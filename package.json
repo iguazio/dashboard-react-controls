@@ -96,5 +96,8 @@
             "last 1 safari version"
         ]
     },
-    "dependencies": {}
+    "dependencies": {
+        "final-form": "^4.20.7",
+        "react-final-form": "^6.5.9"
+    }
 }
