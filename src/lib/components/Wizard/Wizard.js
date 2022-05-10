@@ -16,7 +16,7 @@ const Wizard = ({ children, initialValues, onSubmit, steps }) => {
       activeStep,
       activeComponent: steps[activeStep],
       names: steps.map((step) => step.name),
-      isLastPage: activeStep === totalSteps,
+      isLastStep: activeStep === totalSteps,
       nextStep: () => setActiveStep((prevStep) => Math.min(++prevStep, totalSteps)),
       previousStep: () => setActiveStep((prevStep) => Math.max(--prevStep, 0)),
       jumpToStep: (i) => setActiveStep(i)
@@ -25,7 +25,7 @@ const Wizard = ({ children, initialValues, onSubmit, steps }) => {
 
   const handleSubmit = (values) => {
     if (!hasSteps) return onSubmit(values)
-    if (StepsProps.isLastPage) {
+    if (StepsProps.isLastStep) {
       return onSubmit(values)
     } else {
       StepsProps.nextStep()
