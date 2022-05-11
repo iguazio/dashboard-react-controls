@@ -8,7 +8,7 @@ const Wizard = ({ children, initialValues, onSubmit, steps }) => {
   const [activeStep, setActiveStep] = useState(0)
 
   let StepsProps = {}
-  const totalSteps = steps.length - 1 || 0
+  let totalSteps = steps?.length - 1 || 0
   const hasSteps = steps && totalSteps > 0
 
   if (hasSteps) {
@@ -34,7 +34,7 @@ const Wizard = ({ children, initialValues, onSubmit, steps }) => {
 
   if (hasSteps) {
     return (
-      <Form initialValues={{}} onSubmit={handleSubmit}>
+      <Form initialValues={initialValues} onSubmit={handleSubmit}>
         {(FormProps) =>
           children(<WizardSteps {...StepsProps} />, {
             ...FormProps,
@@ -45,8 +45,12 @@ const Wizard = ({ children, initialValues, onSubmit, steps }) => {
     )
   } else {
     return (
-      <Form initialValues={{}} onSubmit={handleSubmit}>
-        {(FormProps) => children({ ...FormProps })}
+      <Form initialValues={initialValues} onSubmit={handleSubmit}>
+        {(FormProps) => (
+          <form className="form" noValidate>
+            {children({ ...FormProps })}
+          </form>
+        )}
       </Form>
     )
   }
