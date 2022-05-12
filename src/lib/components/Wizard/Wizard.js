@@ -16,11 +16,10 @@ const Wizard = ({ children, id, initialValues, isOpen, onReject, onSubmit, steps
   const activeStep = React.Children.toArray(children)[step]
   const totalSteps = React.Children.count(children) - 1 || 0
   const isLastStep = step === totalSteps
-  const stepsLabel = stepsConfig.map((step) => ({ id: step.id, label: step.label })) || []
 
   let StepsProps = {
     step,
-    labels: stepsLabel,
+    labels: stepsConfig?.map((step) => ({ id: step.id, label: step.label })) || [],
     jumpToStep: (i) => setStep(i)
   }
 
@@ -45,13 +44,13 @@ const Wizard = ({ children, id, initialValues, isOpen, onReject, onSubmit, steps
     />
   ]
 
-  const renderModalActions = (handleSubmit, submitting) => {
-    const actions = stepsConfig.map((step) =>
-      step.actions({ handleSubmit, nextStep, onReject, previousStep, submitting })
-    )
+  const renderModalActions = (FormApi) => {
+    const actions =
+      stepsConfig?.map((step) => step.actions({ ...FormApi, nextStep, onReject, previousStep })) ||
+      []
 
     if (!actions[step] || actions[step].length === 0) {
-      return defaultActions(handleSubmit, submitting)
+      return defaultActions(FormApi.handleSubmit, FormApi.submitting)
     } else {
       return actions[step].map((action) => {
         return <Button {...action} />
@@ -61,14 +60,10 @@ const Wizard = ({ children, id, initialValues, isOpen, onReject, onSubmit, steps
 
   return (
     <Form initialValues={initialValues} onSubmit={handleSubmit}>
-      {({ handleSubmit, submitting }) => (
-        <Modal
-          actions={renderModalActions(handleSubmit, submitting)}
-          onClose={onReject}
-          show={isOpen}
-        >
+      {(FormApi) => (
+        <Modal actions={renderModalActions(FormApi)} onClose={onReject} show={isOpen}>
           <form className="wizard-form" id={id} noValidate>
-            {stepsLabel && <WizardSteps {...StepsProps} />}
+            {totalSteps > 0 && <WizardSteps {...StepsProps} />}
             <div className="wizard-form__content">{activeStep}</div>
           </form>
         </Modal>
