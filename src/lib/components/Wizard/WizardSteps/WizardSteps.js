@@ -6,7 +6,7 @@ import Button from '../../Button/Button'
 
 import './WizardSteps.scss'
 
-const WizardSteps = ({ activeStep, jumpToStep, names }) => {
+const WizardSteps = ({ activeStep, jumpToStep, labels }) => {
   const StepItem = (i) =>
     classNames('wizard-steps__list-step', i === activeStep && 'active', i < activeStep && 'valid')
 
@@ -18,13 +18,13 @@ const WizardSteps = ({ activeStep, jumpToStep, names }) => {
   return (
     <div className="wizard-steps">
       <ol className="wizard-steps__list">
-        {names.map((name, i) => (
-          <li key={name} className="wizard-steps__list-item">
+        {labels.map(({ id, label }, i) => (
+          <li key={id} className="wizard-steps__list-item">
             <Button
               className={StepItem(i)}
               disabled={i > activeStep}
               icon={<span className="wizard-steps__list-step__indicator">{i + 1}</span>}
-              label={name}
+              label={label}
               onClick={(e) => handleJumpToStep(e, i)}
             />
           </li>

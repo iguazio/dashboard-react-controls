@@ -2,58 +2,64 @@ import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 import { Form } from 'react-final-form'
 
+import Button from '../Button/Button'
+import Modal from '../Modal/Modal'
 import WizardSteps from './WizardSteps/WizardSteps'
 
-const Wizard = ({ children, initialValues, onSubmit, steps }) => {
-  const [activeStep, setActiveStep] = useState(0)
+import './Wizard.scss'
 
-  let StepsProps = {}
-  let totalSteps = steps?.length - 1 || 0
-  const hasSteps = steps && totalSteps > 0
+const Wizard = ({ children, id, initialValues, isOpen, onReject, onSubmit, steps }) => {
+  const [step, setStep] = useState(0)
 
-  if (hasSteps) {
-    StepsProps = {
-      activeStep,
-      activeComponent: steps[activeStep],
-      names: steps.map((step) => step.name),
-      isLastStep: activeStep === totalSteps,
-      nextStep: () => setActiveStep((prevStep) => Math.min(++prevStep, totalSteps)),
-      previousStep: () => setActiveStep((prevStep) => Math.max(--prevStep, 0)),
-      jumpToStep: (i) => setActiveStep(i)
-    }
+  const ActiveStep = React.Children.toArray(children)[step]
+  const totalSteps = React.Children.count(children) - 1 || 0
+  const isLastStep = step === totalSteps
+
+  let StepsProps = {
+    labels: steps.map((step) => ({ id: step.id, label: step.label })),
+    jumpToStep: (i) => setStep(i)
   }
+
+  const nextStep = () => setStep((prevStep) => Math.min(++prevStep, totalSteps))
+  const previousStep = () => setStep((prevStep) => Math.max(--prevStep, 0))
 
   const handleSubmit = (values) => {
-    if (!hasSteps) return onSubmit(values)
-    if (StepsProps.isLastStep) {
+    if (isLastStep) {
       return onSubmit(values)
     } else {
-      StepsProps.nextStep()
+      nextStep()
     }
   }
 
-  if (hasSteps) {
-    return (
-      <Form initialValues={initialValues} onSubmit={handleSubmit}>
-        {(FormProps) =>
-          children(<WizardSteps {...StepsProps} />, {
-            ...FormProps,
-            ...StepsProps
-          })
-        }
-      </Form>
-    )
-  } else {
-    return (
-      <Form initialValues={initialValues} onSubmit={handleSubmit}>
-        {(FormProps) => (
-          <form className="form" noValidate>
-            {children({ ...FormProps })}
+  // const renderModalActions = () => {
+  //   if (!hasSteps) {
+  //     return
+  //   }
+  // }
+
+  return (
+    <Form initialValues={initialValues} onSubmit={handleSubmit}>
+      {({ handleSubmit, submitting }) => (
+        <Modal
+          actions={[
+            <Button onClick={previousStep} disabled={step === 0}>
+              Back
+            </Button>,
+            <Button onClick={handleSubmit} disabled={submitting}>
+              {isLastStep ? 'Submit' : 'Next'}
+            </Button>
+          ]}
+          onClose={onReject}
+          show={isOpen}
+        >
+          <form className="wizard-form" id={id} noValidate>
+            <WizardSteps activeStep={step} {...StepsProps} />
+            <div className="wizard-form__content">{ActiveStep}</div>
           </form>
-        )}
-      </Form>
-    )
-  }
+        </Modal>
+      )}
+    </Form>
+  )
 }
 
 Wizard.propsTypes = {
@@ -67,5 +73,7 @@ Wizard.propsTypes = {
   onSubmit: PropTypes.func.isRequired,
   steps: PropTypes.array
 }
+
+Wizard.Step = ({ children }) => children
 
 export default Wizard
