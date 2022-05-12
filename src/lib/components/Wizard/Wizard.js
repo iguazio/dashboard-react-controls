@@ -10,15 +10,17 @@ import { SECONDARY_BUTTON } from '../../constants'
 
 import './Wizard.scss'
 
-const Wizard = ({ children, id, initialValues, isOpen, onReject, onSubmit, steps }) => {
+const Wizard = ({ children, id, initialValues, isOpen, onReject, onSubmit, stepsConfig }) => {
   const [step, setStep] = useState(0)
 
-  const ActiveStep = React.Children.toArray(children)[step]
+  const activeStep = React.Children.toArray(children)[step]
   const totalSteps = React.Children.count(children) - 1 || 0
   const isLastStep = step === totalSteps
+  const stepsLabel = stepsConfig.map((step) => ({ id: step.id, label: step.label })) || []
 
   let StepsProps = {
-    labels: steps.map((step) => ({ id: step.id, label: step.label })),
+    step,
+    labels: stepsLabel,
     jumpToStep: (i) => setStep(i)
   }
 
@@ -44,11 +46,16 @@ const Wizard = ({ children, id, initialValues, isOpen, onReject, onSubmit, steps
   ]
 
   const renderModalActions = (handleSubmit, submitting) => {
-    const actions = steps.map((step) => step.actions)
+    const actions = stepsConfig.map((step) =>
+      step.actions({ handleSubmit, nextStep, onReject, previousStep, submitting })
+    )
+
     if (!actions[step] || actions[step].length === 0) {
       return defaultActions(handleSubmit, submitting)
     } else {
-      return actions[step].map((action) => <Button {...action.defaultProps} />)
+      return actions[step].map((action) => {
+        return <Button {...action} />
+      })
     }
   }
 
@@ -61,8 +68,8 @@ const Wizard = ({ children, id, initialValues, isOpen, onReject, onSubmit, steps
           show={isOpen}
         >
           <form className="wizard-form" id={id} noValidate>
-            <WizardSteps activeStep={step} {...StepsProps} />
-            <div className="wizard-form__content">{ActiveStep}</div>
+            {stepsLabel && <WizardSteps {...StepsProps} />}
+            <div className="wizard-form__content">{activeStep}</div>
           </form>
         </Modal>
       )}
@@ -78,6 +85,7 @@ Wizard.propsTypes = {
     PropTypes.string
   ]).isRequired,
   initialValues: PropTypes.object,
+  isOpen: PropTypes.bool,
   onSubmit: PropTypes.func.isRequired,
   steps: PropTypes.array
 }

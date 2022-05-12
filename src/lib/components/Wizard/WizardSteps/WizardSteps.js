@@ -6,9 +6,9 @@ import Button from '../../Button/Button'
 
 import './WizardSteps.scss'
 
-const WizardSteps = ({ activeStep, jumpToStep, labels }) => {
+const WizardSteps = ({ jumpToStep, labels, step }) => {
   const StepItem = (i) =>
-    classNames('wizard-steps__list-step', i === activeStep && 'active', i < activeStep && 'valid')
+    classNames('wizard-steps__list-step', i === step && 'active', i < step && 'valid')
 
   const handleJumpToStep = (event, idx) => {
     event.preventDefault()
@@ -22,7 +22,7 @@ const WizardSteps = ({ activeStep, jumpToStep, labels }) => {
           <li key={id} className="wizard-steps__list-item">
             <Button
               className={StepItem(i)}
-              disabled={i > activeStep}
+              disabled={i > step}
               icon={<span className="wizard-steps__list-step__indicator">{i + 1}</span>}
               label={label}
               onClick={(e) => handleJumpToStep(e, i)}
