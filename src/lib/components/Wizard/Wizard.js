@@ -6,6 +6,8 @@ import Button from '../Button/Button'
 import Modal from '../Modal/Modal'
 import WizardSteps from './WizardSteps/WizardSteps'
 
+import { SECONDARY_BUTTON } from '../../constants'
+
 import './Wizard.scss'
 
 const Wizard = ({ children, id, initialValues, isOpen, onReject, onSubmit, steps }) => {
@@ -31,24 +33,30 @@ const Wizard = ({ children, id, initialValues, isOpen, onReject, onSubmit, steps
     }
   }
 
-  // const renderModalActions = () => {
-  //   if (!hasSteps) {
-  //     return
-  //   }
-  // }
+  const defaultActions = (handleSubmit, submitting) => [
+    <Button onClick={previousStep} disabled={step === 0} label="Back" />,
+    <Button
+      onClick={handleSubmit}
+      disabled={submitting}
+      variant={SECONDARY_BUTTON}
+      label={isLastStep ? 'Submit' : 'Next'}
+    />
+  ]
+
+  const renderModalActions = (handleSubmit, submitting) => {
+    const actions = steps.map((step) => step.actions)
+    if (!actions[step] || actions[step].length === 0) {
+      return defaultActions(handleSubmit, submitting)
+    } else {
+      return actions[step].map((action) => <Button {...action.defaultProps} />)
+    }
+  }
 
   return (
     <Form initialValues={initialValues} onSubmit={handleSubmit}>
       {({ handleSubmit, submitting }) => (
         <Modal
-          actions={[
-            <Button onClick={previousStep} disabled={step === 0}>
-              Back
-            </Button>,
-            <Button onClick={handleSubmit} disabled={submitting}>
-              {isLastStep ? 'Submit' : 'Next'}
-            </Button>
-          ]}
+          actions={renderModalActions(handleSubmit, submitting)}
           onClose={onReject}
           show={isOpen}
         >
