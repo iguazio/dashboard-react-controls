@@ -10,7 +10,16 @@ import { SECONDARY_BUTTON } from '../../constants'
 
 import './Wizard.scss'
 
-const Wizard = ({ children, id, initialValues, isOpen, onReject, onSubmit, stepsConfig }) => {
+const Wizard = ({
+  children,
+  id,
+  initialValues,
+  isOpen,
+  onReject,
+  onResolve,
+  onSubmit,
+  stepsConfig
+}) => {
   const [step, setStep] = useState(0)
 
   const activeStep = React.Children.toArray(children)[step]
@@ -28,10 +37,14 @@ const Wizard = ({ children, id, initialValues, isOpen, onReject, onSubmit, steps
 
   const handleSubmit = (values) => {
     if (isLastStep) {
-      return onSubmit(values)
+      onSubmit(values)
     } else {
       nextStep()
     }
+  }
+
+  const handleOnReject = () => {
+    onReject && onReject()
   }
 
   const defaultActions = (handleSubmit, submitting) => [
@@ -46,8 +59,9 @@ const Wizard = ({ children, id, initialValues, isOpen, onReject, onSubmit, steps
 
   const renderModalActions = (FormApi) => {
     const actions =
-      stepsConfig?.map((step) => step.actions({ ...FormApi, nextStep, onReject, previousStep })) ||
-      []
+      stepsConfig?.map((step) =>
+        step.actions({ ...FormApi, nextStep, handleOnReject, previousStep })
+      ) || []
 
     if (!actions[step] || actions[step].length === 0) {
       return defaultActions(FormApi.handleSubmit, FormApi.submitting)
@@ -61,7 +75,7 @@ const Wizard = ({ children, id, initialValues, isOpen, onReject, onSubmit, steps
   return (
     <Form initialValues={initialValues} onSubmit={handleSubmit}>
       {(FormApi) => (
-        <Modal actions={renderModalActions(FormApi)} onClose={onReject} show={isOpen}>
+        <Modal actions={renderModalActions(FormApi)} onClose={handleOnReject} show={isOpen}>
           <form className="wizard-form" id={id} noValidate>
             {totalSteps > 0 && <WizardSteps {...StepsProps} />}
             <div className="wizard-form__content">{activeStep}</div>
