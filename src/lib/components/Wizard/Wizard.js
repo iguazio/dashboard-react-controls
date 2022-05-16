@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useCallback, useMemo, useState } from 'react'
 import PropTypes from 'prop-types'
 import { Form } from 'react-final-form'
 
@@ -7,6 +7,7 @@ import Modal from '../Modal/Modal'
 import WizardSteps from './WizardSteps/WizardSteps'
 
 import { SECONDARY_BUTTON } from '../../constants'
+import { MODAL_SIZES } from '../../types'
 
 import './Wizard.scss'
 
@@ -15,10 +16,11 @@ const Wizard = ({
   id,
   initialValues,
   isOpen,
-  onReject,
   onResolve,
   onSubmit,
-  stepsConfig
+  size,
+  title,
+  wizardConfig
 }) => {
   const [step, setStep] = useState(0)
 
@@ -28,11 +30,14 @@ const Wizard = ({
 
   let StepsProps = {
     step,
-    labels: stepsConfig?.map((step) => ({ id: step.id, label: step.label })) || [],
+    labels: wizardConfig?.map((step) => ({ id: step.id, label: step.label })) || [],
     jumpToStep: (i) => setStep(i)
   }
 
-  const nextStep = () => setStep((prevStep) => Math.min(++prevStep, totalSteps))
+  const nextStep = useMemo(
+    () => setStep((prevStep) => Math.min(++prevStep, totalSteps)),
+    [totalSteps]
+  )
   const previousStep = () => setStep((prevStep) => Math.max(--prevStep, 0))
 
   const handleSubmit = (values) => {
@@ -43,39 +48,43 @@ const Wizard = ({
     }
   }
 
-  const handleOnReject = () => {
-    onReject && onReject()
-  }
+  const defaultActions = useCallback(
+    (handleSubmit, submitting) => [
+      <Button onClick={previousStep} disabled={step === 0} label="Back" />,
+      <Button
+        onClick={handleSubmit}
+        disabled={submitting}
+        variant={SECONDARY_BUTTON}
+        label={isLastStep ? 'Submit' : 'Next'}
+      />
+    ],
+    [isLastStep, step]
+  )
 
-  const defaultActions = (handleSubmit, submitting) => [
-    <Button onClick={previousStep} disabled={step === 0} label="Back" />,
-    <Button
-      onClick={handleSubmit}
-      disabled={submitting}
-      variant={SECONDARY_BUTTON}
-      label={isLastStep ? 'Submit' : 'Next'}
-    />
-  ]
+  const renderModalActions = useCallback(
+    (FormApi) => {
+      const actions =
+        wizardConfig?.map((step) => step.setActions({ ...FormApi, nextStep, previousStep })) || []
 
-  const renderModalActions = (FormApi) => {
-    const actions =
-      stepsConfig?.map((step) =>
-        step.actions({ ...FormApi, nextStep, handleOnReject, previousStep })
-      ) || []
-
-    if (!actions[step] || actions[step].length === 0) {
-      return defaultActions(FormApi.handleSubmit, FormApi.submitting)
-    } else {
-      return actions[step].map((action) => {
-        return <Button {...action} />
-      })
-    }
-  }
+      if (!actions[step] || actions[step].length === 0) {
+        return defaultActions(FormApi.handleSubmit, FormApi.submitting)
+      } else {
+        return actions[step].map((action) => <Button {...action} />)
+      }
+    },
+    [defaultActions, nextStep, step, wizardConfig]
+  )
 
   return (
     <Form initialValues={initialValues} onSubmit={handleSubmit}>
       {(FormApi) => (
-        <Modal actions={renderModalActions(FormApi)} onClose={handleOnReject} show={isOpen}>
+        <Modal
+          actions={renderModalActions(FormApi)}
+          onClose={onResolve}
+          show={isOpen}
+          size={size}
+          title={title}
+        >
           <form className="wizard-form" id={id} noValidate>
             {totalSteps > 0 && <WizardSteps {...StepsProps} />}
             <div className="wizard-form__content">{activeStep}</div>
@@ -86,6 +95,13 @@ const Wizard = ({
   )
 }
 
+Wizard.defaultProps = {
+  id: 'form',
+  initialValues: {},
+  onResolve: () => {},
+  onSubmit: () => {}
+}
+
 Wizard.propsTypes = {
   children: PropTypes.oneOfType([
     PropTypes.element,
@@ -93,10 +109,14 @@ Wizard.propsTypes = {
     PropTypes.node,
     PropTypes.string
   ]).isRequired,
+  id: PropTypes.string,
   initialValues: PropTypes.object,
-  isOpen: PropTypes.bool,
+  isOpen: PropTypes.bool.isRequired,
+  onResolve: PropTypes.func.isRequired,
   onSubmit: PropTypes.func.isRequired,
-  steps: PropTypes.array
+  size: MODAL_SIZES,
+  title: PropTypes.string,
+  wizardConfig: PropTypes.array
 }
 
 Wizard.Step = ({ children }) => children

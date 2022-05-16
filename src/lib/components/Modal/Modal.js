@@ -7,7 +7,8 @@ import classNames from 'classnames'
 import Backdrop from '../Backdrop/Backdrop'
 import { RoundedIcon } from 'igz-controls/components'
 
-import { MODAL_LG, MODAL_MD, MODAL_SM } from '../../constants'
+import { MODAL_MD } from '../../constants'
+import { MODAL_SIZES } from '../../types'
 
 import { ReactComponent as CloseIcon } from 'igz-controls/images/close.svg'
 
@@ -46,7 +47,7 @@ const JSX_MODAL = ({ actions, children, className, onClose, size, show, title })
     </>
   )
 }
-const Modal = props => {
+const Modal = (props) => {
   return createPortal(<JSX_MODAL {...props} />, document.getElementById('overlay_container'))
 }
 
@@ -67,7 +68,7 @@ Modal.propTypes = {
   ]).isRequired,
   onClose: PropTypes.func.isRequired,
   show: PropTypes.bool.isRequired,
-  size: PropTypes.oneOf([MODAL_SM, MODAL_MD, MODAL_LG]),
+  size: MODAL_SIZES,
   title: PropTypes.string
 }
 
