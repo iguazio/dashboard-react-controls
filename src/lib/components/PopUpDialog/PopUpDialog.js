@@ -30,7 +30,7 @@ const PopUpDialog = ({
   )
 
   const calculateCustomPopUpPosition = useCallback(() => {
-    if (customPosition.element) {
+    if (customPosition && customPosition.element) {
       const elementRect = customPosition.element.current.getBoundingClientRect()
       const popUpRect = popUpOverlayRef.current.getBoundingClientRect()
       const [verticalPosition, horizontalPosition] = customPosition.position.split('-')
@@ -60,7 +60,8 @@ const PopUpDialog = ({
   return createPortal(
     <div ref={popUpOverlayRef} className={popUpClassNames} style={style}>
       <div data-testid="pop-up-dialog" className="pop-up-dialog">
-        {!headerIsHidden && <div className="pop-up-dialog__header">
+        {!headerIsHidden && (
+          <div className="pop-up-dialog__header">
             {headerText && (
               <div data-testid="pop-up-dialog-header" className="pop-up-dialog__header-text">
                 <Tooltip template={<TextTooltipTemplate text={tooltipText || headerText} />}>
@@ -77,7 +78,7 @@ const PopUpDialog = ({
               <CloseIcon />
             </RoundedIcon>
           </div>
-        }
+        )}
         {children}
       </div>
     </div>,
