@@ -31,3 +31,11 @@ export const CONFIRM_DIALOG_BUTTON = PropTypes.shape({
   label: PropTypes.string.isRequired,
   variant: PropTypes.string.isRequired
 })
+
+export const WIZARD_STEPS_CONFIG = PropTypes.arrayOf(
+  PropTypes.shape({
+    id: PropTypes.string,
+    label: PropTypes.string,
+    getActions: PropTypes.func
+  })
+)

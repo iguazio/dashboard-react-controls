@@ -7,67 +7,60 @@
   min-width: 260px;
   margin-right: 1rem;
 
-  &__list {
-    list-style-type: none;
-    padding: 0;
-    margin: 0;
+  &__indicator {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid transparent;
+    border-radius: 50%;
+    padding: 10px;
+    width: 36px;
+    height: 36px;
+  }
 
-    &-item:not(:last-child) {
-      padding: 0;
-      margin-bottom: 10px;
+  &__item:not(:last-child) {
+    margin-bottom: 10px;
+  }
+
+  &__item {
+    justify-content: flex-start;
+    background-color: inherit;
+    border: 0;
+    border-radius: 8px;
+    font-size: 1em;
+    padding: 8px;
+    min-height: 52px;
+    width: 100%;
+
+    &.active {
+      background-color: $malibuTwo;
+      color: $cornflowerBlue;
+
+      .wizard-steps__indicator {
+        border-color: transparent;
+        color: $white;
+        background-color: $malibu;
+      }
     }
 
-    &-step {
-      justify-content: flex-start;
-      background-color: inherit;
+    &.valid {
+      color: $primary;
+
+      .wizard-steps__indicator {
+        border-color: $malibu;
+        color: $malibu;
+        background-color: inherit;
+      }
+    }
+
+    &:disabled {
       border: 0;
-      border-radius: 8px;
-      font-size: 1em;
-      padding: 8px;
-      min-height: 52px;
-      width: 100%;
+      color: $spunPearl;
 
-      &__indicator {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        border: 2px solid transparent;
-        border-radius: 50%;
-        padding: 10px;
-        width: 36px;
-        height: 36px;
-      }
-
-      &.active {
-        background-color: rgba(134, 156, 255, 0.12);
-        color: $cornflowerBlue;
-
-        .wizard-steps__list-step__indicator {
-          border-color: transparent;
-          color: $white;
-          background-color: $malibu;
-        }
-      }
-
-      &.valid {
-        color: $primary;
-
-        .wizard-steps__list-step__indicator {
-          border-color: $malibu;
-          color: $malibu;
-          background-color: inherit;
-        }
-      }
-
-      &:disabled {
-        border: 0;
+      .wizard-steps__indicator {
+        border-color: $spunPearl;
         color: $spunPearl;
-
-        .wizard-steps__list-step__indicator {
-          border-color: $spunPearl;
-          color: $spunPearl;
-          background-color: inherit;
-        }
+        background-color: inherit;
       }
     }
   }
