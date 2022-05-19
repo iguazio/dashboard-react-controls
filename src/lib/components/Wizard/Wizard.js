@@ -1,6 +1,6 @@
 import React, { useMemo, useState } from 'react'
 import PropTypes from 'prop-types'
-import { Form, Field } from 'react-final-form'
+import { Form } from 'react-final-form'
 import classNames from 'classnames'
 
 import Button from '../Button/Button'
@@ -10,6 +10,7 @@ import WizardSteps from './WizardSteps/WizardSteps'
 
 import { MODAL_MD, SECONDARY_BUTTON, TERTIARY_BUTTON } from '../../constants'
 import { MODAL_SIZES, WIZARD_STEPS_CONFIG } from '../../types'
+import { openPopUp } from '../../utils/common.util'
 
 import './Wizard.scss'
 
@@ -18,16 +19,15 @@ const Wizard = ({
   className,
   confirmClose,
   initialValues,
-  isOpen,
-  onResolve,
-  onSubmit,
+  isWizardOpen,
+  onWizardResolve,
+  onWizardSubmit,
   size,
   title,
   stepsConfig,
   submitButtonLabel
 }) => {
   const [activeStepNumber, setActiveStepNumber] = useState(0)
-  const [isConfirmDialogOpen, setConfirmDialogOpen] = useState(false)
 
   const activeStepTemplate = useMemo(() => {
     return React.Children.toArray(children)[activeStepNumber]
@@ -62,25 +62,34 @@ const Wizard = ({
   }
 
   const handleOnClose = (FormState) => {
-    // use openModal promise instaed of useState
-    // return a promise
     if (confirmClose && FormState && FormState.dirty) {
-      setConfirmDialogOpen(true)
+      openPopUp(ConfirmDialog, {
+        cancelButton: {
+          label: 'Cancel',
+          variant: TERTIARY_BUTTON
+        },
+        confirmButton: {
+          handler: onWizardResolve,
+          label: 'OK',
+          variant: SECONDARY_BUTTON
+        },
+        header: 'Are you sure?',
+        message: 'All changes will be lost'
+      })
     } else {
-      isConfirmDialogOpen && setConfirmDialogOpen(false)
-      onResolve()
+      onWizardResolve()
     }
   }
 
   const handleSubmit = (values) => {
     if (isLastStep) {
-      onSubmit(values)
+      onWizardSubmit(values)
     } else {
       goToNextStep()
     }
   }
 
-  const getDefaultActions = ({ dirty, handleSubmit, submitting }) => {
+  const getDefaultActions = (FormState) => {
     if (hasSteps) {
       return [
         <Button
@@ -90,8 +99,8 @@ const Wizard = ({
           type="button"
         />,
         <Button
-          onClick={handleSubmit}
-          disabled={submitting}
+          onClick={FormState.handleSubmit}
+          disabled={FormState.submitting}
           label={isLastStep ? submitButtonLabel : 'Next'}
           type="button"
           variant={SECONDARY_BUTTON}
@@ -99,10 +108,10 @@ const Wizard = ({
       ]
     } else {
       return [
-        <Button onClick={() => handleOnClose({ dirty })} label="Cancel" type="button" />,
+        <Button onClick={() => handleOnClose(FormState)} label="Cancel" type="button" />,
         <Button
-          onClick={handleSubmit}
-          disabled={submitting}
+          onClick={FormState.handleSubmit}
+          disabled={FormState.submitting}
           label={submitButtonLabel}
           type="button"
           variant={SECONDARY_BUTTON}
@@ -134,7 +143,7 @@ const Wizard = ({
             actions={renderModalActions(FormState)}
             className={wizardClasses}
             onClose={() => handleOnClose(FormState)}
-            show={isOpen}
+            show={isWizardOpen}
             size={size}
             title={title}
           >
@@ -145,31 +154,10 @@ const Wizard = ({
                 steps={stepsMenu}
               />
             )}
-            <div className="wizard-form__content">
-              <Field name="firstName" component="input" type="text" placeholder="First Name" />
-              {activeStepTemplate}
-              <pre>{JSON.stringify(FormState.values, 0, 2)}</pre>
-            </div>
+            <div className="wizard-form__content">{activeStepTemplate}</div>
           </Modal>
         )}
       </Form>
-      {isConfirmDialogOpen && (
-        <ConfirmDialog
-          cancelButton={{
-            handler: () => setConfirmDialogOpen(false),
-            label: 'Cancel',
-            variant: TERTIARY_BUTTON
-          }}
-          closePopUp={() => setConfirmDialogOpen(false)}
-          confirmButton={{
-            handler: handleOnClose,
-            label: 'OK',
-            variant: SECONDARY_BUTTON
-          }}
-          header="Are you sure?"
-          message="All changes will be lost"
-        />
-      )}
     </>
   )
 }

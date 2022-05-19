@@ -5,7 +5,7 @@ import classnames from 'classnames'
 import Button from '../Button/Button'
 import PopUpDialog from '../PopUpDialog/PopUpDialog'
 
-import { CONFIRM_DIALOG_BUTTON } from '../../types'
+import { CONFIRM_DIALOG_CANCEL_BUTTON, CONFIRM_DIALOG_SUBMIT_BUTTON } from '../../types'
 
 import './confirmDialog.scss'
 
@@ -16,40 +16,59 @@ const ConfirmDialog = ({
   confirmButton,
   customPosition,
   header,
+  isOpen,
   message,
-  messageOnly
+  messageOnly,
+  onResolve
 }) => {
   const messageClassNames = classnames(
     'confirm-dialog__message',
     messageOnly && 'confirm-dialog__message-only'
   )
 
+  const handleCancelDialog = (event) => {
+    onResolve && onResolve()
+    cancelButton.handler && cancelButton.handler(event)
+  }
+
+  const handleCloseDialog = (event) => {
+    onResolve && onResolve()
+    closePopUp && closePopUp(event)
+  }
+
+  const handleConfirmDialog = (event) => {
+    onResolve && onResolve()
+    confirmButton.handler(event)
+  }
+
   return (
-    <PopUpDialog
-      className={className}
-      closePopUp={closePopUp}
-      customPosition={customPosition}
-      headerText={header}
-    >
-      <div className="confirm-dialog">
-        {message && <div className={messageClassNames}>{message}</div>}
-        <div className="confirm-dialog__btn-container">
-          {cancelButton && (
+    isOpen && (
+      <PopUpDialog
+        className={className}
+        closePopUp={handleCloseDialog}
+        customPosition={customPosition}
+        headerText={header}
+      >
+        <div className="confirm-dialog">
+          {message && <div className={messageClassNames}>{message}</div>}
+          <div className="confirm-dialog__btn-container">
+            {cancelButton && (
+              <Button
+                className="pop-up-dialog__btn_cancel"
+                label={cancelButton.label}
+                onClick={handleCancelDialog}
+                variant={cancelButton.variant}
+              />
+            )}
             <Button
-              className="pop-up-dialog__btn_cancel"
-              label={cancelButton.label}
-              onClick={cancelButton.handler}
-              variant={cancelButton.variant}
+              label={confirmButton.label}
+              onClick={handleConfirmDialog}
+              variant={confirmButton.variant}
             />
-          )}
-          <Button
-            label={confirmButton.label}
-            onClick={confirmButton.handler}
-            variant={confirmButton.variant}
-          />
+          </div>
         </div>
-      </div>
-    </PopUpDialog>
+      </PopUpDialog>
+    )
   )
 }
 
@@ -63,10 +82,10 @@ ConfirmDialog.defaultProps = {
 }
 
 ConfirmDialog.propTypes = {
-  cancelButton: CONFIRM_DIALOG_BUTTON,
+  cancelButton: CONFIRM_DIALOG_CANCEL_BUTTON,
   className: PropTypes.string,
-  closePopUp: PropTypes.func.isRequired,
-  confirmButton: CONFIRM_DIALOG_BUTTON.isRequired,
+  closePopUp: PropTypes.func,
+  confirmButton: CONFIRM_DIALOG_SUBMIT_BUTTON.isRequired,
   customPosition: PropTypes.object,
   header: PropTypes.string,
   message: PropTypes.string,

@@ -26,7 +26,12 @@ export const POP_UP_CUSTOM_POSITION = PropTypes.shape({
 
 export const MODAL_SIZES = PropTypes.oneOf([MODAL_SM, MODAL_MD, MODAL_LG])
 
-export const CONFIRM_DIALOG_BUTTON = PropTypes.shape({
+export const CONFIRM_DIALOG_CANCEL_BUTTON = PropTypes.shape({
+  handler: PropTypes.func,
+  label: PropTypes.string.isRequired,
+  variant: PropTypes.string.isRequired
+})
+export const CONFIRM_DIALOG_SUBMIT_BUTTON = PropTypes.shape({
   handler: PropTypes.func.isRequired,
   label: PropTypes.string.isRequired,
   variant: PropTypes.string.isRequired
