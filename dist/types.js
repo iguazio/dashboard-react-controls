@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.WIZARD_STEPS_CONFIG = exports.POP_UP_CUSTOM_POSITION = exports.MODAL_SIZES = exports.CONFIRM_DIALOG_BUTTON = exports.BUTTON_VARIANTS = void 0;
+exports.POP_UP_CUSTOM_POSITION = exports.BUTTON_VARIANTS = void 0;
 
 var _propTypes = _interopRequireDefault(require("prop-types"));
 
@@ -21,23 +21,3 @@ var POP_UP_CUSTOM_POSITION = _propTypes.default.shape({
 });
 
 exports.POP_UP_CUSTOM_POSITION = POP_UP_CUSTOM_POSITION;
-
-var MODAL_SIZES = _propTypes.default.oneOf([_constants.MODAL_SM, _constants.MODAL_MD, _constants.MODAL_LG]);
-
-exports.MODAL_SIZES = MODAL_SIZES;
-
-var CONFIRM_DIALOG_BUTTON = _propTypes.default.shape({
-  handler: _propTypes.default.func.isRequired,
-  label: _propTypes.default.string.isRequired,
-  variant: _propTypes.default.string.isRequired
-});
-
-exports.CONFIRM_DIALOG_BUTTON = CONFIRM_DIALOG_BUTTON;
-
-var WIZARD_STEPS_CONFIG = _propTypes.default.arrayOf(_propTypes.default.shape({
-  id: _propTypes.default.string,
-  label: _propTypes.default.string,
-  getActions: _propTypes.default.func
-}));
-
-exports.WIZARD_STEPS_CONFIG = WIZARD_STEPS_CONFIG;

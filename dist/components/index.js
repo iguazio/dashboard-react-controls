@@ -9,18 +9,6 @@ Object.defineProperty(exports, "Button", {
     return _Button.default;
   }
 });
-Object.defineProperty(exports, "ConfirmDialog", {
-  enumerable: true,
-  get: function get() {
-    return _ConfirmDialog.default;
-  }
-});
-Object.defineProperty(exports, "Modal", {
-  enumerable: true,
-  get: function get() {
-    return _Modal.default;
-  }
-});
 Object.defineProperty(exports, "PopUpDialog", {
   enumerable: true,
   get: function get() {
@@ -45,18 +33,8 @@ Object.defineProperty(exports, "Tooltip", {
     return _Tooltip.default;
   }
 });
-Object.defineProperty(exports, "Wizard", {
-  enumerable: true,
-  get: function get() {
-    return _Wizard.default;
-  }
-});
 
 var _Button = _interopRequireDefault(require("./Button/Button"));
-
-var _ConfirmDialog = _interopRequireDefault(require("./ConfirmDialog/ConfirmDialog"));
-
-var _Modal = _interopRequireDefault(require("./Modal/Modal"));
 
 var _PopUpDialog = _interopRequireDefault(require("./PopUpDialog/PopUpDialog"));
 
@@ -66,6 +44,5 @@ var _TextTooltipTemplate = _interopRequireDefault(require("./TooltipTemplate/Tex
 
 var _Tooltip = _interopRequireDefault(require("./Tooltip/Tooltip"));
 
-var _Wizard = _interopRequireDefault(require("./Wizard/Wizard"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
