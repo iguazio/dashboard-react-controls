@@ -44,5 +44,4 @@ var _TextTooltipTemplate = _interopRequireDefault(require("./TooltipTemplate/Tex
 
 var _Tooltip = _interopRequireDefault(require("./Tooltip/Tooltip"));
 
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
