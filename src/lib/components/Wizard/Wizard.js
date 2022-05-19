@@ -38,7 +38,7 @@ const Wizard = ({
   }, [children])
 
   const hasSteps = useMemo(() => {
-    return stepsConfig ?? stepsConfig.some((step) => step.id)
+    return stepsConfig.some((step) => step.id)
   }, [stepsConfig])
 
   const isLastStep = useMemo(() => {
