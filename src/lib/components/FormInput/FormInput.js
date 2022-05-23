@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react'
 import PropTypes from 'prop-types'
 import classnames from 'classnames'
-import { isEmpty } from 'lodash'
+import { debounce, isEmpty } from 'lodash'
 import { Field, useField } from 'react-final-form'
 
 import OptionsMenu from '../../elemens/OptionsMenu/OptionsMenu'
@@ -140,43 +140,38 @@ const FormInput = React.forwardRef(
     }
 
     const validateField = (value) => {
-      return new Promise((resolve) => {
-        setTimeout(() => {
-          const valueToValidate = value ?? ''
-          let validationError = null
+      const valueToValidate = value ?? ''
+      let validationError = null
 
-          if (!isEmpty(rules)) {
-            const [newRules, isValidField] = checkPatternsValidity(rules, valueToValidate)
-            const invalidRules = newRules.filter((rule) => !rule.isValid)
-            setValidationRules(() => newRules)
+      if (!isEmpty(rules)) {
+        const [newRules, isValidField] = checkPatternsValidity(rules, valueToValidate)
+        const invalidRules = newRules.filter((rule) => !rule.isValid)
+        setValidationRules(() => newRules)
 
-            if (!isValidField) {
-              validationError = invalidRules.map((rule) => ({ name: rule.name, label: rule.label }))
-            }
+        if (!isValidField) {
+          validationError = invalidRules.map((rule) => ({ name: rule.name, label: rule.label }))
+        }
 
-            if ((isValidField && showValidationRules) || valueToValidate.trim() === '') {
-              setShowValidationRules(false)
-            }
-          }
+        if ((isValidField && showValidationRules) || valueToValidate.trim() === '') {
+          setShowValidationRules(false)
+        }
+      }
 
-          if (!validationError) {
-            if (pattern && !validationPattern.test(valueToValidate)) {
-              validationError = { name: 'pattern', label: invalidText }
-            } else if (
-              valueToValidate.startsWith(' ') ||
-              (required && valueToValidate.trim().length === 0)
-            ) {
-              validationError = { name: 'empty', label: invalidText }
-            }
-          }
+      if (!validationError) {
+        if (pattern && !validationPattern.test(valueToValidate)) {
+          validationError = { name: 'pattern', label: invalidText }
+        } else if (valueToValidate.startsWith(' ')) {
+          validationError = { name: 'empty', label: invalidText }
+        } else if (required && valueToValidate.trim().length === 0) {
+          validationError = { name: 'required', label: 'This field is required' }
+        }
+      }
 
-          if (!validationError && validator) {
-            validationError = validator(value)
-          }
+      if (!validationError && validator) {
+        validationError = validator(value)
+      }
 
-          resolve(validationError)
-        })
-      })
+      return validationError
     }
     return (
       <Field validate={validateField} name={name}>
