@@ -44,3 +44,8 @@ export const WIZARD_STEPS_CONFIG = PropTypes.arrayOf(
     getActions: PropTypes.func
   })
 )
+
+export const INPUT_LINK = PropTypes.shape({
+  show: PropTypes.oneOfType([PropTypes.bool, PropTypes.string]),
+  url: PropTypes.string
+})
