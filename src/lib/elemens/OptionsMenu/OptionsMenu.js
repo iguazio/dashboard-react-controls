@@ -2,19 +2,14 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { CSSTransition } from 'react-transition-group'
 
-import { PopUpDialog } from 'igz-controls/components'
+import { PopUpDialog } from '../../components'
 
 import './optionsMenu.scss'
 
 const OptionsMenu = React.forwardRef(({ children, show, timeout }, ref) => {
   const { width: dropdownWidth } = ref?.current?.getBoundingClientRect() || {}
   return (
-    <CSSTransition
-      in={show}
-      timeout={timeout}
-      classNames="options-menu-transition"
-      unmountOnExit
-    >
+    <CSSTransition in={show} timeout={timeout} classNames="options-menu-transition" unmountOnExit>
       <PopUpDialog
         className="options-menu"
         customPosition={{

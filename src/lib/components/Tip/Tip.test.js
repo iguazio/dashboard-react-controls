@@ -1,16 +1,12 @@
 import React from 'react'
-import {
-  fireEvent,
-  render,
-  waitForElementToBeRemoved
-} from '@testing-library/react'
+import { fireEvent, render, waitForElementToBeRemoved } from '@testing-library/react'
 import Tip from './Tip'
 
-jest.mock('igz-controls/images/question-mark.svg', () => ({
+jest.mock('../../images/question-mark.svg', () => ({
   ReactComponent: 'Question-icon'
 }))
 
-const renderComponent = props => render(<Tip {...props} />)
+const renderComponent = (props) => render(<Tip {...props} />)
 
 describe('Tip component', () => {
   let wrapper
@@ -43,9 +39,7 @@ describe('Tip component', () => {
 
     fireEvent.mouseLeave(tipIcon)
 
-    const tipText = await waitForElementToBeRemoved(() =>
-      wrapper.queryByTestId('tip-text')
-    )
+    const tipText = await waitForElementToBeRemoved(() => wrapper.queryByTestId('tip-text'))
 
     expect(tipText).toBeUndefined()
   })

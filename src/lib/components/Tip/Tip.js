@@ -4,7 +4,7 @@ import { CSSTransition } from 'react-transition-group'
 import classnames from 'classnames'
 import { createPortal } from 'react-dom'
 
-import { ReactComponent as QuestionMarkIcon } from 'igz-controls/images/question-mark.svg'
+import { ReactComponent as QuestionMarkIcon } from '../../images/question-mark.svg'
 
 import './tip.scss'
 import tipStyle from './tip.scss'
@@ -28,22 +28,19 @@ const Tip = ({ className, text }) => {
     text.length <= minTextLength ? 'tip_small' : 'tip_big'
   )
 
-  const handleMouseEnter = useCallback(event => {
+  const handleMouseEnter = useCallback((event) => {
     setIsShow(true)
 
     const iconRect = iconRef.current.getBoundingClientRect()
     const tipRect = tipBodyRef.current.getBoundingClientRect()
-    const widthPosition =
-      iconRect.left > tipRect.width - arrowOffset ? 'tip_left' : 'tip_right'
-    const heightPosition =
-      iconRect.top > tipRect.height + arrowLength ? 'tip_top' : 'tip_bottom'
+    const widthPosition = iconRect.left > tipRect.width - arrowOffset ? 'tip_left' : 'tip_right'
+    const heightPosition = iconRect.top > tipRect.height + arrowLength ? 'tip_top' : 'tip_bottom'
 
     setTipClassName(`${heightPosition} ${widthPosition}`)
 
     if (widthPosition === 'tip_left') {
       const computedArrowOffset = arrowOffset + (iconLength + arrowLength) / 2
-      tipBodyRef.current.style.left = `${iconRect.left -
-        (tipRect.width - computedArrowOffset)}px`
+      tipBodyRef.current.style.left = `${iconRect.left - (tipRect.width - computedArrowOffset)}px`
     } else {
       const computedArrowOffset = arrowOffset - (iconLength - arrowLength) / 2
       tipBodyRef.current.style.left = `${iconRect.left - computedArrowOffset}px`
@@ -77,17 +74,8 @@ const Tip = ({ className, text }) => {
     <div data-testid="tip" className={tipContainerClassNames}>
       <QuestionMarkIcon data-testid="tip-icon" ref={iconRef} />
       {createPortal(
-        <CSSTransition
-          in={isShow}
-          timeout={200}
-          classNames="fade"
-          unmountOnExit
-        >
-          <div
-            ref={tipBodyRef}
-            data-testid="tip-text"
-            className={tipClassNames}
-          >
+        <CSSTransition in={isShow} timeout={200} classNames="fade" unmountOnExit>
+          <div ref={tipBodyRef} data-testid="tip-text" className={tipClassNames}>
             {text}
           </div>
         </CSSTransition>,
