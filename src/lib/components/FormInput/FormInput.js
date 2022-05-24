@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react'
 import PropTypes from 'prop-types'
 import classnames from 'classnames'
-import { debounce, isEmpty } from 'lodash'
+import { isEmpty } from 'lodash'
 import { Field, useField } from 'react-final-form'
 
 import OptionsMenu from '../../elemens/OptionsMenu/OptionsMenu'
@@ -124,7 +124,10 @@ const FormInput = React.forwardRef(
     }
 
     const handleScroll = (event) => {
-      if (!event.target.closest('.options-menu') && !event.target.classList.contains('input')) {
+      if (
+        !event.target.closest('.options-menu') &&
+        !event.target.classList.contains('form-field')
+      ) {
         setShowValidationRules(false)
       }
     }
@@ -209,13 +212,13 @@ const FormInput = React.forwardRef(
                   className={inputClassNames}
                   ref={inputRef}
                   required={isInvalid}
-                  autoComplete={inputProps.autocomplete ?? 'off'}
                   {...{
                     disabled,
                     pattern,
                     ...inputProps,
                     ...input
                   }}
+                  autoComplete={inputProps.autocomplete ?? 'off'}
                   onChange={handleInputChange}
                   onBlur={handleInputBlur}
                   onFocus={handleInputFocus}
