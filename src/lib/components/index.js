@@ -1,6 +1,8 @@
 import Button from './Button/Button'
 import ConfirmDialog from './ConfirmDialog/ConfirmDialog'
+import FormCheckBox from './FormCheckBox/FormCheckBox'
 import FormInput from './FormInput/FormInput'
+import FormSelect from './FormSelect/FormSelect'
 import Modal from './Modal/Modal'
 import PopUpDialog from './PopUpDialog/PopUpDialog'
 import RoundedIcon from './RoundedIcon/RoundedIcon'
@@ -12,7 +14,9 @@ import Wizard from './Wizard/Wizard'
 export {
   Button,
   ConfirmDialog,
+  FormCheckBox,
   FormInput,
+  FormSelect,
   Modal,
   PopUpDialog,
   RoundedIcon,

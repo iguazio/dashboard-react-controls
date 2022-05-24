@@ -91,9 +91,14 @@
       border-color: transparent;
     }
 
-    &:read-only {
+    &:read-only:not(:disabled) {
       border-color: transparent;
       padding: 0;
+    }
+
+    &:disabled {
+      color: $spunPearl;
+      cursor: not-allowed;
     }
 
     &-dense {

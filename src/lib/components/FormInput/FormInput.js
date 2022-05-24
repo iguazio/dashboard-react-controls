@@ -4,11 +4,11 @@ import classnames from 'classnames'
 import { isEmpty } from 'lodash'
 import { Field, useField } from 'react-final-form'
 
-import OptionsMenu from '../../elemens/OptionsMenu/OptionsMenu'
+import OptionsMenu from '../../elements/OptionsMenu/OptionsMenu'
 import TextTooltipTemplate from '../TooltipTemplate/TextTooltipTemplate'
 import Tip from '../Tip/Tip'
 import Tooltip from '../Tooltip/Tooltip'
-import ValidationTemplate from '../../elemens/ValidationTemplate/ValidationTemplate'
+import ValidationTemplate from '../../elements/ValidationTemplate/ValidationTemplate'
 
 import { checkPatternsValidity } from '../../utils/validationService'
 import { useDetectOutsideClick } from '../../hooks/useDetectOutsideClick'
@@ -109,13 +109,13 @@ const FormInput = React.forwardRef(
 
       if (!event.relatedTarget || !event.relatedTarget?.closest('.suggestion-list')) {
         setIsFocused(false)
-        onBlur(event)
+        onBlur && onBlur(event)
       }
     }
 
     const handleInputChange = (event) => {
       input.onChange(event)
-      onChange(event.target.value)
+      onChange && onChange(event.target.value)
     }
 
     const handleInputFocus = (event) => {
@@ -176,6 +176,7 @@ const FormInput = React.forwardRef(
 
       return validationError
     }
+
     return (
       <Field validate={validateField} name={name}>
         {({ input, meta }) => (
