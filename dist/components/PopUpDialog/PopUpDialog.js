@@ -59,7 +59,7 @@ var PopUpDialog = function PopUpDialog(_ref) {
   var popUpOverlayRef = (0, _react.useRef)(null);
   var popUpClassNames = (0, _classnames.default)(className, 'pop-up-dialog__overlay', customPosition.element && 'custom-position');
   var calculateCustomPopUpPosition = (0, _react.useCallback)(function () {
-    if (customPosition.element) {
+    if (customPosition && customPosition.element) {
       var elementRect = customPosition.element.current.getBoundingClientRect();
       var popUpRect = popUpOverlayRef.current.getBoundingClientRect();
 

@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.TERTIARY_BUTTON = exports.SECONDARY_BUTTON = exports.PRIMARY_BUTTON = exports.LABEL_BUTTON = exports.INTERNAL_SERVER_ERROR_STATUS_CODE = exports.FORBIDDEN_ERROR_STATUS_CODE = exports.DANGER_BUTTON = exports.CONFLICT_ERROR_STATUS_CODE = void 0;
+exports.TERTIARY_BUTTON = exports.SECONDARY_BUTTON = exports.PRIMARY_BUTTON = exports.MODAL_SM = exports.MODAL_MD = exports.MODAL_LG = exports.LABEL_BUTTON = exports.INTERNAL_SERVER_ERROR_STATUS_CODE = exports.FORBIDDEN_ERROR_STATUS_CODE = exports.DANGER_BUTTON = exports.CONFLICT_ERROR_STATUS_CODE = void 0;
 
 /*=========== BUTTONS =============*/
 var PRIMARY_BUTTON = 'primary';
@@ -23,4 +23,12 @@ exports.INTERNAL_SERVER_ERROR_STATUS_CODE = INTERNAL_SERVER_ERROR_STATUS_CODE;
 var CONFLICT_ERROR_STATUS_CODE = 409;
 exports.CONFLICT_ERROR_STATUS_CODE = CONFLICT_ERROR_STATUS_CODE;
 var FORBIDDEN_ERROR_STATUS_CODE = 403;
+/*=========== MODAL =============*/
+
 exports.FORBIDDEN_ERROR_STATUS_CODE = FORBIDDEN_ERROR_STATUS_CODE;
+var MODAL_SM = 'sm';
+exports.MODAL_SM = MODAL_SM;
+var MODAL_MD = 'md';
+exports.MODAL_MD = MODAL_MD;
+var MODAL_LG = 'lg';
+exports.MODAL_LG = MODAL_LG;
