@@ -1,0 +1,17 @@
+.wizard-form {
+  &__with-steps {
+    .modal__body {
+      display: flex;
+      flex-flow: row nowrap;
+      overflow: hidden;
+      padding-right: 0;
+    }
+
+    .wizard-form__content {
+      overflow-y: auto;
+      height: 100%;
+      width: 100%;
+      padding-right: 2rem;
+    }
+  }
+}
