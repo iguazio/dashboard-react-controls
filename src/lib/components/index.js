@@ -1,5 +1,6 @@
 import Button from './Button/Button'
 import ConfirmDialog from './ConfirmDialog/ConfirmDialog'
+import Form from './Form/Form'
 import FormCheckBox from './FormCheckBox/FormCheckBox'
 import FormInput from './FormInput/FormInput'
 import FormSelect from './FormSelect/FormSelect'
@@ -14,6 +15,7 @@ import Wizard from './Wizard/Wizard'
 export {
   Button,
   ConfirmDialog,
+  Form,
   FormCheckBox,
   FormInput,
   FormSelect,

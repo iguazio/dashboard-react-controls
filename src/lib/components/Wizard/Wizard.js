@@ -1,10 +1,10 @@
 import React, { useMemo, useState } from 'react'
 import PropTypes from 'prop-types'
-import { Form } from 'react-final-form'
 import classNames from 'classnames'
 
 import Button from '../Button/Button'
 import ConfirmDialog from '../ConfirmDialog/ConfirmDialog'
+import Form from '../Form/Form'
 import Modal from '../Modal/Modal'
 import WizardSteps from './WizardSteps/WizardSteps'
 
