@@ -49,3 +49,24 @@ export const INPUT_LINK = PropTypes.shape({
   show: PropTypes.oneOfType([PropTypes.bool, PropTypes.string]),
   url: PropTypes.string
 })
+
+export const SELECT_OPTION = PropTypes.shape({
+  disabled: PropTypes.bool,
+  hidden: PropTypes.bool,
+  icon: PropTypes.element,
+  id: PropTypes.string.isRequired,
+  label: PropTypes.string.isRequired,
+  status: PropTypes.string,
+  subLabel: PropTypes.string
+})
+
+export const SELECT_OPTIONS = PropTypes.arrayOf(SELECT_OPTION)
+
+export const INPUT_VALIDATION_RULES = PropTypes.arrayOf(
+  PropTypes.shape({
+    name: PropTypes.string.isRequired,
+    label: PropTypes.string.isRequired,
+    pattern: PropTypes.oneOfType([PropTypes.instanceOf(RegExp), PropTypes.func]).isRequired,
+    isValid: PropTypes.bool
+  })
+)
