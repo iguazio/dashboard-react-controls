@@ -61,3 +61,12 @@ export const SELECT_OPTION = PropTypes.shape({
 })
 
 export const SELECT_OPTIONS = PropTypes.arrayOf(SELECT_OPTION)
+
+export const INPUT_VALIDATION_RULES = PropTypes.arrayOf(
+  PropTypes.shape({
+    name: PropTypes.string.isRequired,
+    label: PropTypes.string.isRequired,
+    pattern: PropTypes.oneOfType([PropTypes.instanceOf(RegExp), PropTypes.func]).isRequired,
+    isValid: PropTypes.bool
+  })
+)
