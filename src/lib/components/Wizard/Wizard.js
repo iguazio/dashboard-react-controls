@@ -18,6 +18,7 @@ const Wizard = ({
   children,
   className,
   confirmClose,
+  FormState,
   initialValues,
   isWizardOpen,
   onWizardResolve,
@@ -61,7 +62,7 @@ const Wizard = ({
     return setActiveStepNumber(idx)
   }
 
-  const handleOnClose = (FormState) => {
+  const handleOnClose = () => {
     if (confirmClose && FormState && FormState.dirty) {
       openPopUp(ConfirmDialog, {
         cancelButton: {
@@ -81,15 +82,15 @@ const Wizard = ({
     }
   }
 
-  const handleSubmit = (values) => {
+  const handleSubmit = () => {
     if (isLastStep) {
-      onWizardSubmit(values)
+      onWizardSubmit(FormState.values)
     } else {
       goToNextStep()
     }
   }
 
-  const getDefaultActions = (FormState) => {
+  const getDefaultActions = () => {
     if (hasSteps) {
       return [
         <Button
@@ -99,7 +100,7 @@ const Wizard = ({
           type="button"
         />,
         <Button
-          onClick={FormState.handleSubmit}
+          onClick={handleSubmit}
           disabled={FormState.submitting}
           label={isLastStep ? submitButtonLabel : 'Next'}
           type="button"
@@ -108,9 +109,9 @@ const Wizard = ({
       ]
     } else {
       return [
-        <Button onClick={() => handleOnClose(FormState)} label="Cancel" type="button" />,
+        <Button onClick={handleOnClose} label="Cancel" type="button" />,
         <Button
-          onClick={FormState.handleSubmit}
+          onClick={handleSubmit}
           disabled={FormState.submitting}
           label={submitButtonLabel}
           type="button"
@@ -120,45 +121,40 @@ const Wizard = ({
     }
   }
 
-  const renderModalActions = (FormState) => {
+  const renderModalActions = () => {
     if (stepsConfig[activeStepNumber]?.getActions) {
       return stepsConfig[activeStepNumber]
         .getActions({
           FormState,
           goToNextStep,
           goToPreviousStep,
-          handleOnClose: () => handleOnClose(FormState)
+          handleOnClose,
+          handleSubmit
         })
         .map((action) => <Button {...action} />)
     } else {
-      return getDefaultActions(FormState)
+      return getDefaultActions()
     }
   }
 
   return (
-    <>
-      <Form initialValues={initialValues} onSubmit={handleSubmit}>
-        {(FormState) => (
-          <Modal
-            actions={renderModalActions(FormState)}
-            className={wizardClasses}
-            onClose={() => handleOnClose(FormState)}
-            show={isWizardOpen}
-            size={size}
-            title={title}
-          >
-            {hasSteps && (
-              <WizardSteps
-                activeStepNumber={activeStepNumber}
-                jumpToStep={jumpToStep}
-                steps={stepsMenu}
-              />
-            )}
-            <div className="wizard-form__content">{activeStepTemplate}</div>
-          </Modal>
-        )}
-      </Form>
-    </>
+    <Modal
+      actions={renderModalActions()}
+      className={wizardClasses}
+      onClose={handleOnClose}
+      show={isWizardOpen}
+      size={size}
+      title={title}
+    >
+      {hasSteps && (
+        <WizardSteps
+          activeStepNumber={activeStepNumber}
+          jumpToStep={jumpToStep}
+          steps={stepsMenu}
+        />
+      )}
+      <div className="wizard-form__content">{activeStepTemplate}</div>
+    </Modal>
   )
 }
 
@@ -174,6 +170,7 @@ Wizard.defaultProps = {
 Wizard.propsTypes = {
   className: PropTypes.string,
   confirmClose: PropTypes.bool,
+  FormState: PropTypes.object.isRequired,
   initialValues: PropTypes.object,
   isOpen: PropTypes.bool.isRequired,
   onResolve: PropTypes.func.isRequired,
