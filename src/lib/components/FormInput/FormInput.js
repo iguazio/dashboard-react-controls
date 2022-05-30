@@ -40,7 +40,7 @@ const FormInput = React.forwardRef(
       required,
       suggestionList,
       tip,
-      validationRules,
+      validationRules: rules,
       validator,
       withoutBorder,
       ...inputProps
@@ -52,6 +52,7 @@ const FormInput = React.forwardRef(
     const [isFocused, setIsFocused] = useState(false)
     const [typedValue, setTypedValue] = useState('')
     const [validationPattern] = useState(RegExp(pattern))
+    const [validationRules, setValidationRules] = useState(rules)
     const [showValidationRules, setShowValidationRules] = useState(false)
     const wrapperRef = useRef()
     ref ??= wrapperRef
@@ -96,8 +97,8 @@ const FormInput = React.forwardRef(
       }
     }, [focused])
 
-    const getValidationRules = (rules) => {
-      return rules.map(({ isValid = false, label, name }) => {
+    const getValidationRules = () => {
+      return validationRules.map(({ isValid = false, label, name }) => {
         return <ValidationTemplate valid={isValid} validationMessage={label} key={name} />
       })
     }
@@ -145,11 +146,13 @@ const FormInput = React.forwardRef(
       const valueToValidate = value ?? ''
       let validationError = null
 
-      if (!isEmpty(validationRules)) {
-        const [newRules, isValidField] = checkPatternsValidity(validationRules, valueToValidate)
+      if (!isEmpty(validationRules) && valueToValidate !== typedValue) {
+        const [newRules, isValidField] = checkPatternsValidity(rules, valueToValidate)
+        const invalidRules = newRules.filter((rule) => !rule.isValid)
+        setValidationRules(() => newRules)
 
         if (!isValidField) {
-          validationError = newRules
+          validationError = invalidRules.map((rule) => ({ name: rule.name, label: rule.label }))
         }
 
         if ((isValidField && showValidationRules) || (required && valueToValidate === '')) {
@@ -170,6 +173,7 @@ const FormInput = React.forwardRef(
       if (!validationError && validator) {
         validationError = validator(value)
       }
+
       return validationError
     }
 
@@ -230,7 +234,7 @@ const FormInput = React.forwardRef(
                     <InvalidIcon />
                   </Tooltip>
                 )}
-                {isInvalid && Array.isArray(meta.error) && !isEmpty(meta.error) && (
+                {isInvalid && Array.isArray(meta.error) && (
                   <i className="form-field__warning" onClick={toggleValidationRulesMenu}>
                     <WarningIcon />
                   </i>
@@ -264,9 +268,9 @@ const FormInput = React.forwardRef(
                 })}
               </ul>
             )}
-            {isInvalid && Array.isArray(meta.error) && !isEmpty(meta.error) && (
-              <OptionsMenu show={showValidationRules} parentElement={ref}>
-                {getValidationRules(meta.error)}
+            {!isEmpty(validationRules) && (
+              <OptionsMenu show={showValidationRules} ref={ref}>
+                {getValidationRules()}
               </OptionsMenu>
             )}
           </div>

@@ -154,10 +154,7 @@ const Wizard = ({
                 steps={stepsMenu}
               />
             )}
-            <div className="wizard-form__content">
-              {activeStepTemplate}
-              <pre>{JSON.stringify(FormState, null, 2)}</pre>
-            </div>
+            <div className="wizard-form__content">{activeStepTemplate}</div>
           </Modal>
         )}
       </Form>

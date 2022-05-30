@@ -6,16 +6,14 @@ import { PopUpDialog } from '../../components'
 
 import './optionsMenu.scss'
 
-const OptionsMenu = ({ children, parentElement, show, timeout }) => {
-  const { width: dropdownWidth } = parentElement.current
-    ? parentElement.current.getBoundingClientRect()
-    : {}
+const OptionsMenu = React.forwardRef(({ children, show, timeout }, ref) => {
+  const { width: dropdownWidth } = ref.current ? ref.current.getBoundingClientRect() : {}
   return (
     <CSSTransition in={show} timeout={timeout} classNames="options-menu-transition" unmountOnExit>
       <PopUpDialog
         className="options-menu"
         customPosition={{
-          element: parentElement,
+          element: ref,
           position: 'bottom-right'
         }}
         style={{ width: `${dropdownWidth}px` }}
@@ -24,7 +22,7 @@ const OptionsMenu = ({ children, parentElement, show, timeout }) => {
       </PopUpDialog>
     </CSSTransition>
   )
-}
+})
 
 OptionsMenu.defaultProps = {
   children: [],
