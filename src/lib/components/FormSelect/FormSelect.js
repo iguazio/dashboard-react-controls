@@ -93,7 +93,7 @@ const FormSelect = ({
   const handleSelectOptionClick = (selectedOption, option) => {
     if (selectedOption !== input.value) {
       option.handler && option.handler()
-      input.onChange(selectedOption)
+      // input.onChange(selectedOption)
       onChange && onChange(selectedOption)
     }
   }
@@ -101,7 +101,7 @@ const FormSelect = ({
   const required = (value) => (value ? undefined : 'Required')
 
   return (
-    <Field name={name} component="select" validate={required}>
+    <Field name={name} validate={required}>
       {({ input, meta }) => (
         <div
           data-testid="select"

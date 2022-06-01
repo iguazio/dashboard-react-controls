@@ -1,6 +1,5 @@
 import React, { useMemo, useState } from 'react'
 import PropTypes from 'prop-types'
-import { Form } from 'react-final-form'
 import classNames from 'classnames'
 
 import Button from '../Button/Button'
@@ -83,10 +82,13 @@ const Wizard = ({
   }
 
   const handleSubmit = () => {
-    if (isLastStep) {
-      onWizardSubmit(FormState.values)
-    } else {
-      goToNextStep()
+    FormState.handleSubmit()
+    if (FormState.valid) {
+      if (isLastStep) {
+        onWizardSubmit(FormState.values)
+      } else {
+        goToNextStep()
+      }
     }
   }
 
@@ -101,7 +103,7 @@ const Wizard = ({
         />,
         <Button
           onClick={handleSubmit}
-          disabled={FormState.submitting}
+          disabled={FormState.submitting || (FormState.invalid && FormState.submitFailed)}
           label={isLastStep ? submitButtonLabel : 'Next'}
           type="button"
           variant={SECONDARY_BUTTON}
@@ -112,7 +114,7 @@ const Wizard = ({
         <Button onClick={handleOnClose} label="Cancel" type="button" />,
         <Button
           onClick={handleSubmit}
-          disabled={FormState.submitting}
+          disabled={FormState.submitting || (FormState.invalid && FormState.submitFailed)}
           label={submitButtonLabel}
           type="button"
           variant={SECONDARY_BUTTON}

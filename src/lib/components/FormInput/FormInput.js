@@ -142,6 +142,18 @@ const FormInput = React.forwardRef(
       setShowValidationRules(!showValidationRules)
     }
 
+    useEffect(() => {
+      setValidationRules((prevState) =>
+        prevState.map((rule) => ({
+          ...rule,
+          isValid:
+            !meta.error || !Array.isArray(meta.error)
+              ? true
+              : !meta.error.some((err) => err.name === rule.name)
+        }))
+      )
+    }, [meta.error])
+
     const validateField = (value) => {
       const valueToValidate = value ?? ''
       let validationError = null
@@ -149,7 +161,6 @@ const FormInput = React.forwardRef(
       if (!isEmpty(validationRules) && valueToValidate !== typedValue) {
         const [newRules, isValidField] = checkPatternsValidity(rules, valueToValidate)
         const invalidRules = newRules.filter((rule) => !rule.isValid)
-        setValidationRules(() => newRules)
 
         if (!isValidField) {
           validationError = invalidRules.map((rule) => ({ name: rule.name, label: rule.label }))
