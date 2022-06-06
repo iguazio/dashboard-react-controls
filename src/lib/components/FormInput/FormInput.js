@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react'
 import PropTypes from 'prop-types'
-import classnames from 'classnames'
+import classNames from 'classnames'
 import { isEmpty } from 'lodash'
 import { Field, useField } from 'react-final-form'
 
@@ -59,15 +59,15 @@ const FormInput = React.forwardRef(
     const inputRef = useRef()
     useDetectOutsideClick(ref, () => setShowValidationRules(false))
 
-    const inputClassNames = classnames(
-      'form-field__input',
-      className,
-      `form-field__input-${density}`,
-      isInvalid && 'form-field__input-invalid',
-      // isInvalid && 'input_rules-invalid',
+    const selectWrapperClassNames = classNames(
+      'form-field__wrapper',
+      `form-field__wrapper-${density}`,
+      disabled && 'form-field__wrapper-disabled',
+      isInvalid && 'form-field__wrapper-invalid',
       withoutBorder && 'without-border'
     )
-    const labelClassNames = classnames(
+
+    const labelClassNames = classNames(
       'form-field__label',
       disabled && 'form-field__label-disabled'
     )
@@ -106,7 +106,7 @@ const FormInput = React.forwardRef(
     const handleInputBlur = (event) => {
       input.onBlur(event)
 
-      if (!event.relatedTarget || !event.relatedTarget?.closest('.suggestion-list')) {
+      if (!event.relatedTarget || !event.relatedTarget?.closest('.form-field__suggestion-list')) {
         setIsFocused(false)
         onBlur && onBlur(event)
       }
@@ -191,7 +191,7 @@ const FormInput = React.forwardRef(
     return (
       <Field validate={validateField} name={name}>
         {({ input, meta }) => (
-          <div ref={ref} className="form-field">
+          <div ref={ref} className={`form-field ${className}`}>
             {label && (
               <div className={labelClassNames}>
                 <label data-testid="label" htmlFor={input.name}>
@@ -216,24 +216,25 @@ const FormInput = React.forwardRef(
                 )}
               </div>
             )}
-            <div className="form-field__wrapper">
-              <input
-                data-testid="input"
-                id={input.name}
-                className={inputClassNames}
-                ref={inputRef}
-                required={isInvalid}
-                {...{
-                  disabled,
-                  pattern,
-                  ...inputProps,
-                  ...input
-                }}
-                autoComplete={inputProps.autocomplete ?? 'off'}
-                onChange={handleInputChange}
-                onBlur={handleInputBlur}
-                onFocus={handleInputFocus}
-              />
+            <div className={selectWrapperClassNames}>
+              <div className="form-field__control">
+                <input
+                  data-testid="input"
+                  id={input.name}
+                  ref={inputRef}
+                  required={isInvalid || required}
+                  {...{
+                    disabled,
+                    pattern,
+                    ...inputProps,
+                    ...input
+                  }}
+                  autoComplete={inputProps.autocomplete ?? 'off'}
+                  onChange={handleInputChange}
+                  onBlur={handleInputBlur}
+                  onFocus={handleInputFocus}
+                />
+              </div>
               <div className="form-field__icons">
                 {isInvalid && !Array.isArray(meta.error) && (
                   <Tooltip
@@ -246,9 +247,9 @@ const FormInput = React.forwardRef(
                   </Tooltip>
                 )}
                 {isInvalid && Array.isArray(meta.error) && (
-                  <i className="form-field__warning" onClick={toggleValidationRulesMenu}>
+                  <button className="form-field__warning" onClick={toggleValidationRulesMenu}>
                     <WarningIcon />
-                  </i>
+                  </button>
                 )}
                 {tip && <Tip text={tip} className="form-field__tip" />}
                 {inputIcon && (
@@ -259,7 +260,7 @@ const FormInput = React.forwardRef(
               </div>
             </div>
             {suggestionList?.length > 0 && isFocused && (
-              <ul className="suggestion-list">
+              <ul className="form-field__suggestion-list">
                 {suggestionList.map((item, index) => {
                   return (
                     <li

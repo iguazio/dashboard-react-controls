@@ -1,303 +1,93 @@
 @import '../../scss/mixins';
 @import '../../scss/colors';
-@import '../../scss/borders';
 @import '../../scss/shadows';
 
-.form-field {
-  position: relative;
-  display: block;
-  width: 100%;
+@include formField;
 
-  &__label {
-    margin-bottom: 5px;
-    color: $topaz;
-    font-size: 12px;
-    text-transform: capitalize;
-    background-color: transparent;
+.form-field {
+  &__wrapper {
+    &-active {
+      background: $alabaster;
+    }
+
+    .form-field__caret {
+      cursor: pointer;
+    }
 
     &-disabled {
-      color: $spunPearl;
+      .form-field__caret {
+        cursor: not-allowed;
+
+        path {
+          fill: $spunPearl;
+        }
+      }
+    }
+
+    &.without-border {
+      .form-field__caret {
+        display: none;
+      }
+
+      &:hover {
+        .form-field__caret {
+          display: block;
+        }
+      }
     }
   }
 
   &__select {
-    padding-left: 16px;
-    padding-right: 30px;
-    cursor: pointer;
-
-    @include fieldWrapper;
-
-    &-active:not(.without-border) {
-      background: $alabaster;
-    }
-
-    &-disabled {
-      color: $spunPearl;
-      cursor: not-allowed;
-    }
-
-    &.without {
-      &-border {
-        border-color: transparent;
-
-        .form-field__caret {
-          display: none;
-        }
-
-        &:hover {
-          .form-field__caret {
-            display: block;
-          }
-        }
-      }
-
-      &-label {
-        padding-left: 16px;
-      }
-    }
-
-    &-dense {
-      padding-top: 12px;
-      padding-bottom: 12px;
-    }
-
-    &-normal {
-      padding-top: 14px;
-      padding-bottom: 14px;
-    }
-
-    &-medium {
-      padding-top: 16px;
-      padding-bottom: 16px;
-    }
-
-    &-chunky {
-      padding-top: 18px;
-      padding-bottom: 18px;
-    }
+    width: 100%;
 
     &-value {
       display: block;
-      min-height: 18px;
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+    }
+
+    &-sub_label {
+      display: block;
+      margin-left: 5px;
+      overflow: hidden;
+      color: $topaz;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+    }
+
+    &__options-list {
+      .pop-up-dialog {
+        width: 100%;
+        padding: 0;
+
+        &__header {
+          display: none;
+        }
+      }
+      .options-list {
+        &__body {
+          width: 100%;
+          max-height: 250px;
+          overflow-y: auto;
+          color: $mulledWineTwo;
+          background-color: $white;
+          border: $primaryBorder;
+          border-radius: 2px;
+          box-shadow: $filterShadow;
+        }
+
+        &__search {
+          width: 100%;
+
+          input {
+            width: 100%;
+            padding: 10px;
+            border: none;
+            border-bottom: $primaryBorder;
+          }
+        }
+      }
     }
   }
 }
-
-// .select {
-//   position: relative;
-//   display: flex;
-//   flex-flow: column;
-//   flex: 1 0;
-//   cursor: pointer;
-
-//   @include fieldWrapper;
-
-//   &__label {
-//     margin-bottom: 5px;
-//     color: $topaz;
-//     font-size: 12px;
-//     text-transform: capitalize;
-//     background-color: transparent;
-
-//     &-mandatory {
-//       color: $amaranth;
-//     }
-
-//     &-disabled {
-//       color: $spunPearl;
-
-//       .form-field__label-mandatory {
-//         color: $spunPearl;
-//       }
-//     }
-//   }
-
-//   &_active:not(.without-border) {
-//     background: $alabaster;
-//   }
-
-//   &__caret {
-//     position: absolute;
-//     top: 50%;
-//     right: 10px;
-//     transform: translate(0%, -50%);
-//   }
-
-//   &.without {
-//     &-border {
-//       border: none;
-
-//       .select__caret {
-//         display: none;
-//       }
-
-//       &:hover {
-//         .select__caret {
-//           display: block;
-//         }
-//       }
-//     }
-
-//     &-label {
-//       padding-left: 16px;
-//     }
-//   }
-
-//   &__header {
-//     position: relative;
-//     display: flex;
-//     align-items: center;
-//     width: 100%;
-//     height: 100%;
-//   }
-
-//   &__value {
-//     min-width: 96px;
-//     min-height: 1em;
-//     padding-right: 50px;
-//     overflow: hidden;
-//     color: $mulledWine;
-//     white-space: nowrap;
-//     text-overflow: ellipsis;
-
-//     &_floating {
-//       position: relative;
-//       top: 6px;
-//       left: 16px;
-//     }
-//   }
-
-//   &__label {
-//     top: 15px;
-//     left: 0;
-//     padding: 0 5px 0 16px;
-//     color: $topaz;
-//     font-size: 15px;
-//     text-transform: capitalize;
-//     transition: 200ms ease;
-
-//     &_floating {
-//       position: absolute;
-//       top: 0;
-//       left: 0;
-//       padding-top: 9px;
-//       font-weight: 700;
-//       font-size: 10px;
-//       line-height: 12px;
-//       letter-spacing: 0.5px;
-//       transition: 200ms ease;
-//     }
-
-//     &_top {
-//       position: absolute;
-//       top: -20px;
-//       left: 0;
-//       padding: 0;
-//       font-weight: bold;
-//       font-size: 12px;
-//       line-height: 15px;
-
-//       & + .select__value {
-//         padding-left: 15px;
-//       }
-//     }
-//   }
-
-//   &__options-list {
-//     .pop-up-dialog {
-//       width: 100%;
-//       padding: 0;
-
-//       &__header {
-//         display: none;
-//       }
-//     }
-//   }
-
-//   &.disabled {
-//     cursor: not-allowed;
-
-//     .select__label,
-//     .select__value {
-//       color: $spunPearl;
-//     }
-//   }
-
-//   .sub-label {
-//     margin-left: 5px;
-//     overflow: hidden;
-//     color: $topaz;
-//     white-space: nowrap;
-//     text-overflow: ellipsis;
-//   }
-
-//   &__body {
-//     width: 100%;
-//     max-height: 250px;
-//     overflow-y: auto;
-//     color: $mulledWineTwo;
-//     background-color: $white;
-//     border: $primaryBorder;
-//     border-radius: 2px;
-//     box-shadow: $filterShadow;
-//   }
-
-//   &__search {
-//     width: 100%;
-
-//     input {
-//       width: 100%;
-//       padding: 10px;
-//       border: none;
-//       border-bottom: $primaryBorder;
-//     }
-//   }
-
-//   .actions {
-//     position: absolute;
-//     right: 25px;
-//   }
-
-//   .disabled {
-//     color: $spunPearl;
-//     cursor: default;
-//     user-select: none;
-
-//     &:hover {
-//       background-color: $white;
-//     }
-//   }
-
-//   .pop-up-dialog__overlay {
-//     top: 100%;
-//     right: calc(100% + 10px);
-//   }
-
-//   &-dense {
-//     height: 40px;
-
-//     .select__label_floating {
-//       padding-top: 6px;
-//     }
-//   }
-
-//   &-normal {
-//     height: 48px;
-//   }
-
-//   &-medium {
-//     height: 52px;
-
-//     .select__label_floating {
-//       padding-top: 11px;
-//     }
-//   }
-
-//   &-chunky {
-//     height: 56px;
-
-//     .select__label_floating {
-//       padding-top: 13px;
-//     }
-//   }
-// }

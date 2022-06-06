@@ -31,26 +31,67 @@ const FormSelect = ({
   withoutBorder,
   withSelectedIcon
 }) => {
-  const { input } = useField(name)
-  const selectRef = useRef()
+  const { input, meta } = useField(name)
+  const [isInvalid, setIsInvalid] = useState(false)
   const [isConfirmDialogOpen, setConfirmDialogOpen] = useState(false)
   const [isOpen, setOpen] = useState(false)
   const [searchValue, setSearchValue] = useState('')
+  const selectRef = useRef()
   const { width: dropdownWidth } = selectRef?.current?.getBoundingClientRect() || {}
 
-  const selectClassName = classNames(
-    'form-field__select',
-    `form-field__select-${density}`,
-    isOpen && 'form-field__select-active',
-    withoutBorder && 'without-border',
-    disabled && 'form-field__select-disabled'
+  const selectWrapperClassNames = classNames(
+    'form-field__wrapper',
+    `form-field__wrapper-${density}`,
+    disabled && 'form-field__wrapper-disabled',
+    isOpen && 'form-field__wrapper-active',
+    isInvalid && 'form-field__wrapper-invalid',
+    withoutBorder && 'without-border'
   )
+
   const selectLabelClassName = classNames(
     'form-field__label',
     disabled && 'form-field__label-disabled'
   )
 
   const selectedOption = options.find((option) => option.id === input.value)
+
+  useEffect(() => {
+    setIsInvalid(
+      meta.invalid && (meta.validating || meta.modified || (meta.submitFailed && meta.touched))
+    )
+  }, [meta.invalid, meta.modified, meta.submitFailed, meta.touched, meta.validating])
+
+  const openMenu = useCallback(() => {
+    if (!isOpen) {
+      setOpen(true)
+      input.onFocus(new Event('focus'))
+    }
+  }, [input, isOpen])
+
+  const closeMenu = useCallback(() => {
+    if (isOpen) {
+      setOpen(false)
+      input.onBlur(new Event('blur'))
+    }
+  }, [input, isOpen])
+
+  const clickHandler = useCallback(
+    (event) => {
+      if (selectRef.current !== event.target.closest('.form-field')) {
+        closeMenu()
+      }
+    },
+    [closeMenu]
+  )
+
+  const handleScroll = useCallback(
+    (event) => {
+      if (!event.target.closest('.options-list__body')) {
+        closeMenu()
+      }
+    },
+    [closeMenu]
+  )
 
   useEffect(() => {
     if (isOpen) {
@@ -63,37 +104,35 @@ const FormSelect = ({
       window.removeEventListener('click', clickHandler)
       window.removeEventListener('scroll', handleScroll, true)
     }
-  }, [isOpen])
-
-  const clickHandler = (event) => {
-    if (selectRef.current !== event.target.closest('.form-field')) {
-      setOpen(false)
-    }
-  }
-
-  const handleScroll = (event) => {
-    if (!event.target.closest('.select__body')) {
-      setOpen(false)
-    }
-  }
+  }, [clickHandler, handleScroll, isOpen])
 
   const toggleOpen = () => {
-    !disabled && setOpen(!isOpen)
+    if (isOpen) {
+      closeMenu()
+    } else {
+      !disabled && openMenu()
+    }
   }
 
-  const handleCloseSelectBody = useCallback((event) => {
-    event.stopPropagation()
+  const handleCloseSelectBody = useCallback(
+    (event) => {
+      event.stopPropagation()
 
-    if (!event.target.classList.contains('disabled') && !event.target.closest('.select__search')) {
-      setOpen(false)
-      setSearchValue('')
-    }
-  }, [])
+      if (
+        !event.target.classList.contains('disabled') &&
+        !event.target.closest('.options-list__search')
+      ) {
+        closeMenu()
+        setSearchValue('')
+      }
+    },
+    [closeMenu]
+  )
 
   const handleSelectOptionClick = (selectedOption, option) => {
     if (selectedOption !== input.value) {
       option.handler && option.handler()
-      // input.onChange(selectedOption)
+      input.onChange(selectedOption)
       onChange && onChange(selectedOption)
     }
   }
@@ -117,19 +156,21 @@ const FormSelect = ({
               </label>
             </div>
           )}
-          <div data-testid="select-header" className="form-field__wrapper">
-            {!hideSelectedOption && (
-              <div data-testid="selected-option" className={selectClassName}>
-                <span className="form-field__select-value">
-                  {input.value && selectedOption?.label}
-                </span>
-                {selectedOption?.subLabel && (
-                  <span data-testid="select-subLabel" className="sub-label">
-                    {selectedOption.subLabel}
+          <div data-testid="select-header" className={selectWrapperClassNames}>
+            <div className="form-field__control">
+              {!hideSelectedOption && (
+                <div data-testid="selected-option" className="form-field__select">
+                  <span className="form-field__select-value">
+                    {input.value && selectedOption?.label}
                   </span>
-                )}
-              </div>
-            )}
+                  {selectedOption?.subLabel && (
+                    <span data-testid="select-subLabel" className="form-field__select-sub_label">
+                      {selectedOption.subLabel}
+                    </span>
+                  )}
+                </div>
+              )}
+            </div>
             <div className="form-field__icons">
               {input.value && selectedItemAction && (
                 <>
@@ -154,7 +195,9 @@ const FormSelect = ({
                   )}
                 </>
               )}
-              <Caret className="form-field__caret" />
+              <span>
+                <Caret className="form-field__caret" />
+              </span>
             </div>
           </div>
           {isConfirmDialogOpen && (
@@ -183,7 +226,7 @@ const FormSelect = ({
           )}
           {isOpen && (
             <PopUpDialog
-              className="select__options-list"
+              className="form-field__select__options-list"
               customPosition={{
                 element: selectRef,
                 position: 'bottom-right'
@@ -192,11 +235,11 @@ const FormSelect = ({
             >
               <div
                 data-testid="select-body"
-                className="select__body"
+                className="options-list__body"
                 onClick={handleCloseSelectBody}
               >
                 {search && (
-                  <div className="select__search">
+                  <div className="options-list__search">
                     <input
                       type="text"
                       placeholder="Search..."
@@ -226,6 +269,7 @@ const FormSelect = ({
               </div>
             </PopUpDialog>
           )}
+          <input {...input} type="hidden" />
         </div>
       )}
     </Field>
@@ -243,7 +287,7 @@ FormSelect.defaultProps = {
   search: false,
   selectType: '',
   withoutBorder: false,
-  withSelectedIcon: false
+  withSelectedIcon: true
 }
 
 FormSelect.propTypes = {

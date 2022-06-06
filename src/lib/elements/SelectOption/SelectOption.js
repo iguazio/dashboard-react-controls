@@ -58,7 +58,7 @@ const SelectOption = ({ item, onClick, selectType, selectedId, withSelectedIcon 
 SelectOption.defaultProps = {
   onClick: () => {},
   selectType: '',
-  withSelectedIcon: false
+  withSelectedIcon: true
 }
 
 SelectOption.propTypes = {
