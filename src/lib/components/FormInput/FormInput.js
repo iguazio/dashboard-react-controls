@@ -59,7 +59,9 @@ const FormInput = React.forwardRef(
     const inputRef = useRef()
     useDetectOutsideClick(ref, () => setShowValidationRules(false))
 
-    const selectWrapperClassNames = classNames(
+    const formFieldClassNames = classNames('form-field', className)
+
+    const inputWrapperClassNames = classNames(
       'form-field__wrapper',
       `form-field__wrapper-${density}`,
       disabled && 'form-field__wrapper-disabled',
@@ -191,7 +193,7 @@ const FormInput = React.forwardRef(
     return (
       <Field validate={validateField} name={name}>
         {({ input, meta }) => (
-          <div ref={ref} className={`form-field ${className}`}>
+          <div ref={ref} className={formFieldClassNames}>
             {label && (
               <div className={labelClassNames}>
                 <label data-testid="label" htmlFor={input.name}>
@@ -216,7 +218,7 @@ const FormInput = React.forwardRef(
                 )}
               </div>
             )}
-            <div className={selectWrapperClassNames}>
+            <div className={inputWrapperClassNames}>
               <div className="form-field__control">
                 <input
                   data-testid="input"
