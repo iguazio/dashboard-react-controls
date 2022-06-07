@@ -1,6 +1,6 @@
 
 
-Create a new dist version 0.0.7
+Create a new dist version 0.0.8
 
 Collecting:
-- Impl [Form Select] move and revamp select component (#11)
+- Fix [Form] wizard and form input (#16)

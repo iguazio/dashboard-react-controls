@@ -19,13 +19,12 @@ var _jsxRuntime = require("react/jsx-runtime");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var OptionsMenu = function OptionsMenu(_ref) {
+var OptionsMenu = /*#__PURE__*/_react.default.forwardRef(function (_ref, ref) {
   var children = _ref.children,
-      parentElement = _ref.parentElement,
       show = _ref.show,
       timeout = _ref.timeout;
 
-  var _ref2 = parentElement.current ? parentElement.current.getBoundingClientRect() : {},
+  var _ref2 = ref.current ? ref.current.getBoundingClientRect() : {},
       dropdownWidth = _ref2.width;
 
   return /*#__PURE__*/(0, _jsxRuntime.jsx)(_reactTransitionGroup.CSSTransition, {
@@ -36,7 +35,7 @@ var OptionsMenu = function OptionsMenu(_ref) {
     children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_components.PopUpDialog, {
       className: "options-menu",
       customPosition: {
-        element: parentElement,
+        element: ref,
         position: 'bottom-right'
       },
       style: {
@@ -48,7 +47,7 @@ var OptionsMenu = function OptionsMenu(_ref) {
       })
     })
   });
-};
+});
 
 OptionsMenu.defaultProps = {
   children: [],

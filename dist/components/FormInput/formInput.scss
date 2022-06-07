@@ -3,30 +3,10 @@
 @import '../../scss/shadows';
 @import '../../scss/mixins';
 
+@include formField;
+
 .form-field {
-  position: relative;
-  display: block;
-  width: 100%;
-
   &__label {
-    margin-bottom: 5px;
-    color: $topaz;
-    font-size: 12px;
-    text-transform: capitalize;
-    background-color: transparent;
-
-    &-mandatory {
-      color: $amaranth;
-    }
-
-    &-disabled {
-      color: $spunPearl;
-
-      .form-field__label-mandatory {
-        color: $spunPearl;
-      }
-    }
-
     &-icon {
       display: inline-flex;
       margin-left: 3px;
@@ -51,11 +31,11 @@
     }
   }
 
-  &__input {
-    padding-left: 16px;
-    padding-right: 30px;
-
-    @include fieldWrapper;
+  input {
+    border: 0;
+    color: inherit;
+    padding: 0;
+    width: 100%;
 
     &::placeholder {
       color: $spunPearl;
@@ -81,66 +61,13 @@
       color: $spunPearl;
     }
 
-    &-invalid {
-      border: $errorBorder;
-      padding-right: 50px;
-    }
-
-    &.without-border {
-      border-color: transparent;
-    }
-
-    &:read-only:not(:disabled) {
-      border-color: transparent;
-      padding: 0;
-    }
-
     &:disabled {
-      color: $spunPearl;
+      background: transparent;
       cursor: not-allowed;
     }
-
-    &-dense {
-      padding-top: 12px;
-      padding-bottom: 12px;
-    }
-
-    &-normal {
-      padding-top: 14px;
-      padding-bottom: 14px;
-    }
-
-    &-medium {
-      padding-top: 16px;
-      padding-bottom: 16px;
-    }
-
-    &-chunky {
-      padding-top: 18px;
-      padding-bottom: 18px;
-    }
   }
 
-  &__icons {
-    display: flex;
-    align-items: center;
-    position: absolute;
-    top: 50%;
-    right: 10px;
-    transform: translateY(-50%);
-
-    & > * {
-      display: flex;
-      align-items: center;
-      cursor: pointer;
-
-      &:not(:first-child) {
-        margin-left: 8px;
-      }
-    }
-  }
-
-  .suggestion-list {
+  &__suggestion-list {
     position: absolute;
     top: 100%;
     left: 0;
@@ -161,9 +88,5 @@
         cursor: pointer;
       }
     }
-  }
-
-  &__wrapper {
-    position: relative;
   }
 }

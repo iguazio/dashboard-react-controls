@@ -81,7 +81,7 @@ var SelectOption = function SelectOption(_ref) {
 SelectOption.defaultProps = {
   onClick: function onClick() {},
   selectType: '',
-  withSelectedIcon: false
+  withSelectedIcon: true
 };
 SelectOption.propTypes = {
   disabled: _propTypes.default.bool,

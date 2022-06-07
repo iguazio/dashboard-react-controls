@@ -92,7 +92,7 @@ var FormInput = /*#__PURE__*/_react.default.forwardRef(function (_ref, ref) {
       required = _ref.required,
       suggestionList = _ref.suggestionList,
       tip = _ref.tip,
-      validationRules = _ref.validationRules,
+      rules = _ref.validationRules,
       validator = _ref.validator,
       withoutBorder = _ref.withoutBorder,
       inputProps = _objectWithoutProperties(_ref, _excluded);
@@ -120,10 +120,15 @@ var FormInput = /*#__PURE__*/_react.default.forwardRef(function (_ref, ref) {
       _useState8 = _slicedToArray(_useState7, 1),
       validationPattern = _useState8[0];
 
-  var _useState9 = (0, _react.useState)(false),
+  var _useState9 = (0, _react.useState)(rules),
       _useState10 = _slicedToArray(_useState9, 2),
-      showValidationRules = _useState10[0],
-      setShowValidationRules = _useState10[1];
+      validationRules = _useState10[0],
+      setValidationRules = _useState10[1];
+
+  var _useState11 = (0, _react.useState)(false),
+      _useState12 = _slicedToArray(_useState11, 2),
+      showValidationRules = _useState12[0],
+      setShowValidationRules = _useState12[1];
 
   var wrapperRef = (0, _react.useRef)();
   (_ref2 = ref) !== null && _ref2 !== void 0 ? _ref2 : ref = wrapperRef;
@@ -131,8 +136,8 @@ var FormInput = /*#__PURE__*/_react.default.forwardRef(function (_ref, ref) {
   (0, _useDetectOutsideClick.useDetectOutsideClick)(ref, function () {
     return setShowValidationRules(false);
   });
-  var inputClassNames = (0, _classnames.default)('form-field__input', className, "form-field__input-".concat(density), isInvalid && 'form-field__input-invalid', // isInvalid && 'input_rules-invalid',
-  withoutBorder && 'without-border');
+  var formFieldClassNames = (0, _classnames.default)('form-field', className);
+  var inputWrapperClassNames = (0, _classnames.default)('form-field__wrapper', "form-field__wrapper-".concat(density), disabled && 'form-field__wrapper-disabled', isInvalid && 'form-field__wrapper-invalid', withoutBorder && 'without-border');
   var labelClassNames = (0, _classnames.default)('form-field__label', disabled && 'form-field__label-disabled');
   (0, _react.useEffect)(function () {
     setTypedValue(String(input.value)); // convert from number to string
@@ -155,8 +160,8 @@ var FormInput = /*#__PURE__*/_react.default.forwardRef(function (_ref, ref) {
     }
   }, [focused]);
 
-  var getValidationRules = function getValidationRules(rules) {
-    return rules.map(function (_ref3) {
+  var getValidationRules = function getValidationRules() {
+    return validationRules.map(function (_ref3) {
       var _ref3$isValid = _ref3.isValid,
           isValid = _ref3$isValid === void 0 ? false : _ref3$isValid,
           label = _ref3.label,
@@ -173,7 +178,7 @@ var FormInput = /*#__PURE__*/_react.default.forwardRef(function (_ref, ref) {
 
     input.onBlur(event);
 
-    if (!event.relatedTarget || !((_event$relatedTarget = event.relatedTarget) !== null && _event$relatedTarget !== void 0 && _event$relatedTarget.closest('.suggestion-list'))) {
+    if (!event.relatedTarget || !((_event$relatedTarget = event.relatedTarget) !== null && _event$relatedTarget !== void 0 && _event$relatedTarget.closest('.form-field__suggestion-list'))) {
       setIsFocused(false);
       onBlur && onBlur(event);
     }
@@ -206,18 +211,39 @@ var FormInput = /*#__PURE__*/_react.default.forwardRef(function (_ref, ref) {
     setShowValidationRules(!showValidationRules);
   };
 
+  (0, _react.useEffect)(function () {
+    setValidationRules(function (prevState) {
+      return prevState.map(function (rule) {
+        return _objectSpread(_objectSpread({}, rule), {}, {
+          isValid: !meta.error || !Array.isArray(meta.error) ? true : !meta.error.some(function (err) {
+            return err.name === rule.name;
+          })
+        });
+      });
+    });
+  }, [meta.error]);
+
   var validateField = function validateField(value) {
     var valueToValidate = value !== null && value !== void 0 ? value : '';
     var validationError = null;
 
-    if (!(0, _lodash.isEmpty)(validationRules)) {
-      var _checkPatternsValidit = (0, _validationService.checkPatternsValidity)(validationRules, valueToValidate),
+    if (!(0, _lodash.isEmpty)(validationRules) && valueToValidate !== typedValue) {
+      var _checkPatternsValidit = (0, _validationService.checkPatternsValidity)(rules, valueToValidate),
           _checkPatternsValidit2 = _slicedToArray(_checkPatternsValidit, 2),
           newRules = _checkPatternsValidit2[0],
           isValidField = _checkPatternsValidit2[1];
 
+      var invalidRules = newRules.filter(function (rule) {
+        return !rule.isValid;
+      });
+
       if (!isValidField) {
-        validationError = newRules;
+        validationError = invalidRules.map(function (rule) {
+          return {
+            name: rule.name,
+            label: rule.label
+          };
+        });
       }
 
       if (isValidField && showValidationRules || required && valueToValidate === '') {
@@ -261,7 +287,7 @@ var FormInput = /*#__PURE__*/_react.default.forwardRef(function (_ref, ref) {
           meta = _ref4.meta;
       return /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
         ref: ref,
-        className: "form-field",
+        className: formFieldClassNames,
         children: [label && /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
           className: labelClassNames,
           children: [/*#__PURE__*/(0, _jsxRuntime.jsxs)("label", {
@@ -291,22 +317,24 @@ var FormInput = /*#__PURE__*/_react.default.forwardRef(function (_ref, ref) {
             })
           })]
         }), /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
-          className: "form-field__wrapper",
-          children: [/*#__PURE__*/(0, _jsxRuntime.jsx)("input", _objectSpread(_objectSpread({
-            "data-testid": "input",
-            id: input.name,
-            className: inputClassNames,
-            ref: inputRef,
-            required: isInvalid
-          }, _objectSpread(_objectSpread({
-            disabled: disabled,
-            pattern: pattern
-          }, inputProps), input)), {}, {
-            autoComplete: (_inputProps$autocompl = inputProps.autocomplete) !== null && _inputProps$autocompl !== void 0 ? _inputProps$autocompl : 'off',
-            onChange: handleInputChange,
-            onBlur: handleInputBlur,
-            onFocus: handleInputFocus
-          })), /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
+          className: inputWrapperClassNames,
+          children: [/*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
+            className: "form-field__control",
+            children: /*#__PURE__*/(0, _jsxRuntime.jsx)("input", _objectSpread(_objectSpread({
+              "data-testid": "input",
+              id: input.name,
+              ref: inputRef,
+              required: isInvalid || required
+            }, _objectSpread(_objectSpread({
+              disabled: disabled,
+              pattern: pattern
+            }, inputProps), input)), {}, {
+              autoComplete: (_inputProps$autocompl = inputProps.autocomplete) !== null && _inputProps$autocompl !== void 0 ? _inputProps$autocompl : 'off',
+              onChange: handleInputChange,
+              onBlur: handleInputBlur,
+              onFocus: handleInputFocus
+            }))
+          }), /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
             className: "form-field__icons",
             children: [isInvalid && !Array.isArray(meta.error) && /*#__PURE__*/(0, _jsxRuntime.jsx)(_Tooltip.default, {
               className: "form-field__warning",
@@ -315,7 +343,7 @@ var FormInput = /*#__PURE__*/_react.default.forwardRef(function (_ref, ref) {
                 warning: true
               }),
               children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_invalid.ReactComponent, {})
-            }), isInvalid && Array.isArray(meta.error) && !(0, _lodash.isEmpty)(meta.error) && /*#__PURE__*/(0, _jsxRuntime.jsx)("i", {
+            }), isInvalid && Array.isArray(meta.error) && /*#__PURE__*/(0, _jsxRuntime.jsx)("button", {
               className: "form-field__warning",
               onClick: toggleValidationRulesMenu,
               children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_warning.ReactComponent, {})
@@ -329,7 +357,7 @@ var FormInput = /*#__PURE__*/_react.default.forwardRef(function (_ref, ref) {
             })]
           })]
         }), (suggestionList === null || suggestionList === void 0 ? void 0 : suggestionList.length) > 0 && isFocused && /*#__PURE__*/(0, _jsxRuntime.jsx)("ul", {
-          className: "suggestion-list",
+          className: "form-field__suggestion-list",
           children: suggestionList.map(function (item, index) {
             return /*#__PURE__*/(0, _jsxRuntime.jsx)("li", {
               className: "suggestion-item",
@@ -344,10 +372,10 @@ var FormInput = /*#__PURE__*/_react.default.forwardRef(function (_ref, ref) {
               }
             }, "".concat(item).concat(index));
           })
-        }), isInvalid && Array.isArray(meta.error) && !(0, _lodash.isEmpty)(meta.error) && /*#__PURE__*/(0, _jsxRuntime.jsx)(_OptionsMenu.default, {
+        }), !(0, _lodash.isEmpty)(validationRules) && /*#__PURE__*/(0, _jsxRuntime.jsx)(_OptionsMenu.default, {
           show: showValidationRules,
-          parentElement: ref,
-          children: getValidationRules(meta.error)
+          ref: ref,
+          children: getValidationRules()
         })]
       });
     }

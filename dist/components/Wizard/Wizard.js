@@ -11,8 +11,6 @@ var _react = _interopRequireWildcard(require("react"));
 
 var _propTypes = _interopRequireDefault(require("prop-types"));
 
-var _reactFinalForm = require("react-final-form");
-
 var _classnames = _interopRequireDefault(require("classnames"));
 
 var _Button = _interopRequireDefault(require("../Button/Button"));
@@ -61,7 +59,7 @@ var Wizard = function Wizard(_ref) {
   var children = _ref.children,
       className = _ref.className,
       confirmClose = _ref.confirmClose,
-      initialValues = _ref.initialValues,
+      FormState = _ref.FormState,
       isWizardOpen = _ref.isWizardOpen,
       onWizardResolve = _ref.onWizardResolve,
       onWizardSubmit = _ref.onWizardSubmit,
@@ -115,7 +113,7 @@ var Wizard = function Wizard(_ref) {
     return setActiveStepNumber(idx);
   };
 
-  var _handleOnClose = function handleOnClose(FormState) {
+  var handleOnClose = function handleOnClose() {
     if (confirmClose && FormState && FormState.dirty) {
       (0, _common.openPopUp)(_ConfirmDialog.default, {
         cancelButton: {
@@ -135,15 +133,19 @@ var Wizard = function Wizard(_ref) {
     }
   };
 
-  var handleSubmit = function handleSubmit(values) {
-    if (isLastStep) {
-      onWizardSubmit(values);
-    } else {
-      goToNextStep();
+  var handleSubmit = function handleSubmit() {
+    FormState.handleSubmit();
+
+    if (FormState.valid) {
+      if (isLastStep) {
+        onWizardSubmit(FormState.values);
+      } else {
+        goToNextStep();
+      }
     }
   };
 
-  var getDefaultActions = function getDefaultActions(FormState) {
+  var getDefaultActions = function getDefaultActions() {
     if (hasSteps) {
       return [/*#__PURE__*/(0, _jsxRuntime.jsx)(_Button.default, {
         onClick: goToPreviousStep,
@@ -151,22 +153,20 @@ var Wizard = function Wizard(_ref) {
         label: "Back",
         type: "button"
       }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_Button.default, {
-        onClick: FormState.handleSubmit,
-        disabled: FormState.submitting,
+        onClick: handleSubmit,
+        disabled: FormState.submitting || FormState.invalid && FormState.submitFailed,
         label: isLastStep ? submitButtonLabel : 'Next',
         type: "button",
         variant: _constants.SECONDARY_BUTTON
       })];
     } else {
       return [/*#__PURE__*/(0, _jsxRuntime.jsx)(_Button.default, {
-        onClick: function onClick() {
-          return _handleOnClose(FormState);
-        },
+        onClick: handleOnClose,
         label: "Cancel",
         type: "button"
       }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_Button.default, {
-        onClick: FormState.handleSubmit,
-        disabled: FormState.submitting,
+        onClick: handleSubmit,
+        disabled: FormState.submitting || FormState.invalid && FormState.submitFailed,
         label: submitButtonLabel,
         type: "button",
         variant: _constants.SECONDARY_BUTTON
@@ -174,7 +174,7 @@ var Wizard = function Wizard(_ref) {
     }
   };
 
-  var renderModalActions = function renderModalActions(FormState) {
+  var renderModalActions = function renderModalActions() {
     var _stepsConfig$activeSt;
 
     if ((_stepsConfig$activeSt = stepsConfig[activeStepNumber]) !== null && _stepsConfig$activeSt !== void 0 && _stepsConfig$activeSt.getActions) {
@@ -182,51 +182,37 @@ var Wizard = function Wizard(_ref) {
         FormState: FormState,
         goToNextStep: goToNextStep,
         goToPreviousStep: goToPreviousStep,
-        handleOnClose: function handleOnClose() {
-          return _handleOnClose(FormState);
-        }
+        handleOnClose: handleOnClose,
+        handleSubmit: handleSubmit
       }).map(function (action) {
         return /*#__PURE__*/(0, _jsxRuntime.jsx)(_Button.default, _objectSpread({}, action));
       });
     } else {
-      return getDefaultActions(FormState);
+      return getDefaultActions();
     }
   };
 
-  return /*#__PURE__*/(0, _jsxRuntime.jsx)(_jsxRuntime.Fragment, {
-    children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_reactFinalForm.Form, {
-      initialValues: initialValues,
-      onSubmit: handleSubmit,
-      children: function children(FormState) {
-        return /*#__PURE__*/(0, _jsxRuntime.jsxs)(_Modal.default, {
-          actions: renderModalActions(FormState),
-          className: wizardClasses,
-          onClose: function onClose() {
-            return _handleOnClose(FormState);
-          },
-          show: isWizardOpen,
-          size: size,
-          title: title,
-          children: [hasSteps && /*#__PURE__*/(0, _jsxRuntime.jsx)(_WizardSteps.default, {
-            activeStepNumber: activeStepNumber,
-            jumpToStep: jumpToStep,
-            steps: stepsMenu
-          }), /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
-            className: "wizard-form__content",
-            children: [activeStepTemplate, /*#__PURE__*/(0, _jsxRuntime.jsx)("pre", {
-              children: JSON.stringify(FormState, null, 2)
-            })]
-          })]
-        });
-      }
-    })
+  return /*#__PURE__*/(0, _jsxRuntime.jsxs)(_Modal.default, {
+    actions: renderModalActions(),
+    className: wizardClasses,
+    onClose: handleOnClose,
+    show: isWizardOpen,
+    size: size,
+    title: title,
+    children: [hasSteps && /*#__PURE__*/(0, _jsxRuntime.jsx)(_WizardSteps.default, {
+      activeStepNumber: activeStepNumber,
+      jumpToStep: jumpToStep,
+      steps: stepsMenu
+    }), /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
+      className: "wizard-form__content",
+      children: activeStepTemplate
+    })]
   });
 };
 
 Wizard.defaultProps = {
   className: '',
   confirmClose: false,
-  initialValues: {},
   size: _constants.MODAL_MD,
   stepsConfig: [],
   submitButtonLabel: 'Submit'
@@ -234,7 +220,7 @@ Wizard.defaultProps = {
 Wizard.propsTypes = {
   className: _propTypes.default.string,
   confirmClose: _propTypes.default.bool,
-  initialValues: _propTypes.default.object,
+  FormState: _propTypes.default.object.isRequired,
   isOpen: _propTypes.default.bool.isRequired,
   onResolve: _propTypes.default.func.isRequired,
   onSubmit: _propTypes.default.func.isRequired,

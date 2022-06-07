@@ -41,6 +41,12 @@ function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "functio
 
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -71,33 +77,64 @@ var FormSelect = function FormSelect(_ref) {
       withSelectedIcon = _ref.withSelectedIcon;
 
   var _useField = (0, _reactFinalForm.useField)(name),
-      input = _useField.input;
-
-  var selectRef = (0, _react.useRef)();
+      input = _useField.input,
+      meta = _useField.meta;
 
   var _useState = (0, _react.useState)(false),
       _useState2 = _slicedToArray(_useState, 2),
-      isConfirmDialogOpen = _useState2[0],
-      setConfirmDialogOpen = _useState2[1];
+      isInvalid = _useState2[0],
+      setIsInvalid = _useState2[1];
 
   var _useState3 = (0, _react.useState)(false),
       _useState4 = _slicedToArray(_useState3, 2),
-      isOpen = _useState4[0],
-      setOpen = _useState4[1];
+      isConfirmDialogOpen = _useState4[0],
+      setConfirmDialogOpen = _useState4[1];
 
-  var _useState5 = (0, _react.useState)(''),
+  var _useState5 = (0, _react.useState)(false),
       _useState6 = _slicedToArray(_useState5, 2),
-      searchValue = _useState6[0],
-      setSearchValue = _useState6[1];
+      isOpen = _useState6[0],
+      setOpen = _useState6[1];
+
+  var _useState7 = (0, _react.useState)(''),
+      _useState8 = _slicedToArray(_useState7, 2),
+      searchValue = _useState8[0],
+      setSearchValue = _useState8[1];
+
+  var selectRef = (0, _react.useRef)();
 
   var _ref2 = (selectRef === null || selectRef === void 0 ? void 0 : (_selectRef$current = selectRef.current) === null || _selectRef$current === void 0 ? void 0 : _selectRef$current.getBoundingClientRect()) || {},
       dropdownWidth = _ref2.width;
 
-  var selectClassName = (0, _classnames.default)('form-field__select', "form-field__select-".concat(density), isOpen && 'form-field__select-active', withoutBorder && 'without-border', disabled && 'form-field__select-disabled');
+  var selectWrapperClassNames = (0, _classnames.default)('form-field__wrapper', "form-field__wrapper-".concat(density), disabled && 'form-field__wrapper-disabled', isOpen && 'form-field__wrapper-active', isInvalid && 'form-field__wrapper-invalid', withoutBorder && 'without-border');
   var selectLabelClassName = (0, _classnames.default)('form-field__label', disabled && 'form-field__label-disabled');
   var selectedOption = options.find(function (option) {
     return option.id === input.value;
   });
+  (0, _react.useEffect)(function () {
+    setIsInvalid(meta.invalid && (meta.validating || meta.modified || meta.submitFailed && meta.touched));
+  }, [meta.invalid, meta.modified, meta.submitFailed, meta.touched, meta.validating]);
+  var openMenu = (0, _react.useCallback)(function () {
+    if (!isOpen) {
+      setOpen(true);
+      input.onFocus(new Event('focus'));
+    }
+  }, [input, isOpen]);
+  var closeMenu = (0, _react.useCallback)(function () {
+    if (isOpen) {
+      setOpen(false);
+      input.onBlur(new Event('blur'));
+    }
+  }, [input, isOpen]);
+  var clickHandler = (0, _react.useCallback)(function (event) {
+    if (selectRef.current !== event.target.closest('.form-field')) {
+      closeMenu();
+    }
+  }, [closeMenu]);
+  var handleScroll = (0, _react.useCallback)(function (event) {
+    if (!event.target.closest('.options-list__body')) {
+      closeMenu();
+    }
+  }, [closeMenu]);
   (0, _react.useEffect)(function () {
     if (isOpen) {
       window.addEventListener('scroll', handleScroll, true);
@@ -108,32 +145,24 @@ var FormSelect = function FormSelect(_ref) {
       window.removeEventListener('click', clickHandler);
       window.removeEventListener('scroll', handleScroll, true);
     };
-  }, [isOpen]);
-
-  var clickHandler = function clickHandler(event) {
-    if (selectRef.current !== event.target.closest('.form-field')) {
-      setOpen(false);
-    }
-  };
-
-  var handleScroll = function handleScroll(event) {
-    if (!event.target.closest('.select__body')) {
-      setOpen(false);
-    }
-  };
+  }, [clickHandler, handleScroll, isOpen]);
 
   var toggleOpen = function toggleOpen() {
-    !disabled && setOpen(!isOpen);
+    if (isOpen) {
+      closeMenu();
+    } else {
+      !disabled && openMenu();
+    }
   };
 
   var handleCloseSelectBody = (0, _react.useCallback)(function (event) {
     event.stopPropagation();
 
-    if (!event.target.classList.contains('disabled') && !event.target.closest('.select__search')) {
-      setOpen(false);
+    if (!event.target.classList.contains('disabled') && !event.target.closest('.options-list__search')) {
+      closeMenu();
       setSearchValue('');
     }
-  }, []);
+  }, [closeMenu]);
 
   var handleSelectOptionClick = function handleSelectOptionClick(selectedOption, option) {
     if (selectedOption !== input.value) {
@@ -149,7 +178,6 @@ var FormSelect = function FormSelect(_ref) {
 
   return /*#__PURE__*/(0, _jsxRuntime.jsx)(_reactFinalForm.Field, {
     name: name,
-    component: "select",
     validate: required,
     children: function children(_ref3) {
       var input = _ref3.input,
@@ -170,18 +198,21 @@ var FormSelect = function FormSelect(_ref) {
           })
         }), /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
           "data-testid": "select-header",
-          className: "form-field__wrapper",
-          children: [!hideSelectedOption && /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
-            "data-testid": "selected-option",
-            className: selectClassName,
-            children: [/*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
-              className: "form-field__select-value",
-              children: input.value && (selectedOption === null || selectedOption === void 0 ? void 0 : selectedOption.label)
-            }), (selectedOption === null || selectedOption === void 0 ? void 0 : selectedOption.subLabel) && /*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
-              "data-testid": "select-subLabel",
-              className: "sub-label",
-              children: selectedOption.subLabel
-            })]
+          className: selectWrapperClassNames,
+          children: [/*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
+            className: "form-field__control",
+            children: !hideSelectedOption && /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
+              "data-testid": "selected-option",
+              className: "form-field__select",
+              children: [/*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
+                className: "form-field__select-value",
+                children: input.value && (selectedOption === null || selectedOption === void 0 ? void 0 : selectedOption.label)
+              }), (selectedOption === null || selectedOption === void 0 ? void 0 : selectedOption.subLabel) && /*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
+                "data-testid": "select-subLabel",
+                className: "form-field__select-sub_label",
+                children: selectedOption.subLabel
+              })]
+            })
           }), /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
             className: "form-field__icons",
             children: [input.value && selectedItemAction && /*#__PURE__*/(0, _jsxRuntime.jsx)(_jsxRuntime.Fragment, {
@@ -204,8 +235,10 @@ var FormSelect = function FormSelect(_ref) {
               }) : /*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
                 children: selectedItemAction.icon
               })
-            }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_dropdown.ReactComponent, {
-              className: "form-field__caret"
+            }), /*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
+              children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_dropdown.ReactComponent, {
+                className: "form-field__caret"
+              })
             })]
           })]
         }), isConfirmDialogOpen && /*#__PURE__*/(0, _jsxRuntime.jsx)(_ConfirmDialog.default, {
@@ -230,7 +263,7 @@ var FormSelect = function FormSelect(_ref) {
           header: selectedItemAction.confirm.title,
           message: selectedItemAction.confirm.message
         }), isOpen && /*#__PURE__*/(0, _jsxRuntime.jsx)(_PopUpDialog.default, {
-          className: "select__options-list",
+          className: "form-field__select__options-list",
           customPosition: {
             element: selectRef,
             position: 'bottom-right'
@@ -240,10 +273,10 @@ var FormSelect = function FormSelect(_ref) {
           },
           children: /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
             "data-testid": "select-body",
-            className: "select__body",
+            className: "options-list__body",
             onClick: handleCloseSelectBody,
             children: [search && /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
-              className: "select__search",
+              className: "options-list__search",
               children: /*#__PURE__*/(0, _jsxRuntime.jsx)("input", {
                 type: "text",
                 placeholder: "Search...",
@@ -266,7 +299,9 @@ var FormSelect = function FormSelect(_ref) {
               }, option.id);
             })]
           })
-        })]
+        }), /*#__PURE__*/(0, _jsxRuntime.jsx)("input", _objectSpread(_objectSpread({}, input), {}, {
+          type: "hidden"
+        }))]
       });
     }
   });
@@ -283,7 +318,7 @@ FormSelect.defaultProps = {
   search: false,
   selectType: '',
   withoutBorder: false,
-  withSelectedIcon: false
+  withSelectedIcon: true
 };
 FormSelect.propTypes = {
   className: _propTypes.default.string,
