@@ -18,7 +18,6 @@ const Wizard = ({
   className,
   confirmClose,
   FormState,
-  initialValues,
   isWizardOpen,
   onWizardResolve,
   onWizardSubmit,
@@ -163,7 +162,6 @@ const Wizard = ({
 Wizard.defaultProps = {
   className: '',
   confirmClose: false,
-  initialValues: {},
   size: MODAL_MD,
   stepsConfig: [],
   submitButtonLabel: 'Submit'
@@ -173,7 +171,6 @@ Wizard.propsTypes = {
   className: PropTypes.string,
   confirmClose: PropTypes.bool,
   FormState: PropTypes.object.isRequired,
-  initialValues: PropTypes.object,
   isOpen: PropTypes.bool.isRequired,
   onResolve: PropTypes.func.isRequired,
   onSubmit: PropTypes.func.isRequired,
