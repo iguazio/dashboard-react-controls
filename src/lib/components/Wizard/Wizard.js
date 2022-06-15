@@ -36,10 +36,6 @@ const Wizard = ({
     return React.Children.count(children) - 1 || 0
   }, [children])
 
-  const hasSteps = useMemo(() => {
-    return stepsConfig.some((step) => step.id)
-  }, [stepsConfig])
-
   const isLastStep = useMemo(() => {
     return activeStepNumber === totalSteps
   }, [activeStepNumber, totalSteps])
@@ -48,7 +44,7 @@ const Wizard = ({
     return stepsConfig?.map((step) => ({ id: step.id, label: step.label })) || []
   }, [stepsConfig])
 
-  const wizardClasses = classNames('wizard-form', className, hasSteps && 'wizard-form__with-steps')
+  const wizardClasses = classNames('wizard-form', className)
 
   const goToNextStep = () => {
     setActiveStepNumber((prevStep) => Math.min(++prevStep, totalSteps))
@@ -91,36 +87,21 @@ const Wizard = ({
     }
   }
 
-  const getDefaultActions = () => {
-    if (hasSteps) {
-      return [
-        <Button
-          onClick={goToPreviousStep}
-          disabled={activeStepNumber === 0}
-          label="Back"
-          type="button"
-        />,
-        <Button
-          onClick={handleSubmit}
-          disabled={FormState.submitting || (FormState.invalid && FormState.submitFailed)}
-          label={isLastStep ? submitButtonLabel : 'Next'}
-          type="button"
-          variant={SECONDARY_BUTTON}
-        />
-      ]
-    } else {
-      return [
-        <Button onClick={handleOnClose} label="Cancel" type="button" />,
-        <Button
-          onClick={handleSubmit}
-          disabled={FormState.submitting || (FormState.invalid && FormState.submitFailed)}
-          label={submitButtonLabel}
-          type="button"
-          variant={SECONDARY_BUTTON}
-        />
-      ]
-    }
-  }
+  const getDefaultActions = () => [
+    <Button
+      onClick={goToPreviousStep}
+      disabled={activeStepNumber === 0}
+      label="Back"
+      type="button"
+    />,
+    <Button
+      onClick={handleSubmit}
+      disabled={FormState.submitting || (FormState.invalid && FormState.submitFailed)}
+      label={isLastStep ? submitButtonLabel : 'Next'}
+      type="button"
+      variant={SECONDARY_BUTTON}
+    />
+  ]
 
   const renderModalActions = () => {
     if (stepsConfig[activeStepNumber]?.getActions) {
@@ -147,13 +128,7 @@ const Wizard = ({
       size={size}
       title={title}
     >
-      {hasSteps && (
-        <WizardSteps
-          activeStepNumber={activeStepNumber}
-          jumpToStep={jumpToStep}
-          steps={stepsMenu}
-        />
-      )}
+      <WizardSteps activeStepNumber={activeStepNumber} jumpToStep={jumpToStep} steps={stepsMenu} />
       <div className="wizard-form__content">{activeStepTemplate}</div>
     </Modal>
   )
