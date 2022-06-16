@@ -221,6 +221,7 @@ const FormSelect = ({
                 variant: selectedItemAction.confirm.btnConfirmType
               }}
               header={selectedItemAction.confirm.title}
+              isOpen={isConfirmDialogOpen}
               message={selectedItemAction.confirm.message}
             />
           )}
