@@ -261,6 +261,7 @@ var FormSelect = function FormSelect(_ref) {
             variant: selectedItemAction.confirm.btnConfirmType
           },
           header: selectedItemAction.confirm.title,
+          isOpen: isConfirmDialogOpen,
           message: selectedItemAction.confirm.message
         }), isOpen && /*#__PURE__*/(0, _jsxRuntime.jsx)(_PopUpDialog.default, {
           className: "form-field__select__options-list",

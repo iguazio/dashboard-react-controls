@@ -2,9 +2,9 @@
 @import '../../scss/colors';
 @import '../../scss/shadows';
 
-@include formField;
-
 .form-field {
+  @include formField;
+
   &__wrapper {
     &-active {
       background: $alabaster;

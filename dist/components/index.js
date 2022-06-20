@@ -27,6 +27,12 @@ Object.defineProperty(exports, "FormInput", {
     return _FormInput.default;
   }
 });
+Object.defineProperty(exports, "FormKeyValueTable", {
+  enumerable: true,
+  get: function get() {
+    return _FormKeyValueTable.default;
+  }
+});
 Object.defineProperty(exports, "FormSelect", {
   enumerable: true,
   get: function get() {
@@ -83,6 +89,8 @@ var _ConfirmDialog = _interopRequireDefault(require("./ConfirmDialog/ConfirmDial
 var _FormCheckBox = _interopRequireDefault(require("./FormCheckBox/FormCheckBox"));
 
 var _FormInput = _interopRequireDefault(require("./FormInput/FormInput"));
+
+var _FormKeyValueTable = _interopRequireDefault(require("./FormKeyValueTable/FormKeyValueTable"));
 
 var _FormSelect = _interopRequireDefault(require("./FormSelect/FormSelect"));
 

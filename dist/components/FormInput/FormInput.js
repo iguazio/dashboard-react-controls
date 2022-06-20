@@ -27,7 +27,7 @@ var _Tooltip = _interopRequireDefault(require("../Tooltip/Tooltip"));
 
 var _ValidationTemplate = _interopRequireDefault(require("../../elements/ValidationTemplate/ValidationTemplate"));
 
-var _validationService = require("../../utils/validationService");
+var _validation = require("../../utils/validation.util");
 
 var _useDetectOutsideClick = require("../../hooks/useDetectOutsideClick");
 
@@ -146,6 +146,11 @@ var FormInput = /*#__PURE__*/_react.default.forwardRef(function (_ref, ref) {
     setIsInvalid(meta.invalid && (meta.validating || meta.modified || meta.submitFailed && meta.touched));
   }, [meta.invalid, meta.modified, meta.submitFailed, meta.touched, meta.validating]);
   (0, _react.useEffect)(function () {
+    if (meta.valid && showValidationRules) {
+      setShowValidationRules(false);
+    }
+  }, [meta.valid, showValidationRules]);
+  (0, _react.useEffect)(function () {
     if (showValidationRules) {
       window.addEventListener('scroll', handleScroll, true);
     }
@@ -227,8 +232,8 @@ var FormInput = /*#__PURE__*/_react.default.forwardRef(function (_ref, ref) {
     var valueToValidate = value !== null && value !== void 0 ? value : '';
     var validationError = null;
 
-    if (!(0, _lodash.isEmpty)(validationRules) && valueToValidate !== typedValue) {
-      var _checkPatternsValidit = (0, _validationService.checkPatternsValidity)(rules, valueToValidate),
+    if (!(0, _lodash.isEmpty)(validationRules)) {
+      var _checkPatternsValidit = (0, _validation.checkPatternsValidity)(rules, valueToValidate),
           _checkPatternsValidit2 = _slicedToArray(_checkPatternsValidit, 2),
           newRules = _checkPatternsValidit2[0],
           isValidField = _checkPatternsValidit2[1];
@@ -245,13 +250,9 @@ var FormInput = /*#__PURE__*/_react.default.forwardRef(function (_ref, ref) {
           };
         });
       }
-
-      if (isValidField && showValidationRules || required && valueToValidate === '') {
-        setShowValidationRules(false);
-      }
     }
 
-    if (!validationError) {
+    if ((0, _lodash.isEmpty)(validationError)) {
       if (pattern && !validationPattern.test(valueToValidate)) {
         validationError = {
           name: 'pattern',

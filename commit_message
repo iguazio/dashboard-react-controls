@@ -1,6 +1,10 @@
 
 
-Create a new dist version 0.0.8
+Create a new dist version 0.0.9
 
 Collecting:
-- Fix [Form] wizard and form input (#16)
+- Fix [Wizard] remove hasSteps logic (#18)
+- add isOpen prop in FormSelect (#19)
+- Impl [Models] Add `FormKeyValueTable` component (#20)
+- Update form.util.js (#21)
+- Fix [FormKeyValue] fix last row (#22)

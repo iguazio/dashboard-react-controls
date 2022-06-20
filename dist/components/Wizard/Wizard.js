@@ -59,7 +59,7 @@ var Wizard = function Wizard(_ref) {
   var children = _ref.children,
       className = _ref.className,
       confirmClose = _ref.confirmClose,
-      FormState = _ref.FormState,
+      formState = _ref.formState,
       isWizardOpen = _ref.isWizardOpen,
       onWizardResolve = _ref.onWizardResolve,
       onWizardSubmit = _ref.onWizardSubmit,
@@ -79,11 +79,6 @@ var Wizard = function Wizard(_ref) {
   var totalSteps = (0, _react.useMemo)(function () {
     return _react.default.Children.count(children) - 1 || 0;
   }, [children]);
-  var hasSteps = (0, _react.useMemo)(function () {
-    return stepsConfig.some(function (step) {
-      return step.id;
-    });
-  }, [stepsConfig]);
   var isLastStep = (0, _react.useMemo)(function () {
     return activeStepNumber === totalSteps;
   }, [activeStepNumber, totalSteps]);
@@ -95,7 +90,7 @@ var Wizard = function Wizard(_ref) {
       };
     })) || [];
   }, [stepsConfig]);
-  var wizardClasses = (0, _classnames.default)('wizard-form', className, hasSteps && 'wizard-form__with-steps');
+  var wizardClasses = (0, _classnames.default)('wizard-form', className);
 
   var goToNextStep = function goToNextStep() {
     setActiveStepNumber(function (prevStep) {
@@ -114,7 +109,7 @@ var Wizard = function Wizard(_ref) {
   };
 
   var handleOnClose = function handleOnClose() {
-    if (confirmClose && FormState && FormState.dirty) {
+    if (confirmClose && formState && formState.dirty) {
       (0, _common.openPopUp)(_ConfirmDialog.default, {
         cancelButton: {
           label: 'Cancel',
@@ -134,11 +129,11 @@ var Wizard = function Wizard(_ref) {
   };
 
   var handleSubmit = function handleSubmit() {
-    FormState.handleSubmit();
+    formState.handleSubmit();
 
-    if (FormState.valid) {
+    if (formState.valid) {
       if (isLastStep) {
-        onWizardSubmit(FormState.values);
+        onWizardSubmit(formState.values);
       } else {
         goToNextStep();
       }
@@ -146,32 +141,18 @@ var Wizard = function Wizard(_ref) {
   };
 
   var getDefaultActions = function getDefaultActions() {
-    if (hasSteps) {
-      return [/*#__PURE__*/(0, _jsxRuntime.jsx)(_Button.default, {
-        onClick: goToPreviousStep,
-        disabled: activeStepNumber === 0,
-        label: "Back",
-        type: "button"
-      }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_Button.default, {
-        onClick: handleSubmit,
-        disabled: FormState.submitting || FormState.invalid && FormState.submitFailed,
-        label: isLastStep ? submitButtonLabel : 'Next',
-        type: "button",
-        variant: _constants.SECONDARY_BUTTON
-      })];
-    } else {
-      return [/*#__PURE__*/(0, _jsxRuntime.jsx)(_Button.default, {
-        onClick: handleOnClose,
-        label: "Cancel",
-        type: "button"
-      }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_Button.default, {
-        onClick: handleSubmit,
-        disabled: FormState.submitting || FormState.invalid && FormState.submitFailed,
-        label: submitButtonLabel,
-        type: "button",
-        variant: _constants.SECONDARY_BUTTON
-      })];
-    }
+    return [/*#__PURE__*/(0, _jsxRuntime.jsx)(_Button.default, {
+      onClick: goToPreviousStep,
+      disabled: activeStepNumber === 0,
+      label: "Back",
+      type: "button"
+    }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_Button.default, {
+      onClick: handleSubmit,
+      disabled: formState.submitting || formState.invalid && formState.submitFailed,
+      label: isLastStep ? submitButtonLabel : 'Next',
+      type: "button",
+      variant: _constants.SECONDARY_BUTTON
+    })];
   };
 
   var renderModalActions = function renderModalActions() {
@@ -179,7 +160,7 @@ var Wizard = function Wizard(_ref) {
 
     if ((_stepsConfig$activeSt = stepsConfig[activeStepNumber]) !== null && _stepsConfig$activeSt !== void 0 && _stepsConfig$activeSt.getActions) {
       return stepsConfig[activeStepNumber].getActions({
-        FormState: FormState,
+        formState: formState,
         goToNextStep: goToNextStep,
         goToPreviousStep: goToPreviousStep,
         handleOnClose: handleOnClose,
@@ -199,7 +180,7 @@ var Wizard = function Wizard(_ref) {
     show: isWizardOpen,
     size: size,
     title: title,
-    children: [hasSteps && /*#__PURE__*/(0, _jsxRuntime.jsx)(_WizardSteps.default, {
+    children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_WizardSteps.default, {
       activeStepNumber: activeStepNumber,
       jumpToStep: jumpToStep,
       steps: stepsMenu
@@ -220,10 +201,10 @@ Wizard.defaultProps = {
 Wizard.propsTypes = {
   className: _propTypes.default.string,
   confirmClose: _propTypes.default.bool,
-  FormState: _propTypes.default.object.isRequired,
-  isOpen: _propTypes.default.bool.isRequired,
-  onResolve: _propTypes.default.func.isRequired,
-  onSubmit: _propTypes.default.func.isRequired,
+  formState: _propTypes.default.object.isRequired,
+  isWizardOpen: _propTypes.default.bool.isRequired,
+  onWizardResolve: _propTypes.default.func.isRequired,
+  onWizardSubmit: _propTypes.default.func.isRequired,
   size: _types.MODAL_SIZES,
   title: _propTypes.default.string.isRequired,
   stepsConfig: _types.WIZARD_STEPS_CONFIG,

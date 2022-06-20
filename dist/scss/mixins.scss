@@ -996,91 +996,89 @@
 }
 
 @mixin formField {
-  .form-field {
+  position: relative;
+  display: flex;
+  flex-flow: column nowrap;
+  height: 100%;
+  width: 100%;
+
+  &__label {
+    margin-bottom: 5px;
+    color: $topaz;
+    font-size: 12px;
+    text-align: left;
+    text-transform: capitalize;
+    background-color: transparent;
+
+    &-mandatory {
+      color: $amaranth;
+    }
+
+    &-disabled {
+      color: $spunPearl;
+
+      .form-field__label-mandatory {
+        color: $spunPearl;
+      }
+    }
+  }
+
+  &__wrapper {
+    @include fieldWrapper;
+
+    &-disabled {
+      color: $spunPearl;
+      cursor: not-allowed;
+    }
+
+    &-invalid {
+      border: $errorBorder;
+    }
+
+    &.without-border {
+      border-color: transparent;
+    }
+
+    &-dense {
+      padding-top: 12px;
+      padding-bottom: 12px;
+    }
+
+    &-normal {
+      padding-top: 14px;
+      padding-bottom: 14px;
+    }
+
+    &-medium {
+      padding-top: 16px;
+      padding-bottom: 16px;
+    }
+
+    &-chunky {
+      padding-top: 18px;
+      padding-bottom: 18px;
+    }
+  }
+
+  &__control {
     position: relative;
     display: flex;
-    flex-flow: column nowrap;
-    height: 100%;
-    width: 100%;
+    flex: 1;
+    overflow: hidden;
+    padding: 0 8px 0 16px;
+  }
 
-    &__label {
-      margin-bottom: 5px;
-      color: $topaz;
-      font-size: 12px;
-      text-align: left;
-      text-transform: capitalize;
-      background-color: transparent;
+  &__icons {
+    display: flex;
+    flex-shrink: 0;
+    align-items: center;
+    margin-right: 4px;
+    min-height: 25px;
 
-      &-mandatory {
-        color: $amaranth;
-      }
-
-      &-disabled {
-        color: $spunPearl;
-
-        .form-field__label-mandatory {
-          color: $spunPearl;
-        }
-      }
-    }
-
-    &__wrapper {
-      @include fieldWrapper;
-
-      &-disabled {
-        color: $spunPearl;
-        cursor: not-allowed;
-      }
-
-      &-invalid {
-        border: $errorBorder;
-      }
-
-      &.without-border {
-        border-color: transparent;
-      }
-
-      &-dense {
-        padding-top: 12px;
-        padding-bottom: 12px;
-      }
-
-      &-normal {
-        padding-top: 14px;
-        padding-bottom: 14px;
-      }
-
-      &-medium {
-        padding-top: 16px;
-        padding-bottom: 16px;
-      }
-
-      &-chunky {
-        padding-top: 18px;
-        padding-bottom: 18px;
-      }
-    }
-
-    &__control {
-      position: relative;
+    & > * {
       display: flex;
-      flex: 1;
-      overflow: hidden;
-      padding: 0 8px 0 16px;
-    }
-
-    &__icons {
-      display: flex;
-      flex-shrink: 0;
       align-items: center;
-      margin-right: 4px;
-      min-height: 25px;
-
-      & > * {
-        display: flex;
-        align-items: center;
-        padding: 0 4px;
-      }
+      padding: 0 4px;
     }
   }
 }
