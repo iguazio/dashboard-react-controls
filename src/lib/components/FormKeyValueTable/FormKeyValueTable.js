@@ -125,16 +125,20 @@ const FormKeyValueTable = ({
         </div>
         <div className="table-cell table-cell__actions" />
       </div>
-      <div className="key-value-table__body">
-        <FieldArray name={name}>
-          {({ fields }) => (
-            <>
+      <FieldArray name={name}>
+        {({ fields }) => (
+          <>
+            <div className="key-value-table__body">
               {fields.map((contentItem, index) => {
                 return isEditMode && index === selectedItem.index && !disabled ? (
                   <div className="table-row table-row_edit" key={index}>
                     <div className="table-cell table-cell__key">
                       {keyOptions ? (
-                        <FormSelect name={`${contentItem}.key`} density="dense" options={keyOptions} />
+                        <FormSelect
+                          name={`${contentItem}.key`}
+                          density="dense"
+                          options={keyOptions}
+                        />
                       ) : (
                         <FormInput
                           className="input_edit"
@@ -164,14 +168,14 @@ const FormKeyValueTable = ({
                     <div className="table-cell table-cell__actions">
                       <RoundedIcon
                         className="key-value-table__btn"
-                        onClick={event => applyChanges(event, fields, index)}
+                        onClick={(event) => applyChanges(event, fields, index)}
                         tooltipText="Apply"
                       >
                         <Checkmark />
                       </RoundedIcon>
                       <RoundedIcon
                         className="key-value-table__btn"
-                        onClick={event => discardOrDelete(event, fields, index)}
+                        onClick={(event) => discardOrDelete(event, fields, index)}
                         tooltipText={selectedItem.isNew ? 'Delete' : 'Discard changes'}
                       >
                         {selectedItem.isNew ? <Delete /> : <Close />}
@@ -182,7 +186,7 @@ const FormKeyValueTable = ({
                   <div
                     className="table-row"
                     key={index}
-                    onClick={event => enterEditMode(event, fields, index)}
+                    onClick={(event) => enterEditMode(event, fields, index)}
                   >
                     <div className="table-cell__inputs-wrapper">
                       <div className="table-cell table-cell__key">
@@ -201,7 +205,7 @@ const FormKeyValueTable = ({
                     <div className="table-cell table-cell__actions">
                       <RoundedIcon
                         className="key-value-table__btn"
-                        onClick={event => {
+                        onClick={(event) => {
                           event.preventDefault()
                         }}
                         tooltipText="Edit"
@@ -211,7 +215,7 @@ const FormKeyValueTable = ({
 
                       <RoundedIcon
                         className="key-value-table__btn"
-                        onClick={event => {
+                        onClick={(event) => {
                           deleteRow(event, fields, index)
                         }}
                         tooltipText="Delete"
@@ -222,24 +226,24 @@ const FormKeyValueTable = ({
                   </div>
                 )
               })}
+            </div>
 
-              {!selectedItem?.isNew && (
-                <div className="table-row table-row__last no-hover">
-                  <button
-                    className={addBtnClassNames}
-                    onClick={event => {
-                      addNewRow(event, fields)
-                    }}
-                  >
-                    <Plus />
-                    {addNewItemLabel}
-                  </button>
-                </div>
-              )}
-            </>
-          )}
-        </FieldArray>
-      </div>
+            {!selectedItem?.isNew && (
+              <div className="table-row table-row__last no-hover">
+                <button
+                  className={addBtnClassNames}
+                  onClick={(event) => {
+                    addNewRow(event, fields)
+                  }}
+                >
+                  <Plus />
+                  {addNewItemLabel}
+                </button>
+              </div>
+            )}
+          </>
+        )}
+      </FieldArray>
     </div>
   )
 }
