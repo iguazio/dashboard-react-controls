@@ -131,6 +131,8 @@ const FormInput = React.forwardRef(
     }
 
     const handleScroll = (event) => {
+      if (inputRef.current.contains(event.target)) return
+
       if (
         !event.target.closest('.options-menu') &&
         !event.target.classList.contains('form-field')
