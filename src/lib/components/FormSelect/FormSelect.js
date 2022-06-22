@@ -142,139 +142,135 @@ const FormSelect = ({
   return (
     <Field name={name} validate={required}>
       {({ input, meta }) => (
-        <div className="form-field-select">
-          <div
-            data-testid="select"
-            ref={selectRef}
-            className={`form-field ${className}`}
-            onClick={toggleOpen}
-          >
-            {label && (
-              <div className={selectLabelClassName}>
-                <label data-testid="select-label">
-                  {label}
-                  {meta.error && <span className="form-field__label-mandatory"> *</span>}
-                </label>
-              </div>
-            )}
-            <div data-testid="select-header" className={selectWrapperClassNames}>
-              <div className="form-field__control">
-                {!hideSelectedOption && (
-                  <div data-testid="selected-option" className="form-field__select">
-                    <span className="form-field__select-value">
-                      {input.value && selectedOption?.label}
+        <div
+          data-testid="select"
+          ref={selectRef}
+          className={`form-field form-field-select ${className}`}
+          onClick={toggleOpen}
+        >
+          {label && (
+            <div className={selectLabelClassName}>
+              <label data-testid="select-label">
+                {label}
+                {meta.error && <span className="form-field__label-mandatory"> *</span>}
+              </label>
+            </div>
+          )}
+          <div data-testid="select-header" className={selectWrapperClassNames}>
+            <div className="form-field__control">
+              {!hideSelectedOption && (
+                <div data-testid="selected-option" className="form-field__select">
+                  <span className="form-field__select-value">
+                    {input.value && selectedOption?.label}
+                  </span>
+                  {selectedOption?.subLabel && (
+                    <span data-testid="select-subLabel" className="form-field__select-sub_label">
+                      {selectedOption.subLabel}
                     </span>
-                    {selectedOption?.subLabel && (
-                      <span data-testid="select-subLabel" className="form-field__select-sub_label">
-                        {selectedOption.subLabel}
-                      </span>
-                    )}
+                  )}
+                </div>
+              )}
+            </div>
+            <div className="form-field__icons">
+              {input.value && selectedItemAction && (
+                <>
+                  {selectedItemAction.handler ? (
+                    <Tooltip template={<TextTooltipTemplate text={selectedItemAction.tooltip} />}>
+                      <button
+                        onClick={(event) => {
+                          if (selectedItemAction.confirm) {
+                            setConfirmDialogOpen(true)
+                          } else {
+                            selectedItemAction.handler(input.value)
+                          }
+
+                          event.stopPropagation()
+                        }}
+                      >
+                        {selectedItemAction.icon}
+                      </button>
+                    </Tooltip>
+                  ) : (
+                    <span>{selectedItemAction.icon}</span>
+                  )}
+                </>
+              )}
+              <span>
+                <Caret className="form-field__caret" />
+              </span>
+            </div>
+          </div>
+          {isConfirmDialogOpen && (
+            <ConfirmDialog
+              cancelButton={{
+                handler: () => {
+                  setConfirmDialogOpen(false)
+                },
+                label: 'Cancel',
+                variant: TERTIARY_BUTTON
+              }}
+              closePopUp={() => {
+                setConfirmDialogOpen(false)
+              }}
+              confirmButton={{
+                handler: () => {
+                  selectedItemAction.handler(input.value)
+                  setConfirmDialogOpen(false)
+                },
+                label: selectedItemAction.confirm.btnConfirmLabel,
+                variant: selectedItemAction.confirm.btnConfirmType
+              }}
+              header={selectedItemAction.confirm.title}
+              isOpen={isConfirmDialogOpen}
+              message={selectedItemAction.confirm.message}
+            />
+          )}
+          {isOpen && (
+            <PopUpDialog
+              className="form-field form-field-select__options-list"
+              customPosition={{
+                element: selectRef,
+                position: 'bottom-right'
+              }}
+              style={{ width: `${dropdownWidth}px` }}
+            >
+              <div
+                data-testid="select-body"
+                className="options-list__body"
+                onClick={handleCloseSelectBody}
+              >
+                {search && (
+                  <div className="options-list__search">
+                    <input
+                      type="text"
+                      placeholder="Search..."
+                      value={searchValue}
+                      onChange={(event) => setSearchValue(event.target.value)}
+                    />
                   </div>
                 )}
-              </div>
-              <div className="form-field__icons">
-                {input.value && selectedItemAction && (
-                  <>
-                    {selectedItemAction.handler ? (
-                      <Tooltip template={<TextTooltipTemplate text={selectedItemAction.tooltip} />}>
-                        <button
-                          onClick={(event) => {
-                            if (selectedItemAction.confirm) {
-                              setConfirmDialogOpen(true)
-                            } else {
-                              selectedItemAction.handler(input.value)
-                            }
-
-                            event.stopPropagation()
-                          }}
-                        >
-                          {selectedItemAction.icon}
-                        </button>
-                      </Tooltip>
-                    ) : (
-                      <span>{selectedItemAction.icon}</span>
-                    )}
-                  </>
-                )}
-                <span>
-                  <Caret className="form-field__caret" />
-                </span>
-              </div>
-            </div>
-            {isConfirmDialogOpen && (
-              <ConfirmDialog
-                cancelButton={{
-                  handler: () => {
-                    setConfirmDialogOpen(false)
-                  },
-                  label: 'Cancel',
-                  variant: TERTIARY_BUTTON
-                }}
-                closePopUp={() => {
-                  setConfirmDialogOpen(false)
-                }}
-                confirmButton={{
-                  handler: () => {
-                    selectedItemAction.handler(input.value)
-                    setConfirmDialogOpen(false)
-                  },
-                  label: selectedItemAction.confirm.btnConfirmLabel,
-                  variant: selectedItemAction.confirm.btnConfirmType
-                }}
-                header={selectedItemAction.confirm.title}
-                isOpen={isConfirmDialogOpen}
-                message={selectedItemAction.confirm.message}
-              />
-            )}
-            {isOpen && (
-              <PopUpDialog
-                className="form-field-select__options-list"
-                customPosition={{
-                  element: selectRef,
-                  position: 'bottom-right'
-                }}
-                style={{ width: `${dropdownWidth}px` }}
-              >
-                <div
-                  data-testid="select-body"
-                  className="options-list__body"
-                  onClick={handleCloseSelectBody}
-                >
-                  {search && (
-                    <div className="options-list__search">
-                      <input
-                        type="text"
-                        placeholder="Search..."
-                        value={searchValue}
-                        onChange={(event) => setSearchValue(event.target.value)}
+                {options
+                  .filter((option) => {
+                    return !search || option.label.toLowerCase().includes(searchValue.toLowerCase())
+                  })
+                  .map((option) => {
+                    return (
+                      <SelectOption
+                        item={option}
+                        key={option.id}
+                        onClick={(selectedOption) => {
+                          handleSelectOptionClick(selectedOption, option)
+                        }}
+                        selectType={selectType}
+                        selectedId={input.value}
+                        withSelectedIcon={withSelectedIcon}
                       />
-                    </div>
-                  )}
-                  {options
-                    .filter((option) => {
-                      return (
-                        !search || option.label.toLowerCase().includes(searchValue.toLowerCase())
-                      )
-                    })
-                    .map((option) => {
-                      return (
-                        <SelectOption
-                          item={option}
-                          key={option.id}
-                          onClick={(selectedOption) => {
-                            handleSelectOptionClick(selectedOption, option)
-                          }}
-                          selectType={selectType}
-                          selectedId={input.value}
-                          withSelectedIcon={withSelectedIcon}
-                        />
-                      )
-                    })}
-                </div>
-              </PopUpDialog>
-            )}
-            <input {...input} type="hidden" />
-          </div>
+                    )
+                  })}
+              </div>
+            </PopUpDialog>
+          )}
+          <input {...input} type="hidden" />
         </div>
       )}
     </Field>

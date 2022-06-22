@@ -16,7 +16,6 @@ const TextArea = React.forwardRef(
       disabled,
       focused,
       iconClass,
-      invalid,
       invalidText,
       label,
       name,
@@ -34,7 +33,7 @@ const TextArea = React.forwardRef(
     const [isInvalid, setIsInvalid] = useState(false)
     const textAreaRef = React.createRef()
 
-    const formFieldClassNames = classnames('form-field', className)
+    const formFieldClassNames = classnames('form-field form-field-textarea', className)
     const labelClassNames = classnames(
       'form-field__label',
       disabled && 'form-field__label-disabled'
@@ -88,51 +87,49 @@ const TextArea = React.forwardRef(
     return (
       <Field validate={validateField} name={name}>
         {({ input, meta }) => (
-          <div className="form-field-textarea">
-            <div ref={ref} className={formFieldClassNames}>
-              <div className={labelClassNames}>
-                {label && (
-                  <label data-testid="label" htmlFor={input.name}>
-                    {label}
-                    {required && <span className="form-field__label-mandatory"> *</span>}
-                  </label>
-                )}
+          <div ref={ref} className={formFieldClassNames}>
+            <div className={labelClassNames}>
+              {label && (
+                <label data-testid="label" htmlFor={input.name}>
+                  {label}
+                  {required && <span className="form-field__label-mandatory"> *</span>}
+                </label>
+              )}
+            </div>
+            <div className={textAreaClassNames}>
+              <div className="form-field__control">
+                <textarea
+                  data-testid="textarea"
+                  id={input.name}
+                  ref={textAreaRef}
+                  required={isInvalid || required}
+                  {...{
+                    disabled,
+                    ...textareaProps,
+                    ...input
+                  }}
+                  onBlur={handleInputBlur}
+                  onChange={handleInputChange}
+                  onFocus={handleInputFocus}
+                />
               </div>
-              <div className={textAreaClassNames}>
-                <div className="form-field__control">
-                  <textarea
-                    data-testid="textarea"
-                    id={input.name}
-                    ref={textAreaRef}
-                    required={isInvalid || required}
-                    {...{
-                      disabled,
-                      ...textareaProps,
-                      ...input
-                    }}
-                    onBlur={handleInputBlur}
-                    onChange={handleInputChange}
-                    onFocus={handleInputFocus}
-                  />
-                </div>
-                <div className="form-field__icons">
-                  {isInvalid && (
-                    <Tooltip
-                      className="form-field__warning"
-                      template={
-                        <TextTooltipTemplate text={meta.error?.label ?? invalidText} warning />
-                      }
-                    >
-                      <InvalidIcon />
-                    </Tooltip>
-                  )}
-                  {tip && !required && <Tip text={tip} className="form-field__tip" />}
-                  {textAreaIcon && (
-                    <span data-testid="textarea__icon" className={iconClass}>
-                      {textAreaIcon}
-                    </span>
-                  )}
-                </div>
+              <div className="form-field__icons">
+                {isInvalid && (
+                  <Tooltip
+                    className="form-field__warning"
+                    template={
+                      <TextTooltipTemplate text={meta.error?.label ?? invalidText} warning />
+                    }
+                  >
+                    <InvalidIcon />
+                  </Tooltip>
+                )}
+                {tip && !required && <Tip text={tip} className="form-field__tip" />}
+                {textAreaIcon && (
+                  <span data-testid="textarea__icon" className={iconClass}>
+                    {textAreaIcon}
+                  </span>
+                )}
               </div>
             </div>
           </div>
@@ -148,7 +145,6 @@ TextArea.defaultProps = {
   focused: false,
   iconClass: '',
   textAreaIcon: null,
-  invalid: false,
   invalidText: 'This field is invalid',
   label: '',
   onBlur: () => {},
@@ -165,7 +161,6 @@ TextArea.propTypes = {
   focused: PropTypes.bool,
   iconClass: PropTypes.string,
   textAreaIcon: PropTypes.element,
-  invalid: PropTypes.bool,
   invalidText: PropTypes.string,
   label: PropTypes.string,
   name: PropTypes.string.isRequired,
@@ -173,7 +168,6 @@ TextArea.propTypes = {
   onChange: PropTypes.func,
   placeholder: PropTypes.string,
   required: PropTypes.bool,
-  rows: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   tip: PropTypes.string
 }
 
