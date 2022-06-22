@@ -1045,7 +1045,7 @@
     }
 
     &-dense {
-      .form-field__control + * {
+      .form-field__control > *:first-child {
         padding-top: 12px;
         padding-bottom: 12px;
       }
@@ -1059,14 +1059,14 @@
     }
 
     &-medium {
-      .form-field__control + * {
+      .form-field__control > *:first-child {
         padding-top: 16px;
         padding-bottom: 16px;
       }
     }
 
     &-chunky {
-      .form-field__control + * {
+      .form-field__control > *:first-child {
         padding-top: 18px;
         padding-bottom: 18px;
       }
