@@ -1026,6 +1026,11 @@
   &__wrapper {
     @include fieldWrapper;
 
+    .form-field__control > *:first-child {
+      padding-top: 14px;
+      padding-bottom: 14px;
+    }
+
     &-disabled {
       color: $spunPearl;
       cursor: not-allowed;
@@ -1040,23 +1045,31 @@
     }
 
     &-dense {
-      padding-top: 12px;
-      padding-bottom: 12px;
+      .form-field__control + * {
+        padding-top: 12px;
+        padding-bottom: 12px;
+      }
     }
 
     &-normal {
-      padding-top: 14px;
-      padding-bottom: 14px;
+      .form-field__control > *:first-child {
+        padding-top: 14px;
+        padding-bottom: 14px;
+      }
     }
 
     &-medium {
-      padding-top: 16px;
-      padding-bottom: 16px;
+      .form-field__control + * {
+        padding-top: 16px;
+        padding-bottom: 16px;
+      }
     }
 
     &-chunky {
-      padding-top: 18px;
-      padding-bottom: 18px;
+      .form-field__control + * {
+        padding-top: 18px;
+        padding-bottom: 18px;
+      }
     }
   }
 

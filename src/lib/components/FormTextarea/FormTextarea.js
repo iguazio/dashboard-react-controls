@@ -1,0 +1,179 @@
+import React, { useEffect, useState } from 'react'
+import classnames from 'classnames'
+import PropTypes from 'prop-types'
+import { Field, useField } from 'react-final-form'
+
+import { Tip, Tooltip, TextTooltipTemplate } from 'igz-controls/components'
+
+import { ReactComponent as InvalidIcon } from 'igz-controls/images/invalid.svg'
+
+import './FormTextarea.scss'
+
+const TextArea = React.forwardRef(
+  (
+    {
+      className,
+      disabled,
+      focused,
+      iconClass,
+      invalid,
+      invalidText,
+      label,
+      name,
+      onBlur,
+      onChange,
+      required,
+      textAreaIcon,
+      tip,
+      withoutBorder,
+      ...textareProps
+    },
+    ref
+  ) => {
+    const { input, meta } = useField(name)
+    const [isInvalid, setIsInvalid] = useState(false)
+    const textAreaRef = React.createRef()
+
+    const formFieldClassNames = classnames('form-field', className)
+    const labelClassNames = classnames(
+      'form-field__label',
+      disabled && 'form-field__label-disabled'
+    )
+    const textAreaClassNames = classnames(
+      'form-field__wrapper',
+      disabled && 'form-field__wrapper-disabled',
+      isInvalid && 'form-field__wrapper-invalid',
+      withoutBorder && 'without-border'
+    )
+
+    useEffect(() => {
+      if (focused) {
+        textAreaRef.current.focus()
+      }
+    }, [focused, textAreaRef])
+
+    useEffect(() => {
+      setIsInvalid(
+        meta.invalid && (meta.validating || meta.modified || (meta.submitFailed && meta.touched))
+      )
+    }, [meta.invalid, meta.modified, meta.submitFailed, meta.touched, meta.validating])
+
+    const handleInputBlur = (event) => {
+      input.onBlur(event)
+      onBlur && onBlur(event)
+    }
+
+    const handleInputChange = (event) => {
+      input.onChange(event)
+      onChange && onChange(event.target.value)
+    }
+
+    const handleInputFocus = (event) => {
+      input.onFocus(event)
+    }
+
+    const validateField = (value) => {
+      const valueToValidate = value ?? ''
+      let validationError = null
+
+      if (valueToValidate.startsWith(' ')) {
+        validationError = { name: 'empty', label: invalidText }
+      } else if (required && valueToValidate.trim().length === 0) {
+        validationError = { name: 'required', label: 'This field is required' }
+      }
+
+      return validationError
+    }
+
+    return (
+      <Field validate={validateField} name={name}>
+        {({ input, meta }) => (
+          <div ref={ref} className={formFieldClassNames}>
+            <div className={labelClassNames}>
+              {label && (
+                <label data-testid="label" htmlFor={input.name}>
+                  {label}
+                  {required && <span className="form-field__label-mandatory"> *</span>}
+                </label>
+              )}
+            </div>
+            <div className={textAreaClassNames}>
+              <div className="form-field__control">
+                <textarea
+                  data-testid="textarea"
+                  disabled={disabled}
+                  id={input.name}
+                  ref={textAreaRef}
+                  required={isInvalid || required}
+                  {...{
+                    disabled,
+                    ...textareProps,
+                    ...input
+                  }}
+                  onBlur={handleInputBlur}
+                  onChange={handleInputChange}
+                  onFocus={handleInputFocus}
+                />
+              </div>
+              <div className="form-field__icons">
+                {isInvalid && (
+                  <Tooltip
+                    className="form-field__warning"
+                    template={
+                      <TextTooltipTemplate text={meta.error?.label ?? invalidText} warning />
+                    }
+                  >
+                    <InvalidIcon />
+                  </Tooltip>
+                )}
+                {tip && !required && <Tip text={tip} className="form-field__tip" />}
+                {textAreaIcon && (
+                  <span data-testid="textarea__icon" className={iconClass}>
+                    {textAreaIcon}
+                  </span>
+                )}
+              </div>
+            </div>
+          </div>
+        )}
+      </Field>
+    )
+  }
+)
+
+TextArea.defaultProps = {
+  className: '',
+  disabled: false,
+  focused: false,
+  iconClass: '',
+  textAreaIcon: null,
+  invalid: false,
+  invalidText: 'This field is invalid',
+  label: '',
+  onBlur: () => {},
+  onChange: () => {},
+  placeholder: '',
+  required: false,
+  rows: 3,
+  tip: ''
+}
+
+TextArea.propTypes = {
+  className: PropTypes.string,
+  disabled: PropTypes.bool,
+  focused: PropTypes.bool,
+  iconClass: PropTypes.string,
+  textAreaIcon: PropTypes.element,
+  invalid: PropTypes.bool,
+  invalidText: PropTypes.string,
+  label: PropTypes.string,
+  name: PropTypes.string.isRequired,
+  onBlur: PropTypes.func,
+  onChange: PropTypes.func,
+  placeholder: PropTypes.string,
+  required: PropTypes.bool,
+  rows: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  tip: PropTypes.string
+}
+
+export default React.memo(TextArea)
