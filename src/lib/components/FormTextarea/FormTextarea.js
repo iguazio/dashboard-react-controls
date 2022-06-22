@@ -7,6 +7,8 @@ import { Tip, Tooltip, TextTooltipTemplate } from 'igz-controls/components'
 
 import { ReactComponent as InvalidIcon } from 'igz-controls/images/invalid.svg'
 
+import './formTextarea.scss'
+
 const TextArea = React.forwardRef(
   (
     {
@@ -24,7 +26,7 @@ const TextArea = React.forwardRef(
       textAreaIcon,
       tip,
       withoutBorder,
-      ...textareProps
+      ...textareaProps
     },
     ref
   ) => {
@@ -86,50 +88,51 @@ const TextArea = React.forwardRef(
     return (
       <Field validate={validateField} name={name}>
         {({ input, meta }) => (
-          <div ref={ref} className={formFieldClassNames}>
-            <div className={labelClassNames}>
-              {label && (
-                <label data-testid="label" htmlFor={input.name}>
-                  {label}
-                  {required && <span className="form-field__label-mandatory"> *</span>}
-                </label>
-              )}
-            </div>
-            <div className={textAreaClassNames}>
-              <div className="form-field__control">
-                <textarea
-                  data-testid="textarea"
-                  disabled={disabled}
-                  id={input.name}
-                  ref={textAreaRef}
-                  required={isInvalid || required}
-                  {...{
-                    disabled,
-                    ...textareProps,
-                    ...input
-                  }}
-                  onBlur={handleInputBlur}
-                  onChange={handleInputChange}
-                  onFocus={handleInputFocus}
-                />
+          <div className="form-field-textarea">
+            <div ref={ref} className={formFieldClassNames}>
+              <div className={labelClassNames}>
+                {label && (
+                  <label data-testid="label" htmlFor={input.name}>
+                    {label}
+                    {required && <span className="form-field__label-mandatory"> *</span>}
+                  </label>
+                )}
               </div>
-              <div className="form-field__icons">
-                {isInvalid && (
-                  <Tooltip
-                    className="form-field__warning"
-                    template={
-                      <TextTooltipTemplate text={meta.error?.label ?? invalidText} warning />
-                    }
-                  >
-                    <InvalidIcon />
-                  </Tooltip>
-                )}
-                {tip && !required && <Tip text={tip} className="form-field__tip" />}
-                {textAreaIcon && (
-                  <span data-testid="textarea__icon" className={iconClass}>
-                    {textAreaIcon}
-                  </span>
-                )}
+              <div className={textAreaClassNames}>
+                <div className="form-field__control">
+                  <textarea
+                    data-testid="textarea"
+                    id={input.name}
+                    ref={textAreaRef}
+                    required={isInvalid || required}
+                    {...{
+                      disabled,
+                      ...textareaProps,
+                      ...input
+                    }}
+                    onBlur={handleInputBlur}
+                    onChange={handleInputChange}
+                    onFocus={handleInputFocus}
+                  />
+                </div>
+                <div className="form-field__icons">
+                  {isInvalid && (
+                    <Tooltip
+                      className="form-field__warning"
+                      template={
+                        <TextTooltipTemplate text={meta.error?.label ?? invalidText} warning />
+                      }
+                    >
+                      <InvalidIcon />
+                    </Tooltip>
+                  )}
+                  {tip && !required && <Tip text={tip} className="form-field__tip" />}
+                  {textAreaIcon && (
+                    <span data-testid="textarea__icon" className={iconClass}>
+                      {textAreaIcon}
+                    </span>
+                  )}
+                </div>
               </div>
             </div>
           </div>

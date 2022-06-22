@@ -3,53 +3,57 @@
 @import '../../scss/shadows';
 @import '../../scss/mixins';
 
-.form-field {
-  @include formField;
+.form-field-input {
+  width: 100%;
 
-  &__label {
-    &-icon {
-      display: inline-flex;
-      margin-left: 3px;
+  .form-field {
+    @include formField;
 
-      & > *,
-      a {
+    &__label {
+      &-icon {
         display: inline-flex;
-      }
+        margin-left: 3px;
 
-      a {
-        transform: translateY(-1px);
-      }
+        & > *,
+        a {
+          display: inline-flex;
+        }
 
-      svg {
-        width: 12px;
-        height: 12px;
+        a {
+          transform: translateY(-1px);
+        }
 
-        path {
-          fill: $cornflowerBlue;
+        svg {
+          width: 12px;
+          height: 12px;
+
+          path {
+            fill: $cornflowerBlue;
+          }
         }
       }
     }
-  }
 
-  &__suggestion-list {
-    position: absolute;
-    top: 100%;
-    left: 0;
-    z-index: 5;
-    margin: 0;
-    padding: 7px 0;
-    background-color: $white;
-    border-radius: 4px;
-    box-shadow: $previewBoxShadow;
+    &__suggestion-list {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      z-index: 5;
+      margin: 0;
+      padding: 7px 0;
+      background-color: $white;
+      border-radius: 4px;
+      box-shadow: $previewBoxShadow;
 
-    .suggestion-item {
-      padding: 7px 15px;
-      color: $mulledWine;
-      list-style-type: none;
+      .suggestion-item {
+        padding: 7px 15px;
+        color: $mulledWine;
+        list-style-type: none;
 
-      &:hover {
-        background-color: $alabaster;
-        cursor: pointer;
+        &:hover {
+          background-color: $alabaster;
+          cursor: pointer;
+        }
       }
     }
   }

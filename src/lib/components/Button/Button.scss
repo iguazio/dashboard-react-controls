@@ -7,15 +7,30 @@
   align-items: center;
   justify-content: center;
   min-width: 90px;
-  height: 36px;
+  height: $fieldNormal;
   padding: 0 16px;
   color: $white;
   font-weight: 500;
   font-size: 0.875rem;
   font-style: normal;
-  line-height: 16px;
   border: $transparentBorder;
   border-radius: $mainBorderRadius;
+
+  &-dense {
+    height: $fieldDense;
+  }
+
+  &-normal {
+    height: $fieldNormal;
+  }
+
+  &-medium {
+    height: $fieldMedium;
+  }
+
+  &-chunky {
+    height: $fieldChunky;
+  }
 
   svg {
     & > * {

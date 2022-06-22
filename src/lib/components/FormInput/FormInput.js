@@ -195,100 +195,102 @@ const FormInput = React.forwardRef(
     return (
       <Field validate={validateField} name={name}>
         {({ input, meta }) => (
-          <div ref={ref} className={formFieldClassNames}>
-            {label && (
-              <div className={labelClassNames}>
-                <label data-testid="label" htmlFor={input.name}>
-                  {label}
-                  {(required || validationRules.find((rule) => rule.name === 'required')) && (
-                    <span className="form-field__label-mandatory"> *</span>
+          <div className="form-field-input">
+            <div ref={ref} className={formFieldClassNames}>
+              {label && (
+                <div className={labelClassNames}>
+                  <label data-testid="label" htmlFor={input.name}>
+                    {label}
+                    {(required || validationRules.find((rule) => rule.name === 'required')) && (
+                      <span className="form-field__label-mandatory"> *</span>
+                    )}
+                  </label>
+                  {link && link.show && typedValue.trim() && (
+                    <div className="form-field__label-icon">
+                      <Tooltip template={<TextTooltipTemplate text={link.url || typedValue} />}>
+                        <a
+                          href={link.url || typedValue}
+                          onClick={(event) => event.stopPropagation()}
+                          target="_blank"
+                          rel="noreferrer"
+                        >
+                          <Popout />
+                        </a>
+                      </Tooltip>
+                    </div>
                   )}
-                </label>
-                {link && link.show && typedValue.trim() && (
-                  <div className="form-field__label-icon">
-                    <Tooltip template={<TextTooltipTemplate text={link.url || typedValue} />}>
-                      <a
-                        href={link.url || typedValue}
-                        onClick={(event) => event.stopPropagation()}
-                        target="_blank"
-                        rel="noreferrer"
-                      >
-                        <Popout />
-                      </a>
+                </div>
+              )}
+              <div className={inputWrapperClassNames}>
+                <div className="form-field__control">
+                  <input
+                    data-testid="input"
+                    id={input.name}
+                    ref={inputRef}
+                    required={isInvalid || required}
+                    {...{
+                      disabled,
+                      pattern,
+                      ...inputProps,
+                      ...input
+                    }}
+                    autoComplete={inputProps.autocomplete ?? 'off'}
+                    onChange={handleInputChange}
+                    onBlur={handleInputBlur}
+                    onFocus={handleInputFocus}
+                  />
+                </div>
+                <div className="form-field__icons">
+                  {isInvalid && !Array.isArray(meta.error) && (
+                    <Tooltip
+                      className="form-field__warning"
+                      template={
+                        <TextTooltipTemplate text={meta.error?.label ?? invalidText} warning />
+                      }
+                    >
+                      <InvalidIcon />
                     </Tooltip>
-                  </div>
-                )}
+                  )}
+                  {isInvalid && Array.isArray(meta.error) && (
+                    <button className="form-field__warning" onClick={toggleValidationRulesMenu}>
+                      <WarningIcon />
+                    </button>
+                  )}
+                  {tip && <Tip text={tip} className="form-field__tip" />}
+                  {inputIcon && (
+                    <span data-testid="input-icon" className={iconClass}>
+                      {inputIcon}
+                    </span>
+                  )}
+                </div>
               </div>
-            )}
-            <div className={inputWrapperClassNames}>
-              <div className="form-field__control">
-                <input
-                  data-testid="input"
-                  id={input.name}
-                  ref={inputRef}
-                  required={isInvalid || required}
-                  {...{
-                    disabled,
-                    pattern,
-                    ...inputProps,
-                    ...input
-                  }}
-                  autoComplete={inputProps.autocomplete ?? 'off'}
-                  onChange={handleInputChange}
-                  onBlur={handleInputBlur}
-                  onFocus={handleInputFocus}
-                />
-              </div>
-              <div className="form-field__icons">
-                {isInvalid && !Array.isArray(meta.error) && (
-                  <Tooltip
-                    className="form-field__warning"
-                    template={
-                      <TextTooltipTemplate text={meta.error?.label ?? invalidText} warning />
-                    }
-                  >
-                    <InvalidIcon />
-                  </Tooltip>
-                )}
-                {isInvalid && Array.isArray(meta.error) && (
-                  <button className="form-field__warning" onClick={toggleValidationRulesMenu}>
-                    <WarningIcon />
-                  </button>
-                )}
-                {tip && <Tip text={tip} className="form-field__tip" />}
-                {inputIcon && (
-                  <span data-testid="input-icon" className={iconClass}>
-                    {inputIcon}
-                  </span>
-                )}
-              </div>
+              {suggestionList?.length > 0 && isFocused && (
+                <ul className="form-field__suggestion-list">
+                  {suggestionList.map((item, index) => {
+                    return (
+                      <li
+                        className="suggestion-item"
+                        key={`${item}${index}`}
+                        onClick={() => {
+                          handleSuggestionClick(item)
+                        }}
+                        tabIndex={index}
+                        dangerouslySetInnerHTML={{
+                          __html: item.replace(new RegExp(typedValue, 'gi'), (match) =>
+                            match ? `<b>${match}</b>` : match
+                          )
+                        }}
+                      />
+                    )
+                  })}
+                </ul>
+              )}
+              {!isEmpty(validationRules) && (
+                <OptionsMenu show={showValidationRules} ref={ref}>
+                  {getValidationRules()}
+                </OptionsMenu>
+              )}
             </div>
-            {suggestionList?.length > 0 && isFocused && (
-              <ul className="form-field__suggestion-list">
-                {suggestionList.map((item, index) => {
-                  return (
-                    <li
-                      className="suggestion-item"
-                      key={`${item}${index}`}
-                      onClick={() => {
-                        handleSuggestionClick(item)
-                      }}
-                      tabIndex={index}
-                      dangerouslySetInnerHTML={{
-                        __html: item.replace(new RegExp(typedValue, 'gi'), (match) =>
-                          match ? `<b>${match}</b>` : match
-                        )
-                      }}
-                    />
-                  )
-                })}
-              </ul>
-            )}
-            {!isEmpty(validationRules) && (
-              <OptionsMenu show={showValidationRules} ref={ref}>
-                {getValidationRules()}
-              </OptionsMenu>
-            )}
           </div>
         )}
       </Field>
