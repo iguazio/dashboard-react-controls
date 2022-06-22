@@ -7,8 +7,6 @@ import { Tip, Tooltip, TextTooltipTemplate } from 'igz-controls/components'
 
 import { ReactComponent as InvalidIcon } from 'igz-controls/images/invalid.svg'
 
-import './FormTextarea.scss'
-
 const TextArea = React.forwardRef(
   (
     {
