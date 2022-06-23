@@ -3,6 +3,7 @@
 @import '../../scss/borders';
 
 .pop-up-dialog {
+  position: relative;
   width: 477px;
   max-height: 90vh;
   padding: 20px;
@@ -35,7 +36,6 @@
   }
 
   &__header {
-    position: relative;
     display: flex;
     align-items: baseline;
     justify-content: space-between;
@@ -71,8 +71,8 @@
 
     &_close {
       position: absolute;
-      top: 0;
-      right: -7px;
+      top: 10px;
+      right: 10px;
     }
   }
 

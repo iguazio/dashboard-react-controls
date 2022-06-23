@@ -1,0 +1,23 @@
+@import '../../scss/colors';
+@import '../../scss/borders';
+@import '../../scss/shadows';
+@import '../../scss/mixins';
+
+.form-field.form-field-textarea {
+  width: 100%;
+
+  .form-field {
+    @include formField;
+
+    &__wrapper {
+      .form-field__control {
+        padding: 0;
+
+        & > *:first-child {
+          height: inherit;
+          padding: 12px 0 12px 16px;
+        }
+      }
+    }
+  }
+}

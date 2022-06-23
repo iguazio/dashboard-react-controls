@@ -25,7 +25,7 @@ require("./Button.scss");
 
 var _jsxRuntime = require("react/jsx-runtime");
 
-var _excluded = ["className", "icon", "label", "tooltip", "variant"];
+var _excluded = ["className", "density", "icon", "label", "tooltip", "variant"];
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -45,13 +45,14 @@ function _objectWithoutPropertiesLoose(source, excluded) { if (source == null) r
 
 var Button = /*#__PURE__*/(0, _react.forwardRef)(function (_ref, ref) {
   var className = _ref.className,
+      density = _ref.density,
       icon = _ref.icon,
       label = _ref.label,
       tooltip = _ref.tooltip,
       variant = _ref.variant,
       restProps = _objectWithoutProperties(_ref, _excluded);
 
-  var buttonClassName = (0, _classnames.default)('btn', "btn-".concat(variant), className);
+  var buttonClassName = (0, _classnames.default)('btn', "btn-".concat(variant), "btn-".concat(density), className);
   return /*#__PURE__*/(0, _jsxRuntime.jsx)(_Tooltip.default, {
     template: /*#__PURE__*/(0, _jsxRuntime.jsx)(_TextTooltipTemplate.default, {
       text: tooltip
@@ -68,12 +69,14 @@ var Button = /*#__PURE__*/(0, _react.forwardRef)(function (_ref, ref) {
 });
 Button.defaultProps = {
   className: '',
+  density: 'normal',
   label: 'Button',
   tooltip: '',
   variant: _constants.TERTIARY_BUTTON
 };
 Button.propTypes = {
   className: _propTypes.default.string,
+  density: _propTypes.default.oneOf(['dense', 'normal', 'medium', 'chunky']),
   icon: _propTypes.default.element,
   label: _propTypes.default.oneOfType([_propTypes.default.string, _propTypes.default.element]),
   tooltip: _propTypes.default.string,

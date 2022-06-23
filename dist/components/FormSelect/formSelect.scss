@@ -2,90 +2,96 @@
 @import '../../scss/colors';
 @import '../../scss/shadows';
 
-.form-field {
-  @include formField;
+.form-field.form-field-select {
+  width: 100%;
 
-  &__wrapper {
-    &-active {
-      background: $alabaster;
-    }
+  .form-field {
+    @include formField;
 
-    .form-field__caret {
-      cursor: pointer;
-    }
-
-    &-disabled {
-      .form-field__caret {
-        cursor: not-allowed;
-
-        path {
-          fill: $spunPearl;
-        }
-      }
-    }
-
-    &.without-border {
-      .form-field__caret {
-        display: none;
+    &__wrapper {
+      &-active {
+        background: $alabaster;
       }
 
-      &:hover {
+      .form-field__caret {
+        cursor: pointer;
+      }
+
+      &-disabled {
         .form-field__caret {
-          display: block;
+          cursor: not-allowed;
+
+          path {
+            fill: $spunPearl;
+          }
         }
+      }
+
+      &.without-border {
+        .form-field__caret {
+          display: none;
+        }
+
+        &:hover {
+          .form-field__caret {
+            display: block;
+          }
+        }
+      }
+    }
+
+    &__select {
+      display: flex;
+      align-items: center;
+      width: 100%;
+
+      &-value {
+        display: block;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+      }
+
+      &-sub_label {
+        display: block;
+        margin-left: 5px;
+        overflow: hidden;
+        color: $topaz;
+        white-space: nowrap;
+        text-overflow: ellipsis;
       }
     }
   }
 
-  &__select {
-    width: 100%;
+  &__options-list {
+    .pop-up-dialog {
+      width: 100%;
+      padding: 0;
 
-    &-value {
-      display: block;
-      overflow: hidden;
-      white-space: nowrap;
-      text-overflow: ellipsis;
-    }
-
-    &-sub_label {
-      display: block;
-      margin-left: 5px;
-      overflow: hidden;
-      color: $topaz;
-      white-space: nowrap;
-      text-overflow: ellipsis;
-    }
-
-    &__options-list {
-      .pop-up-dialog {
-        width: 100%;
-        padding: 0;
-
-        &__header {
-          display: none;
-        }
+      &__header {
+        display: none;
       }
-      .options-list {
-        &__body {
-          width: 100%;
-          max-height: 250px;
-          overflow-y: auto;
-          color: $mulledWineTwo;
-          background-color: $white;
-          border: $primaryBorder;
-          border-radius: 2px;
-          box-shadow: $filterShadow;
-        }
+    }
+    .options-list {
+      &__body {
+        width: 100%;
+        max-height: 250px;
+        overflow-y: auto;
+        color: $mulledWineTwo;
+        background-color: $white;
+        border: $primaryBorder;
+        border-radius: 2px;
+        box-shadow: $filterShadow;
+      }
 
-        &__search {
-          width: 100%;
+      &__search {
+        width: 100%;
 
-          input {
-            width: 100%;
-            padding: 10px;
-            border: none;
-            border-bottom: $primaryBorder;
-          }
+        input {
+          width: 100%;
+          padding: 10px;
+          border: none;
+          border-bottom: $primaryBorder;
         }
       }
     }

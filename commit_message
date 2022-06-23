@@ -1,10 +1,7 @@
 
 
-Create a new dist version 0.0.9
+Create a new dist version 0.0.10
 
 Collecting:
-- Fix [Wizard] remove hasSteps logic (#18)
-- add isOpen prop in FormSelect (#19)
-- Impl [Models] Add `FormKeyValueTable` component (#20)
-- Update form.util.js (#21)
-- Fix [FormKeyValue] fix last row (#22)
+- Impl [Form] new Textarea component (#24)
+- Fix [Models] Issue with input validation (#25)

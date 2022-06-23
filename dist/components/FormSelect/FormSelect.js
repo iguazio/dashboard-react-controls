@@ -185,7 +185,7 @@ var FormSelect = function FormSelect(_ref) {
       return /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
         "data-testid": "select",
         ref: selectRef,
-        className: "form-field ".concat(className),
+        className: "form-field form-field-select ".concat(className),
         onClick: toggleOpen,
         children: [label && /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
           className: selectLabelClassName,
@@ -264,7 +264,7 @@ var FormSelect = function FormSelect(_ref) {
           isOpen: isConfirmDialogOpen,
           message: selectedItemAction.confirm.message
         }), isOpen && /*#__PURE__*/(0, _jsxRuntime.jsx)(_PopUpDialog.default, {
-          className: "form-field__select__options-list",
+          className: "form-field form-field-select__options-list",
           customPosition: {
             element: selectRef,
             position: 'bottom-right'

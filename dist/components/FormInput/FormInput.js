@@ -136,7 +136,7 @@ var FormInput = /*#__PURE__*/_react.default.forwardRef(function (_ref, ref) {
   (0, _useDetectOutsideClick.useDetectOutsideClick)(ref, function () {
     return setShowValidationRules(false);
   });
-  var formFieldClassNames = (0, _classnames.default)('form-field', className);
+  var formFieldClassNames = (0, _classnames.default)('form-field form-field-input', className);
   var inputWrapperClassNames = (0, _classnames.default)('form-field__wrapper', "form-field__wrapper-".concat(density), disabled && 'form-field__wrapper-disabled', isInvalid && 'form-field__wrapper-invalid', withoutBorder && 'without-border');
   var labelClassNames = (0, _classnames.default)('form-field__label', disabled && 'form-field__label-disabled');
   (0, _react.useEffect)(function () {
@@ -200,6 +200,8 @@ var FormInput = /*#__PURE__*/_react.default.forwardRef(function (_ref, ref) {
   };
 
   var handleScroll = function handleScroll(event) {
+    if (inputRef.current.contains(event.target)) return;
+
     if (!event.target.closest('.options-menu') && !event.target.classList.contains('form-field')) {
       setShowValidationRules(false);
     }

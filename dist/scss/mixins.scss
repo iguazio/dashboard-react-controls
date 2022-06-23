@@ -1,5 +1,6 @@
 @import './colors';
 @import './borders';
+@import './variables.scss';
 
 @mixin fixed {
   position: fixed;
@@ -1040,23 +1041,27 @@
     }
 
     &-dense {
-      padding-top: 12px;
-      padding-bottom: 12px;
+      .form-field__control > *:first-child {
+        height: $fieldDense;
+      }
     }
 
     &-normal {
-      padding-top: 14px;
-      padding-bottom: 14px;
+      .form-field__control > *:first-child {
+        height: $fieldNormal;
+      }
     }
 
     &-medium {
-      padding-top: 16px;
-      padding-bottom: 16px;
+      .form-field__control > *:first-child {
+        height: $fieldMedium;
+      }
     }
 
     &-chunky {
-      padding-top: 18px;
-      padding-bottom: 18px;
+      .form-field__control > *:first-child {
+        height: $fieldChunky;
+      }
     }
   }
 
@@ -1064,6 +1069,7 @@
     position: relative;
     display: flex;
     flex: 1;
+    align-items: center;
     overflow: hidden;
     padding: 0 8px 0 16px;
   }
@@ -1072,13 +1078,16 @@
     display: flex;
     flex-shrink: 0;
     align-items: center;
-    margin-right: 4px;
     min-height: 25px;
 
     & > * {
       display: flex;
       align-items: center;
       padding: 0 4px;
+
+      &:last-child {
+        margin-right: 4px;
+      }
     }
   }
 }

@@ -39,6 +39,12 @@ Object.defineProperty(exports, "FormSelect", {
     return _FormSelect.default;
   }
 });
+Object.defineProperty(exports, "FormTextarea", {
+  enumerable: true,
+  get: function get() {
+    return _FormTextarea.default;
+  }
+});
 Object.defineProperty(exports, "Modal", {
   enumerable: true,
   get: function get() {
@@ -93,6 +99,8 @@ var _FormInput = _interopRequireDefault(require("./FormInput/FormInput"));
 var _FormKeyValueTable = _interopRequireDefault(require("./FormKeyValueTable/FormKeyValueTable"));
 
 var _FormSelect = _interopRequireDefault(require("./FormSelect/FormSelect"));
+
+var _FormTextarea = _interopRequireDefault(require("./FormTextarea/FormTextarea"));
 
 var _Modal = _interopRequireDefault(require("./Modal/Modal"));
 
