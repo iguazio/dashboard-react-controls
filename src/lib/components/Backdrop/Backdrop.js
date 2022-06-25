@@ -1,12 +1,11 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { createPortal } from 'react-dom'
 import { CSSTransition } from 'react-transition-group'
 
 import './Backdrop.scss'
 
 const Backdrop = ({ duration = 300, show, onClose }) => {
-  return createPortal(
+  return (
     <CSSTransition
       in={show}
       timeout={duration}
@@ -15,8 +14,7 @@ const Backdrop = ({ duration = 300, show, onClose }) => {
       unmountOnExit
     >
       <div className="backdrop" onClick={onClose}></div>
-    </CSSTransition>,
-    document.getElementById('overlay_container')
+    </CSSTransition>
   )
 }
 

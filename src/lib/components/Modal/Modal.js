@@ -1,6 +1,5 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { createPortal } from 'react-dom'
 import { CSSTransition } from 'react-transition-group'
 import classNames from 'classnames'
 
@@ -14,8 +13,9 @@ import { ReactComponent as CloseIcon } from '../../images/close.svg'
 
 import './Modal.scss'
 
-const JSX_MODAL = ({ actions, children, className, onClose, size, show, title }) => {
+const Modal = ({ actions, children, className, onClose, size, show, title }) => {
   const modalClassNames = classNames('modal', className, size && `modal-${size}`)
+
   return (
     <>
       <Backdrop onClose={onClose} show={show} />
@@ -46,9 +46,6 @@ const JSX_MODAL = ({ actions, children, className, onClose, size, show, title })
     </>
   )
 }
-
-const Modal = (props) =>
-  createPortal(<JSX_MODAL {...props} />, document.getElementById('overlay_container'))
 
 Modal.defaultProps = {
   actions: [],
