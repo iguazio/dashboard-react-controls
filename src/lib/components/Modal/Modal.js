@@ -14,17 +14,7 @@ import { ReactComponent as CloseIcon } from '../../images/close.svg'
 
 import './Modal.scss'
 
-const JSX_MODAL = ({
-  actions,
-  children,
-  className,
-  location,
-  onClose,
-  onResolve,
-  size,
-  show,
-  title
-}) => {
+const JSX_MODAL = ({ actions, children, className, location, onClose, size, show, title }) => {
   const [currentLocation, setCurrentLocation] = useState(location)
   const modalClassNames = classNames('modal', className, size && `modal-${size}`)
 
@@ -33,10 +23,10 @@ const JSX_MODAL = ({
 
     return () => {
       if (location !== currentLocation) {
-        onResolve()
+        onClose()
       }
     }
-  }, [currentLocation, location, onResolve])
+  }, [currentLocation, location, onClose])
 
   return (
     <>
@@ -89,7 +79,6 @@ Modal.propTypes = {
   ]).isRequired,
   location: PropTypes.string.isRequired,
   onClose: PropTypes.func.isRequired,
-  onResolve: PropTypes.func.isRequired,
   show: PropTypes.bool.isRequired,
   size: MODAL_SIZES,
   title: PropTypes.string
