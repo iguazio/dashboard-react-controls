@@ -9,8 +9,6 @@ var _react = _interopRequireDefault(require("react"));
 
 var _propTypes = _interopRequireDefault(require("prop-types"));
 
-var _reactDom = require("react-dom");
-
 var _reactTransitionGroup = require("react-transition-group");
 
 require("./Backdrop.scss");
@@ -24,7 +22,7 @@ var Backdrop = function Backdrop(_ref) {
       duration = _ref$duration === void 0 ? 300 : _ref$duration,
       show = _ref.show,
       onClose = _ref.onClose;
-  return /*#__PURE__*/(0, _reactDom.createPortal)( /*#__PURE__*/(0, _jsxRuntime.jsx)(_reactTransitionGroup.CSSTransition, {
+  return /*#__PURE__*/(0, _jsxRuntime.jsx)(_reactTransitionGroup.CSSTransition, {
     in: show,
     timeout: duration,
     classNames: "backdrop-transition",
@@ -34,7 +32,7 @@ var Backdrop = function Backdrop(_ref) {
       className: "backdrop",
       onClick: onClose
     })
-  }), document.getElementById('overlay_container'));
+  });
 };
 
 Backdrop.defaultProps = {

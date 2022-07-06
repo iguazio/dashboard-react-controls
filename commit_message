@@ -1,7 +1,7 @@
 
 
-Create a new dist version 0.0.10
+Create a new dist version 0.0.11
 
 Collecting:
-- Impl [Form] new Textarea component (#24)
-- Fix [Models] Issue with input validation (#25)
+- Fix [Modal] on navigation back (#28)
+- Fix [Modal] remove create portal (#27)
