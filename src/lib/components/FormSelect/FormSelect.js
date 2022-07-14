@@ -22,11 +22,12 @@ const FormSelect = ({
   disabled,
   hideSelectedOption,
   label,
+  multiple,
   name,
   onChange,
   options,
+  required,
   search,
-  selectType,
   selectedItemAction,
   withoutBorder,
   withSelectedIcon
@@ -54,6 +55,17 @@ const FormSelect = ({
   )
 
   const selectedOption = options.find((option) => option.id === input.value)
+
+  const getLabel = () => {
+    if (!input.value || !input.value.length) {
+      return `Select Option${multiple ? 's' : ''}`
+    }
+    return !multiple
+      ? selectedOption?.label
+      : input.value.length <= 2
+      ? input.value.join(', ')
+      : `${input.value.length} items selected`
+  }
 
   useEffect(() => {
     setIsInvalid(
@@ -117,7 +129,7 @@ const FormSelect = ({
   const handleCloseSelectBody = useCallback(
     (event) => {
       event.stopPropagation()
-
+      if (multiple) return
       if (
         !event.target.classList.contains('disabled') &&
         !event.target.closest('.options-list__search')
@@ -126,7 +138,7 @@ const FormSelect = ({
         setSearchValue('')
       }
     },
-    [closeMenu]
+    [closeMenu, multiple]
   )
 
   const handleSelectOptionClick = (selectedOption, option) => {
@@ -137,10 +149,14 @@ const FormSelect = ({
     }
   }
 
-  const required = (value) => (value ? undefined : 'Required')
+  const isRequired = (value) => {
+    if (required) {
+      return value ? undefined : 'Required'
+    }
+  }
 
   return (
-    <Field name={name} validate={required}>
+    <Field name={name} validate={isRequired}>
       {({ input, meta }) => (
         <div
           data-testid="select"
@@ -160,9 +176,7 @@ const FormSelect = ({
             <div className="form-field__control">
               {!hideSelectedOption && (
                 <div data-testid="selected-option" className="form-field__select">
-                  <span className="form-field__select-value">
-                    {input.value && selectedOption?.label}
-                  </span>
+                  <span className="form-field__select-value">{getLabel()}</span>
                   {selectedOption?.subLabel && (
                     <span data-testid="select-subLabel" className="form-field__select-sub_label">
                       {selectedOption.subLabel}
@@ -258,11 +272,12 @@ const FormSelect = ({
                       <SelectOption
                         item={option}
                         key={option.id}
+                        name={name}
                         onClick={(selectedOption) => {
                           handleSelectOptionClick(selectedOption, option)
                         }}
-                        selectType={selectType}
-                        selectedId={input.value}
+                        multiple={multiple}
+                        selectedId={!multiple ? input.value : ''}
                         withSelectedIcon={withSelectedIcon}
                       />
                     )
@@ -286,7 +301,7 @@ FormSelect.defaultProps = {
   labelAtTop: false,
   onClick: null,
   search: false,
-  selectType: '',
+  multiple: false,
   withoutBorder: false,
   withSelectedIcon: true
 }
@@ -302,7 +317,7 @@ FormSelect.propTypes = {
   onClick: PropTypes.oneOfType([PropTypes.func, PropTypes.bool]),
   options: SELECT_OPTIONS.isRequired,
   search: PropTypes.bool,
-  selectType: PropTypes.string,
+  multiple: PropTypes.bool,
   withoutBorder: PropTypes.bool,
   withSelectedIcon: PropTypes.bool
 }

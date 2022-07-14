@@ -18,13 +18,10 @@
       display: none;
     }
 
-    .checkbox {
+    .form-field-checkbox {
       flex: 1;
       height: 100%;
-
-      svg {
-        margin: 0;
-      }
+      width: 100%;
     }
 
     &:hover {

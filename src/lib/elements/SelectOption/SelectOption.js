@@ -2,8 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import classnames from 'classnames'
 
-import { FormCheckBox } from '../../components'
-import { Tooltip, TextTooltipTemplate } from '../../components'
+import { FormCheckBox, Tooltip, TextTooltipTemplate } from '../../components'
 
 import { SELECT_OPTION } from '../../types'
 
@@ -11,19 +10,17 @@ import { ReactComponent as Checkmark } from '../../images/checkmark.svg'
 
 import './selectOption.scss'
 
-const SelectOption = ({ item, onClick, selectType, selectedId, withSelectedIcon }) => {
+const SelectOption = ({ item, name, onClick, multiple, selectedId, withSelectedIcon }) => {
   const selectClassName = classnames(
     'select__item',
     item.hidden && 'hidden',
     item.disabled && 'disabled'
   )
-
-  if (selectType === 'checkbox') {
+  if (multiple) {
     return (
-      <div data-testid="select-checkbox" className="select__item">
-        <FormCheckBox item={item} selectedId={selectedId} onChange={onClick}>
+      <div data-testid="select-checkbox" className={selectClassName}>
+        <FormCheckBox name={name} id={item.id} label={item.label}>
           {item.status && <span className={`state-${item.status}-job status`} />}
-          {item.label}
         </FormCheckBox>
       </div>
     )
@@ -57,7 +54,7 @@ const SelectOption = ({ item, onClick, selectType, selectedId, withSelectedIcon 
 
 SelectOption.defaultProps = {
   onClick: () => {},
-  selectType: '',
+  multiple: false,
   withSelectedIcon: true
 }
 
@@ -65,7 +62,7 @@ SelectOption.propTypes = {
   disabled: PropTypes.bool,
   item: SELECT_OPTION.isRequired,
   onClick: PropTypes.func,
-  selectType: PropTypes.string,
+  multiple: PropTypes.bool,
   selectedId: PropTypes.string,
   withSelectedIcon: PropTypes.bool
 }
