@@ -5,21 +5,21 @@ import classNames from 'classnames'
 
 import './formCheckBox.scss'
 
-const FormCheckBox = ({ children, className, id, name, label, ...inputProps }) => {
+const FormCheckBox = ({ children, className, name, label, ...inputProps }) => {
   const formFieldClassNames = classNames('form-field form-field-checkbox', className)
 
   return (
-    <Field name={name} type="checkbox" value={id}>
+    <Field name={name} value={inputProps.value} type="checkbox">
       {({ input }) => (
         <div className={formFieldClassNames}>
           <input
             {...{
-              id,
-              ...inputProps,
-              ...input
+              ...input,
+              ...inputProps
             }}
+            id={inputProps.id ?? inputProps.value ?? name}
           />
-          <label data-testid="value" htmlFor={id}>
+          <label data-testid="value" htmlFor={inputProps.id ?? inputProps.value ?? name}>
             {label ? label : ''}
             {children}
           </label>
@@ -36,7 +36,6 @@ FormCheckBox.defaultProps = {
 
 FormCheckBox.propTypes = {
   className: PropTypes.string,
-  id: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
   label: PropTypes.string
 }

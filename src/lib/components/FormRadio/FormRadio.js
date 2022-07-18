@@ -5,21 +5,21 @@ import classNames from 'classnames'
 
 import './FormRadio.scss'
 
-const FormRadio = ({ children, className, id, name, label, ...inputProps }) => {
+const FormRadio = ({ children, className, name, label, ...inputProps }) => {
   const formFieldClassNames = classNames('form-field form-field-radio', className)
 
   return (
-    <Field name={name} type="radio" value={id}>
+    <Field name={name} value={inputProps.value} type="radio">
       {({ input }) => (
         <div className={formFieldClassNames}>
           <input
             {...{
-              id,
-              ...inputProps,
-              ...input
+              ...input,
+              ...inputProps
             }}
+            id={inputProps.id ?? inputProps.value ?? name}
           />
-          <label data-testid="value" htmlFor={id}>
+          <label data-testid="value" htmlFor={inputProps.id ?? inputProps.value ?? name}>
             {label ? label : ''}
             {children}
           </label>
@@ -36,7 +36,6 @@ FormRadio.defaultProps = {
 
 FormRadio.propTypes = {
   className: PropTypes.string,
-  id: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
   label: PropTypes.string
 }
