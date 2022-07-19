@@ -163,11 +163,6 @@ const FormSelect = ({
                   <span className="form-field__select-value">
                     {input.value && selectedOption?.label}
                   </span>
-                  {selectedOption?.subLabel && (
-                    <span data-testid="select-subLabel" className="form-field__select-sub_label">
-                      {selectedOption.subLabel}
-                    </span>
-                  )}
                 </div>
               )}
             </div>
