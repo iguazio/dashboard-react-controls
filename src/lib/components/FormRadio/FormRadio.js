@@ -5,7 +5,7 @@ import classNames from 'classnames'
 
 import './FormRadio.scss'
 
-const FormRadio = ({ children, className, name, label, ...inputProps }) => {
+const FormRadio = ({ className, name, label, ...inputProps }) => {
   const formFieldClassNames = classNames('form-field form-field-radio', className)
 
   return (
@@ -17,12 +17,9 @@ const FormRadio = ({ children, className, name, label, ...inputProps }) => {
               ...input,
               ...inputProps
             }}
-            id={inputProps.id ?? inputProps.value ?? name}
+            id={inputProps.value}
           />
-          <label data-testid="value" htmlFor={inputProps.id ?? inputProps.value ?? name}>
-            {label ? label : ''}
-            {children}
-          </label>
+          <label htmlFor={inputProps.value}>{label}</label>
         </div>
       )}
     </Field>
@@ -37,7 +34,7 @@ FormRadio.defaultProps = {
 FormRadio.propTypes = {
   className: PropTypes.string,
   name: PropTypes.string.isRequired,
-  label: PropTypes.string
+  label: PropTypes.string.isRequired
 }
 
 export default React.memo(FormRadio)

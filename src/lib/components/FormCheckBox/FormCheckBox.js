@@ -17,9 +17,9 @@ const FormCheckBox = ({ children, className, name, label, ...inputProps }) => {
               ...input,
               ...inputProps
             }}
-            id={inputProps.id ?? inputProps.value ?? name}
+            id={inputProps.value ?? name}
           />
-          <label data-testid="value" htmlFor={inputProps.id ?? inputProps.value ?? name}>
+          <label htmlFor={inputProps.value ?? name}>
             {label ? label : ''}
             {children}
           </label>
