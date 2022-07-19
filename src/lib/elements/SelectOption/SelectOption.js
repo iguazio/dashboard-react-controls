@@ -37,9 +37,9 @@ const SelectOption = ({ item, onClick, selectType, selectedId, withSelectedIcon 
       }}
     >
       <div className="data-ellipsis label-row">
-        <div className="select__item__label">
+        <div className="select__item-label">
           {item.icon && (
-            <span data-testid="select-icon" className="select__item__icon">
+            <span data-testid="select-icon" className="select__item-icon">
               {item.icon}
             </span>
           )}
@@ -50,7 +50,7 @@ const SelectOption = ({ item, onClick, selectType, selectedId, withSelectedIcon 
       </div>
       {item.subLabel && (
         <Tooltip
-          className="select__item__sub-label"
+          className="select__item-sub-label"
           template={<TextTooltipTemplate text={item.subLabel} />}
         >
           {item.subLabel}
