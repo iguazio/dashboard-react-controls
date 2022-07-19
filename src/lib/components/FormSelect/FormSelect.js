@@ -149,14 +149,14 @@ const FormSelect = ({
     }
   }
 
-  const isRequired = (value) => {
+  const validateField = (value) => {
     if (required) {
       return value ? undefined : 'Required'
     }
   }
 
   return (
-    <Field name={name} validate={isRequired}>
+    <Field name={name} validate={validateField}>
       {({ input, meta }) => (
         <div
           data-testid="select"
@@ -177,11 +177,6 @@ const FormSelect = ({
               {!hideSelectedOption && (
                 <div data-testid="selected-option" className="form-field__select">
                   <span className="form-field__select-value">{getLabel()}</span>
-                  {selectedOption?.subLabel && (
-                    <span data-testid="select-subLabel" className="form-field__select-sub_label">
-                      {selectedOption.subLabel}
-                    </span>
-                  )}
                 </div>
               )}
             </div>

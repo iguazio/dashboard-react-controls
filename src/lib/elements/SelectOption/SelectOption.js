@@ -33,18 +33,23 @@ const SelectOption = ({ item, name, onClick, multiple, selectedId, withSelectedI
         !item.disabled && onClick(item.id)
       }}
     >
-      {item.icon && (
-        <span data-testid="select-icon" className="select__icon">
-          {item.icon}
-        </span>
-      )}
-      {item.status && <span className={`state-${item.status}-job status`} />}
       <div className="data-ellipsis label-row">
-        <Tooltip template={<TextTooltipTemplate text={item.label} />}>{item.label}</Tooltip>
+        <div className="select__item-label">
+          {item.icon && (
+            <span data-testid="select-icon" className="select__item-icon">
+              {item.icon}
+            </span>
+          )}
+          {item.status && <span className={`state-${item.status}-job status`} />}
+          <Tooltip template={<TextTooltipTemplate text={item.label} />}>{item.label}</Tooltip>
+        </div>
         {withSelectedIcon && item.id === selectedId && <Checkmark className="checkmark" />}
       </div>
       {item.subLabel && (
-        <Tooltip className="sub-label" template={<TextTooltipTemplate text={item.subLabel} />}>
+        <Tooltip
+          className="select__item-sub-label"
+          template={<TextTooltipTemplate text={item.subLabel} />}
+        >
           {item.subLabel}
         </Tooltip>
       )}
