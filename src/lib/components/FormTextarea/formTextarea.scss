@@ -3,11 +3,11 @@
 @import '../../scss/shadows';
 @import '../../scss/mixins';
 
-.form-field.form-field-textarea {
+.form-field-textarea {
   width: 100%;
 
   .form-field {
-    @include formField;
+    @include inputSelectField;
 
     &__wrapper {
       .form-field__control {

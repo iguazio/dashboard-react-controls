@@ -59,7 +59,7 @@ const FormInput = React.forwardRef(
     const inputRef = useRef()
     useDetectOutsideClick(ref, () => setShowValidationRules(false))
 
-    const formFieldClassNames = classNames('form-field form-field-input', className)
+    const formFieldClassNames = classNames('form-field-input', className)
 
     const inputWrapperClassNames = classNames(
       'form-field__wrapper',
@@ -135,7 +135,7 @@ const FormInput = React.forwardRef(
 
       if (
         !event.target.closest('.options-menu') &&
-        !event.target.classList.contains('form-field')
+        !event.target.classList.contains('form-field-input')
       ) {
         setShowValidationRules(false)
       }

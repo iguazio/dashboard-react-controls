@@ -6,7 +6,7 @@ import classNames from 'classnames'
 import './formCheckBox.scss'
 
 const FormCheckBox = ({ children, className, name, label, ...inputProps }) => {
-  const formFieldClassNames = classNames('form-field form-field-checkbox', className)
+  const formFieldClassNames = classNames('form-field-checkbox', className)
 
   return (
     <Field name={name} value={inputProps.value} type="checkbox">

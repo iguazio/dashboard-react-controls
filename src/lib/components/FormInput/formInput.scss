@@ -3,11 +3,11 @@
 @import '../../scss/shadows';
 @import '../../scss/mixins';
 
-.form-field.form-field-input {
+.form-field-input {
   width: 100%;
 
   .form-field {
-    @include formField;
+    @include inputSelectField;
 
     &__label {
       &-icon {

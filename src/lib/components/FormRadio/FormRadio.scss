@@ -1,12 +1,15 @@
 @import '../../scss/colors';
+@import '../../scss/mixins';
 
-.form-field.form-field-radio {
+.form-field-radio {
   display: inline-flex;
   align-items: center;
   justify-content: flex-start;
   color: $primary;
 
   input[type='radio'] {
+    @include radioCheckField;
+
     width: 16px;
     height: 16px;
     border-radius: 50%;

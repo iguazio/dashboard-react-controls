@@ -2,11 +2,11 @@
 @import '../../scss/colors';
 @import '../../scss/shadows';
 
-.form-field.form-field-select {
+.form-field-select {
   width: 100%;
 
   .form-field {
-    @include formField;
+    @include inputSelectField;
 
     &__wrapper {
       cursor: pointer;

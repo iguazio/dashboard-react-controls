@@ -6,7 +6,7 @@ import classNames from 'classnames'
 import './FormRadio.scss'
 
 const FormRadio = ({ className, name, label, ...inputProps }) => {
-  const formFieldClassNames = classNames('form-field form-field-radio', className)
+  const formFieldClassNames = classNames('form-field-radio', className)
 
   return (
     <Field name={name} value={inputProps.value} type="radio">

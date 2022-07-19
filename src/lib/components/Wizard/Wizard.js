@@ -16,11 +16,11 @@ import './Wizard.scss'
 const Wizard = ({
   children,
   className,
-  confirmClose,
   formState,
   isWizardOpen,
   onWizardResolve,
   onWizardSubmit,
+  location,
   size,
   title,
   stepsConfig,
@@ -57,7 +57,7 @@ const Wizard = ({
   }
 
   const handleOnClose = () => {
-    if (confirmClose && formState && formState.dirty) {
+    if (formState && formState.dirty) {
       openPopUp(ConfirmDialog, {
         cancelButton: {
           label: 'Cancel',
@@ -124,6 +124,7 @@ const Wizard = ({
       actions={renderModalActions()}
       className={wizardClasses}
       onClose={handleOnClose}
+      location={location}
       show={isWizardOpen}
       size={size}
       title={title}
@@ -149,6 +150,7 @@ Wizard.propsTypes = {
   isWizardOpen: PropTypes.bool.isRequired,
   onWizardResolve: PropTypes.func.isRequired,
   onWizardSubmit: PropTypes.func.isRequired,
+  location: PropTypes.string.isRequired,
   size: MODAL_SIZES,
   title: PropTypes.string.isRequired,
   stepsConfig: WIZARD_STEPS_CONFIG,

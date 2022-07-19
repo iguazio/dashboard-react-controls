@@ -1,12 +1,15 @@
 @import '../../scss/colors';
+@import '../../scss/mixins';
 
-.form-field.form-field-checkbox {
+.form-field-checkbox {
   display: inline-flex;
   align-items: center;
   justify-content: flex-start;
   color: $primary;
 
   input[type='checkbox'] {
+    @include radioCheckField;
+
     width: 18px;
     height: 18px;
     border-radius: 4px;

@@ -33,7 +33,7 @@ const TextArea = React.forwardRef(
     const [isInvalid, setIsInvalid] = useState(false)
     const textAreaRef = React.createRef()
 
-    const formFieldClassNames = classnames('form-field form-field-textarea', className)
+    const formFieldClassNames = classnames('form-field-textarea', className)
     const labelClassNames = classnames(
       'form-field__label',
       disabled && 'form-field__label-disabled'

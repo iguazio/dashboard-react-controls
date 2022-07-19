@@ -89,7 +89,7 @@ const FormSelect = ({
 
   const clickHandler = useCallback(
     (event) => {
-      if (selectRef.current !== event.target.closest('.form-field')) {
+      if (selectRef.current !== event.target.closest('.form-field-select')) {
         closeMenu()
       }
     },
@@ -161,7 +161,7 @@ const FormSelect = ({
         <div
           data-testid="select"
           ref={selectRef}
-          className={`form-field form-field-select ${className}`}
+          className={`form-field-select ${className}`}
           onClick={toggleOpen}
         >
           {label && (
