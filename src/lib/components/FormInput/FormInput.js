@@ -4,6 +4,7 @@ import classNames from 'classnames'
 import { isEmpty } from 'lodash'
 import { Field, useField } from 'react-final-form'
 
+import FormInputRange from '../FormInputRange/FormInputRange'
 import OptionsMenu from '../../elements/OptionsMenu/OptionsMenu'
 import TextTooltipTemplate from '../TooltipTemplate/TextTooltipTemplate'
 import Tip from '../Tip/Tip'
@@ -195,7 +196,7 @@ const FormInput = React.forwardRef(
     }
 
     return (
-      <Field validate={validateField} name={name}>
+      <Field validate={validateField} name={name} value={inputProps.value}>
         {({ input, meta }) => (
           <div ref={ref} className={formFieldClassNames}>
             {label && (
@@ -264,6 +265,14 @@ const FormInput = React.forwardRef(
                   </span>
                 )}
               </div>
+              {inputProps.type === 'number' && (
+                <FormInputRange
+                  {...{ ...inputProps, ...input, disabled }}
+                  onBlur={handleInputBlur}
+                  onChange={handleInputChange}
+                  onFocus={handleInputFocus}
+                />
+              )}
             </div>
             {suggestionList?.length > 0 && isFocused && (
               <ul className="form-field__suggestion-list">
@@ -308,8 +317,8 @@ FormInput.defaultProps = {
   invalidText: 'This field is invalid',
   label: '',
   link: { show: '', value: '' },
-  maxLength: null,
   min: null,
+  max: null,
   onBlur: () => {},
   onChange: () => {},
   onKeyDown: () => {},
@@ -336,8 +345,8 @@ FormInput.propTypes = {
   invalidText: PropTypes.string,
   label: PropTypes.string,
   link: INPUT_LINK,
-  maxLength: PropTypes.number,
-  min: PropTypes.number,
+  min: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  max: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   name: PropTypes.string.isRequired,
   onBlur: PropTypes.func,
   onChange: PropTypes.func,
