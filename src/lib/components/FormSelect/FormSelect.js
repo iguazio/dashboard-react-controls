@@ -54,7 +54,7 @@ const FormSelect = ({
     disabled && 'form-field__label-disabled'
   )
 
-  const selectedOption = options.find((option) => option.id === input.value)
+  const selectedOption = options.find((option) => (option.id || option.value) === input.value)
 
   const getLabel = () => {
     if (!input.value || !input.value.length) {
@@ -63,7 +63,10 @@ const FormSelect = ({
     return !multiple
       ? selectedOption?.label
       : input.value.length <= 2
-      ? input.value.join(', ')
+      ? options
+          .filter((option) => input.value.includes(option.value || option.id))
+          .map((option) => option.label)
+          .join(', ')
       : `${input.value.length} items selected`
   }
 
@@ -266,7 +269,7 @@ const FormSelect = ({
                     return (
                       <SelectOption
                         item={option}
-                        key={option.id}
+                        key={option.id ?? option.value ?? name}
                         name={name}
                         onClick={(selectedOption) => {
                           handleSelectOptionClick(selectedOption, option)

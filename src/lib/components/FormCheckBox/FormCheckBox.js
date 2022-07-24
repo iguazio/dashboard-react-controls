@@ -5,7 +5,7 @@ import classNames from 'classnames'
 
 import './formCheckBox.scss'
 
-const FormCheckBox = ({ children, className, name, label, ...inputProps }) => {
+const FormCheckBox = ({ children, className, name, ...inputProps }) => {
   const formFieldClassNames = classNames('form-field-checkbox', className)
 
   return (
@@ -20,7 +20,7 @@ const FormCheckBox = ({ children, className, name, label, ...inputProps }) => {
             id={inputProps.value ?? name}
           />
           <label htmlFor={inputProps.value ?? name}>
-            {label ? label : ''}
+            {inputProps.label && inputProps.label}
             {children}
           </label>
         </div>
@@ -30,14 +30,12 @@ const FormCheckBox = ({ children, className, name, label, ...inputProps }) => {
 }
 
 FormCheckBox.defaultProps = {
-  className: '',
-  label: ''
+  className: ''
 }
 
 FormCheckBox.propTypes = {
   className: PropTypes.string,
-  name: PropTypes.string.isRequired,
-  label: PropTypes.string
+  name: PropTypes.string.isRequired
 }
 
 export default React.memo(FormCheckBox)

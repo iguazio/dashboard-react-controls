@@ -54,8 +54,8 @@ export const SELECT_OPTION = PropTypes.shape({
   disabled: PropTypes.bool,
   hidden: PropTypes.bool,
   icon: PropTypes.element,
-  id: PropTypes.string.isRequired,
-  label: PropTypes.string.isRequired,
+  id: PropTypes.string,
+  label: PropTypes.string,
   status: PropTypes.string,
   subLabel: PropTypes.string
 })
