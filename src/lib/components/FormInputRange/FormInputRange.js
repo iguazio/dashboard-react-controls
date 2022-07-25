@@ -39,7 +39,7 @@ const FormInputRange = ({ disabled, min, max, onChange, step, value }) => {
 
     if (inputValue <= 0 || inputValue <= min) return
 
-    const value = isCurrentValueEmpty() ? -step : +inputValue - step
+    const value = isCurrentValueEmpty() ? -step : +inputValue - +step
     const nextValue = isInteger(value) ? value : value.toFixed(3)
 
     setInputValue(String(nextValue))
@@ -88,22 +88,18 @@ const FormInputRange = ({ disabled, min, max, onChange, step, value }) => {
 }
 
 FormInputRange.defaultProps = {
-  className: '',
   disabled: false,
-  invalid: false,
-  label: '',
-  step: '1',
-  required: false
+  min: null,
+  max: null,
+  step: '1'
 }
 
 FormInputRange.propTypes = {
-  className: PropTypes.string,
   disabled: PropTypes.bool,
-  invalid: PropTypes.bool,
-  label: PropTypes.string,
+  min: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  max: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   onChange: PropTypes.func.isRequired,
   step: PropTypes.string,
-  required: PropTypes.bool,
   value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired
 }
 

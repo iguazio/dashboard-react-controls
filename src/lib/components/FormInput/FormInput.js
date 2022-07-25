@@ -266,12 +266,7 @@ const FormInput = React.forwardRef(
                 )}
               </div>
               {inputProps.type === 'number' && (
-                <FormInputRange
-                  {...{ ...inputProps, ...input, disabled }}
-                  onBlur={handleInputBlur}
-                  onChange={handleInputChange}
-                  onFocus={handleInputFocus}
-                />
+                <FormInputRange {...{ ...inputProps, ...input, disabled }} />
               )}
             </div>
             {suggestionList?.length > 0 && isFocused && (
@@ -325,7 +320,7 @@ FormInput.defaultProps = {
   pattern: null,
   placeholder: '',
   required: false,
-  step: '',
+  step: '1',
   suggestionList: [],
   tip: '',
   type: 'text',
