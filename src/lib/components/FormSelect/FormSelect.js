@@ -54,7 +54,7 @@ const FormSelect = ({
     disabled && 'form-field__label-disabled'
   )
 
-  const selectedOption = options.find((option) => (option.id || option.value) === input.value)
+  const selectedOption = options.find((option) => option.id === input.value)
 
   const getLabel = () => {
     if (!input.value || !input.value.length) {
@@ -64,7 +64,7 @@ const FormSelect = ({
       ? selectedOption?.label
       : input.value.length <= 2
       ? options
-          .filter((option) => input.value.includes(option.value || option.id))
+          .filter((option) => input.value.includes(option.id))
           .map((option) => option.label)
           .join(', ')
       : `${input.value.length} items selected`
@@ -269,7 +269,7 @@ const FormSelect = ({
                     return (
                       <SelectOption
                         item={option}
-                        key={option.id ?? option.value ?? name}
+                        key={option.id}
                         name={name}
                         onClick={(selectedOption) => {
                           handleSelectOptionClick(selectedOption, option)
@@ -296,7 +296,6 @@ FormSelect.defaultProps = {
   disabled: false,
   hideSelectedOption: false,
   label: '',
-  labelAtTop: false,
   onClick: null,
   search: false,
   multiple: false,
@@ -310,7 +309,6 @@ FormSelect.propTypes = {
   disabled: PropTypes.bool,
   hideSelectedOption: PropTypes.bool,
   label: PropTypes.string,
-  labelAtTop: PropTypes.bool,
   name: PropTypes.string.isRequired,
   onClick: PropTypes.oneOfType([PropTypes.func, PropTypes.bool]),
   options: SELECT_OPTIONS.isRequired,
