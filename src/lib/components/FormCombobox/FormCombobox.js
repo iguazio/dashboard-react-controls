@@ -220,6 +220,7 @@ const FormCombobox = ({
       onBlur && onBlur(input.value)
     } else {
       setShowSuggestionList(false)
+      setShowValidationRules(false)
       setDropdownStyle({
         left: '0',
         paddingTop: '10px'
@@ -256,6 +257,11 @@ const FormCombobox = ({
     }
 
     return validationError
+  }
+
+  const warningIconClick = () => {
+    setShowValidationRules((state) => !state)
+    setShowSelectDropdown(false)
   }
 
   const comboboxClassNames = classnames(
@@ -380,10 +386,7 @@ const FormCombobox = ({
             </div>
             <div className="form-field__icons">
               {isInvalid && Array.isArray(meta.error) && (
-                <button
-                  className="form-field__warning"
-                  onClick={() => setShowValidationRules((state) => !state)}
-                >
+                <button className="form-field__warning" onClick={warningIconClick}>
                   <WarningIcon />
                 </button>
               )}
