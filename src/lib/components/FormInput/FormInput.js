@@ -166,6 +166,9 @@ const FormInput = React.forwardRef(
 
     const validateField = (value) => {
       const valueToValidate = value ?? ''
+
+      if (!valueToValidate && !required) return
+
       let validationError = null
 
       if (!isEmpty(validationRules)) {
