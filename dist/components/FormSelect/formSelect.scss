@@ -2,25 +2,23 @@
 @import '../../scss/colors';
 @import '../../scss/shadows';
 
-.form-field.form-field-select {
+.form-field-select {
   width: 100%;
 
   .form-field {
-    @include formField;
+    @include inputSelectField;
 
     &__wrapper {
+      cursor: pointer;
+
       &-active {
         background: $alabaster;
       }
 
-      .form-field__caret {
-        cursor: pointer;
-      }
-
       &-disabled {
-        .form-field__caret {
-          cursor: not-allowed;
+        cursor: not-allowed;
 
+        .form-field__caret {
           path {
             fill: $spunPearl;
           }
@@ -47,6 +45,7 @@
 
       &-value {
         display: block;
+        font-size: 15px;
         overflow: hidden;
         white-space: nowrap;
         text-overflow: ellipsis;
@@ -54,7 +53,7 @@
 
       &-sub_label {
         display: block;
-        margin-left: 5px;
+        margin-left: 10px;
         overflow: hidden;
         color: $topaz;
         white-space: nowrap;
@@ -67,6 +66,7 @@
     .pop-up-dialog {
       width: 100%;
       padding: 0;
+      border-radius: 0;
 
       &__header {
         display: none;
@@ -80,7 +80,7 @@
         color: $mulledWineTwo;
         background-color: $white;
         border: $primaryBorder;
-        border-radius: 2px;
+        border-radius: 4px;
         box-shadow: $filterShadow;
       }
 

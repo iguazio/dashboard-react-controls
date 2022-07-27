@@ -17,6 +17,8 @@ var _lodash = require("lodash");
 
 var _reactFinalForm = require("react-final-form");
 
+var _InputNumberButtons = _interopRequireDefault(require("./InputNumberButtons/InputNumberButtons"));
+
 var _OptionsMenu = _interopRequireDefault(require("../../elements/OptionsMenu/OptionsMenu"));
 
 var _TextTooltipTemplate = _interopRequireDefault(require("../TooltipTemplate/TextTooltipTemplate"));
@@ -136,7 +138,7 @@ var FormInput = /*#__PURE__*/_react.default.forwardRef(function (_ref, ref) {
   (0, _useDetectOutsideClick.useDetectOutsideClick)(ref, function () {
     return setShowValidationRules(false);
   });
-  var formFieldClassNames = (0, _classnames.default)('form-field form-field-input', className);
+  var formFieldClassNames = (0, _classnames.default)('form-field-input', className);
   var inputWrapperClassNames = (0, _classnames.default)('form-field__wrapper', "form-field__wrapper-".concat(density), disabled && 'form-field__wrapper-disabled', isInvalid && 'form-field__wrapper-invalid', withoutBorder && 'without-border');
   var labelClassNames = (0, _classnames.default)('form-field__label', disabled && 'form-field__label-disabled');
   (0, _react.useEffect)(function () {
@@ -189,11 +191,6 @@ var FormInput = /*#__PURE__*/_react.default.forwardRef(function (_ref, ref) {
     }
   };
 
-  var handleInputChange = function handleInputChange(event) {
-    input.onChange(event);
-    onChange && onChange(event.target.value);
-  };
-
   var handleInputFocus = function handleInputFocus(event) {
     input.onFocus(event);
     setIsFocused(true);
@@ -202,7 +199,7 @@ var FormInput = /*#__PURE__*/_react.default.forwardRef(function (_ref, ref) {
   var handleScroll = function handleScroll(event) {
     if (inputRef.current.contains(event.target)) return;
 
-    if (!event.target.closest('.options-menu') && !event.target.classList.contains('form-field')) {
+    if (!event.target.closest('.options-menu') && !event.target.classList.contains('form-field-input')) {
       setShowValidationRules(false);
     }
   };
@@ -231,7 +228,8 @@ var FormInput = /*#__PURE__*/_react.default.forwardRef(function (_ref, ref) {
   }, [meta.error]);
 
   var validateField = function validateField(value) {
-    var valueToValidate = value !== null && value !== void 0 ? value : '';
+    var valueToValidate = (0, _lodash.isNil)(value) ? '' : String(value);
+    if (!valueToValidate && !required) return;
     var validationError = null;
 
     if (!(0, _lodash.isEmpty)(validationRules)) {
@@ -255,6 +253,22 @@ var FormInput = /*#__PURE__*/_react.default.forwardRef(function (_ref, ref) {
     }
 
     if ((0, _lodash.isEmpty)(validationError)) {
+      if (inputProps.type === 'number') {
+        if (inputProps.max && +valueToValidate > +inputProps.max) {
+          validationError = {
+            name: 'maxValue',
+            label: "Max value is ".concat(inputProps.max)
+          };
+        }
+
+        if (inputProps.min && +valueToValidate < +inputProps.min) {
+          validationError = {
+            name: 'minValue',
+            label: "Min value is ".concat(inputProps.min)
+          };
+        }
+      }
+
       if (pattern && !validationPattern.test(valueToValidate)) {
         validationError = {
           name: 'pattern',
@@ -280,9 +294,15 @@ var FormInput = /*#__PURE__*/_react.default.forwardRef(function (_ref, ref) {
     return validationError;
   };
 
+  var parseField = function parseField(val) {
+    if (!val) return;
+    return inputProps.type === 'number' ? +val : val;
+  };
+
   return /*#__PURE__*/(0, _jsxRuntime.jsx)(_reactFinalForm.Field, {
     validate: validateField,
     name: name,
+    parse: parseField,
     children: function children(_ref4) {
       var _inputProps$autocompl, _meta$error$label, _meta$error;
 
@@ -333,7 +353,6 @@ var FormInput = /*#__PURE__*/_react.default.forwardRef(function (_ref, ref) {
               pattern: pattern
             }, inputProps), input)), {}, {
               autoComplete: (_inputProps$autocompl = inputProps.autocomplete) !== null && _inputProps$autocompl !== void 0 ? _inputProps$autocompl : 'off',
-              onChange: handleInputChange,
               onBlur: handleInputBlur,
               onFocus: handleInputFocus
             }))
@@ -358,7 +377,9 @@ var FormInput = /*#__PURE__*/_react.default.forwardRef(function (_ref, ref) {
               className: iconClass,
               children: inputIcon
             })]
-          })]
+          }), inputProps.type === 'number' && /*#__PURE__*/(0, _jsxRuntime.jsx)(_InputNumberButtons.default, _objectSpread({}, _objectSpread(_objectSpread(_objectSpread({}, inputProps), input), {}, {
+            disabled: disabled
+          })))]
         }), (suggestionList === null || suggestionList === void 0 ? void 0 : suggestionList.length) > 0 && isFocused && /*#__PURE__*/(0, _jsxRuntime.jsx)("ul", {
           className: "form-field__suggestion-list",
           children: suggestionList.map(function (item, index) {
@@ -398,15 +419,15 @@ FormInput.defaultProps = {
     show: '',
     value: ''
   },
-  maxLength: null,
   min: null,
+  max: null,
   onBlur: function onBlur() {},
   onChange: function onChange() {},
   onKeyDown: function onKeyDown() {},
   pattern: null,
   placeholder: '',
   required: false,
-  step: '',
+  step: '1',
   suggestionList: [],
   tip: '',
   type: 'text',
@@ -425,8 +446,8 @@ FormInput.propTypes = {
   invalidText: _propTypes.default.string,
   label: _propTypes.default.string,
   link: _types.INPUT_LINK,
-  maxLength: _propTypes.default.number,
-  min: _propTypes.default.number,
+  min: _propTypes.default.oneOfType([_propTypes.default.string, _propTypes.default.number]),
+  max: _propTypes.default.oneOfType([_propTypes.default.string, _propTypes.default.number]),
   name: _propTypes.default.string.isRequired,
   onBlur: _propTypes.default.func,
   onChange: _propTypes.default.func,

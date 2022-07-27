@@ -67,11 +67,12 @@ var FormSelect = function FormSelect(_ref) {
       disabled = _ref.disabled,
       hideSelectedOption = _ref.hideSelectedOption,
       label = _ref.label,
+      multiple = _ref.multiple,
       name = _ref.name,
       onChange = _ref.onChange,
       options = _ref.options,
+      required = _ref.required,
       search = _ref.search,
-      selectType = _ref.selectType,
       selectedItemAction = _ref.selectedItemAction,
       withoutBorder = _ref.withoutBorder,
       withSelectedIcon = _ref.withSelectedIcon;
@@ -110,6 +111,19 @@ var FormSelect = function FormSelect(_ref) {
   var selectedOption = options.find(function (option) {
     return option.id === input.value;
   });
+
+  var getLabel = function getLabel() {
+    if (!input.value || !input.value.length) {
+      return "Select Option".concat(multiple ? 's' : '');
+    }
+
+    return !multiple ? selectedOption === null || selectedOption === void 0 ? void 0 : selectedOption.label : input.value.length <= 2 ? options.filter(function (option) {
+      return input.value.includes(option.id);
+    }).map(function (option) {
+      return option.label;
+    }).join(', ') : "".concat(input.value.length, " items selected");
+  };
+
   (0, _react.useEffect)(function () {
     setIsInvalid(meta.invalid && (meta.validating || meta.modified || meta.submitFailed && meta.touched));
   }, [meta.invalid, meta.modified, meta.submitFailed, meta.touched, meta.validating]);
@@ -126,7 +140,7 @@ var FormSelect = function FormSelect(_ref) {
     }
   }, [input, isOpen]);
   var clickHandler = (0, _react.useCallback)(function (event) {
-    if (selectRef.current !== event.target.closest('.form-field')) {
+    if (selectRef.current !== event.target.closest('.form-field-select')) {
       closeMenu();
     }
   }, [closeMenu]);
@@ -157,12 +171,13 @@ var FormSelect = function FormSelect(_ref) {
 
   var handleCloseSelectBody = (0, _react.useCallback)(function (event) {
     event.stopPropagation();
+    if (multiple) return;
 
     if (!event.target.classList.contains('disabled') && !event.target.closest('.options-list__search')) {
       closeMenu();
       setSearchValue('');
     }
-  }, [closeMenu]);
+  }, [closeMenu, multiple]);
 
   var handleSelectOptionClick = function handleSelectOptionClick(selectedOption, option) {
     if (selectedOption !== input.value) {
@@ -172,20 +187,22 @@ var FormSelect = function FormSelect(_ref) {
     }
   };
 
-  var required = function required(value) {
-    return value ? undefined : 'Required';
+  var validateField = function validateField(value) {
+    if (required) {
+      return value ? undefined : 'Required';
+    }
   };
 
   return /*#__PURE__*/(0, _jsxRuntime.jsx)(_reactFinalForm.Field, {
     name: name,
-    validate: required,
+    validate: validateField,
     children: function children(_ref3) {
       var input = _ref3.input,
           meta = _ref3.meta;
       return /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
         "data-testid": "select",
         ref: selectRef,
-        className: "form-field form-field-select ".concat(className),
+        className: "form-field-select ".concat(className),
         onClick: toggleOpen,
         children: [label && /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
           className: selectLabelClassName,
@@ -201,17 +218,13 @@ var FormSelect = function FormSelect(_ref) {
           className: selectWrapperClassNames,
           children: [/*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
             className: "form-field__control",
-            children: !hideSelectedOption && /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
+            children: !hideSelectedOption && /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
               "data-testid": "selected-option",
               className: "form-field__select",
-              children: [/*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
+              children: /*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
                 className: "form-field__select-value",
-                children: input.value && (selectedOption === null || selectedOption === void 0 ? void 0 : selectedOption.label)
-              }), (selectedOption === null || selectedOption === void 0 ? void 0 : selectedOption.subLabel) && /*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
-                "data-testid": "select-subLabel",
-                className: "form-field__select-sub_label",
-                children: selectedOption.subLabel
-              })]
+                children: getLabel()
+              })
             })
           }), /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
             className: "form-field__icons",
@@ -291,11 +304,12 @@ var FormSelect = function FormSelect(_ref) {
             }).map(function (option) {
               return /*#__PURE__*/(0, _jsxRuntime.jsx)(_SelectOption.default, {
                 item: option,
+                name: name,
                 onClick: function onClick(selectedOption) {
                   handleSelectOptionClick(selectedOption, option);
                 },
-                selectType: selectType,
-                selectedId: input.value,
+                multiple: multiple,
+                selectedId: !multiple ? input.value : '',
                 withSelectedIcon: withSelectedIcon
               }, option.id);
             })]
@@ -314,10 +328,9 @@ FormSelect.defaultProps = {
   disabled: false,
   hideSelectedOption: false,
   label: '',
-  labelAtTop: false,
   onClick: null,
   search: false,
-  selectType: '',
+  multiple: false,
   withoutBorder: false,
   withSelectedIcon: true
 };
@@ -327,12 +340,11 @@ FormSelect.propTypes = {
   disabled: _propTypes.default.bool,
   hideSelectedOption: _propTypes.default.bool,
   label: _propTypes.default.string,
-  labelAtTop: _propTypes.default.bool,
   name: _propTypes.default.string.isRequired,
   onClick: _propTypes.default.oneOfType([_propTypes.default.func, _propTypes.default.bool]),
   options: _types.SELECT_OPTIONS.isRequired,
   search: _propTypes.default.bool,
-  selectType: _propTypes.default.string,
+  multiple: _propTypes.default.bool,
   withoutBorder: _propTypes.default.bool,
   withSelectedIcon: _propTypes.default.bool
 };

@@ -13,11 +13,11 @@ var _reactFinalForm = require("react-final-form");
 
 var _classnames = _interopRequireDefault(require("classnames"));
 
-require("./formCheckBox.scss");
+require("./FormRadio.scss");
 
 var _jsxRuntime = require("react/jsx-runtime");
 
-var _excluded = ["children", "className", "name", "label"];
+var _excluded = ["className", "name", "label"];
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -31,45 +31,42 @@ function _objectWithoutProperties(source, excluded) { if (source == null) return
 
 function _objectWithoutPropertiesLoose(source, excluded) { if (source == null) return {}; var target = {}; var sourceKeys = Object.keys(source); var key, i; for (i = 0; i < sourceKeys.length; i++) { key = sourceKeys[i]; if (excluded.indexOf(key) >= 0) continue; target[key] = source[key]; } return target; }
 
-var FormCheckBox = function FormCheckBox(_ref) {
-  var _children = _ref.children,
-      className = _ref.className,
+var FormRadio = function FormRadio(_ref) {
+  var className = _ref.className,
       name = _ref.name,
       label = _ref.label,
       inputProps = _objectWithoutProperties(_ref, _excluded);
 
-  var formFieldClassNames = (0, _classnames.default)('form-field-checkbox', className);
+  var formFieldClassNames = (0, _classnames.default)('form-field-radio', className);
   return /*#__PURE__*/(0, _jsxRuntime.jsx)(_reactFinalForm.Field, {
     name: name,
     value: inputProps.value,
-    type: "checkbox",
+    type: "radio",
     children: function children(_ref2) {
-      var _inputProps$value, _inputProps$value2;
-
       var input = _ref2.input;
       return /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
         className: formFieldClassNames,
         children: [/*#__PURE__*/(0, _jsxRuntime.jsx)("input", _objectSpread(_objectSpread({}, _objectSpread(_objectSpread({}, input), inputProps)), {}, {
-          id: (_inputProps$value = inputProps.value) !== null && _inputProps$value !== void 0 ? _inputProps$value : name
-        })), /*#__PURE__*/(0, _jsxRuntime.jsxs)("label", {
-          htmlFor: (_inputProps$value2 = inputProps.value) !== null && _inputProps$value2 !== void 0 ? _inputProps$value2 : name,
-          children: [label ? label : '', _children]
+          id: inputProps.value
+        })), /*#__PURE__*/(0, _jsxRuntime.jsx)("label", {
+          htmlFor: inputProps.value,
+          children: label
         })]
       });
     }
   });
 };
 
-FormCheckBox.defaultProps = {
+FormRadio.defaultProps = {
   className: '',
   label: ''
 };
-FormCheckBox.propTypes = {
+FormRadio.propTypes = {
   className: _propTypes.default.string,
   name: _propTypes.default.string.isRequired,
-  label: _propTypes.default.string
+  label: _propTypes.default.string.isRequired
 };
 
-var _default = /*#__PURE__*/_react.default.memo(FormCheckBox);
+var _default = /*#__PURE__*/_react.default.memo(FormRadio);
 
 exports.default = _default;

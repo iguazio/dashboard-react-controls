@@ -58,11 +58,11 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var Wizard = function Wizard(_ref) {
   var children = _ref.children,
       className = _ref.className,
-      confirmClose = _ref.confirmClose,
       formState = _ref.formState,
       isWizardOpen = _ref.isWizardOpen,
       onWizardResolve = _ref.onWizardResolve,
       onWizardSubmit = _ref.onWizardSubmit,
+      location = _ref.location,
       size = _ref.size,
       title = _ref.title,
       stepsConfig = _ref.stepsConfig,
@@ -109,7 +109,7 @@ var Wizard = function Wizard(_ref) {
   };
 
   var handleOnClose = function handleOnClose() {
-    if (confirmClose && formState && formState.dirty) {
+    if (formState && formState.dirty) {
       (0, _common.openPopUp)(_ConfirmDialog.default, {
         cancelButton: {
           label: 'Cancel',
@@ -177,6 +177,7 @@ var Wizard = function Wizard(_ref) {
     actions: renderModalActions(),
     className: wizardClasses,
     onClose: handleOnClose,
+    location: location,
     show: isWizardOpen,
     size: size,
     title: title,
@@ -205,6 +206,7 @@ Wizard.propsTypes = {
   isWizardOpen: _propTypes.default.bool.isRequired,
   onWizardResolve: _propTypes.default.func.isRequired,
   onWizardSubmit: _propTypes.default.func.isRequired,
+  location: _propTypes.default.string.isRequired,
   size: _types.MODAL_SIZES,
   title: _propTypes.default.string.isRequired,
   stepsConfig: _types.WIZARD_STEPS_CONFIG,

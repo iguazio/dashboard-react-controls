@@ -3,11 +3,11 @@
 @import '../../scss/shadows';
 @import '../../scss/mixins';
 
-.form-field.form-field-input {
+.form-field-input {
   width: 100%;
 
   .form-field {
-    @include formField;
+    @include inputSelectField;
 
     &__label {
       &-icon {
@@ -55,6 +55,16 @@
           cursor: pointer;
         }
       }
+    }
+  }
+
+  input[type='number'] {
+    border: none;
+    -moz-appearance: textfield;
+
+    &::-webkit-outer-spin-button,
+    &::-webkit-inner-spin-button {
+      -webkit-appearance: none;
     }
   }
 }

@@ -80,7 +80,7 @@ var TextArea = /*#__PURE__*/_react.default.forwardRef(function (_ref, ref) {
 
   var textAreaRef = /*#__PURE__*/_react.default.createRef();
 
-  var formFieldClassNames = (0, _classnames.default)('form-field form-field-textarea', className);
+  var formFieldClassNames = (0, _classnames.default)('form-field-textarea', className);
   var labelClassNames = (0, _classnames.default)('form-field__label', disabled && 'form-field__label-disabled');
   var textAreaClassNames = (0, _classnames.default)('form-field__wrapper', disabled && 'form-field__wrapper-disabled', isInvalid && 'form-field__wrapper-invalid', withoutBorder && 'without-border');
   (0, _react.useEffect)(function () {

@@ -2,29 +2,29 @@
 @import '../../scss/mixins';
 
 .select {
-  &__icon {
-    display: flex;
-    margin-right: 10px;
-  }
-
   &__item {
-    display: flex;
-    align-items: center;
     width: 100%;
-    height: 49px;
-    padding: 0 15px;
+    min-height: 49px;
+    padding: 16px 15px;
+
+    &.multiple {
+      padding: 0 15px;
+      min-height: 0;
+
+      input[type='checkbox'] ~ label {
+        padding-top: 16px;
+        padding-bottom: 16px;
+      }
+    }
 
     &.hidden {
       display: none;
     }
 
-    .checkbox {
+    .form-field-checkbox {
       flex: 1;
       height: 100%;
-
-      svg {
-        margin: 0;
-      }
+      width: 100%;
     }
 
     &:hover {
@@ -48,6 +48,23 @@
       align-items: center;
       justify-content: space-between;
       width: 100%;
+    }
+
+    &-label {
+      display: flex;
+      flex-flow: row nowrap;
+      align-items: center;
+      justify-content: flex-start;
+      flex: 1;
+    }
+
+    &-sub-label {
+      margin-top: 5px;
+    }
+
+    &-icon {
+      display: flex;
+      margin-right: 10px;
     }
 
     .checkmark {

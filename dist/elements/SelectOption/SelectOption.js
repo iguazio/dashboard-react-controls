@@ -25,23 +25,24 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var SelectOption = function SelectOption(_ref) {
   var item = _ref.item,
+      name = _ref.name,
       _onClick = _ref.onClick,
-      selectType = _ref.selectType,
+      multiple = _ref.multiple,
       selectedId = _ref.selectedId,
       withSelectedIcon = _ref.withSelectedIcon;
-  var selectClassName = (0, _classnames.default)('select__item', item.hidden && 'hidden', item.disabled && 'disabled');
+  var selectClassName = (0, _classnames.default)('select__item', multiple && 'multiple', item.hidden && 'hidden', item.disabled && 'disabled');
 
-  if (selectType === 'checkbox') {
+  if (multiple) {
     return /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
       "data-testid": "select-checkbox",
-      className: "select__item",
-      children: /*#__PURE__*/(0, _jsxRuntime.jsxs)(_components.FormCheckBox, {
-        item: item,
-        selectedId: selectedId,
-        onChange: _onClick,
-        children: [item.status && /*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
+      className: selectClassName,
+      children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_components.FormCheckBox, {
+        name: name,
+        value: item.id,
+        label: item.label,
+        children: item.status && /*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
           className: "state-".concat(item.status, "-job status")
-        }), item.label]
+        })
       })
     });
   }
@@ -52,24 +53,27 @@ var SelectOption = function SelectOption(_ref) {
     onClick: function onClick() {
       !item.disabled && _onClick(item.id);
     },
-    children: [item.icon && /*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
-      "data-testid": "select-icon",
-      className: "select__icon",
-      children: item.icon
-    }), item.status && /*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
-      className: "state-".concat(item.status, "-job status")
-    }), /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
+    children: [/*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
       className: "data-ellipsis label-row",
-      children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_components.Tooltip, {
-        template: /*#__PURE__*/(0, _jsxRuntime.jsx)(_components.TextTooltipTemplate, {
-          text: item.label
-        }),
-        children: item.label
+      children: [/*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
+        className: "select__item-label",
+        children: [item.icon && /*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
+          "data-testid": "select-icon",
+          className: "select__item-icon",
+          children: item.icon
+        }), item.status && /*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
+          className: "state-".concat(item.status, "-job status")
+        }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_components.Tooltip, {
+          template: /*#__PURE__*/(0, _jsxRuntime.jsx)(_components.TextTooltipTemplate, {
+            text: item.label
+          }),
+          children: item.label
+        })]
       }), withSelectedIcon && item.id === selectedId && /*#__PURE__*/(0, _jsxRuntime.jsx)(_checkmark.ReactComponent, {
         className: "checkmark"
       })]
     }), item.subLabel && /*#__PURE__*/(0, _jsxRuntime.jsx)(_components.Tooltip, {
-      className: "sub-label",
+      className: "select__item-sub-label",
       template: /*#__PURE__*/(0, _jsxRuntime.jsx)(_components.TextTooltipTemplate, {
         text: item.subLabel
       }),
@@ -80,14 +84,15 @@ var SelectOption = function SelectOption(_ref) {
 
 SelectOption.defaultProps = {
   onClick: function onClick() {},
-  selectType: '',
+  multiple: false,
   withSelectedIcon: true
 };
 SelectOption.propTypes = {
   disabled: _propTypes.default.bool,
+  name: _propTypes.default.string.isRequired,
   item: _types.SELECT_OPTION.isRequired,
   onClick: _propTypes.default.func,
-  selectType: _propTypes.default.string,
+  multiple: _propTypes.default.bool,
   selectedId: _propTypes.default.string,
   withSelectedIcon: _propTypes.default.bool
 };

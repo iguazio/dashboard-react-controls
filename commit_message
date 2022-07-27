@@ -1,7 +1,11 @@
 
 
-Create a new dist version 0.0.11
+Create a new dist version 0.0.12
 
 Collecting:
-- Fix [Modal] on navigation back (#28)
-- Fix [Modal] remove create portal (#27)
+- Fix [Select] display label and sub-label (#31)
+- Impl [UI] new Form Checkbox and radio fields (#30)
+- Fix [Select] remove capitalize label (#35)
+- Impl [FormInput] new range by type number (#36)
+- Fix [Form select] show label instead of value (#37)
+- Fix css and input validation (#39)

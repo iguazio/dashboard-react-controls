@@ -33,6 +33,12 @@ Object.defineProperty(exports, "FormKeyValueTable", {
     return _FormKeyValueTable.default;
   }
 });
+Object.defineProperty(exports, "FormRadio", {
+  enumerable: true,
+  get: function get() {
+    return _FormRadio.default;
+  }
+});
 Object.defineProperty(exports, "FormSelect", {
   enumerable: true,
   get: function get() {
@@ -97,6 +103,8 @@ var _FormCheckBox = _interopRequireDefault(require("./FormCheckBox/FormCheckBox"
 var _FormInput = _interopRequireDefault(require("./FormInput/FormInput"));
 
 var _FormKeyValueTable = _interopRequireDefault(require("./FormKeyValueTable/FormKeyValueTable"));
+
+var _FormRadio = _interopRequireDefault(require("./FormRadio/FormRadio"));
 
 var _FormSelect = _interopRequireDefault(require("./FormSelect/FormSelect"));
 

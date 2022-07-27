@@ -5,7 +5,7 @@
 .wizard-steps {
   background-color: $white;
   min-width: 260px;
-  margin-right: 1rem;
+  margin-right: 2rem;
 
   &__indicator {
     display: inline-flex;
@@ -18,7 +18,7 @@
     height: 36px;
   }
 
-  &__item:not(:last-child) {
+  & > *:not(:last-child) {
     margin-bottom: 10px;
   }
 
