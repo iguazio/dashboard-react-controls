@@ -1,11 +1,6 @@
 
 
-Create a new dist version 0.0.12
+Create a new dist version 0.0.13
 
 Collecting:
-- Fix [Select] display label and sub-label (#31)
-- Impl [UI] new Form Checkbox and radio fields (#30)
-- Fix [Select] remove capitalize label (#35)
-- Impl [FormInput] new range by type number (#36)
-- Fix [Form select] show label instead of value (#37)
-- Fix css and input validation (#39)
+- Impl [Form] Added form combobox (#38)

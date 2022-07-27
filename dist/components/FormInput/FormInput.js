@@ -212,7 +212,9 @@ var FormInput = /*#__PURE__*/_react.default.forwardRef(function (_ref, ref) {
 
   var toggleValidationRulesMenu = function toggleValidationRulesMenu() {
     inputRef.current.focus();
-    setShowValidationRules(!showValidationRules);
+    setShowValidationRules(function (state) {
+      return !state;
+    });
   };
 
   (0, _react.useEffect)(function () {

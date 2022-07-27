@@ -246,7 +246,8 @@ var validationRules = {
     }), generateRule.required()],
     tag: [generateRule.validCharacters('a-z A-Z 0-9 - _ .'), generateRule.beginEndWith('a-z A-Z 0-9'), generateRule.length({
       max: 56
-    })]
+    })],
+    combobox: [generateRule.required()]
   },
   project: {
     name: [generateRule.validCharacters('a-z 0-9 -'), generateRule.beginWith('a-z'), generateRule.endWith('a-z 0-9'), generateRule.length({

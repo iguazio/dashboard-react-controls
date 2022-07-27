@@ -1,0 +1,102 @@
+@import '../../scss/colors';
+@import '../../scss/borders';
+@import '../../scss/shadows';
+@import '../../scss/mixins';
+
+.form-field.form-field-combobox {
+  width: 100%;
+
+  .form-field {
+    @include formField;
+
+    &__icons {
+      .form-field-combobox__icon {
+        cursor: pointer;
+        padding: 0;
+
+        &_open {
+          transform: rotate(90deg);
+          transform-origin: center center;
+          transition: transform 200ms linear;
+        }
+      }
+    }
+
+    &__label {
+      margin-bottom: 0;
+      font-size: 15px;
+    }
+
+    &-combobox {
+      &__select {
+        flex: unset;
+        padding: 0;
+        max-width: 110px;
+        overflow: visible;
+
+        &-header {
+          display: flex;
+          align-items: center;
+        }
+
+        &-body {
+          top: 35px;
+          max-width: 220px;
+        }
+
+        &_open {
+          .form-field-combobox__select-body {
+            display: block;
+          }
+        }
+      }
+
+      &__dropdown {
+        position: absolute;
+        z-index: 5;
+        display: none;
+        padding: 0;
+        background-color: $white;
+        box-shadow: $previewBoxShadow;
+      }
+
+      &__list {
+        margin: 0;
+        padding: 0;
+        min-width: 140px;
+        list-style-type: none;
+
+        &-option {
+          padding: 8px 15px;
+          word-break: break-all;
+          cursor: pointer;
+
+          &:hover {
+            background-color: $alabaster;
+          }
+        }
+      }
+
+      &__input {
+        padding: 0;
+
+        &-dropdown {
+          top: 40px;
+          max-width: 350px;
+
+          &_visible {
+            display: block;
+          }
+        }
+      }
+      &__search {
+        padding-left: 8px;
+
+        &-wrapper {
+          display: flex;
+          padding: 5px;
+        }
+      }
+    }
+  }
+}

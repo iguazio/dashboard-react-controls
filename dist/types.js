@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.WIZARD_STEPS_CONFIG = exports.SELECT_OPTIONS = exports.SELECT_OPTION = exports.POP_UP_CUSTOM_POSITION = exports.MODAL_SIZES = exports.INPUT_VALIDATION_RULES = exports.INPUT_LINK = exports.CONFIRM_DIALOG_SUBMIT_BUTTON = exports.CONFIRM_DIALOG_CANCEL_BUTTON = exports.BUTTON_VARIANTS = void 0;
+exports.WIZARD_STEPS_CONFIG = exports.SELECT_OPTIONS = exports.SELECT_OPTION = exports.POP_UP_CUSTOM_POSITION = exports.MODAL_SIZES = exports.INPUT_VALIDATION_RULES = exports.INPUT_LINK = exports.CONFIRM_DIALOG_SUBMIT_BUTTON = exports.CONFIRM_DIALOG_CANCEL_BUTTON = exports.COMBOBOX_VALIDATION_RULES = exports.COMBOBOX_SUGGESTION_LIST = exports.COMBOBOX_SELECT_OPTIONS = exports.BUTTON_VARIANTS = void 0;
 
 var _propTypes = _interopRequireDefault(require("prop-types"));
 
@@ -81,3 +81,27 @@ var INPUT_VALIDATION_RULES = _propTypes.default.arrayOf(_propTypes.default.shape
 }));
 
 exports.INPUT_VALIDATION_RULES = INPUT_VALIDATION_RULES;
+
+var COMBOBOX_SUGGESTION_LIST = _propTypes.default.arrayOf(_propTypes.default.shape({
+  customDelimiter: _propTypes.default.string,
+  id: _propTypes.default.string.isRequired,
+  label: _propTypes.default.string.isRequired
+}));
+
+exports.COMBOBOX_SUGGESTION_LIST = COMBOBOX_SUGGESTION_LIST;
+
+var COMBOBOX_VALIDATION_RULES = _propTypes.default.arrayOf(_propTypes.default.shape({
+  name: _propTypes.default.string.isRequired,
+  label: _propTypes.default.string.isRequired,
+  isValid: _propTypes.default.bool
+}));
+
+exports.COMBOBOX_VALIDATION_RULES = COMBOBOX_VALIDATION_RULES;
+
+var COMBOBOX_SELECT_OPTIONS = _propTypes.default.arrayOf(_propTypes.default.shape({
+  className: _propTypes.default.string,
+  id: _propTypes.default.string.isRequired,
+  label: _propTypes.default.string.isRequired
+}));
+
+exports.COMBOBOX_SELECT_OPTIONS = COMBOBOX_SELECT_OPTIONS;

@@ -21,6 +21,12 @@ Object.defineProperty(exports, "FormCheckBox", {
     return _FormCheckBox.default;
   }
 });
+Object.defineProperty(exports, "FormCombobox", {
+  enumerable: true,
+  get: function get() {
+    return _FormCombobox.default;
+  }
+});
 Object.defineProperty(exports, "FormInput", {
   enumerable: true,
   get: function get() {
@@ -123,5 +129,7 @@ var _Tip = _interopRequireDefault(require("./Tip/Tip"));
 var _Tooltip = _interopRequireDefault(require("./Tooltip/Tooltip"));
 
 var _Wizard = _interopRequireDefault(require("./Wizard/Wizard"));
+
+var _FormCombobox = _interopRequireDefault(require("./FormCombobox/FormCombobox"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
