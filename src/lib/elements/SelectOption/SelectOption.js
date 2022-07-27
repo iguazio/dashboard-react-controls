@@ -13,18 +13,20 @@ import './selectOption.scss'
 const SelectOption = ({ item, name, onClick, multiple, selectedId, withSelectedIcon }) => {
   const selectClassName = classnames(
     'select__item',
+    multiple && 'multiple',
     item.hidden && 'hidden',
     item.disabled && 'disabled'
   )
   if (multiple) {
     return (
       <div data-testid="select-checkbox" className={selectClassName}>
-        <FormCheckBox name={name} id={item.id} value={item.id} label={item.label}>
+        <FormCheckBox name={name} value={item.id} label={item.label}>
           {item.status && <span className={`state-${item.status}-job status`} />}
         </FormCheckBox>
       </div>
     )
   }
+
   return (
     <div
       data-testid="select-option"
@@ -65,6 +67,7 @@ SelectOption.defaultProps = {
 
 SelectOption.propTypes = {
   disabled: PropTypes.bool,
+  name: PropTypes.string.isRequired,
   item: SELECT_OPTION.isRequired,
   onClick: PropTypes.func,
   multiple: PropTypes.bool,

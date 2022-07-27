@@ -63,7 +63,10 @@ const FormSelect = ({
     return !multiple
       ? selectedOption?.label
       : input.value.length <= 2
-      ? input.value.join(', ')
+      ? options
+          .filter((option) => input.value.includes(option.id))
+          .map((option) => option.label)
+          .join(', ')
       : `${input.value.length} items selected`
   }
 
@@ -293,7 +296,6 @@ FormSelect.defaultProps = {
   disabled: false,
   hideSelectedOption: false,
   label: '',
-  labelAtTop: false,
   onClick: null,
   search: false,
   multiple: false,
@@ -307,7 +309,6 @@ FormSelect.propTypes = {
   disabled: PropTypes.bool,
   hideSelectedOption: PropTypes.bool,
   label: PropTypes.string,
-  labelAtTop: PropTypes.bool,
   name: PropTypes.string.isRequired,
   onClick: PropTypes.oneOfType([PropTypes.func, PropTypes.bool]),
   options: SELECT_OPTIONS.isRequired,
