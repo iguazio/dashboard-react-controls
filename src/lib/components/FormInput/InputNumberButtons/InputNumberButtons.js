@@ -1,62 +1,35 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
 import { isNil } from 'lodash'
 
 import { ReactComponent as Arrow } from 'igz-controls/images/range-arrow-small.svg'
 
-import './FormInputRange.scss'
+import './InputNumberButtons.scss'
 
-const FormInputRange = ({ disabled, min, max, onChange, step, value }) => {
-  const [inputValue, setInputValue] = useState('')
-
-  useEffect(() => {
-    setInputValue(value)
-  }, [value])
-
+const InputNumberButtons = ({ disabled, min, max, onChange, step, value }) => {
   const handleIncrease = (event) => {
     event.preventDefault()
+    if (max && +value >= +max) return
 
-    if (max && inputValue >= max) return
+    const currentValue = isCurrentValueEmpty() ? +step : +value + +step
+    const nextValue = isInteger(currentValue) ? currentValue : currentValue.toFixed(3)
 
-    const value = isCurrentValueEmpty() ? +step : +inputValue + +step
-    const nextValue = isInteger(value) ? value : value.toFixed(3)
-
-    setInputValue(String(nextValue))
-
-    const modifiedEvent = {
-      ...event,
-      target: {
-        ...event.target,
-        value: String(nextValue)
-      }
-    }
-
-    onChange(modifiedEvent)
+    onChange(nextValue)
   }
 
   const handleDecrease = (event) => {
     event.preventDefault()
 
-    if (inputValue <= 0 || inputValue <= min) return
+    if (value <= 0 || +value <= +min) return
 
-    const value = isCurrentValueEmpty() ? -step : +inputValue - +step
-    const nextValue = isInteger(value) ? value : value.toFixed(3)
+    const currentValue = isCurrentValueEmpty() ? -step : +value - +step
+    const nextValue = isInteger(currentValue) ? currentValue : currentValue.toFixed(3)
 
-    setInputValue(String(nextValue))
-
-    const modifiedEvent = {
-      ...event,
-      target: {
-        ...event.target,
-        value: String(nextValue)
-      }
-    }
-
-    onChange(modifiedEvent)
+    onChange(nextValue)
   }
 
   const isCurrentValueEmpty = () => {
-    return isNil(inputValue) || inputValue === ''
+    return isNil(value) || value === ''
   }
 
   const isInteger = (number) => {
@@ -87,14 +60,14 @@ const FormInputRange = ({ disabled, min, max, onChange, step, value }) => {
   )
 }
 
-FormInputRange.defaultProps = {
+InputNumberButtons.defaultProps = {
   disabled: false,
   min: null,
   max: null,
   step: '1'
 }
 
-FormInputRange.propTypes = {
+InputNumberButtons.propTypes = {
   disabled: PropTypes.bool,
   min: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   max: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
@@ -103,4 +76,4 @@ FormInputRange.propTypes = {
   value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired
 }
 
-export default React.memo(FormInputRange)
+export default React.memo(InputNumberButtons)

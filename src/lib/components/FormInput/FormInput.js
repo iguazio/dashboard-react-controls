@@ -3,8 +3,9 @@ import PropTypes from 'prop-types'
 import classNames from 'classnames'
 import { isEmpty } from 'lodash'
 import { Field, useField } from 'react-final-form'
+import { isNil } from 'lodash'
 
-import FormInputRange from '../FormInputRange/FormInputRange'
+import InputNumberButtons from './InputNumberButtons/InputNumberButtons'
 import OptionsMenu from '../../elements/OptionsMenu/OptionsMenu'
 import TextTooltipTemplate from '../TooltipTemplate/TextTooltipTemplate'
 import Tip from '../Tip/Tip'
@@ -120,12 +121,6 @@ const FormInput = React.forwardRef(
         onBlur && onBlur(event)
       }
     }
-
-    const handleInputChange = (event) => {
-      input.onChange(event)
-      onChange && onChange(event.target.value)
-    }
-
     const handleInputFocus = (event) => {
       input.onFocus(event)
       setIsFocused(true)
@@ -166,7 +161,8 @@ const FormInput = React.forwardRef(
     }, [meta.error])
 
     const validateField = (value) => {
-      const valueToValidate = value ?? ''
+      let valueToValidate = isNil(value) ? '' : String(value)
+
       let validationError = null
 
       if (!isEmpty(validationRules)) {
@@ -179,6 +175,14 @@ const FormInput = React.forwardRef(
       }
 
       if (isEmpty(validationError)) {
+        if (inputProps.type === 'number') {
+          if (inputProps.max && +valueToValidate > +inputProps.max) {
+            validationError = { name: 'maxValue', label: `Max value is ${inputProps.max}` }
+          }
+          if (inputProps.min && +valueToValidate < +inputProps.min) {
+            validationError = { name: 'minValue', label: `Min value is ${inputProps.min}` }
+          }
+        }
         if (pattern && !validationPattern.test(valueToValidate)) {
           validationError = { name: 'pattern', label: invalidText }
         } else if (valueToValidate.startsWith(' ')) {
@@ -195,8 +199,12 @@ const FormInput = React.forwardRef(
       return validationError
     }
 
+    const parseToNumber = (val) => {
+      return inputProps.type === 'number' ? +val : val
+    }
+
     return (
-      <Field validate={validateField} name={name} value={inputProps.value}>
+      <Field validate={validateField} name={name} parse={parseToNumber}>
         {({ input, meta }) => (
           <div ref={ref} className={formFieldClassNames}>
             {label && (
@@ -237,7 +245,6 @@ const FormInput = React.forwardRef(
                     ...input
                   }}
                   autoComplete={inputProps.autocomplete ?? 'off'}
-                  onChange={handleInputChange}
                   onBlur={handleInputBlur}
                   onFocus={handleInputFocus}
                 />
@@ -266,7 +273,7 @@ const FormInput = React.forwardRef(
                 )}
               </div>
               {inputProps.type === 'number' && (
-                <FormInputRange {...{ ...inputProps, ...input, disabled }} />
+                <InputNumberButtons {...{ ...inputProps, ...input, disabled }} />
               )}
             </div>
             {suggestionList?.length > 0 && isFocused && (
