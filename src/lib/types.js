@@ -70,3 +70,19 @@ export const INPUT_VALIDATION_RULES = PropTypes.arrayOf(
     isValid: PropTypes.bool
   })
 )
+
+export const COMBOBOX_SUGGESTION_LIST = PropTypes.arrayOf(
+  PropTypes.shape({
+    customDelimiter: PropTypes.string,
+    id: PropTypes.string.isRequired,
+    label: PropTypes.string.isRequired
+  })
+)
+
+export const COMBOBOX_VALIDATION_RULES = PropTypes.arrayOf(
+  PropTypes.shape({
+    name: PropTypes.string.isRequired,
+    label: PropTypes.string.isRequired,
+    isValid: PropTypes.bool
+  })
+)
