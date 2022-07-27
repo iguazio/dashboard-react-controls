@@ -5,29 +5,32 @@ import classNames from 'classnames'
 
 import './formCheckBox.scss'
 
-const FormCheckBox = ({ children, className, name, label, ...inputProps }) => {
-  const formFieldClassNames = classNames('form-field-checkbox', className)
+const FormCheckBox = React.forwardRef(
+  ({ children, className, name, label, ...inputProps }, ref) => {
+    const formFieldClassNames = classNames('form-field-checkbox', className)
 
-  return (
-    <Field name={name} value={inputProps.value} type="checkbox">
-      {({ input }) => (
-        <div className={formFieldClassNames}>
-          <input
-            {...{
-              ...input,
-              ...inputProps
-            }}
-            id={inputProps.value ?? name}
-          />
-          <label htmlFor={inputProps.value ?? name}>
-            {label ? label : ''}
-            {children}
-          </label>
-        </div>
-      )}
-    </Field>
-  )
-}
+    return (
+      <Field name={name} value={inputProps.value} type="checkbox">
+        {({ input }) => (
+          <div className={formFieldClassNames}>
+            <input
+              {...{
+                ...input,
+                ...inputProps
+              }}
+              id={inputProps.value ?? name}
+              ref={ref}
+            />
+            <label htmlFor={inputProps.value ?? name}>
+              {label ? label : ''}
+              {children}
+            </label>
+          </div>
+        )}
+      </Field>
+    )
+  }
+)
 
 FormCheckBox.defaultProps = {
   className: '',

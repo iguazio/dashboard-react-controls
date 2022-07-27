@@ -1,0 +1,24 @@
+@import '../../scss/colors';
+
+.form-field-checkbox {
+  input[type='checkbox'] {
+    &.partial-select,
+    &:checked.partial-select {
+      background: currentColor;
+
+      &::before {
+        content: '';
+        display: block;
+        position: absolute;
+        top: 6px;
+        left: 3px;
+        width: 10px;
+        height: 0;
+        border-style: solid;
+        border-color: $white;
+        border-width: 2px;
+        transform: rotate(0deg);
+      }
+    }
+  }
+}
