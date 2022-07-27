@@ -200,6 +200,7 @@ const FormInput = React.forwardRef(
     }
 
     const parseToNumber = (val) => {
+      if (!val) return
       return inputProps.type === 'number' ? +val : val
     }
 
