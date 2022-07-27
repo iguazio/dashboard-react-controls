@@ -1,9 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react'
 import PropTypes from 'prop-types'
 import classNames from 'classnames'
-import { isEmpty } from 'lodash'
+import { isEmpty, isNil } from 'lodash'
 import { Field, useField } from 'react-final-form'
-import { isNil } from 'lodash'
 
 import InputNumberButtons from './InputNumberButtons/InputNumberButtons'
 import OptionsMenu from '../../elements/OptionsMenu/OptionsMenu'
@@ -179,6 +178,7 @@ const FormInput = React.forwardRef(
           if (inputProps.max && +valueToValidate > +inputProps.max) {
             validationError = { name: 'maxValue', label: `Max value is ${inputProps.max}` }
           }
+
           if (inputProps.min && +valueToValidate < +inputProps.min) {
             validationError = { name: 'minValue', label: `Min value is ${inputProps.min}` }
           }
@@ -199,13 +199,13 @@ const FormInput = React.forwardRef(
       return validationError
     }
 
-    const parseToNumber = (val) => {
+    const parseField = (val) => {
       if (!val) return
       return inputProps.type === 'number' ? +val : val
     }
 
     return (
-      <Field validate={validateField} name={name} parse={parseToNumber}>
+      <Field validate={validateField} name={name} parse={parseField}>
         {({ input, meta }) => (
           <div ref={ref} className={formFieldClassNames}>
             {label && (
