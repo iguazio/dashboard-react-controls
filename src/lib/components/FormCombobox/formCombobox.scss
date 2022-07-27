@@ -7,7 +7,7 @@
   width: 100%;
 
   .form-field {
-    @include formField;
+    @include inputSelectField;
 
     &__icons {
       .form-field-combobox__icon {
