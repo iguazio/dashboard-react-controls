@@ -58,7 +58,6 @@
         padding: 0;
         background-color: $white;
         box-shadow: $previewBoxShadow;
-        animation: show 100ms linear;
       }
 
       &__list {
@@ -87,7 +86,6 @@
 
           &_visible {
             display: block;
-            animation: show 100ms linear;
           }
         }
       }
@@ -100,19 +98,5 @@
         }
       }
     }
-  }
-}
-
-@keyframes show {
-  0% {
-    opacity: 0;
-  }
-
-  50% {
-    opacity: 0.5;
-  }
-
-  100% {
-    opacity: 1;
   }
 }

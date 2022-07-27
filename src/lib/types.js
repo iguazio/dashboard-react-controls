@@ -86,3 +86,11 @@ export const COMBOBOX_VALIDATION_RULES = PropTypes.arrayOf(
     isValid: PropTypes.bool
   })
 )
+
+export const COMBOBOX_SELECT_OPTIONS = PropTypes.arrayOf(
+  PropTypes.shape({
+    className: PropTypes.string,
+    id: PropTypes.string.isRequired,
+    label: PropTypes.string.isRequired
+  })
+)

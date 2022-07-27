@@ -1,14 +1,20 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react'
-import { useField } from 'react-final-form'
+import { Field, useField } from 'react-final-form'
 import { isEmpty } from 'lodash'
 import PropTypes from 'prop-types'
+import classnames from 'classnames'
 
-import FormComboboxView from './FormComboboxView'
-import { ValidationTemplate } from '../../elements'
+import { OptionsMenu, ValidationTemplate } from '../../elements'
 
 import { checkPatternsValidity } from '../../utils/validation.util'
 import { useDetectOutsideClick } from '../../hooks'
-import { COMBOBOX_SUGGESTION_LIST } from '../../types'
+import { COMBOBOX_SELECT_OPTIONS, COMBOBOX_SUGGESTION_LIST } from '../../types'
+
+import { ReactComponent as Arrow } from '../../images/arrow.svg'
+import { ReactComponent as SearchIcon } from '../../images/search.svg'
+import { ReactComponent as WarningIcon } from '../../images/warning.svg'
+
+import './formCombobox.scss'
 
 const FormCombobox = ({
   comboboxClassName,
@@ -66,7 +72,7 @@ const FormCombobox = ({
   useEffect(() => {
     if (inputDefaultValue.length > 0 && selectValue.id.length > 0 && inputValue.length === 0) {
       setInputValue(inputDefaultValue)
-      onChange && onChange(selectValue, inputDefaultValue)
+      onChange && onChange(selectValue.id, inputDefaultValue)
       input.onChange(`${selectValue.id}${inputDefaultValue}`)
     }
   }, [input, inputDefaultValue, inputValue.length, onChange, selectValue])
@@ -138,7 +144,7 @@ const FormCombobox = ({
 
     setInputValue(target.value)
     input.onChange(`${selectValue.id}${target.value}`)
-    onChange && onChange(selectValue, target.value)
+    onChange && onChange(selectValue.id, target.value)
 
     if (dropdownList.length > 0) {
       setShowSuggestionList(true)
@@ -176,7 +182,7 @@ const FormCombobox = ({
     if (inputValueItems.join('/') !== inputValue) {
       setInputValue(inputValueItems.join('/'))
       input.onChange(`${selectValue.id}${inputValueItems.join('/')}`)
-      onChange && onChange(selectValue, inputValueItems.join('/'))
+      onChange && onChange(selectValue.id, inputValueItems.join('/'))
     }
 
     setShowSuggestionList(false)
@@ -252,44 +258,145 @@ const FormCombobox = ({
     return validationError
   }
 
+  const comboboxClassNames = classnames(
+    comboboxClassName,
+    'form-field-combobox',
+    'form-field',
+    isInvalid && 'form-field-combobox_invalid'
+  )
+  const iconClassNames = classnames(
+    showSelectDropdown && 'form-field-combobox__icon_open',
+    'form-field-combobox__icon'
+  )
+  const selectClassNames = classnames(
+    'form-field-combobox__select',
+    'form-field__control',
+    showSelectDropdown && 'form-field-combobox__select_open',
+    selectValue.id.length <= 5 && selectValue.id.length !== 0 && 'form-field-combobox__select_short'
+  )
+  const selectValueClassNames = classnames(selectValue.className)
+  const dropdownClassNames = classnames(
+    'form-field-combobox__dropdown',
+    'form-field-combobox__input-dropdown',
+    showSuggestionList && dropdownList.length > 0 && 'form-field-combobox__input-dropdown_visible'
+  )
+
+  const wrapperClassNames = classnames(
+    'form-field__wrapper',
+    `form-field__wrapper-${density}`,
+    disabled && 'form-field__wrapper-disabled',
+    isInvalid && 'form-field__wrapper-invalid',
+    withoutBorder && 'without-border'
+  )
+
   return (
-    <FormComboboxView
-      comboboxClassName={comboboxClassName}
-      density={density}
-      disabled={disabled}
-      dropdownList={dropdownList}
-      dropdownStyle={dropdownStyle}
-      getValidationRules={getValidationRules}
-      handleInputChange={handleInputChange}
-      handleSelectOptionClick={handleSelectOptionClick}
-      handleSuggestionListOptionClick={handleSuggestionListOptionClick}
-      hideSearchInput={hideSearchInput}
-      inputOnFocus={inputOnFocus}
-      inputPlaceholder={inputPlaceholder}
-      inputValue={inputValue}
-      isInvalid={isInvalid}
-      name={name}
-      ref={{
-        comboboxRef,
-        inputRef,
-        selectRef
-      }}
-      required={required}
-      searchIsFocused={searchIsFocused}
-      selectOptions={selectOptions}
-      selectPlaceholder={selectPlaceholder}
-      selectValue={selectValue}
-      setSearchIsFocused={setSearchIsFocused}
-      setShowValidationRules={setShowValidationRules}
-      showSelectDropdown={showSelectDropdown}
-      showSuggestionList={showSuggestionList}
-      showValidationRules={showValidationRules}
-      suggestionListSearchChange={suggestionListSearchChange}
-      toggleSelect={toggleSelect}
-      validateField={validateField}
-      validationRules={validationRules}
-      withoutBorder={withoutBorder}
-    />
+    <Field name={name} validate={validateField}>
+      {({ input, meta }) => (
+        <div className={comboboxClassNames} ref={comboboxRef}>
+          <div className={wrapperClassNames}>
+            <div className="form-field__icons">
+              <Arrow className={iconClassNames} onClick={toggleSelect} />
+            </div>
+            <div className={selectClassNames} ref={selectRef}>
+              <div className="form-field-combobox__select-header" onClick={toggleSelect}>
+                <span className={selectValueClassNames}>{selectValue.id}</span>
+                {selectValue.id.length === 0 && selectPlaceholder && (
+                  <div className="form-field__label">
+                    <label>
+                      {selectPlaceholder}
+                      {(meta.error || required) && (
+                        <span className="form-field__label-mandatory"> *</span>
+                      )}
+                    </label>
+                  </div>
+                )}
+              </div>
+              <div className="form-field-combobox__select-body form-field-combobox__dropdown">
+                <ul className="form-field-combobox__list">
+                  {selectOptions.map((option) => {
+                    const selectOptionClassNames = classnames(
+                      'form-field-combobox__list-option',
+                      option.className
+                    )
+
+                    return (
+                      <li
+                        className={selectOptionClassNames}
+                        key={option.id}
+                        onClick={() => handleSelectOptionClick(option)}
+                      >
+                        {option.label}
+                      </li>
+                    )
+                  })}
+                </ul>
+              </div>
+            </div>
+            <input
+              className="form-field-combobox__input form-field__control"
+              disabled={selectValue.id.length === 0}
+              onChange={handleInputChange}
+              onFocus={inputOnFocus}
+              placeholder={inputPlaceholder}
+              ref={inputRef}
+              type="text"
+              value={inputValue}
+            />
+            <div
+              className={dropdownClassNames}
+              style={{
+                ...dropdownStyle
+              }}
+            >
+              {!hideSearchInput && (
+                <div className="form-field-combobox__search-wrapper">
+                  <input
+                    className="form-field-combobox__search form-field__control"
+                    onChange={suggestionListSearchChange}
+                    onFocus={() => setSearchIsFocused(true)}
+                    placeholder="Type to search"
+                    type="text"
+                  />
+                  <SearchIcon />
+                </div>
+              )}
+              <ul className="form-field-combobox__list">
+                {searchIsFocused && dropdownList.length === 0 ? (
+                  <li className="form-field-combobox__list-option" key="no data">
+                    No data
+                  </li>
+                ) : (
+                  dropdownList.map((value) => (
+                    <li
+                      className="form-field-combobox__list-option"
+                      key={value.id}
+                      onClick={() => handleSuggestionListOptionClick(value)}
+                    >
+                      {value.label}
+                    </li>
+                  ))
+                )}
+              </ul>
+            </div>
+            <div className="form-field__icons">
+              {isInvalid && Array.isArray(meta.error) && (
+                <button
+                  className="form-field__warning"
+                  onClick={() => setShowValidationRules((state) => !state)}
+                >
+                  <WarningIcon />
+                </button>
+              )}
+            </div>
+            {!isEmpty(validationRules) && (
+              <OptionsMenu show={showValidationRules} ref={comboboxRef}>
+                {getValidationRules()}
+              </OptionsMenu>
+            )}
+          </div>
+        </div>
+      )}
+    </Field>
   )
 }
 
@@ -329,7 +436,7 @@ FormCombobox.propTypes = {
   required: PropTypes.bool,
   rules: PropTypes.array,
   selectDefaultValue: PropTypes.string,
-  selectOptions: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
+  selectOptions: COMBOBOX_SELECT_OPTIONS.isRequired,
   selectPlaceholder: PropTypes.string,
   suggestionList: COMBOBOX_SUGGESTION_LIST,
   validator: PropTypes.func,
