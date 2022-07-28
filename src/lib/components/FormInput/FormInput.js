@@ -158,11 +158,9 @@ const FormInput = React.forwardRef(
         }))
       )
     }, [meta.error])
-
     const validateField = (value) => {
       let valueToValidate = isNil(value) ? '' : String(value)
-
-      if (!valueToValidate && !required) return
+      if ((!valueToValidate && !required) || disabled) return
 
       let validationError = null
 
