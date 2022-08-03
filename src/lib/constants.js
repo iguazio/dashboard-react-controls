@@ -1,3 +1,10 @@
+/*=========== EVENT KEYS =============*/
+export const BACKSPACE = 'Backspace'
+export const CLICK = 'Click'
+export const DELETE = 'Delete'
+export const TAB = 'Tab'
+export const TAB_SHIFT = 'Tab+Shift'
+
 /*=========== BUTTONS =============*/
 
 export const PRIMARY_BUTTON = 'primary'
