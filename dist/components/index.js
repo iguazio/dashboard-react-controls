@@ -21,6 +21,12 @@ Object.defineProperty(exports, "FormCheckBox", {
     return _FormCheckBox.default;
   }
 });
+Object.defineProperty(exports, "FormChipCell", {
+  enumerable: true,
+  get: function get() {
+    return _FormChipCell.default;
+  }
+});
 Object.defineProperty(exports, "FormCombobox", {
   enumerable: true,
   get: function get() {
@@ -105,6 +111,8 @@ var _Button = _interopRequireDefault(require("./Button/Button"));
 var _ConfirmDialog = _interopRequireDefault(require("./ConfirmDialog/ConfirmDialog"));
 
 var _FormCheckBox = _interopRequireDefault(require("./FormCheckBox/FormCheckBox"));
+
+var _FormChipCell = _interopRequireDefault(require("./FormChipCell/FormChipCell"));
 
 var _FormInput = _interopRequireDefault(require("./FormInput/FormInput"));
 

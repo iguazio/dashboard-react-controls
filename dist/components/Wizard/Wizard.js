@@ -79,7 +79,9 @@ var Wizard = function Wizard(_ref) {
     return activeStepNumber === totalSteps;
   }, [activeStepNumber, totalSteps]);
   var stepsMenu = (0, _react.useMemo)(function () {
-    return (stepsConfig === null || stepsConfig === void 0 ? void 0 : stepsConfig.map(function (step) {
+    return (stepsConfig === null || stepsConfig === void 0 ? void 0 : stepsConfig.filter(function (step) {
+      return !step.isHidden;
+    }).map(function (step) {
       return {
         id: step.id,
         label: step.label

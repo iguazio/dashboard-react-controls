@@ -1,8 +1,7 @@
 
 
-Create a new dist version 0.0.15
+Create a new dist version 0.0.16
 
 Collecting:
-- Fix [Input] do not validate if disabled (#44)
-- Fix [Wizard] Does not close on navigation (#45)
-- Fix [css] wizard, model and input (#46)
+- Impl [Models] Revamp Register model wizard (#48)
+- Fix [wizard] css and action button (#49)

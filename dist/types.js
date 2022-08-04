@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.WIZARD_STEPS_CONFIG = exports.SELECT_OPTIONS = exports.SELECT_OPTION = exports.POP_UP_CUSTOM_POSITION = exports.MODAL_SIZES = exports.INPUT_VALIDATION_RULES = exports.INPUT_LINK = exports.CONFIRM_DIALOG_SUBMIT_BUTTON = exports.CONFIRM_DIALOG_CANCEL_BUTTON = exports.COMBOBOX_VALIDATION_RULES = exports.COMBOBOX_SUGGESTION_LIST = exports.COMBOBOX_SELECT_OPTIONS = exports.BUTTON_VARIANTS = void 0;
+exports.WIZARD_STEPS_CONFIG = exports.SELECT_OPTIONS = exports.SELECT_OPTION = exports.POP_UP_CUSTOM_POSITION = exports.MODAL_SIZES = exports.INPUT_VALIDATION_RULES = exports.INPUT_LINK = exports.CONFIRM_DIALOG_SUBMIT_BUTTON = exports.CONFIRM_DIALOG_CANCEL_BUTTON = exports.COMBOBOX_VALIDATION_RULES = exports.COMBOBOX_SUGGESTION_LIST = exports.COMBOBOX_SELECT_OPTIONS = exports.CHIP_OPTIONS = exports.CHIP_INPUT_LIST = exports.CHIPS = exports.CHIP = exports.BUTTON_VARIANTS = void 0;
 
 var _propTypes = _interopRequireDefault(require("prop-types"));
 
@@ -14,6 +14,40 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var BUTTON_VARIANTS = _propTypes.default.oneOf([_constants.PRIMARY_BUTTON, _constants.SECONDARY_BUTTON, _constants.TERTIARY_BUTTON, _constants.DANGER_BUTTON, _constants.LABEL_BUTTON]);
 
 exports.BUTTON_VARIANTS = BUTTON_VARIANTS;
+
+var CHIP = _propTypes.default.shape({
+  delimiter: _propTypes.default.element,
+  id: _propTypes.default.string,
+  value: _propTypes.default.string.isRequired
+});
+
+exports.CHIP = CHIP;
+
+var CHIP_INPUT_LIST = _propTypes.default.arrayOf(_propTypes.default.shape({
+  disabled: _propTypes.default.bool,
+  icon: _propTypes.default.element,
+  id: _propTypes.default.string.isRequired,
+  label: _propTypes.default.string.isRequired,
+  subLabel: _propTypes.default.string,
+  ui: _propTypes.default.shape({})
+}));
+
+exports.CHIP_INPUT_LIST = CHIP_INPUT_LIST;
+
+var CHIP_OPTIONS = _propTypes.default.shape({
+  background: _propTypes.default.oneOf(['none', 'orange', 'green', 'purple', 'grey', 'sorbus', 'java', 'amethyst']),
+  boldValue: _propTypes.default.bool,
+  borderColor: _propTypes.default.oneOf(['transparent', 'orange', 'green', 'purple', 'grey']),
+  density: _propTypes.default.oneOf(['dense', 'normal', 'medium']),
+  font: _propTypes.default.oneOf(['primary', 'white', 'green', 'purple', 'orange']),
+  borderRadius: _propTypes.default.oneOf(['primary', 'secondary'])
+});
+
+exports.CHIP_OPTIONS = CHIP_OPTIONS;
+
+var CHIPS = _propTypes.default.arrayOf(CHIP);
+
+exports.CHIPS = CHIPS;
 
 var POP_UP_CUSTOM_POSITION = _propTypes.default.shape({
   element: _propTypes.default.shape({}),

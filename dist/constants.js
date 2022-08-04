@@ -3,9 +3,21 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.validation = exports.TERTIARY_BUTTON = exports.SECONDARY_BUTTON = exports.PRIMARY_BUTTON = exports.MODAL_SM = exports.MODAL_MD = exports.MODAL_LG = exports.LABEL_BUTTON = exports.INTERNAL_SERVER_ERROR_STATUS_CODE = exports.FORBIDDEN_ERROR_STATUS_CODE = exports.DANGER_BUTTON = exports.CONFLICT_ERROR_STATUS_CODE = void 0;
+exports.validation = exports.TERTIARY_BUTTON = exports.TAB_SHIFT = exports.TAB = exports.SECONDARY_BUTTON = exports.PRIMARY_BUTTON = exports.MODAL_SM = exports.MODAL_MD = exports.MODAL_LG = exports.LABEL_BUTTON = exports.INTERNAL_SERVER_ERROR_STATUS_CODE = exports.FORBIDDEN_ERROR_STATUS_CODE = exports.DELETE = exports.DANGER_BUTTON = exports.CONFLICT_ERROR_STATUS_CODE = exports.CLICK = exports.BACKSPACE = void 0;
 
+/*=========== EVENT KEYS =============*/
+var BACKSPACE = 'Backspace';
+exports.BACKSPACE = BACKSPACE;
+var CLICK = 'Click';
+exports.CLICK = CLICK;
+var DELETE = 'Delete';
+exports.DELETE = DELETE;
+var TAB = 'Tab';
+exports.TAB = TAB;
+var TAB_SHIFT = 'Tab+Shift';
 /*=========== BUTTONS =============*/
+
+exports.TAB_SHIFT = TAB_SHIFT;
 var PRIMARY_BUTTON = 'primary';
 exports.PRIMARY_BUTTON = PRIMARY_BUTTON;
 var SECONDARY_BUTTON = 'secondary';
