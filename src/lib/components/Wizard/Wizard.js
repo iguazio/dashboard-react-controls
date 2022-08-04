@@ -39,7 +39,11 @@ const Wizard = ({
   }, [activeStepNumber, totalSteps])
 
   const stepsMenu = useMemo(() => {
-    return stepsConfig?.map((step) => ({ id: step.id, label: step.label })) || []
+    return (
+      stepsConfig
+        ?.filter((step) => !step.isHidden)
+        .map((step) => ({ id: step.id, label: step.label })) || []
+    )
   }, [stepsConfig])
 
   const wizardClasses = classNames('wizard-form', className)
