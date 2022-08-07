@@ -40,6 +40,7 @@ button {
 
 input,
 textarea {
+  flex: 1;
   overflow-x: hidden;
   font-weight: normal;
   font-size: 15px;
@@ -53,7 +54,6 @@ textarea {
   background-color: transparent;
   padding: 0;
   resize: none;
-  width: 100%;
 
   &::placeholder {
     color: $spunPearl;
