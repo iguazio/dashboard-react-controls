@@ -6,10 +6,6 @@
 .form-field-textarea {
   width: 100%;
 
-  textarea {
-    flex: 1;
-  }
-
   .form-field {
     @include inputSelectField;
 
