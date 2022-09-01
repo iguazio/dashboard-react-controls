@@ -194,7 +194,7 @@ var TextArea = /*#__PURE__*/_react.default.forwardRef(function (_ref, ref) {
           })]
         }), maxLength && /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
           className: "form-field__counter",
-          children: "".concat(maxLength - textAreaCount, "/").concat(maxLength)
+          children: "".concat(maxLength - textAreaCount, " ").concat(maxLength - textAreaCount !== 1 ? 'characters' : 'character', " left")
         })]
       });
     }
