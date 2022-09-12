@@ -44,4 +44,3 @@ Backdrop.propTypes = {
 };
 var _default = Backdrop;
 exports.default = _default;
-
