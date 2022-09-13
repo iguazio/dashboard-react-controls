@@ -57,7 +57,7 @@ function _objectWithoutProperties(source, excluded) { if (source == null) return
 
 function _objectWithoutPropertiesLoose(source, excluded) { if (source == null) return {}; var target = {}; var sourceKeys = Object.keys(source); var key, i; for (i = 0; i < sourceKeys.length; i++) { key = sourceKeys[i]; if (excluded.indexOf(key) >= 0) continue; target[key] = source[key]; } return target; }
 
-var TextArea = /*#__PURE__*/_react.default.forwardRef(function (_ref, ref) {
+var FormTextarea = /*#__PURE__*/_react.default.forwardRef(function (_ref, ref) {
   var className = _ref.className,
       disabled = _ref.disabled,
       focused = _ref.focused,
@@ -201,7 +201,7 @@ var TextArea = /*#__PURE__*/_react.default.forwardRef(function (_ref, ref) {
   });
 });
 
-TextArea.defaultProps = {
+FormTextarea.defaultProps = {
   className: '',
   disabled: false,
   focused: false,
@@ -217,7 +217,7 @@ TextArea.defaultProps = {
   rows: 3,
   tip: ''
 };
-TextArea.propTypes = {
+FormTextarea.propTypes = {
   className: _propTypes.default.string,
   disabled: _propTypes.default.bool,
   focused: _propTypes.default.bool,
@@ -234,6 +234,6 @@ TextArea.propTypes = {
   tip: _propTypes.default.string
 };
 
-var _default = /*#__PURE__*/_react.default.memo(TextArea);
+var _default = /*#__PURE__*/_react.default.memo(FormTextarea);
 
 exports.default = _default;

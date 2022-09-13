@@ -1,6 +1,8 @@
 
 
-Create a new dist version 0.0.18
+Create a new dist version 0.0.19
 
 Collecting:
-- Fix [UI][Feature Vector] Wrong presentation for description tooltips for long description text (#57)
+- Add Copyright Disclaimer (#59)
+- Impl [UI]Change implementation of the useBlockHistory hook (#60)
+- Fix [Textarea] text doesn't break (#61)
