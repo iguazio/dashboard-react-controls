@@ -14,7 +14,7 @@ illegal under applicable law, and the grant of the foregoing license
 under the Apache 2.0 license is conditioned upon your compliance with
 such restriction.
 */
-import { set } from 'lodash'
+import { isEqual, set } from 'lodash'
 
 export const setFieldState = (args, state) => {
   let fieldName = args[0]
@@ -26,4 +26,16 @@ export const setFieldState = (args, state) => {
       set(field, stateName, states[stateName])
     }
   }
+}
+
+export const isEqualValues = (initialValues, values) => {
+  const replacer = (key, value) => {
+    if (value === '') {
+      return undefined
+    }
+
+    return value
+  }
+
+  return isEqual(JSON.stringify(initialValues, replacer), JSON.stringify(values, replacer))
 }

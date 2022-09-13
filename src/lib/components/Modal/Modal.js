@@ -14,7 +14,7 @@ illegal under applicable law, and the grant of the foregoing license
 under the Apache 2.0 license is conditioned upon your compliance with
 such restriction.
 */
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
 import { CSSTransition } from 'react-transition-group'
 import classNames from 'classnames'
@@ -30,18 +30,7 @@ import { ReactComponent as CloseIcon } from '../../images/close.svg'
 import './Modal.scss'
 
 const Modal = ({ actions, children, className, location, onClose, size, show, title }) => {
-  const [currentLocation, setCurrentLocation] = useState(location.pathname)
   const modalClassNames = classNames('modal', className, size && `modal-${size}`)
-
-  useEffect(() => {
-    setCurrentLocation(location.pathname)
-
-    return () => {
-      if (location.pathname !== currentLocation) {
-        onClose()
-      }
-    }
-  }, [currentLocation, location, onClose])
 
   return (
     <>
