@@ -11,7 +11,7 @@ import { ReactComponent as InvalidIcon } from '../../images/invalid.svg'
 
 import './formTextarea.scss'
 
-const TextArea = React.forwardRef(
+const FormTextarea = React.forwardRef(
   (
     {
       className,
@@ -150,7 +150,7 @@ const TextArea = React.forwardRef(
   }
 )
 
-TextArea.defaultProps = {
+FormTextarea.defaultProps = {
   className: '',
   disabled: false,
   focused: false,
@@ -167,7 +167,7 @@ TextArea.defaultProps = {
   tip: ''
 }
 
-TextArea.propTypes = {
+FormTextarea.propTypes = {
   className: PropTypes.string,
   disabled: PropTypes.bool,
   focused: PropTypes.bool,
@@ -184,4 +184,4 @@ TextArea.propTypes = {
   tip: PropTypes.string
 }
 
-export default React.memo(TextArea)
+export default React.memo(FormTextarea)
