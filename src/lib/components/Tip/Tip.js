@@ -88,7 +88,9 @@ const Tip = ({ className, text }) => {
 
   return (
     <div data-testid="tip" className={tipContainerClassNames}>
-      <QuestionMarkIcon data-testid="tip-icon" ref={iconRef} />
+      <div ref={iconRef}>
+        <QuestionMarkIcon data-testid="tip-icon" />
+      </div>
       {createPortal(
         <CSSTransition in={isShow} timeout={200} classNames="fade" unmountOnExit>
           <div ref={tipBodyRef} data-testid="tip-text" className={tipClassNames}>

@@ -15,46 +15,31 @@ under the Apache 2.0 license is conditioned upon your compliance with
 such restriction.
 */
 import React from 'react'
-import { Form } from 'react-final-form'
 
-import { FormSelect } from '/src/lib/components'
+import { Tooltip } from '/src/lib/components'
+import { TextTooltipTemplate } from '/src/lib/components'
+import { ReactComponent as EyeIcon } from '../../images/eye.svg'
 
 export default {
-  title: 'Example/FormSelect',
-  component: FormSelect
+  title: 'Example/Tooltip',
+  component: Tooltip
 }
 
 const commonArgs = {
-  label: 'label',
-  name: 'select',
-  options: [
-    { id: 'min', label: 'long-long-long-long-long-long-long-long' },
-    { id: 'max', label: 'Max' }
-  ]
+  template: <TextTooltipTemplate text="Tooltip" />,
+  textShow: true
 }
 
-const Template = (args) => <Form onSubmit={() => null}>{() => <FormSelect {...args} />}</Form>
-
-export const Dense = Template.bind({})
-Dense.args = {
-  ...commonArgs,
-  density: 'dense'
-}
+const Template = (args) => <Tooltip {...args} />
 
 export const Normal = Template.bind({})
 Normal.args = {
   ...commonArgs,
-  density: 'normal'
+  children: 'Tooltip'
 }
 
-export const Medium = Template.bind({})
-Medium.args = {
+export const Icon = Template.bind({})
+Icon.args = {
   ...commonArgs,
-  density: 'medium'
-}
-
-export const Chunky = Template.bind({})
-Chunky.args = {
-  ...commonArgs,
-  density: 'chunky'
+  children: <EyeIcon />
 }

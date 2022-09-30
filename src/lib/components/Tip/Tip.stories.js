@@ -15,46 +15,21 @@ under the Apache 2.0 license is conditioned upon your compliance with
 such restriction.
 */
 import React from 'react'
-import { Form } from 'react-final-form'
 
-import { FormSelect } from '/src/lib/components'
+import { Tip } from '/src/lib/components'
 
 export default {
-  title: 'Example/FormSelect',
-  component: FormSelect
+  title: 'Example/Tip',
+  component: Tip
 }
 
 const commonArgs = {
-  label: 'label',
-  name: 'select',
-  options: [
-    { id: 'min', label: 'long-long-long-long-long-long-long-long' },
-    { id: 'max', label: 'Max' }
-  ]
+  text: 'Tip',
 }
 
-const Template = (args) => <Form onSubmit={() => null}>{() => <FormSelect {...args} />}</Form>
-
-export const Dense = Template.bind({})
-Dense.args = {
-  ...commonArgs,
-  density: 'dense'
-}
+const Template = (args) => <Tip {...args} />
 
 export const Normal = Template.bind({})
 Normal.args = {
   ...commonArgs,
-  density: 'normal'
-}
-
-export const Medium = Template.bind({})
-Medium.args = {
-  ...commonArgs,
-  density: 'medium'
-}
-
-export const Chunky = Template.bind({})
-Chunky.args = {
-  ...commonArgs,
-  density: 'chunky'
 }

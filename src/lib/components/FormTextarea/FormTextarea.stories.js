@@ -17,44 +17,36 @@ such restriction.
 import React from 'react'
 import { Form } from 'react-final-form'
 
-import { FormSelect } from '/src/lib/components'
+import { FormTextarea } from '/src/lib/components'
 
 export default {
-  title: 'Example/FormSelect',
-  component: FormSelect
+  title: 'Example/FormTextarea',
+  component: FormTextarea
 }
 
 const commonArgs = {
-  label: 'label',
-  name: 'select',
-  options: [
-    { id: 'min', label: 'long-long-long-long-long-long-long-long' },
-    { id: 'max', label: 'Max' }
-  ]
+  name: 'textArea',
+  rows: 3
 }
 
-const Template = (args) => <Form onSubmit={() => null}>{() => <FormSelect {...args} />}</Form>
-
-export const Dense = Template.bind({})
-Dense.args = {
-  ...commonArgs,
-  density: 'dense'
-}
+const Template = (args) => <Form onSubmit={() => null}>{() => <FormTextarea {...args} />}</Form>
 
 export const Normal = Template.bind({})
 Normal.args = {
   ...commonArgs,
-  density: 'normal'
+  label: 'Normal'
 }
 
-export const Medium = Template.bind({})
-Medium.args = {
+export const withTip = Template.bind({})
+withTip.args = {
   ...commonArgs,
-  density: 'medium'
+  label: 'With Tip',
+  tip: 'Tip'
 }
 
-export const Chunky = Template.bind({})
-Chunky.args = {
+export const withMaxLength = Template.bind({})
+withMaxLength.args = {
   ...commonArgs,
-  density: 'chunky'
+  label: 'With max length',
+  maxLength: 50
 }

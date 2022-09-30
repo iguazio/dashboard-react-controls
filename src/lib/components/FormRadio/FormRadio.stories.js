@@ -17,44 +17,22 @@ such restriction.
 import React from 'react'
 import { Form } from 'react-final-form'
 
-import { FormSelect } from '/src/lib/components'
+import { FormRadio } from '/src/lib/components'
 
 export default {
-  title: 'Example/FormSelect',
-  component: FormSelect
+  title: 'Example/FormRadio',
+  component: FormRadio
 }
 
 const commonArgs = {
+  disabled: false,
   label: 'label',
-  name: 'select',
-  options: [
-    { id: 'min', label: 'long-long-long-long-long-long-long-long' },
-    { id: 'max', label: 'Max' }
-  ]
+  name: 'radio'
 }
 
-const Template = (args) => <Form onSubmit={() => null}>{() => <FormSelect {...args} />}</Form>
-
-export const Dense = Template.bind({})
-Dense.args = {
-  ...commonArgs,
-  density: 'dense'
-}
+const Template = (args) => <Form onSubmit={() => null}>{() => <FormRadio {...args} />}</Form>
 
 export const Normal = Template.bind({})
 Normal.args = {
-  ...commonArgs,
-  density: 'normal'
-}
-
-export const Medium = Template.bind({})
-Medium.args = {
-  ...commonArgs,
-  density: 'medium'
-}
-
-export const Chunky = Template.bind({})
-Chunky.args = {
-  ...commonArgs,
-  density: 'chunky'
+  ...commonArgs
 }

@@ -15,46 +15,34 @@ under the Apache 2.0 license is conditioned upon your compliance with
 such restriction.
 */
 import React from 'react'
-import { Form } from 'react-final-form'
 
-import { FormSelect } from '/src/lib/components'
+import ConfirmDialog from './ConfirmDialog'
+import { SECONDARY_BUTTON, TERTIARY_BUTTON } from '../../constants'
 
 export default {
-  title: 'Example/FormSelect',
-  component: FormSelect
+  title: 'Example/ConfirmDialog',
+  component: ConfirmDialog
 }
 
 const commonArgs = {
-  label: 'label',
-  name: 'select',
-  options: [
-    { id: 'min', label: 'long-long-long-long-long-long-long-long' },
-    { id: 'max', label: 'Max' }
-  ]
+  confirmButton: {
+    handler: () => null,
+    label: 'Confirm',
+    variant: SECONDARY_BUTTON
+  },
+  cancelButton: {
+    handler: () => null,
+    label: 'Cancel',
+    variant: TERTIARY_BUTTON
+  },
+  isOpen: true
 }
 
-const Template = (args) => <Form onSubmit={() => null}>{() => <FormSelect {...args} />}</Form>
-
-export const Dense = Template.bind({})
-Dense.args = {
-  ...commonArgs,
-  density: 'dense'
-}
+const Template = (args) => <ConfirmDialog {...args} />
 
 export const Normal = Template.bind({})
 Normal.args = {
   ...commonArgs,
-  density: 'normal'
-}
-
-export const Medium = Template.bind({})
-Medium.args = {
-  ...commonArgs,
-  density: 'medium'
-}
-
-export const Chunky = Template.bind({})
-Chunky.args = {
-  ...commonArgs,
-  density: 'chunky'
+  header: 'Header',
+  message: 'Message'
 }
