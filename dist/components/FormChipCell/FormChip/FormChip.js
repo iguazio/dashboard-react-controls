@@ -11,13 +11,9 @@ var _react = _interopRequireWildcard(require("react"));
 
 var _propTypes = _interopRequireDefault(require("prop-types"));
 
-var _classnames = _interopRequireDefault(require("classnames"));
-
 var _NewChipForm = _interopRequireDefault(require("../NewChipForm/NewChipForm"));
 
 var _types = require("../../../types");
-
-var _close = require("../../../images/close.svg");
 
 require("./formChip.scss");
 
@@ -36,30 +32,24 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 var FormChip = /*#__PURE__*/_react.default.forwardRef(function (_ref, ref) {
-  var _chip$delimiter;
-
   var chip = _ref.chip,
-      chipClassNames = _ref.chipClassNames,
       chipIndex = _ref.chipIndex,
       chipOptions = _ref.chipOptions,
-      className = _ref.className,
       editConfig = _ref.editConfig,
       handleEditChip = _ref.handleEditChip,
-      handleIsEdit = _ref.handleIsEdit,
       handleRemoveChip = _ref.handleRemoveChip,
+      handleToEditMode = _ref.handleToEditMode,
       isDeleteMode = _ref.isDeleteMode,
       isEditMode = _ref.isEditMode,
       keyName = _ref.keyName,
-      onClick = _ref.onClick,
+      meta = _ref.meta,
       setChipsSizes = _ref.setChipsSizes,
       setEditConfig = _ref.setEditConfig,
-      textOverflowEllipsis = _ref.textOverflowEllipsis,
+      validationRules = _ref.validationRules,
       valueName = _ref.valueName;
 
   var chipRef = _react.default.useRef();
 
-  var chipLabelClassNames = (0, _classnames.default)('chip__label', (textOverflowEllipsis || isEditMode) && 'data-ellipsis');
-  var chipValueClassNames = (0, _classnames.default)('chip__value', (textOverflowEllipsis || isEditMode) && 'data-ellipsis', chipOptions.boldValue && 'chip-value_bold');
   (0, _react.useEffect)(function () {
     if (chipRef.current && setChipsSizes) {
       setChipsSizes(function (state) {
@@ -67,40 +57,27 @@ var FormChip = /*#__PURE__*/_react.default.forwardRef(function (_ref, ref) {
       });
     }
   }, [chipIndex, setChipsSizes]);
-  return isEditMode && chipIndex === editConfig.chipIndex ? /*#__PURE__*/(0, _jsxRuntime.jsx)(_NewChipForm.default, {
-    chip: chip,
-    chipOptions: chipOptions,
-    className: "input-label-key",
-    editConfig: editConfig,
-    keyName: keyName,
-    onChange: handleEditChip,
-    ref: ref,
-    setEditConfig: setEditConfig,
-    valueName: valueName
-  }) : /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
-    className: chipClassNames,
+  return /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
     onClick: function onClick(event) {
-      return handleIsEdit(event, chipIndex);
+      return handleToEditMode(event, chipIndex);
     },
     ref: chipRef,
-    children: [chip.key && /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
-      className: chipLabelClassNames,
-      children: chip.key
-    }), chip.value && /*#__PURE__*/(0, _jsxRuntime.jsxs)(_jsxRuntime.Fragment, {
-      children: [/*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
-        className: "chip__delimiter",
-        children: (_chip$delimiter = chip.delimiter) !== null && _chip$delimiter !== void 0 ? _chip$delimiter : ':'
-      }), /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
-        className: chipValueClassNames,
-        children: chip.value
-      })]
-    }), (isEditMode || isDeleteMode) && /*#__PURE__*/(0, _jsxRuntime.jsx)("button", {
-      className: "item-icon-close",
-      onClick: function onClick(event) {
-        return handleRemoveChip(event, chipIndex);
-      },
-      children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_close.ReactComponent, {})
-    })]
+    children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_NewChipForm.default, {
+      chip: chip,
+      chipIndex: chipIndex,
+      chipOptions: chipOptions,
+      className: "input-label-key",
+      editConfig: editConfig,
+      handleRemoveChip: handleRemoveChip,
+      isEditMode: isEditMode,
+      keyName: keyName,
+      meta: meta,
+      onChange: handleEditChip,
+      ref: ref,
+      setEditConfig: setEditConfig,
+      validationRules: validationRules,
+      valueName: valueName
+    })
   });
 });
 
@@ -116,27 +93,24 @@ FormChip.defaultProps = {
   isDeleteMode: false,
   isEditMode: false,
   keyName: '',
-  onClick: function onClick() {},
-  textOverflowEllipsis: false,
+  validationRules: {},
   valueName: ''
 };
 FormChip.propTypes = {
   chip: _propTypes.default.object.isRequired,
-  chipClassNames: _propTypes.default.string.isRequired,
   chipIndex: _propTypes.default.number.isRequired,
   chipOptions: _types.CHIP_OPTIONS,
-  className: _propTypes.default.string,
   editConfig: _propTypes.default.object.isRequired,
   handleEditChip: _propTypes.default.func.isRequired,
-  handleIsEdit: _propTypes.default.func.isRequired,
   handleRemoveChip: _propTypes.default.func.isRequired,
+  handleToEditMode: _propTypes.default.func.isRequired,
   isDeleteMode: _propTypes.default.bool,
   isEditMode: _propTypes.default.bool,
   keyName: _propTypes.default.string,
-  onClick: _propTypes.default.func,
+  meta: _propTypes.default.object.isRequired,
   setChipsSizes: _propTypes.default.func.isRequired,
   setEditConfig: _propTypes.default.func.isRequired,
-  textOverflowEllipsis: _propTypes.default.bool,
+  validationRules: _propTypes.default.object,
   valueName: _propTypes.default.string
 };
 var _default = FormChip;

@@ -1,8 +1,7 @@
 
 
-Create a new dist version 0.0.19
+Create a new dist version 0.0.20
 
 Collecting:
-- Add Copyright Disclaimer (#59)
-- Impl [UI]Change implementation of the useBlockHistory hook (#60)
-- Fix [Textarea] text doesn't break (#61)
+- Impl [Storybook] Add new stories for components (#63)
+- Impl [Models] add label validation (#65)
