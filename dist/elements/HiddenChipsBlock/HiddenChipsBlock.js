@@ -13,15 +13,13 @@ var _propTypes = _interopRequireDefault(require("prop-types"));
 
 var _classnames = _interopRequireDefault(require("classnames"));
 
-var _FormChip = _interopRequireDefault(require("../../components/FormChipCell/FormChip/FormChip"));
+var _Tooltip = _interopRequireDefault(require("../../components/Tooltip/Tooltip"));
 
 var _TextTooltipTemplate = _interopRequireDefault(require("../../components/TooltipTemplate/TextTooltipTemplate"));
 
-var _Tooltip = _interopRequireDefault(require("../../components/Tooltip/Tooltip"));
+var _types = require("../../types");
 
 var _getFirstScrollableParent = require("../../utils/getFirstScrollableParent.util");
-
-var _types = require("../../types");
 
 require("./hiddenChipsBlock.scss");
 
@@ -47,18 +45,10 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var HiddenChipsBlock = /*#__PURE__*/_react.default.forwardRef(function (_ref, ref) {
   var chipClassNames = _ref.chipClassNames,
-      chipIndex = _ref.chipIndex,
       chipOptions = _ref.chipOptions,
       chips = _ref.chips,
-      className = _ref.className,
-      editConfig = _ref.editConfig,
-      handleEditChip = _ref.handleEditChip,
-      handleIsEdit = _ref.handleIsEdit,
-      handleRemoveChip = _ref.handleRemoveChip,
       handleShowElements = _ref.handleShowElements,
-      isEditMode = _ref.isEditMode,
-      setChipsSizes = _ref.setChipsSizes,
-      setEditConfig = _ref.setEditConfig;
+      textOverflowEllipsis = _ref.textOverflowEllipsis;
 
   var _useState = (0, _react.useState)(false),
       _useState2 = _slicedToArray(_useState, 2),
@@ -83,6 +73,8 @@ var HiddenChipsBlock = /*#__PURE__*/_react.default.forwardRef(function (_ref, re
   var hiddenRef = (0, _react.useRef)();
   var offset = 28;
   var hiddenChipsBlockClassNames = (0, _classnames.default)('chip-block-hidden', isTop ? 'chip-block-hidden_top' : 'chip-block-hidden_bottom', isRight ? 'chip-block-hidden_right' : 'chip-block-hidden_left', isVisible && 'chip-block-hidden_visible');
+  var chipLabelClassNames = (0, _classnames.default)('chip__label', textOverflowEllipsis && 'data-ellipsis');
+  var chipValueClassNames = (0, _classnames.default)('chip__value', textOverflowEllipsis && 'data-ellipsis', chipOptions.boldValue && 'chip-value_bold');
   var handleResize = (0, _react.useCallback)(function () {
     if (hiddenRef !== null && hiddenRef !== void 0 && hiddenRef.current) {
       setWindowHalfWidth(parseInt(window.innerWidth / 2));
@@ -131,7 +123,9 @@ var HiddenChipsBlock = /*#__PURE__*/_react.default.forwardRef(function (_ref, re
   return /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
     ref: hiddenRef,
     className: hiddenChipsBlockClassNames,
-    children: chips === null || chips === void 0 ? void 0 : chips.map(function (element, index) {
+    children: chips === null || chips === void 0 ? void 0 : chips.map(function (element) {
+      var _element$delimiter;
+
       return /*#__PURE__*/(0, _jsxRuntime.jsx)(_Tooltip.default, {
         template: /*#__PURE__*/(0, _jsxRuntime.jsx)(_TextTooltipTemplate.default, {
           text: element.delimiter ? /*#__PURE__*/(0, _jsxRuntime.jsxs)("span", {
@@ -142,49 +136,35 @@ var HiddenChipsBlock = /*#__PURE__*/_react.default.forwardRef(function (_ref, re
             }), element.value]
           }) : generateChipData(element)
         }),
-        children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_FormChip.default, {
-          chip: element,
-          chipClassNames: chipClassNames,
-          chipIndex: index + chipIndex,
-          chipOptions: chipOptions,
-          className: className,
-          editConfig: editConfig,
-          handleEditChip: handleEditChip,
-          handleIsEdit: handleIsEdit,
-          handleRemoveChip: handleRemoveChip,
-          hiddenChips: true,
-          isEditMode: isEditMode,
-          ref: hiddenRef,
-          setChipsSizes: setChipsSizes,
-          setEditConfig: setEditConfig,
-          showChips: true,
-          textOverflowEllipsis: true
+        children: /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
+          className: chipClassNames,
+          children: [element.key && /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
+            className: chipLabelClassNames,
+            children: element.key
+          }), element.value && /*#__PURE__*/(0, _jsxRuntime.jsxs)(_jsxRuntime.Fragment, {
+            children: [/*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
+              className: "chip__delimiter",
+              children: (_element$delimiter = element.delimiter) !== null && _element$delimiter !== void 0 ? _element$delimiter : ':'
+            }), /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
+              className: chipValueClassNames,
+              children: element.value
+            })]
+          })]
         })
-      }, element.value);
+      }, element.id);
     })
   });
 });
 
 HiddenChipsBlock.defaultProps = {
-  chips: [],
-  chipIndex: 0,
-  editConfig: {},
-  isEditMode: false
+  textOverflowEllipsis: false
 };
 HiddenChipsBlock.propTypes = {
   chipClassNames: _propTypes.default.string.isRequired,
-  chipIndex: _propTypes.default.number,
   chipOptions: _types.CHIP_OPTIONS.isRequired,
   chips: _propTypes.default.array.isRequired,
-  className: _propTypes.default.string,
-  editConfig: _propTypes.default.shape({}),
-  handleEditChip: _propTypes.default.func.isRequired,
-  handleIsEdit: _propTypes.default.func.isRequired,
-  handleRemoveChip: _propTypes.default.func.isRequired,
   handleShowElements: _propTypes.default.func.isRequired,
-  isEditMode: _propTypes.default.bool,
-  setEditConfig: _propTypes.default.func.isRequired,
-  setChipsSizes: _propTypes.default.func.isRequired
+  textOverflowEllipsis: _propTypes.default.bool
 };
 var _default = HiddenChipsBlock;
 exports.default = _default;

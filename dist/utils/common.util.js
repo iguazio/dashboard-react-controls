@@ -3,9 +3,11 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.openPopUp = exports.isEveryObjectValueEmpty = void 0;
+exports.openPopUp = exports.isEveryObjectValueEmpty = exports.areArraysEqual = void 0;
 
 var _reactModalPromise = require("react-modal-promise");
+
+var _lodash = require("lodash");
 
 /*
 Copyright 2022 Iguazio Systems Ltd.
@@ -33,6 +35,17 @@ var isEveryObjectValueEmpty = function isEveryObjectValueEmpty(obj) {
   return Object.values(obj).every(function (item) {
     return !item || item.length === 0;
   });
-};
+}; // Checks, whether two arrays of objects are equal, can omit some keys if their comparison is not necessary
+
 
 exports.isEveryObjectValueEmpty = isEveryObjectValueEmpty;
+
+var areArraysEqual = function areArraysEqual(firstArray, secondArray) {
+  var omitBy = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : [];
+  if (firstArray.length !== secondArray.length) return false;
+  return (0, _lodash.isEmpty)((0, _lodash.differenceWith)(firstArray, secondArray, function (a, b) {
+    return (0, _lodash.isEqual)((0, _lodash.omit)(a, omitBy), (0, _lodash.omit)(b, omitBy));
+  }));
+};
+
+exports.areArraysEqual = areArraysEqual;

@@ -14,22 +14,35 @@ illegal under applicable law, and the grant of the foregoing license
 under the Apache 2.0 license is conditioned upon your compliance with
 such restriction.
 */
-export const generateChipsList = (chips, maxLength) => {
-  if (chips.length > maxLength) {
-    let hiddenChipsNumber = `+ ${chips.length - maxLength}`
-    const hiddenChips = chips
-      .slice(maxLength)
-    const visibleChips = chips
-      .slice(0, maxLength)
+import React from 'react'
 
-    return {
-      visibleChips,
-      hiddenChips,
-      hiddenChipsNumber
-    }
-  }
-  return {
-    visibleChips: chips,
-    hiddenChips: []
-  }
+import ConfirmDialog from './ConfirmDialog'
+import { SECONDARY_BUTTON, TERTIARY_BUTTON } from '../../constants'
+
+export default {
+  title: 'Example/ConfirmDialog',
+  component: ConfirmDialog
+}
+
+const commonArgs = {
+  confirmButton: {
+    handler: () => null,
+    label: 'Confirm',
+    variant: SECONDARY_BUTTON
+  },
+  cancelButton: {
+    handler: () => null,
+    label: 'Cancel',
+    variant: TERTIARY_BUTTON
+  },
+  isOpen: true
+}
+
+const Template = (args) => <ConfirmDialog {...args} />
+
+export const Normal = Template.bind({})
+Normal.args = {
+  ...commonArgs,
+  header: 'Header',
+  message: 'Message'
 }

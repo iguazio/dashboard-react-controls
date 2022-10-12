@@ -17,44 +17,82 @@ such restriction.
 import React from 'react'
 import { Form } from 'react-final-form'
 
-import { FormSelect } from '/src/lib/components'
+import { FormInput } from '/src/lib/components'
+import { getValidationRules } from '/src/lib/utils/validation.util'
 
 export default {
-  title: 'Example/FormSelect',
-  component: FormSelect
+  title: 'Example/FormInput',
+  component: FormInput
 }
 
 const commonArgs = {
-  label: 'label',
-  name: 'select',
-  options: [
-    { id: 'min', label: 'long-long-long-long-long-long-long-long' },
-    { id: 'max', label: 'Max' }
-  ]
-}
+  name: 'input',
+  placeholder: 'placeholder',
 
-const Template = (args) => <Form onSubmit={() => null}>{() => <FormSelect {...args} />}</Form>
+}
+const Template = (args) => <Form onSubmit={() => null}>{() => <FormInput {...args} />}</Form>
 
 export const Dense = Template.bind({})
 Dense.args = {
   ...commonArgs,
-  density: 'dense'
+  density: 'dense',
+  label: 'Dense'
 }
 
 export const Normal = Template.bind({})
 Normal.args = {
   ...commonArgs,
-  density: 'normal'
+  density: 'normal',
+  label: 'Normal'
 }
 
 export const Medium = Template.bind({})
 Medium.args = {
   ...commonArgs,
-  density: 'medium'
+  density: 'medium',
+  label: 'Medium'
 }
 
 export const Chunky = Template.bind({})
 Chunky.args = {
   ...commonArgs,
-  density: 'chunky'
+  density: 'chunky',
+  label: 'Chunky'
+}
+
+export const withTip = Template.bind({})
+withTip.args = {
+  ...commonArgs,
+  label: 'With Tip',
+  tip: 'Tip'
+}
+
+export const withValidationRules = Template.bind({})
+withValidationRules.args = {
+  ...commonArgs,
+  density: 'chunky',
+  label: 'With validation rules',
+  required: true,
+  validationRules: getValidationRules('common.name')
+}
+
+export const withLink = Template.bind({})
+withLink.args = {
+  ...commonArgs,
+  label: 'label with static link',
+  link: {
+    show: true,
+    url: 'https:github.com'
+  },
+  value: 'test'
+}
+
+export const Range = Template.bind({})
+Range.args = {
+  ...commonArgs,
+  label: 'Range input',
+  placeholder: '',
+  type: 'number',
+  max: 10,
+  min: 1
 }

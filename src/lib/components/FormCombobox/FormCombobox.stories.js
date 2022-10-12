@@ -17,23 +17,30 @@ such restriction.
 import React from 'react'
 import { Form } from 'react-final-form'
 
-import { FormSelect } from '/src/lib/components'
+import { FormCombobox } from '/src/lib/components'
 
 export default {
-  title: 'Example/FormSelect',
-  component: FormSelect
+  title: 'Example/FormCombobox',
+  component: FormCombobox
 }
 
 const commonArgs = {
-  label: 'label',
-  name: 'select',
-  options: [
-    { id: 'min', label: 'long-long-long-long-long-long-long-long' },
-    { id: 'max', label: 'Max' }
+  name: 'combobox',
+  selectOptions: [
+    {
+      className: 'path-type-store',
+      label: 'MLRun store',
+      id: 'store://'
+    },
+    {
+      className: 'path-type-v3io',
+      label: 'V3IO',
+      id: 'v3io:///'
+    }
   ]
 }
 
-const Template = (args) => <Form onSubmit={() => null}>{() => <FormSelect {...args} />}</Form>
+const Template = (args) => <Form onSubmit={() => null}>{() => <FormCombobox {...args} />}</Form>
 
 export const Dense = Template.bind({})
 Dense.args = {
@@ -57,4 +64,30 @@ export const Chunky = Template.bind({})
 Chunky.args = {
   ...commonArgs,
   density: 'chunky'
+}
+
+export const withDefaultValue = Template.bind({})
+withDefaultValue.args = {
+  ...commonArgs,
+  selectDefaultValue: {
+    className: 'path-type-store',
+    label: 'MLRun store',
+    id: 'store://'
+  },
+  inputDefaultValue: 'artifacts/default'
+}
+
+export const withSuggestions = Template.bind({})
+withSuggestions.args = {
+  ...commonArgs,
+  suggestionList: [
+    {
+      label: 'Artifact',
+      id: 'artifacts'
+    },
+    {
+      label: 'Feature Vector',
+      id: 'featureVector'
+    }
+  ]
 }

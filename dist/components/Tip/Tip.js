@@ -103,9 +103,11 @@ var Tip = function Tip(_ref) {
   return /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
     "data-testid": "tip",
     className: tipContainerClassNames,
-    children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_questionMark.ReactComponent, {
-      "data-testid": "tip-icon",
-      ref: iconRef
+    children: [/*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
+      ref: iconRef,
+      children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_questionMark.ReactComponent, {
+        "data-testid": "tip-icon"
+      })
     }), /*#__PURE__*/(0, _reactDom.createPortal)( /*#__PURE__*/(0, _jsxRuntime.jsx)(_reactTransitionGroup.CSSTransition, {
       in: isShow,
       timeout: 200,

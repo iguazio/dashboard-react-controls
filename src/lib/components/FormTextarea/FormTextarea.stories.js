@@ -14,22 +14,39 @@ illegal under applicable law, and the grant of the foregoing license
 under the Apache 2.0 license is conditioned upon your compliance with
 such restriction.
 */
-export const generateChipsList = (chips, maxLength) => {
-  if (chips.length > maxLength) {
-    let hiddenChipsNumber = `+ ${chips.length - maxLength}`
-    const hiddenChips = chips
-      .slice(maxLength)
-    const visibleChips = chips
-      .slice(0, maxLength)
+import React from 'react'
+import { Form } from 'react-final-form'
 
-    return {
-      visibleChips,
-      hiddenChips,
-      hiddenChipsNumber
-    }
-  }
-  return {
-    visibleChips: chips,
-    hiddenChips: []
-  }
+import { FormTextarea } from '/src/lib/components'
+
+export default {
+  title: 'Example/FormTextarea',
+  component: FormTextarea
+}
+
+const commonArgs = {
+  name: 'textArea',
+  rows: 3
+}
+
+const Template = (args) => <Form onSubmit={() => null}>{() => <FormTextarea {...args} />}</Form>
+
+export const Normal = Template.bind({})
+Normal.args = {
+  ...commonArgs,
+  label: 'Normal'
+}
+
+export const withTip = Template.bind({})
+withTip.args = {
+  ...commonArgs,
+  label: 'With Tip',
+  tip: 'Tip'
+}
+
+export const withMaxLength = Template.bind({})
+withMaxLength.args = {
+  ...commonArgs,
+  label: 'With max length',
+  maxLength: 50
 }

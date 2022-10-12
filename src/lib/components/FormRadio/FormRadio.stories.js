@@ -14,22 +14,25 @@ illegal under applicable law, and the grant of the foregoing license
 under the Apache 2.0 license is conditioned upon your compliance with
 such restriction.
 */
-export const generateChipsList = (chips, maxLength) => {
-  if (chips.length > maxLength) {
-    let hiddenChipsNumber = `+ ${chips.length - maxLength}`
-    const hiddenChips = chips
-      .slice(maxLength)
-    const visibleChips = chips
-      .slice(0, maxLength)
+import React from 'react'
+import { Form } from 'react-final-form'
 
-    return {
-      visibleChips,
-      hiddenChips,
-      hiddenChipsNumber
-    }
-  }
-  return {
-    visibleChips: chips,
-    hiddenChips: []
-  }
+import { FormRadio } from '/src/lib/components'
+
+export default {
+  title: 'Example/FormRadio',
+  component: FormRadio
+}
+
+const commonArgs = {
+  disabled: false,
+  label: 'label',
+  name: 'radio'
+}
+
+const Template = (args) => <Form onSubmit={() => null}>{() => <FormRadio {...args} />}</Form>
+
+export const Normal = Template.bind({})
+Normal.args = {
+  ...commonArgs
 }

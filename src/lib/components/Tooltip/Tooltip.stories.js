@@ -14,22 +14,32 @@ illegal under applicable law, and the grant of the foregoing license
 under the Apache 2.0 license is conditioned upon your compliance with
 such restriction.
 */
-export const generateChipsList = (chips, maxLength) => {
-  if (chips.length > maxLength) {
-    let hiddenChipsNumber = `+ ${chips.length - maxLength}`
-    const hiddenChips = chips
-      .slice(maxLength)
-    const visibleChips = chips
-      .slice(0, maxLength)
+import React from 'react'
 
-    return {
-      visibleChips,
-      hiddenChips,
-      hiddenChipsNumber
-    }
-  }
-  return {
-    visibleChips: chips,
-    hiddenChips: []
-  }
+import { Tooltip } from '/src/lib/components'
+import { TextTooltipTemplate } from '/src/lib/components'
+import { ReactComponent as EyeIcon } from '../../images/eye.svg'
+
+export default {
+  title: 'Example/Tooltip',
+  component: Tooltip
+}
+
+const commonArgs = {
+  template: <TextTooltipTemplate text="Tooltip" />,
+  textShow: true
+}
+
+const Template = (args) => <Tooltip {...args} />
+
+export const Normal = Template.bind({})
+Normal.args = {
+  ...commonArgs,
+  children: 'Tooltip'
+}
+
+export const Icon = Template.bind({})
+Icon.args = {
+  ...commonArgs,
+  children: <EyeIcon />
 }

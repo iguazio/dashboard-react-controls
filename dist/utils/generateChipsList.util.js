@@ -34,7 +34,8 @@ var generateChipsList = function generateChipsList(chips, maxLength) {
   }
 
   return {
-    visibleChips: chips
+    visibleChips: chips,
+    hiddenChips: []
   };
 };
 
