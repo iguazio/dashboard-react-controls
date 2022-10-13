@@ -88,7 +88,7 @@ const Tip = ({ className, text }) => {
 
   return (
     <div data-testid="tip" className={tipContainerClassNames}>
-      <div ref={iconRef}>
+      <div ref={iconRef} className="tip-wrapper">
         <QuestionMarkIcon data-testid="tip-icon" />
       </div>
       {createPortal(
