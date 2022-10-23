@@ -20,6 +20,11 @@ $arrowOffset: 20px;
   border-radius: 4px;
   z-index: 9;
 
+  &-wrapper {
+    display: inline-flex;
+    align-items: center;
+  }
+
   &_top {
     &::after {
       bottom: calc(-#{$arrowLength} / 2);

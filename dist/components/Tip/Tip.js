@@ -105,6 +105,7 @@ var Tip = function Tip(_ref) {
     className: tipContainerClassNames,
     children: [/*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
       ref: iconRef,
+      className: "tip-wrapper",
       children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_questionMark.ReactComponent, {
         "data-testid": "tip-icon"
       })

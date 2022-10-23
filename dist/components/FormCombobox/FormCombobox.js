@@ -19,6 +19,12 @@ var _classnames = _interopRequireDefault(require("classnames"));
 
 var _elements = require("../../elements");
 
+var _PopUpDialog = _interopRequireDefault(require("../PopUpDialog/PopUpDialog"));
+
+var _TextTooltipTemplate = _interopRequireDefault(require("../TooltipTemplate/TextTooltipTemplate"));
+
+var _Tooltip = _interopRequireDefault(require("../Tooltip/Tooltip"));
+
 var _validation = require("../../utils/validation.util");
 
 var _hooks = require("../../hooks");
@@ -30,6 +36,8 @@ var _arrow = require("../../images/arrow.svg");
 var _search = require("../../images/search.svg");
 
 var _warning = require("../../images/warning.svg");
+
+var _invalid = require("../../images/invalid.svg");
 
 require("./formCombobox.scss");
 
@@ -67,6 +75,7 @@ var FormCombobox = function FormCombobox(_ref) {
       inputDefaultValue = _ref.inputDefaultValue,
       inputPlaceholder = _ref.inputPlaceholder,
       invalidText = _ref.invalidText,
+      label = _ref.label,
       maxSuggestedMatches = _ref.maxSuggestedMatches,
       name = _ref.name,
       onBlur = _ref.onBlur,
@@ -85,23 +94,18 @@ var FormCombobox = function FormCombobox(_ref) {
       input = _useField.input,
       meta = _useField.meta;
 
-  var _useState = (0, _react.useState)(''),
+  var _useState = (0, _react.useState)(inputDefaultValue),
       _useState2 = _slicedToArray(_useState, 2),
       inputValue = _useState2[0],
       setInputValue = _useState2[1];
 
-  var _useState3 = (0, _react.useState)({
-    label: '',
-    id: '',
-    className: ''
-  }),
+  var _useState3 = (0, _react.useState)(selectDefaultValue),
       _useState4 = _slicedToArray(_useState3, 2),
       selectValue = _useState4[0],
       setSelectValue = _useState4[1];
 
   var _useState5 = (0, _react.useState)({
-    left: '0',
-    paddingTop: '10px'
+    left: '0px'
   }),
       _useState6 = _slicedToArray(_useState5, 2),
       dropdownStyle = _useState6[0],
@@ -145,23 +149,11 @@ var FormCombobox = function FormCombobox(_ref) {
   var comboboxRef = (0, _react.useRef)();
   var selectRef = (0, _react.useRef)();
   var inputRef = (0, _react.useRef)();
+  var suggestionListRef = (0, _react.useRef)();
   (0, _hooks.useDetectOutsideClick)(comboboxRef, function () {
     return setShowValidationRules(false);
   });
-  (0, _react.useEffect)(function () {
-    if ((selectDefaultValue === null || selectDefaultValue === void 0 ? void 0 : selectDefaultValue.label.length) > 0 && selectValue.label.length === 0) {
-      setSelectValue(selectDefaultValue);
-      input.onChange(selectDefaultValue.id);
-      onChange && onChange(selectDefaultValue);
-    }
-  }, [input, onChange, selectDefaultValue, selectValue.label.length]);
-  (0, _react.useEffect)(function () {
-    if (inputDefaultValue.length > 0 && selectValue.id.length > 0 && inputValue.length === 0) {
-      setInputValue(inputDefaultValue);
-      onChange && onChange(selectValue.id, inputDefaultValue);
-      input.onChange("".concat(selectValue.id).concat(inputDefaultValue));
-    }
-  }, [input, inputDefaultValue, inputValue.length, onChange, selectValue]);
+  var labelClassNames = (0, _classnames.default)('form-field__label', disabled && 'form-field__label-disabled');
   (0, _react.useEffect)(function () {
     setValidationRules(function (prevState) {
       return prevState.map(function (rule) {
@@ -184,7 +176,7 @@ var FormCombobox = function FormCombobox(_ref) {
     setIsInvalid(meta.invalid && (meta.validating || meta.modified || meta.submitFailed && meta.touched));
   }, [meta.invalid, meta.modified, meta.submitFailed, meta.touched, meta.validating]);
   var handleOutsideClick = (0, _react.useCallback)(function (event) {
-    if (comboboxRef.current && !comboboxRef.current.contains(event.target)) {
+    if (comboboxRef.current && !comboboxRef.current.contains(event.target) && suggestionListRef.current && !suggestionListRef.current.contains(event.target)) {
       setSearchIsFocused(false);
       setShowSelectDropdown(false);
       setShowSuggestionList(false);
@@ -215,8 +207,7 @@ var FormCombobox = function FormCombobox(_ref) {
   var handleInputChange = function handleInputChange(event) {
     var target = event.target;
     setDropdownStyle({
-      left: "".concat(target.selectionStart < 30 ? target.selectionStart : 30, "ch"),
-      paddingTop: '10px'
+      left: "".concat(target.selectionStart < 30 ? target.selectionStart : 30, "ch")
     });
 
     if (searchIsFocused) {
@@ -264,8 +255,7 @@ var FormCombobox = function FormCombobox(_ref) {
     setShowSuggestionList(false);
     inputRef.current.focus();
     setDropdownStyle({
-      left: "".concat(inputRef.current.selectionStart < 30 ? inputRef.current.selectionStart : 30, "ch"),
-      paddingTop: '10px'
+      left: "".concat(inputRef.current.selectionStart < 30 ? inputRef.current.selectionStart : 30, "ch")
     });
   };
 
@@ -298,8 +288,7 @@ var FormCombobox = function FormCombobox(_ref) {
       setShowSuggestionList(false);
       setShowValidationRules(false);
       setDropdownStyle({
-        left: '0',
-        paddingTop: '10px'
+        left: '0px'
       });
       setShowSelectDropdown(true);
       input.onFocus(new Event('focus'));
@@ -307,8 +296,10 @@ var FormCombobox = function FormCombobox(_ref) {
     }
   }, [input, onBlur, onFocus, showSelectDropdown]);
 
-  var validateField = function validateField(value) {
-    var valueToValidate = value !== null && value !== void 0 ? value : '';
+  var validateField = function validateField(value, allValues) {
+    var _value$split$;
+
+    var valueToValidate = (_value$split$ = value.split(selectValue.id)[1]) !== null && _value$split$ !== void 0 ? _value$split$ : '';
     var validationError = null;
 
     if (!(0, _lodash.isEmpty)(validationRules)) {
@@ -346,7 +337,7 @@ var FormCombobox = function FormCombobox(_ref) {
     }
 
     if (!validationError && validator) {
-      validationError = validator(value);
+      validationError = validator(value, allValues);
     }
 
     return validationError;
@@ -361,20 +352,32 @@ var FormCombobox = function FormCombobox(_ref) {
 
   var comboboxClassNames = (0, _classnames.default)(comboboxClassName, 'form-field-combobox', 'form-field', isInvalid && 'form-field-combobox_invalid');
   var iconClassNames = (0, _classnames.default)(showSelectDropdown && 'form-field-combobox__icon_open', 'form-field-combobox__icon');
-  var selectClassNames = (0, _classnames.default)('form-field-combobox__select', 'form-field__control', showSelectDropdown && 'form-field-combobox__select_open', selectValue.id.length <= 5 && selectValue.id.length !== 0 && 'form-field-combobox__select_short');
   var selectValueClassNames = (0, _classnames.default)(selectValue.className);
-  var dropdownClassNames = (0, _classnames.default)('form-field-combobox__dropdown', 'form-field-combobox__input-dropdown', showSuggestionList && dropdownList.length > 0 && 'form-field-combobox__input-dropdown_visible');
   var wrapperClassNames = (0, _classnames.default)('form-field__wrapper', "form-field__wrapper-".concat(density), disabled && 'form-field__wrapper-disabled', isInvalid && 'form-field__wrapper-invalid', withoutBorder && 'without-border');
   return /*#__PURE__*/(0, _jsxRuntime.jsx)(_reactFinalForm.Field, {
     name: name,
     validate: validateField,
     children: function children(_ref3) {
+      var _meta$error$label, _meta$error;
+
       var input = _ref3.input,
           meta = _ref3.meta;
-      return /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
+      return /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
         className: comboboxClassNames,
         ref: comboboxRef,
-        children: /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
+        children: [label && /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
+          className: labelClassNames,
+          children: /*#__PURE__*/(0, _jsxRuntime.jsxs)("label", {
+            "data-testid": "label",
+            htmlFor: input.name,
+            children: [label, (required || validationRules.find(function (rule) {
+              return rule.name === 'required';
+            })) && /*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
+              className: "form-field__label-mandatory",
+              children: " *"
+            })]
+          })
+        }), /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
           className: wrapperClassNames,
           children: [/*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
             className: "form-field__icons",
@@ -383,7 +386,7 @@ var FormCombobox = function FormCombobox(_ref) {
               onClick: toggleSelect
             })
           }), /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
-            className: selectClassNames,
+            className: "form-field-combobox__select form-field__control",
             ref: selectRef,
             children: [/*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
               className: "form-field-combobox__select-header",
@@ -392,20 +395,21 @@ var FormCombobox = function FormCombobox(_ref) {
                 className: selectValueClassNames,
                 children: selectValue.id
               }), selectValue.id.length === 0 && selectPlaceholder && /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
-                className: "form-field__label",
-                children: /*#__PURE__*/(0, _jsxRuntime.jsxs)("label", {
-                  children: [selectPlaceholder, (meta.error || required) && /*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
-                    className: "form-field__label-mandatory",
-                    children: " *"
-                  })]
+                className: "form-field-combobox__placeholder",
+                children: /*#__PURE__*/(0, _jsxRuntime.jsx)("label", {
+                  children: selectPlaceholder
                 })
               })]
-            }), /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
-              className: "form-field-combobox__select-body form-field-combobox__dropdown",
+            }), showSelectDropdown && /*#__PURE__*/(0, _jsxRuntime.jsx)(_PopUpDialog.default, {
+              customPosition: {
+                element: selectRef,
+                position: 'bottom-right'
+              },
+              className: "form-field-combobox__dropdown form-field-combobox__dropdown-select",
               children: /*#__PURE__*/(0, _jsxRuntime.jsx)("ul", {
-                className: "form-field-combobox__list",
+                className: "form-field-combobox__dropdown-list",
                 children: selectOptions.map(function (option) {
-                  var selectOptionClassNames = (0, _classnames.default)('form-field-combobox__list-option', option.className);
+                  var selectOptionClassNames = (0, _classnames.default)('form-field-combobox__dropdown-list-option', option.className);
                   return /*#__PURE__*/(0, _jsxRuntime.jsx)("li", {
                     className: selectOptionClassNames,
                     onClick: function onClick() {
@@ -423,50 +427,65 @@ var FormCombobox = function FormCombobox(_ref) {
             onFocus: inputOnFocus,
             placeholder: inputPlaceholder,
             ref: inputRef,
+            required: required,
             type: "text",
             value: inputValue
-          }), /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
-            className: dropdownClassNames,
+          }), showSuggestionList && (dropdownList.length > 0 || searchIsFocused) && /*#__PURE__*/(0, _jsxRuntime.jsx)(_PopUpDialog.default, {
+            customPosition: {
+              element: selectRef,
+              position: 'bottom-right'
+            },
+            className: "form-field-combobox__dropdown form-field-combobox__dropdown-suggestions",
             style: _objectSpread({}, dropdownStyle),
-            children: [!hideSearchInput && /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
-              className: "form-field-combobox__search-wrapper",
-              children: [/*#__PURE__*/(0, _jsxRuntime.jsx)("input", {
-                className: "form-field-combobox__search form-field__control",
-                onChange: suggestionListSearchChange,
-                onFocus: function onFocus() {
-                  return setSearchIsFocused(true);
-                },
-                placeholder: "Type to search",
-                type: "text"
-              }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_search.ReactComponent, {})]
-            }), /*#__PURE__*/(0, _jsxRuntime.jsx)("ul", {
-              className: "form-field-combobox__list",
-              children: searchIsFocused && dropdownList.length === 0 ? /*#__PURE__*/(0, _jsxRuntime.jsx)("li", {
-                className: "form-field-combobox__list-option",
-                children: "No data"
-              }, "no data") : dropdownList.map(function (value) {
-                return /*#__PURE__*/(0, _jsxRuntime.jsx)("li", {
-                  className: "form-field-combobox__list-option",
-                  onClick: function onClick() {
-                    return handleSuggestionListOptionClick(value);
+            children: /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
+              ref: suggestionListRef,
+              children: [!hideSearchInput && /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
+                className: "form-field-combobox__search-wrapper",
+                children: [/*#__PURE__*/(0, _jsxRuntime.jsx)("input", {
+                  className: "form-field-combobox__search form-field__control",
+                  onChange: suggestionListSearchChange,
+                  onFocus: function onFocus() {
+                    return setSearchIsFocused(true);
                   },
-                  children: value.label
-                }, value.id);
-              })
-            })]
-          }), /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
+                  placeholder: "Type to search",
+                  type: "text"
+                }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_search.ReactComponent, {})]
+              }), /*#__PURE__*/(0, _jsxRuntime.jsx)("ul", {
+                className: "form-field-combobox__dropdown-list",
+                children: searchIsFocused && dropdownList.length === 0 ? /*#__PURE__*/(0, _jsxRuntime.jsx)("li", {
+                  className: "form-field-combobox__dropdown-list-option",
+                  children: "No data"
+                }, "no data") : dropdownList.map(function (value) {
+                  return /*#__PURE__*/(0, _jsxRuntime.jsx)("li", {
+                    className: "form-field-combobox__dropdown-list-option",
+                    onClick: function onClick() {
+                      return handleSuggestionListOptionClick(value);
+                    },
+                    children: value.label
+                  }, value.id);
+                })
+              })]
+            })
+          }), /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
             className: "form-field__icons",
-            children: isInvalid && Array.isArray(meta.error) && /*#__PURE__*/(0, _jsxRuntime.jsx)("button", {
+            children: [isInvalid && !Array.isArray(meta.error) && /*#__PURE__*/(0, _jsxRuntime.jsx)(_Tooltip.default, {
+              className: "form-field__warning",
+              template: /*#__PURE__*/(0, _jsxRuntime.jsx)(_TextTooltipTemplate.default, {
+                text: (_meta$error$label = (_meta$error = meta.error) === null || _meta$error === void 0 ? void 0 : _meta$error.label) !== null && _meta$error$label !== void 0 ? _meta$error$label : invalidText,
+                warning: true
+              }),
+              children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_invalid.ReactComponent, {})
+            }), isInvalid && Array.isArray(meta.error) && /*#__PURE__*/(0, _jsxRuntime.jsx)("button", {
               className: "form-field__warning",
               onClick: warningIconClick,
               children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_warning.ReactComponent, {})
-            })
+            })]
           }), !(0, _lodash.isEmpty)(validationRules) && /*#__PURE__*/(0, _jsxRuntime.jsx)(_elements.OptionsMenu, {
             show: showValidationRules,
             ref: comboboxRef,
             children: getValidationRules()
           })]
-        })
+        })]
       });
     }
   });
@@ -479,13 +498,18 @@ FormCombobox.defaultProps = {
   hideSearchInput: false,
   inputDefaultValue: '',
   inputPlaceholder: '',
+  label: '',
   maxSuggestedMatches: 1,
   onBlur: null,
   onFocus: null,
   onChange: null,
   required: false,
   rules: [],
-  selectDefaultValue: null,
+  selectDefaultValue: {
+    label: '',
+    id: '',
+    className: ''
+  },
   selectPlaceholder: '',
   suggestionList: [],
   validator: null,
@@ -499,6 +523,7 @@ FormCombobox.propTypes = {
   inputDefaultValue: _propTypes.default.string,
   inputPlaceholder: _propTypes.default.string,
   invalidText: _propTypes.default.string,
+  label: _propTypes.default.string,
   maxSuggestedMatches: _propTypes.default.number,
   name: _propTypes.default.string.isRequired,
   onBlur: _propTypes.default.func,
@@ -506,7 +531,7 @@ FormCombobox.propTypes = {
   onFocus: _propTypes.default.func,
   required: _propTypes.default.bool,
   rules: _propTypes.default.array,
-  selectDefaultValue: _propTypes.default.string,
+  selectDefaultValue: _propTypes.default.shape({}),
   selectOptions: _types.COMBOBOX_SELECT_OPTIONS.isRequired,
   selectPlaceholder: _propTypes.default.string,
   suggestionList: _types.COMBOBOX_SUGGESTION_LIST,

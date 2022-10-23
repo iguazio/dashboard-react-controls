@@ -1,7 +1,7 @@
 
 
-Create a new dist version 0.0.20
+Create a new dist version 0.0.21
 
 Collecting:
-- Impl [Storybook] Add new stories for components (#63)
-- Impl [Models] add label validation (#65)
+- Fix [Tip] align icon to center (#67)
+- Add/Change target path to register model, dataset and artifacts wizard (#64)
