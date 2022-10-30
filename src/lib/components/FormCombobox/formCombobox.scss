@@ -13,11 +13,11 @@
       .form-field-combobox__icon {
         cursor: pointer;
         padding: 0;
+        transition: transform 200ms linear;
 
         &_open {
           transform: rotate(90deg);
           transform-origin: center center;
-          transition: transform 200ms linear;
         }
       }
     }
@@ -29,21 +29,31 @@
         text-align: left;
         text-transform: capitalize;
         background-color: transparent;
+
+        label {
+          cursor: inherit;
+        }
       }
+
       &__select {
-        flex: unset;
         padding: 0;
-        max-width: 110px;
         overflow: visible;
 
         &-header {
           display: flex;
+          flex: 1;
           align-items: center;
+          cursor: pointer;
         }
       }
 
       &__input {
+        width: 100%;
         padding: 0;
+
+        &_hidden {
+          flex: 0;
+        }
       }
     }
   }
@@ -59,7 +69,6 @@
       align-items: center;
       margin: 0 9px;
       border-bottom: $dividerBorder;
-
     }
   }
 
@@ -101,7 +110,7 @@
     }
   }
 
-  & .path-type,
+  .path-type,
   &__dropdown .path-type {
     &-store {
       color: $amethyst;

@@ -346,8 +346,9 @@ const FormCombobox = ({
               )}
             </div>
             <input
-              className="form-field-combobox__input form-field__control"
-              disabled={selectValue.id.length === 0}
+              className={`form-field-combobox__input ${
+                selectValue.id.length === 0 ? 'form-field-combobox__input_hidden' : ''
+              }`}
               onChange={handleInputChange}
               onFocus={inputOnFocus}
               placeholder={inputPlaceholder}

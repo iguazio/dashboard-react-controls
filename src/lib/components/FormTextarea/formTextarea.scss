@@ -7,7 +7,9 @@
   width: 100%;
 
   textarea {
+    height: inherit;
     width: 100%;
+    padding: 12px 16px;
     white-space: normal;
   }
 
@@ -17,11 +19,6 @@
     &__wrapper {
       .form-field__control {
         padding: 0;
-
-        & > *:first-child {
-          height: inherit;
-          padding: 12px 0 12px 16px;
-        }
       }
     }
 
