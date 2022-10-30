@@ -36,6 +36,7 @@ const Wizard = ({
   onWizardSubmit,
   location,
   size,
+  subTitle,
   title,
   stepsConfig,
   submitButtonLabel
@@ -125,6 +126,7 @@ const Wizard = ({
       location={location}
       show={isWizardOpen}
       size={size}
+      subTitle={subTitle}
       title={title}
     >
       <WizardSteps activeStepNumber={activeStepNumber} jumpToStep={jumpToStep} steps={stepsMenu} />
@@ -138,7 +140,8 @@ Wizard.defaultProps = {
   confirmClose: false,
   size: MODAL_MD,
   stepsConfig: [],
-  submitButtonLabel: 'Submit'
+  submitButtonLabel: 'Submit',
+  subTitle: null
 }
 
 Wizard.propsTypes = {
@@ -150,6 +153,7 @@ Wizard.propsTypes = {
   onWizardSubmit: PropTypes.func.isRequired,
   location: PropTypes.string.isRequired,
   size: MODAL_SIZES,
+  subTitle: PropTypes.string,
   title: PropTypes.string.isRequired,
   stepsConfig: WIZARD_STEPS_CONFIG,
   submitButtonLabel: PropTypes.string

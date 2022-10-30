@@ -58,6 +58,13 @@
       margin: 0;
     }
 
+    &-subTitle {
+      color: $primary;
+      font-size: 1em;
+      font-weight: 400;
+      line-height: 2em;
+    }
+
     &-button {
       position: absolute;
       top: 10px;
