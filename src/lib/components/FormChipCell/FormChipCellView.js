@@ -91,7 +91,7 @@ const FormChipCellView = React.forwardRef(
                     const chipData = fields.value[index]
                     return (
                       index < chips.visibleChips.length && (
-                        <div className="chip-block" key={chipData.id || chipData.key}>
+                        <div className="chip-block" key={chipData.id}>
                           <Tooltip
                             hidden={editConfig.isEdit}
                             key={chipData.id}

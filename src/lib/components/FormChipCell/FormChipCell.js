@@ -74,10 +74,9 @@ const FormChipCell = ({
         }
       : generateChipsList(
           get(formState.values, name),
-          visibleChipsMaxLength ? visibleChipsMaxLength : visibleChipsCount,
-          delimiter
+          visibleChipsMaxLength ? visibleChipsMaxLength : visibleChipsCount
         )
-  }, [visibleChipsMaxLength, isEditMode, visibleChipsCount, delimiter, formState.values, name])
+  }, [visibleChipsMaxLength, isEditMode, visibleChipsCount, formState.values, name])
 
   const handleResize = useCallback(() => {
     if (!isEditMode && !isEveryObjectValueEmpty(chipsSizes)) {
