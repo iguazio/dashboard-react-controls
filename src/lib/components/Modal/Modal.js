@@ -45,7 +45,7 @@ const Modal = ({ actions, children, className, onClose, size, show, subTitle, ti
           <div className="modal__content">
             <div className="modal__header">
               <h5 className="modal__header-title">{title}</h5>
-              {subTitle && <h6 className="modal__header-subTitle">{subTitle}</h6>}
+              {subTitle && <h6 className="modal__header-sub-title">{subTitle}</h6>}
             </div>
             <div className="modal__body">{children}</div>
             {actions && actions.length > 0 && (
