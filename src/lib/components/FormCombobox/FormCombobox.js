@@ -115,8 +115,8 @@ const FormCombobox = ({
       if (
         comboboxRef.current &&
         !comboboxRef.current.contains(event.target) &&
-        suggestionListRef.current &&
-        !suggestionListRef.current.contains(event.target)
+        selectRef.current &&
+        !selectRef.current.contains(event.target)
       ) {
         setSearchIsFocused(false)
         setShowSelectDropdown(false)
@@ -128,6 +128,20 @@ const FormCombobox = ({
     [input, onBlur]
   )
 
+  const handleScroll = (event) => {
+    if (comboboxRef.current.contains(event.target)) return
+
+    if (
+      !event.target.closest('.pop-up-dialog') &&
+      !event.target.classList.contains('form-field-combobox')
+    ) {
+      setShowValidationRules(false)
+      setShowSelectDropdown(false)
+      setShowSuggestionList(false)
+      inputRef.current.blur()
+    }
+  }
+
   useEffect(() => {
     window.addEventListener('click', handleOutsideClick)
 
@@ -135,6 +149,15 @@ const FormCombobox = ({
       window.removeEventListener('click', handleOutsideClick)
     }
   }, [handleOutsideClick])
+
+  useEffect(() => {
+    if (showValidationRules || showSelectDropdown || showSuggestionList) {
+      window.addEventListener('scroll', handleScroll, true)
+    }
+    return () => {
+      window.removeEventListener('scroll', handleScroll, true)
+    }
+  }, [showSelectDropdown, showSuggestionList, showValidationRules])
 
   const getValidationRules = () => {
     return validationRules.map(({ isValid = false, label, name }) => {
@@ -323,7 +346,7 @@ const FormCombobox = ({
               {showSelectDropdown && (
                 <PopUpDialog
                   customPosition={{
-                    element: selectRef,
+                    element: comboboxRef,
                     position: 'bottom-right'
                   }}
                   className="form-field-combobox__dropdown form-field-combobox__dropdown-select"
@@ -362,7 +385,7 @@ const FormCombobox = ({
             {showSuggestionList && (dropdownList.length > 0 || searchIsFocused) && (
               <PopUpDialog
                 customPosition={{
-                  element: selectRef,
+                  element: comboboxRef,
                   position: 'bottom-right'
                 }}
                 className="form-field-combobox__dropdown form-field-combobox__dropdown-suggestions"
