@@ -987,7 +987,6 @@
   display: flex;
   flex: 1;
   flex-flow: row nowrap;
-  align-items: center;
   position: relative;
   width: 100%;
   color: $primary;
@@ -1063,7 +1062,6 @@
     flex: 1;
     align-items: center;
     overflow: hidden;
-    padding: 0 8px 0 16px;
   }
 
   &__icons {
