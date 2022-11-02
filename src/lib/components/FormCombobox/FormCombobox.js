@@ -341,7 +341,7 @@ const FormCombobox = ({
               {showSelectDropdown && (
                 <PopUpDialog
                   customPosition={{
-                    element: comboboxRef,
+                    element: selectRef,
                     position: 'bottom-right'
                   }}
                   className="form-field-combobox__dropdown form-field-combobox__dropdown-select"
@@ -369,6 +369,7 @@ const FormCombobox = ({
             </div>
             <input
               className={inputClassNames}
+              id={input.name}
               onChange={handleInputChange}
               onFocus={inputOnFocus}
               placeholder={inputPlaceholder}
@@ -380,7 +381,7 @@ const FormCombobox = ({
             {showSuggestionList && (dropdownList.length > 0 || searchIsFocused) && (
               <PopUpDialog
                 customPosition={{
-                  element: comboboxRef,
+                  element: selectRef,
                   position: 'bottom-right'
                 }}
                 className="form-field-combobox__dropdown form-field-combobox__dropdown-suggestions"
