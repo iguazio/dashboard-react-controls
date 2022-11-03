@@ -154,6 +154,7 @@ var FormCombobox = function FormCombobox(_ref) {
     return setShowValidationRules(false);
   });
   var labelClassNames = (0, _classnames.default)('form-field__label', disabled && 'form-field__label-disabled');
+  var inputClassNames = (0, _classnames.default)('form-field-combobox__input', selectValue.id.length === 0 && 'form-field-combobox__input_hidden');
   (0, _react.useEffect)(function () {
     setValidationRules(function (prevState) {
       return prevState.map(function (rule) {
@@ -176,7 +177,7 @@ var FormCombobox = function FormCombobox(_ref) {
     setIsInvalid(meta.invalid && (meta.validating || meta.modified || meta.submitFailed && meta.touched));
   }, [meta.invalid, meta.modified, meta.submitFailed, meta.touched, meta.validating]);
   var handleOutsideClick = (0, _react.useCallback)(function (event) {
-    if (comboboxRef.current && !comboboxRef.current.contains(event.target) && suggestionListRef.current && !suggestionListRef.current.contains(event.target)) {
+    if (comboboxRef.current && !comboboxRef.current.contains(event.target)) {
       setSearchIsFocused(false);
       setShowSelectDropdown(false);
       setShowSuggestionList(false);
@@ -184,12 +185,33 @@ var FormCombobox = function FormCombobox(_ref) {
       onBlur && onBlur(input.value);
     }
   }, [input, onBlur]);
+
+  var handleScroll = function handleScroll(event) {
+    if (comboboxRef.current.contains(event.target)) return;
+
+    if (!event.target.closest('.pop-up-dialog') && !event.target.classList.contains('form-field-combobox')) {
+      setShowValidationRules(false);
+      setShowSelectDropdown(false);
+      setShowSuggestionList(false);
+      inputRef.current.blur();
+    }
+  };
+
   (0, _react.useEffect)(function () {
     window.addEventListener('click', handleOutsideClick);
     return function () {
       window.removeEventListener('click', handleOutsideClick);
     };
   }, [handleOutsideClick]);
+  (0, _react.useEffect)(function () {
+    if (showValidationRules || showSelectDropdown || showSuggestionList) {
+      window.addEventListener('scroll', handleScroll, true);
+    }
+
+    return function () {
+      window.removeEventListener('scroll', handleScroll, true);
+    };
+  }, [showSelectDropdown, showSuggestionList, showValidationRules]);
 
   var getValidationRules = function getValidationRules() {
     return validationRules.map(function (_ref2) {
@@ -421,8 +443,8 @@ var FormCombobox = function FormCombobox(_ref) {
               })
             })]
           }), /*#__PURE__*/(0, _jsxRuntime.jsx)("input", {
-            className: "form-field-combobox__input form-field__control",
-            disabled: selectValue.id.length === 0,
+            className: inputClassNames,
+            id: input.name,
             onChange: handleInputChange,
             onFocus: inputOnFocus,
             placeholder: inputPlaceholder,

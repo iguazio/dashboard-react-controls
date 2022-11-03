@@ -113,8 +113,8 @@ var FormChipCell = function FormChipCell(_ref) {
     return isEditMode || visibleChipsMaxLength === 'all' ? {
       visibleChips: (0, _lodash.get)(formState.values, name),
       hiddenChips: []
-    } : (0, _generateChipsList.generateChipsList)((0, _lodash.get)(formState.values, name), visibleChipsMaxLength ? visibleChipsMaxLength : visibleChipsCount, delimiter);
-  }, [visibleChipsMaxLength, isEditMode, visibleChipsCount, delimiter, formState.values, name]);
+    } : (0, _generateChipsList.generateChipsList)((0, _lodash.get)(formState.values, name), visibleChipsMaxLength ? visibleChipsMaxLength : visibleChipsCount);
+  }, [visibleChipsMaxLength, isEditMode, visibleChipsCount, formState.values, name]);
   var handleResize = (0, _react.useCallback)(function () {
     if (!isEditMode && !(0, _common.isEveryObjectValueEmpty)(chipsSizes)) {
       var _chipsCellRef$current;

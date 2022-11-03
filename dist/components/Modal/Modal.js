@@ -49,10 +49,10 @@ var Modal = function Modal(_ref) {
   var actions = _ref.actions,
       children = _ref.children,
       className = _ref.className,
-      location = _ref.location,
       onClose = _ref.onClose,
       size = _ref.size,
       show = _ref.show,
+      subTitle = _ref.subTitle,
       title = _ref.title;
   var modalClassNames = (0, _classnames.default)('modal', className, size && "modal-".concat(size));
   return /*#__PURE__*/(0, _jsxRuntime.jsxs)(_jsxRuntime.Fragment, {
@@ -77,12 +77,15 @@ var Modal = function Modal(_ref) {
           })
         }), /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
           className: "modal__content",
-          children: [/*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
+          children: [/*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
             className: "modal__header",
-            children: /*#__PURE__*/(0, _jsxRuntime.jsx)("h5", {
+            children: [/*#__PURE__*/(0, _jsxRuntime.jsx)("h5", {
               className: "modal__header-title",
               children: title
-            })
+            }), subTitle && /*#__PURE__*/(0, _jsxRuntime.jsx)("h6", {
+              className: "modal__header-sub-title",
+              children: subTitle
+            })]
           }), /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
             className: "modal__body",
             children: children
@@ -107,15 +110,16 @@ Modal.defaultProps = {
   actions: [],
   show: false,
   size: _constants.MODAL_MD,
+  subTitle: null,
   title: ''
 };
 Modal.propTypes = {
   actions: _propTypes.default.array,
   children: _propTypes.default.oneOfType([_propTypes.default.element, _propTypes.default.object, _propTypes.default.node, _propTypes.default.string]).isRequired,
-  location: _propTypes.default.object.isRequired,
   onClose: _propTypes.default.func.isRequired,
   show: _propTypes.default.bool.isRequired,
   size: _types.MODAL_SIZES,
+  subTitle: _propTypes.default.string,
   title: _propTypes.default.string
 };
 var _default = Modal;

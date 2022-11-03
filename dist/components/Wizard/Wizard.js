@@ -60,6 +60,7 @@ var Wizard = function Wizard(_ref) {
       onWizardSubmit = _ref.onWizardSubmit,
       location = _ref.location,
       size = _ref.size,
+      subTitle = _ref.subTitle,
       title = _ref.title,
       stepsConfig = _ref.stepsConfig,
       submitButtonLabel = _ref.submitButtonLabel;
@@ -158,6 +159,7 @@ var Wizard = function Wizard(_ref) {
     location: location,
     show: isWizardOpen,
     size: size,
+    subTitle: subTitle,
     title: title,
     children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_WizardSteps.default, {
       activeStepNumber: activeStepNumber,
@@ -175,7 +177,8 @@ Wizard.defaultProps = {
   confirmClose: false,
   size: _constants.MODAL_MD,
   stepsConfig: [],
-  submitButtonLabel: 'Submit'
+  submitButtonLabel: 'Submit',
+  subTitle: null
 };
 Wizard.propsTypes = {
   className: _propTypes.default.string,
@@ -186,6 +189,7 @@ Wizard.propsTypes = {
   onWizardSubmit: _propTypes.default.func.isRequired,
   location: _propTypes.default.string.isRequired,
   size: _types.MODAL_SIZES,
+  subTitle: _propTypes.default.string,
   title: _propTypes.default.string.isRequired,
   stepsConfig: _types.WIZARD_STEPS_CONFIG,
   submitButtonLabel: _propTypes.default.string

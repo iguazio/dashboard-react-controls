@@ -1,7 +1,7 @@
 
 
-Create a new dist version 0.0.21
+Create a new dist version 0.0.22
 
 Collecting:
-- Fix [Tip] align icon to center (#67)
-- Add/Change target path to register model, dataset and artifacts wizard (#64)
+- Impl [Modal] add sub title prop in the header  (#69)
+- Fix [Combobox] hide dropdown on page scroll (#70)

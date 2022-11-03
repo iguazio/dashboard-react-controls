@@ -43,18 +43,23 @@
 
   &__header {
     position: relative;
-    padding: 1.5rem 2rem;
-    display: flex;
-    flex-shrink: 0;
-    justify-content: center;
-    align-items: center;
     border-bottom: $primaryBorder;
+    text-align: center;
+    vertical-align: middle;
+    padding: 1.5rem 2rem;
 
     &-title {
       color: $primary;
       font-size: 2em;
-      font-weight: 400;
       text-transform: capitalize;
+      margin: 0;
+    }
+
+    &-sub-title {
+      color: $primary;
+      font-size: 1.5em;
+      font-weight: 400;
+      line-height: 2em;
       margin: 0;
     }
 
