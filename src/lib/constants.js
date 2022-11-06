@@ -58,5 +58,3 @@ export const FORBIDDEN_ERROR_STATUS_CODE = 403
 export const MODAL_SM = 'sm'
 export const MODAL_MD = 'md'
 export const MODAL_LG = 'lg'
-export const MODAL_MIN = 'min'
-export const MODAL_MAX = 'max'
