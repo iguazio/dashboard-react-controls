@@ -1,7 +1,6 @@
 
 
-Create a new dist version 0.0.22
+Create a new dist version 0.0.23
 
 Collecting:
-- Impl [Modal] add sub title prop in the header  (#69)
-- Fix [Combobox] hide dropdown on page scroll (#70)
+- Impl [UI] Manage Artifact tagging (#72)

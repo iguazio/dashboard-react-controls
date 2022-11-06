@@ -27,7 +27,7 @@ illegal under applicable law, and the grant of the foregoing license
 under the Apache 2.0 license is conditioned upon your compliance with
 such restriction.
 */
-var BUTTON_VARIANTS = _propTypes.default.oneOf([_constants.PRIMARY_BUTTON, _constants.SECONDARY_BUTTON, _constants.TERTIARY_BUTTON, _constants.DANGER_BUTTON, _constants.LABEL_BUTTON]);
+var BUTTON_VARIANTS = _propTypes.default.oneOf([_constants.DANGER_BUTTON, _constants.LABEL_BUTTON, _constants.PRIMARY_BUTTON, _constants.SECONDARY_BUTTON, _constants.TERTIARY_BUTTON]);
 
 exports.BUTTON_VARIANTS = BUTTON_VARIANTS;
 
@@ -51,7 +51,7 @@ var CHIP_INPUT_LIST = _propTypes.default.arrayOf(_propTypes.default.shape({
 exports.CHIP_INPUT_LIST = CHIP_INPUT_LIST;
 
 var CHIP_OPTIONS = _propTypes.default.shape({
-  background: _propTypes.default.oneOf(['none', 'orange', 'green', 'purple', 'grey', 'sorbus', 'java', 'amethyst']),
+  background: _propTypes.default.oneOf(['amethyst', 'green', 'grey', 'java', 'none', 'orange', 'purple', 'sorbus']),
   boldValue: _propTypes.default.bool,
   borderColor: _propTypes.default.oneOf(['transparent', 'orange', 'green', 'purple', 'grey']),
   density: _propTypes.default.oneOf(['dense', 'normal', 'medium']),
@@ -72,7 +72,7 @@ var POP_UP_CUSTOM_POSITION = _propTypes.default.shape({
 
 exports.POP_UP_CUSTOM_POSITION = POP_UP_CUSTOM_POSITION;
 
-var MODAL_SIZES = _propTypes.default.oneOf([_constants.MODAL_SM, _constants.MODAL_MD, _constants.MODAL_LG]);
+var MODAL_SIZES = _propTypes.default.oneOf([_constants.MODAL_SM, _constants.MODAL_MD, _constants.MODAL_LG, _constants.MODAL_MIN, _constants.MODAL_MAX]);
 
 exports.MODAL_SIZES = MODAL_SIZES;
 
