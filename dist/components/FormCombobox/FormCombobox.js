@@ -431,14 +431,16 @@ var FormCombobox = function FormCombobox(_ref) {
               children: /*#__PURE__*/(0, _jsxRuntime.jsx)("ul", {
                 className: "form-field-combobox__dropdown-list",
                 children: selectOptions.map(function (option) {
-                  var selectOptionClassNames = (0, _classnames.default)('form-field-combobox__dropdown-list-option', option.className);
-                  return /*#__PURE__*/(0, _jsxRuntime.jsx)("li", {
-                    className: selectOptionClassNames,
-                    onClick: function onClick() {
-                      return handleSelectOptionClick(option);
-                    },
-                    children: option.label
-                  }, option.id);
+                  if (!option.hidden) {
+                    var selectOptionClassNames = (0, _classnames.default)('form-field-combobox__dropdown-list-option', option.className);
+                    return /*#__PURE__*/(0, _jsxRuntime.jsx)("li", {
+                      className: selectOptionClassNames,
+                      onClick: function onClick() {
+                        return handleSelectOptionClick(option);
+                      },
+                      children: option.label
+                    }, option.id);
+                  }
                 })
               })
             })]

@@ -1,6 +1,6 @@
 
 
-Create a new dist version 0.0.23
+Create a new dist version 0.0.24
 
 Collecting:
-- Impl [UI] Manage Artifact tagging (#72)
+- Fix [Combobox] add ability to hide option (#74)
