@@ -348,20 +348,22 @@ const FormCombobox = ({
                 >
                   <ul className="form-field-combobox__dropdown-list">
                     {selectOptions.map((option) => {
-                      const selectOptionClassNames = classnames(
-                        'form-field-combobox__dropdown-list-option',
-                        option.className
-                      )
+                      if (!option.hidden) {
+                        const selectOptionClassNames = classnames(
+                          'form-field-combobox__dropdown-list-option',
+                          option.className
+                        )
 
-                      return (
-                        <li
-                          className={selectOptionClassNames}
-                          key={option.id}
-                          onClick={() => handleSelectOptionClick(option)}
-                        >
-                          {option.label}
-                        </li>
-                      )
+                        return (
+                          <li
+                            className={selectOptionClassNames}
+                            key={option.id}
+                            onClick={() => handleSelectOptionClick(option)}
+                          >
+                            {option.label}
+                          </li>
+                        )
+                      }
                     })}
                   </ul>
                 </PopUpDialog>
