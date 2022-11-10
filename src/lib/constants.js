@@ -49,9 +49,11 @@ export const validation = {
 
 /*=========== STATUS CODES =============*/
 
-export const INTERNAL_SERVER_ERROR_STATUS_CODE = 500
-export const CONFLICT_ERROR_STATUS_CODE = 409
+export const BADREQUEST_ERROR_STATUS_CODE = 400
 export const FORBIDDEN_ERROR_STATUS_CODE = 403
+export const NOTFOUND_ERROR_STATUS_CODE = 404
+export const CONFLICT_ERROR_STATUS_CODE = 409
+export const INTERNAL_SERVER_ERROR_STATUS_CODE = 500
 
 /*=========== MODAL =============*/
 
