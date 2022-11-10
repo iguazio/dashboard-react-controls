@@ -1,6 +1,6 @@
 
 
-Create a new dist version 0.0.24
+Create a new dist version 0.0.25
 
 Collecting:
-- Fix [Combobox] add ability to hide option (#74)
+- Impl [ui] new error status codes (#76)
