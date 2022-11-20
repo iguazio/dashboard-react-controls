@@ -1,6 +1,7 @@
 
 
-Create a new dist version 0.0.25
+Create a new dist version 0.0.26
 
 Collecting:
-- Impl [ui] new error status codes (#76)
+- Fix [Artifacts] information row is missing (#78)
+- Fix [UI] Trimmed tooltips of dataset labels (#79)
