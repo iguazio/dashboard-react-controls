@@ -1,7 +1,6 @@
 
 
-Create a new dist version 0.0.26
+Create a new dist version 0.0.27
 
 Collecting:
-- Fix [Artifacts] information row is missing (#78)
-- Fix [UI] Trimmed tooltips of dataset labels (#79)
+- Fix [Artifacts] missing input validation logic in "edit tag" dialog (#81)

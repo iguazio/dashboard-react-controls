@@ -1,15 +1,19 @@
 "use strict";
 
+function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
+
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.required = exports.getValidationRules = exports.checkPatternsValidity = void 0;
 
-var _lodash = _interopRequireDefault(require("lodash"));
+var _lodash = _interopRequireWildcard(require("lodash"));
 
 var _constants = require("../constants");
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
+
+function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
 
@@ -76,14 +80,17 @@ var required = function required() {
  * @function checkPatternsValidity
  * @param {Array} validationRules Array of Validation Rule Objects {name: "", lable: "", pattren: [Function || Regex]}
  * @param {string} value Field value to check validity
+ * @param {boolean} required Specified if the value should be validated
  * @returns {Array} [validationRules, isFieldValid] New validationRules With `isValid` property, `true` in case there is at least one failed validation rule, or `false` otherwise.
  */
 
 
 exports.required = required;
 
-var checkPatternsValidity = function checkPatternsValidity(validationRules, value) {
-  var newRules = validationRules.map(function (rule) {
+var checkPatternsValidity = function checkPatternsValidity(validationRules) {
+  var value = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : '';
+  var required = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : true;
+  var newRules = !required && (0, _lodash.isEmpty)(value) ? validationRules : validationRules.map(function (rule) {
     return _objectSpread(_objectSpread({}, rule), {}, {
       isValid: _lodash.default.isFunction(rule.pattern) ? rule.pattern(value) :
       /* else, it is a RegExp */
