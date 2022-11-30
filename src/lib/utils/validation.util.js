@@ -80,16 +80,32 @@ export const required =
  * @param {boolean} required Specified if the value should be validated
  * @returns {Array} [validationRules, isFieldValid] New validationRules With `isValid` property, `true` in case there is at least one failed validation rule, or `false` otherwise.
  */
-export const checkPatternsValidity = (validationRules, value = '', required = true) => {
-  const newRules =
+
+export const checkPatternsValidity = async (validationRules, value = '', required = true) => {
+  const asyncRules = await Promise.all(
+    validationRules
+      .filter((rule) => rule.async)
+      .map(async (rule) => ({
+        ...rule,
+        isValid: await rule.pattern(value)
+      }))
+  )
+
+  const syncRules =
     !required && isEmpty(value)
       ? validationRules
-      : validationRules.map((rule) => ({
-          ...rule,
-          isValid: lodash.isFunction(rule.pattern)
-            ? rule.pattern(value)
-            : /* else, it is a RegExp */ rule.pattern.test(value)
-        }))
+      : validationRules
+          .filter((rule) => !rule.async)
+          .map((rule) => {
+            return {
+              ...rule,
+              isValid: lodash.isFunction(rule.pattern)
+                ? rule.pattern(value)
+                : /* else, it is a RegExp */ rule.pattern.test(value)
+            }
+          })
+
+  const newRules = syncRules.concat(asyncRules)
 
   return [newRules, !hasInvalidRule(newRules)]
 }

@@ -102,10 +102,12 @@ const FormInput = React.forwardRef(
     }, [meta.invalid, meta.modified, meta.submitFailed, meta.touched, meta.validating])
 
     useEffect(() => {
-      if (meta.valid && showValidationRules) {
-        setShowValidationRules(false)
+      if (!meta.validating) {
+        if (meta.valid && showValidationRules) {
+          setShowValidationRules(false)
+        }
       }
-    }, [meta.valid, showValidationRules])
+    }, [meta.valid, meta.validating, showValidationRules])
 
     useEffect(() => {
       if (showValidationRules) {
@@ -175,14 +177,14 @@ const FormInput = React.forwardRef(
       )
     }, [meta.error])
 
-    const validateField = (value) => {
+    const validateField = async (value) => {
       let valueToValidate = isNil(value) ? '' : String(value)
       if ((!valueToValidate && !required) || disabled) return
 
       let validationError = null
 
       if (!isEmpty(validationRules)) {
-        const [newRules, isValidField] = checkPatternsValidity(rules, valueToValidate)
+        const [newRules, isValidField] = await checkPatternsValidity(rules, valueToValidate)
         const invalidRules = newRules.filter((rule) => !rule.isValid)
 
         if (!isValidField) {
