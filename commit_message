@@ -1,6 +1,6 @@
 
 
-Create a new dist version 0.0.27
+Create a new dist version 0.0.28
 
 Collecting:
-- Fix [Artifacts] missing input validation logic in "edit tag" dialog (#81)
+- Fix [UI] Put MLRun icon instead of the 'M' (#84)
