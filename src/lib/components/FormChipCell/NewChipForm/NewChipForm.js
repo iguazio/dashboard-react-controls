@@ -39,7 +39,7 @@ const NewChipForm = React.forwardRef(
       className,
       editConfig,
       handleRemoveChip,
-      isEditMode,
+      isEditable,
       keyName,
       meta,
       onChange,
@@ -73,7 +73,9 @@ const NewChipForm = React.forwardRef(
     const labelKeyClassName = classnames(
       className,
       !editConfig.isKeyFocused && 'item_edited',
-      !isEmpty(get(meta, ['error', chipIndex, 'key'], [])) && !isEmpty(chipData.key) && 'item_edited_invalid'
+      !isEmpty(get(meta, ['error', chipIndex, 'key'], [])) &&
+        !isEmpty(chipData.key) &&
+        'item_edited_invalid'
     )
     const labelContainerClassName = classnames(
       'edit-chip-container',
@@ -87,7 +89,9 @@ const NewChipForm = React.forwardRef(
     const labelValueClassName = classnames(
       'input-label-value',
       !editConfig.isValueFocused && 'item_edited',
-      !isEmpty(get(meta, ['error', chipIndex, 'value'], [])) && !isEmpty(chipData.value) && 'item_edited_invalid'
+      !isEmpty(get(meta, ['error', chipIndex, 'value'], [])) &&
+        !isEmpty(chipData.value) &&
+        'item_edited_invalid'
     )
 
     useLayoutEffect(() => {
@@ -99,9 +103,17 @@ const NewChipForm = React.forwardRef(
           setChipData((prevState) => ({
             ...prevState,
             keyFieldWidth:
-              currentWidthKeyInput >= maxWidthInput ? maxWidthInput : currentWidthKeyInput,
+              currentWidthKeyInput >= maxWidthInput
+                ? maxWidthInput
+                : currentWidthKeyInput <= minWidthInput
+                ? minWidthInput
+                : currentWidthKeyInput,
             valueFieldWidth:
-              currentWidthValueInput >= maxWidthInput ? maxWidthInput : currentWidthValueInput
+              currentWidthValueInput >= maxWidthInput
+                ? maxWidthInput
+                : currentWidthValueInput <= minWidthValueInput
+                ? minWidthValueInput
+                : currentWidthValueInput
           }))
         } else {
           setChipData((prevState) => ({
@@ -181,7 +193,7 @@ const NewChipForm = React.forwardRef(
       (event) => {
         event.stopPropagation()
 
-        if (editConfig.chipIndex === chipIndex && isEditMode) {
+        if (editConfig.chipIndex === chipIndex && isEditable) {
           if (!event.shiftKey && event.key === TAB && editConfig.isValueFocused) {
             onChange(event, TAB)
           } else if (event.shiftKey && event.key === TAB && editConfig.isKeyFocused) {
@@ -198,7 +210,7 @@ const NewChipForm = React.forwardRef(
           }
         }
       },
-      [editConfig, onChange, chipIndex, isEditMode]
+      [editConfig, onChange, chipIndex, isEditable]
     )
 
     const handleOnFocus = useCallback(
@@ -316,7 +328,7 @@ const NewChipForm = React.forwardRef(
       >
         <NewChipInput
           className={labelKeyClassName}
-          disabled={!isEditMode || editConfig.chipIndex !== chipIndex}
+          disabled={!isEditable || editConfig.chipIndex !== chipIndex}
           name={keyName}
           onChange={handleOnChange}
           onFocus={handleOnFocus}
@@ -327,7 +339,7 @@ const NewChipForm = React.forwardRef(
         <div className="edit-chip-separator">:</div>
         <NewChipInput
           className={labelValueClassName}
-          disabled={!isEditMode || editConfig.chipIndex !== chipIndex}
+          disabled={!isEditable || editConfig.chipIndex !== chipIndex}
           name={valueName}
           onChange={handleOnChange}
           onFocus={handleOnFocus}
@@ -336,7 +348,7 @@ const NewChipForm = React.forwardRef(
           style={{ width: chipData.valueFieldWidth }}
         />
 
-        {editConfig.chipIndex !== chipIndex && isEditMode && (
+        {editConfig.chipIndex !== chipIndex && isEditable && (
           <button
             className="edit-chip__icon-close"
             onClick={(event) => handleRemoveChip(event, chipIndex)}
@@ -369,7 +381,7 @@ NewChipForm.propTypes = {
   className: PropTypes.string,
   editConfig: PropTypes.shape({}).isRequired,
   handleRemoveChip: PropTypes.func.isRequired,
-  isEditMode: PropTypes.bool.isRequired,
+  isEditable: PropTypes.bool.isRequired,
   keyName: PropTypes.string.isRequired,
   meta: PropTypes.object.isRequired,
   onChange: PropTypes.func.isRequired,

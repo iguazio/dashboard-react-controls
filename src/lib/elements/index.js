@@ -14,6 +14,8 @@ illegal under applicable law, and the grant of the foregoing license
 under the Apache 2.0 license is conditioned upon your compliance with
 such restriction.
 */
+export { default as FormActionButton } from './FormActionButton/FormActionButton'
+export { default as FormRowActions } from './FormRowActions/FormRowActions'
 export { default as OptionsMenu } from './OptionsMenu/OptionsMenu'
 export { default as SelectOption } from './SelectOption/SelectOption'
 export { default as ValidationTemplate } from './ValidationTemplate/ValidationTemplate'

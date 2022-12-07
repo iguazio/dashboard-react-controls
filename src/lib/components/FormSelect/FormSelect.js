@@ -168,8 +168,11 @@ const FormSelect = ({
   const handleSelectOptionClick = (selectedOption, option) => {
     if (selectedOption !== input.value) {
       option.handler && option.handler()
-      input.onChange(selectedOption)
       onChange && onChange(selectedOption)
+
+      setTimeout(() => {
+        input.onChange(selectedOption)
+      })
     }
   }
 
@@ -261,6 +264,7 @@ const FormSelect = ({
           {isOpen && (
             <PopUpDialog
               className="form-field form-field-select__options-list"
+              headerIsHidden
               customPosition={{
                 element: selectRef,
                 position: 'bottom-right'

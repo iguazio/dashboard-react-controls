@@ -59,7 +59,7 @@ const SelectOption = ({ item, name, onClick, multiple, selectedId, withSelectedI
             </span>
           )}
           {item.status && <span className={`state-${item.status}-job status`} />}
-          <Tooltip template={<TextTooltipTemplate text={item.label} />}>{item.label}</Tooltip>
+          <Tooltip template={<TextTooltipTemplate text={item.label} />}><span>{item.label}</span></Tooltip>
         </div>
         {withSelectedIcon && item.id === selectedId && <Checkmark className="checkmark" />}
       </div>
@@ -68,7 +68,7 @@ const SelectOption = ({ item, name, onClick, multiple, selectedId, withSelectedI
           className="select__item-sub-label"
           template={<TextTooltipTemplate text={item.subLabel} />}
         >
-          {item.subLabel}
+          <span>{item.subLabel}</span>
         </Tooltip>
       )}
     </div>

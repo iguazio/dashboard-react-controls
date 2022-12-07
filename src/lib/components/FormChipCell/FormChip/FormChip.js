@@ -34,7 +34,7 @@ const FormChip = React.forwardRef(
       handleRemoveChip,
       handleToEditMode,
       isDeleteMode,
-      isEditMode,
+      isEditable,
       keyName,
       meta,
       setChipsSizes,
@@ -64,7 +64,7 @@ const FormChip = React.forwardRef(
           className="input-label-key"
           editConfig={editConfig}
           handleRemoveChip={handleRemoveChip}
-          isEditMode={isEditMode}
+          isEditable={isEditable}
           keyName={keyName}
           meta={meta}
           onChange={handleEditChip}
@@ -88,7 +88,7 @@ FormChip.defaultProps = {
     font: 'purple'
   },
   isDeleteMode: false,
-  isEditMode: false,
+  isEditable: false,
   keyName: '',
   validationRules: {},
   valueName: ''
@@ -103,7 +103,7 @@ FormChip.propTypes = {
   handleRemoveChip: PropTypes.func.isRequired,
   handleToEditMode: PropTypes.func.isRequired,
   isDeleteMode: PropTypes.bool,
-  isEditMode: PropTypes.bool,
+  isEditable: PropTypes.bool,
   keyName: PropTypes.string,
   meta: PropTypes.object.isRequired,
   setChipsSizes: PropTypes.func.isRequired,

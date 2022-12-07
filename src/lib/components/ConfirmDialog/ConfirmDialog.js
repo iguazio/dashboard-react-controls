@@ -54,7 +54,7 @@ const ConfirmDialog = ({
 
   const handleConfirmDialog = (event) => {
     onResolve && onResolve()
-    confirmButton.handler(event)
+    confirmButton.handler && confirmButton.handler(event)
   }
 
   return (

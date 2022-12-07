@@ -48,8 +48,8 @@ const Wizard = ({
   }, [children, activeStepNumber])
 
   const totalSteps = useMemo(() => {
-    return React.Children.count(children) - 1 || 0
-  }, [children])
+    return stepsConfig.filter((stepConfig) => !stepConfig.isHidden).length - 1 || 0
+  }, [stepsConfig])
 
   const isLastStep = useMemo(() => {
     return activeStepNumber === totalSteps
@@ -77,6 +77,7 @@ const Wizard = ({
 
   const handleSubmit = () => {
     formState.handleSubmit()
+
     if (formState.valid) {
       if (isLastStep) {
         onWizardSubmit(formState.values)
@@ -103,8 +104,10 @@ const Wizard = ({
   ]
 
   const renderModalActions = () => {
-    if (stepsConfig[activeStepNumber]?.getActions) {
-      return stepsConfig[activeStepNumber]
+    const filteredStepsConfig = stepsConfig.filter((stepConfig) => !stepConfig.isHidden)
+
+    if (filteredStepsConfig[activeStepNumber]?.getActions) {
+      return filteredStepsConfig[activeStepNumber]
         .getActions({
           formState,
           goToNextStep,
@@ -130,7 +133,9 @@ const Wizard = ({
       title={title}
     >
       <WizardSteps activeStepNumber={activeStepNumber} jumpToStep={jumpToStep} steps={stepsMenu} />
-      <div className="wizard-form__content">{activeStepTemplate}</div>
+      <div className="wizard-form__content-container">
+        <div className="wizard-form__content">{activeStepTemplate}</div>
+      </div>
     </Modal>
   )
 }

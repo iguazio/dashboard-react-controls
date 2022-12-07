@@ -28,7 +28,7 @@ export const setFieldState = (args, state) => {
   }
 }
 
-export const isEqualValues = (initialValues, values) => {
+export const areFormValuesChanged = (initialValues, values) => {
   const replacer = (key, value) => {
     if (value === '') {
       return undefined
@@ -37,5 +37,24 @@ export const isEqualValues = (initialValues, values) => {
     return value
   }
 
-  return isEqual(JSON.stringify(initialValues, replacer), JSON.stringify(values, replacer))
+  return !isEqual(JSON.stringify(initialValues, replacer), JSON.stringify(values, replacer))
+}
+
+export const generateObjectFromKeyValue = (keyValueList = []) => {
+  return keyValueList.reduce((acc, keyValue) => {
+    acc[keyValue.data.key] = keyValue.data.value
+
+    return acc
+  }, {})
+}
+
+export const parseObjectToKeyValue = (object = {}) => {
+  return Object.entries(object).map(([key, value]) => {
+    return {
+      data: {
+        key,
+        value
+      }
+    }
+  })
 }

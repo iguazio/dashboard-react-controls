@@ -17,8 +17,8 @@ such restriction.
 import React, { useState, useEffect, useRef } from 'react'
 import PropTypes from 'prop-types'
 import classNames from 'classnames'
-import { isEmpty, isNil } from 'lodash'
-import { Field, useField } from 'react-final-form'
+import { debounce, isEmpty, isEqual, isNil } from 'lodash'
+import { Field } from 'react-final-form'
 
 import InputNumberButtons from './InputNumberButtons/InputNumberButtons'
 import OptionsMenu from '../../elements/OptionsMenu/OptionsMenu'
@@ -64,7 +64,8 @@ const FormInput = React.forwardRef(
     },
     ref
   ) => {
-    const { input, meta } = useField(name)
+    const [fieldMeta, setFieldMeta] = useState({})
+    const [fieldInput, setFieldInput] = useState({})
     const [isInvalid, setIsInvalid] = useState(false)
     const [isFocused, setIsFocused] = useState(false)
     const [typedValue, setTypedValue] = useState('')
@@ -93,31 +94,29 @@ const FormInput = React.forwardRef(
     )
 
     useEffect(() => {
-      setTypedValue(String(input.value)) // convert from number to string
-    }, [input.value])
+      setTypedValue(String(fieldInput.value)) // convert from number to string
+    }, [fieldInput.value])
 
     useEffect(() => {
       setIsInvalid(
-        errorsRef.current ||
-          (meta.invalid &&
-            (meta.validating || meta.modified || (meta.submitFailed && meta.touched)))
+        fieldMeta.invalid &&
+          (fieldMeta.validating ||
+            fieldMeta.modified ||
+            (fieldMeta.submitFailed && fieldMeta.touched))
       )
     }, [
-      errorsRef.current,
-      meta.invalid,
-      meta.modified,
-      meta.submitFailed,
-      meta.touched,
-      meta.validating
+      fieldMeta.invalid,
+      fieldMeta.modified,
+      fieldMeta.submitFailed,
+      fieldMeta.touched,
+      fieldMeta.validating
     ])
 
     useEffect(() => {
-      if (!errorsRef.current) {
-        if (meta.valid && showValidationRules) {
-          setShowValidationRules(false)
-        }
+      if (fieldMeta.valid && showValidationRules) {
+        setShowValidationRules(false)
       }
-    }, [errorsRef.current, meta.valid, showValidationRules])
+    }, [fieldMeta.valid, showValidationRules])
 
     useEffect(() => {
       if (showValidationRules) {
@@ -135,17 +134,16 @@ const FormInput = React.forwardRef(
     }, [focused])
 
     useEffect(() => {
-      setValidationRules((prevState) =>
-        prevState.map((rule) => ({
+      setValidationRules(() =>
+        rules.map((rule) => ({
           ...rule,
           isValid:
-            !errorsRef.current || !Array.isArray(errorsRef.current)
+            !fieldMeta.error || !Array.isArray(fieldMeta.error)
               ? true
-              : !errorsRef.current.some((err) => err.name === rule.name),
-          validating: rule.validating
+              : !fieldMeta.error.some((err) => err.name === rule.name)
         }))
       )
-    }, [errorsRef.current])
+    }, [fieldMeta.error, rules])
 
     const getValidationRules = () => {
       return validationRules.map(({ isValid = false, label, name }) => {
@@ -154,7 +152,7 @@ const FormInput = React.forwardRef(
     }
 
     const handleInputBlur = (event) => {
-      input.onBlur(event)
+      fieldInput.onBlur && fieldInput.onBlur(event)
 
       if (!event.relatedTarget || !event.relatedTarget?.closest('.form-field__suggestion-list')) {
         setIsFocused(false)
@@ -162,7 +160,7 @@ const FormInput = React.forwardRef(
       }
     }
     const handleInputFocus = (event) => {
-      input.onFocus(event)
+      fieldInput.onFocus && fieldInput.onFocus(event)
       setIsFocused(true)
     }
 
@@ -178,7 +176,7 @@ const FormInput = React.forwardRef(
     }
 
     const handleSuggestionClick = (item) => {
-      input.onChange && input.onChange(item)
+      fieldInput.onChange && fieldInput.onChange(item)
       setIsFocused(false)
       onBlur()
     }
@@ -188,14 +186,14 @@ const FormInput = React.forwardRef(
       setShowValidationRules((state) => !state)
     }
 
-    const validateField = async (value) => {
+    const validateField = (value, allValues) => {
       let valueToValidate = isNil(value) ? '' : String(value)
       if (!meta.active || (!valueToValidate && !required) || disabled) return
 
       let validationError = null
 
-      if (!isEmpty(validationRules)) {
-        const [newRules, isValidField] = await checkPatternsValidity(rules, valueToValidate)
+      if (!isEmpty(rules)) {
+        const [newRules, isValidField] = checkPatternsValidity(rules, valueToValidate)
         const invalidRules = newRules.filter((rule) => !rule.isValid)
 
         if (!isValidField) {
@@ -206,11 +204,17 @@ const FormInput = React.forwardRef(
       if (isEmpty(validationError)) {
         if (inputProps.type === 'number') {
           if (inputProps.max && +valueToValidate > +inputProps.max) {
-            validationError = { name: 'maxValue', label: `Max value is ${inputProps.max}` }
+            validationError = {
+              name: 'maxValue',
+              label: `The maximum value should be ${inputProps.max}`
+            }
           }
 
           if (inputProps.min && +valueToValidate < +inputProps.min) {
-            validationError = { name: 'minValue', label: `Min value is ${inputProps.min}` }
+            validationError = {
+              name: 'minValue',
+              label: `The minimum value should be ${inputProps.min}`
+            }
           }
         }
         if (pattern && !validationPattern.test(valueToValidate)) {
@@ -223,7 +227,7 @@ const FormInput = React.forwardRef(
       }
 
       if (!validationError && validator) {
-        validationError = validator(value)
+        validationError = validator(value, allValues)
       }
 
       errorsRef.current = validationError
@@ -235,13 +239,21 @@ const FormInput = React.forwardRef(
       return inputProps.type === 'number' ? +val : val
     }
 
+    const setFieldData = debounce((input, meta) => {
+      if (!isEqual(meta, fieldMeta)) {
+        setFieldMeta(meta)
+      }
+
+      if (!isEqual(input, fieldInput)) {
+        setFieldInput(input)
+      }
+    }, 50)
+
     return (
-      <Field
-        validate={async ? useDebounce(validateField, 400) : validateField}
-        name={name}
-        parse={parseField}
-      >
-        {({ input }) => {
+      <Field validate={validateField} name={name} parse={parseField}>
+        {({ input, meta }) => {
+          setFieldData(input, meta)
+
           return (
             <div ref={ref} className={formFieldClassNames}>
               {label && (
@@ -287,20 +299,17 @@ const FormInput = React.forwardRef(
                   />
                 </div>
                 <div className="form-field__icons">
-                  {isInvalid && !Array.isArray(errorsRef.current) && (
+                  {isInvalid && !Array.isArray(meta.error) && (
                     <Tooltip
                       className="form-field__warning"
                       template={
-                        <TextTooltipTemplate
-                          text={errorsRef.current?.label ?? invalidText}
-                          warning
-                        />
+                        <TextTooltipTemplate text={meta.error?.label ?? invalidText} warning />
                       }
                     >
                       <InvalidIcon />
                     </Tooltip>
                   )}
-                  {isInvalid && Array.isArray(errorsRef.current) && (
+                  {isInvalid && Array.isArray(meta.error) && (
                     <button className="form-field__warning" onClick={toggleValidationRulesMenu}>
                       <WarningIcon />
                     </button>
@@ -368,7 +377,7 @@ FormInput.defaultProps = {
   pattern: null,
   placeholder: '',
   required: false,
-  step: '1',
+  step: 1,
   suggestionList: [],
   tip: '',
   type: 'text',
@@ -397,7 +406,7 @@ FormInput.propTypes = {
   pattern: PropTypes.string,
   placeholder: PropTypes.string,
   required: PropTypes.bool,
-  step: PropTypes.string,
+  step: PropTypes.number,
   suggestionList: PropTypes.arrayOf(PropTypes.string),
   tip: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
   type: PropTypes.string,

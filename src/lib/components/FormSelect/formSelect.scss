@@ -24,18 +24,6 @@
           }
         }
       }
-
-      &.without-border {
-        .form-field__caret {
-          display: none;
-        }
-
-        &:hover {
-          .form-field__caret {
-            display: block;
-          }
-        }
-      }
     }
 
     &__select {
@@ -72,11 +60,8 @@
       width: 100%;
       padding: 0;
       border-radius: 0;
-
-      &__header {
-        display: none;
-      }
     }
+
     .options-list {
       &__body {
         width: 100%;

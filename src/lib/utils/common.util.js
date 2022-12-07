@@ -16,9 +16,27 @@ such restriction.
 */
 import { create } from 'react-modal-promise'
 import { differenceWith, isEqual, omit, isEmpty } from 'lodash'
+import { ConfirmDialog } from '../components'
+import { SECONDARY_BUTTON, TERTIARY_BUTTON } from '../constants'
 
 export const openPopUp = (element, props) => {
   return create(element)(props)
+}
+
+export const openConfirmPopUp = (confirmHandler, message) => {
+  return openPopUp(ConfirmDialog, {
+    cancelButton: {
+      label: 'Cancel',
+      variant: TERTIARY_BUTTON
+    },
+    confirmButton: {
+      label: 'OK',
+      variant: SECONDARY_BUTTON,
+      handler: confirmHandler
+    },
+    header: 'Are you sure?',
+    message
+  })
 }
 
 export const isEveryObjectValueEmpty = (obj) =>

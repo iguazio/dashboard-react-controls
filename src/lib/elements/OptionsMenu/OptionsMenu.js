@@ -27,6 +27,7 @@ const OptionsMenu = React.forwardRef(({ children, show, timeout }, ref) => {
   return (
     <CSSTransition in={show} timeout={timeout} classNames="options-menu-transition" unmountOnExit>
       <PopUpDialog
+        headerIsHidden
         className="options-menu"
         customPosition={{
           element: ref,
