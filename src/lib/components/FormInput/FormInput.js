@@ -99,12 +99,14 @@ const FormInput = React.forwardRef(
 
     useEffect(() => {
       setIsInvalid(
-        fieldMeta.invalid &&
-          (fieldMeta.validating ||
-            fieldMeta.modified ||
-            (fieldMeta.submitFailed && fieldMeta.touched))
+        errorsRef.current ||
+          (fieldMeta.invalid &&
+            (fieldMeta.validating ||
+              fieldMeta.modified ||
+              (fieldMeta.submitFailed && fieldMeta.touched)))
       )
     }, [
+      errorsRef.current,
       fieldMeta.invalid,
       fieldMeta.modified,
       fieldMeta.submitFailed,
@@ -113,10 +115,12 @@ const FormInput = React.forwardRef(
     ])
 
     useEffect(() => {
-      if (fieldMeta.valid && showValidationRules) {
-        setShowValidationRules(false)
+      if (!errorsRef.current) {
+        if (fieldMeta.valid && showValidationRules) {
+          setShowValidationRules(false)
+        }
       }
-    }, [fieldMeta.valid, showValidationRules])
+    }, [errorsRef.current, fieldMeta.valid, showValidationRules])
 
     useEffect(() => {
       if (showValidationRules) {
@@ -186,14 +190,14 @@ const FormInput = React.forwardRef(
       setShowValidationRules((state) => !state)
     }
 
-    const validateField = (value, allValues) => {
+    const validateField = async (value, allValues) => {
       let valueToValidate = isNil(value) ? '' : String(value)
-      if (!meta.active || (!valueToValidate && !required) || disabled) return
+      if ((!valueToValidate && !required) || disabled) return
 
       let validationError = null
 
       if (!isEmpty(rules)) {
-        const [newRules, isValidField] = checkPatternsValidity(rules, valueToValidate)
+        const [newRules, isValidField] = await checkPatternsValidity(rules, valueToValidate)
         const invalidRules = newRules.filter((rule) => !rule.isValid)
 
         if (!isValidField) {
@@ -250,7 +254,11 @@ const FormInput = React.forwardRef(
     }, 50)
 
     return (
-      <Field validate={validateField} name={name} parse={parseField}>
+      <Field
+        validate={async ? useDebounce(validateField, 400) : validateField}
+        name={name}
+        parse={parseField}
+      >
         {({ input, meta }) => {
           setFieldData(input, meta)
 
