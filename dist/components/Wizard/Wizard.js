@@ -74,8 +74,10 @@ var Wizard = function Wizard(_ref) {
     return _react.default.Children.toArray(children)[activeStepNumber];
   }, [children, activeStepNumber]);
   var totalSteps = (0, _react.useMemo)(function () {
-    return _react.default.Children.count(children) - 1 || 0;
-  }, [children]);
+    return stepsConfig.filter(function (stepConfig) {
+      return !stepConfig.isHidden;
+    }).length - 1 || 0;
+  }, [stepsConfig]);
   var isLastStep = (0, _react.useMemo)(function () {
     return activeStepNumber === totalSteps;
   }, [activeStepNumber, totalSteps]);
@@ -135,10 +137,14 @@ var Wizard = function Wizard(_ref) {
   };
 
   var renderModalActions = function renderModalActions() {
-    var _stepsConfig$activeSt;
+    var _filteredStepsConfig$;
 
-    if ((_stepsConfig$activeSt = stepsConfig[activeStepNumber]) !== null && _stepsConfig$activeSt !== void 0 && _stepsConfig$activeSt.getActions) {
-      return stepsConfig[activeStepNumber].getActions({
+    var filteredStepsConfig = stepsConfig.filter(function (stepConfig) {
+      return !stepConfig.isHidden;
+    });
+
+    if ((_filteredStepsConfig$ = filteredStepsConfig[activeStepNumber]) !== null && _filteredStepsConfig$ !== void 0 && _filteredStepsConfig$.getActions) {
+      return filteredStepsConfig[activeStepNumber].getActions({
         formState: formState,
         goToNextStep: goToNextStep,
         goToPreviousStep: goToPreviousStep,
@@ -166,8 +172,11 @@ var Wizard = function Wizard(_ref) {
       jumpToStep: jumpToStep,
       steps: stepsMenu
     }), /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
-      className: "wizard-form__content",
-      children: activeStepTemplate
+      className: "wizard-form__content-container",
+      children: /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
+        className: "wizard-form__content",
+        children: activeStepTemplate
+      })
     })]
   });
 };

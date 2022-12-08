@@ -83,7 +83,9 @@ var SelectOption = function SelectOption(_ref) {
           template: /*#__PURE__*/(0, _jsxRuntime.jsx)(_components.TextTooltipTemplate, {
             text: item.label
           }),
-          children: item.label
+          children: /*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
+            children: item.label
+          })
         })]
       }), withSelectedIcon && item.id === selectedId && /*#__PURE__*/(0, _jsxRuntime.jsx)(_checkmark.ReactComponent, {
         className: "checkmark"
@@ -93,7 +95,9 @@ var SelectOption = function SelectOption(_ref) {
       template: /*#__PURE__*/(0, _jsxRuntime.jsx)(_components.TextTooltipTemplate, {
         text: item.subLabel
       }),
-      children: item.subLabel
+      children: /*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
+        children: item.subLabel
+      })
     })]
   });
 };

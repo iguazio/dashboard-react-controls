@@ -49,6 +49,7 @@ var OptionsMenu = /*#__PURE__*/_react.default.forwardRef(function (_ref, ref) {
     classNames: "options-menu-transition",
     unmountOnExit: true,
     children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_components.PopUpDialog, {
+      headerIsHidden: true,
       className: "options-menu",
       customPosition: {
         element: ref,

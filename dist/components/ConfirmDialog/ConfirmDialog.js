@@ -64,7 +64,7 @@ var ConfirmDialog = function ConfirmDialog(_ref) {
 
   var handleConfirmDialog = function handleConfirmDialog(event) {
     onResolve && onResolve();
-    confirmButton.handler(event);
+    confirmButton.handler && confirmButton.handler(event);
   };
 
   return isOpen && /*#__PURE__*/(0, _jsxRuntime.jsx)(_PopUpDialog.default, {

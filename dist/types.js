@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.WIZARD_STEPS_CONFIG = exports.SELECT_OPTIONS = exports.SELECT_OPTION = exports.POP_UP_CUSTOM_POSITION = exports.MODAL_SIZES = exports.INPUT_VALIDATION_RULES = exports.INPUT_LINK = exports.CONFIRM_DIALOG_SUBMIT_BUTTON = exports.CONFIRM_DIALOG_CANCEL_BUTTON = exports.COMBOBOX_VALIDATION_RULES = exports.COMBOBOX_SUGGESTION_LIST = exports.COMBOBOX_SELECT_OPTIONS = exports.CHIP_OPTIONS = exports.CHIP_INPUT_LIST = exports.CHIPS = exports.CHIP = exports.BUTTON_VARIANTS = void 0;
+exports.WIZARD_STEPS_CONFIG = exports.SELECT_OPTIONS = exports.SELECT_OPTION = exports.POP_UP_CUSTOM_POSITION = exports.MODAL_SIZES = exports.INPUT_VALIDATION_RULES = exports.INPUT_LINK = exports.FORM_TABLE_EDITING_ITEM = exports.CONFIRM_DIALOG_SUBMIT_BUTTON = exports.CONFIRM_DIALOG_CANCEL_BUTTON = exports.COMBOBOX_VALIDATION_RULES = exports.COMBOBOX_SUGGESTION_LIST = exports.COMBOBOX_SELECT_OPTIONS = exports.CHIP_OPTIONS = exports.CHIP_INPUT_LIST = exports.CHIPS = exports.CHIP = exports.BUTTON_VARIANTS = void 0;
 
 var _propTypes = _interopRequireDefault(require("prop-types"));
 
@@ -11,22 +11,8 @@ var _constants = require("./constants");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-/*
-Copyright 2022 Iguazio Systems Ltd.
-Licensed under the Apache License, Version 2.0 (the "License") with
-an addition restriction as set forth herein. You may not use this
-file except in compliance with the License. You may obtain a copy of
-the License at http://www.apache.org/licenses/LICENSE-2.0.
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an "AS IS" BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or
-implied. See the License for the specific language governing
-permissions and limitations under the License.
-In addition, you may not use the software for any purposes that are
-illegal under applicable law, and the grant of the foregoing license
-under the Apache 2.0 license is conditioned upon your compliance with
-such restriction.
-*/
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 var BUTTON_VARIANTS = _propTypes.default.oneOf([_constants.DANGER_BUTTON, _constants.LABEL_BUTTON, _constants.PRIMARY_BUTTON, _constants.SECONDARY_BUTTON, _constants.TERTIARY_BUTTON]);
 
 exports.BUTTON_VARIANTS = BUTTON_VARIANTS;
@@ -155,3 +141,14 @@ var COMBOBOX_SELECT_OPTIONS = _propTypes.default.arrayOf(_propTypes.default.shap
 }));
 
 exports.COMBOBOX_SELECT_OPTIONS = COMBOBOX_SELECT_OPTIONS;
+
+var FORM_TABLE_EDITING_ITEM = _propTypes.default.shape(_defineProperty({
+  data: _propTypes.default.shape({}).isRequired,
+  ui: _propTypes.default.shape({
+    isNew: _propTypes.default.bool,
+    index: _propTypes.default.number.isRequired,
+    fieldsPath: _propTypes.default.string.isRequired
+  }).isRequired
+}, _propTypes.default.string, _propTypes.default.any));
+
+exports.FORM_TABLE_EDITING_ITEM = FORM_TABLE_EDITING_ITEM;

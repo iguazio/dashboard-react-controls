@@ -3,11 +3,15 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.openPopUp = exports.isEveryObjectValueEmpty = exports.areArraysEqual = void 0;
+exports.openPopUp = exports.openConfirmPopUp = exports.isEveryObjectValueEmpty = exports.areArraysEqual = void 0;
 
 var _reactModalPromise = require("react-modal-promise");
 
 var _lodash = require("lodash");
+
+var _components = require("../components");
+
+var _constants = require("../constants");
 
 /*
 Copyright 2022 Iguazio Systems Ltd.
@@ -30,6 +34,24 @@ var openPopUp = function openPopUp(element, props) {
 };
 
 exports.openPopUp = openPopUp;
+
+var openConfirmPopUp = function openConfirmPopUp(confirmHandler, message) {
+  return openPopUp(_components.ConfirmDialog, {
+    cancelButton: {
+      label: 'Cancel',
+      variant: _constants.TERTIARY_BUTTON
+    },
+    confirmButton: {
+      label: 'OK',
+      variant: _constants.SECONDARY_BUTTON,
+      handler: confirmHandler
+    },
+    header: 'Are you sure?',
+    message: message
+  });
+};
+
+exports.openConfirmPopUp = openConfirmPopUp;
 
 var isEveryObjectValueEmpty = function isEveryObjectValueEmpty(obj) {
   return Object.values(obj).every(function (item) {

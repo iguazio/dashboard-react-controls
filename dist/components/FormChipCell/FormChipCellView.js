@@ -58,7 +58,7 @@ var FormChipCellView = /*#__PURE__*/_react.default.forwardRef(function (_ref, _r
       _handleRemoveChip = _ref.handleRemoveChip,
       handleShowElements = _ref.handleShowElements,
       handleToEditMode = _ref.handleToEditMode,
-      isEditMode = _ref.isEditMode,
+      isEditable = _ref.isEditable,
       name = _ref.name,
       setChipsSizes = _ref.setChipsSizes,
       setEditConfig = _ref.setEditConfig,
@@ -70,8 +70,8 @@ var FormChipCellView = /*#__PURE__*/_react.default.forwardRef(function (_ref, _r
   var chipsCellRef = _ref2.chipsCellRef,
       chipsWrapperRef = _ref2.chipsWrapperRef;
   var buttonAddClassNames = (0, _classnames.default)('button-add', chipOptions.background && "button-add-background_".concat(chipOptions.background), chipOptions.borderColor && "button-add-border_".concat(chipOptions.borderColor), chipOptions.font && "button-add-font_".concat(chipOptions.font), chipOptions.density && "button-add-density_".concat(chipOptions.density));
-  var wrapperClassNames = (0, _classnames.default)('chips-wrapper', isEditMode && 'fixed-max-width');
-  var chipClassNames = (0, _classnames.default)('chip', 'chip__content', isEditMode && 'data-ellipsis', shortChips && 'chip_short', chips.hiddenChips && 'chip_hidden', chipOptions.density && "chip-density_".concat(chipOptions.density), chipOptions.borderRadius && "chip-border_".concat(chipOptions.borderRadius), chipOptions.background && "chip-background_".concat(chipOptions.background), chipOptions.borderColor && "chip-border_".concat(chipOptions.borderColor), chipOptions.font && "chip-font_".concat(chipOptions.font), isEditMode && 'editable', (showChips || isEditMode) && 'chip_visible');
+  var wrapperClassNames = (0, _classnames.default)('chips-wrapper', isEditable && 'fixed-max-width');
+  var chipClassNames = (0, _classnames.default)('chip', 'chip__content', isEditable && 'data-ellipsis', shortChips && 'chip_short', chips.hiddenChips && 'chip_hidden', chipOptions.density && "chip-density_".concat(chipOptions.density), chipOptions.borderRadius && "chip-border_".concat(chipOptions.borderRadius), chipOptions.background && "chip-background_".concat(chipOptions.background), chipOptions.borderColor && "chip-border_".concat(chipOptions.borderColor), chipOptions.font && "chip-font_".concat(chipOptions.font), isEditable && 'editable', (showChips || isEditable) && 'chip_visible');
   return /*#__PURE__*/(0, _jsxRuntime.jsx)(_reactFinalFormArrays.FieldArray, {
     name: name,
     validate: validateFields,
@@ -85,7 +85,7 @@ var FormChipCellView = /*#__PURE__*/_react.default.forwardRef(function (_ref, _r
         validationRules.key.push(_formChipCell.uniquenessError);
       }
 
-      return (isEditMode || !(0, _common.isEveryObjectValueEmpty)(fields)) && /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
+      return (isEditable || !(0, _common.isEveryObjectValueEmpty)(fields)) && /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
         className: "chips-cell",
         ref: chipsCellRef,
         children: /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
@@ -118,7 +118,7 @@ var FormChipCellView = /*#__PURE__*/_react.default.forwardRef(function (_ref, _r
                     return _handleRemoveChip(event, fields, index);
                   },
                   handleToEditMode: handleToEditMode,
-                  isEditMode: isEditMode,
+                  isEditable: isEditable,
                   keyName: "".concat(contentItem, ".key"),
                   meta: meta,
                   ref: chipsCellRef,
@@ -143,7 +143,7 @@ var FormChipCellView = /*#__PURE__*/_react.default.forwardRef(function (_ref, _r
               onClick: handleShowElements,
               children: chips.hiddenChipsNumber
             })]
-          }), isEditMode && /*#__PURE__*/(0, _jsxRuntime.jsx)("button", {
+          }), isEditable && /*#__PURE__*/(0, _jsxRuntime.jsx)("button", {
             className: buttonAddClassNames,
             onClick: function onClick(e) {
               return handleAddNewChip(e, fields);
@@ -165,7 +165,7 @@ FormChipCellView.defaultProps = {
     density: 'dense',
     font: 'purple'
   },
-  isEditMode: false,
+  isEditable: false,
   shortChips: false,
   validationRules: {}
 };
@@ -178,7 +178,7 @@ FormChipCellView.propTypes = {
   handleRemoveChip: _propTypes.default.func.isRequired,
   handleShowElements: _propTypes.default.func.isRequired,
   handleToEditMode: _propTypes.default.func.isRequired,
-  isEditMode: _propTypes.default.bool,
+  isEditable: _propTypes.default.bool,
   name: _propTypes.default.string.isRequired,
   setChipsSizes: _propTypes.default.func.isRequired,
   setEditConfig: _propTypes.default.func.isRequired,

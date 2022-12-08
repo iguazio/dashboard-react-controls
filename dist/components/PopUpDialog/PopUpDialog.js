@@ -71,9 +71,14 @@ var PopUpDialog = function PopUpDialog(_ref) {
       var topPosition = verticalPosition === 'top' ? elementRect.top - popUpRect.height - 5 : elementRect.bottom + 5;
       var leftPosition = horizontalPosition === 'left' ? elementRect.right - popUpRect.width : elementRect.left;
       popUpOverlayRef.current.style.top = "".concat(topPosition, "px");
-      popUpOverlayRef.current.style.left = "".concat(leftPosition, "px");
+
+      if (style.left) {
+        popUpOverlayRef.current.style.left = "calc(".concat(leftPosition, "px + ").concat(style.left, ")");
+      } else {
+        popUpOverlayRef.current.style.left = "".concat(leftPosition, "px");
+      }
     }
-  }, [customPosition]);
+  }, [customPosition, style.left]);
   (0, _react.useLayoutEffect)(function () {
     calculateCustomPopUpPosition();
   }, [calculateCustomPopUpPosition]);

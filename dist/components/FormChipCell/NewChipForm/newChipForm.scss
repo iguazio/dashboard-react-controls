@@ -22,13 +22,16 @@
         &_invalid {
           color: $amaranth;
         }
+
         &::placeholder {
           color: $spunPearl;
         }
       }
 
-      &::placeholder {
-        color: $primary;
+      &.input-label-key, &.input-label-value {
+        &::placeholder {
+          color: $topaz;
+        }
       }
     }
 
