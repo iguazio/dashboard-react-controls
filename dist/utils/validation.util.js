@@ -260,6 +260,14 @@ var validationRules = {
     name: [generateRule.validCharacters('a-z 0-9 -'), generateRule.beginWith('a-z'), generateRule.endWith('a-z 0-9'), generateRule.length({
       max: 63
     }), generateRule.required()]
+  },
+  environmentVariables: {
+    secretName: [generateRule.validCharacters('a-z A-Z 0-9 - _ .'), generateRule.beginEndWith('a-z A-Z 0-9'), generateRule.noConsecutiveCharacters('.., .–, –.'), generateRule.maxLengthBetweenDelimiters(/[\.\-\_]/, 63, 'periods'), generateRule.length({
+      max: 253
+    }), generateRule.required()],
+    secretKey: [generateRule.validCharacters('a-z A-Z 0-9 - _ .'), generateRule.beginNotWith('.'), generateRule.length({
+      max: 253
+    })]
   }
 };
 /**

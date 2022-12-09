@@ -183,8 +183,10 @@ var FormSelect = function FormSelect(_ref) {
   var handleSelectOptionClick = function handleSelectOptionClick(selectedOption, option) {
     if (selectedOption !== input.value) {
       option.handler && option.handler();
-      input.onChange(selectedOption);
       onChange && onChange(selectedOption);
+      setTimeout(function () {
+        input.onChange(selectedOption);
+      });
     }
   };
 
@@ -279,6 +281,7 @@ var FormSelect = function FormSelect(_ref) {
           message: selectedItemAction.confirm.message
         }), isOpen && /*#__PURE__*/(0, _jsxRuntime.jsx)(_PopUpDialog.default, {
           className: "form-field form-field-select__options-list",
+          headerIsHidden: true,
           customPosition: {
             element: selectRef,
             position: 'bottom-right'

@@ -1,6 +1,6 @@
 
 
-Create a new dist version 0.0.28
+Create a new dist version 0.0.29
 
 Collecting:
-- Fix [UI] Put MLRun icon instead of the 'M' (#84)
+- Impl [Jobs] New Job Wizard - New layout (#83)

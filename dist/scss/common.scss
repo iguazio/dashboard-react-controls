@@ -1,4 +1,5 @@
 @import './colors';
+@import './borders';
 
 #root {
   z-index: 1;
@@ -117,5 +118,134 @@ textarea {
 
   &-exit-active {
     opacity: 0;
+  }
+}
+
+.form-table {
+  $tableHeaderHeight: 46px;
+
+  max-height: 500px;
+  overflow: hidden;
+  overflow-y: auto;
+  background-color: $white;
+
+  .form-table__row {
+    display: flex;
+    align-items: center;
+    min-height: $tableHeaderHeight;
+    border-bottom: $primaryBorder;
+    background-color: $white;
+
+    &:not(.no-hover):hover {
+      background-color: $alabaster;
+
+      .form-table__actions-cell {
+        visibility: visible;
+      }
+    }
+
+    &.active {
+      background-color: $alabaster;
+
+      .form-table__cell {
+        padding: 3px;
+      }
+    }
+
+    &_multiline {
+      display: flex;
+      flex: 1;
+      flex-wrap: wrap;
+    }
+  }
+
+  .form-table__header-row,
+  .form-table__sub-header-row,
+  .form-table__action-row {
+    position: sticky;
+    z-index: 3;
+    height: $tableHeaderHeight;
+  }
+
+  .form-table__header-row {
+    border-top: $primaryBorder;
+    font-size: 18px;
+    font-weight: bold;
+    top: 0;
+  }
+
+  .form-table__sub-header-row {
+    border: unset;
+    font-size: 16px;
+    font-weight: bold;
+    top: $tableHeaderHeight;
+  }
+
+  .form-table__action-row {
+    bottom: 0;
+    border: unset;
+
+    button {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      min-width: 44px;
+      padding: 10px;
+      color: $cornflowerBlue;
+      font-size: 15px;
+      line-height: 18px;
+
+      svg {
+        width: 20px;
+        height: 20px;
+
+        rect {
+          fill: $cornflowerBlue;
+        }
+      }
+    }
+  }
+
+  .form-table__cell {
+    display: flex;
+    overflow: hidden;
+    align-items: center;
+    padding: 3px 15px;
+    color: $primary;
+
+    &.disabled {
+      color: $spunPearl;
+    }
+  }
+
+  .form-table__cell_1 {
+    flex: 1;
+  }
+
+  .form-table__cell_2 {
+    flex: 2;
+  }
+
+  .form-table__cell_3 {
+    flex: 3;
+  }
+
+  .form-table__cell_4 {
+    flex: 4;
+  }
+
+  .form-table__cell_5 {
+    flex: 5;
+  }
+
+  .form-table__actions-cell {
+    visibility: hidden;
+    justify-content: flex-end;
+    width: 72px;
+    padding: 0;
+
+    & > * {
+      margin: 0 5px 0 0;
+    }
   }
 }

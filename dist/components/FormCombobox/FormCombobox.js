@@ -177,7 +177,7 @@ var FormCombobox = function FormCombobox(_ref) {
     setIsInvalid(meta.invalid && (meta.validating || meta.modified || meta.submitFailed && meta.touched));
   }, [meta.invalid, meta.modified, meta.submitFailed, meta.touched, meta.validating]);
   var handleOutsideClick = (0, _react.useCallback)(function (event) {
-    if (comboboxRef.current && !comboboxRef.current.contains(event.target)) {
+    if (comboboxRef.current && !comboboxRef.current.contains(event.target) && suggestionListRef.current && !suggestionListRef.current.contains(event.target)) {
       setSearchIsFocused(false);
       setShowSelectDropdown(false);
       setShowSuggestionList(false);
@@ -423,6 +423,7 @@ var FormCombobox = function FormCombobox(_ref) {
                 })
               })]
             }), showSelectDropdown && /*#__PURE__*/(0, _jsxRuntime.jsx)(_PopUpDialog.default, {
+              headerIsHidden: true,
               customPosition: {
                 element: selectRef,
                 position: 'bottom-right'
@@ -455,6 +456,7 @@ var FormCombobox = function FormCombobox(_ref) {
             type: "text",
             value: inputValue
           }), showSuggestionList && (dropdownList.length > 0 || searchIsFocused) && /*#__PURE__*/(0, _jsxRuntime.jsx)(_PopUpDialog.default, {
+            headerIsHidden: true,
             customPosition: {
               element: selectRef,
               position: 'bottom-right'
