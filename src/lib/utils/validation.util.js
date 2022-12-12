@@ -81,17 +81,8 @@ export const required =
  * @returns {Array} [validationRules, isFieldValid] New validationRules With `isValid` property, `true` in case there is at least one failed validation rule, or `false` otherwise.
  */
 
-export const checkPatternsValidity = async (validationRules, value = '', required = true) => {
-  const asyncRules = await Promise.all(
-    validationRules
-      .filter((rule) => rule.async)
-      .map(async (rule) => ({
-        ...rule,
-        isValid: await rule.pattern(value)
-      }))
-  )
-
-  const syncRules =
+export const checkPatternsValidity = (validationRules, value = '', required = true) => {
+  const newRules =
     !required && isEmpty(value)
       ? validationRules
       : validationRules
@@ -105,9 +96,23 @@ export const checkPatternsValidity = async (validationRules, value = '', require
             }
           })
 
-  const newRules = syncRules.concat(asyncRules)
-
   return [newRules, !hasInvalidRule(newRules)]
+}
+
+export const checkPatternsValidityAsync = async (validationRules, value) => {
+  const [newRules] = checkPatternsValidity(validationRules, value)
+  const asyncRules = await Promise.all(
+    validationRules
+      .filter((rule) => rule.async)
+      .map(async (rule) => ({
+        ...rule,
+        isValid: await rule.pattern(value)
+      }))
+  )
+
+  const allRules = newRules.concat(asyncRules)
+
+  return [allRules, !hasInvalidRule(allRules)]
 }
 
 const generateRule = {

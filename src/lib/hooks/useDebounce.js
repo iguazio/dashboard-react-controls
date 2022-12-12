@@ -16,7 +16,7 @@ such restriction.
 */
 import { useRef } from 'react'
 
-export const useDebounce = (validate, time) => {
+export const useDebounce = () => (validate, time) => {
   const timeout = useRef(null)
   const lastValue = useRef(null)
   const lastResult = useRef(null)

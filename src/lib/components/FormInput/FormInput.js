@@ -26,7 +26,7 @@ import { TextTooltipTemplate, Tip, Tooltip } from '../../components'
 import ValidationTemplate from '../../elements/ValidationTemplate/ValidationTemplate'
 
 import { useDebounce } from '../../hooks/useDebounce'
-import { checkPatternsValidity } from '../../utils/validation.util'
+import { checkPatternsValidity, checkPatternsValidityAsync } from '../../utils/validation.util'
 import { useDetectOutsideClick } from '../../hooks/useDetectOutsideClick'
 
 import { INPUT_LINK, INPUT_VALIDATION_RULES } from '../../types'
@@ -40,7 +40,7 @@ import './formInput.scss'
 const FormInput = React.forwardRef(
   (
     {
-      async,
+      isAsync,
       className,
       density,
       disabled,
@@ -76,6 +76,7 @@ const FormInput = React.forwardRef(
     const inputRef = useRef()
     const errorsRef = useRef()
     useDetectOutsideClick(ref, () => setShowValidationRules(false))
+    const debounce = useDebounce()
 
     const formFieldClassNames = classNames('form-field-input', className)
 
@@ -187,14 +188,14 @@ const FormInput = React.forwardRef(
       setShowValidationRules((state) => !state)
     }
 
-    const validateField = async (value, allValues) => {
+    const validateField = (value, allValues) => {
       let valueToValidate = isNil(value) ? '' : String(value)
       if (!meta.active || (!valueToValidate && !required) || disabled) return
 
       let validationError = null
 
-      if (!isEmpty(rules)) {
-        const [newRules, isValidField] = await checkPatternsValidity(rules, valueToValidate)
+      if (!isEmpty(rules) && !isAsync) {
+        const [newRules, isValidField] = checkPatternsValidity(rules, valueToValidate)
         const invalidRules = newRules.filter((rule) => !rule.isValid)
 
         if (!isValidField) {
@@ -235,17 +236,32 @@ const FormInput = React.forwardRef(
       return validationError
     }
 
+    const validateFieldAsync = debounce(async (value, allValues) => {
+      if (!meta.active || !value) return
+
+      let validationError = validateField(value, allValues)
+
+      if (!isEmpty(rules)) {
+        const [newRules, isValidField] = await checkPatternsValidityAsync(rules, value)
+
+        const invalidRules = newRules.filter((rule) => !rule.isValid)
+
+        if (!isValidField) {
+          validationError = invalidRules.map((rule) => ({ name: rule.name, label: rule.label }))
+        }
+      }
+
+      errorsRef.current = validationError
+      return validationError
+    }, 400)
+
     const parseField = (val) => {
       if (!val) return
       return inputProps.type === 'number' ? +val : val
     }
 
     return (
-      <Field
-        validate={async ? useDebounce(validateField, 400) : validateField}
-        name={name}
-        parse={parseField}
-      >
+      <Field validate={isAsync ? validateFieldAsync : validateField} name={name} parse={parseField}>
         {({ input }) => {
           return (
             <div ref={ref} className={formFieldClassNames}>
