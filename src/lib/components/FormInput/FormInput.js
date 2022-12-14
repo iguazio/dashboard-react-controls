@@ -76,7 +76,7 @@ const FormInput = React.forwardRef(
     const inputRef = useRef()
     const errorsRef = useRef()
     useDetectOutsideClick(ref, () => setShowValidationRules(false))
-    const debounce = useDebounce()
+    const debounceAsync = useDebounce()
 
     const formFieldClassNames = classNames('form-field-input', className)
 
@@ -99,9 +99,9 @@ const FormInput = React.forwardRef(
 
     useEffect(() => {
       setIsInvalid(
-        errorsRef.current ||
-          (meta.invalid &&
-            (meta.validating || meta.modified || (meta.submitFailed && meta.touched)))
+        errorsRef.current &&
+          meta.invalid &&
+          (meta.validating || meta.modified || (meta.submitFailed && meta.touched))
       )
     }, [
       errorsRef.current,
@@ -190,7 +190,7 @@ const FormInput = React.forwardRef(
 
     const validateField = (value, allValues) => {
       let valueToValidate = isNil(value) ? '' : String(value)
-      if (!meta.active || (!valueToValidate && !required) || disabled) return
+      if ((!valueToValidate && !required) || disabled) return
 
       let validationError = null
 
@@ -236,9 +236,7 @@ const FormInput = React.forwardRef(
       return validationError
     }
 
-    const validateFieldAsync = debounce(async (value, allValues) => {
-      if (!meta.active || !value) return
-
+    const validateFieldAsync = debounceAsync(async (value, allValues) => {
       let validationError = validateField(value, allValues)
 
       if (!isEmpty(rules)) {
@@ -334,7 +332,9 @@ const FormInput = React.forwardRef(
                   )}
                 </div>
                 {inputProps.type === 'number' && (
-                  <InputNumberButtons {...{ ...inputProps, ...input, disabled }} />
+                  <InputNumberButtons
+                    {...{ ...inputProps, step: +inputProps.step, ...input, disabled }}
+                  />
                 )}
               </div>
               {suggestionList?.length > 0 && isFocused && (
@@ -379,6 +379,7 @@ FormInput.defaultProps = {
   iconClass: '',
   inputIcon: null,
   invalidText: 'This field is invalid',
+  isAsync: false,
   label: '',
   link: { show: '', value: '' },
   min: null,
@@ -407,6 +408,7 @@ FormInput.propTypes = {
   iconClass: PropTypes.string,
   inputIcon: PropTypes.element,
   invalidText: PropTypes.string,
+  isAsync: PropTypes.bool,
   label: PropTypes.string,
   link: INPUT_LINK,
   min: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
