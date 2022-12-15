@@ -21,13 +21,11 @@ var _InputNumberButtons = _interopRequireDefault(require("./InputNumberButtons/I
 
 var _OptionsMenu = _interopRequireDefault(require("../../elements/OptionsMenu/OptionsMenu"));
 
-var _TextTooltipTemplate = _interopRequireDefault(require("../TooltipTemplate/TextTooltipTemplate"));
-
-var _Tip = _interopRequireDefault(require("../Tip/Tip"));
-
-var _Tooltip = _interopRequireDefault(require("../Tooltip/Tooltip"));
+var _components = require("../../components");
 
 var _ValidationTemplate = _interopRequireDefault(require("../../elements/ValidationTemplate/ValidationTemplate"));
+
+var _useDebounce = require("../../hooks/useDebounce");
 
 var _validation = require("../../utils/validation.util");
 
@@ -45,13 +43,19 @@ require("./formInput.scss");
 
 var _jsxRuntime = require("react/jsx-runtime");
 
-var _excluded = ["className", "density", "disabled", "focused", "iconClass", "inputIcon", "invalidText", "label", "link", "name", "onBlur", "onChange", "pattern", "required", "suggestionList", "tip", "validationRules", "validator", "withoutBorder"];
+var _excluded = ["async", "className", "density", "disabled", "focused", "iconClass", "inputIcon", "invalidText", "label", "link", "name", "onBlur", "onChange", "pattern", "required", "suggestionList", "tip", "validationRules", "validator", "withoutBorder"];
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+
+function _regeneratorRuntime() { "use strict"; /*! regenerator-runtime -- Copyright (c) 2014-present, Facebook, Inc. -- license (MIT): https://github.com/facebook/regenerator/blob/main/LICENSE */ _regeneratorRuntime = function _regeneratorRuntime() { return exports; }; var exports = {}, Op = Object.prototype, hasOwn = Op.hasOwnProperty, $Symbol = "function" == typeof Symbol ? Symbol : {}, iteratorSymbol = $Symbol.iterator || "@@iterator", asyncIteratorSymbol = $Symbol.asyncIterator || "@@asyncIterator", toStringTagSymbol = $Symbol.toStringTag || "@@toStringTag"; function define(obj, key, value) { return Object.defineProperty(obj, key, { value: value, enumerable: !0, configurable: !0, writable: !0 }), obj[key]; } try { define({}, ""); } catch (err) { define = function define(obj, key, value) { return obj[key] = value; }; } function wrap(innerFn, outerFn, self, tryLocsList) { var protoGenerator = outerFn && outerFn.prototype instanceof Generator ? outerFn : Generator, generator = Object.create(protoGenerator.prototype), context = new Context(tryLocsList || []); return generator._invoke = function (innerFn, self, context) { var state = "suspendedStart"; return function (method, arg) { if ("executing" === state) throw new Error("Generator is already running"); if ("completed" === state) { if ("throw" === method) throw arg; return doneResult(); } for (context.method = method, context.arg = arg;;) { var delegate = context.delegate; if (delegate) { var delegateResult = maybeInvokeDelegate(delegate, context); if (delegateResult) { if (delegateResult === ContinueSentinel) continue; return delegateResult; } } if ("next" === context.method) context.sent = context._sent = context.arg;else if ("throw" === context.method) { if ("suspendedStart" === state) throw state = "completed", context.arg; context.dispatchException(context.arg); } else "return" === context.method && context.abrupt("return", context.arg); state = "executing"; var record = tryCatch(innerFn, self, context); if ("normal" === record.type) { if (state = context.done ? "completed" : "suspendedYield", record.arg === ContinueSentinel) continue; return { value: record.arg, done: context.done }; } "throw" === record.type && (state = "completed", context.method = "throw", context.arg = record.arg); } }; }(innerFn, self, context), generator; } function tryCatch(fn, obj, arg) { try { return { type: "normal", arg: fn.call(obj, arg) }; } catch (err) { return { type: "throw", arg: err }; } } exports.wrap = wrap; var ContinueSentinel = {}; function Generator() {} function GeneratorFunction() {} function GeneratorFunctionPrototype() {} var IteratorPrototype = {}; define(IteratorPrototype, iteratorSymbol, function () { return this; }); var getProto = Object.getPrototypeOf, NativeIteratorPrototype = getProto && getProto(getProto(values([]))); NativeIteratorPrototype && NativeIteratorPrototype !== Op && hasOwn.call(NativeIteratorPrototype, iteratorSymbol) && (IteratorPrototype = NativeIteratorPrototype); var Gp = GeneratorFunctionPrototype.prototype = Generator.prototype = Object.create(IteratorPrototype); function defineIteratorMethods(prototype) { ["next", "throw", "return"].forEach(function (method) { define(prototype, method, function (arg) { return this._invoke(method, arg); }); }); } function AsyncIterator(generator, PromiseImpl) { function invoke(method, arg, resolve, reject) { var record = tryCatch(generator[method], generator, arg); if ("throw" !== record.type) { var result = record.arg, value = result.value; return value && "object" == _typeof(value) && hasOwn.call(value, "__await") ? PromiseImpl.resolve(value.__await).then(function (value) { invoke("next", value, resolve, reject); }, function (err) { invoke("throw", err, resolve, reject); }) : PromiseImpl.resolve(value).then(function (unwrapped) { result.value = unwrapped, resolve(result); }, function (error) { return invoke("throw", error, resolve, reject); }); } reject(record.arg); } var previousPromise; this._invoke = function (method, arg) { function callInvokeWithMethodAndArg() { return new PromiseImpl(function (resolve, reject) { invoke(method, arg, resolve, reject); }); } return previousPromise = previousPromise ? previousPromise.then(callInvokeWithMethodAndArg, callInvokeWithMethodAndArg) : callInvokeWithMethodAndArg(); }; } function maybeInvokeDelegate(delegate, context) { var method = delegate.iterator[context.method]; if (undefined === method) { if (context.delegate = null, "throw" === context.method) { if (delegate.iterator.return && (context.method = "return", context.arg = undefined, maybeInvokeDelegate(delegate, context), "throw" === context.method)) return ContinueSentinel; context.method = "throw", context.arg = new TypeError("The iterator does not provide a 'throw' method"); } return ContinueSentinel; } var record = tryCatch(method, delegate.iterator, context.arg); if ("throw" === record.type) return context.method = "throw", context.arg = record.arg, context.delegate = null, ContinueSentinel; var info = record.arg; return info ? info.done ? (context[delegate.resultName] = info.value, context.next = delegate.nextLoc, "return" !== context.method && (context.method = "next", context.arg = undefined), context.delegate = null, ContinueSentinel) : info : (context.method = "throw", context.arg = new TypeError("iterator result is not an object"), context.delegate = null, ContinueSentinel); } function pushTryEntry(locs) { var entry = { tryLoc: locs[0] }; 1 in locs && (entry.catchLoc = locs[1]), 2 in locs && (entry.finallyLoc = locs[2], entry.afterLoc = locs[3]), this.tryEntries.push(entry); } function resetTryEntry(entry) { var record = entry.completion || {}; record.type = "normal", delete record.arg, entry.completion = record; } function Context(tryLocsList) { this.tryEntries = [{ tryLoc: "root" }], tryLocsList.forEach(pushTryEntry, this), this.reset(!0); } function values(iterable) { if (iterable) { var iteratorMethod = iterable[iteratorSymbol]; if (iteratorMethod) return iteratorMethod.call(iterable); if ("function" == typeof iterable.next) return iterable; if (!isNaN(iterable.length)) { var i = -1, next = function next() { for (; ++i < iterable.length;) { if (hasOwn.call(iterable, i)) return next.value = iterable[i], next.done = !1, next; } return next.value = undefined, next.done = !0, next; }; return next.next = next; } } return { next: doneResult }; } function doneResult() { return { value: undefined, done: !0 }; } return GeneratorFunction.prototype = GeneratorFunctionPrototype, define(Gp, "constructor", GeneratorFunctionPrototype), define(GeneratorFunctionPrototype, "constructor", GeneratorFunction), GeneratorFunction.displayName = define(GeneratorFunctionPrototype, toStringTagSymbol, "GeneratorFunction"), exports.isGeneratorFunction = function (genFun) { var ctor = "function" == typeof genFun && genFun.constructor; return !!ctor && (ctor === GeneratorFunction || "GeneratorFunction" === (ctor.displayName || ctor.name)); }, exports.mark = function (genFun) { return Object.setPrototypeOf ? Object.setPrototypeOf(genFun, GeneratorFunctionPrototype) : (genFun.__proto__ = GeneratorFunctionPrototype, define(genFun, toStringTagSymbol, "GeneratorFunction")), genFun.prototype = Object.create(Gp), genFun; }, exports.awrap = function (arg) { return { __await: arg }; }, defineIteratorMethods(AsyncIterator.prototype), define(AsyncIterator.prototype, asyncIteratorSymbol, function () { return this; }), exports.AsyncIterator = AsyncIterator, exports.async = function (innerFn, outerFn, self, tryLocsList, PromiseImpl) { void 0 === PromiseImpl && (PromiseImpl = Promise); var iter = new AsyncIterator(wrap(innerFn, outerFn, self, tryLocsList), PromiseImpl); return exports.isGeneratorFunction(outerFn) ? iter : iter.next().then(function (result) { return result.done ? result.value : iter.next(); }); }, defineIteratorMethods(Gp), define(Gp, toStringTagSymbol, "Generator"), define(Gp, iteratorSymbol, function () { return this; }), define(Gp, "toString", function () { return "[object Generator]"; }), exports.keys = function (object) { var keys = []; for (var key in object) { keys.push(key); } return keys.reverse(), function next() { for (; keys.length;) { var key = keys.pop(); if (key in object) return next.value = key, next.done = !1, next; } return next.done = !0, next; }; }, exports.values = values, Context.prototype = { constructor: Context, reset: function reset(skipTempReset) { if (this.prev = 0, this.next = 0, this.sent = this._sent = undefined, this.done = !1, this.delegate = null, this.method = "next", this.arg = undefined, this.tryEntries.forEach(resetTryEntry), !skipTempReset) for (var name in this) { "t" === name.charAt(0) && hasOwn.call(this, name) && !isNaN(+name.slice(1)) && (this[name] = undefined); } }, stop: function stop() { this.done = !0; var rootRecord = this.tryEntries[0].completion; if ("throw" === rootRecord.type) throw rootRecord.arg; return this.rval; }, dispatchException: function dispatchException(exception) { if (this.done) throw exception; var context = this; function handle(loc, caught) { return record.type = "throw", record.arg = exception, context.next = loc, caught && (context.method = "next", context.arg = undefined), !!caught; } for (var i = this.tryEntries.length - 1; i >= 0; --i) { var entry = this.tryEntries[i], record = entry.completion; if ("root" === entry.tryLoc) return handle("end"); if (entry.tryLoc <= this.prev) { var hasCatch = hasOwn.call(entry, "catchLoc"), hasFinally = hasOwn.call(entry, "finallyLoc"); if (hasCatch && hasFinally) { if (this.prev < entry.catchLoc) return handle(entry.catchLoc, !0); if (this.prev < entry.finallyLoc) return handle(entry.finallyLoc); } else if (hasCatch) { if (this.prev < entry.catchLoc) return handle(entry.catchLoc, !0); } else { if (!hasFinally) throw new Error("try statement without catch or finally"); if (this.prev < entry.finallyLoc) return handle(entry.finallyLoc); } } } }, abrupt: function abrupt(type, arg) { for (var i = this.tryEntries.length - 1; i >= 0; --i) { var entry = this.tryEntries[i]; if (entry.tryLoc <= this.prev && hasOwn.call(entry, "finallyLoc") && this.prev < entry.finallyLoc) { var finallyEntry = entry; break; } } finallyEntry && ("break" === type || "continue" === type) && finallyEntry.tryLoc <= arg && arg <= finallyEntry.finallyLoc && (finallyEntry = null); var record = finallyEntry ? finallyEntry.completion : {}; return record.type = type, record.arg = arg, finallyEntry ? (this.method = "next", this.next = finallyEntry.finallyLoc, ContinueSentinel) : this.complete(record); }, complete: function complete(record, afterLoc) { if ("throw" === record.type) throw record.arg; return "break" === record.type || "continue" === record.type ? this.next = record.arg : "return" === record.type ? (this.rval = this.arg = record.arg, this.method = "return", this.next = "end") : "normal" === record.type && afterLoc && (this.next = afterLoc), ContinueSentinel; }, finish: function finish(finallyLoc) { for (var i = this.tryEntries.length - 1; i >= 0; --i) { var entry = this.tryEntries[i]; if (entry.finallyLoc === finallyLoc) return this.complete(entry.completion, entry.afterLoc), resetTryEntry(entry), ContinueSentinel; } }, catch: function _catch(tryLoc) { for (var i = this.tryEntries.length - 1; i >= 0; --i) { var entry = this.tryEntries[i]; if (entry.tryLoc === tryLoc) { var record = entry.completion; if ("throw" === record.type) { var thrown = record.arg; resetTryEntry(entry); } return thrown; } } throw new Error("illegal catch attempt"); }, delegateYield: function delegateYield(iterable, resultName, nextLoc) { return this.delegate = { iterator: values(iterable), resultName: resultName, nextLoc: nextLoc }, "next" === this.method && (this.arg = undefined), ContinueSentinel; } }, exports; }
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
 
@@ -78,7 +82,8 @@ function _objectWithoutPropertiesLoose(source, excluded) { if (source == null) r
 var FormInput = /*#__PURE__*/_react.default.forwardRef(function (_ref, ref) {
   var _ref2;
 
-  var className = _ref.className,
+  var async = _ref.async,
+      className = _ref.className,
       density = _ref.density,
       disabled = _ref.disabled,
       focused = _ref.focused,
@@ -99,65 +104,63 @@ var FormInput = /*#__PURE__*/_react.default.forwardRef(function (_ref, ref) {
       withoutBorder = _ref.withoutBorder,
       inputProps = _objectWithoutProperties(_ref, _excluded);
 
-  var _useState = (0, _react.useState)({}),
+  var _useField = (0, _reactFinalForm.useField)(name),
+      input = _useField.input,
+      meta = _useField.meta;
+
+  var _useState = (0, _react.useState)(false),
       _useState2 = _slicedToArray(_useState, 2),
-      fieldMeta = _useState2[0],
-      setFieldMeta = _useState2[1];
+      isInvalid = _useState2[0],
+      setIsInvalid = _useState2[1];
 
-  var _useState3 = (0, _react.useState)({}),
+  var _useState3 = (0, _react.useState)(false),
       _useState4 = _slicedToArray(_useState3, 2),
-      fieldInput = _useState4[0],
-      setFieldInput = _useState4[1];
+      isFocused = _useState4[0],
+      setIsFocused = _useState4[1];
 
-  var _useState5 = (0, _react.useState)(false),
+  var _useState5 = (0, _react.useState)(''),
       _useState6 = _slicedToArray(_useState5, 2),
-      isInvalid = _useState6[0],
-      setIsInvalid = _useState6[1];
+      typedValue = _useState6[0],
+      setTypedValue = _useState6[1];
 
-  var _useState7 = (0, _react.useState)(false),
-      _useState8 = _slicedToArray(_useState7, 2),
-      isFocused = _useState8[0],
-      setIsFocused = _useState8[1];
+  var _useState7 = (0, _react.useState)(RegExp(pattern)),
+      _useState8 = _slicedToArray(_useState7, 1),
+      validationPattern = _useState8[0];
 
-  var _useState9 = (0, _react.useState)(''),
+  var _useState9 = (0, _react.useState)(rules),
       _useState10 = _slicedToArray(_useState9, 2),
-      typedValue = _useState10[0],
-      setTypedValue = _useState10[1];
+      validationRules = _useState10[0],
+      setValidationRules = _useState10[1];
 
-  var _useState11 = (0, _react.useState)(RegExp(pattern)),
-      _useState12 = _slicedToArray(_useState11, 1),
-      validationPattern = _useState12[0];
-
-  var _useState13 = (0, _react.useState)(rules),
-      _useState14 = _slicedToArray(_useState13, 2),
-      validationRules = _useState14[0],
-      setValidationRules = _useState14[1];
-
-  var _useState15 = (0, _react.useState)(false),
-      _useState16 = _slicedToArray(_useState15, 2),
-      showValidationRules = _useState16[0],
-      setShowValidationRules = _useState16[1];
+  var _useState11 = (0, _react.useState)(false),
+      _useState12 = _slicedToArray(_useState11, 2),
+      showValidationRules = _useState12[0],
+      setShowValidationRules = _useState12[1];
 
   var wrapperRef = (0, _react.useRef)();
   (_ref2 = ref) !== null && _ref2 !== void 0 ? _ref2 : ref = wrapperRef;
   var inputRef = (0, _react.useRef)();
+  var errorsRef = (0, _react.useRef)();
   (0, _useDetectOutsideClick.useDetectOutsideClick)(ref, function () {
     return setShowValidationRules(false);
   });
+  var debounceAsync = (0, _useDebounce.useDebounce)();
   var formFieldClassNames = (0, _classnames.default)('form-field-input', className);
   var inputWrapperClassNames = (0, _classnames.default)('form-field__wrapper', "form-field__wrapper-".concat(density), disabled && 'form-field__wrapper-disabled', isInvalid && 'form-field__wrapper-invalid', withoutBorder && 'without-border');
   var labelClassNames = (0, _classnames.default)('form-field__label', disabled && 'form-field__label-disabled');
   (0, _react.useEffect)(function () {
-    setTypedValue(String(fieldInput.value)); // convert from number to string
-  }, [fieldInput.value]);
+    setTypedValue(String(input.value)); // convert from number to string
+  }, [input.value]);
   (0, _react.useEffect)(function () {
-    setIsInvalid(fieldMeta.invalid && (fieldMeta.validating || fieldMeta.modified || fieldMeta.submitFailed && fieldMeta.touched));
-  }, [fieldMeta.invalid, fieldMeta.modified, fieldMeta.submitFailed, fieldMeta.touched, fieldMeta.validating]);
+    setIsInvalid(errorsRef.current && meta.invalid && (meta.validating || meta.modified || meta.submitFailed && meta.touched));
+  }, [meta.invalid, meta.modified, meta.submitFailed, meta.touched, meta.validating]);
   (0, _react.useEffect)(function () {
-    if (fieldMeta.valid && showValidationRules) {
-      setShowValidationRules(false);
+    if (!errorsRef.current) {
+      if (meta.valid && showValidationRules) {
+        setShowValidationRules(false);
+      }
     }
-  }, [fieldMeta.valid, showValidationRules]);
+  }, [meta.valid, showValidationRules]);
   (0, _react.useEffect)(function () {
     if (showValidationRules) {
       window.addEventListener('scroll', handleScroll, true);
@@ -176,13 +179,13 @@ var FormInput = /*#__PURE__*/_react.default.forwardRef(function (_ref, ref) {
     setValidationRules(function () {
       return rules.map(function (rule) {
         return _objectSpread(_objectSpread({}, rule), {}, {
-          isValid: !fieldMeta.error || !Array.isArray(fieldMeta.error) ? true : !fieldMeta.error.some(function (err) {
+          isValid: !errorsRef.current || !Array.isArray(errorsRef.current) ? true : !errorsRef.current.some(function (err) {
             return err.name === rule.name;
           })
         });
       });
     });
-  }, [fieldMeta.error, rules]);
+  }, [rules]);
 
   var getValidationRules = function getValidationRules() {
     return validationRules.map(function (_ref3) {
@@ -200,7 +203,7 @@ var FormInput = /*#__PURE__*/_react.default.forwardRef(function (_ref, ref) {
   var handleInputBlur = function handleInputBlur(event) {
     var _event$relatedTarget;
 
-    fieldInput.onBlur && fieldInput.onBlur(event);
+    input.onBlur && input.onBlur(event);
 
     if (!event.relatedTarget || !((_event$relatedTarget = event.relatedTarget) !== null && _event$relatedTarget !== void 0 && _event$relatedTarget.closest('.form-field__suggestion-list'))) {
       setIsFocused(false);
@@ -209,12 +212,12 @@ var FormInput = /*#__PURE__*/_react.default.forwardRef(function (_ref, ref) {
   };
 
   var handleInputFocus = function handleInputFocus(event) {
-    fieldInput.onFocus && fieldInput.onFocus(event);
+    input.onFocus && input.onFocus(event);
     setIsFocused(true);
   };
 
   var handleScroll = function handleScroll(event) {
-    if (inputRef.current.contains(event.target)) return;
+    if (inputRef.current && inputRef.current.contains(event.target)) return;
 
     if (!event.target.closest('.options-menu') && !event.target.classList.contains('form-field-input')) {
       setShowValidationRules(false);
@@ -222,7 +225,7 @@ var FormInput = /*#__PURE__*/_react.default.forwardRef(function (_ref, ref) {
   };
 
   var handleSuggestionClick = function handleSuggestionClick(item) {
-    fieldInput.onChange && fieldInput.onChange(item);
+    input.onChange && input.onChange(item);
     setIsFocused(false);
     onBlur();
   };
@@ -239,7 +242,7 @@ var FormInput = /*#__PURE__*/_react.default.forwardRef(function (_ref, ref) {
     if (!valueToValidate && !required || disabled) return;
     var validationError = null;
 
-    if (!(0, _lodash.isEmpty)(rules)) {
+    if (!(0, _lodash.isEmpty)(rules) && !async) {
       var _checkPatternsValidit = (0, _validation.checkPatternsValidity)(rules, valueToValidate),
           _checkPatternsValidit2 = _slicedToArray(_checkPatternsValidit, 2),
           newRules = _checkPatternsValidit2[0],
@@ -298,33 +301,76 @@ var FormInput = /*#__PURE__*/_react.default.forwardRef(function (_ref, ref) {
       validationError = validator(value, allValues);
     }
 
+    errorsRef.current = validationError;
     return validationError;
   };
+
+  var validateFieldAsync = debounceAsync( /*#__PURE__*/function () {
+    var _ref4 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee(value, allValues) {
+      var validationError, _yield$checkPatternsV, _yield$checkPatternsV2, newRules, isValidField, invalidRules;
+
+      return _regeneratorRuntime().wrap(function _callee$(_context) {
+        while (1) {
+          switch (_context.prev = _context.next) {
+            case 0:
+              validationError = validateField(value, allValues);
+
+              if ((0, _lodash.isEmpty)(rules)) {
+                _context.next = 10;
+                break;
+              }
+
+              _context.next = 4;
+              return (0, _validation.checkPatternsValidityAsync)(rules, value);
+
+            case 4:
+              _yield$checkPatternsV = _context.sent;
+              _yield$checkPatternsV2 = _slicedToArray(_yield$checkPatternsV, 2);
+              newRules = _yield$checkPatternsV2[0];
+              isValidField = _yield$checkPatternsV2[1];
+              invalidRules = newRules.filter(function (rule) {
+                return !rule.isValid;
+              });
+
+              if (!isValidField) {
+                validationError = invalidRules.map(function (rule) {
+                  return {
+                    name: rule.name,
+                    label: rule.label
+                  };
+                });
+              }
+
+            case 10:
+              errorsRef.current = validationError;
+              return _context.abrupt("return", validationError);
+
+            case 12:
+            case "end":
+              return _context.stop();
+          }
+        }
+      }, _callee);
+    }));
+
+    return function (_x, _x2) {
+      return _ref4.apply(this, arguments);
+    };
+  }(), 400);
 
   var parseField = function parseField(val) {
     if (!val) return;
     return inputProps.type === 'number' ? +val : val;
   };
 
-  var setFieldData = (0, _lodash.debounce)(function (input, meta) {
-    if (!(0, _lodash.isEqual)(meta, fieldMeta)) {
-      setFieldMeta(meta);
-    }
-
-    if (!(0, _lodash.isEqual)(input, fieldInput)) {
-      setFieldInput(input);
-    }
-  }, 50);
   return /*#__PURE__*/(0, _jsxRuntime.jsx)(_reactFinalForm.Field, {
-    validate: validateField,
+    validate: async ? validateFieldAsync : validateField,
     name: name,
     parse: parseField,
-    children: function children(_ref4) {
-      var _inputProps$autocompl, _meta$error$label, _meta$error;
+    children: function children(_ref5) {
+      var _inputProps$autocompl, _errorsRef$current$la, _errorsRef$current;
 
-      var input = _ref4.input,
-          meta = _ref4.meta;
-      setFieldData(input, meta);
+      var input = _ref5.input;
       return /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
         ref: ref,
         className: formFieldClassNames,
@@ -341,8 +387,8 @@ var FormInput = /*#__PURE__*/_react.default.forwardRef(function (_ref, ref) {
             })]
           }), link && link.show && typedValue.trim() && /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
             className: "form-field__label-icon",
-            children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_Tooltip.default, {
-              template: /*#__PURE__*/(0, _jsxRuntime.jsx)(_TextTooltipTemplate.default, {
+            children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_components.Tooltip, {
+              template: /*#__PURE__*/(0, _jsxRuntime.jsx)(_components.TextTooltipTemplate, {
                 text: link.url || typedValue
               }),
               children: /*#__PURE__*/(0, _jsxRuntime.jsx)("a", {
@@ -375,18 +421,18 @@ var FormInput = /*#__PURE__*/_react.default.forwardRef(function (_ref, ref) {
             }))
           }), /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
             className: "form-field__icons",
-            children: [isInvalid && !Array.isArray(meta.error) && /*#__PURE__*/(0, _jsxRuntime.jsx)(_Tooltip.default, {
+            children: [isInvalid && !Array.isArray(errorsRef.current) && /*#__PURE__*/(0, _jsxRuntime.jsx)(_components.Tooltip, {
               className: "form-field__warning",
-              template: /*#__PURE__*/(0, _jsxRuntime.jsx)(_TextTooltipTemplate.default, {
-                text: (_meta$error$label = (_meta$error = meta.error) === null || _meta$error === void 0 ? void 0 : _meta$error.label) !== null && _meta$error$label !== void 0 ? _meta$error$label : invalidText,
+              template: /*#__PURE__*/(0, _jsxRuntime.jsx)(_components.TextTooltipTemplate, {
+                text: (_errorsRef$current$la = (_errorsRef$current = errorsRef.current) === null || _errorsRef$current === void 0 ? void 0 : _errorsRef$current.label) !== null && _errorsRef$current$la !== void 0 ? _errorsRef$current$la : invalidText,
                 warning: true
               }),
               children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_invalid.ReactComponent, {})
-            }), isInvalid && Array.isArray(meta.error) && /*#__PURE__*/(0, _jsxRuntime.jsx)("button", {
+            }), isInvalid && Array.isArray(errorsRef.current) && /*#__PURE__*/(0, _jsxRuntime.jsx)("button", {
               className: "form-field__warning",
               onClick: toggleValidationRulesMenu,
               children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_warning.ReactComponent, {})
-            }), tip && /*#__PURE__*/(0, _jsxRuntime.jsx)(_Tip.default, {
+            }), tip && /*#__PURE__*/(0, _jsxRuntime.jsx)(_components.Tip, {
               text: tip,
               className: "form-field__tip"
             }), inputIcon && /*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
@@ -394,7 +440,9 @@ var FormInput = /*#__PURE__*/_react.default.forwardRef(function (_ref, ref) {
               className: iconClass,
               children: inputIcon
             })]
-          }), inputProps.type === 'number' && /*#__PURE__*/(0, _jsxRuntime.jsx)(_InputNumberButtons.default, _objectSpread({}, _objectSpread(_objectSpread(_objectSpread({}, inputProps), input), {}, {
+          }), inputProps.type === 'number' && /*#__PURE__*/(0, _jsxRuntime.jsx)(_InputNumberButtons.default, _objectSpread({}, _objectSpread(_objectSpread(_objectSpread({}, inputProps), {}, {
+            step: +inputProps.step
+          }, input), {}, {
             disabled: disabled
           })))]
         }), (suggestionList === null || suggestionList === void 0 ? void 0 : suggestionList.length) > 0 && isFocused && /*#__PURE__*/(0, _jsxRuntime.jsx)("ul", {
@@ -424,6 +472,7 @@ var FormInput = /*#__PURE__*/_react.default.forwardRef(function (_ref, ref) {
 });
 
 FormInput.defaultProps = {
+  async: false,
   className: '',
   density: 'normal',
   disabled: false,
@@ -444,7 +493,7 @@ FormInput.defaultProps = {
   pattern: null,
   placeholder: '',
   required: false,
-  step: 1,
+  step: '1',
   suggestionList: [],
   tip: '',
   type: 'text',
@@ -454,6 +503,7 @@ FormInput.defaultProps = {
   withoutBorder: false
 };
 FormInput.propTypes = {
+  async: _propTypes.default.bool,
   className: _propTypes.default.string,
   density: _propTypes.default.oneOf(['dense', 'normal', 'medium', 'chunky']),
   disabled: _propTypes.default.bool,
@@ -472,7 +522,7 @@ FormInput.propTypes = {
   pattern: _propTypes.default.string,
   placeholder: _propTypes.default.string,
   required: _propTypes.default.bool,
-  step: _propTypes.default.number,
+  step: _propTypes.default.string,
   suggestionList: _propTypes.default.arrayOf(_propTypes.default.string),
   tip: _propTypes.default.oneOfType([_propTypes.default.string, _propTypes.default.element]),
   type: _propTypes.default.string,

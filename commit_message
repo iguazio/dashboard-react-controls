@@ -1,6 +1,6 @@
 
 
-Create a new dist version 0.0.29
+Create a new dist version 0.0.30
 
 Collecting:
-- Impl [Jobs] New Job Wizard - New layout (#83)
+- Fix [Artifacts] Missing validation for an existing artifact name (#86)
