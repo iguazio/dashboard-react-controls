@@ -40,7 +40,7 @@ import './formInput.scss'
 const FormInput = React.forwardRef(
   (
     {
-      isAsync,
+      async,
       className,
       density,
       disabled,
@@ -138,7 +138,7 @@ const FormInput = React.forwardRef(
               : !errorsRef.current.some((err) => err.name === rule.name)
         }))
       )
-    }, [errorsRef.current])
+    }, [rules])
 
     const getValidationRules = () => {
       return validationRules.map(({ isValid = false, label, name }) => {
@@ -147,7 +147,7 @@ const FormInput = React.forwardRef(
     }
 
     const handleInputBlur = (event) => {
-      input.onBlur(event)
+      input.onBlur && input.onBlur(event)
 
       if (!event.relatedTarget || !event.relatedTarget?.closest('.form-field__suggestion-list')) {
         setIsFocused(false)
@@ -155,12 +155,12 @@ const FormInput = React.forwardRef(
       }
     }
     const handleInputFocus = (event) => {
-      input.onFocus(event)
+      input.onFocus && input.onFocus(event)
       setIsFocused(true)
     }
 
     const handleScroll = (event) => {
-      if (inputRef.current.contains(event.target)) return
+      if (inputRef.current && inputRef.current.contains(event.target)) return
 
       if (
         !event.target.closest('.options-menu') &&
@@ -187,7 +187,7 @@ const FormInput = React.forwardRef(
 
       let validationError = null
 
-      if (!isEmpty(rules) && !isAsync) {
+      if (!isEmpty(rules) && !async) {
         const [newRules, isValidField] = checkPatternsValidity(rules, valueToValidate)
         const invalidRules = newRules.filter((rule) => !rule.isValid)
 
@@ -226,6 +226,7 @@ const FormInput = React.forwardRef(
       }
 
       errorsRef.current = validationError
+
       return validationError
     }
 
@@ -243,6 +244,7 @@ const FormInput = React.forwardRef(
       }
 
       errorsRef.current = validationError
+
       return validationError
     }, 400)
 
@@ -252,7 +254,7 @@ const FormInput = React.forwardRef(
     }
 
     return (
-      <Field validate={isAsync ? validateFieldAsync : validateField} name={name} parse={parseField}>
+      <Field validate={async ? validateFieldAsync : validateField} name={name} parse={parseField}>
         {({ input }) => {
           return (
             <div ref={ref} className={formFieldClassNames}>
@@ -365,6 +367,7 @@ const FormInput = React.forwardRef(
 )
 
 FormInput.defaultProps = {
+  async: false,
   className: '',
   density: 'normal',
   disabled: false,
@@ -372,7 +375,6 @@ FormInput.defaultProps = {
   iconClass: '',
   inputIcon: null,
   invalidText: 'This field is invalid',
-  isAsync: false,
   label: '',
   link: { show: '', value: '' },
   min: null,
@@ -394,6 +396,7 @@ FormInput.defaultProps = {
 }
 
 FormInput.propTypes = {
+  async: PropTypes.bool,
   className: PropTypes.string,
   density: PropTypes.oneOf(['dense', 'normal', 'medium', 'chunky']),
   disabled: PropTypes.bool,
@@ -401,7 +404,6 @@ FormInput.propTypes = {
   iconClass: PropTypes.string,
   inputIcon: PropTypes.element,
   invalidText: PropTypes.string,
-  isAsync: PropTypes.bool,
   label: PropTypes.string,
   link: INPUT_LINK,
   min: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
