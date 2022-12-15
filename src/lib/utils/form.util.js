@@ -28,7 +28,7 @@ export const setFieldState = (args, state) => {
   }
 }
 
-export const areFormValuesChanged = (initialValues, values) => {
+export const isEqualValues = (initialValues, values) => {
   const replacer = (key, value) => {
     if (value === '') {
       return undefined
