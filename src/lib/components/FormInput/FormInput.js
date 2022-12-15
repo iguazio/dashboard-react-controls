@@ -17,17 +17,16 @@ such restriction.
 import React, { useState, useEffect, useRef } from 'react'
 import PropTypes from 'prop-types'
 import classNames from 'classnames'
-import { debounce, isEmpty, isEqual, isNil } from 'lodash'
-import { Field } from 'react-final-form'
+import { isEmpty, isNil } from 'lodash'
+import { Field, useField } from 'react-final-form'
 
 import InputNumberButtons from './InputNumberButtons/InputNumberButtons'
 import OptionsMenu from '../../elements/OptionsMenu/OptionsMenu'
-import TextTooltipTemplate from '../TooltipTemplate/TextTooltipTemplate'
-import Tip from '../Tip/Tip'
-import Tooltip from '../Tooltip/Tooltip'
+import { TextTooltipTemplate, Tip, Tooltip } from '../../components'
 import ValidationTemplate from '../../elements/ValidationTemplate/ValidationTemplate'
 
-import { checkPatternsValidity } from '../../utils/validation.util'
+import { useDebounce } from '../../hooks/useDebounce'
+import { checkPatternsValidity, checkPatternsValidityAsync } from '../../utils/validation.util'
 import { useDetectOutsideClick } from '../../hooks/useDetectOutsideClick'
 
 import { INPUT_LINK, INPUT_VALIDATION_RULES } from '../../types'
@@ -41,6 +40,7 @@ import './formInput.scss'
 const FormInput = React.forwardRef(
   (
     {
+      async,
       className,
       density,
       disabled,
@@ -64,8 +64,7 @@ const FormInput = React.forwardRef(
     },
     ref
   ) => {
-    const [fieldMeta, setFieldMeta] = useState({})
-    const [fieldInput, setFieldInput] = useState({})
+    const { input, meta } = useField(name)
     const [isInvalid, setIsInvalid] = useState(false)
     const [isFocused, setIsFocused] = useState(false)
     const [typedValue, setTypedValue] = useState('')
@@ -75,7 +74,9 @@ const FormInput = React.forwardRef(
     const wrapperRef = useRef()
     ref ??= wrapperRef
     const inputRef = useRef()
+    const errorsRef = useRef()
     useDetectOutsideClick(ref, () => setShowValidationRules(false))
+    const debounceAsync = useDebounce()
 
     const formFieldClassNames = classNames('form-field-input', className)
 
@@ -93,29 +94,24 @@ const FormInput = React.forwardRef(
     )
 
     useEffect(() => {
-      setTypedValue(String(fieldInput.value)) // convert from number to string
-    }, [fieldInput.value])
+      setTypedValue(String(input.value)) // convert from number to string
+    }, [input.value])
 
     useEffect(() => {
       setIsInvalid(
-        fieldMeta.invalid &&
-          (fieldMeta.validating ||
-            fieldMeta.modified ||
-            (fieldMeta.submitFailed && fieldMeta.touched))
+        errorsRef.current &&
+          meta.invalid &&
+          (meta.validating || meta.modified || (meta.submitFailed && meta.touched))
       )
-    }, [
-      fieldMeta.invalid,
-      fieldMeta.modified,
-      fieldMeta.submitFailed,
-      fieldMeta.touched,
-      fieldMeta.validating
-    ])
+    }, [meta.invalid, meta.modified, meta.submitFailed, meta.touched, meta.validating])
 
     useEffect(() => {
-      if (fieldMeta.valid && showValidationRules) {
-        setShowValidationRules(false)
+      if (!errorsRef.current) {
+        if (meta.valid && showValidationRules) {
+          setShowValidationRules(false)
+        }
       }
-    }, [fieldMeta.valid, showValidationRules])
+    }, [meta.valid, showValidationRules])
 
     useEffect(() => {
       if (showValidationRules) {
@@ -137,12 +133,12 @@ const FormInput = React.forwardRef(
         rules.map((rule) => ({
           ...rule,
           isValid:
-            !fieldMeta.error || !Array.isArray(fieldMeta.error)
+            !errorsRef.current || !Array.isArray(errorsRef.current)
               ? true
-              : !fieldMeta.error.some((err) => err.name === rule.name)
+              : !errorsRef.current.some((err) => err.name === rule.name)
         }))
       )
-    }, [fieldMeta.error, rules])
+    }, [rules])
 
     const getValidationRules = () => {
       return validationRules.map(({ isValid = false, label, name }) => {
@@ -151,7 +147,7 @@ const FormInput = React.forwardRef(
     }
 
     const handleInputBlur = (event) => {
-      fieldInput.onBlur && fieldInput.onBlur(event)
+      input.onBlur && input.onBlur(event)
 
       if (!event.relatedTarget || !event.relatedTarget?.closest('.form-field__suggestion-list')) {
         setIsFocused(false)
@@ -159,12 +155,12 @@ const FormInput = React.forwardRef(
       }
     }
     const handleInputFocus = (event) => {
-      fieldInput.onFocus && fieldInput.onFocus(event)
+      input.onFocus && input.onFocus(event)
       setIsFocused(true)
     }
 
     const handleScroll = (event) => {
-      if (inputRef.current.contains(event.target)) return
+      if (inputRef.current && inputRef.current.contains(event.target)) return
 
       if (
         !event.target.closest('.options-menu') &&
@@ -175,7 +171,7 @@ const FormInput = React.forwardRef(
     }
 
     const handleSuggestionClick = (item) => {
-      fieldInput.onChange && fieldInput.onChange(item)
+      input.onChange && input.onChange(item)
       setIsFocused(false)
       onBlur()
     }
@@ -191,7 +187,7 @@ const FormInput = React.forwardRef(
 
       let validationError = null
 
-      if (!isEmpty(rules)) {
+      if (!isEmpty(rules) && !async) {
         const [newRules, isValidField] = checkPatternsValidity(rules, valueToValidate)
         const invalidRules = newRules.filter((rule) => !rule.isValid)
 
@@ -229,29 +225,37 @@ const FormInput = React.forwardRef(
         validationError = validator(value, allValues)
       }
 
+      errorsRef.current = validationError
+
       return validationError
     }
+
+    const validateFieldAsync = debounceAsync(async (value, allValues) => {
+      let validationError = validateField(value, allValues)
+
+      if (!isEmpty(rules)) {
+        const [newRules, isValidField] = await checkPatternsValidityAsync(rules, value)
+
+        const invalidRules = newRules.filter((rule) => !rule.isValid)
+
+        if (!isValidField) {
+          validationError = invalidRules.map((rule) => ({ name: rule.name, label: rule.label }))
+        }
+      }
+
+      errorsRef.current = validationError
+
+      return validationError
+    }, 400)
 
     const parseField = (val) => {
       if (!val) return
       return inputProps.type === 'number' ? +val : val
     }
 
-    const setFieldData = debounce((input, meta) => {
-      if (!isEqual(meta, fieldMeta)) {
-        setFieldMeta(meta)
-      }
-
-      if (!isEqual(input, fieldInput)) {
-        setFieldInput(input)
-      }
-    }, 50)
-
     return (
-      <Field validate={validateField} name={name} parse={parseField}>
-        {({ input, meta }) => {
-          setFieldData(input, meta)
-
+      <Field validate={async ? validateFieldAsync : validateField} name={name} parse={parseField}>
+        {({ input }) => {
           return (
             <div ref={ref} className={formFieldClassNames}>
               {label && (
@@ -297,17 +301,20 @@ const FormInput = React.forwardRef(
                   />
                 </div>
                 <div className="form-field__icons">
-                  {isInvalid && !Array.isArray(meta.error) && (
+                  {isInvalid && !Array.isArray(errorsRef.current) && (
                     <Tooltip
                       className="form-field__warning"
                       template={
-                        <TextTooltipTemplate text={meta.error?.label ?? invalidText} warning />
+                        <TextTooltipTemplate
+                          text={errorsRef.current?.label ?? invalidText}
+                          warning
+                        />
                       }
                     >
                       <InvalidIcon />
                     </Tooltip>
                   )}
-                  {isInvalid && Array.isArray(meta.error) && (
+                  {isInvalid && Array.isArray(errorsRef.current) && (
                     <button className="form-field__warning" onClick={toggleValidationRulesMenu}>
                       <WarningIcon />
                     </button>
@@ -320,7 +327,9 @@ const FormInput = React.forwardRef(
                   )}
                 </div>
                 {inputProps.type === 'number' && (
-                  <InputNumberButtons {...{ ...inputProps, ...input, disabled }} />
+                  <InputNumberButtons
+                    {...{ ...inputProps, step: +inputProps.step, ...input, disabled }}
+                  />
                 )}
               </div>
               {suggestionList?.length > 0 && isFocused && (
@@ -358,6 +367,7 @@ const FormInput = React.forwardRef(
 )
 
 FormInput.defaultProps = {
+  async: false,
   className: '',
   density: 'normal',
   disabled: false,
@@ -375,7 +385,7 @@ FormInput.defaultProps = {
   pattern: null,
   placeholder: '',
   required: false,
-  step: 1,
+  step: '1',
   suggestionList: [],
   tip: '',
   type: 'text',
@@ -386,6 +396,7 @@ FormInput.defaultProps = {
 }
 
 FormInput.propTypes = {
+  async: PropTypes.bool,
   className: PropTypes.string,
   density: PropTypes.oneOf(['dense', 'normal', 'medium', 'chunky']),
   disabled: PropTypes.bool,
@@ -404,7 +415,7 @@ FormInput.propTypes = {
   pattern: PropTypes.string,
   placeholder: PropTypes.string,
   required: PropTypes.bool,
-  step: PropTypes.number,
+  step: PropTypes.string,
   suggestionList: PropTypes.arrayOf(PropTypes.string),
   tip: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
   type: PropTypes.string,
