@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.setFieldState = exports.parseObjectToKeyValue = exports.generateObjectFromKeyValue = exports.areFormValuesChanged = void 0;
+exports.setFieldState = exports.parseObjectToKeyValue = exports.isEqualValues = exports.generateObjectFromKeyValue = void 0;
 
 var _lodash = require("lodash");
 
@@ -33,7 +33,7 @@ var setFieldState = function setFieldState(args, state) {
 
 exports.setFieldState = setFieldState;
 
-var areFormValuesChanged = function areFormValuesChanged(initialValues, values) {
+var isEqualValues = function isEqualValues(initialValues, values) {
   var replacer = function replacer(key, value) {
     if (value === '') {
       return undefined;
@@ -45,7 +45,7 @@ var areFormValuesChanged = function areFormValuesChanged(initialValues, values) 
   return !(0, _lodash.isEqual)(JSON.stringify(initialValues, replacer), JSON.stringify(values, replacer));
 };
 
-exports.areFormValuesChanged = areFormValuesChanged;
+exports.isEqualValues = isEqualValues;
 
 var generateObjectFromKeyValue = function generateObjectFromKeyValue() {
   var keyValueList = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
