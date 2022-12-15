@@ -103,14 +103,7 @@ const FormInput = React.forwardRef(
           meta.invalid &&
           (meta.validating || meta.modified || (meta.submitFailed && meta.touched))
       )
-    }, [
-      errorsRef.current,
-      meta.invalid,
-      meta.modified,
-      meta.submitFailed,
-      meta.touched,
-      meta.validating
-    ])
+    }, [meta.invalid, meta.modified, meta.submitFailed, meta.touched, meta.validating])
 
     useEffect(() => {
       if (!errorsRef.current) {
@@ -118,7 +111,7 @@ const FormInput = React.forwardRef(
           setShowValidationRules(false)
         }
       }
-    }, [errorsRef.current, meta.valid, showValidationRules])
+    }, [meta.valid, showValidationRules])
 
     useEffect(() => {
       if (showValidationRules) {
