@@ -46,7 +46,7 @@ var RoundedIcon = /*#__PURE__*/_react.default.forwardRef(function (_ref, ref) {
       onClick = _ref.onClick,
       tooltipText = _ref.tooltipText;
   var wrapperClassNames = (0, _classnames.default)('round-icon-cp', className);
-  var IconClassNames = (0, _classnames.default)('round-icon-cp__circle', isActive && 'round-icon-cp__circle-active');
+  var IconClassNames = (0, _classnames.default)('round-icon-cp__circle', isActive && 'round-icon-cp__circle-active', disabled && 'round-icon-cp__circle-disabled');
   return /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
     className: wrapperClassNames,
     ref: ref,
