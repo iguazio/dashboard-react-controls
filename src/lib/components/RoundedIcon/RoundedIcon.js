@@ -24,28 +24,18 @@ import TextTooltipTemplate from '../TooltipTemplate/TextTooltipTemplate'
 import './roundedIcon.scss'
 
 const RoundedIcon = React.forwardRef(
-  (
-    { children, className, disabled, id, isActive, onClick, tooltipText },
-    ref
-  ) => {
+  ({ children, className, disabled, id, isActive, onClick, tooltipText }, ref) => {
     const wrapperClassNames = classNames('round-icon-cp', className)
     const IconClassNames = classNames(
       'round-icon-cp__circle',
-      isActive && 'round-icon-cp__circle-active'
+      isActive && 'round-icon-cp__circle-active',
+      disabled && 'round-icon-cp__circle-disabled'
     )
 
     return (
       <div className={wrapperClassNames} ref={ref}>
-        <Tooltip
-          hidden={!tooltipText}
-          template={<TextTooltipTemplate text={tooltipText} />}
-        >
-          <button
-            onClick={onClick}
-            disabled={disabled}
-            id={id}
-            className={IconClassNames}
-          >
+        <Tooltip hidden={!tooltipText} template={<TextTooltipTemplate text={tooltipText} />}>
+          <button onClick={onClick} disabled={disabled} id={id} className={IconClassNames}>
             {children}
           </button>
         </Tooltip>
