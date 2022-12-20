@@ -79,13 +79,8 @@ var SelectOption = function SelectOption(_ref) {
           children: item.icon
         }), item.status && /*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
           className: "state-".concat(item.status, "-job status")
-        }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_components.Tooltip, {
-          template: /*#__PURE__*/(0, _jsxRuntime.jsx)(_components.TextTooltipTemplate, {
-            text: item.label
-          }),
-          children: /*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
-            children: item.label
-          })
+        }), /*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
+          children: item.label
         })]
       }), withSelectedIcon && item.id === selectedId && /*#__PURE__*/(0, _jsxRuntime.jsx)(_checkmark.ReactComponent, {
         className: "checkmark"

@@ -41,5 +41,17 @@
         opacity: 1;
       }
     }
+
+    &-disabled {
+      path {
+        fill: $spunPearl;
+      }
+
+      &:hover {
+        &::before {
+          opacity: 0;
+        }
+      }
+    }
   }
 }
