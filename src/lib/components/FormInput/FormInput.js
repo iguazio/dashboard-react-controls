@@ -111,7 +111,7 @@ const FormInput = React.forwardRef(
           setShowValidationRules(false)
         }
       }
-    }, [meta.valid, showValidationRules])
+    }, [errorsRef.current, meta.valid, showValidationRules])
 
     useEffect(() => {
       if (showValidationRules) {
