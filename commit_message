@@ -1,7 +1,6 @@
 
 
-Create a new dist version 0.0.32
+Create a new dist version 0.0.33
 
 Collecting:
-- Fix [UI] Edit a an artifact tag from the overview tab does not have exit option (#99)
-- Fix [UI] redundant tooltips in "Create New" dropdown (#96)
+- Fix [Input] add missing dependency for validations (#102)

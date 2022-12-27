@@ -160,7 +160,7 @@ var FormInput = /*#__PURE__*/_react.default.forwardRef(function (_ref, ref) {
         setShowValidationRules(false);
       }
     }
-  }, [meta.valid, showValidationRules]);
+  }, [errorsRef.current, meta.valid, showValidationRules]);
   (0, _react.useEffect)(function () {
     if (showValidationRules) {
       window.addEventListener('scroll', handleScroll, true);
