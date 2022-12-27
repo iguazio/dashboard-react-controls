@@ -84,14 +84,34 @@ export const checkPatternsValidity = (validationRules, value = '', required = tr
   const newRules =
     !required && isEmpty(value)
       ? validationRules
-      : validationRules.map((rule) => ({
-          ...rule,
-          isValid: lodash.isFunction(rule.pattern)
-            ? rule.pattern(value)
-            : /* else, it is a RegExp */ rule.pattern.test(value)
-        }))
+      : validationRules
+          .filter((rule) => !rule.async)
+          .map((rule) => {
+            return {
+              ...rule,
+              isValid: lodash.isFunction(rule.pattern)
+                ? rule.pattern(value)
+                : /* else, it is a RegExp */ rule.pattern.test(value)
+            }
+          })
 
   return [newRules, !hasInvalidRule(newRules)]
+}
+
+export const checkPatternsValidityAsync = async (validationRules, value) => {
+  const [newRules] = checkPatternsValidity(validationRules, value)
+  const asyncRules = await Promise.all(
+    validationRules
+      .filter((rule) => rule.async)
+      .map(async (rule) => ({
+        ...rule,
+        isValid: await rule.pattern(value)
+      }))
+  )
+
+  const allRules = newRules.concat(asyncRules)
+
+  return [allRules, !hasInvalidRule(allRules)]
 }
 
 const generateRule = {
