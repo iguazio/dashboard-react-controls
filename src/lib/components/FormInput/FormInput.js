@@ -22,12 +22,11 @@ import { Field, useField } from 'react-final-form'
 
 import InputNumberButtons from './InputNumberButtons/InputNumberButtons'
 import OptionsMenu from '../../elements/OptionsMenu/OptionsMenu'
-import TextTooltipTemplate from '../TooltipTemplate/TextTooltipTemplate'
-import Tip from '../Tip/Tip'
-import Tooltip from '../Tooltip/Tooltip'
+import { TextTooltipTemplate, Tip, Tooltip } from '../../components'
 import ValidationTemplate from '../../elements/ValidationTemplate/ValidationTemplate'
 
-import { checkPatternsValidity } from '../../utils/validation.util'
+import { useDebounce } from '../../hooks/useDebounce'
+import { checkPatternsValidity, checkPatternsValidityAsync } from '../../utils/validation.util'
 import { useDetectOutsideClick } from '../../hooks/useDetectOutsideClick'
 
 import { INPUT_LINK, INPUT_VALIDATION_RULES } from '../../types'
@@ -41,6 +40,7 @@ import './formInput.scss'
 const FormInput = React.forwardRef(
   (
     {
+      async,
       className,
       density,
       disabled,
@@ -74,7 +74,9 @@ const FormInput = React.forwardRef(
     const wrapperRef = useRef()
     ref ??= wrapperRef
     const inputRef = useRef()
+    const errorsRef = useRef()
     useDetectOutsideClick(ref, () => setShowValidationRules(false))
+    const debounceAsync = useDebounce()
 
     const formFieldClassNames = classNames('form-field-input', className)
 
@@ -97,15 +99,19 @@ const FormInput = React.forwardRef(
 
     useEffect(() => {
       setIsInvalid(
-        meta.invalid && (meta.validating || meta.modified || (meta.submitFailed && meta.touched))
+        errorsRef.current &&
+          meta.invalid &&
+          (meta.validating || meta.modified || (meta.submitFailed && meta.touched))
       )
     }, [meta.invalid, meta.modified, meta.submitFailed, meta.touched, meta.validating])
 
     useEffect(() => {
-      if (meta.valid && showValidationRules) {
-        setShowValidationRules(false)
+      if (!errorsRef.current) {
+        if (meta.valid && showValidationRules) {
+          setShowValidationRules(false)
+        }
       }
-    }, [meta.valid, showValidationRules])
+    }, [errorsRef.current, meta.valid, showValidationRules])
 
     useEffect(() => {
       if (showValidationRules) {
@@ -121,6 +127,18 @@ const FormInput = React.forwardRef(
         inputRef.current.focus()
       }
     }, [focused])
+
+    useEffect(() => {
+      setValidationRules(() =>
+        rules.map((rule) => ({
+          ...rule,
+          isValid:
+            !errorsRef.current || !Array.isArray(errorsRef.current)
+              ? true
+              : !errorsRef.current.some((err) => err.name === rule.name)
+        }))
+      )
+    }, [rules])
 
     const getValidationRules = () => {
       return validationRules.map(({ isValid = false, label, name }) => {
@@ -142,7 +160,7 @@ const FormInput = React.forwardRef(
     }
 
     const handleScroll = (event) => {
-      if (inputRef.current.contains(event.target)) return
+      if (inputRef.current && inputRef.current.contains(event.target)) return
 
       if (
         !event.target.closest('.options-menu') &&
@@ -163,25 +181,13 @@ const FormInput = React.forwardRef(
       setShowValidationRules((state) => !state)
     }
 
-    useEffect(() => {
-      setValidationRules((prevState) =>
-        prevState.map((rule) => ({
-          ...rule,
-          isValid:
-            !meta.error || !Array.isArray(meta.error)
-              ? true
-              : !meta.error.some((err) => err.name === rule.name)
-        }))
-      )
-    }, [meta.error])
-
-    const validateField = (value) => {
+    const validateField = (value, allValues) => {
       let valueToValidate = isNil(value) ? '' : String(value)
       if ((!valueToValidate && !required) || disabled) return
 
       let validationError = null
 
-      if (!isEmpty(rules)) {
+      if (!isEmpty(rules) && !async) {
         const [newRules, isValidField] = checkPatternsValidity(rules, valueToValidate)
         const invalidRules = newRules.filter((rule) => !rule.isValid)
 
@@ -193,11 +199,17 @@ const FormInput = React.forwardRef(
       if (isEmpty(validationError)) {
         if (inputProps.type === 'number') {
           if (inputProps.max && +valueToValidate > +inputProps.max) {
-            validationError = { name: 'maxValue', label: `Max value is ${inputProps.max}` }
+            validationError = {
+              name: 'maxValue',
+              label: `The maximum value should be ${inputProps.max}`
+            }
           }
 
           if (inputProps.min && +valueToValidate < +inputProps.min) {
-            validationError = { name: 'minValue', label: `Min value is ${inputProps.min}` }
+            validationError = {
+              name: 'minValue',
+              label: `The minimum value should be ${inputProps.min}`
+            }
           }
         }
         if (pattern && !validationPattern.test(valueToValidate)) {
@@ -210,11 +222,31 @@ const FormInput = React.forwardRef(
       }
 
       if (!validationError && validator) {
-        validationError = validator(value)
+        validationError = validator(value, allValues)
       }
+
+      errorsRef.current = validationError
 
       return validationError
     }
+
+    const validateFieldAsync = debounceAsync(async (value, allValues) => {
+      let validationError = validateField(value, allValues)
+
+      if (!isEmpty(rules)) {
+        const [newRules, isValidField] = await checkPatternsValidityAsync(rules, value)
+
+        const invalidRules = newRules.filter((rule) => !rule.isValid)
+
+        if (!isValidField) {
+          validationError = invalidRules.map((rule) => ({ name: rule.name, label: rule.label }))
+        }
+      }
+
+      errorsRef.current = validationError
+
+      return validationError
+    }, 400)
 
     const parseField = (val) => {
       if (!val) return
@@ -222,112 +254,120 @@ const FormInput = React.forwardRef(
     }
 
     return (
-      <Field validate={validateField} name={name} parse={parseField}>
-        {({ input, meta }) => (
-          <div ref={ref} className={formFieldClassNames}>
-            {label && (
-              <div className={labelClassNames}>
-                <label data-testid="label" htmlFor={input.name}>
-                  {label}
-                  {(required || validationRules.find((rule) => rule.name === 'required')) && (
-                    <span className="form-field__label-mandatory"> *</span>
+      <Field validate={async ? validateFieldAsync : validateField} name={name} parse={parseField}>
+        {({ input }) => {
+          return (
+            <div ref={ref} className={formFieldClassNames}>
+              {label && (
+                <div className={labelClassNames}>
+                  <label data-testid="label" htmlFor={input.name}>
+                    {label}
+                    {(required || validationRules.find((rule) => rule.name === 'required')) && (
+                      <span className="form-field__label-mandatory"> *</span>
+                    )}
+                  </label>
+                  {link && link.show && typedValue.trim() && (
+                    <div className="form-field__label-icon">
+                      <Tooltip template={<TextTooltipTemplate text={link.url || typedValue} />}>
+                        <a
+                          href={link.url || typedValue}
+                          onClick={(event) => event.stopPropagation()}
+                          target="_blank"
+                          rel="noreferrer"
+                        >
+                          <Popout />
+                        </a>
+                      </Tooltip>
+                    </div>
                   )}
-                </label>
-                {link && link.show && typedValue.trim() && (
-                  <div className="form-field__label-icon">
-                    <Tooltip template={<TextTooltipTemplate text={link.url || typedValue} />}>
-                      <a
-                        href={link.url || typedValue}
-                        onClick={(event) => event.stopPropagation()}
-                        target="_blank"
-                        rel="noreferrer"
-                      >
-                        <Popout />
-                      </a>
+                </div>
+              )}
+              <div className={inputWrapperClassNames}>
+                <div className="form-field__control">
+                  <input
+                    data-testid="input"
+                    id={input.name}
+                    ref={inputRef}
+                    required={isInvalid || required}
+                    {...{
+                      disabled,
+                      pattern,
+                      ...inputProps,
+                      ...input
+                    }}
+                    autoComplete={inputProps.autocomplete ?? 'off'}
+                    onBlur={handleInputBlur}
+                    onFocus={handleInputFocus}
+                  />
+                </div>
+                <div className="form-field__icons">
+                  {isInvalid && !Array.isArray(errorsRef.current) && (
+                    <Tooltip
+                      className="form-field__warning"
+                      template={
+                        <TextTooltipTemplate
+                          text={errorsRef.current?.label ?? invalidText}
+                          warning
+                        />
+                      }
+                    >
+                      <InvalidIcon />
                     </Tooltip>
-                  </div>
+                  )}
+                  {isInvalid && Array.isArray(errorsRef.current) && (
+                    <button className="form-field__warning" onClick={toggleValidationRulesMenu}>
+                      <WarningIcon />
+                    </button>
+                  )}
+                  {tip && <Tip text={tip} className="form-field__tip" />}
+                  {inputIcon && (
+                    <span data-testid="input-icon" className={iconClass}>
+                      {inputIcon}
+                    </span>
+                  )}
+                </div>
+                {inputProps.type === 'number' && (
+                  <InputNumberButtons
+                    {...{ ...inputProps, step: +inputProps.step, ...input, disabled }}
+                  />
                 )}
               </div>
-            )}
-            <div className={inputWrapperClassNames}>
-              <div className="form-field__control">
-                <input
-                  data-testid="input"
-                  id={input.name}
-                  ref={inputRef}
-                  required={isInvalid || required}
-                  {...{
-                    disabled,
-                    pattern,
-                    ...inputProps,
-                    ...input
-                  }}
-                  autoComplete={inputProps.autocomplete ?? 'off'}
-                  onBlur={handleInputBlur}
-                  onFocus={handleInputFocus}
-                />
-              </div>
-              <div className="form-field__icons">
-                {isInvalid && !Array.isArray(meta.error) && (
-                  <Tooltip
-                    className="form-field__warning"
-                    template={
-                      <TextTooltipTemplate text={meta.error?.label ?? invalidText} warning />
-                    }
-                  >
-                    <InvalidIcon />
-                  </Tooltip>
-                )}
-                {isInvalid && Array.isArray(meta.error) && (
-                  <button className="form-field__warning" onClick={toggleValidationRulesMenu}>
-                    <WarningIcon />
-                  </button>
-                )}
-                {tip && <Tip text={tip} className="form-field__tip" />}
-                {inputIcon && (
-                  <span data-testid="input-icon" className={iconClass}>
-                    {inputIcon}
-                  </span>
-                )}
-              </div>
-              {inputProps.type === 'number' && (
-                <InputNumberButtons {...{ ...inputProps, ...input, disabled }} />
+              {suggestionList?.length > 0 && isFocused && (
+                <ul className="form-field__suggestion-list">
+                  {suggestionList.map((item, index) => {
+                    return (
+                      <li
+                        className="suggestion-item"
+                        key={`${item}${index}`}
+                        onClick={() => {
+                          handleSuggestionClick(item)
+                        }}
+                        tabIndex={index}
+                        dangerouslySetInnerHTML={{
+                          __html: item.replace(new RegExp(typedValue, 'gi'), (match) =>
+                            match ? `<b>${match}</b>` : match
+                          )
+                        }}
+                      />
+                    )
+                  })}
+                </ul>
+              )}
+              {!isEmpty(validationRules) && (
+                <OptionsMenu show={showValidationRules} ref={ref}>
+                  {getValidationRules()}
+                </OptionsMenu>
               )}
             </div>
-            {suggestionList?.length > 0 && isFocused && (
-              <ul className="form-field__suggestion-list">
-                {suggestionList.map((item, index) => {
-                  return (
-                    <li
-                      className="suggestion-item"
-                      key={`${item}${index}`}
-                      onClick={() => {
-                        handleSuggestionClick(item)
-                      }}
-                      tabIndex={index}
-                      dangerouslySetInnerHTML={{
-                        __html: item.replace(new RegExp(typedValue, 'gi'), (match) =>
-                          match ? `<b>${match}</b>` : match
-                        )
-                      }}
-                    />
-                  )
-                })}
-              </ul>
-            )}
-            {!isEmpty(validationRules) && (
-              <OptionsMenu show={showValidationRules} ref={ref}>
-                {getValidationRules()}
-              </OptionsMenu>
-            )}
-          </div>
-        )}
+          )
+        }}
       </Field>
     )
   }
 )
 
 FormInput.defaultProps = {
+  async: false,
   className: '',
   density: 'normal',
   disabled: false,
@@ -356,6 +396,7 @@ FormInput.defaultProps = {
 }
 
 FormInput.propTypes = {
+  async: PropTypes.bool,
   className: PropTypes.string,
   density: PropTypes.oneOf(['dense', 'normal', 'medium', 'chunky']),
   disabled: PropTypes.bool,
