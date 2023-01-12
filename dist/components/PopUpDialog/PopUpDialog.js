@@ -68,8 +68,15 @@ var PopUpDialog = function PopUpDialog(_ref) {
           verticalPosition = _customPosition$posit2[0],
           horizontalPosition = _customPosition$posit2[1];
 
-      var topPosition = verticalPosition === 'top' ? elementRect.top - popUpRect.height - 5 : elementRect.bottom + 5;
       var leftPosition = horizontalPosition === 'left' ? elementRect.right - popUpRect.width : elementRect.left;
+      var topPosition;
+
+      if (verticalPosition === 'top') {
+        topPosition = elementRect.top > popUpRect.height ? elementRect.top - popUpRect.height - 5 : 5;
+      } else {
+        topPosition = popUpRect.height + elementRect.bottom > window.innerHeight ? window.innerHeight - popUpRect.height - 5 : elementRect.bottom + 5;
+      }
+
       popUpOverlayRef.current.style.top = "".concat(topPosition, "px");
 
       if (style.left) {

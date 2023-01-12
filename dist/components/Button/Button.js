@@ -53,19 +53,19 @@ var Button = /*#__PURE__*/(0, _react.forwardRef)(function (_ref, ref) {
       restProps = _objectWithoutProperties(_ref, _excluded);
 
   var buttonClassName = (0, _classnames.default)('btn', "btn-".concat(variant), "btn-".concat(density), className);
-  return /*#__PURE__*/(0, _jsxRuntime.jsx)(_Tooltip.default, {
-    template: /*#__PURE__*/(0, _jsxRuntime.jsx)(_TextTooltipTemplate.default, {
-      text: tooltip
-    }),
-    hidden: !tooltip,
-    children: /*#__PURE__*/(0, _jsxRuntime.jsxs)("button", _objectSpread(_objectSpread({}, restProps), {}, {
-      className: buttonClassName,
-      ref: ref,
+  return /*#__PURE__*/(0, _jsxRuntime.jsx)("button", _objectSpread(_objectSpread({}, restProps), {}, {
+    className: buttonClassName,
+    ref: ref,
+    children: /*#__PURE__*/(0, _jsxRuntime.jsxs)(_Tooltip.default, {
+      template: /*#__PURE__*/(0, _jsxRuntime.jsx)(_TextTooltipTemplate.default, {
+        text: tooltip
+      }),
+      hidden: !tooltip,
       children: [icon, label && /*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
         children: label
       })]
-    }))
-  });
+    })
+  }));
 });
 Button.defaultProps = {
   className: '',
