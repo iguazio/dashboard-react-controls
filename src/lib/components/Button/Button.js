@@ -54,7 +54,7 @@ Button.propTypes = {
   density: PropTypes.oneOf(['dense', 'normal', 'medium', 'chunky']),
   icon: PropTypes.element,
   label: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
-  tooltip: PropTypes.string,
+  tooltip: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
   variant: BUTTON_VARIANTS
 }
 

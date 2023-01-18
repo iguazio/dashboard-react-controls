@@ -159,3 +159,9 @@ export const FORM_TABLE_EDITING_ITEM = PropTypes.shape({
   }).isRequired,
   [PropTypes.string]: PropTypes.any
 })
+
+export const SORT_PROPS = PropTypes.shape({
+  selectedColumnName: PropTypes.string.isRequired,
+  getSortingIcon: PropTypes.func.isRequired,
+  sortTable: PropTypes.func.isRequired
+})
