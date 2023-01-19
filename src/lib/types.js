@@ -165,3 +165,17 @@ export const SORT_PROPS = PropTypes.shape({
   getSortingIcon: PropTypes.func.isRequired,
   sortTable: PropTypes.func.isRequired
 })
+
+export const ALLOW_SORT_BY = PropTypes.oneOfType([
+  PropTypes.string,
+  PropTypes.number,
+  PropTypes.arrayOf(PropTypes.string, PropTypes.number)
+])
+
+export const DEFAULT_SORT_BY = PropTypes.oneOfType([PropTypes.string, PropTypes.number])
+
+export const EXCLUDE_SORT_BY = PropTypes.oneOfType([
+  PropTypes.string,
+  PropTypes.number,
+  PropTypes.arrayOf(PropTypes.string, PropTypes.number)
+])
