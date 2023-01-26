@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.WIZARD_STEPS_CONFIG = exports.SELECT_OPTIONS = exports.SELECT_OPTION = exports.POP_UP_CUSTOM_POSITION = exports.MODAL_SIZES = exports.INPUT_VALIDATION_RULES = exports.INPUT_LINK = exports.FORM_TABLE_EDITING_ITEM = exports.CONFIRM_DIALOG_SUBMIT_BUTTON = exports.CONFIRM_DIALOG_CANCEL_BUTTON = exports.COMBOBOX_VALIDATION_RULES = exports.COMBOBOX_SUGGESTION_LIST = exports.COMBOBOX_SELECT_OPTIONS = exports.CHIP_OPTIONS = exports.CHIP_INPUT_LIST = exports.CHIPS = exports.CHIP = exports.BUTTON_VARIANTS = void 0;
+exports.WIZARD_STEPS_CONFIG = exports.SORT_PROPS = exports.SELECT_OPTIONS = exports.SELECT_OPTION = exports.POP_UP_CUSTOM_POSITION = exports.MODAL_SIZES = exports.INPUT_VALIDATION_RULES = exports.INPUT_LINK = exports.FORM_TABLE_EDITING_ITEM = exports.EXCLUDE_SORT_BY = exports.DEFAULT_SORT_BY = exports.CONFIRM_DIALOG_SUBMIT_BUTTON = exports.CONFIRM_DIALOG_CANCEL_BUTTON = exports.COMBOBOX_VALIDATION_RULES = exports.COMBOBOX_SUGGESTION_LIST = exports.COMBOBOX_SELECT_OPTIONS = exports.CHIP_OPTIONS = exports.CHIP_INPUT_LIST = exports.CHIPS = exports.CHIP = exports.BUTTON_VARIANTS = exports.ALLOW_SORT_BY = void 0;
 
 var _propTypes = _interopRequireDefault(require("prop-types"));
 
@@ -152,3 +152,23 @@ var FORM_TABLE_EDITING_ITEM = _propTypes.default.shape(_defineProperty({
 }, _propTypes.default.string, _propTypes.default.any));
 
 exports.FORM_TABLE_EDITING_ITEM = FORM_TABLE_EDITING_ITEM;
+
+var SORT_PROPS = _propTypes.default.shape({
+  selectedColumnName: _propTypes.default.string.isRequired,
+  getSortingIcon: _propTypes.default.func.isRequired,
+  sortTable: _propTypes.default.func.isRequired
+});
+
+exports.SORT_PROPS = SORT_PROPS;
+
+var ALLOW_SORT_BY = _propTypes.default.oneOfType([_propTypes.default.string, _propTypes.default.number, _propTypes.default.arrayOf(_propTypes.default.string, _propTypes.default.number)]);
+
+exports.ALLOW_SORT_BY = ALLOW_SORT_BY;
+
+var DEFAULT_SORT_BY = _propTypes.default.oneOfType([_propTypes.default.string, _propTypes.default.number]);
+
+exports.DEFAULT_SORT_BY = DEFAULT_SORT_BY;
+
+var EXCLUDE_SORT_BY = _propTypes.default.oneOfType([_propTypes.default.string, _propTypes.default.number, _propTypes.default.arrayOf(_propTypes.default.string, _propTypes.default.number)]);
+
+exports.EXCLUDE_SORT_BY = EXCLUDE_SORT_BY;

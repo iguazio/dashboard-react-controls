@@ -82,7 +82,7 @@ var HiddenChipsBlock = /*#__PURE__*/_react.default.forwardRef(function (_ref, re
   }, [hiddenRef]);
 
   var generateChipData = function generateChipData(chip) {
-    return "".concat(chip.key).concat(chip.delimiter ? chip.delimiter : ':', " ").concat(chip.value);
+    return chip.isKeyOnly ? chip.key : "".concat(chip.key).concat(chip.delimiter ? chip.delimiter : ':', " ").concat(chip.value);
   };
 
   (0, _react.useEffect)(function () {
@@ -130,10 +130,12 @@ var HiddenChipsBlock = /*#__PURE__*/_react.default.forwardRef(function (_ref, re
         template: /*#__PURE__*/(0, _jsxRuntime.jsx)(_TextTooltipTemplate.default, {
           text: element.delimiter ? /*#__PURE__*/(0, _jsxRuntime.jsxs)("span", {
             className: "chip__content",
-            children: [element.key, /*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
-              className: "chip__delimiter",
-              children: element.delimiter
-            }), element.value]
+            children: [element.key, !element.isKeyOnly && /*#__PURE__*/(0, _jsxRuntime.jsxs)(_jsxRuntime.Fragment, {
+              children: [/*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
+                className: "chip__delimiter",
+                children: element.delimiter
+              }), element.value]
+            })]
           }) : generateChipData(element)
         }),
         children: /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {

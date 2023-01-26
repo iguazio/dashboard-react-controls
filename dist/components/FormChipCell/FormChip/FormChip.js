@@ -51,11 +51,13 @@ var FormChip = /*#__PURE__*/_react.default.forwardRef(function (_ref, ref) {
   var chipRef = _react.default.useRef();
 
   (0, _react.useEffect)(function () {
-    if (chipRef.current && setChipsSizes) {
-      setChipsSizes(function (state) {
-        return _objectSpread(_objectSpread({}, state), {}, _defineProperty({}, chipIndex, chipRef.current.getBoundingClientRect().width));
-      });
-    }
+    queueMicrotask(function () {
+      if (chipRef.current && setChipsSizes) {
+        setChipsSizes(function (state) {
+          return _objectSpread(_objectSpread({}, state), {}, _defineProperty({}, chipIndex, chipRef.current.getBoundingClientRect().width));
+        });
+      }
+    });
   }, [chipIndex, setChipsSizes]);
   return /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
     onClick: function onClick(event) {

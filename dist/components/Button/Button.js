@@ -79,7 +79,7 @@ Button.propTypes = {
   density: _propTypes.default.oneOf(['dense', 'normal', 'medium', 'chunky']),
   icon: _propTypes.default.element,
   label: _propTypes.default.oneOfType([_propTypes.default.string, _propTypes.default.element]),
-  tooltip: _propTypes.default.string,
+  tooltip: _propTypes.default.oneOfType([_propTypes.default.string, _propTypes.default.element]),
   variant: _types.BUTTON_VARIANTS
 };
 var _default = Button;

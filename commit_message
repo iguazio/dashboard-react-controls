@@ -1,8 +1,7 @@
 
 
-Create a new dist version 0.0.34
+Create a new dist version 0.0.35
 
 Collecting:
-- Impl [UI] new navbar and homepage icons (#108)
-- Fix [Button] make button as parent container (#106)
-- Fix [UI] Popup is cropped (#107)
+- Impl [UI] add sort type (#110)
+- Impl [Job Wizard] Batch run changes (#111)

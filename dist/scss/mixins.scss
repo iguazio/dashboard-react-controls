@@ -15,12 +15,12 @@
 }
 
 @mixin tableDet {
-  display: flex;
+  display: inline-flex;
   align-items: center;
   text-align: left;
 
   &:first-child {
-    padding-left: 40px;
+    margin-left: 10px;
   }
 }
 
@@ -380,12 +380,18 @@
   line-height: $lineHeight;
 }
 
-@mixin tableHeader($sidePadding) {
-  padding: 5px $sidePadding;
+@mixin tableHeader($topPadding, $rightPadding, $bottomPadding, $leftPadding) {
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  height: auto;
+  min-height: 50px;
+  margin: 0 1px;
+  padding: $topPadding $rightPadding $bottomPadding $leftPadding;
+  text-align: left;
   color: $topaz;
   font-weight: bold;
   font-size: 14px;
-  line-height: 24px;
 }
 
 @mixin resetSpaces {

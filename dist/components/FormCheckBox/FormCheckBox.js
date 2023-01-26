@@ -17,7 +17,7 @@ require("./formCheckBox.scss");
 
 var _jsxRuntime = require("react/jsx-runtime");
 
-var _excluded = ["children", "className", "name", "label"];
+var _excluded = ["children", "className", "highlightLabel", "label", "name"];
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -34,11 +34,13 @@ function _objectWithoutPropertiesLoose(source, excluded) { if (source == null) r
 var FormCheckBox = function FormCheckBox(_ref) {
   var _children = _ref.children,
       className = _ref.className,
-      name = _ref.name,
+      highlightLabel = _ref.highlightLabel,
       label = _ref.label,
+      name = _ref.name,
       inputProps = _objectWithoutProperties(_ref, _excluded);
 
   var formFieldClassNames = (0, _classnames.default)('form-field-checkbox', className);
+  var labelClassNames = (0, _classnames.default)(highlightLabel && 'highlighted');
   return /*#__PURE__*/(0, _jsxRuntime.jsx)(_reactFinalForm.Field, {
     name: name,
     value: inputProps.value,
@@ -53,6 +55,7 @@ var FormCheckBox = function FormCheckBox(_ref) {
           id: (_inputProps$value = inputProps.value) !== null && _inputProps$value !== void 0 ? _inputProps$value : name
         })), /*#__PURE__*/(0, _jsxRuntime.jsxs)("label", {
           htmlFor: (_inputProps$value2 = inputProps.value) !== null && _inputProps$value2 !== void 0 ? _inputProps$value2 : name,
+          className: labelClassNames,
           children: [label ? label : '', _children]
         })]
       });
@@ -62,10 +65,12 @@ var FormCheckBox = function FormCheckBox(_ref) {
 
 FormCheckBox.defaultProps = {
   className: '',
+  highlightLabel: false,
   label: ''
 };
 FormCheckBox.propTypes = {
   className: _propTypes.default.string,
+  highlightLabel: _propTypes.default.bool,
   name: _propTypes.default.string.isRequired,
   label: _propTypes.default.string
 };

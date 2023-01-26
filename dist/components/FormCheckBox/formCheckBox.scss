@@ -47,5 +47,41 @@
         background: $white;
       }
     }
+
+    &:not(:disabled):checked {
+      ~ label {
+        &.highlighted {
+          color: $white;
+          background-color: $malibu;
+        }
+      }
+
+      &:hover {
+        ~ label {
+          &.highlighted {
+            background-color: $cornflowerBlue;
+          }
+        }
+      }
+    }
+
+    ~ label {
+      &.highlighted {
+        background-color: $mischka;
+        font-size: 12px;
+        font-weight: bold;
+        margin-left: 10px;
+        padding: 4px 8px;
+        border-radius: 4px;
+      }
+    }
+
+    &:not(:disabled):hover {
+      ~ label {
+        &.highlighted {
+          background-color: $iron;
+        }
+      }
+    }
   }
 }

@@ -4,6 +4,7 @@
 
 .chips {
   @include inputSelectField;
+  height: auto;
 
   &__wrapper {
     padding: 12px 16px;

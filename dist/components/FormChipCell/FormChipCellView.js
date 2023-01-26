@@ -13,6 +13,8 @@ var _classnames = _interopRequireDefault(require("classnames"));
 
 var _reactFinalFormArrays = require("react-final-form-arrays");
 
+var _lodash = require("lodash");
+
 var _Tooltip = _interopRequireDefault(require("../Tooltip/Tooltip"));
 
 var _FormChip = _interopRequireDefault(require("./FormChip/FormChip"));
@@ -79,7 +81,7 @@ var FormChipCellView = /*#__PURE__*/_react.default.forwardRef(function (_ref, _r
       var fields = _ref3.fields,
           meta = _ref3.meta;
 
-      if (validationRules.key.every(function (rule) {
+      if (!(0, _lodash.isEmpty)(validationRules) && validationRules.key.every(function (rule) {
         return rule.name !== _formChipCell.uniquenessError.name;
       })) {
         validationRules.key.push(_formChipCell.uniquenessError);
@@ -100,10 +102,12 @@ var FormChipCellView = /*#__PURE__*/_react.default.forwardRef(function (_ref, _r
                 template: /*#__PURE__*/(0, _jsxRuntime.jsx)(_TextTooltipTemplate.default, {
                   text: /*#__PURE__*/(0, _jsxRuntime.jsxs)("span", {
                     className: "chip__content",
-                    children: [chipData.key, /*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
-                      className: "chip__delimiter",
-                      children: chipData.delimiter ? chipData.delimiter : ':'
-                    }), chipData.value]
+                    children: [chipData.key, !chipData.isKeyOnly && /*#__PURE__*/(0, _jsxRuntime.jsxs)(_jsxRuntime.Fragment, {
+                      children: [/*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
+                        className: "chip__delimiter",
+                        children: chipData.delimiter ? chipData.delimiter : ':'
+                      }), chipData.value]
+                    })]
                   })
                 }),
                 children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_FormChip.default, {

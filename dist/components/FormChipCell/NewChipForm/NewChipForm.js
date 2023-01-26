@@ -71,6 +71,7 @@ var NewChipForm = /*#__PURE__*/_react.default.forwardRef(function (_ref, ref) {
       valueName = _ref.valueName;
 
   var _useState = (0, _react.useState)({
+    isKeyOnly: chip.isKeyOnly,
     key: chip.key,
     value: chip.value,
     keyFieldWidth: 0,
@@ -108,9 +109,9 @@ var NewChipForm = /*#__PURE__*/_react.default.forwardRef(function (_ref, ref) {
   var minWidthInput = 25;
   var minWidthValueInput = 35;
 
-  var refInputKey = _react.default.useRef();
+  var refInputKey = _react.default.useRef({});
 
-  var refInputValue = _react.default.useRef();
+  var refInputValue = _react.default.useRef({});
 
   var refInputContainer = _react.default.useRef();
 
@@ -121,22 +122,14 @@ var NewChipForm = /*#__PURE__*/_react.default.forwardRef(function (_ref, ref) {
     if (!chipData.keyFieldWidth && !chipData.valueFieldWidth) {
       var currentWidthKeyInput = refInputKey.current.scrollWidth + 1;
       var currentWidthValueInput = refInputValue.current.scrollWidth + 1;
-
-      if (chipData.key && chipData.value) {
-        setChipData(function (prevState) {
-          return _objectSpread(_objectSpread({}, prevState), {}, {
-            keyFieldWidth: currentWidthKeyInput >= maxWidthInput ? maxWidthInput : currentWidthKeyInput <= minWidthInput ? minWidthInput : currentWidthKeyInput,
-            valueFieldWidth: currentWidthValueInput >= maxWidthInput ? maxWidthInput : currentWidthValueInput <= minWidthValueInput ? minWidthValueInput : currentWidthValueInput
-          });
+      var keyFieldWidth = !chipData.key || currentWidthKeyInput <= minWidthInput ? minWidthInput : currentWidthKeyInput >= maxWidthInput ? maxWidthInput : currentWidthKeyInput;
+      var valueFieldWidth = !chipData.value || currentWidthValueInput <= minWidthValueInput ? minWidthValueInput : currentWidthValueInput >= maxWidthInput ? maxWidthInput : currentWidthValueInput;
+      setChipData(function (prevState) {
+        return _objectSpread(_objectSpread({}, prevState), {}, {
+          keyFieldWidth: keyFieldWidth,
+          valueFieldWidth: valueFieldWidth
         });
-      } else {
-        setChipData(function (prevState) {
-          return _objectSpread(_objectSpread({}, prevState), {}, {
-            keyFieldWidth: minWidthInput,
-            valueFieldWidth: minWidthValueInput
-          });
-        });
-      }
+      });
     }
   }, [chipData.key, chipData.value, chipData.keyFieldWidth, chipData.valueFieldWidth, maxWidthInput, refInputKey, refInputValue]);
 
@@ -241,9 +234,11 @@ var NewChipForm = /*#__PURE__*/_react.default.forwardRef(function (_ref, ref) {
     } else {
       var currentWidthValueInput = refInputValue.current.scrollWidth;
       setChipData(function (prevState) {
+        var _refInputValue$curren;
+
         return _objectSpread(_objectSpread({}, prevState), {}, {
           value: refInputValue.current.value,
-          valueFieldWidth: refInputValue.current.value.length <= 1 ? minWidthValueInput : currentWidthValueInput >= maxWidthInput ? maxWidthInput : currentWidthValueInput > minWidthValueInput ? currentWidthValueInput + 2 : minWidthValueInput
+          valueFieldWidth: ((_refInputValue$curren = refInputValue.current.value) === null || _refInputValue$curren === void 0 ? void 0 : _refInputValue$curren.length) <= 1 ? minWidthValueInput : currentWidthValueInput >= maxWidthInput ? maxWidthInput : currentWidthValueInput > minWidthValueInput ? currentWidthValueInput + 2 : minWidthValueInput
         });
       });
     }
@@ -261,7 +256,9 @@ var NewChipForm = /*#__PURE__*/_react.default.forwardRef(function (_ref, ref) {
   (0, _react.useEffect)(function () {
     if (meta.error) {
       setValidationRules(function (prevState) {
-        return _objectSpread(_objectSpread({}, prevState), {}, _defineProperty({}, selectedInput, prevState[selectedInput].map(function (rule) {
+        var _prevState$selectedIn;
+
+        return _objectSpread(_objectSpread({}, prevState), {}, _defineProperty({}, selectedInput, (_prevState$selectedIn = prevState[selectedInput]) === null || _prevState$selectedIn === void 0 ? void 0 : _prevState$selectedIn.map(function (rule) {
           return _objectSpread(_objectSpread({}, rule), {}, {
             isValid: (0, _lodash.isEmpty)((0, _lodash.get)(meta, ['error', editConfig.chipIndex, selectedInput], [])) ? true : !meta.error[editConfig.chipIndex][selectedInput].some(function (err) {
               return err && err.name === rule.name;
@@ -273,7 +270,9 @@ var NewChipForm = /*#__PURE__*/_react.default.forwardRef(function (_ref, ref) {
     }
   }, [meta, showValidationRules, selectedInput, editConfig.chipIndex]);
   var getValidationRules = (0, _react.useCallback)(function () {
-    return validationRules[selectedInput].map(function (_ref2) {
+    var _validationRules$sele;
+
+    return (_validationRules$sele = validationRules[selectedInput]) === null || _validationRules$sele === void 0 ? void 0 : _validationRules$sele.map(function (_ref2) {
       var _ref2$isValid = _ref2.isValid,
           isValid = _ref2$isValid === void 0 ? false : _ref2$isValid,
           label = _ref2.label,
@@ -301,10 +300,10 @@ var NewChipForm = /*#__PURE__*/_react.default.forwardRef(function (_ref, ref) {
       style: {
         width: chipData.keyFieldWidth
       }
-    }), /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
+    }), !chipData.isKeyOnly && /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
       className: "edit-chip-separator",
       children: ":"
-    }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_NewChipInput.default, {
+    }), !chipData.isKeyOnly && /*#__PURE__*/(0, _jsxRuntime.jsx)(_NewChipInput.default, {
       className: labelValueClassName,
       disabled: !isEditable || editConfig.chipIndex !== chipIndex,
       name: valueName,
