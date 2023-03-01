@@ -28,19 +28,11 @@ import './tooltip.scss'
 const Tooltip = ({ children, className, hidden, template, textShow }) => {
   const [show, setShow] = useState(false)
   const [style, setStyle] = useState({})
-  const tooltipClassNames = classnames(
-    'data-ellipsis',
-    'tooltip-wrapper',
-    className
-  )
+  const tooltipClassNames = classnames('data-ellipsis', 'tooltip-wrapper', className)
   const duration = 200
   const parentRef = useRef()
   const tooltipRef = useRef()
   const offset = 10
-
-  const defaultStyle = {
-    transition: `opacity ${duration}ms ease-in-out ${duration}ms`
-  }
 
   const handleScroll = () => {
     setShow(false)
@@ -51,7 +43,7 @@ const Tooltip = ({ children, className, hidden, template, textShow }) => {
   }
 
   const handleMouseEnter = useCallback(
-    event => {
+    (event) => {
       const [child] = parentRef.current.childNodes
       let show =
         !hidden &&
@@ -67,17 +59,13 @@ const Tooltip = ({ children, className, hidden, template, textShow }) => {
               parentRef.current.scrollWidth > parentRef.current.offsetWidth))
       if (show) {
         setShow(true)
-        let { height, top, bottom } =
-          parentRef?.current?.getBoundingClientRect() ?? {}
-        const {
-          height: tooltipHeight,
-          width: tooltipWidth
-        } = tooltipRef.current?.getBoundingClientRect() ?? {
-          height: 0,
-          width: 0
-        }
-        const leftPosition =
-          event.x - (event.x + tooltipWidth - window.innerWidth + offset)
+        let { height, top, bottom } = parentRef?.current?.getBoundingClientRect() ?? {}
+        const { height: tooltipHeight, width: tooltipWidth } =
+          tooltipRef.current?.getBoundingClientRect() ?? {
+            height: 0,
+            width: 0
+          }
+        const leftPosition = event.x - (event.x + tooltipWidth - window.innerWidth + offset)
         const left =
           event.x + tooltipWidth + offset > window.innerWidth
             ? leftPosition > offset
@@ -138,26 +126,16 @@ const Tooltip = ({ children, className, hidden, template, textShow }) => {
 
   return (
     <>
-      <div
-        data-testid="tooltip-wrapper"
-        ref={parentRef}
-        className={tooltipClassNames}
-      >
+      <div data-testid="tooltip-wrapper" ref={parentRef} className={tooltipClassNames}>
         {children}
       </div>
       {!hidden &&
         createPortal(
-          <CSSTransition
-            classNames="fade"
-            in={show}
-            timeout={duration}
-            unmountOnExit
-          >
+          <CSSTransition classNames="fade" in={show} timeout={duration} unmountOnExit>
             <div
               data-testid="tooltip"
               ref={tooltipRef}
               style={{
-                ...defaultStyle,
                 ...style
               }}
               className="tooltip"
