@@ -71,9 +71,6 @@ var Tooltip = function Tooltip(_ref) {
   var parentRef = (0, _react.useRef)();
   var tooltipRef = (0, _react.useRef)();
   var offset = 10;
-  var defaultStyle = {
-    transition: "opacity ".concat(duration, "ms ease-in-out ").concat(duration, "ms")
-  };
 
   var handleScroll = function handleScroll() {
     setShow(false);
@@ -172,7 +169,7 @@ var Tooltip = function Tooltip(_ref) {
       children: /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
         "data-testid": "tooltip",
         ref: tooltipRef,
-        style: _objectSpread(_objectSpread({}, defaultStyle), style),
+        style: _objectSpread({}, style),
         className: "tooltip",
         children: template
       })

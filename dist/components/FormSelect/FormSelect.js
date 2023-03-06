@@ -74,6 +74,7 @@ var FormSelect = function FormSelect(_ref) {
       required = _ref.required,
       search = _ref.search,
       selectedItemAction = _ref.selectedItemAction,
+      tooltip = _ref.tooltip,
       withoutBorder = _ref.withoutBorder,
       withSelectedIcon = _ref.withSelectedIcon;
 
@@ -202,125 +203,132 @@ var FormSelect = function FormSelect(_ref) {
     children: function children(_ref3) {
       var input = _ref3.input,
           meta = _ref3.meta;
-      return /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
-        "data-testid": "select",
-        ref: selectRef,
-        className: "form-field-select ".concat(className),
-        onClick: toggleOpen,
-        children: [label && /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
-          className: selectLabelClassName,
-          children: /*#__PURE__*/(0, _jsxRuntime.jsxs)("label", {
-            "data-testid": "select-label",
-            children: [label, meta.error && /*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
-              className: "form-field__label-mandatory",
-              children: " *"
-            })]
-          })
-        }), /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
-          "data-testid": "select-header",
-          className: selectWrapperClassNames,
-          children: [/*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
-            className: "form-field__control",
-            children: !hideSelectedOption && /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
-              "data-testid": "selected-option",
-              className: "form-field__select",
-              children: /*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
-                className: selectValueClassName,
-                children: getSelectValue()
-              })
+      return /*#__PURE__*/(0, _jsxRuntime.jsx)(_Tooltip.default, {
+        className: "select-tooltip",
+        template: /*#__PURE__*/(0, _jsxRuntime.jsx)(_TextTooltipTemplate.default, {
+          text: tooltip
+        }),
+        hidden: !tooltip,
+        children: /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
+          "data-testid": "select",
+          ref: selectRef,
+          className: "form-field-select ".concat(className),
+          onClick: toggleOpen,
+          children: [label && /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
+            className: selectLabelClassName,
+            children: /*#__PURE__*/(0, _jsxRuntime.jsxs)("label", {
+              "data-testid": "select-label",
+              children: [label, meta.error && /*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
+                className: "form-field__label-mandatory",
+                children: " *"
+              })]
             })
           }), /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
-            className: "form-field__icons",
-            children: [input.value && selectedItemAction && /*#__PURE__*/(0, _jsxRuntime.jsx)(_jsxRuntime.Fragment, {
-              children: selectedItemAction.handler ? /*#__PURE__*/(0, _jsxRuntime.jsx)(_Tooltip.default, {
-                template: /*#__PURE__*/(0, _jsxRuntime.jsx)(_TextTooltipTemplate.default, {
-                  text: selectedItemAction.tooltip
-                }),
-                children: /*#__PURE__*/(0, _jsxRuntime.jsx)("button", {
-                  onClick: function onClick(event) {
-                    if (selectedItemAction.confirm) {
-                      setConfirmDialogOpen(true);
-                    } else {
-                      selectedItemAction.handler(input.value);
-                    }
+            "data-testid": "select-header",
+            className: selectWrapperClassNames,
+            children: [/*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
+              className: "form-field__control",
+              children: !hideSelectedOption && /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
+                "data-testid": "selected-option",
+                className: "form-field__select",
+                children: /*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
+                  className: selectValueClassName,
+                  children: getSelectValue()
+                })
+              })
+            }), /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
+              className: "form-field__icons",
+              children: [input.value && selectedItemAction && /*#__PURE__*/(0, _jsxRuntime.jsx)(_jsxRuntime.Fragment, {
+                children: selectedItemAction.handler ? /*#__PURE__*/(0, _jsxRuntime.jsx)(_Tooltip.default, {
+                  template: /*#__PURE__*/(0, _jsxRuntime.jsx)(_TextTooltipTemplate.default, {
+                    text: selectedItemAction.tooltip
+                  }),
+                  children: /*#__PURE__*/(0, _jsxRuntime.jsx)("button", {
+                    onClick: function onClick(event) {
+                      if (selectedItemAction.confirm) {
+                        setConfirmDialogOpen(true);
+                      } else {
+                        selectedItemAction.handler(input.value);
+                      }
 
-                    event.stopPropagation();
-                  },
+                      event.stopPropagation();
+                    },
+                    children: selectedItemAction.icon
+                  })
+                }) : /*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
                   children: selectedItemAction.icon
                 })
-              }) : /*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
-                children: selectedItemAction.icon
-              })
-            }), /*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
-              children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_dropdown.ReactComponent, {
-                className: "form-field__caret"
-              })
+              }), /*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
+                children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_dropdown.ReactComponent, {
+                  className: "form-field__caret"
+                })
+              })]
             })]
-          })]
-        }), isConfirmDialogOpen && /*#__PURE__*/(0, _jsxRuntime.jsx)(_ConfirmDialog.default, {
-          cancelButton: {
-            handler: function handler() {
+          }), isConfirmDialogOpen && /*#__PURE__*/(0, _jsxRuntime.jsx)(_ConfirmDialog.default, {
+            cancelButton: {
+              handler: function handler() {
+                setConfirmDialogOpen(false);
+              },
+              label: 'Cancel',
+              variant: _constants.TERTIARY_BUTTON
+            },
+            closePopUp: function closePopUp() {
               setConfirmDialogOpen(false);
             },
-            label: 'Cancel',
-            variant: _constants.TERTIARY_BUTTON
-          },
-          closePopUp: function closePopUp() {
-            setConfirmDialogOpen(false);
-          },
-          confirmButton: {
-            handler: function handler() {
-              selectedItemAction.handler(input.value);
-              setConfirmDialogOpen(false);
+            confirmButton: {
+              handler: function handler() {
+                selectedItemAction.handler(input.value);
+                setConfirmDialogOpen(false);
+              },
+              label: selectedItemAction.confirm.btnConfirmLabel,
+              variant: selectedItemAction.confirm.btnConfirmType
             },
-            label: selectedItemAction.confirm.btnConfirmLabel,
-            variant: selectedItemAction.confirm.btnConfirmType
-          },
-          header: selectedItemAction.confirm.title,
-          isOpen: isConfirmDialogOpen,
-          message: selectedItemAction.confirm.message
-        }), isOpen && /*#__PURE__*/(0, _jsxRuntime.jsx)(_PopUpDialog.default, {
-          className: "form-field form-field-select__options-list",
-          headerIsHidden: true,
-          customPosition: {
-            element: selectRef,
-            position: 'bottom-right'
-          },
-          style: {
-            width: "".concat(dropdownWidth, "px")
-          },
-          children: /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
-            "data-testid": "select-body",
-            className: "options-list__body",
-            onClick: handleCloseSelectBody,
-            children: [search && /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
-              className: "options-list__search",
-              children: /*#__PURE__*/(0, _jsxRuntime.jsx)("input", {
-                type: "text",
-                placeholder: "Search...",
-                value: searchValue,
-                onChange: function onChange(event) {
-                  return setSearchValue(event.target.value);
-                }
-              })
-            }), options.filter(function (option) {
-              return !search || option.label.toLowerCase().includes(searchValue.toLowerCase());
-            }).map(function (option) {
-              return /*#__PURE__*/(0, _jsxRuntime.jsx)(_SelectOption.default, {
-                item: option,
-                name: name,
-                onClick: function onClick(selectedOption) {
-                  handleSelectOptionClick(selectedOption, option);
-                },
-                multiple: multiple,
-                selectedId: !multiple ? input.value : '',
-                withSelectedIcon: withSelectedIcon
-              }, option.id);
-            })]
-          })
-        }), /*#__PURE__*/(0, _jsxRuntime.jsx)("input", _objectSpread(_objectSpread({}, input), {}, {
-          type: "hidden"
-        }))]
+            header: selectedItemAction.confirm.title,
+            isOpen: isConfirmDialogOpen,
+            message: selectedItemAction.confirm.message
+          }), isOpen && /*#__PURE__*/(0, _jsxRuntime.jsx)(_PopUpDialog.default, {
+            className: "form-field form-field-select__options-list",
+            headerIsHidden: true,
+            customPosition: {
+              element: selectRef,
+              position: 'bottom-right'
+            },
+            style: {
+              width: "".concat(dropdownWidth, "px")
+            },
+            children: /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
+              "data-testid": "select-body",
+              className: "options-list__body",
+              onClick: handleCloseSelectBody,
+              children: [search && /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
+                className: "options-list__search",
+                children: /*#__PURE__*/(0, _jsxRuntime.jsx)("input", {
+                  type: "text",
+                  placeholder: "Search...",
+                  value: searchValue,
+                  onChange: function onChange(event) {
+                    return setSearchValue(event.target.value);
+                  }
+                })
+              }), options.filter(function (option) {
+                return !search || option.label.toLowerCase().includes(searchValue.toLowerCase());
+              }).map(function (option) {
+                return /*#__PURE__*/(0, _jsxRuntime.jsx)(_SelectOption.default, {
+                  item: option,
+                  name: name,
+                  onClick: function onClick(selectedOption) {
+                    handleSelectOptionClick(selectedOption, option);
+                  },
+                  multiple: multiple,
+                  selectedId: !multiple ? input.value : '',
+                  withSelectedIcon: withSelectedIcon
+                }, option.id);
+              })]
+            })
+          }), /*#__PURE__*/(0, _jsxRuntime.jsx)("input", _objectSpread(_objectSpread({}, input), {}, {
+            type: "hidden"
+          }))]
+        })
       });
     }
   });
@@ -334,6 +342,7 @@ FormSelect.defaultProps = {
   label: '',
   onClick: null,
   search: false,
+  tooltip: '',
   multiple: false,
   withoutBorder: false,
   withSelectedIcon: true
@@ -348,6 +357,7 @@ FormSelect.propTypes = {
   onClick: _propTypes.default.oneOfType([_propTypes.default.func, _propTypes.default.bool]),
   options: _types.SELECT_OPTIONS.isRequired,
   search: _propTypes.default.bool,
+  tooltip: _propTypes.default.string,
   multiple: _propTypes.default.bool,
   withoutBorder: _propTypes.default.bool,
   withSelectedIcon: _propTypes.default.bool
