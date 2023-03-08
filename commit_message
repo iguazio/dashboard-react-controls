@@ -1,7 +1,6 @@
 
 
-Create a new dist version 0.0.36
+Create a new dist version 0.0.37
 
 Collecting:
-- Impl [Select] Add tooltip to the Select component (#113)
-- Fix [General] Broken tooltips animation (#114)
+- Fix [Artifacts] unable to set empty "Version tag" (#116)

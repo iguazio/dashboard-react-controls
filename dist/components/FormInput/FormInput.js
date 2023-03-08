@@ -200,6 +200,10 @@ var FormInput = /*#__PURE__*/_react.default.forwardRef(function (_ref, ref) {
     });
   };
 
+  var isValueEmptyAndValid = function isValueEmptyAndValid(value) {
+    return !value && !required || disabled;
+  };
+
   var handleInputBlur = function handleInputBlur(event) {
     var _event$relatedTarget;
 
@@ -239,7 +243,7 @@ var FormInput = /*#__PURE__*/_react.default.forwardRef(function (_ref, ref) {
 
   var validateField = function validateField(value, allValues) {
     var valueToValidate = (0, _lodash.isNil)(value) ? '' : String(value);
-    if (!valueToValidate && !required || disabled) return;
+    if (isValueEmptyAndValid(valueToValidate)) return;
     var validationError = null;
 
     if (!(0, _lodash.isEmpty)(rules) && !async) {
@@ -307,23 +311,33 @@ var FormInput = /*#__PURE__*/_react.default.forwardRef(function (_ref, ref) {
 
   var validateFieldAsync = debounceAsync( /*#__PURE__*/function () {
     var _ref4 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee(value, allValues) {
-      var validationError, _yield$checkPatternsV, _yield$checkPatternsV2, newRules, isValidField, invalidRules;
+      var valueToValidate, validationError, _yield$checkPatternsV, _yield$checkPatternsV2, newRules, isValidField, invalidRules;
 
       return _regeneratorRuntime().wrap(function _callee$(_context) {
         while (1) {
           switch (_context.prev = _context.next) {
             case 0:
-              validationError = validateField(value, allValues);
+              valueToValidate = (0, _lodash.isNil)(value) ? '' : String(value);
 
-              if ((0, _lodash.isEmpty)(rules)) {
-                _context.next = 10;
+              if (!isValueEmptyAndValid(valueToValidate)) {
+                _context.next = 3;
                 break;
               }
 
-              _context.next = 4;
-              return (0, _validation.checkPatternsValidityAsync)(rules, value);
+              return _context.abrupt("return");
 
-            case 4:
+            case 3:
+              validationError = validateField(valueToValidate, allValues);
+
+              if ((0, _lodash.isEmpty)(rules)) {
+                _context.next = 13;
+                break;
+              }
+
+              _context.next = 7;
+              return (0, _validation.checkPatternsValidityAsync)(rules, valueToValidate);
+
+            case 7:
               _yield$checkPatternsV = _context.sent;
               _yield$checkPatternsV2 = _slicedToArray(_yield$checkPatternsV, 2);
               newRules = _yield$checkPatternsV2[0];
@@ -341,11 +355,11 @@ var FormInput = /*#__PURE__*/_react.default.forwardRef(function (_ref, ref) {
                 });
               }
 
-            case 10:
+            case 13:
               errorsRef.current = validationError;
               return _context.abrupt("return", validationError);
 
-            case 12:
+            case 15:
             case "end":
               return _context.stop();
           }
