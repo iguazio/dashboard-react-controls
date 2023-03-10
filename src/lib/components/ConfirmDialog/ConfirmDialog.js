@@ -76,11 +76,13 @@ const ConfirmDialog = ({
                 variant={cancelButton.variant}
               />
             )}
-            <Button
-              label={confirmButton.label}
-              onClick={handleConfirmDialog}
-              variant={confirmButton.variant}
-            />
+            {confirmButton && (
+              <Button
+                label={confirmButton.label}
+                onClick={handleConfirmDialog}
+                variant={confirmButton.variant}
+              />
+            )}
           </div>
         </div>
       </PopUpDialog>
@@ -91,6 +93,7 @@ const ConfirmDialog = ({
 ConfirmDialog.defaultProps = {
   cancelButton: null,
   className: '',
+  confirmButton: null,
   customPosition: {},
   header: '',
   message: '',
@@ -101,7 +104,7 @@ ConfirmDialog.propTypes = {
   cancelButton: CONFIRM_DIALOG_CANCEL_BUTTON,
   className: PropTypes.string,
   closePopUp: PropTypes.func,
-  confirmButton: CONFIRM_DIALOG_SUBMIT_BUTTON.isRequired,
+  confirmButton: CONFIRM_DIALOG_SUBMIT_BUTTON,
   customPosition: PropTypes.object,
   header: PropTypes.string,
   message: PropTypes.string,
