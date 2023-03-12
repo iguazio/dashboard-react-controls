@@ -84,7 +84,7 @@ var ConfirmDialog = function ConfirmDialog(_ref) {
           label: cancelButton.label,
           onClick: handleCancelDialog,
           variant: cancelButton.variant
-        }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_Button.default, {
+        }), confirmButton && /*#__PURE__*/(0, _jsxRuntime.jsx)(_Button.default, {
           label: confirmButton.label,
           onClick: handleConfirmDialog,
           variant: confirmButton.variant
@@ -97,6 +97,7 @@ var ConfirmDialog = function ConfirmDialog(_ref) {
 ConfirmDialog.defaultProps = {
   cancelButton: null,
   className: '',
+  confirmButton: null,
   customPosition: {},
   header: '',
   message: '',
@@ -106,7 +107,7 @@ ConfirmDialog.propTypes = {
   cancelButton: _types.CONFIRM_DIALOG_CANCEL_BUTTON,
   className: _propTypes.default.string,
   closePopUp: _propTypes.default.func,
-  confirmButton: _types.CONFIRM_DIALOG_SUBMIT_BUTTON.isRequired,
+  confirmButton: _types.CONFIRM_DIALOG_SUBMIT_BUTTON,
   customPosition: _propTypes.default.object,
   header: _propTypes.default.string,
   message: _propTypes.default.string,

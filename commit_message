@@ -1,6 +1,6 @@
 
 
-Create a new dist version 0.0.37
+Create a new dist version 0.0.38
 
 Collecting:
-- Fix [Artifacts] unable to set empty "Version tag" (#116)
+- Fix [General] "Something went wrong" displayed on attempt to click "Create feature set" from Project home (#118)
