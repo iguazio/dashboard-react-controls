@@ -1,6 +1,7 @@
 
 
-Create a new dist version 0.0.38
+Create a new dist version 0.0.39
 
 Collecting:
-- Fix [General] "Something went wrong" displayed on attempt to click "Create feature set" from Project home (#118)
+- Fix [Batch Run] UI minor fix (#120)
+- Fix [General] Input validation rules weird behavior (#121)

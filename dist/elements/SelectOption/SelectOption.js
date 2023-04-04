@@ -70,16 +70,19 @@ var SelectOption = function SelectOption(_ref) {
       !item.disabled && _onClick(item.id);
     },
     children: [/*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
-      className: "data-ellipsis label-row",
+      className: "label-row",
       children: [/*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
-        className: "select__item-label",
+        className: "data-ellipsis select__item-label",
         children: [item.icon && /*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
           "data-testid": "select-icon",
           className: "select__item-icon",
           children: item.icon
         }), item.status && /*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
           className: "state-".concat(item.status, "-job status")
-        }), /*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
+        }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_components.Tooltip, {
+          template: /*#__PURE__*/(0, _jsxRuntime.jsx)(_components.TextTooltipTemplate, {
+            text: item.label
+          }),
           children: item.label
         })]
       }), withSelectedIcon && item.id === selectedId && /*#__PURE__*/(0, _jsxRuntime.jsx)(_checkmark.ReactComponent, {

@@ -97,15 +97,22 @@ var FormSelect = function FormSelect(_ref) {
       isOpen = _useState6[0],
       setOpen = _useState6[1];
 
-  var _useState7 = (0, _react.useState)(''),
+  var _useState7 = (0, _react.useState)('bottom-right'),
       _useState8 = _slicedToArray(_useState7, 2),
-      searchValue = _useState8[0],
-      setSearchValue = _useState8[1];
+      position = _useState8[0],
+      setPosition = _useState8[1];
+
+  var _useState9 = (0, _react.useState)(''),
+      _useState10 = _slicedToArray(_useState9, 2),
+      searchValue = _useState10[0],
+      setSearchValue = _useState10[1];
 
   var selectRef = (0, _react.useRef)();
+  var popUpRef = (0, _react.useRef)();
 
   var _ref2 = (selectRef === null || selectRef === void 0 ? void 0 : (_selectRef$current = selectRef.current) === null || _selectRef$current === void 0 ? void 0 : _selectRef$current.getBoundingClientRect()) || {},
-      dropdownWidth = _ref2.width;
+      selectWidth = _ref2.width,
+      selectLeft = _ref2.left;
 
   var selectWrapperClassNames = (0, _classnames.default)('form-field__wrapper', "form-field__wrapper-".concat(density), disabled && 'form-field__wrapper-disabled', isOpen && 'form-field__wrapper-active', isInvalid && 'form-field__wrapper-invalid', withoutBorder && 'without-border');
   var selectLabelClassName = (0, _classnames.default)('form-field__label', disabled && 'form-field__label-disabled');
@@ -151,6 +158,14 @@ var FormSelect = function FormSelect(_ref) {
       closeMenu();
     }
   }, [closeMenu]);
+  (0, _react.useLayoutEffect)(function () {
+    if (popUpRef !== null && popUpRef !== void 0 && popUpRef.current) {
+      var _popUpRef$current$get = popUpRef.current.getBoundingClientRect(),
+          width = _popUpRef$current$get.width;
+
+      selectLeft + width > window.innerWidth ? setPosition('bottom-left') : setPosition('bottom-right');
+    }
+  }, [isOpen, selectLeft]);
   (0, _react.useEffect)(function () {
     if (isOpen) {
       window.addEventListener('scroll', handleScroll, true);
@@ -289,12 +304,14 @@ var FormSelect = function FormSelect(_ref) {
           }), isOpen && /*#__PURE__*/(0, _jsxRuntime.jsx)(_PopUpDialog.default, {
             className: "form-field form-field-select__options-list",
             headerIsHidden: true,
+            ref: popUpRef,
             customPosition: {
               element: selectRef,
-              position: 'bottom-right'
+              position: position
             },
             style: {
-              width: "".concat(dropdownWidth, "px")
+              maxWidth: "".concat(selectWidth < 500 ? 500 : selectWidth, "px"),
+              minWidth: "".concat(selectWidth, "px")
             },
             children: /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
               "data-testid": "select-body",

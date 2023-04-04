@@ -47,7 +47,9 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
-var PopUpDialog = function PopUpDialog(_ref) {
+var PopUpDialog = /*#__PURE__*/_react.default.forwardRef(function (_ref, ref) {
+  var _ref2;
+
   var children = _ref.children,
       className = _ref.className,
       closePopUp = _ref.closePopUp,
@@ -57,11 +59,14 @@ var PopUpDialog = function PopUpDialog(_ref) {
       style = _ref.style,
       tooltipText = _ref.tooltipText;
   var popUpOverlayRef = (0, _react.useRef)(null);
+  (_ref2 = ref) !== null && _ref2 !== void 0 ? _ref2 : ref = popUpOverlayRef;
   var popUpClassNames = (0, _classnames.default)(className, 'pop-up-dialog__overlay', customPosition.element && 'custom-position');
   var calculateCustomPopUpPosition = (0, _react.useCallback)(function () {
     if (customPosition && customPosition.element) {
+      var _ref3;
+
       var elementRect = customPosition.element.current.getBoundingClientRect();
-      var popUpRect = popUpOverlayRef.current.getBoundingClientRect();
+      var popUpRect = (_ref3 = ref) === null || _ref3 === void 0 ? void 0 : _ref3.current.getBoundingClientRect();
 
       var _customPosition$posit = customPosition.position.split('-'),
           _customPosition$posit2 = _slicedToArray(_customPosition$posit, 2),
@@ -77,15 +82,15 @@ var PopUpDialog = function PopUpDialog(_ref) {
         topPosition = popUpRect.height + elementRect.bottom > window.innerHeight ? window.innerHeight - popUpRect.height - 5 : elementRect.bottom + 5;
       }
 
-      popUpOverlayRef.current.style.top = "".concat(topPosition, "px");
+      ref.current.style.top = "".concat(topPosition, "px");
 
       if (style.left) {
-        popUpOverlayRef.current.style.left = "calc(".concat(leftPosition, "px + ").concat(style.left, ")");
+        ref.current.style.left = "calc(".concat(leftPosition, "px + ").concat(style.left, ")");
       } else {
-        popUpOverlayRef.current.style.left = "".concat(leftPosition, "px");
+        ref.current.style.left = "".concat(leftPosition, "px");
       }
     }
-  }, [customPosition, style.left]);
+  }, [customPosition, style.left, ref]);
   (0, _react.useLayoutEffect)(function () {
     calculateCustomPopUpPosition();
   }, [calculateCustomPopUpPosition]);
@@ -96,7 +101,7 @@ var PopUpDialog = function PopUpDialog(_ref) {
     };
   });
   return /*#__PURE__*/(0, _reactDom.createPortal)( /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
-    ref: popUpOverlayRef,
+    ref: ref,
     className: popUpClassNames,
     style: style,
     children: /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
@@ -125,7 +130,7 @@ var PopUpDialog = function PopUpDialog(_ref) {
       }), children]
     })
   }), document.getElementById('overlay_container'));
-};
+});
 
 PopUpDialog.defaultProps = {
   className: '',

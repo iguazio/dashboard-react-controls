@@ -475,7 +475,7 @@ var FormInput = /*#__PURE__*/_react.default.forwardRef(function (_ref, ref) {
               }
             }, "".concat(item).concat(index));
           })
-        }), !(0, _lodash.isEmpty)(validationRules) && /*#__PURE__*/(0, _jsxRuntime.jsx)(_OptionsMenu.default, {
+        }), !(0, _lodash.isEmpty)(validationRules) && isInvalid && Array.isArray(errorsRef.current) && /*#__PURE__*/(0, _jsxRuntime.jsx)(_OptionsMenu.default, {
           show: showValidationRules,
           ref: ref,
           children: getValidationRules()
