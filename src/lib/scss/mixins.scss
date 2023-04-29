@@ -14,14 +14,9 @@
   flex-shrink: 1;
 }
 
-@mixin tableDet {
-  display: inline-flex;
-  align-items: center;
+@mixin tableDet($topPadding, $rightPadding, $bottomPadding, $leftPadding) {
+  padding: $topPadding $rightPadding $bottomPadding $leftPadding;
   text-align: left;
-
-  &:first-child {
-    margin-left: 10px;
-  }
 }
 
 @mixin detailsMetadataStatisticsTable {
@@ -380,15 +375,7 @@
   line-height: $lineHeight;
 }
 
-@mixin tableHeader($topPadding, $rightPadding, $bottomPadding, $leftPadding) {
-  flex-direction: row;
-  justify-content: flex-start;
-  align-items: center;
-  height: auto;
-  min-height: 50px;
-  margin: 0 1px;
-  padding: $topPadding $rightPadding $bottomPadding $leftPadding;
-  text-align: left;
+@mixin tableHeader {
   color: $topaz;
   font-weight: bold;
   font-size: 14px;
