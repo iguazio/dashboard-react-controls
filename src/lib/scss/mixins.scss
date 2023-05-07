@@ -375,6 +375,7 @@
 }
 
 @mixin tableHeader {
+  background-color: $titanWhite;
   font-weight: bold;
   font-size: 14px;
 }
