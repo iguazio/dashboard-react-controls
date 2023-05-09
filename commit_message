@@ -1,7 +1,7 @@
 
 
-Create a new dist version 0.0.39
+Create a new dist version 1.1.0
 
 Collecting:
-- Fix [Batch Run] UI minor fix (#120)
-- Fix [General] Input validation rules weird behavior (#121)
+- Impl [Rounded Icon] Change dimentions to 36px (#123)
+- Impl [Table] Move sort icon to the right of the title (#124)

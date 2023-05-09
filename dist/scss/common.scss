@@ -241,7 +241,7 @@ textarea {
   .form-table__actions-cell {
     visibility: hidden;
     justify-content: flex-end;
-    width: 72px;
+    min-width: 72px;
     padding: 0;
 
     & > * {

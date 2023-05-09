@@ -14,14 +14,9 @@
   flex-shrink: 1;
 }
 
-@mixin tableDet {
-  display: inline-flex;
-  align-items: center;
+@mixin tableDet($topPadding, $rightPadding, $bottomPadding, $leftPadding) {
+  padding: $topPadding $rightPadding $bottomPadding $leftPadding;
   text-align: left;
-
-  &:first-child {
-    margin-left: 10px;
-  }
 }
 
 @mixin detailsMetadataStatisticsTable {
@@ -30,7 +25,6 @@
     flex: 1;
     flex-direction: column;
     align-items: flex-start;
-    overflow-x: auto;
 
     &-wrapper {
       min-width: 100%;
@@ -380,16 +374,8 @@
   line-height: $lineHeight;
 }
 
-@mixin tableHeader($topPadding, $rightPadding, $bottomPadding, $leftPadding) {
-  flex-direction: row;
-  justify-content: flex-start;
-  align-items: center;
-  height: auto;
-  min-height: 50px;
-  margin: 0 1px;
-  padding: $topPadding $rightPadding $bottomPadding $leftPadding;
-  text-align: left;
-  color: $topaz;
+@mixin tableHeader {
+  background-color: $magnoliaWhite;
   font-weight: bold;
   font-size: 14px;
 }
