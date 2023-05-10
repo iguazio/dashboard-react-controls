@@ -46,6 +46,7 @@ const FormInput = React.forwardRef(
       disabled,
       focused,
       iconClass,
+      iconClick,
       inputIcon,
       invalidText,
       label,
@@ -87,7 +88,6 @@ const FormInput = React.forwardRef(
       isInvalid && 'form-field__wrapper-invalid',
       withoutBorder && 'without-border'
     )
-
     const labelClassNames = classNames(
       'form-field__label',
       disabled && 'form-field__label-disabled'
@@ -330,7 +330,7 @@ const FormInput = React.forwardRef(
                   )}
                   {tip && <Tip text={tip} className="form-field__tip" />}
                   {inputIcon && (
-                    <span data-testid="input-icon" className={iconClass}>
+                    <span data-testid="input-icon" className={iconClass} onClick={iconClick}>
                       {inputIcon}
                     </span>
                   )}
@@ -382,6 +382,7 @@ FormInput.defaultProps = {
   disabled: false,
   focused: false,
   iconClass: '',
+  iconClick: () => {},
   inputIcon: null,
   invalidText: 'This field is invalid',
   label: '',
@@ -411,6 +412,7 @@ FormInput.propTypes = {
   disabled: PropTypes.bool,
   focused: PropTypes.bool,
   iconClass: PropTypes.string,
+  iconClick: PropTypes.func,
   inputIcon: PropTypes.element,
   invalidText: PropTypes.string,
   label: PropTypes.string,
