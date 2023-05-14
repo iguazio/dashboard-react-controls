@@ -79,14 +79,14 @@ const FormKeyValueTable = ({
                     {keyOptions ? (
                       <FormSelect
                         name={`${contentItem}.data.key`}
-                        density="dense"
+                        density="normal"
                         options={keyOptions}
                       />
                     ) : (
                       <FormInput
                         className="input_edit"
                         placeholder={keyLabel}
-                        density="dense"
+                        density="normal"
                         name={`${contentItem}.data.key`}
                         required={isKeyRequired}
                         validationRules={[
@@ -103,7 +103,7 @@ const FormKeyValueTable = ({
                     <FormInput
                       className="input_edit"
                       placeholder={valueLabel}
-                      density="dense"
+                      density="normal"
                       name={`${contentItem}.data.value`}
                       required={isValueRequired}
                     />

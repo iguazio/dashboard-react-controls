@@ -122,7 +122,7 @@ textarea {
 }
 
 .form-table {
-  $tableHeaderHeight: 46px;
+  $tableHeaderHeight: 50px;
 
   max-height: 500px;
   overflow: hidden;
@@ -148,7 +148,9 @@ textarea {
       background-color: $alabaster;
 
       .form-table__cell {
-        padding: 3px;
+        &:not(.form-table__actions-cell) {
+          padding: 10px 15px;
+        }
       }
     }
 
@@ -239,9 +241,10 @@ textarea {
   }
 
   .form-table__actions-cell {
+    flex: 0 1 auto;
     visibility: hidden;
     justify-content: flex-end;
-    min-width: 72px;
+    min-width: 82px;
     padding: 0;
 
     & > * {

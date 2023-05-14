@@ -36,7 +36,7 @@
       z-index: 3;
       display: flex;
       min-width: 100%;
-      padding-bottom: 10px;
+      padding: 15px 10px;
       color: $topaz;
       font-weight: bold;
       background-color: $white;
@@ -452,6 +452,7 @@
       &-actions {
         width: 44px;
         max-width: 44px;
+        padding: 0;
       }
     }
 
