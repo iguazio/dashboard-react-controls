@@ -4,17 +4,11 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.default = void 0;
-
 var _react = _interopRequireDefault(require("react"));
-
 var _propTypes = _interopRequireDefault(require("prop-types"));
-
 require("./producerTooltipTemplate.scss");
-
 var _jsxRuntime = require("react/jsx-runtime");
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
 /*
 Copyright 2022 Iguazio Systems Ltd.
 Licensed under the Apache License, Version 2.0 (the "License") with
@@ -31,9 +25,10 @@ illegal under applicable law, and the grant of the foregoing license
 under the Apache 2.0 license is conditioned upon your compliance with
 such restriction.
 */
+
 var ProducerTooltipTemplate = function ProducerTooltipTemplate(_ref) {
   var kind = _ref.kind,
-      owner = _ref.owner;
+    owner = _ref.owner;
   return /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
     className: "tooltip-container",
     children: [/*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
@@ -49,7 +44,6 @@ var ProducerTooltipTemplate = function ProducerTooltipTemplate(_ref) {
     })]
   });
 };
-
 ProducerTooltipTemplate.defaultProps = {
   kind: '',
   owner: ''

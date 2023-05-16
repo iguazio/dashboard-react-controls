@@ -4,7 +4,6 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.validation = exports.TERTIARY_BUTTON = exports.TAB_SHIFT = exports.TAB = exports.SECONDARY_BUTTON = exports.PRIMARY_BUTTON = exports.NOTFOUND_ERROR_STATUS_CODE = exports.MODAL_SM = exports.MODAL_MIN = exports.MODAL_MD = exports.MODAL_MAX = exports.MODAL_LG = exports.LABEL_BUTTON = exports.INTERNAL_SERVER_ERROR_STATUS_CODE = exports.GATEWAY_TIMEOUT_STATUS_CODE = exports.FORBIDDEN_ERROR_STATUS_CODE = exports.DELETE = exports.DANGER_BUTTON = exports.CONFLICT_ERROR_STATUS_CODE = exports.CLICK = exports.BADREQUEST_ERROR_STATUS_CODE = exports.BACKSPACE = void 0;
-
 /*
 Copyright 2022 Iguazio Systems Ltd.
 Licensed under the Apache License, Version 2.0 (the "License") with
@@ -21,7 +20,6 @@ illegal under applicable law, and the grant of the foregoing license
 under the Apache 2.0 license is conditioned upon your compliance with
 such restriction.
 */
-
 /*=========== EVENT KEYS =============*/
 var BACKSPACE = 'Backspace';
 exports.BACKSPACE = BACKSPACE;
@@ -32,8 +30,8 @@ exports.DELETE = DELETE;
 var TAB = 'Tab';
 exports.TAB = TAB;
 var TAB_SHIFT = 'Tab+Shift';
-/*=========== BUTTONS =============*/
 
+/*=========== BUTTONS =============*/
 exports.TAB_SHIFT = TAB_SHIFT;
 var PRIMARY_BUTTON = 'primary';
 exports.PRIMARY_BUTTON = PRIMARY_BUTTON;
@@ -44,8 +42,8 @@ exports.TERTIARY_BUTTON = TERTIARY_BUTTON;
 var DANGER_BUTTON = 'danger';
 exports.DANGER_BUTTON = DANGER_BUTTON;
 var LABEL_BUTTON = 'label';
-/*=========== VALITATION =============*/
 
+/*=========== VALITATION =============*/
 exports.LABEL_BUTTON = LABEL_BUTTON;
 var validation = {
   BEGIN_END_NOT_WITH: 'Must not begin and end with',
@@ -62,8 +60,8 @@ var validation = {
   REQUIRED: 'This field is required',
   VALID_CHARACTERS: 'Valid characters'
 };
-/*=========== STATUS CODES =============*/
 
+/*=========== STATUS CODES =============*/
 exports.validation = validation;
 var BADREQUEST_ERROR_STATUS_CODE = 400;
 exports.BADREQUEST_ERROR_STATUS_CODE = BADREQUEST_ERROR_STATUS_CODE;
@@ -76,8 +74,8 @@ exports.CONFLICT_ERROR_STATUS_CODE = CONFLICT_ERROR_STATUS_CODE;
 var INTERNAL_SERVER_ERROR_STATUS_CODE = 500;
 exports.INTERNAL_SERVER_ERROR_STATUS_CODE = INTERNAL_SERVER_ERROR_STATUS_CODE;
 var GATEWAY_TIMEOUT_STATUS_CODE = 504;
-/*=========== MODAL =============*/
 
+/*=========== MODAL =============*/
 exports.GATEWAY_TIMEOUT_STATUS_CODE = GATEWAY_TIMEOUT_STATUS_CODE;
 var MODAL_SM = 'sm';
 exports.MODAL_SM = MODAL_SM;

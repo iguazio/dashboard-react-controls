@@ -4,31 +4,18 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.default = void 0;
-
 var _react = _interopRequireDefault(require("react"));
-
 var _propTypes = _interopRequireDefault(require("prop-types"));
-
 var _reactTransitionGroup = require("react-transition-group");
-
 var _classnames = _interopRequireDefault(require("classnames"));
-
 var _Backdrop = _interopRequireDefault(require("../Backdrop/Backdrop"));
-
 var _RoundedIcon = _interopRequireDefault(require("../RoundedIcon/RoundedIcon"));
-
 var _constants = require("../../constants");
-
 var _types = require("../../types");
-
 var _close = require("../../images/close.svg");
-
 require("./Modal.scss");
-
 var _jsxRuntime = require("react/jsx-runtime");
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
 /*
 Copyright 2022 Iguazio Systems Ltd.
 Licensed under the Apache License, Version 2.0 (the "License") with
@@ -45,15 +32,16 @@ illegal under applicable law, and the grant of the foregoing license
 under the Apache 2.0 license is conditioned upon your compliance with
 such restriction.
 */
+
 var Modal = function Modal(_ref) {
   var actions = _ref.actions,
-      children = _ref.children,
-      className = _ref.className,
-      onClose = _ref.onClose,
-      size = _ref.size,
-      show = _ref.show,
-      subTitle = _ref.subTitle,
-      title = _ref.title;
+    children = _ref.children,
+    className = _ref.className,
+    onClose = _ref.onClose,
+    size = _ref.size,
+    show = _ref.show,
+    subTitle = _ref.subTitle,
+    title = _ref.title;
   var modalClassNames = (0, _classnames.default)('modal', className, size && "modal-".concat(size));
   return /*#__PURE__*/(0, _jsxRuntime.jsxs)(_jsxRuntime.Fragment, {
     children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_Backdrop.default, {
@@ -105,7 +93,6 @@ var Modal = function Modal(_ref) {
     })]
   });
 };
-
 Modal.defaultProps = {
   actions: [],
   show: false,

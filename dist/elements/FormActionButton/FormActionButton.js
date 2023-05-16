@@ -4,17 +4,11 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.default = void 0;
-
 var _react = _interopRequireDefault(require("react"));
-
 var _propTypes = _interopRequireDefault(require("prop-types"));
-
 var _plus = require("../../images/plus.svg");
-
 var _jsxRuntime = require("react/jsx-runtime");
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
 /*
 Copyright 2019 Iguazio Systems Ltd.
 
@@ -34,13 +28,14 @@ illegal under applicable law, and the grant of the foregoing license
 under the Apache 2.0 license is conditioned upon your compliance with
 such restriction.
 */
+
 var FormActionButton = /*#__PURE__*/_react.default.forwardRef(function (_ref, ref) {
   var disabled = _ref.disabled,
-      fields = _ref.fields,
-      fieldsPath = _ref.fieldsPath,
-      hidden = _ref.hidden,
-      label = _ref.label,
-      _onClick = _ref.onClick;
+    fields = _ref.fields,
+    fieldsPath = _ref.fieldsPath,
+    hidden = _ref.hidden,
+    label = _ref.label,
+    _onClick = _ref.onClick;
   return /*#__PURE__*/(0, _jsxRuntime.jsxs)(_jsxRuntime.Fragment, {
     children: [!hidden && /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
       className: "form-table__row form-table__action-row no-hover",
@@ -55,7 +50,6 @@ var FormActionButton = /*#__PURE__*/_react.default.forwardRef(function (_ref, re
     })]
   });
 });
-
 FormActionButton.defaultProps = {
   disabled: false,
   label: 'Add new item'

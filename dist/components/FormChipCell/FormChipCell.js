@@ -1,105 +1,90 @@
 "use strict";
 
 function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
-
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.default = void 0;
-
 var _react = _interopRequireWildcard(require("react"));
-
 var _lodash = _interopRequireWildcard(require("lodash"));
-
 var _propTypes = _interopRequireDefault(require("prop-types"));
-
 var _FormChipCellView = _interopRequireDefault(require("./FormChipCellView"));
-
 var _common = require("../../utils/common.util");
-
 var _generateChipsList = require("../../utils/generateChipsList.util");
-
 var _validation = require("../../utils/validation.util");
-
 var _formChipCell = require("./formChipCell.util");
-
 var _types = require("../../types");
-
 var _constants = require("../../constants");
-
 require("./formChipCell.scss");
-
 var _jsxRuntime = require("react/jsx-runtime");
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
-
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
-
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
-
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
+function _defineProperty(obj, key, value) { key = _toPropertyKey(key); if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+function _toPropertyKey(arg) { var key = _toPrimitive(arg, "string"); return _typeof(key) === "symbol" ? key : String(key); }
+function _toPrimitive(input, hint) { if (_typeof(input) !== "object" || input === null) return input; var prim = input[Symbol.toPrimitive]; if (prim !== undefined) { var res = prim.call(input, hint || "default"); if (_typeof(res) !== "object") return res; throw new TypeError("@@toPrimitive must return a primitive value."); } return (hint === "string" ? String : Number)(input); }
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
-
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
-
 function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
-
-function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
-
-function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]; if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
-
-function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
-
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i]; return arr2; }
+function _iterableToArrayLimit(arr, i) { var _i = null == arr ? null : "undefined" != typeof Symbol && arr[Symbol.iterator] || arr["@@iterator"]; if (null != _i) { var _s, _e, _x, _r, _arr = [], _n = !0, _d = !1; try { if (_x = (_i = _i.call(arr)).next, 0 === i) { if (Object(_i) !== _i) return; _n = !1; } else for (; !(_n = (_s = _x.call(_i)).done) && (_arr.push(_s.value), _arr.length !== i); _n = !0); } catch (err) { _d = !0, _e = err; } finally { try { if (!_n && null != _i.return && (_r = _i.return(), Object(_r) !== _r)) return; } finally { if (_d) throw _e; } } return _arr; } }
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; } /*
+                                                                      Copyright 2022 Iguazio Systems Ltd.
+                                                                      Licensed under the Apache License, Version 2.0 (the "License") with
+                                                                      an addition restriction as set forth herein. You may not use this
+                                                                      file except in compliance with the License. You may obtain a copy of
+                                                                      the License at http://www.apache.org/licenses/LICENSE-2.0.
+                                                                      Unless required by applicable law or agreed to in writing, software
+                                                                      distributed under the License is distributed on an "AS IS" BASIS,
+                                                                      WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or
+                                                                      implied. See the License for the specific language governing
+                                                                      permissions and limitations under the License.
+                                                                      In addition, you may not use the software for any purposes that are
+                                                                      illegal under applicable law, and the grant of the foregoing license
+                                                                      under the Apache 2.0 license is conditioned upon your compliance with
+                                                                      such restriction.
+                                                                      */
 var FormChipCell = function FormChipCell(_ref) {
   var chipOptions = _ref.chipOptions,
-      delimiter = _ref.delimiter,
-      formState = _ref.formState,
-      initialValues = _ref.initialValues,
-      isEditable = _ref.isEditable,
-      label = _ref.label,
-      name = _ref.name,
-      onClick = _ref.onClick,
-      shortChips = _ref.shortChips,
-      validationRules = _ref.validationRules,
-      validator = _ref.validator,
-      visibleChipsMaxLength = _ref.visibleChipsMaxLength;
-
+    delimiter = _ref.delimiter,
+    formState = _ref.formState,
+    initialValues = _ref.initialValues,
+    isEditable = _ref.isEditable,
+    label = _ref.label,
+    name = _ref.name,
+    onClick = _ref.onClick,
+    shortChips = _ref.shortChips,
+    validationRules = _ref.validationRules,
+    validator = _ref.validator,
+    visibleChipsMaxLength = _ref.visibleChipsMaxLength;
   var _useState = (0, _react.useState)({}),
-      _useState2 = _slicedToArray(_useState, 2),
-      chipsSizes = _useState2[0],
-      setChipsSizes = _useState2[1];
-
+    _useState2 = _slicedToArray(_useState, 2),
+    chipsSizes = _useState2[0],
+    setChipsSizes = _useState2[1];
   var _useState3 = (0, _react.useState)(false),
-      _useState4 = _slicedToArray(_useState3, 2),
-      showHiddenChips = _useState4[0],
-      setShowHiddenChips = _useState4[1];
-
+    _useState4 = _slicedToArray(_useState3, 2),
+    showHiddenChips = _useState4[0],
+    setShowHiddenChips = _useState4[1];
   var _useState5 = (0, _react.useState)({
-    chipIndex: null,
-    isEdit: false,
-    isKeyFocused: false,
-    isValueFocused: false,
-    isNewChip: false
-  }),
-      _useState6 = _slicedToArray(_useState5, 2),
-      editConfig = _useState6[0],
-      setEditConfig = _useState6[1];
-
+      chipIndex: null,
+      isEdit: false,
+      isKeyFocused: false,
+      isValueFocused: false,
+      isNewChip: false
+    }),
+    _useState6 = _slicedToArray(_useState5, 2),
+    editConfig = _useState6[0],
+    setEditConfig = _useState6[1];
   var _useState7 = (0, _react.useState)(false),
-      _useState8 = _slicedToArray(_useState7, 2),
-      showChips = _useState8[0],
-      setShowChips = _useState8[1];
-
+    _useState8 = _slicedToArray(_useState7, 2),
+    showChips = _useState8[0],
+    setShowChips = _useState8[1];
   var _useState9 = (0, _react.useState)(8),
-      _useState10 = _slicedToArray(_useState9, 2),
-      visibleChipsCount = _useState10[0],
-      setVisibleChipsCount = _useState10[1];
-
+    _useState10 = _slicedToArray(_useState9, 2),
+    visibleChipsCount = _useState10[0],
+    setVisibleChipsCount = _useState10[1];
   var chipsCellRef = (0, _react.useRef)();
   var chipsWrapperRef = (0, _react.useRef)();
   var handleShowElements = (0, _react.useCallback)(function () {
@@ -118,7 +103,6 @@ var FormChipCell = function FormChipCell(_ref) {
   var handleResize = (0, _react.useCallback)(function () {
     if (!isEditable && !(0, _common.isEveryObjectValueEmpty)(chipsSizes)) {
       var _chipsCellRef$current;
-
       var parentSize = (_chipsCellRef$current = chipsCellRef.current) === null || _chipsCellRef$current === void 0 ? void 0 : _chipsCellRef$current.getBoundingClientRect().width;
       var maxLength = 0;
       var chipIndex = 0;
@@ -129,11 +113,9 @@ var FormChipCell = function FormChipCell(_ref) {
           return false;
         } else {
           maxLength += chipSize;
-
           if (index === Object.values(chipsSizes).length - 1) {
             chipIndex = 8;
           }
-
           return true;
         }
       });
@@ -170,7 +152,6 @@ var FormChipCell = function FormChipCell(_ref) {
     if ((0, _common.areArraysEqual)((0, _lodash.get)(initialValues, name), currentChipsList, ['id'])) {
       (0, _lodash.set)(formState.initialValues, name, currentChipsList);
     }
-
     formState.form.mutators.setFieldState(name, {
       modified: true
     });
@@ -187,11 +168,9 @@ var FormChipCell = function FormChipCell(_ref) {
         delimiter: delimiter
       });
     }
-
     if (showHiddenChips) {
       setShowHiddenChips(false);
     }
-
     setEditConfig({
       chipIndex: fields.value.length,
       isEdit: true,
@@ -210,15 +189,13 @@ var FormChipCell = function FormChipCell(_ref) {
   }, [checkChipsList, formState, name]);
   var handleEditChip = (0, _react.useCallback)(function (event, fields, nameEvent) {
     var _fields$value$editCon = fields.value[editConfig.chipIndex],
-        key = _fields$value$editCon.key,
-        value = _fields$value$editCon.value;
+      key = _fields$value$editCon.key,
+      value = _fields$value$editCon.value;
     var isChipNotEmpty = !!(key !== null && key !== void 0 && key.trim() && value !== null && value !== void 0 && value.trim());
-
     if (nameEvent === _constants.CLICK) {
       if (!isChipNotEmpty) {
         handleRemoveChip(event, fields, editConfig.chipIndex);
       }
-
       setEditConfig({
         chipIndex: null,
         isEdit: false,
@@ -230,7 +207,6 @@ var FormChipCell = function FormChipCell(_ref) {
       if (!isChipNotEmpty) {
         handleRemoveChip(event, fields, editConfig.chipIndex);
       }
-
       setEditConfig(function (prevState) {
         var lastChipSelected = prevState.chipIndex + 1 > fields.value.length - 1;
         return {
@@ -245,7 +221,6 @@ var FormChipCell = function FormChipCell(_ref) {
       if (!isChipNotEmpty) {
         handleRemoveChip(event, fields, editConfig.chipIndex);
       }
-
       setEditConfig(function (prevState) {
         var isPrevChipIndexExists = prevState.chipIndex - 1 < 0;
         return {
@@ -257,7 +232,6 @@ var FormChipCell = function FormChipCell(_ref) {
         };
       });
     }
-
     checkChipsList((0, _lodash.get)(formState.values, name));
     event && event.preventDefault();
   }, [editConfig.chipIndex, handleRemoveChip, checkChipsList, formState.values, name]);
@@ -273,10 +247,8 @@ var FormChipCell = function FormChipCell(_ref) {
         });
       });
     }
-
     onClick && onClick();
   }, [isEditable, onClick]);
-
   var validateFields = function validateFields(fieldsArray) {
     var uniquenessValidator = function uniquenessValidator(newValue, idx) {
       return !fieldsArray.some(function (_ref2, index) {
@@ -284,17 +256,14 @@ var FormChipCell = function FormChipCell(_ref) {
         return newValue === key && index !== idx;
       });
     };
-
     var errorData = [];
     if (!fieldsArray) return [];
-
     if (!(0, _lodash.isEmpty)(validationRules)) {
       errorData = fieldsArray.map(function (chip) {
         var _validateChip = validateChip(chip),
-            _validateChip2 = _slicedToArray(_validateChip, 2),
-            keyValidation = _validateChip2[0],
-            valueValidation = _validateChip2[1];
-
+          _validateChip2 = _slicedToArray(_validateChip, 2),
+          keyValidation = _validateChip2[0],
+          valueValidation = _validateChip2[1];
         if (keyValidation && valueValidation) return {
           key: keyValidation,
           value: valueValidation
@@ -307,12 +276,11 @@ var FormChipCell = function FormChipCell(_ref) {
         };
         return null;
       });
-    } // uniqueness
+    }
 
-
+    // uniqueness
     fieldsArray.forEach(function (chip, index) {
       var isUnique = uniquenessValidator(chip.key, index);
-
       if (!isUnique) {
         if ((0, _lodash.get)(errorData, [index, 'key'], false)) {
           errorData.at(index).key.push(_formChipCell.uniquenessError);
@@ -321,32 +289,26 @@ var FormChipCell = function FormChipCell(_ref) {
         }
       }
     });
-
     if (!errorData && validator) {
       errorData = validator(fieldsArray);
     }
-
     if (errorData.every(function (label) {
       return (0, _lodash.isNil)(label);
     })) {
       return [];
     }
-
     return errorData;
   };
-
   var validateChip = function validateChip(_ref3) {
     var key = _ref3.key,
-        value = _ref3.value;
-
+      value = _ref3.value;
     var validateField = function validateField(value, field) {
       var _checkPatternsValidit = (0, _validation.checkPatternsValidity)(validationRules[field].filter(function (rule) {
-        return rule.pattern;
-      }), value),
-          _checkPatternsValidit2 = _slicedToArray(_checkPatternsValidit, 2),
-          newRules = _checkPatternsValidit2[0],
-          isValidField = _checkPatternsValidit2[1];
-
+          return rule.pattern;
+        }), value),
+        _checkPatternsValidit2 = _slicedToArray(_checkPatternsValidit, 2),
+        newRules = _checkPatternsValidit2[0],
+        isValidField = _checkPatternsValidit2[1];
       if (isValidField) return null;
       var invalidRules = newRules.filter(function (rule) {
         return !rule.isValid;
@@ -358,10 +320,8 @@ var FormChipCell = function FormChipCell(_ref) {
         };
       });
     };
-
     return [validateField(key, 'key'), validateField(value, 'value')];
   };
-
   return /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
     className: "chips",
     children: [label && /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
@@ -395,7 +355,6 @@ var FormChipCell = function FormChipCell(_ref) {
     })]
   });
 };
-
 FormChipCell.defaultProps = {
   chipOptions: {
     background: 'purple',
@@ -428,7 +387,5 @@ FormChipCell.propTypes = {
   validator: _propTypes.default.func,
   visibleChipsMaxLength: _propTypes.default.oneOfType([_propTypes.default.string, _propTypes.default.number])
 };
-
 var _default = /*#__PURE__*/_react.default.memo(FormChipCell);
-
 exports.default = _default;

@@ -4,9 +4,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.useDebounce = void 0;
-
 var _react = require("react");
-
 /*
 Copyright 2022 Iguazio Systems Ltd.
 Licensed under the Apache License, Version 2.0 (the "License") with
@@ -23,6 +21,7 @@ illegal under applicable law, and the grant of the foregoing license
 under the Apache 2.0 license is conditioned upon your compliance with
 such restriction.
 */
+
 var useDebounce = function useDebounce() {
   return function (validate, time) {
     var timeout = (0, _react.useRef)(null);
@@ -33,14 +32,12 @@ var useDebounce = function useDebounce() {
         if (timeout.current) {
           timeout.current();
         }
-
         if (value !== lastValue.current) {
           var timerId = setTimeout(function () {
             lastValue.current = value;
             lastResult.current = validate(value);
             resolve(lastResult.current);
           }, time);
-
           timeout.current = function () {
             clearTimeout(timerId);
             resolve(true);
@@ -52,5 +49,4 @@ var useDebounce = function useDebounce() {
     };
   };
 };
-
 exports.useDebounce = useDebounce;

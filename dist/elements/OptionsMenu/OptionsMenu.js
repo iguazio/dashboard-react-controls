@@ -4,21 +4,13 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.default = void 0;
-
 var _react = _interopRequireDefault(require("react"));
-
 var _propTypes = _interopRequireDefault(require("prop-types"));
-
 var _reactTransitionGroup = require("react-transition-group");
-
 var _components = require("../../components");
-
 require("./optionsMenu.scss");
-
 var _jsxRuntime = require("react/jsx-runtime");
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
 /*
 Copyright 2022 Iguazio Systems Ltd.
 Licensed under the Apache License, Version 2.0 (the "License") with
@@ -35,14 +27,13 @@ illegal under applicable law, and the grant of the foregoing license
 under the Apache 2.0 license is conditioned upon your compliance with
 such restriction.
 */
+
 var OptionsMenu = /*#__PURE__*/_react.default.forwardRef(function (_ref, ref) {
   var children = _ref.children,
-      show = _ref.show,
-      timeout = _ref.timeout;
-
+    show = _ref.show,
+    timeout = _ref.timeout;
   var _ref2 = ref.current ? ref.current.getBoundingClientRect() : {},
-      dropdownWidth = _ref2.width;
-
+    dropdownWidth = _ref2.width;
   return /*#__PURE__*/(0, _jsxRuntime.jsx)(_reactTransitionGroup.CSSTransition, {
     in: show,
     timeout: timeout,
@@ -65,7 +56,6 @@ var OptionsMenu = /*#__PURE__*/_react.default.forwardRef(function (_ref, ref) {
     })
   });
 });
-
 OptionsMenu.defaultProps = {
   children: [],
   show: false,

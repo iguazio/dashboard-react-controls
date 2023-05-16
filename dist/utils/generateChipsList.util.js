@@ -4,7 +4,6 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.generateChipsList = void 0;
-
 /*
 Copyright 2022 Iguazio Systems Ltd.
 Licensed under the Apache License, Version 2.0 (the "License") with
@@ -32,11 +31,9 @@ var generateChipsList = function generateChipsList(chips, maxLength) {
       hiddenChipsNumber: hiddenChipsNumber
     };
   }
-
   return {
     visibleChips: chips,
     hiddenChips: []
   };
 };
-
 exports.generateChipsList = generateChipsList;

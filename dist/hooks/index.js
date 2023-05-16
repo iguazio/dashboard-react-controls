@@ -9,5 +9,4 @@ Object.defineProperty(exports, "useDetectOutsideClick", {
     return _useDetectOutsideClick.useDetectOutsideClick;
   }
 });
-
 var _useDetectOutsideClick = require("./useDetectOutsideClick");

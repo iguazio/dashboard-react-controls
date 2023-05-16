@@ -4,7 +4,6 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.getFirstScrollableParentUtil = void 0;
-
 /*
 Copyright 2022 Iguazio Systems Ltd.
 Licensed under the Apache License, Version 2.0 (the "License") with
@@ -22,17 +21,13 @@ under the Apache 2.0 license is conditioned upon your compliance with
 such restriction.
 */
 var regex = /(auto|scroll|hidden)/;
-
 var style = function style(node, prop) {
   return getComputedStyle(node, null).getPropertyValue(prop);
 };
-
 var scroll = function scroll(node) {
   return regex.test(style(node, 'overflow') + style(node, 'overflow-y') + style(node, 'overflow-x'));
 };
-
 var getFirstScrollableParentUtil = function getFirstScrollableParentUtil(node) {
   return !node || node === document.body ? document.body : scroll(node) ? node : getFirstScrollableParentUtil(node.parentNode);
 };
-
 exports.getFirstScrollableParentUtil = getFirstScrollableParentUtil;

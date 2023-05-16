@@ -4,25 +4,15 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.default = void 0;
-
 var _react = _interopRequireDefault(require("react"));
-
 var _propTypes = _interopRequireDefault(require("prop-types"));
-
 var _classnames = _interopRequireDefault(require("classnames"));
-
 var _Button = _interopRequireDefault(require("../Button/Button"));
-
 var _PopUpDialog = _interopRequireDefault(require("../PopUpDialog/PopUpDialog"));
-
 var _types = require("../../types");
-
 require("./confirmDialog.scss");
-
 var _jsxRuntime = require("react/jsx-runtime");
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
 /*
 Copyright 2022 Iguazio Systems Ltd.
 Licensed under the Apache License, Version 2.0 (the "License") with
@@ -39,34 +29,31 @@ illegal under applicable law, and the grant of the foregoing license
 under the Apache 2.0 license is conditioned upon your compliance with
 such restriction.
 */
+
 var ConfirmDialog = function ConfirmDialog(_ref) {
   var cancelButton = _ref.cancelButton,
-      className = _ref.className,
-      closePopUp = _ref.closePopUp,
-      confirmButton = _ref.confirmButton,
-      customPosition = _ref.customPosition,
-      header = _ref.header,
-      isOpen = _ref.isOpen,
-      message = _ref.message,
-      messageOnly = _ref.messageOnly,
-      onResolve = _ref.onResolve;
+    className = _ref.className,
+    closePopUp = _ref.closePopUp,
+    confirmButton = _ref.confirmButton,
+    customPosition = _ref.customPosition,
+    header = _ref.header,
+    isOpen = _ref.isOpen,
+    message = _ref.message,
+    messageOnly = _ref.messageOnly,
+    onResolve = _ref.onResolve;
   var messageClassNames = (0, _classnames.default)('confirm-dialog__message', messageOnly && 'confirm-dialog__message-only');
-
   var handleCancelDialog = function handleCancelDialog(event) {
     onResolve && onResolve();
     cancelButton.handler && cancelButton.handler(event);
   };
-
   var handleCloseDialog = function handleCloseDialog(event) {
     onResolve && onResolve();
     closePopUp && closePopUp(event);
   };
-
   var handleConfirmDialog = function handleConfirmDialog(event) {
     onResolve && onResolve();
     confirmButton.handler && confirmButton.handler(event);
   };
-
   return isOpen && /*#__PURE__*/(0, _jsxRuntime.jsx)(_PopUpDialog.default, {
     className: className,
     closePopUp: handleCloseDialog,
@@ -93,7 +80,6 @@ var ConfirmDialog = function ConfirmDialog(_ref) {
     })
   });
 };
-
 ConfirmDialog.defaultProps = {
   cancelButton: null,
   className: '',

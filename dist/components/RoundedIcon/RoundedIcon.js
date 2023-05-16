@@ -4,23 +4,14 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.default = void 0;
-
 var _react = _interopRequireDefault(require("react"));
-
 var _propTypes = _interopRequireDefault(require("prop-types"));
-
 var _classnames = _interopRequireDefault(require("classnames"));
-
 var _Tooltip = _interopRequireDefault(require("../Tooltip/Tooltip"));
-
 var _TextTooltipTemplate = _interopRequireDefault(require("../TooltipTemplate/TextTooltipTemplate"));
-
 require("./roundedIcon.scss");
-
 var _jsxRuntime = require("react/jsx-runtime");
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
 /*
 Copyright 2022 Iguazio Systems Ltd.
 Licensed under the Apache License, Version 2.0 (the "License") with
@@ -37,14 +28,15 @@ illegal under applicable law, and the grant of the foregoing license
 under the Apache 2.0 license is conditioned upon your compliance with
 such restriction.
 */
+
 var RoundedIcon = /*#__PURE__*/_react.default.forwardRef(function (_ref, ref) {
   var children = _ref.children,
-      className = _ref.className,
-      disabled = _ref.disabled,
-      id = _ref.id,
-      isActive = _ref.isActive,
-      onClick = _ref.onClick,
-      tooltipText = _ref.tooltipText;
+    className = _ref.className,
+    disabled = _ref.disabled,
+    id = _ref.id,
+    isActive = _ref.isActive,
+    onClick = _ref.onClick,
+    tooltipText = _ref.tooltipText;
   var wrapperClassNames = (0, _classnames.default)('round-icon-cp', className);
   var IconClassNames = (0, _classnames.default)('round-icon-cp__circle', isActive && 'round-icon-cp__circle-active', disabled && 'round-icon-cp__circle-disabled');
   return /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
@@ -65,7 +57,6 @@ var RoundedIcon = /*#__PURE__*/_react.default.forwardRef(function (_ref, ref) {
     })
   });
 });
-
 RoundedIcon.defaultProps = {
   className: '',
   disabled: false,
@@ -83,7 +74,5 @@ RoundedIcon.propTypes = {
   onClick: _propTypes.default.func,
   tooltipText: _propTypes.default.string
 };
-
 var _default = /*#__PURE__*/_react.default.memo(RoundedIcon);
-
 exports.default = _default;

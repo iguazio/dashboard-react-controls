@@ -4,9 +4,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.useDetectOutsideClick = void 0;
-
 var _react = require("react");
-
 /*
 Copyright 2022 Iguazio Systems Ltd.
 Licensed under the Apache License, Version 2.0 (the "License") with
@@ -33,19 +31,17 @@ such restriction.
 var useDetectOutsideClick = function useDetectOutsideClick(ref, handler) {
   (0, _react.useEffect)(function () {
     var onClick = function onClick(e) {
-      e.stopPropagation(); // If the active element exists and is clicked outside of
-
+      e.stopPropagation();
+      // If the active element exists and is clicked outside of
       if (ref.current !== null && !ref.current.contains(e.target)) {
         handler(e);
       }
-    }; // If the item is active (ie open) then listen for clicks outside
-
-
+    };
+    // If the item is active (ie open) then listen for clicks outside
     window.addEventListener('click', onClick);
     return function () {
       window.removeEventListener('click', onClick);
     };
   }, [ref, handler]);
 };
-
 exports.useDetectOutsideClick = useDetectOutsideClick;

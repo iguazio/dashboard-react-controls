@@ -4,21 +4,13 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.default = void 0;
-
 var _react = _interopRequireDefault(require("react"));
-
 var _propTypes = _interopRequireDefault(require("prop-types"));
-
 var _lodash = require("lodash");
-
 var _rangeArrowSmall = require("../../../images/range-arrow-small.svg");
-
 require("./InputNumberButtons.scss");
-
 var _jsxRuntime = require("react/jsx-runtime");
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
 /*
 Copyright 2022 Iguazio Systems Ltd.
 Licensed under the Apache License, Version 2.0 (the "License") with
@@ -35,14 +27,14 @@ illegal under applicable law, and the grant of the foregoing license
 under the Apache 2.0 license is conditioned upon your compliance with
 such restriction.
 */
+
 var InputNumberButtons = function InputNumberButtons(_ref) {
   var disabled = _ref.disabled,
-      min = _ref.min,
-      max = _ref.max,
-      onChange = _ref.onChange,
-      step = _ref.step,
-      value = _ref.value;
-
+    min = _ref.min,
+    max = _ref.max,
+    onChange = _ref.onChange,
+    step = _ref.step,
+    value = _ref.value;
   var handleIncrease = function handleIncrease(event) {
     event.preventDefault();
     if (max && +value >= +max) return;
@@ -50,7 +42,6 @@ var InputNumberButtons = function InputNumberButtons(_ref) {
     var nextValue = isInteger(currentValue) ? currentValue : currentValue.toFixed(3);
     onChange(nextValue);
   };
-
   var handleDecrease = function handleDecrease(event) {
     event.preventDefault();
     if (value <= 0 || +value <= +min) return;
@@ -58,15 +49,12 @@ var InputNumberButtons = function InputNumberButtons(_ref) {
     var nextValue = isInteger(currentValue) ? currentValue : currentValue.toFixed(3);
     onChange(nextValue);
   };
-
   var isCurrentValueEmpty = function isCurrentValueEmpty() {
     return (0, _lodash.isNil)(value) || value === '';
   };
-
   var isInteger = function isInteger(number) {
     return Number(number) === number && number % 1 === 0;
   };
-
   return /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
     "data-testid": "range-input-container",
     className: "form-field-range",
@@ -92,7 +80,6 @@ var InputNumberButtons = function InputNumberButtons(_ref) {
     })
   });
 };
-
 InputNumberButtons.defaultProps = {
   disabled: false,
   min: null,
@@ -107,7 +94,5 @@ InputNumberButtons.propTypes = {
   step: _propTypes.default.number,
   value: _propTypes.default.oneOfType([_propTypes.default.string, _propTypes.default.number]).isRequired
 };
-
 var _default = /*#__PURE__*/_react.default.memo(InputNumberButtons);
-
 exports.default = _default;

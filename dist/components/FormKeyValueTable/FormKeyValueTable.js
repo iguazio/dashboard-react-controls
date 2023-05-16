@@ -4,25 +4,15 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.default = void 0;
-
 var _react = _interopRequireDefault(require("react"));
-
 var _propTypes = _interopRequireDefault(require("prop-types"));
-
 var _classnames = _interopRequireDefault(require("classnames"));
-
 var _reactFinalFormArrays = require("react-final-form-arrays");
-
 var _components = require("../../components");
-
 var _elements = require("../../elements");
-
 var _useFormTable2 = require("../../hooks/useFormTable.hook");
-
 var _jsxRuntime = require("react/jsx-runtime");
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
 /*
 Copyright 2022 Iguazio Systems Ltd.
 Licensed under the Apache License, Version 2.0 (the "License") with
@@ -39,38 +29,36 @@ illegal under applicable law, and the grant of the foregoing license
 under the Apache 2.0 license is conditioned upon your compliance with
 such restriction.
 */
+
 var FormKeyValueTable = function FormKeyValueTable(_ref) {
   var addNewItemLabel = _ref.addNewItemLabel,
-      className = _ref.className,
-      defaultKey = _ref.defaultKey,
-      disabled = _ref.disabled,
-      fieldsPath = _ref.fieldsPath,
-      formState = _ref.formState,
-      isKeyRequired = _ref.isKeyRequired,
-      isValueRequired = _ref.isValueRequired,
-      keyHeader = _ref.keyHeader,
-      keyLabel = _ref.keyLabel,
-      keyOptions = _ref.keyOptions,
-      valueHeader = _ref.valueHeader,
-      valueLabel = _ref.valueLabel;
+    className = _ref.className,
+    defaultKey = _ref.defaultKey,
+    disabled = _ref.disabled,
+    fieldsPath = _ref.fieldsPath,
+    formState = _ref.formState,
+    isKeyRequired = _ref.isKeyRequired,
+    isValueRequired = _ref.isValueRequired,
+    keyHeader = _ref.keyHeader,
+    keyLabel = _ref.keyLabel,
+    keyOptions = _ref.keyOptions,
+    valueHeader = _ref.valueHeader,
+    valueLabel = _ref.valueLabel;
   var tableClassNames = (0, _classnames.default)('form-table form-key-value-table', className);
-
   var _useFormTable = (0, _useFormTable2.useFormTable)(formState),
-      editingItem = _useFormTable.editingItem,
-      addNewRow = _useFormTable.addNewRow,
-      applyChanges = _useFormTable.applyChanges,
-      deleteRow = _useFormTable.deleteRow,
-      discardOrDelete = _useFormTable.discardOrDelete,
-      enterEditMode = _useFormTable.enterEditMode,
-      bottomScrollRef = _useFormTable.bottomScrollRef;
-
+    editingItem = _useFormTable.editingItem,
+    addNewRow = _useFormTable.addNewRow,
+    applyChanges = _useFormTable.applyChanges,
+    deleteRow = _useFormTable.deleteRow,
+    discardOrDelete = _useFormTable.discardOrDelete,
+    enterEditMode = _useFormTable.enterEditMode,
+    bottomScrollRef = _useFormTable.bottomScrollRef;
   var uniquenessValidator = function uniquenessValidator(fields, newValue) {
     return !fields.value.some(function (_ref2, index) {
       var key = _ref2.data.key;
       return newValue.trim() === key && index !== editingItem.ui.index;
     });
   };
-
   return /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
     className: tableClassNames,
     children: [/*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
@@ -88,12 +76,10 @@ var FormKeyValueTable = function FormKeyValueTable(_ref) {
       name: fieldsPath,
       children: function children(_ref3) {
         var _editingItem$ui3;
-
         var fields = _ref3.fields;
         return /*#__PURE__*/(0, _jsxRuntime.jsxs)(_jsxRuntime.Fragment, {
           children: [fields.map(function (contentItem, index) {
             var _editingItem$ui, _editingItem$ui2;
-
             var tableRowClassNames = (0, _classnames.default)('form-table__row', fieldsPath === (editingItem === null || editingItem === void 0 ? void 0 : (_editingItem$ui = editingItem.ui) === null || _editingItem$ui === void 0 ? void 0 : _editingItem$ui.fieldsPath) && (editingItem === null || editingItem === void 0 ? void 0 : (_editingItem$ui2 = editingItem.ui) === null || _editingItem$ui2 === void 0 ? void 0 : _editingItem$ui2.index) === index && 'active');
             return editingItem && index === editingItem.ui.index && !disabled ? /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
               className: tableRowClassNames,
@@ -101,12 +87,12 @@ var FormKeyValueTable = function FormKeyValueTable(_ref) {
                 className: "form-table__cell form-table__cell_1",
                 children: keyOptions ? /*#__PURE__*/(0, _jsxRuntime.jsx)(_components.FormSelect, {
                   name: "".concat(contentItem, ".data.key"),
-                  density: "dense",
+                  density: "normal",
                   options: keyOptions
                 }) : /*#__PURE__*/(0, _jsxRuntime.jsx)(_components.FormInput, {
                   className: "input_edit",
                   placeholder: keyLabel,
-                  density: "dense",
+                  density: "normal",
                   name: "".concat(contentItem, ".data.key"),
                   required: isKeyRequired,
                   validationRules: [{
@@ -122,7 +108,7 @@ var FormKeyValueTable = function FormKeyValueTable(_ref) {
                 children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_components.FormInput, {
                   className: "input_edit",
                   placeholder: valueLabel,
-                  density: "dense",
+                  density: "normal",
                   name: "".concat(contentItem, ".data.value"),
                   required: isValueRequired
                 })
@@ -174,7 +160,6 @@ var FormKeyValueTable = function FormKeyValueTable(_ref) {
               for (var _len = arguments.length, addRowArgs = new Array(_len), _key = 0; _key < _len; _key++) {
                 addRowArgs[_key] = arguments[_key];
               }
-
               return addNewRow.apply(void 0, addRowArgs.concat([{
                 data: {
                   key: defaultKey || '',
@@ -189,7 +174,6 @@ var FormKeyValueTable = function FormKeyValueTable(_ref) {
     })]
   });
 };
-
 FormKeyValueTable.defaultProps = {
   addNewItemLabel: 'Add new item',
   className: '',

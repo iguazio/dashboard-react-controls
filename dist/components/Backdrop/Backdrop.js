@@ -4,19 +4,12 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.default = void 0;
-
 var _react = _interopRequireDefault(require("react"));
-
 var _propTypes = _interopRequireDefault(require("prop-types"));
-
 var _reactTransitionGroup = require("react-transition-group");
-
 require("./Backdrop.scss");
-
 var _jsxRuntime = require("react/jsx-runtime");
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
 /*
 Copyright 2022 Iguazio Systems Ltd.
 Licensed under the Apache License, Version 2.0 (the "License") with
@@ -33,11 +26,12 @@ illegal under applicable law, and the grant of the foregoing license
 under the Apache 2.0 license is conditioned upon your compliance with
 such restriction.
 */
+
 var Backdrop = function Backdrop(_ref) {
   var _ref$duration = _ref.duration,
-      duration = _ref$duration === void 0 ? 300 : _ref$duration,
-      show = _ref.show,
-      onClose = _ref.onClose;
+    duration = _ref$duration === void 0 ? 300 : _ref$duration,
+    show = _ref.show,
+    onClose = _ref.onClose;
   return /*#__PURE__*/(0, _jsxRuntime.jsx)(_reactTransitionGroup.CSSTransition, {
     in: show,
     timeout: duration,
@@ -50,7 +44,6 @@ var Backdrop = function Backdrop(_ref) {
     })
   });
 };
-
 Backdrop.defaultProps = {
   duration: 300,
   show: false

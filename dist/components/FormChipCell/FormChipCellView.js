@@ -4,37 +4,21 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.default = void 0;
-
 var _react = _interopRequireDefault(require("react"));
-
 var _propTypes = _interopRequireDefault(require("prop-types"));
-
 var _classnames = _interopRequireDefault(require("classnames"));
-
 var _reactFinalFormArrays = require("react-final-form-arrays");
-
 var _lodash = require("lodash");
-
 var _Tooltip = _interopRequireDefault(require("../Tooltip/Tooltip"));
-
 var _FormChip = _interopRequireDefault(require("./FormChip/FormChip"));
-
 var _TextTooltipTemplate = _interopRequireDefault(require("../TooltipTemplate/TextTooltipTemplate"));
-
 var _HiddenChipsBlock = _interopRequireDefault(require("../../elements/HiddenChipsBlock/HiddenChipsBlock"));
-
 var _types = require("../../types");
-
 var _formChipCell = require("./formChipCell.util");
-
 var _common = require("../../utils/common.util");
-
 var _add = require("../../images/add.svg");
-
 var _jsxRuntime = require("react/jsx-runtime");
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
 /*
 Copyright 2022 Iguazio Systems Ltd.
 Licensed under the Apache License, Version 2.0 (the "License") with
@@ -51,26 +35,27 @@ illegal under applicable law, and the grant of the foregoing license
 under the Apache 2.0 license is conditioned upon your compliance with
 such restriction.
 */
+
 var FormChipCellView = /*#__PURE__*/_react.default.forwardRef(function (_ref, _ref2) {
   var chipOptions = _ref.chipOptions,
-      chips = _ref.chips,
-      editConfig = _ref.editConfig,
-      handleAddNewChip = _ref.handleAddNewChip,
-      _handleEditChip = _ref.handleEditChip,
-      _handleRemoveChip = _ref.handleRemoveChip,
-      handleShowElements = _ref.handleShowElements,
-      handleToEditMode = _ref.handleToEditMode,
-      isEditable = _ref.isEditable,
-      name = _ref.name,
-      setChipsSizes = _ref.setChipsSizes,
-      setEditConfig = _ref.setEditConfig,
-      shortChips = _ref.shortChips,
-      showChips = _ref.showChips,
-      showHiddenChips = _ref.showHiddenChips,
-      validateFields = _ref.validateFields,
-      validationRules = _ref.validationRules;
+    chips = _ref.chips,
+    editConfig = _ref.editConfig,
+    handleAddNewChip = _ref.handleAddNewChip,
+    _handleEditChip = _ref.handleEditChip,
+    _handleRemoveChip = _ref.handleRemoveChip,
+    handleShowElements = _ref.handleShowElements,
+    handleToEditMode = _ref.handleToEditMode,
+    isEditable = _ref.isEditable,
+    name = _ref.name,
+    setChipsSizes = _ref.setChipsSizes,
+    setEditConfig = _ref.setEditConfig,
+    shortChips = _ref.shortChips,
+    showChips = _ref.showChips,
+    showHiddenChips = _ref.showHiddenChips,
+    validateFields = _ref.validateFields,
+    validationRules = _ref.validationRules;
   var chipsCellRef = _ref2.chipsCellRef,
-      chipsWrapperRef = _ref2.chipsWrapperRef;
+    chipsWrapperRef = _ref2.chipsWrapperRef;
   var buttonAddClassNames = (0, _classnames.default)('button-add', chipOptions.background && "button-add-background_".concat(chipOptions.background), chipOptions.borderColor && "button-add-border_".concat(chipOptions.borderColor), chipOptions.font && "button-add-font_".concat(chipOptions.font), chipOptions.density && "button-add-density_".concat(chipOptions.density));
   var wrapperClassNames = (0, _classnames.default)('chips-wrapper', isEditable && 'fixed-max-width');
   var chipClassNames = (0, _classnames.default)('chip', 'chip__content', isEditable && 'data-ellipsis', shortChips && 'chip_short', chips.hiddenChips && 'chip_hidden', chipOptions.density && "chip-density_".concat(chipOptions.density), chipOptions.borderRadius && "chip-border_".concat(chipOptions.borderRadius), chipOptions.background && "chip-background_".concat(chipOptions.background), chipOptions.borderColor && "chip-border_".concat(chipOptions.borderColor), chipOptions.font && "chip-font_".concat(chipOptions.font), isEditable && 'editable', (showChips || isEditable) && 'chip_visible');
@@ -79,14 +64,12 @@ var FormChipCellView = /*#__PURE__*/_react.default.forwardRef(function (_ref, _r
     validate: validateFields,
     children: function children(_ref3) {
       var fields = _ref3.fields,
-          meta = _ref3.meta;
-
+        meta = _ref3.meta;
       if (!(0, _lodash.isEmpty)(validationRules) && validationRules.key.every(function (rule) {
         return rule.name !== _formChipCell.uniquenessError.name;
       })) {
         validationRules.key.push(_formChipCell.uniquenessError);
       }
-
       return (isEditable || !(0, _common.isEveryObjectValueEmpty)(fields)) && /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
         className: "chips-cell",
         ref: chipsCellRef,
@@ -159,7 +142,6 @@ var FormChipCellView = /*#__PURE__*/_react.default.forwardRef(function (_ref, _r
     }
   });
 });
-
 FormChipCellView.defaultProps = {
   chipOptions: {
     background: 'purple',

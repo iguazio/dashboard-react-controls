@@ -4,27 +4,16 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.default = void 0;
-
 var _react = _interopRequireDefault(require("react"));
-
 var _propTypes = _interopRequireDefault(require("prop-types"));
-
 var _components = require("../../components");
-
 var _types = require("../../types");
-
 var _close = require("../../images/close.svg");
-
 var _edit = require("../../images/edit.svg");
-
 var _delete = require("../../images/delete.svg");
-
 var _checkmark = require("../../images/checkmark2.svg");
-
 var _jsxRuntime = require("react/jsx-runtime");
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
 /*
 Copyright 2019 Iguazio Systems Ltd.
 
@@ -44,15 +33,15 @@ illegal under applicable law, and the grant of the foregoing license
 under the Apache 2.0 license is conditioned upon your compliance with
 such restriction.
 */
+
 var FormRowActions = function FormRowActions(_ref) {
   var _editingItem$ui, _editingItem$ui2, _editingItem$ui3;
-
   var applyChanges = _ref.applyChanges,
-      deleteRow = _ref.deleteRow,
-      discardOrDelete = _ref.discardOrDelete,
-      editingItem = _ref.editingItem,
-      fieldsPath = _ref.fieldsPath,
-      index = _ref.index;
+    deleteRow = _ref.deleteRow,
+    discardOrDelete = _ref.discardOrDelete,
+    editingItem = _ref.editingItem,
+    fieldsPath = _ref.fieldsPath,
+    index = _ref.index;
   return /*#__PURE__*/(0, _jsxRuntime.jsx)(_jsxRuntime.Fragment, {
     children: (editingItem === null || editingItem === void 0 ? void 0 : (_editingItem$ui = editingItem.ui) === null || _editingItem$ui === void 0 ? void 0 : _editingItem$ui.index) === index ? /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
       className: "form-table__cell form-table__actions-cell",
@@ -87,7 +76,6 @@ var FormRowActions = function FormRowActions(_ref) {
     })
   });
 };
-
 FormRowActions.defaultProps = {
   editingItem: null
 };
