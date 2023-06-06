@@ -7,6 +7,7 @@ Object.defineProperty(exports, "__esModule", {
 exports.default = void 0;
 var _react = _interopRequireWildcard(require("react"));
 var _lodash = _interopRequireWildcard(require("lodash"));
+var _classnames = _interopRequireDefault(require("classnames"));
 var _propTypes = _interopRequireDefault(require("prop-types"));
 var _FormChipCellView = _interopRequireDefault(require("./FormChipCellView"));
 var _common = require("../../utils/common.util");
@@ -48,6 +49,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; } /*
                                                                       */
 var FormChipCell = function FormChipCell(_ref) {
   var chipOptions = _ref.chipOptions,
+    className = _ref.className,
     delimiter = _ref.delimiter,
     formState = _ref.formState,
     initialValues = _ref.initialValues,
@@ -59,6 +61,7 @@ var FormChipCell = function FormChipCell(_ref) {
     validationRules = _ref.validationRules,
     validator = _ref.validator,
     visibleChipsMaxLength = _ref.visibleChipsMaxLength;
+  var chipsClassName = (0, _classnames.default)('chips', className);
   var _useState = (0, _react.useState)({}),
     _useState2 = _slicedToArray(_useState, 2),
     chipsSizes = _useState2[0],
@@ -323,7 +326,7 @@ var FormChipCell = function FormChipCell(_ref) {
     return [validateField(key, 'key'), validateField(value, 'value')];
   };
   return /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
-    className: "chips",
+    className: chipsClassName,
     children: [label && /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
       className: "chips__label",
       children: label
@@ -364,6 +367,7 @@ FormChipCell.defaultProps = {
     density: 'dense',
     font: 'purple'
   },
+  className: '',
   delimiter: null,
   isEditable: false,
   label: null,
@@ -375,6 +379,7 @@ FormChipCell.defaultProps = {
 };
 FormChipCell.propTypes = {
   chipOptions: _types.CHIP_OPTIONS,
+  className: _propTypes.default.string,
   delimiter: _propTypes.default.oneOfType([_propTypes.default.string, _propTypes.default.element]),
   formState: _propTypes.default.shape({}).isRequired,
   initialValues: _propTypes.default.object.isRequired,

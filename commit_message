@@ -1,7 +1,7 @@
 
 
-Create a new dist version 1.2.0
+Create a new dist version 1.2.1
 
 Collecting:
-- Fix [UI] Magnifying glass icon doesn't work for name filtering (#126)
-- Revamp [UI] Icons, Tables css (#127)
+- Fix [Job Wizard] Batch run, hubs can't select card when click near 'chips' (#130)
+- Impl [UI] Revamp Details new view for datasets/models/artifacts (#131)
