@@ -1,7 +1,6 @@
 
 
-Create a new dist version 1.2.1
+Create a new dist version 1.2.2
 
 Collecting:
-- Fix [Job Wizard] Batch run, hubs can't select card when click near 'chips' (#130)
-- Impl [UI] Revamp Details new view for datasets/models/artifacts (#131)
+- Fix [Checkbox] The 'checked' html indication (#133)

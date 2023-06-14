@@ -54,8 +54,13 @@ var FormCheckBox = function FormCheckBox(_ref) {
       var input = _ref2.input;
       return /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
         className: formFieldClassNames,
-        children: [/*#__PURE__*/(0, _jsxRuntime.jsx)("input", _objectSpread(_objectSpread({}, _objectSpread(_objectSpread({}, input), inputProps)), {}, {
+        children: [/*#__PURE__*/(0, _jsxRuntime.jsx)("input", _objectSpread(_objectSpread({
+          className: (0, _classnames.default)(input.checked ? 'checked' : 'unchecked'),
+          type: "checkbox",
+          "data-testid": "checkbox",
           id: (_inputProps$value = inputProps.value) !== null && _inputProps$value !== void 0 ? _inputProps$value : name
+        }, _objectSpread(_objectSpread({}, input), inputProps)), {}, {
+          value: String(input.checked)
         })), /*#__PURE__*/(0, _jsxRuntime.jsxs)("label", {
           htmlFor: (_inputProps$value2 = inputProps.value) !== null && _inputProps$value2 !== void 0 ? _inputProps$value2 : name,
           className: labelClassNames,
