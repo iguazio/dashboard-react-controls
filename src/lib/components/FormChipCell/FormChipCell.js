@@ -153,9 +153,11 @@ const FormChipCell = ({
 
   const handleAddNewChip = useCallback(
     (event, fields) => {
+      const fieldsLength = fields.value?.length || 0
+
       if (!editConfig.isEdit && !editConfig.chipIndex) {
         formState.form.mutators.push(name, {
-          id: fields.value.length + new Date(),
+          id: fieldsLength + new Date(),
           key: '',
           value: '',
           delimiter: delimiter
@@ -167,7 +169,7 @@ const FormChipCell = ({
       }
 
       setEditConfig({
-        chipIndex: fields.value.length,
+        chipIndex: fieldsLength,
         isEdit: true,
         isKeyFocused: true,
         isValueFocused: false,
