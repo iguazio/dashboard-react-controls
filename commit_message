@@ -1,6 +1,7 @@
 
 
-Create a new dist version 1.2.2
+Create a new dist version 1.2.3
 
 Collecting:
-- Fix [Checkbox] The 'checked' html indication (#133)
+- Fix [General] Chips pop-up is hidden for the first table item (#135)
+- [Feature set] Apply changes button presents for empty label field on Details pane (#136)

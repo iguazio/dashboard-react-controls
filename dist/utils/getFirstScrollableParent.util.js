@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.getFirstScrollableParentUtil = void 0;
+exports.getFirstScrollableParent = void 0;
 /*
 Copyright 2022 Iguazio Systems Ltd.
 Licensed under the Apache License, Version 2.0 (the "License") with
@@ -21,13 +21,35 @@ under the Apache 2.0 license is conditioned upon your compliance with
 such restriction.
 */
 var regex = /(auto|scroll|hidden)/;
+
+/**
+ * Retrieves the computed style of a node for the specified CSS property.
+ *
+ * @param {Node} node - The DOM node.
+ * @param {string} prop - The CSS property to retrieve.
+ * @returns {string} The computed style value.
+ */
 var style = function style(node, prop) {
   return getComputedStyle(node, null).getPropertyValue(prop);
 };
+
+/**
+ * Checks if the given node has a scrollable overflow.
+ *
+ * @param {Node} node - The DOM node.
+ * @returns {boolean} Returns true if the node has a scrollable overflow, false otherwise.
+ */
 var scroll = function scroll(node) {
   return regex.test(style(node, 'overflow') + style(node, 'overflow-y') + style(node, 'overflow-x'));
 };
-var getFirstScrollableParentUtil = function getFirstScrollableParentUtil(node) {
-  return !node || node === document.body ? document.body : scroll(node) ? node : getFirstScrollableParentUtil(node.parentNode);
+
+/**
+ * Finds the first scrollable parent node of the given node.
+ *
+ * @param {Node} node - The DOM node.
+ * @returns {Node} The first scrollable parent node.
+ */
+var getFirstScrollableParent = function getFirstScrollableParent(node) {
+  return !node || node === document.body ? document.body : scroll(node) ? node : getFirstScrollableParent(node.parentNode);
 };
-exports.getFirstScrollableParentUtil = getFirstScrollableParentUtil;
+exports.getFirstScrollableParent = getFirstScrollableParent;

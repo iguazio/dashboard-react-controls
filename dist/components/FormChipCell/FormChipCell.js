@@ -10,12 +10,13 @@ var _lodash = _interopRequireWildcard(require("lodash"));
 var _classnames = _interopRequireDefault(require("classnames"));
 var _propTypes = _interopRequireDefault(require("prop-types"));
 var _FormChipCellView = _interopRequireDefault(require("./FormChipCellView"));
-var _common = require("../../utils/common.util");
-var _generateChipsList = require("../../utils/generateChipsList.util");
-var _validation = require("../../utils/validation.util");
-var _formChipCell = require("./formChipCell.util");
 var _types = require("../../types");
 var _constants = require("../../constants");
+var _common = require("../../utils/common.util");
+var _validation = require("../../utils/validation.util");
+var _generateChipsList = require("../../utils/generateChipsList.util");
+var _formChipCell = require("./formChipCell.util");
+var _useChipCell2 = require("../../hooks/useChipCell.hook");
 require("./formChipCell.scss");
 var _jsxRuntime = require("react/jsx-runtime");
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -62,95 +63,33 @@ var FormChipCell = function FormChipCell(_ref) {
     validator = _ref.validator,
     visibleChipsMaxLength = _ref.visibleChipsMaxLength;
   var chipsClassName = (0, _classnames.default)('chips', className);
-  var _useState = (0, _react.useState)({}),
-    _useState2 = _slicedToArray(_useState, 2),
-    chipsSizes = _useState2[0],
-    setChipsSizes = _useState2[1];
-  var _useState3 = (0, _react.useState)(false),
-    _useState4 = _slicedToArray(_useState3, 2),
-    showHiddenChips = _useState4[0],
-    setShowHiddenChips = _useState4[1];
-  var _useState5 = (0, _react.useState)({
+  var _useChipCell = (0, _useChipCell2.useChipCell)(isEditable, visibleChipsMaxLength),
+    chipsCellRef = _useChipCell.chipsCellRef,
+    chipsWrapperRef = _useChipCell.chipsWrapperRef,
+    handleShowElements = _useChipCell.handleShowElements,
+    hiddenChipsCounterRef = _useChipCell.hiddenChipsCounterRef,
+    hiddenChipsPopUpRef = _useChipCell.hiddenChipsPopUpRef,
+    setChipsSizes = _useChipCell.setChipsSizes,
+    setShowHiddenChips = _useChipCell.setShowHiddenChips,
+    showChips = _useChipCell.showChips,
+    showHiddenChips = _useChipCell.showHiddenChips,
+    visibleChipsCount = _useChipCell.visibleChipsCount;
+  var _useState = (0, _react.useState)({
       chipIndex: null,
       isEdit: false,
       isKeyFocused: false,
       isValueFocused: false,
       isNewChip: false
     }),
-    _useState6 = _slicedToArray(_useState5, 2),
-    editConfig = _useState6[0],
-    setEditConfig = _useState6[1];
-  var _useState7 = (0, _react.useState)(false),
-    _useState8 = _slicedToArray(_useState7, 2),
-    showChips = _useState8[0],
-    setShowChips = _useState8[1];
-  var _useState9 = (0, _react.useState)(8),
-    _useState10 = _slicedToArray(_useState9, 2),
-    visibleChipsCount = _useState10[0],
-    setVisibleChipsCount = _useState10[1];
-  var chipsCellRef = (0, _react.useRef)();
-  var chipsWrapperRef = (0, _react.useRef)();
-  var handleShowElements = (0, _react.useCallback)(function () {
-    if (!isEditable || isEditable && visibleChipsMaxLength) {
-      setShowHiddenChips(function (state) {
-        return !state;
-      });
-    }
-  }, [isEditable, visibleChipsMaxLength]);
+    _useState2 = _slicedToArray(_useState, 2),
+    editConfig = _useState2[0],
+    setEditConfig = _useState2[1];
   var chips = (0, _react.useMemo)(function () {
     return isEditable || visibleChipsMaxLength === 'all' ? {
       visibleChips: (0, _lodash.get)(formState.values, name),
       hiddenChips: []
     } : (0, _generateChipsList.generateChipsList)((0, _lodash.get)(formState.values, name), visibleChipsMaxLength ? visibleChipsMaxLength : visibleChipsCount);
   }, [visibleChipsMaxLength, isEditable, visibleChipsCount, formState.values, name]);
-  var handleResize = (0, _react.useCallback)(function () {
-    if (!isEditable && !(0, _common.isEveryObjectValueEmpty)(chipsSizes)) {
-      var _chipsCellRef$current;
-      var parentSize = (_chipsCellRef$current = chipsCellRef.current) === null || _chipsCellRef$current === void 0 ? void 0 : _chipsCellRef$current.getBoundingClientRect().width;
-      var maxLength = 0;
-      var chipIndex = 0;
-      var padding = 65;
-      Object.values(chipsSizes).every(function (chipSize, index) {
-        if (maxLength + chipSize > parentSize || Object.values(chipsSizes).length > 1 && maxLength + chipSize + padding > parentSize) {
-          chipIndex = index;
-          return false;
-        } else {
-          maxLength += chipSize;
-          if (index === Object.values(chipsSizes).length - 1) {
-            chipIndex = 8;
-          }
-          return true;
-        }
-      });
-      setVisibleChipsCount(chipIndex);
-      setShowChips(true);
-    }
-  }, [chipsSizes, isEditable]);
-  (0, _react.useEffect)(function () {
-    handleResize();
-  }, [handleResize, showChips]);
-  (0, _react.useEffect)(function () {
-    if (!isEditable) {
-      window.addEventListener('resize', handleResize);
-      return function () {
-        return window.removeEventListener('resize', handleResize);
-      };
-    }
-  }, [handleResize, isEditable]);
-  (0, _react.useEffect)(function () {
-    window.addEventListener('mainResize', handleResize);
-    return function () {
-      return window.removeEventListener('mainResize', handleResize);
-    };
-  }, [handleResize]);
-  (0, _react.useEffect)(function () {
-    if (showHiddenChips) {
-      window.addEventListener('click', handleShowElements);
-      return function () {
-        return window.removeEventListener('click', handleShowElements);
-      };
-    }
-  }, [showHiddenChips, handleShowElements]);
   var checkChipsList = (0, _react.useCallback)(function (currentChipsList) {
     if ((0, _common.areArraysEqual)((0, _lodash.get)(initialValues, name), currentChipsList, ['id'])) {
       (0, _lodash.set)(formState.initialValues, name, currentChipsList);
@@ -163,9 +102,11 @@ var FormChipCell = function FormChipCell(_ref) {
     });
   }, [initialValues, name, formState]);
   var handleAddNewChip = (0, _react.useCallback)(function (event, fields) {
+    var _fields$value;
+    var fieldsLength = ((_fields$value = fields.value) === null || _fields$value === void 0 ? void 0 : _fields$value.length) || 0;
     if (!editConfig.isEdit && !editConfig.chipIndex) {
       formState.form.mutators.push(name, {
-        id: fields.value.length + new Date(),
+        id: fieldsLength + new Date(),
         key: '',
         value: '',
         delimiter: delimiter
@@ -175,14 +116,14 @@ var FormChipCell = function FormChipCell(_ref) {
       setShowHiddenChips(false);
     }
     setEditConfig({
-      chipIndex: fields.value.length,
+      chipIndex: fieldsLength,
       isEdit: true,
       isKeyFocused: true,
       isValueFocused: false,
       isNewChip: true
     });
     event && event.preventDefault();
-  }, [editConfig.isEdit, editConfig.chipIndex, showHiddenChips, formState, name, delimiter]);
+  }, [editConfig.isEdit, editConfig.chipIndex, showHiddenChips, formState.form.mutators, name, delimiter, setShowHiddenChips]);
   var handleRemoveChip = (0, _react.useCallback)(function (event, fields, chipIndex) {
     checkChipsList(_lodash.default.chain(formState).get(['values', name]).filter(function (_, index) {
       return index !== chipIndex;
@@ -345,7 +286,9 @@ var FormChipCell = function FormChipCell(_ref) {
         name: name,
         ref: {
           chipsCellRef: chipsCellRef,
-          chipsWrapperRef: chipsWrapperRef
+          chipsWrapperRef: chipsWrapperRef,
+          hiddenChipsCounterRef: hiddenChipsCounterRef,
+          hiddenChipsPopUpRef: hiddenChipsPopUpRef
         },
         setChipsSizes: setChipsSizes,
         setEditConfig: setEditConfig,

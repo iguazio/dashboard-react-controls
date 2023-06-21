@@ -9,13 +9,13 @@ var _propTypes = _interopRequireDefault(require("prop-types"));
 var _classnames = _interopRequireDefault(require("classnames"));
 var _reactFinalFormArrays = require("react-final-form-arrays");
 var _lodash = require("lodash");
-var _Tooltip = _interopRequireDefault(require("../Tooltip/Tooltip"));
 var _FormChip = _interopRequireDefault(require("./FormChip/FormChip"));
+var _HiddenChipsBlock = _interopRequireDefault(require("./HiddenChipsBlock/HiddenChipsBlock"));
 var _TextTooltipTemplate = _interopRequireDefault(require("../TooltipTemplate/TextTooltipTemplate"));
-var _HiddenChipsBlock = _interopRequireDefault(require("../../elements/HiddenChipsBlock/HiddenChipsBlock"));
+var _Tooltip = _interopRequireDefault(require("../Tooltip/Tooltip"));
 var _types = require("../../types");
-var _formChipCell = require("./formChipCell.util");
 var _common = require("../../utils/common.util");
+var _formChipCell = require("./formChipCell.util");
 var _add = require("../../images/add.svg");
 var _jsxRuntime = require("react/jsx-runtime");
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -55,7 +55,9 @@ var FormChipCellView = /*#__PURE__*/_react.default.forwardRef(function (_ref, _r
     validateFields = _ref.validateFields,
     validationRules = _ref.validationRules;
   var chipsCellRef = _ref2.chipsCellRef,
-    chipsWrapperRef = _ref2.chipsWrapperRef;
+    chipsWrapperRef = _ref2.chipsWrapperRef,
+    hiddenChipsCounterRef = _ref2.hiddenChipsCounterRef,
+    hiddenChipsPopUpRef = _ref2.hiddenChipsPopUpRef;
   var buttonAddClassNames = (0, _classnames.default)('button-add', chipOptions.background && "button-add-background_".concat(chipOptions.background), chipOptions.borderColor && "button-add-border_".concat(chipOptions.borderColor), chipOptions.font && "button-add-font_".concat(chipOptions.font), chipOptions.density && "button-add-density_".concat(chipOptions.density));
   var wrapperClassNames = (0, _classnames.default)('chips-wrapper', isEditable && 'fixed-max-width');
   var chipClassNames = (0, _classnames.default)('chip', 'chip__content', isEditable && 'data-ellipsis', shortChips && 'chip_short', chips.hiddenChips && 'chip_hidden', chipOptions.density && "chip-density_".concat(chipOptions.density), chipOptions.borderRadius && "chip-border_".concat(chipOptions.borderRadius), chipOptions.background && "chip-background_".concat(chipOptions.background), chipOptions.borderColor && "chip-border_".concat(chipOptions.borderColor), chipOptions.font && "chip-font_".concat(chipOptions.font), isEditable && 'editable', (showChips || isEditable) && 'chip_visible');
@@ -123,9 +125,13 @@ var FormChipCellView = /*#__PURE__*/_react.default.forwardRef(function (_ref, _r
               chipOptions: chipOptions,
               chips: chips.hiddenChips,
               handleShowElements: handleShowElements,
-              ref: chipsCellRef,
+              ref: {
+                hiddenChipsCounterRef: hiddenChipsCounterRef,
+                hiddenChipsPopUpRef: hiddenChipsPopUpRef
+              },
               textOverflowEllipsis: true
             }), chips.hiddenChipsNumber && /*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
+              ref: hiddenChipsCounterRef,
               className: "".concat(chipClassNames, " chips_button"),
               onClick: handleShowElements,
               children: chips.hiddenChipsNumber

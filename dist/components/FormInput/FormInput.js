@@ -12,12 +12,12 @@ var _lodash = require("lodash");
 var _reactFinalForm = require("react-final-form");
 var _InputNumberButtons = _interopRequireDefault(require("./InputNumberButtons/InputNumberButtons"));
 var _OptionsMenu = _interopRequireDefault(require("../../elements/OptionsMenu/OptionsMenu"));
-var _components = require("../../components");
 var _ValidationTemplate = _interopRequireDefault(require("../../elements/ValidationTemplate/ValidationTemplate"));
-var _useDebounce = require("../../hooks/useDebounce");
-var _validation = require("../../utils/validation.util");
-var _useDetectOutsideClick = require("../../hooks/useDetectOutsideClick");
+var _components = require("../../components");
 var _types = require("../../types");
+var _validation = require("../../utils/validation.util");
+var _useDebounce = require("../../hooks/useDebounce");
+var _hooks = require("../../hooks");
 var _invalid = require("../../images/invalid.svg");
 var _popout = require("../../images/popout.svg");
 var _warning = require("../../images/warning.svg");
@@ -113,7 +113,7 @@ var FormInput = /*#__PURE__*/_react.default.forwardRef(function (_ref, ref) {
   (_ref2 = ref) !== null && _ref2 !== void 0 ? _ref2 : ref = wrapperRef;
   var inputRef = (0, _react.useRef)();
   var errorsRef = (0, _react.useRef)();
-  (0, _useDetectOutsideClick.useDetectOutsideClick)(ref, function () {
+  (0, _hooks.useDetectOutsideClick)(ref, function () {
     return setShowValidationRules(false);
   });
   var debounceAsync = (0, _useDebounce.useDebounce)();

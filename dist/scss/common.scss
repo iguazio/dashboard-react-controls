@@ -1,6 +1,8 @@
 @import './colors';
 @import './borders';
 @import './variables';
+@import './shadows';
+@import './mixins';
 
 #root {
   z-index: 1;
@@ -251,5 +253,59 @@ textarea {
     & > * {
       margin: 0 5px 0 0;
     }
+  }
+}
+
+.chip-block-hidden {
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  top: unset;
+  right: unset;
+  left: unset;
+  bottom: unset;
+  width: min-content;
+  height: min-content;
+  min-width: 250px;
+  max-width: 100%;
+  max-height: 100%;
+  padding: 10px;
+  background-color: $white;
+  border-radius: $mainBorderRadius;
+  box-shadow: $hiddenChipsBlockShadow;
+  z-index: 9;
+  opacity: 0;
+
+  &__scrollable-container {
+    overflow: auto;
+    display: flex;
+    width: 100%;
+    flex-flow: row wrap;
+  }
+
+  &_bottom {
+    &::after {
+      @include hiddenChipBlockArrow();
+
+      top: -6px;
+    }
+  }
+
+  &_top {
+    &::before {
+      @include hiddenChipBlockArrow();
+
+      top: calc(100% - 6px);
+    }
+  }
+
+  &_left {
+    &::before, &::after {
+      right: 15px;
+    }
+  }
+
+  &_visible {
+    opacity: 1;
   }
 }
