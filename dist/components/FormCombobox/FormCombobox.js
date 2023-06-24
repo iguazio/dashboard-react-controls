@@ -272,8 +272,7 @@ var FormCombobox = function FormCombobox(_ref) {
     }
   }, [input, onBlur, onFocus, showSelectDropdown]);
   var validateField = function validateField(value, allValues) {
-    var _value$split$;
-    var valueToValidate = (_value$split$ = value.split(selectValue.id)[1]) !== null && _value$split$ !== void 0 ? _value$split$ : '';
+    var valueToValidate = value.startsWith(selectValue.id) ? value.substring(selectValue.id.length) : value !== null && value !== void 0 ? value : '';
     var validationError = null;
     if (!(0, _lodash.isEmpty)(validationRules)) {
       var _checkPatternsValidit = (0, _validation.checkPatternsValidity)(rules, valueToValidate),

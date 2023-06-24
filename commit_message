@@ -1,7 +1,6 @@
 
 
-Create a new dist version 1.2.3
+Create a new dist version 1.2.4
 
 Collecting:
-- Fix [General] Chips pop-up is hidden for the first table item (#135)
-- [Feature set] Apply changes button presents for empty label field on Details pane (#136)
+- Fix [Combobox] Validation doesn't work correctly (#138)
