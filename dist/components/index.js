@@ -63,6 +63,12 @@ Object.defineProperty(exports, "FormTextarea", {
     return _FormTextarea.default;
   }
 });
+Object.defineProperty(exports, "FormToggle", {
+  enumerable: true,
+  get: function get() {
+    return _FormToggle.default;
+  }
+});
 Object.defineProperty(exports, "Modal", {
   enumerable: true,
   get: function get() {
@@ -109,7 +115,9 @@ var _Button = _interopRequireDefault(require("./Button/Button"));
 var _ConfirmDialog = _interopRequireDefault(require("./ConfirmDialog/ConfirmDialog"));
 var _FormCheckBox = _interopRequireDefault(require("./FormCheckBox/FormCheckBox"));
 var _FormChipCell = _interopRequireDefault(require("./FormChipCell/FormChipCell"));
+var _FormCombobox = _interopRequireDefault(require("./FormCombobox/FormCombobox"));
 var _FormInput = _interopRequireDefault(require("./FormInput/FormInput"));
+var _FormToggle = _interopRequireDefault(require("./FormToggle/FormToggle"));
 var _FormKeyValueTable = _interopRequireDefault(require("./FormKeyValueTable/FormKeyValueTable"));
 var _FormRadio = _interopRequireDefault(require("./FormRadio/FormRadio"));
 var _FormSelect = _interopRequireDefault(require("./FormSelect/FormSelect"));
@@ -121,5 +129,4 @@ var _TextTooltipTemplate = _interopRequireDefault(require("./TooltipTemplate/Tex
 var _Tip = _interopRequireDefault(require("./Tip/Tip"));
 var _Tooltip = _interopRequireDefault(require("./Tooltip/Tooltip"));
 var _Wizard = _interopRequireDefault(require("./Wizard/Wizard"));
-var _FormCombobox = _interopRequireDefault(require("./FormCombobox/FormCombobox"));
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }

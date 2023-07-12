@@ -6,6 +6,11 @@
   align-items: center;
   justify-content: flex-start;
   color: $primary;
+  margin-right: 15px;
+
+  &_readonly {
+    @include radioCheckReadonly;
+  }
 
   input[type='radio'] {
     @include radioCheckField;

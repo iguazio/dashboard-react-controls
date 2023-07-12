@@ -5,13 +5,13 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.default = void 0;
-var _react = _interopRequireDefault(require("react"));
+var _react = _interopRequireWildcard(require("react"));
 var _propTypes = _interopRequireDefault(require("prop-types"));
 var _reactFinalForm = require("react-final-form");
 var _classnames = _interopRequireDefault(require("classnames"));
 require("./formCheckBox.scss");
 var _jsxRuntime = require("react/jsx-runtime");
-var _excluded = ["children", "className", "highlightLabel", "label", "name"];
+var _excluded = ["children", "className", "highlightLabel", "label", "name", "readOnly"];
 /*
 Copyright 2022 Iguazio Systems Ltd.
 Licensed under the Apache License, Version 2.0 (the "License") with
@@ -29,6 +29,8 @@ under the Apache 2.0 license is conditioned upon your compliance with
 such restriction.
 */
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
+function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
 function _defineProperty(obj, key, value) { key = _toPropertyKey(key); if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
@@ -42,9 +44,11 @@ var FormCheckBox = function FormCheckBox(_ref) {
     highlightLabel = _ref.highlightLabel,
     label = _ref.label,
     name = _ref.name,
+    readOnly = _ref.readOnly,
     inputProps = _objectWithoutProperties(_ref, _excluded);
-  var formFieldClassNames = (0, _classnames.default)('form-field-checkbox', className);
+  var formFieldClassNames = (0, _classnames.default)('form-field-checkbox', readOnly && 'form-field-checkbox_readonly', className);
   var labelClassNames = (0, _classnames.default)(highlightLabel && 'highlighted');
+  var inputRef = (0, _react.useRef)();
   return /*#__PURE__*/(0, _jsxRuntime.jsx)(_reactFinalForm.Field, {
     name: name,
     value: inputProps.value,
@@ -55,6 +59,7 @@ var FormCheckBox = function FormCheckBox(_ref) {
       return /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
         className: formFieldClassNames,
         children: [/*#__PURE__*/(0, _jsxRuntime.jsx)("input", _objectSpread(_objectSpread({
+          ref: inputRef,
           className: (0, _classnames.default)(input.checked ? 'checked' : 'unchecked'),
           type: "checkbox",
           "data-testid": "checkbox",
@@ -73,13 +78,15 @@ var FormCheckBox = function FormCheckBox(_ref) {
 FormCheckBox.defaultProps = {
   className: '',
   highlightLabel: false,
-  label: ''
+  label: '',
+  readOnly: false
 };
 FormCheckBox.propTypes = {
   className: _propTypes.default.string,
   highlightLabel: _propTypes.default.bool,
   name: _propTypes.default.string.isRequired,
-  label: _propTypes.default.string
+  label: _propTypes.default.string,
+  readOnly: _propTypes.default.bool
 };
 var _default = /*#__PURE__*/_react.default.memo(FormCheckBox);
 exports.default = _default;

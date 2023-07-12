@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.openPopUp = exports.openConfirmPopUp = exports.isEveryObjectValueEmpty = exports.getTransitionEndEventName = exports.areArraysEqual = void 0;
+exports.openPopUp = exports.openConfirmPopUp = exports.isEveryObjectValueEmpty = exports.getTransitionEndEventName = exports.getErrorDetail = exports.areArraysEqual = void 0;
 var _reactModalPromise = require("react-modal-promise");
 var _lodash = require("lodash");
 var _components = require("../components");
@@ -60,13 +60,22 @@ var areArraysEqual = function areArraysEqual(firstArray, secondArray) {
     return (0, _lodash.isEqual)((0, _lodash.omit)(a, omitBy), (0, _lodash.omit)(b, omitBy));
   }));
 };
+exports.areArraysEqual = areArraysEqual;
+var getErrorDetail = function getErrorDetail(error) {
+  var errorDetail = (0, _lodash.get)(error, 'response.data.detail', '');
+  if (typeof errorDetail === 'string') {
+    return errorDetail;
+  } else {
+    return (0, _lodash.get)(errorDetail, 'reason', '');
+  }
+};
 
 /**
  * Retrieves the appropriate transition end event name based on the browser.
  *
  * @returns {string} The transition end event name.
  */
-exports.areArraysEqual = areArraysEqual;
+exports.getErrorDetail = getErrorDetail;
 var getTransitionEndEventName = function getTransitionEndEventName() {
   var transitions = {
     transition: 'transitionend',

@@ -999,8 +999,11 @@
     color: $topaz;
     font-size: 12px;
     text-align: left;
-    text-transform: capitalize;
     background-color: transparent;
+
+    &::first-letter {
+      text-transform: uppercase;
+    }
 
     &-mandatory {
       color: $amaranth;
@@ -1074,6 +1077,18 @@
   }
 }
 
+@mixin radioCheckReadonly {
+  input {
+    pointer-events: none;
+    opacity: 0.5;
+
+    ~ label {
+      pointer-events: none;
+      opacity: 0.5;
+    }
+  }
+}
+
 @mixin radioCheckField {
   position: relative;
   background: $white;
@@ -1099,6 +1114,7 @@
     color: $spunPearl;
     border-color: currentColor;
     cursor: not-allowed;
+    pointer-events: none;
 
     &:hover {
       color: $spunPearl;
@@ -1111,11 +1127,6 @@
     }
   }
 
-  &:focus:not(:disabled),
-  &:active:not(:disabled) {
-    animation: pulse-animation 0.5s ease-out;
-  }
-
   @keyframes pulse-animation {
     20% {
       box-shadow: 0 0 0 0 rgba($cornflowerBlue, 0.5);
@@ -1125,9 +1136,16 @@
     }
   }
 
-  &:hover {
-    color: $cornflowerBlue;
-    border-color: currentColor;
+  &:not(:disabled) {
+    &:focus,
+    &:active {
+      animation: pulse-animation 0.5s ease-out;
+    }
+
+    &:hover {
+      color: $cornflowerBlue;
+      border-color: currentColor;
+    }
   }
 
   ~ label {

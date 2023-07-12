@@ -37,7 +37,9 @@ such restriction.
 var FormRowActions = function FormRowActions(_ref) {
   var _editingItem$ui, _editingItem$ui2, _editingItem$ui3;
   var applyChanges = _ref.applyChanges,
+    deleteIsDisabled = _ref.deleteIsDisabled,
     deleteRow = _ref.deleteRow,
+    disabled = _ref.disabled,
     discardOrDelete = _ref.discardOrDelete,
     editingItem = _ref.editingItem,
     fieldsPath = _ref.fieldsPath,
@@ -50,12 +52,14 @@ var FormRowActions = function FormRowActions(_ref) {
           return applyChanges(event, index);
         },
         tooltipText: "Apply",
+        disabled: disabled,
         children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_checkmark.ReactComponent, {})
       }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_components.RoundedIcon, {
         onClick: function onClick(event) {
           return discardOrDelete(event, fieldsPath, index);
         },
         tooltipText: (_editingItem$ui2 = editingItem.ui) !== null && _editingItem$ui2 !== void 0 && _editingItem$ui2.isNew ? 'Delete' : 'Discard changes',
+        disabled: disabled,
         children: (_editingItem$ui3 = editingItem.ui) !== null && _editingItem$ui3 !== void 0 && _editingItem$ui3.isNew ? /*#__PURE__*/(0, _jsxRuntime.jsx)(_delete.ReactComponent, {}) : /*#__PURE__*/(0, _jsxRuntime.jsx)(_close.ReactComponent, {})
       })]
     }) : /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
@@ -65,23 +69,29 @@ var FormRowActions = function FormRowActions(_ref) {
           event.preventDefault();
         },
         tooltipText: "Edit",
+        disabled: disabled,
         children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_edit.ReactComponent, {})
       }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_components.RoundedIcon, {
         onClick: function onClick(event) {
           deleteRow(event, fieldsPath, index);
         },
         tooltipText: "Delete",
+        disabled: disabled || deleteIsDisabled,
         children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_delete.ReactComponent, {})
       })]
     })
   });
 };
 FormRowActions.defaultProps = {
+  deleteIsDisabled: false,
+  disabled: false,
   editingItem: null
 };
 FormRowActions.propTypes = {
   applyChanges: _propTypes.default.func.isRequired,
+  deleteIsDisabled: _propTypes.default.bool,
   deleteRow: _propTypes.default.func.isRequired,
+  disabled: _propTypes.default.bool,
   discardOrDelete: _propTypes.default.func.isRequired,
   editingItem: _types.FORM_TABLE_EDITING_ITEM,
   fieldsPath: _propTypes.default.string.isRequired,

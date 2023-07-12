@@ -6,12 +6,12 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = void 0;
 var _react = _interopRequireDefault(require("react"));
+var _classnames = _interopRequireDefault(require("classnames"));
 var _propTypes = _interopRequireDefault(require("prop-types"));
 var _reactFinalForm = require("react-final-form");
-var _classnames = _interopRequireDefault(require("classnames"));
-require("./FormRadio.scss");
+require("./formToggle.scss");
 var _jsxRuntime = require("react/jsx-runtime");
-var _excluded = ["className", "name", "label", "readOnly"];
+var _excluded = ["className", "label", "name", "onChange", "readOnly"];
 /*
 Copyright 2022 Iguazio Systems Ltd.
 Licensed under the Apache License, Version 2.0 (the "License") with
@@ -36,40 +36,56 @@ function _toPropertyKey(arg) { var key = _toPrimitive(arg, "string"); return _ty
 function _toPrimitive(input, hint) { if (_typeof(input) !== "object" || input === null) return input; var prim = input[Symbol.toPrimitive]; if (prim !== undefined) { var res = prim.call(input, hint || "default"); if (_typeof(res) !== "object") return res; throw new TypeError("@@toPrimitive must return a primitive value."); } return (hint === "string" ? String : Number)(input); }
 function _objectWithoutProperties(source, excluded) { if (source == null) return {}; var target = _objectWithoutPropertiesLoose(source, excluded); var key, i; if (Object.getOwnPropertySymbols) { var sourceSymbolKeys = Object.getOwnPropertySymbols(source); for (i = 0; i < sourceSymbolKeys.length; i++) { key = sourceSymbolKeys[i]; if (excluded.indexOf(key) >= 0) continue; if (!Object.prototype.propertyIsEnumerable.call(source, key)) continue; target[key] = source[key]; } } return target; }
 function _objectWithoutPropertiesLoose(source, excluded) { if (source == null) return {}; var target = {}; var sourceKeys = Object.keys(source); var key, i; for (i = 0; i < sourceKeys.length; i++) { key = sourceKeys[i]; if (excluded.indexOf(key) >= 0) continue; target[key] = source[key]; } return target; }
-var FormRadio = function FormRadio(_ref) {
+var FormToggle = function FormToggle(_ref) {
   var className = _ref.className,
-    name = _ref.name,
     label = _ref.label,
+    name = _ref.name,
+    _onChange = _ref.onChange,
     readOnly = _ref.readOnly,
     inputProps = _objectWithoutProperties(_ref, _excluded);
-  var formFieldClassNames = (0, _classnames.default)('form-field-radio', readOnly && 'form-field-radio_readonly', className);
   return /*#__PURE__*/(0, _jsxRuntime.jsx)(_reactFinalForm.Field, {
     name: name,
     value: inputProps.value,
-    type: "radio",
+    type: "checkbox",
     children: function children(_ref2) {
       var input = _ref2.input;
-      return /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
-        className: formFieldClassNames,
-        children: [/*#__PURE__*/(0, _jsxRuntime.jsx)("input", _objectSpread(_objectSpread({}, _objectSpread(_objectSpread({}, input), inputProps)), {}, {
-          id: name + inputProps.value
-        })), /*#__PURE__*/(0, _jsxRuntime.jsx)("label", {
-          htmlFor: name + inputProps.value,
+      var toggleClassName = (0, _classnames.default)('form-field-toggle', className, readOnly && 'form-field-toggle_readonly', input.checked && 'form-field-toggle_checked');
+      return /*#__PURE__*/(0, _jsxRuntime.jsxs)("label", {
+        className: toggleClassName,
+        children: [/*#__PURE__*/(0, _jsxRuntime.jsx)("input", _objectSpread(_objectSpread({
+          "data-testid": "toggle",
+          id: name
+        }, _objectSpread(_objectSpread({}, input), inputProps)), {}, {
+          onChange: function onChange(event) {
+            _onChange && _onChange(event);
+            input.onChange(event);
+          },
+          type: "checkbox"
+        })), /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
+          className: "form-field-toggle__switch",
+          children: /*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
+            className: "form-field-toggle__switch-button"
+          })
+        }), label && /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
+          className: "form-field-toggle__label",
           children: label
         })]
       });
     }
   });
 };
-FormRadio.defaultProps = {
+FormToggle.defaultProps = {
   className: '',
+  label: '',
+  onChange: function onChange() {},
   readOnly: false
 };
-FormRadio.propTypes = {
+FormToggle.propTypes = {
   className: _propTypes.default.string,
-  label: _propTypes.default.string.isRequired,
+  label: _propTypes.default.string,
   name: _propTypes.default.string.isRequired,
+  onChange: _propTypes.default.func,
   readOnly: _propTypes.default.bool
 };
-var _default = /*#__PURE__*/_react.default.memo(FormRadio);
+var _default = FormToggle;
 exports.default = _default;
