@@ -61,14 +61,22 @@
 
     &-label {
       display: flex;
-      flex-flow: row nowrap;
+      flex-flow: row wrap;
       align-items: center;
       justify-content: flex-start;
       flex: 1;
     }
 
+    &-main-label {
+      display: flex;
+      flex-flow: row nowrap;
+      align-items: center;
+      justify-content: flex-start;
+    }
+
     &-sub-label {
       margin-top: 5px;
+      font-size: 13px;
     }
 
     &-icon {
@@ -77,6 +85,7 @@
     }
 
     .checkmark {
+      align-self: flex-start;
       margin: 0 0 0 10px;
 
       path {

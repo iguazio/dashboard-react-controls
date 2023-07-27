@@ -52,40 +52,43 @@ var SelectOption = function SelectOption(_ref) {
       })
     });
   }
-  return /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
+  return /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
     "data-testid": "select-option",
     className: selectClassName,
     onClick: function onClick() {
       !item.disabled && _onClick(item.id);
     },
-    children: [/*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
+    children: /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
       className: "label-row",
       children: [/*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
         className: "data-ellipsis select__item-label",
-        children: [item.icon && /*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
-          "data-testid": "select-icon",
-          className: "select__item-icon",
-          children: item.icon
-        }), item.status && /*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
-          className: "state-".concat(item.status, "-job status")
-        }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_components.Tooltip, {
+        children: [/*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
+          className: " select__item-main-label",
+          children: [item.icon && /*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
+            "data-testid": "select-icon",
+            className: "select__item-icon",
+            children: item.icon
+          }), item.status && /*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
+            className: "state-".concat(item.status, "-job status")
+          }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_components.Tooltip, {
+            template: /*#__PURE__*/(0, _jsxRuntime.jsx)(_components.TextTooltipTemplate, {
+              text: item.label
+            }),
+            children: item.label
+          })]
+        }), item.subLabel && /*#__PURE__*/(0, _jsxRuntime.jsx)(_components.Tooltip, {
+          className: "select__item-sub-label",
           template: /*#__PURE__*/(0, _jsxRuntime.jsx)(_components.TextTooltipTemplate, {
-            text: item.label
+            text: item.subLabel
           }),
-          children: item.label
+          children: /*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
+            children: item.subLabel
+          })
         })]
       }), withSelectedIcon && item.id === selectedId && /*#__PURE__*/(0, _jsxRuntime.jsx)(_checkmark.ReactComponent, {
         className: "checkmark"
       })]
-    }), item.subLabel && /*#__PURE__*/(0, _jsxRuntime.jsx)(_components.Tooltip, {
-      className: "select__item-sub-label",
-      template: /*#__PURE__*/(0, _jsxRuntime.jsx)(_components.TextTooltipTemplate, {
-        text: item.subLabel
-      }),
-      children: /*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
-        children: item.subLabel
-      })
-    })]
+    })
   });
 };
 SelectOption.defaultProps = {
