@@ -1,7 +1,8 @@
 
 
-Create a new dist version 1.3.1
+Create a new dist version 1.3.2
 
 Collecting:
-- Impl [Icons] Change details view icons (#143)
-- Fix [Select] Unclear method options under during the Batch Run setting (#142)
+- Impl [Projects] Add 'Download Yaml' to projects screen (#147)
+- Impl [UI] Support DBFS as a data item (#146)
+- Fix [Batch run] add vertical scroll to function list (#145)
