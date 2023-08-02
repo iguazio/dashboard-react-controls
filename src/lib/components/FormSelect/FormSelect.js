@@ -14,7 +14,7 @@ illegal under applicable law, and the grant of the foregoing license
 under the Apache 2.0 license is conditioned upon your compliance with
 such restriction.
 */
-import React, { useState, useEffect, useCallback, useRef, useLayoutEffect } from 'react'
+import React, { useState, useEffect, useCallback, useMemo, useRef, useLayoutEffect } from 'react'
 import PropTypes from 'prop-types'
 import classNames from 'classnames'
 import { Field, useField } from 'react-final-form'
@@ -57,10 +57,7 @@ const FormSelect = ({
   const [searchValue, setSearchValue] = useState('')
   const selectRef = useRef()
   const popUpRef = useRef()
-  const {
-    width: selectWidth,
-    left: selectLeft,
-  } = selectRef?.current?.getBoundingClientRect() || {}
+  const { width: selectWidth, left: selectLeft } = selectRef?.current?.getBoundingClientRect() || {}
 
   const selectWrapperClassNames = classNames(
     'form-field__wrapper',
@@ -82,6 +79,26 @@ const FormSelect = ({
   )
 
   const selectedOption = options.find((option) => option.id === input.value)
+
+  const sortedOptionsList = useMemo(() => {
+    const optionsList = [...options]
+
+    const selectedOption = optionsList.filter((option, idx, arr) => {
+      if (option.id === input.value) {
+        arr.splice(idx, 1)
+        return true
+      }
+      return false
+    })
+
+    if (search) {
+      return [...selectedOption, ...optionsList].filter((option) =>
+        option.label.toLowerCase().includes(searchValue.toLowerCase())
+      )
+    }
+
+    return [...selectedOption, ...optionsList]
+  }, [input.value, options, search, searchValue])
 
   const getSelectValue = () => {
     if (!input.value || !input.value.length) {
@@ -311,27 +328,21 @@ const FormSelect = ({
                       />
                     </div>
                   )}
-                  {options
-                    .filter((option) => {
-                      return (
-                        !search || option.label.toLowerCase().includes(searchValue.toLowerCase())
-                      )
-                    })
-                    .map((option) => {
-                      return (
-                        <SelectOption
-                          item={option}
-                          key={option.id}
-                          name={name}
-                          onClick={(selectedOption) => {
-                            handleSelectOptionClick(selectedOption, option)
-                          }}
-                          multiple={multiple}
-                          selectedId={!multiple ? input.value : ''}
-                          withSelectedIcon={withSelectedIcon}
-                        />
-                      )
-                    })}
+                  {sortedOptionsList.map((option) => {
+                    return (
+                      <SelectOption
+                        item={option}
+                        key={option.id}
+                        name={name}
+                        onClick={(selectedOption) => {
+                          handleSelectOptionClick(selectedOption, option)
+                        }}
+                        multiple={multiple}
+                        selectedId={!multiple ? input.value : ''}
+                        withSelectedIcon={withSelectedIcon}
+                      />
+                    )
+                  })}
                 </div>
               </PopUpDialog>
             )}
