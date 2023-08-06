@@ -139,6 +139,7 @@ textarea {
     min-height: $tableHeaderHeight;
     border-bottom: $primaryBorder;
     background-color: $white;
+    padding: 5px 0;
 
     &:not(.no-hover):hover {
       background-color: $alabaster;
@@ -307,7 +308,8 @@ textarea {
   }
 
   &_left {
-    &::before, &::after {
+    &::before,
+    &::after {
       right: 15px;
     }
   }
