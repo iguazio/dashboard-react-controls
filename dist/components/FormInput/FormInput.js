@@ -473,7 +473,7 @@ FormInput.propTypes = {
   pattern: _propTypes.default.string,
   placeholder: _propTypes.default.string,
   required: _propTypes.default.bool,
-  step: _propTypes.default.string,
+  step: _propTypes.default.oneOfType([_propTypes.default.string, _propTypes.default.number]),
   suggestionList: _propTypes.default.arrayOf(_propTypes.default.string),
   tip: _propTypes.default.oneOfType([_propTypes.default.string, _propTypes.default.element]),
   type: _propTypes.default.string,

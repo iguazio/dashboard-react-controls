@@ -124,7 +124,12 @@ var useFormTable = function useFormTable(formState) {
       applyOrDiscardOrDelete(event);
     }
     exitEditMode();
-    formState.form.mutators.remove(fieldsPath, index);
+    var values = (0, _lodash.get)(formState.values, fieldsPath);
+    if ((values === null || values === void 0 ? void 0 : values.length) > 1) {
+      formState.form.mutators.remove(fieldsPath, index);
+    } else {
+      formState.form.change(fieldsPath, []);
+    }
     event && event.stopPropagation();
   };
   var discardChanges = function discardChanges(event, fieldsPath, index) {
