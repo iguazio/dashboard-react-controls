@@ -45,6 +45,7 @@ const FormSelect = ({
   required,
   search,
   selectedItemAction,
+  scrollToView,
   tooltip,
   withoutBorder,
   withSelectedIcon
@@ -52,11 +53,12 @@ const FormSelect = ({
   const { input, meta } = useField(name)
   const [isInvalid, setIsInvalid] = useState(false)
   const [isConfirmDialogOpen, setConfirmDialogOpen] = useState(false)
-  const [isOpen, setOpen] = useState(false)
+  const [isOpen, setIsOpen] = useState(false)
   const [position, setPosition] = useState('bottom-right')
   const [searchValue, setSearchValue] = useState('')
-  const selectRef = useRef()
+  const optionsListRef = useRef()
   const popUpRef = useRef()
+  const selectRef = useRef()
   const { width: selectWidth, left: selectLeft } = selectRef?.current?.getBoundingClientRect() || {}
 
   const selectWrapperClassNames = classNames(
@@ -81,6 +83,12 @@ const FormSelect = ({
   const selectedOption = options.find((option) => option.id === input.value)
 
   const sortedOptionsList = useMemo(() => {
+    if (scrollToView) {
+      return options.filter((option) => {
+        return !search || option.label.toLowerCase().includes(searchValue.toLowerCase())
+      })
+    }
+
     const optionsList = [...options]
 
     const selectedOption = optionsList.filter((option, idx, arr) => {
@@ -91,14 +99,10 @@ const FormSelect = ({
       return false
     })
 
-    if (search) {
-      return [...selectedOption, ...optionsList].filter((option) =>
-        option.label.toLowerCase().includes(searchValue.toLowerCase())
-      )
-    }
-
-    return [...selectedOption, ...optionsList]
-  }, [input.value, options, search, searchValue])
+    return [...selectedOption, ...optionsList].filter((option) => {
+      return !search || option.label.toLowerCase().includes(searchValue.toLowerCase())
+    })
+  }, [input.value, options, scrollToView, search, searchValue])
 
   const getSelectValue = () => {
     if (!input.value || !input.value.length) {
@@ -122,14 +126,14 @@ const FormSelect = ({
 
   const openMenu = useCallback(() => {
     if (!isOpen) {
-      setOpen(true)
+      setIsOpen(true)
       input.onFocus(new Event('focus'))
     }
   }, [input, isOpen])
 
   const closeMenu = useCallback(() => {
     if (isOpen) {
-      setOpen(false)
+      setIsOpen(false)
       input.onBlur(new Event('blur'))
     }
   }, [input, isOpen])
@@ -175,6 +179,23 @@ const FormSelect = ({
     }
   }, [clickHandler, handleScroll, isOpen])
 
+  const scrollOptionToView = useCallback(() => {
+    const selectedOptionEl = optionsListRef.current.querySelector(`#${input.value}`)
+
+    searchValue
+      ? optionsListRef.current.scrollTo({ top: 0, left: 0, behavior: 'smooth' })
+      : selectedOptionEl.scrollIntoView({
+          behavior: 'smooth',
+          block: 'start'
+        })
+  }, [input.value, searchValue])
+
+  useEffect(() => {
+    if (isOpen && optionsListRef.current && scrollToView) {
+      scrollOptionToView()
+    }
+  }, [isOpen, scrollOptionToView, scrollToView])
+
   const toggleOpen = () => {
     if (isOpen) {
       closeMenu()
@@ -198,7 +219,7 @@ const FormSelect = ({
     [closeMenu, multiple]
   )
 
-  const handleSelectOptionClick = (selectedOption, option) => {
+  const handleSelectOptionClick = (selectedOption, option, ref) => {
     if (selectedOption !== input.value) {
       option.handler && option.handler()
       onChange && onChange(selectedOption)
@@ -328,21 +349,23 @@ const FormSelect = ({
                       />
                     </div>
                   )}
-                  {sortedOptionsList.map((option) => {
-                    return (
-                      <SelectOption
-                        item={option}
-                        key={option.id}
-                        name={name}
-                        onClick={(selectedOption) => {
-                          handleSelectOptionClick(selectedOption, option)
-                        }}
-                        multiple={multiple}
-                        selectedId={!multiple ? input.value : ''}
-                        withSelectedIcon={withSelectedIcon}
-                      />
-                    )
-                  })}
+                  <ul className="options-list" ref={optionsListRef}>
+                    {sortedOptionsList.map((option) => {
+                      return (
+                        <SelectOption
+                          item={option}
+                          key={option.id}
+                          name={name}
+                          onClick={(selectedOption) => {
+                            handleSelectOptionClick(selectedOption, option)
+                          }}
+                          multiple={multiple}
+                          selectedId={!multiple ? input.value : ''}
+                          withSelectedIcon={withSelectedIcon}
+                        />
+                      )
+                    })}
+                  </ul>
                 </div>
               </PopUpDialog>
             )}
@@ -364,6 +387,7 @@ FormSelect.defaultProps = {
   search: false,
   tooltip: '',
   multiple: false,
+  scrollToView: true,
   withoutBorder: false,
   withSelectedIcon: true
 }
@@ -380,6 +404,7 @@ FormSelect.propTypes = {
   search: PropTypes.bool,
   tooltip: PropTypes.string,
   multiple: PropTypes.bool,
+  scrollToView: PropTypes.bool,
   withoutBorder: PropTypes.bool,
   withSelectedIcon: PropTypes.bool
 }

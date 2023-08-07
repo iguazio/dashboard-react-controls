@@ -44,12 +44,13 @@ const SelectOption = ({ item, name, onClick, multiple, selectedId, withSelectedI
   }
 
   return (
-    <div
+    <li
       data-testid="select-option"
       className={selectClassName}
       onClick={() => {
         !item.disabled && onClick(item.id)
       }}
+      id={item.id}
     >
       <div className="label-row">
         <div className="data-ellipsis select__item-label">
@@ -73,7 +74,7 @@ const SelectOption = ({ item, name, onClick, multiple, selectedId, withSelectedI
         </div>
         {withSelectedIcon && item.id === selectedId && <Checkmark className="checkmark" />}
       </div>
-    </div>
+    </li>
   )
 }
 
