@@ -82,11 +82,18 @@ const FormSelect = ({
 
   const selectedOption = options.find((option) => option.id === input.value)
 
-  const sortedOptionsList = useMemo(() => {
-    if (scrollToView) {
+  const getFilteredOptions = useCallback(
+    (options) => {
       return options.filter((option) => {
         return !search || option.label.toLowerCase().includes(searchValue.toLowerCase())
       })
+    },
+    [search, searchValue]
+  )
+
+  const sortedOptionsList = useMemo(() => {
+    if (scrollToView) {
+      return getFilteredOptions(options)
     }
 
     const optionsList = [...options]
@@ -99,10 +106,8 @@ const FormSelect = ({
       return false
     })
 
-    return [...selectedOption, ...optionsList].filter((option) => {
-      return !search || option.label.toLowerCase().includes(searchValue.toLowerCase())
-    })
-  }, [input.value, options, scrollToView, search, searchValue])
+    return getFilteredOptions([...selectedOption, ...optionsList])
+  }, [input.value, getFilteredOptions, options, scrollToView])
 
   const getSelectValue = () => {
     if (!input.value || !input.value.length) {
@@ -186,7 +191,7 @@ const FormSelect = ({
       ? optionsListRef.current.scrollTo({ top: 0, left: 0, behavior: 'smooth' })
       : selectedOptionEl.scrollIntoView({
           behavior: 'smooth',
-          block: 'start'
+          block: 'center'
         })
   }, [input.value, searchValue])
 
