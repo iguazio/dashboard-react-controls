@@ -59,6 +59,7 @@ const FormSelect = ({
   const optionsListRef = useRef()
   const popUpRef = useRef()
   const selectRef = useRef()
+  const searchRef = useRef()
   const { width: selectWidth, left: selectLeft } = selectRef?.current?.getBoundingClientRect() || {}
 
   const selectWrapperClassNames = classNames(
@@ -189,10 +190,12 @@ const FormSelect = ({
 
     searchValue
       ? optionsListRef.current.scrollTo({ top: 0, left: 0, behavior: 'smooth' })
-      : selectedOptionEl.scrollIntoView({
-          behavior: 'smooth',
-          block: 'center'
-        })
+      : setTimeout(() => {
+          selectedOptionEl.scrollIntoView({
+            behavior: 'smooth',
+            block: 'center'
+          })
+        }, 0)
   }, [input.value, searchValue])
 
   useEffect(() => {
@@ -200,6 +203,12 @@ const FormSelect = ({
       scrollOptionToView()
     }
   }, [isOpen, scrollOptionToView, scrollToView])
+
+  useEffect(() => {
+    if (isOpen && search && searchRef.current) {
+      searchRef.current.focus()
+    }
+  }, [isOpen, search])
 
   const toggleOpen = () => {
     if (isOpen) {
@@ -351,6 +360,8 @@ const FormSelect = ({
                         placeholder="Search..."
                         value={searchValue}
                         onChange={(event) => setSearchValue(event.target.value)}
+                        ref={searchRef}
+                        autoFocus
                       />
                     </div>
                   )}
