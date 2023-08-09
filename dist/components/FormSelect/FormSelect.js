@@ -27,6 +27,10 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 function _defineProperty(obj, key, value) { key = _toPropertyKey(key); if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 function _toPropertyKey(arg) { var key = _toPrimitive(arg, "string"); return _typeof(key) === "symbol" ? key : String(key); }
 function _toPrimitive(input, hint) { if (_typeof(input) !== "object" || input === null) return input; var prim = input[Symbol.toPrimitive]; if (prim !== undefined) { var res = prim.call(input, hint || "default"); if (_typeof(res) !== "object") return res; throw new TypeError("@@toPrimitive must return a primitive value."); } return (hint === "string" ? String : Number)(input); }
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter); }
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
 function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
@@ -62,6 +66,7 @@ var FormSelect = function FormSelect(_ref) {
     required = _ref.required,
     search = _ref.search,
     selectedItemAction = _ref.selectedItemAction,
+    scrollToView = _ref.scrollToView,
     tooltip = _ref.tooltip,
     withoutBorder = _ref.withoutBorder,
     withSelectedIcon = _ref.withSelectedIcon;
@@ -79,7 +84,7 @@ var FormSelect = function FormSelect(_ref) {
   var _useState5 = (0, _react.useState)(false),
     _useState6 = _slicedToArray(_useState5, 2),
     isOpen = _useState6[0],
-    setOpen = _useState6[1];
+    setIsOpen = _useState6[1];
   var _useState7 = (0, _react.useState)('bottom-right'),
     _useState8 = _slicedToArray(_useState7, 2),
     position = _useState8[0],
@@ -88,8 +93,10 @@ var FormSelect = function FormSelect(_ref) {
     _useState10 = _slicedToArray(_useState9, 2),
     searchValue = _useState10[0],
     setSearchValue = _useState10[1];
-  var selectRef = (0, _react.useRef)();
+  var optionsListRef = (0, _react.useRef)();
   var popUpRef = (0, _react.useRef)();
+  var selectRef = (0, _react.useRef)();
+  var searchRef = (0, _react.useRef)();
   var _ref2 = (selectRef === null || selectRef === void 0 ? void 0 : (_selectRef$current = selectRef.current) === null || _selectRef$current === void 0 ? void 0 : _selectRef$current.getBoundingClientRect()) || {},
     selectWidth = _ref2.width,
     selectLeft = _ref2.left;
@@ -99,6 +106,25 @@ var FormSelect = function FormSelect(_ref) {
   var selectedOption = options.find(function (option) {
     return option.id === input.value;
   });
+  var getFilteredOptions = (0, _react.useCallback)(function (options) {
+    return options.filter(function (option) {
+      return !search || option.label.toLowerCase().includes(searchValue.toLowerCase());
+    });
+  }, [search, searchValue]);
+  var sortedOptionsList = (0, _react.useMemo)(function () {
+    if (scrollToView) {
+      return getFilteredOptions(options);
+    }
+    var optionsList = _toConsumableArray(options);
+    var selectedOption = optionsList.filter(function (option, idx, arr) {
+      if (option.id === input.value) {
+        arr.splice(idx, 1);
+        return true;
+      }
+      return false;
+    });
+    return getFilteredOptions([].concat(_toConsumableArray(selectedOption), _toConsumableArray(optionsList)));
+  }, [input.value, getFilteredOptions, options, scrollToView]);
   var getSelectValue = function getSelectValue() {
     if (!input.value || !input.value.length) {
       return "Select Option".concat(multiple ? 's' : '');
@@ -114,13 +140,13 @@ var FormSelect = function FormSelect(_ref) {
   }, [meta.invalid, meta.modified, meta.submitFailed, meta.touched, meta.validating]);
   var openMenu = (0, _react.useCallback)(function () {
     if (!isOpen) {
-      setOpen(true);
+      setIsOpen(true);
       input.onFocus(new Event('focus'));
     }
   }, [input, isOpen]);
   var closeMenu = (0, _react.useCallback)(function () {
     if (isOpen) {
-      setOpen(false);
+      setIsOpen(false);
       input.onBlur(new Event('blur'));
     }
   }, [input, isOpen]);
@@ -151,6 +177,29 @@ var FormSelect = function FormSelect(_ref) {
       window.removeEventListener('scroll', handleScroll, true);
     };
   }, [clickHandler, handleScroll, isOpen]);
+  var scrollOptionToView = (0, _react.useCallback)(function () {
+    var selectedOptionEl = optionsListRef.current.querySelector("#".concat(input.value));
+    searchValue ? optionsListRef.current.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: 'smooth'
+    }) : setTimeout(function () {
+      selectedOptionEl.scrollIntoView({
+        behavior: 'smooth',
+        block: 'center'
+      });
+    }, 0);
+  }, [input.value, searchValue]);
+  (0, _react.useEffect)(function () {
+    if (isOpen && optionsListRef.current && scrollToView) {
+      scrollOptionToView();
+    }
+  }, [isOpen, scrollOptionToView, scrollToView]);
+  (0, _react.useEffect)(function () {
+    if (isOpen && search && searchRef.current) {
+      searchRef.current.focus();
+    }
+  }, [isOpen, search]);
   var toggleOpen = function toggleOpen() {
     if (isOpen) {
       closeMenu();
@@ -166,7 +215,7 @@ var FormSelect = function FormSelect(_ref) {
       setSearchValue('');
     }
   }, [closeMenu, multiple]);
-  var handleSelectOptionClick = function handleSelectOptionClick(selectedOption, option) {
+  var handleSelectOptionClick = function handleSelectOptionClick(selectedOption, option, ref) {
     if (selectedOption !== input.value) {
       option.handler && option.handler();
       onChange && onChange(selectedOption);
@@ -292,21 +341,25 @@ var FormSelect = function FormSelect(_ref) {
                   value: searchValue,
                   onChange: function onChange(event) {
                     return setSearchValue(event.target.value);
-                  }
-                })
-              }), options.filter(function (option) {
-                return !search || option.label.toLowerCase().includes(searchValue.toLowerCase());
-              }).map(function (option) {
-                return /*#__PURE__*/(0, _jsxRuntime.jsx)(_SelectOption.default, {
-                  item: option,
-                  name: name,
-                  onClick: function onClick(selectedOption) {
-                    handleSelectOptionClick(selectedOption, option);
                   },
-                  multiple: multiple,
-                  selectedId: !multiple ? input.value : '',
-                  withSelectedIcon: withSelectedIcon
-                }, option.id);
+                  ref: searchRef,
+                  autoFocus: true
+                })
+              }), /*#__PURE__*/(0, _jsxRuntime.jsx)("ul", {
+                className: "options-list",
+                ref: optionsListRef,
+                children: sortedOptionsList.map(function (option) {
+                  return /*#__PURE__*/(0, _jsxRuntime.jsx)(_SelectOption.default, {
+                    item: option,
+                    name: name,
+                    onClick: function onClick(selectedOption) {
+                      handleSelectOptionClick(selectedOption, option);
+                    },
+                    multiple: multiple,
+                    selectedId: !multiple ? input.value : '',
+                    withSelectedIcon: withSelectedIcon
+                  }, option.id);
+                })
               })]
             })
           }), /*#__PURE__*/(0, _jsxRuntime.jsx)("input", _objectSpread(_objectSpread({}, input), {}, {
@@ -327,6 +380,7 @@ FormSelect.defaultProps = {
   search: false,
   tooltip: '',
   multiple: false,
+  scrollToView: true,
   withoutBorder: false,
   withSelectedIcon: true
 };
@@ -342,6 +396,7 @@ FormSelect.propTypes = {
   search: _propTypes.default.bool,
   tooltip: _propTypes.default.string,
   multiple: _propTypes.default.bool,
+  scrollToView: _propTypes.default.bool,
   withoutBorder: _propTypes.default.bool,
   withSelectedIcon: _propTypes.default.bool
 };

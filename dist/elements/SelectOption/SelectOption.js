@@ -52,12 +52,13 @@ var SelectOption = function SelectOption(_ref) {
       })
     });
   }
-  return /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
+  return /*#__PURE__*/(0, _jsxRuntime.jsx)("li", {
     "data-testid": "select-option",
     className: selectClassName,
     onClick: function onClick() {
       !item.disabled && _onClick(item.id);
     },
+    id: item.id,
     children: /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
       className: "label-row",
       children: [/*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {

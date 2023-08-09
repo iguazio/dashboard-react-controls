@@ -1,7 +1,7 @@
 
 
-Create a new dist version 1.3.3
+Create a new dist version 1.3.4
 
 Collecting:
-- Fix [Batch run] Unable to run batch run after deleting the last Data Input (#150)
-- Fix [Batch run] No validation for a negative CPU value during setting the resources in Batch Run (#151)
+- Fix [Select] The chosen option should be present in the first row (#149)
+- Impl [Wizard] Adjust steps layout in small resolution (#153)
