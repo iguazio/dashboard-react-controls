@@ -32,8 +32,8 @@ const Button = forwardRef(
 
     return (
       <button {...restProps} className={buttonClassName} ref={ref}>
+        {icon}
         <Tooltip template={<TextTooltipTemplate text={tooltip} />} hidden={!tooltip}>
-          {icon}
           {label && <span>{label}</span>}
         </Tooltip>
       </button>
