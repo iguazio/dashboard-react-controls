@@ -1,7 +1,10 @@
 
 
-Create a new dist version 1.3.4
+Create a new dist version 1.3.5
 
 Collecting:
-- Fix [Select] The chosen option should be present in the first row (#149)
-- Impl [Wizard] Adjust steps layout in small resolution (#153)
+- Fix [ML function] Function name validation should not contain "_" (#155)
+- Fix [Wizard] steps layout in small resolution (#156)
+- Fix [Data Inputs] crash on deleting a row (#157)
+- Fix [Batch Run] Incorrect display of method description during setting Run Details (#158)
+- Fix [UI] "Type" inconsistency for databricks job (#159)

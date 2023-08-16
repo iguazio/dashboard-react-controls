@@ -310,6 +310,11 @@ var validationRules = {
       }), generateRule.required()]
     }
   },
+  function: {
+    name: [generateRule.validCharacters('a-z A-Z 0-9 - .'), generateRule.beginEndWith('a-z A-Z 0-9'), generateRule.length({
+      max: 63
+    }), generateRule.required()]
+  },
   common: {
     name: [generateRule.validCharacters('a-z A-Z 0-9 - _ .'), generateRule.beginEndWith('a-z A-Z 0-9'), generateRule.length({
       max: 63
