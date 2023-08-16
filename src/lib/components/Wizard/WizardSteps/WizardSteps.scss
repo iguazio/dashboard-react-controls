@@ -43,20 +43,6 @@
         }
       }
 
-      // & > * {
-      //   display: flex;
-      //   flex-flow: column nowrap;
-      //   align-items: center;
-      //   text-align: center;
-      //   width: 100%;
-
-      //   @media screen and (min-width: 1200px) {
-      //     flex-flow: row nowrap;
-      //     text-align: left;
-      //     white-space: normal;
-      //   }
-      // }
-
       &.active {
         background-color: $malibuTwo;
         color: $cornflowerBlue;
