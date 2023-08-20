@@ -178,7 +178,7 @@ var FormSelect = function FormSelect(_ref) {
     };
   }, [clickHandler, handleScroll, isOpen]);
   var scrollOptionToView = (0, _react.useCallback)(function () {
-    var selectedOptionEl = optionsListRef.current.querySelector("#".concat(input.value));
+    var selectedOptionEl = optionsListRef.current.querySelector("#".concat(_constants.SELECT_OPTION_ID_PREFIX).concat(input.value));
     searchValue ? optionsListRef.current.scrollTo({
       top: 0,
       left: 0,
@@ -215,7 +215,7 @@ var FormSelect = function FormSelect(_ref) {
       setSearchValue('');
     }
   }, [closeMenu, multiple]);
-  var handleSelectOptionClick = function handleSelectOptionClick(selectedOption, option, ref) {
+  var handleSelectOptionClick = function handleSelectOptionClick(selectedOption, option) {
     if (selectedOption !== input.value) {
       option.handler && option.handler();
       onChange && onChange(selectedOption);

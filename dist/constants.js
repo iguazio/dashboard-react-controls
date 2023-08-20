@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.validation = exports.TERTIARY_BUTTON = exports.TAB_SHIFT = exports.TAB = exports.SECONDARY_BUTTON = exports.PRIMARY_BUTTON = exports.NOTFOUND_ERROR_STATUS_CODE = exports.MODAL_SM = exports.MODAL_MIN = exports.MODAL_MD = exports.MODAL_MAX = exports.MODAL_LG = exports.LABEL_BUTTON = exports.INTERNAL_SERVER_ERROR_STATUS_CODE = exports.GATEWAY_TIMEOUT_STATUS_CODE = exports.FORBIDDEN_ERROR_STATUS_CODE = exports.DELETE = exports.DANGER_BUTTON = exports.CONFLICT_ERROR_STATUS_CODE = exports.CLICK = exports.BADREQUEST_ERROR_STATUS_CODE = exports.BACKSPACE = void 0;
+exports.validation = exports.TERTIARY_BUTTON = exports.TAB_SHIFT = exports.TAB = exports.SELECT_OPTION_ID_PREFIX = exports.SECONDARY_BUTTON = exports.PRIMARY_BUTTON = exports.NOTFOUND_ERROR_STATUS_CODE = exports.MODAL_SM = exports.MODAL_MIN = exports.MODAL_MD = exports.MODAL_MAX = exports.MODAL_LG = exports.LABEL_BUTTON = exports.INTERNAL_SERVER_ERROR_STATUS_CODE = exports.GATEWAY_TIMEOUT_STATUS_CODE = exports.FORBIDDEN_ERROR_STATUS_CODE = exports.DELETE = exports.DANGER_BUTTON = exports.CONFLICT_ERROR_STATUS_CODE = exports.CLICK = exports.BADREQUEST_ERROR_STATUS_CODE = exports.BACKSPACE = void 0;
 /*
 Copyright 2022 Iguazio Systems Ltd.
 Licensed under the Apache License, Version 2.0 (the "License") with
@@ -86,4 +86,8 @@ exports.MODAL_LG = MODAL_LG;
 var MODAL_MIN = 'min';
 exports.MODAL_MIN = MODAL_MIN;
 var MODAL_MAX = 'max';
+
+/*=========== SELECT =============*/
 exports.MODAL_MAX = MODAL_MAX;
+var SELECT_OPTION_ID_PREFIX = 'id-';
+exports.SELECT_OPTION_ID_PREFIX = SELECT_OPTION_ID_PREFIX;
