@@ -1,6 +1,7 @@
 
 
-Create a new dist version 1.3.6
+Create a new dist version 1.3.7
 
 Collecting:
-- Fix [Batch Run] Blank screen after click on default interval on simple scheduler (#161)
+- Fix [UI] The "check" attribute should be dynamic (#163)
+- Fix [Batch Run] It's not clear what the 'Hyper' toggle does (#164)

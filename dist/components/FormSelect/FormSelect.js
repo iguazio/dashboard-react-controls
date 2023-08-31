@@ -179,6 +179,7 @@ var FormSelect = function FormSelect(_ref) {
   }, [clickHandler, handleScroll, isOpen]);
   var scrollOptionToView = (0, _react.useCallback)(function () {
     var selectedOptionEl = optionsListRef.current.querySelector("#".concat(_constants.SELECT_OPTION_ID_PREFIX).concat(input.value));
+    if (!selectedOptionEl) return;
     searchValue ? optionsListRef.current.scrollTo({
       top: 0,
       left: 0,
