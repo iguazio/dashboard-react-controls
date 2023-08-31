@@ -1,10 +1,14 @@
 @import '../../scss/colors';
+@import '../../scss/mixins';
 
 .form-field-toggle {
   position: relative;
-  display: flex;
-  font-size: 16px;
-  line-height: 24px;
+
+  input[type='checkbox'] {
+    display: none;
+    width: 0;
+    height: 0;
+  }
 
   &__switch {
     height: 24px;
@@ -26,28 +30,32 @@
     }
   }
 
-  &__label {
-    margin-left: 10px;
-  }
+  .form-field {
+    @include inputSelectField;
 
-  &_readonly {
-    opacity: 0.5;
-    pointer-events: none;
-
-    .form-field-toggle__switch {
-      cursor: default;
+    &__wrapper {
+      border: none;
     }
 
-    &.form-field-toggle_checked {
+    &_readonly {
+      opacity: 0.5;
+      pointer-events: none;
+
       .form-field-toggle__switch {
-        &-button {
-          opacity: 0.5;
+        cursor: default;
+      }
+
+      &.form-field-toggle_checked {
+        .form-field-toggle__switch {
+          &-button {
+            opacity: 0.5;
+          }
         }
       }
     }
   }
 
-  &_checked {
+  &.form-field_checked {
     .form-field-toggle__switch {
       background-color: $malibu;
 
@@ -55,11 +63,5 @@
         transform: translateX(26px);
       }
     }
-  }
-
-  input[type='checkbox'] {
-    display: none;
-    width: 0;
-    height: 0;
   }
 }

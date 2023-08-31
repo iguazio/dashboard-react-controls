@@ -21,15 +21,20 @@ import { Field } from 'react-final-form'
 
 import './formToggle.scss'
 
-const FormToggle = ({ className, label, name, onChange, readOnly, ...inputProps }) => {
+const FormToggle = ({ className, density, label, name, onChange, readOnly, ...inputProps }) => {
+  const toggleWrapperClassNames = classnames(
+    'form-field__wrapper',
+    `form-field__wrapper-${density}`
+  )
+
   return (
     <Field name={name} value={inputProps.value} type="checkbox">
       {({ input }) => {
         const toggleClassName = classnames(
           'form-field-toggle',
           className,
-          readOnly && 'form-field-toggle_readonly',
-          input.checked && 'form-field-toggle_checked'
+          readOnly && 'form-field_readonly',
+          input.checked && 'form-field_checked'
         )
 
         return (
@@ -44,10 +49,12 @@ const FormToggle = ({ className, label, name, onChange, readOnly, ...inputProps 
               }}
               type="checkbox"
             />
-            <div className="form-field-toggle__switch">
-              <span className="form-field-toggle__switch-button" />
+            {label && <div className="form-field__label">{label}</div>}
+            <div className={toggleWrapperClassNames}>
+              <div className="form-field-toggle__switch">
+                <span className="form-field-toggle__switch-button" />
+              </div>
             </div>
-            {label && <div className="form-field-toggle__label">{label}</div>}
           </label>
         )
       }}
@@ -64,6 +71,7 @@ FormToggle.defaultProps = {
 
 FormToggle.propTypes = {
   className: PropTypes.string,
+  density: PropTypes.string,
   label: PropTypes.string,
   name: PropTypes.string.isRequired,
   onChange: PropTypes.func,
