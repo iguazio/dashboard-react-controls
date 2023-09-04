@@ -224,6 +224,13 @@ var generateRule = {
       pattern: new RegExp('^[' + convertToPattern(chars) + ']+$')
     };
   },
+  validCharactersWithPrefix: function validCharactersWithPrefix(chars) {
+    return {
+      name: 'validCharactersWithPrefix',
+      label: _constants.validation.VALID_CHARACTERS + ': ' + convertToLabel(chars),
+      pattern: new RegExp('^([' + convertToPattern(chars) + ']+\/)?[' + convertToPattern(chars) + ']+$')
+    };
+  },
   noConsecutiveCharacters: function noConsecutiveCharacters(chars) {
     var convertedPattern = chars.split(' ').map(function (charPair) {
       var charsPairArray = charPair.split('');
@@ -335,6 +342,11 @@ var validationRules = {
     }), generateRule.required()],
     secretKey: [generateRule.validCharacters('a-z A-Z 0-9 - _ .'), generateRule.beginNotWith('.'), generateRule.length({
       max: 253
+    })]
+  },
+  job: {
+    label: [generateRule.validCharactersWithPrefix('a-z A-Z 0-9 - _ .'), generateRule.beginEndWith('a-z A-Z 0-9'), generateRule.length({
+      max: 56
     })]
   }
 };
