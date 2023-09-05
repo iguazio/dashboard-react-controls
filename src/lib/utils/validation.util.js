@@ -182,7 +182,9 @@ const generateRule = {
     return {
       name: 'validCharactersWithPrefix',
       label: ValidationConstants.VALID_CHARACTERS + ': ' + convertToLabel(chars),
-      pattern: new RegExp('^([' + convertToPattern(chars) + ']+\/)?[' + convertToPattern(chars) + ']+$')
+      pattern: new RegExp(
+        '^([' + convertToPattern(chars) + ']+/)?[' + convertToPattern(chars) + ']+$'
+      )
     }
   },
   noConsecutiveCharacters: (chars) => {
@@ -295,8 +297,8 @@ const validationRules = {
   },
   function: {
     name: [
-      generateRule.validCharacters('a-z A-Z 0-9 - .'),
-      generateRule.beginEndWith('a-z A-Z 0-9'),
+      generateRule.validCharacters('a-z 0-9 - .'),
+      generateRule.beginEndWith('a-z 0-9'),
       generateRule.length({ max: 63 }),
       generateRule.required()
     ]
