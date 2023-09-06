@@ -65,61 +65,75 @@ var Tooltip = function Tooltip(_ref) {
   var handleScroll = function handleScroll() {
     setShow(false);
   };
-  var handleMouseLeave = function handleMouseLeave() {
-    setShow(false);
-  };
+  var handleMouseLeave = (0, _react.useCallback)(function (event) {
+    if (tooltipRef.current && !tooltipRef.current.contains(event.relatedTarget) && parentRef.current && !parentRef.current.contains(event.relatedTarget)) {
+      setShow(false);
+    }
+  }, []);
   var handleMouseEnter = (0, _react.useCallback)(function (event) {
-    var _parentRef$current$ch = _slicedToArray(parentRef.current.childNodes, 1),
-      child = _parentRef$current$ch[0];
-    var show = !hidden && (textShow ? true : !child ? false : child.nodeType !== Node.TEXT_NODE ||
-    /*
-    If the child node is a text node and the text of the child node inside the container is greater than the width of the container, then show tooltip.
-    */
-    child.nodeType === Node.TEXT_NODE && parentRef.current.scrollWidth > parentRef.current.offsetWidth);
-    if (show) {
-      var _parentRef$current$ge, _parentRef$current, _tooltipRef$current$g, _tooltipRef$current;
-      setShow(true);
-      var _ref2 = (_parentRef$current$ge = parentRef === null || parentRef === void 0 ? void 0 : (_parentRef$current = parentRef.current) === null || _parentRef$current === void 0 ? void 0 : _parentRef$current.getBoundingClientRect()) !== null && _parentRef$current$ge !== void 0 ? _parentRef$current$ge : {},
-        height = _ref2.height,
-        top = _ref2.top,
-        bottom = _ref2.bottom;
-      var _ref3 = (_tooltipRef$current$g = (_tooltipRef$current = tooltipRef.current) === null || _tooltipRef$current === void 0 ? void 0 : _tooltipRef$current.getBoundingClientRect()) !== null && _tooltipRef$current$g !== void 0 ? _tooltipRef$current$g : {
-          height: 0,
-          width: 0
-        },
-        tooltipHeight = _ref3.height,
-        tooltipWidth = _ref3.width;
-      var leftPosition = event.x - (event.x + tooltipWidth - window.innerWidth + offset);
-      var left = event.x + tooltipWidth + offset > window.innerWidth ? leftPosition > offset ? leftPosition : offset : event.x + offset;
-      if (top + height + offset + tooltipHeight >= window.innerHeight) {
-        setStyle({
-          top: bottom - height - offset - tooltipHeight,
-          left: left
-        });
-      } else {
-        setStyle({
-          top: top + height + offset,
-          left: left
-        });
+    if (!show) {
+      var _parentRef$current$ch = _slicedToArray(parentRef.current.childNodes, 1),
+        child = _parentRef$current$ch[0];
+      var _show = !hidden && (textShow ? true : !child ? false : child.nodeType !== Node.TEXT_NODE ||
+      /*
+      If the child node is a text node and the text of the child node inside the container is greater than the width of the container, then show tooltip.
+      */
+      child.nodeType === Node.TEXT_NODE && parentRef.current.scrollWidth > parentRef.current.offsetWidth);
+      if (_show) {
+        var _parentRef$current$ge, _parentRef$current, _tooltipRef$current$g, _tooltipRef$current;
+        setShow(true);
+        var _ref2 = (_parentRef$current$ge = parentRef === null || parentRef === void 0 ? void 0 : (_parentRef$current = parentRef.current) === null || _parentRef$current === void 0 ? void 0 : _parentRef$current.getBoundingClientRect()) !== null && _parentRef$current$ge !== void 0 ? _parentRef$current$ge : {},
+          height = _ref2.height,
+          top = _ref2.top,
+          bottom = _ref2.bottom;
+        var _ref3 = (_tooltipRef$current$g = (_tooltipRef$current = tooltipRef.current) === null || _tooltipRef$current === void 0 ? void 0 : _tooltipRef$current.getBoundingClientRect()) !== null && _tooltipRef$current$g !== void 0 ? _tooltipRef$current$g : {
+            height: 0,
+            width: 0
+          },
+          tooltipHeight = _ref3.height,
+          tooltipWidth = _ref3.width;
+        var leftPosition = event.x - (event.x + tooltipWidth - window.innerWidth + offset);
+        var left = event.x + tooltipWidth + offset > window.innerWidth ? leftPosition > offset ? leftPosition : offset : event.x + offset;
+        if (top + height + offset + tooltipHeight >= window.innerHeight) {
+          var topPosition = bottom - height - offset - tooltipHeight;
+          setStyle({
+            top: topPosition > 0 ? topPosition : offset,
+            left: left
+          });
+        } else {
+          setStyle({
+            top: top + height + offset,
+            left: left
+          });
+        }
       }
     }
-  }, [hidden, textShow]);
+  }, [hidden, textShow, show]);
   var clearStyles = (0, _lodash.debounce)(function () {
     if (!(0, _common.isEveryObjectValueEmpty)(style)) {
       setStyle({});
     }
   }, 100);
   (0, _react.useEffect)(function () {
-    var node = parentRef.current;
-    if (node) {
-      node.addEventListener('mouseenter', handleMouseEnter);
-      node.addEventListener('mouseleave', handleMouseLeave);
+    var parentNode = parentRef.current;
+    if (parentNode) {
+      parentNode.addEventListener('mouseenter', handleMouseEnter);
+      parentNode.addEventListener('mouseleave', handleMouseLeave);
       return function () {
-        node.removeEventListener('mouseenter', handleMouseEnter);
-        node.removeEventListener('mouseleave', handleMouseLeave);
+        parentNode.removeEventListener('mouseenter', handleMouseEnter);
+        parentNode.removeEventListener('mouseleave', handleMouseLeave);
       };
     }
-  }, [parentRef, handleMouseEnter]);
+  }, [parentRef, handleMouseEnter, handleMouseLeave]);
+  (0, _react.useEffect)(function () {
+    var tooltipNode = tooltipRef.current;
+    if (tooltipNode && show) {
+      tooltipNode.addEventListener('mouseleave', handleMouseLeave);
+      return function () {
+        tooltipNode.removeEventListener('mouseleave', handleMouseLeave);
+      };
+    }
+  }, [tooltipRef, handleMouseEnter, handleMouseLeave, show]);
   (0, _react.useEffect)(function () {
     if (show) {
       window.addEventListener('scroll', handleScroll, true);

@@ -228,7 +228,7 @@ var generateRule = {
     return {
       name: 'validCharactersWithPrefix',
       label: _constants.validation.VALID_CHARACTERS + ': ' + convertToLabel(chars),
-      pattern: new RegExp('^([' + convertToPattern(chars) + ']+\/)?[' + convertToPattern(chars) + ']+$')
+      pattern: new RegExp('^([' + convertToPattern(chars) + ']+/)?[' + convertToPattern(chars) + ']+$')
     };
   },
   noConsecutiveCharacters: function noConsecutiveCharacters(chars) {
@@ -318,7 +318,7 @@ var validationRules = {
     }
   },
   function: {
-    name: [generateRule.validCharacters('a-z A-Z 0-9 - .'), generateRule.beginEndWith('a-z A-Z 0-9'), generateRule.length({
+    name: [generateRule.validCharacters('a-z 0-9 - .'), generateRule.beginEndWith('a-z 0-9'), generateRule.length({
       max: 63
     }), generateRule.required()]
   },
