@@ -9,7 +9,6 @@ var _propTypes = _interopRequireDefault(require("prop-types"));
 var _classnames = _interopRequireDefault(require("classnames"));
 var _components = require("../../components");
 var _types = require("../../types");
-var _constants = require("../../constants");
 var _checkmark = require("../../images/checkmark.svg");
 require("./selectOption.scss");
 var _jsxRuntime = require("react/jsx-runtime");
@@ -59,7 +58,7 @@ var SelectOption = function SelectOption(_ref) {
     onClick: function onClick() {
       !item.disabled && _onClick(item.id);
     },
-    id: "".concat(_constants.SELECT_OPTION_ID_PREFIX).concat(item.id),
+    "data-custom-id": item.id,
     children: /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
       className: "label-row",
       children: [/*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
@@ -99,7 +98,6 @@ SelectOption.defaultProps = {
   withSelectedIcon: true
 };
 SelectOption.propTypes = {
-  disabled: _propTypes.default.bool,
   name: _propTypes.default.string.isRequired,
   item: _types.SELECT_OPTION.isRequired,
   onClick: _propTypes.default.func,

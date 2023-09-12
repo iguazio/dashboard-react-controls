@@ -1,7 +1,7 @@
 
 
-Create a new dist version 1.3.9
+Create a new dist version 1.3.10
 
 Collecting:
-- Fix [ML Functions] Capital letters on function name gives error (#169)
-- Fix [Jobs] Inconsistency between "Results" in "Overview" vs "Results" tab (#170)
+- Fix [Batch Run] unable to run job (#172)
+- Fix [Batch inference] Project Empty screen after click on "feature_columns" field (#173)

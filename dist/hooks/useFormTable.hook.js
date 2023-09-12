@@ -68,6 +68,9 @@ var useFormTable = function useFormTable(formState) {
       var _editingItemRef$curre, _editingItemRef$curre2;
       if ((_editingItemRef$curre = editingItemRef.current) !== null && _editingItemRef$curre !== void 0 && (_editingItemRef$curre2 = _editingItemRef$curre.ui) !== null && _editingItemRef$curre2 !== void 0 && _editingItemRef$curre2.isNew) {
         formState.form.mutators.remove(editingItemRef.current.ui.fieldsPath, editingItemRef.current.ui.index);
+        if (editingItemRef.current.ui.index === 0) {
+          formState.form.mutators.concat(editingItemRef.current.ui.fieldsPath, []);
+        }
       } else if (editingItemRef.current) {
         formState.form.mutators.update(editingItemRef.current.ui.fieldsPath, editingItemRef.current.ui.index, (0, _lodash.omit)(editingItemRef.current, ['ui']));
       }
