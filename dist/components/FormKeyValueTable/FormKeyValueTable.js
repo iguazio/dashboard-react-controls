@@ -10,7 +10,7 @@ var _classnames = _interopRequireDefault(require("classnames"));
 var _reactFinalFormArrays = require("react-final-form-arrays");
 var _components = require("../../components");
 var _elements = require("../../elements");
-var _useFormTable2 = require("../../hooks/useFormTable.hook");
+var _hooks = require("../../hooks");
 var _jsxRuntime = require("react/jsx-runtime");
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 /*
@@ -45,7 +45,7 @@ var FormKeyValueTable = function FormKeyValueTable(_ref) {
     valueHeader = _ref.valueHeader,
     valueLabel = _ref.valueLabel;
   var tableClassNames = (0, _classnames.default)('form-table form-key-value-table', className);
-  var _useFormTable = (0, _useFormTable2.useFormTable)(formState),
+  var _useFormTable = (0, _hooks.useFormTable)(formState),
     editingItem = _useFormTable.editingItem,
     addNewRow = _useFormTable.addNewRow,
     applyChanges = _useFormTable.applyChanges,

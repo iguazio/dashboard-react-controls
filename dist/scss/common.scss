@@ -102,6 +102,13 @@ textarea {
   }
 }
 
+.warning-text {
+  color: $amaranth;
+  padding: 5px 0;
+  line-height: 1.5;
+  font-size: 13px;
+}
+
 [class*='igz-transition'] {
   transition: opacity 200ms ease-in-out;
 }

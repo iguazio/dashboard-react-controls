@@ -1,7 +1,7 @@
 
 
-Create a new dist version 1.3.10
+Create a new dist version 1.4.0
 
 Collecting:
-- Fix [Batch Run] unable to run job (#172)
-- Fix [Batch inference] Project Empty screen after click on "feature_columns" field (#173)
+- Fix [Batch run] Hide 'Build image' option, add message for 'Image name' (#177)
+- Fix [Batch Run] Number input for int and float parameters is malfunctioning (#175)

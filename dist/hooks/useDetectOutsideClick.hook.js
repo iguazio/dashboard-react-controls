@@ -23,7 +23,7 @@ such restriction.
 */
 
 /**
- * Hook for handling closing when clicking outside of an element
+ * Hook for handling closing when clicking outside an element
  * @function useDetectOutsideClick
  * @param {React.node} ref
  * @param {function} handler A callback function to use on outside click

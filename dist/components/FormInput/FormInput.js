@@ -16,7 +16,6 @@ var _ValidationTemplate = _interopRequireDefault(require("../../elements/Validat
 var _components = require("../../components");
 var _types = require("../../types");
 var _validation = require("../../utils/validation.util");
-var _useDebounce = require("../../hooks/useDebounce");
 var _hooks = require("../../hooks");
 var _invalid = require("../../images/invalid.svg");
 var _popout = require("../../images/popout.svg");
@@ -116,7 +115,7 @@ var FormInput = /*#__PURE__*/_react.default.forwardRef(function (_ref, ref) {
   (0, _hooks.useDetectOutsideClick)(ref, function () {
     return setShowValidationRules(false);
   });
-  var debounceAsync = (0, _useDebounce.useDebounce)();
+  var debounceAsync = (0, _hooks.useDebounce)();
   var formFieldClassNames = (0, _classnames.default)('form-field-input', className);
   var inputWrapperClassNames = (0, _classnames.default)('form-field__wrapper', "form-field__wrapper-".concat(density), disabled && 'form-field__wrapper-disabled', isInvalid && 'form-field__wrapper-invalid', withoutBorder && 'without-border');
   var labelClassNames = (0, _classnames.default)('form-field__label', disabled && 'form-field__label-disabled');
@@ -205,7 +204,12 @@ var FormInput = /*#__PURE__*/_react.default.forwardRef(function (_ref, ref) {
     var valueToValidate = (0, _lodash.isNil)(value) ? '' : String(value);
     if (isValueEmptyAndValid(valueToValidate)) return;
     var validationError = null;
-    if (!(0, _lodash.isEmpty)(rules) && !async) {
+    if (required && valueToValidate.trim().length === 0) {
+      validationError = {
+        name: 'required',
+        label: 'This field is required'
+      };
+    } else if (!(0, _lodash.isEmpty)(rules) && !async) {
       var _checkPatternsValidit = (0, _validation.checkPatternsValidity)(rules, valueToValidate),
         _checkPatternsValidit2 = _slicedToArray(_checkPatternsValidit, 2),
         newRules = _checkPatternsValidit2[0],
@@ -246,11 +250,6 @@ var FormInput = /*#__PURE__*/_react.default.forwardRef(function (_ref, ref) {
         validationError = {
           name: 'empty',
           label: invalidText
-        };
-      } else if (required && valueToValidate.trim().length === 0) {
-        validationError = {
-          name: 'required',
-          label: 'This field is required'
         };
       }
     }
@@ -310,8 +309,7 @@ var FormInput = /*#__PURE__*/_react.default.forwardRef(function (_ref, ref) {
     };
   }(), 400);
   var parseField = function parseField(val) {
-    if (!val) return;
-    return inputProps.type === 'number' ? +val : val;
+    return inputProps.type === 'number' && val ? parseFloat(val) || val : val;
   };
   return /*#__PURE__*/(0, _jsxRuntime.jsx)(_reactFinalForm.Field, {
     validate: async ? validateFieldAsync : validateField,

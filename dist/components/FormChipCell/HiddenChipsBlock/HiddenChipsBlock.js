@@ -12,7 +12,7 @@ var _classnames = _interopRequireDefault(require("classnames"));
 var _Tooltip = _interopRequireDefault(require("../../Tooltip/Tooltip"));
 var _TextTooltipTemplate = _interopRequireDefault(require("../../TooltipTemplate/TextTooltipTemplate"));
 var _types = require("../../../types");
-var _useHiddenChipsBlock2 = require("../../../hooks/useHiddenChipsBlock.hook");
+var _hooks = require("../../../hooks");
 var _jsxRuntime = require("react/jsx-runtime");
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
@@ -42,7 +42,7 @@ var HiddenChipsBlock = /*#__PURE__*/_react.default.forwardRef(function (_ref, _r
     textOverflowEllipsis = _ref.textOverflowEllipsis;
   var hiddenChipsCounterRef = _ref2.hiddenChipsCounterRef,
     hiddenChipsPopUpRef = _ref2.hiddenChipsPopUpRef;
-  var _useHiddenChipsBlock = (0, _useHiddenChipsBlock2.useHiddenChipsBlock)(hiddenChipsCounterRef, hiddenChipsPopUpRef),
+  var _useHiddenChipsBlock = (0, _hooks.useHiddenChipsBlock)(hiddenChipsCounterRef, hiddenChipsPopUpRef),
     hiddenChipsBlockClassNames = _useHiddenChipsBlock.hiddenChipsBlockClassNames;
   var chipLabelClassNames = (0, _classnames.default)('chip__label', textOverflowEllipsis && 'data-ellipsis');
   var chipValueClassNames = (0, _classnames.default)('chip__value', textOverflowEllipsis && 'data-ellipsis', chipOptions.boldValue && 'chip-value_bold');

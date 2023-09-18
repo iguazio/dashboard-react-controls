@@ -16,7 +16,7 @@ var _common = require("../../utils/common.util");
 var _validation = require("../../utils/validation.util");
 var _generateChipsList = require("../../utils/generateChipsList.util");
 var _formChipCell = require("./formChipCell.util");
-var _useChipCell2 = require("../../hooks/useChipCell.hook");
+var _hooks = require("../../hooks");
 require("./formChipCell.scss");
 var _jsxRuntime = require("react/jsx-runtime");
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -63,7 +63,7 @@ var FormChipCell = function FormChipCell(_ref) {
     validator = _ref.validator,
     visibleChipsMaxLength = _ref.visibleChipsMaxLength;
   var chipsClassName = (0, _classnames.default)('chips', className);
-  var _useChipCell = (0, _useChipCell2.useChipCell)(isEditable, visibleChipsMaxLength),
+  var _useChipCell = (0, _hooks.useChipCell)(isEditable, visibleChipsMaxLength),
     chipsCellRef = _useChipCell.chipsCellRef,
     chipsWrapperRef = _useChipCell.chipsWrapperRef,
     handleShowElements = _useChipCell.handleShowElements,
