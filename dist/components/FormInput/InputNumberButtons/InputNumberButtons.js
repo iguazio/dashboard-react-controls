@@ -7,6 +7,7 @@ exports.default = void 0;
 var _react = _interopRequireDefault(require("react"));
 var _propTypes = _interopRequireDefault(require("prop-types"));
 var _lodash = require("lodash");
+var _math = require("../../../utils/math.util");
 var _rangeArrowSmall = require("../../../images/range-arrow-small.svg");
 require("./InputNumberButtons.scss");
 var _jsxRuntime = require("react/jsx-runtime");
@@ -37,23 +38,18 @@ var InputNumberButtons = function InputNumberButtons(_ref) {
     value = _ref.value;
   var handleIncrease = function handleIncrease(event) {
     event.preventDefault();
-    if (max && +value >= +max) return;
-    var currentValue = isCurrentValueEmpty() ? +step : +value + +step;
-    var nextValue = isInteger(currentValue) ? currentValue : currentValue.toFixed(3);
-    onChange(nextValue);
+    if (max && value >= max) return;
+    var newValue = isCurrentValueEmpty() ? step : (0, _math.performFloatOperation)(value, step, '+');
+    onChange(newValue);
   };
   var handleDecrease = function handleDecrease(event) {
     event.preventDefault();
-    if (value <= 0 || +value <= +min) return;
-    var currentValue = isCurrentValueEmpty() ? -step : +value - +step;
-    var nextValue = isInteger(currentValue) ? currentValue : currentValue.toFixed(3);
-    onChange(nextValue);
+    if (min && value <= min) return;
+    var newValue = isCurrentValueEmpty() ? -step : (0, _math.performFloatOperation)(value, step, '-');
+    onChange(newValue);
   };
   var isCurrentValueEmpty = function isCurrentValueEmpty() {
     return (0, _lodash.isNil)(value) || value === '';
-  };
-  var isInteger = function isInteger(number) {
-    return Number(number) === number && number % 1 === 0;
   };
   return /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
     "data-testid": "range-input-container",
