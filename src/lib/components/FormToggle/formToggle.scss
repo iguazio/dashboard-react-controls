@@ -4,12 +4,6 @@
 .form-field-toggle {
   position: relative;
 
-  input[type='checkbox'] {
-    display: none;
-    width: 0;
-    height: 0;
-  }
-
   &__switch {
     height: 24px;
     width: 48px;
@@ -20,7 +14,8 @@
     border-radius: 20px;
     transition: all 0.2s ease;
 
-    &-button {
+    &:before {
+      content: '';
       width: 20px;
       height: 20px;
       background-color: $white;
@@ -36,31 +31,27 @@
     &__wrapper {
       border: none;
     }
-
-    &_readonly {
-      opacity: 0.5;
-      pointer-events: none;
-
-      .form-field-toggle__switch {
-        cursor: default;
-      }
-
-      &.form-field-toggle_checked {
-        .form-field-toggle__switch {
-          &-button {
-            opacity: 0.5;
-          }
-        }
-      }
-    }
   }
 
-  &.form-field_checked {
-    .form-field-toggle__switch {
-      background-color: $malibu;
+  input[type='checkbox'] {
+    display: none;
+    width: 0;
+    height: 0;
 
-      &-button {
-        transform: translateX(26px);
+    &:disabled {
+      & + * .form-field-toggle__switch {
+        opacity: 0.5;
+        pointer-events: none;
+        cursor: default;
+      }
+    }
+
+    &:checked {
+      & + * .form-field-toggle__switch {
+        background-color: $malibu;
+        &:before {
+          transform: translateX(26px);
+        }
       }
     }
   }
