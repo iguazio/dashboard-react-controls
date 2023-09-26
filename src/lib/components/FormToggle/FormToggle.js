@@ -21,24 +21,18 @@ import { Field } from 'react-final-form'
 
 import './formToggle.scss'
 
-const FormToggle = ({ className, density, label, name, onChange, readOnly, ...inputProps }) => {
+const FormToggle = ({ className, density, label, name, onChange, ...inputProps }) => {
   const toggleWrapperClassNames = classnames(
     'form-field__wrapper',
-    `form-field__wrapper-${density}`
+    density && `form-field__wrapper-${density}`
   )
 
   return (
     <Field name={name} value={inputProps.value} type="checkbox">
       {({ input }) => {
-        const toggleClassName = classnames(
-          'form-field-toggle',
-          className,
-          readOnly && 'form-field_readonly',
-          input.checked && 'form-field_checked'
-        )
-
         return (
-          <label className={toggleClassName}>
+          <label className="form-field-toggle">
+            {label && <div className="form-field__label">{label}</div>}
             <input
               data-testid="toggle"
               id={name}
@@ -49,11 +43,8 @@ const FormToggle = ({ className, density, label, name, onChange, readOnly, ...in
               }}
               type="checkbox"
             />
-            {label && <div className="form-field__label">{label}</div>}
             <div className={toggleWrapperClassNames}>
-              <div className="form-field-toggle__switch">
-                <span className="form-field-toggle__switch-button" />
-              </div>
+              <span className="form-field-toggle__switch" />
             </div>
           </label>
         )
@@ -65,8 +56,7 @@ const FormToggle = ({ className, density, label, name, onChange, readOnly, ...in
 FormToggle.defaultProps = {
   className: '',
   label: '',
-  onChange: () => {},
-  readOnly: false
+  onChange: () => {}
 }
 
 FormToggle.propTypes = {
@@ -74,8 +64,7 @@ FormToggle.propTypes = {
   density: PropTypes.string,
   label: PropTypes.string,
   name: PropTypes.string.isRequired,
-  onChange: PropTypes.func,
-  readOnly: PropTypes.bool
+  onChange: PropTypes.func
 }
 
 export default FormToggle

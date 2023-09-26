@@ -37,12 +37,15 @@ const FormRowActions = ({
   discardOrDelete,
   editingItem,
   fieldsPath,
+  hidden,
   index
 }) => {
-  return (
-    <>
+  return hidden ? (
+    <div className="form-table__cell form-table__actions-cell" />
+  ) : (
+    <div className="form-table__cell form-table__actions-cell">
       {editingItem?.ui?.index === index ? (
-        <div className="form-table__cell form-table__actions-cell">
+        <>
           <RoundedIcon
             onClick={(event) => applyChanges(event, index)}
             tooltipText="Apply"
@@ -57,9 +60,9 @@ const FormRowActions = ({
           >
             {editingItem.ui?.isNew ? <Delete /> : <Close />}
           </RoundedIcon>
-        </div>
+        </>
       ) : (
-        <div className="form-table__cell form-table__actions-cell">
+        <>
           <RoundedIcon
             onClick={(event) => {
               event.preventDefault()
@@ -79,16 +82,17 @@ const FormRowActions = ({
           >
             <Delete />
           </RoundedIcon>
-        </div>
+        </>
       )}
-    </>
+    </div>
   )
 }
 
 FormRowActions.defaultProps = {
   deleteIsDisabled: false,
   disabled: false,
-  editingItem: null
+  editingItem: null,
+  hidden: false
 }
 
 FormRowActions.propTypes = {
@@ -99,6 +103,7 @@ FormRowActions.propTypes = {
   discardOrDelete: PropTypes.func.isRequired,
   editingItem: FORM_TABLE_EDITING_ITEM,
   fieldsPath: PropTypes.string.isRequired,
+  hidden: PropTypes.bool,
   index: PropTypes.number.isRequired
 }
 
