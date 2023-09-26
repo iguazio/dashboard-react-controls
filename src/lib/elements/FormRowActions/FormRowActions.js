@@ -37,9 +37,12 @@ const FormRowActions = ({
   discardOrDelete,
   editingItem,
   fieldsPath,
+  hidden,
   index
 }) => {
-  return (
+  return hidden ? (
+    <div className="form-table__cell form-table__actions-cell" />
+  ) : (
     <div className="form-table__cell form-table__actions-cell">
       {editingItem?.ui?.index === index ? (
         <>
@@ -88,7 +91,8 @@ const FormRowActions = ({
 FormRowActions.defaultProps = {
   deleteIsDisabled: false,
   disabled: false,
-  editingItem: null
+  editingItem: null,
+  hidden: false
 }
 
 FormRowActions.propTypes = {
@@ -99,6 +103,7 @@ FormRowActions.propTypes = {
   discardOrDelete: PropTypes.func.isRequired,
   editingItem: FORM_TABLE_EDITING_ITEM,
   fieldsPath: PropTypes.string.isRequired,
+  hidden: PropTypes.bool,
   index: PropTypes.number.isRequired
 }
 
