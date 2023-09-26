@@ -39,45 +39,49 @@ const FormRowActions = ({
   fieldsPath,
   index
 }) => {
-  return editingItem?.ui?.index === index ? (
-    <>
-      <RoundedIcon
-        onClick={(event) => applyChanges(event, index)}
-        tooltipText="Apply"
-        disabled={disabled}
-      >
-        <Checkmark />
-      </RoundedIcon>
-      <RoundedIcon
-        onClick={(event) => discardOrDelete(event, fieldsPath, index)}
-        tooltipText={editingItem.ui?.isNew ? 'Delete' : 'Discard changes'}
-        disabled={disabled}
-      >
-        {editingItem.ui?.isNew ? <Delete /> : <Close />}
-      </RoundedIcon>
-    </>
-  ) : (
-    <>
-      <RoundedIcon
-        onClick={(event) => {
-          event.preventDefault()
-        }}
-        tooltipText="Edit"
-        disabled={disabled}
-      >
-        <Edit />
-      </RoundedIcon>
+  return (
+    <div className="form-table__cell form-table__actions-cell">
+      {editingItem?.ui?.index === index ? (
+        <>
+          <RoundedIcon
+            onClick={(event) => applyChanges(event, index)}
+            tooltipText="Apply"
+            disabled={disabled}
+          >
+            <Checkmark />
+          </RoundedIcon>
+          <RoundedIcon
+            onClick={(event) => discardOrDelete(event, fieldsPath, index)}
+            tooltipText={editingItem.ui?.isNew ? 'Delete' : 'Discard changes'}
+            disabled={disabled}
+          >
+            {editingItem.ui?.isNew ? <Delete /> : <Close />}
+          </RoundedIcon>
+        </>
+      ) : (
+        <>
+          <RoundedIcon
+            onClick={(event) => {
+              event.preventDefault()
+            }}
+            tooltipText="Edit"
+            disabled={disabled}
+          >
+            <Edit />
+          </RoundedIcon>
 
-      <RoundedIcon
-        onClick={(event) => {
-          deleteRow(event, fieldsPath, index)
-        }}
-        tooltipText="Delete"
-        disabled={disabled || deleteIsDisabled}
-      >
-        <Delete />
-      </RoundedIcon>
-    </>
+          <RoundedIcon
+            onClick={(event) => {
+              deleteRow(event, fieldsPath, index)
+            }}
+            tooltipText="Delete"
+            disabled={disabled || deleteIsDisabled}
+          >
+            <Delete />
+          </RoundedIcon>
+        </>
+      )}
+    </div>
   )
 }
 
