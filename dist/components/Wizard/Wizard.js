@@ -57,6 +57,7 @@ var Wizard = function Wizard(_ref) {
     title = _ref.title,
     stepsConfig = _ref.stepsConfig,
     submitButtonLabel = _ref.submitButtonLabel;
+  var wizardClasses = (0, _classnames.default)('wizard-form', className);
   var _useState = (0, _react.useState)(0),
     _useState2 = _slicedToArray(_useState, 2),
     activeStepNumber = _useState2[0],
@@ -78,11 +79,14 @@ var Wizard = function Wizard(_ref) {
     }).map(function (step) {
       return {
         id: step.id,
-        label: step.label
+        label: step.label,
+        disabled: step.disabled
       };
     })) || [];
   }, [stepsConfig]);
-  var wizardClasses = (0, _classnames.default)('wizard-form', className);
+  var nextStepIsInvalid = (0, _react.useMemo)(function () {
+    return formState.submitting || formState.invalid && formState.submitFailed;
+  }, [formState.invalid, formState.submitFailed, formState.submitting]);
   var goToNextStep = function goToNextStep() {
     setActiveStepNumber(function (prevStep) {
       return Math.min(++prevStep, totalSteps);
@@ -114,7 +118,7 @@ var Wizard = function Wizard(_ref) {
       type: "button"
     }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_Button.default, {
       onClick: handleSubmit,
-      disabled: formState.submitting || formState.invalid && formState.submitFailed,
+      disabled: nextStepIsInvalid,
       label: isLastStep ? submitButtonLabel : 'Next',
       type: "button",
       variant: _constants.SECONDARY_BUTTON
@@ -150,7 +154,9 @@ var Wizard = function Wizard(_ref) {
     title: title,
     children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_WizardSteps.default, {
       activeStepNumber: activeStepNumber,
+      handleSubmit: handleSubmit,
       jumpToStep: jumpToStep,
+      nextStepIsInvalid: nextStepIsInvalid,
       steps: stepsMenu
     }), /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
       className: "wizard-form__content-container",

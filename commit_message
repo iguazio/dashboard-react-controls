@@ -1,7 +1,7 @@
 
 
-Create a new dist version 1.4.0
+Create a new dist version 1.4.1
 
 Collecting:
-- Fix [Batch run] Hide 'Build image' option, add message for 'Image name' (#177)
-- Fix [Batch Run] Number input for int and float parameters is malfunctioning (#175)
+- Impl [Wizard steps] Next to step should be clickable (#181)
+- Fix [Batch Run] UI minor fix (#183)

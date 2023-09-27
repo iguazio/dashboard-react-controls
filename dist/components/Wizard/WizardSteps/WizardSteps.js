@@ -31,23 +31,31 @@ such restriction.
 
 var WizardSteps = function WizardSteps(_ref) {
   var activeStepNumber = _ref.activeStepNumber,
+    handleSubmit = _ref.handleSubmit,
     jumpToStep = _ref.jumpToStep,
+    nextStepIsInvalid = _ref.nextStepIsInvalid,
     steps = _ref.steps;
-  var getStepClassNames = function getStepClassNames(idx) {
-    return (0, _classnames.default)('wizard-steps__item', idx === activeStepNumber && 'active', idx < activeStepNumber && 'valid');
+  var getStepClassNames = function getStepClassNames(idx, stepIsInvalid) {
+    return (0, _classnames.default)('wizard-steps__item', idx === activeStepNumber && 'active', !stepIsInvalid && 'valid');
   };
   var handleJumpToStep = function handleJumpToStep(event, idx) {
     event.preventDefault();
-    jumpToStep(idx);
+    if (idx === activeStepNumber + 1) {
+      handleSubmit();
+    } else {
+      jumpToStep(idx);
+    }
   };
   return /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
     className: "wizard-steps",
     children: steps.map(function (_ref2, idx) {
       var id = _ref2.id,
-        label = _ref2.label;
+        label = _ref2.label,
+        disabled = _ref2.disabled;
+      var stepIsInvalid = idx > activeStepNumber + 1 || idx === activeStepNumber + 1 && (nextStepIsInvalid || disabled);
       return /*#__PURE__*/(0, _jsxRuntime.jsx)(_Button.default, {
-        className: getStepClassNames(idx),
-        disabled: idx > activeStepNumber,
+        className: getStepClassNames(idx, stepIsInvalid),
+        disabled: stepIsInvalid,
         icon: /*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
           className: "wizard-steps__indicator",
           children: idx + 1
@@ -62,7 +70,9 @@ var WizardSteps = function WizardSteps(_ref) {
 };
 WizardSteps.propTypes = {
   activeStepNumber: _propTypes.default.number.isRequired,
+  handleSubmit: _propTypes.default.func.isRequired,
   jumpToStep: _propTypes.default.func.isRequired,
+  nextStepIsInvalid: _propTypes.default.bool.isRequired,
   steps: _types.WIZARD_STEPS_CONFIG
 };
 var _default = WizardSteps;
