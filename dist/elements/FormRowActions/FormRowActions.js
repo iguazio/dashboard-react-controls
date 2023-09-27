@@ -43,10 +43,13 @@ var FormRowActions = function FormRowActions(_ref) {
     discardOrDelete = _ref.discardOrDelete,
     editingItem = _ref.editingItem,
     fieldsPath = _ref.fieldsPath,
+    hidden = _ref.hidden,
     index = _ref.index;
-  return /*#__PURE__*/(0, _jsxRuntime.jsx)(_jsxRuntime.Fragment, {
-    children: (editingItem === null || editingItem === void 0 ? void 0 : (_editingItem$ui = editingItem.ui) === null || _editingItem$ui === void 0 ? void 0 : _editingItem$ui.index) === index ? /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
-      className: "form-table__cell form-table__actions-cell",
+  return hidden ? /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
+    className: "form-table__cell form-table__actions-cell"
+  }) : /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
+    className: "form-table__cell form-table__actions-cell",
+    children: (editingItem === null || editingItem === void 0 ? void 0 : (_editingItem$ui = editingItem.ui) === null || _editingItem$ui === void 0 ? void 0 : _editingItem$ui.index) === index ? /*#__PURE__*/(0, _jsxRuntime.jsxs)(_jsxRuntime.Fragment, {
       children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_components.RoundedIcon, {
         onClick: function onClick(event) {
           return applyChanges(event, index);
@@ -62,8 +65,7 @@ var FormRowActions = function FormRowActions(_ref) {
         disabled: disabled,
         children: (_editingItem$ui3 = editingItem.ui) !== null && _editingItem$ui3 !== void 0 && _editingItem$ui3.isNew ? /*#__PURE__*/(0, _jsxRuntime.jsx)(_delete.ReactComponent, {}) : /*#__PURE__*/(0, _jsxRuntime.jsx)(_close.ReactComponent, {})
       })]
-    }) : /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
-      className: "form-table__cell form-table__actions-cell",
+    }) : /*#__PURE__*/(0, _jsxRuntime.jsxs)(_jsxRuntime.Fragment, {
       children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_components.RoundedIcon, {
         onClick: function onClick(event) {
           event.preventDefault();
@@ -85,7 +87,8 @@ var FormRowActions = function FormRowActions(_ref) {
 FormRowActions.defaultProps = {
   deleteIsDisabled: false,
   disabled: false,
-  editingItem: null
+  editingItem: null,
+  hidden: false
 };
 FormRowActions.propTypes = {
   applyChanges: _propTypes.default.func.isRequired,
@@ -95,6 +98,7 @@ FormRowActions.propTypes = {
   discardOrDelete: _propTypes.default.func.isRequired,
   editingItem: _types.FORM_TABLE_EDITING_ITEM,
   fieldsPath: _propTypes.default.string.isRequired,
+  hidden: _propTypes.default.bool,
   index: _propTypes.default.number.isRequired
 };
 var _default = FormRowActions;

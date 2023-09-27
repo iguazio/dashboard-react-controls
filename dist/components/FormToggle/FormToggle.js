@@ -11,7 +11,7 @@ var _propTypes = _interopRequireDefault(require("prop-types"));
 var _reactFinalForm = require("react-final-form");
 require("./formToggle.scss");
 var _jsxRuntime = require("react/jsx-runtime");
-var _excluded = ["className", "density", "label", "name", "onChange", "readOnly"];
+var _excluded = ["className", "density", "label", "name", "onChange"];
 /*
 Copyright 2022 Iguazio Systems Ltd.
 Licensed under the Apache License, Version 2.0 (the "License") with
@@ -42,19 +42,20 @@ var FormToggle = function FormToggle(_ref) {
     label = _ref.label,
     name = _ref.name,
     _onChange = _ref.onChange,
-    readOnly = _ref.readOnly,
     inputProps = _objectWithoutProperties(_ref, _excluded);
-  var toggleWrapperClassNames = (0, _classnames.default)('form-field__wrapper', "form-field__wrapper-".concat(density));
+  var toggleWrapperClassNames = (0, _classnames.default)('form-field__wrapper', density && "form-field__wrapper-".concat(density));
   return /*#__PURE__*/(0, _jsxRuntime.jsx)(_reactFinalForm.Field, {
     name: name,
     value: inputProps.value,
     type: "checkbox",
     children: function children(_ref2) {
       var input = _ref2.input;
-      var toggleClassName = (0, _classnames.default)('form-field-toggle', className, readOnly && 'form-field_readonly', input.checked && 'form-field_checked');
       return /*#__PURE__*/(0, _jsxRuntime.jsxs)("label", {
-        className: toggleClassName,
-        children: [/*#__PURE__*/(0, _jsxRuntime.jsx)("input", _objectSpread(_objectSpread({
+        className: "form-field-toggle",
+        children: [label && /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
+          className: "form-field__label",
+          children: label
+        }), /*#__PURE__*/(0, _jsxRuntime.jsx)("input", _objectSpread(_objectSpread({
           "data-testid": "toggle",
           id: name
         }, _objectSpread(_objectSpread({}, input), inputProps)), {}, {
@@ -63,16 +64,10 @@ var FormToggle = function FormToggle(_ref) {
             input.onChange(event);
           },
           type: "checkbox"
-        })), label && /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
-          className: "form-field__label",
-          children: label
-        }), /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
+        })), /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
           className: toggleWrapperClassNames,
-          children: /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
-            className: "form-field-toggle__switch",
-            children: /*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
-              className: "form-field-toggle__switch-button"
-            })
+          children: /*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
+            className: "form-field-toggle__switch"
           })
         })]
       });
@@ -82,16 +77,14 @@ var FormToggle = function FormToggle(_ref) {
 FormToggle.defaultProps = {
   className: '',
   label: '',
-  onChange: function onChange() {},
-  readOnly: false
+  onChange: function onChange() {}
 };
 FormToggle.propTypes = {
   className: _propTypes.default.string,
   density: _propTypes.default.string,
   label: _propTypes.default.string,
   name: _propTypes.default.string.isRequired,
-  onChange: _propTypes.default.func,
-  readOnly: _propTypes.default.bool
+  onChange: _propTypes.default.func
 };
 var _default = FormToggle;
 exports.default = _default;

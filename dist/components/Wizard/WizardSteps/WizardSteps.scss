@@ -43,6 +43,16 @@
         }
       }
 
+      &.valid {
+        color: $primary;
+
+        .wizard-steps__indicator {
+          border-color: $malibu;
+          color: $malibu;
+          background-color: inherit;
+        }
+      }
+
       &.active {
         background-color: $malibuTwo;
         color: $cornflowerBlue;
@@ -51,16 +61,6 @@
           border-color: transparent;
           color: $white;
           background-color: $malibu;
-        }
-      }
-
-      &.valid {
-        color: $primary;
-
-        .wizard-steps__indicator {
-          border-color: $malibu;
-          color: $malibu;
-          background-color: inherit;
         }
       }
 
