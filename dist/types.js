@@ -90,6 +90,7 @@ var SELECT_OPTION = _propTypes.default.shape({
   icon: _propTypes.default.element,
   id: _propTypes.default.string.isRequired,
   label: _propTypes.default.string.isRequired,
+  labelHtml: _propTypes.default.string,
   status: _propTypes.default.string,
   subLabel: _propTypes.default.string
 });

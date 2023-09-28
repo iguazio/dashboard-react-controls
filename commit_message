@@ -1,7 +1,6 @@
 
 
-Create a new dist version 1.4.1
+Create a new dist version 1.4.2
 
 Collecting:
-- Impl [Wizard steps] Next to step should be clickable (#181)
-- Fix [Batch Run] UI minor fix (#183)
+- Fix [Search] The search item list closing on scroll (#188)
