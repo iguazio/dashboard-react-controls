@@ -31,6 +31,7 @@ such restriction.
 */
 
 var SelectOption = function SelectOption(_ref) {
+  var _item$labelHtml;
   var item = _ref.item,
     name = _ref.name,
     _onClick = _ref.onClick,
@@ -64,7 +65,7 @@ var SelectOption = function SelectOption(_ref) {
       children: [/*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
         className: "data-ellipsis select__item-label",
         children: [/*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
-          className: " select__item-main-label",
+          className: "select__item-main-label",
           children: [item.icon && /*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
             "data-testid": "select-icon",
             className: "select__item-icon",
@@ -72,10 +73,11 @@ var SelectOption = function SelectOption(_ref) {
           }), item.status && /*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
             className: "state-".concat(item.status, "-job status")
           }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_components.Tooltip, {
+            renderChildAsHtml: ((_item$labelHtml = item.labelHtml) === null || _item$labelHtml === void 0 ? void 0 : _item$labelHtml.length) > 0,
             template: /*#__PURE__*/(0, _jsxRuntime.jsx)(_components.TextTooltipTemplate, {
               text: item.label
             }),
-            children: item.label
+            children: item.labelHtml ? item.labelHtml : item.label
           })]
         }), item.subLabel && /*#__PURE__*/(0, _jsxRuntime.jsx)(_components.Tooltip, {
           className: "select__item-sub-label",
