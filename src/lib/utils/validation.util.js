@@ -345,7 +345,7 @@ const validationRules = {
     label: [
       generateRule.validCharactersWithPrefix('a-z A-Z 0-9 - _ .'),
       generateRule.beginEndWith('a-z A-Z 0-9'),
-      generateRule.length({ max: 56 })
+      generateRule.length({ max: 75 })
     ]
   }
 }

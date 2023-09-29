@@ -324,7 +324,7 @@ const NewChipForm = React.forwardRef(
       >
         <NewChipInput
           className={labelKeyClassName}
-          disabled={!isEditable || editConfig.chipIndex !== chipIndex}
+          disabled={!isEditable || (editConfig.chipIndex && editConfig.chipIndex !== chipIndex)}
           name={keyName}
           onChange={handleOnChange}
           onFocus={handleOnFocus}
@@ -336,7 +336,7 @@ const NewChipForm = React.forwardRef(
         {!chipData.isKeyOnly && (
           <NewChipInput
             className={labelValueClassName}
-            disabled={!isEditable || editConfig.chipIndex !== chipIndex}
+            disabled={!isEditable || (editConfig.chipIndex && editConfig.chipIndex !== chipIndex)}
             name={valueName}
             onChange={handleOnChange}
             onFocus={handleOnFocus}

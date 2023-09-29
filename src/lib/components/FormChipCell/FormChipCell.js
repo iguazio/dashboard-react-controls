@@ -71,13 +71,13 @@ const FormChipCell = ({
   let chips = useMemo(() => {
     return isEditable || visibleChipsMaxLength === 'all'
       ? {
-        visibleChips: get(formState.values, name),
-        hiddenChips: []
-      }
+          visibleChips: get(formState.values, name),
+          hiddenChips: []
+        }
       : generateChipsList(
-        get(formState.values, name),
-        visibleChipsMaxLength ? visibleChipsMaxLength : visibleChipsCount
-      )
+          get(formState.values, name),
+          visibleChipsMaxLength ? visibleChipsMaxLength : visibleChipsCount
+        )
   }, [visibleChipsMaxLength, isEditable, visibleChipsCount, formState.values, name])
 
   const checkChipsList = useCallback(
