@@ -260,7 +260,7 @@ var NewChipForm = /*#__PURE__*/_react.default.forwardRef(function (_ref, ref) {
     ref: refInputContainer,
     children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_NewChipInput.default, {
       className: labelKeyClassName,
-      disabled: !isEditable || editConfig.chipIndex !== chipIndex,
+      disabled: !isEditable || editConfig.chipIndex && editConfig.chipIndex !== chipIndex,
       name: keyName,
       onChange: handleOnChange,
       onFocus: handleOnFocus,
@@ -274,7 +274,7 @@ var NewChipForm = /*#__PURE__*/_react.default.forwardRef(function (_ref, ref) {
       children: ":"
     }), !chipData.isKeyOnly && /*#__PURE__*/(0, _jsxRuntime.jsx)(_NewChipInput.default, {
       className: labelValueClassName,
-      disabled: !isEditable || editConfig.chipIndex !== chipIndex,
+      disabled: !isEditable || editConfig.chipIndex && editConfig.chipIndex !== chipIndex,
       name: valueName,
       onChange: handleOnChange,
       onFocus: handleOnFocus,
