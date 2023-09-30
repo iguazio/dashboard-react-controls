@@ -1,6 +1,6 @@
 
 
-Create a new dist version 1.4.2
+Create a new dist version 1.4.3
 
 Collecting:
-- Fix [Search] The search item list closing on scroll (#188)
+- Fix [Batch run] Labels issues on Bach run wizard (#191)
