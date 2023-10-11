@@ -1,6 +1,6 @@
 
 
-Create a new dist version 1.4.3
+Create a new dist version 1.5.0
 
 Collecting:
-- Fix [Batch run] Labels issues on Bach run wizard (#191)
+- Fix [Batch run] Require mandatory data inputs and parameters before running the job (#195)
