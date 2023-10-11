@@ -46,13 +46,14 @@ var FormKeyValueTable = function FormKeyValueTable(_ref) {
     valueLabel = _ref.valueLabel;
   var tableClassNames = (0, _classnames.default)('form-table form-key-value-table', className);
   var _useFormTable = (0, _hooks.useFormTable)(formState),
-    editingItem = _useFormTable.editingItem,
     addNewRow = _useFormTable.addNewRow,
     applyChanges = _useFormTable.applyChanges,
+    bottomScrollRef = _useFormTable.bottomScrollRef,
     deleteRow = _useFormTable.deleteRow,
     discardOrDelete = _useFormTable.discardOrDelete,
+    editingItem = _useFormTable.editingItem,
     enterEditMode = _useFormTable.enterEditMode,
-    bottomScrollRef = _useFormTable.bottomScrollRef;
+    isCurrentRowEditing = _useFormTable.isCurrentRowEditing;
   var uniquenessValidator = function uniquenessValidator(fields, newValue) {
     return !fields.value.some(function (_ref2, index) {
       var key = _ref2.data.key;
@@ -75,25 +76,24 @@ var FormKeyValueTable = function FormKeyValueTable(_ref) {
     }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_reactFinalFormArrays.FieldArray, {
       name: fieldsPath,
       children: function children(_ref3) {
-        var _editingItem$ui3;
+        var _editingItem$ui;
         var fields = _ref3.fields;
         return /*#__PURE__*/(0, _jsxRuntime.jsxs)(_jsxRuntime.Fragment, {
-          children: [fields.map(function (contentItem, index) {
-            var _editingItem$ui, _editingItem$ui2;
-            var tableRowClassNames = (0, _classnames.default)('form-table__row', fieldsPath === (editingItem === null || editingItem === void 0 ? void 0 : (_editingItem$ui = editingItem.ui) === null || _editingItem$ui === void 0 ? void 0 : _editingItem$ui.fieldsPath) && (editingItem === null || editingItem === void 0 ? void 0 : (_editingItem$ui2 = editingItem.ui) === null || _editingItem$ui2 === void 0 ? void 0 : _editingItem$ui2.index) === index && 'active');
+          children: [fields.map(function (rowPath, index) {
+            var tableRowClassNames = (0, _classnames.default)('form-table__row', isCurrentRowEditing(rowPath) && 'form-table__row_active');
             return editingItem && index === editingItem.ui.index && !disabled ? /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
               className: tableRowClassNames,
               children: [/*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
                 className: "form-table__cell form-table__cell_1",
                 children: keyOptions ? /*#__PURE__*/(0, _jsxRuntime.jsx)(_components.FormSelect, {
-                  name: "".concat(contentItem, ".data.key"),
+                  name: "".concat(rowPath, ".data.key"),
                   density: "normal",
                   options: keyOptions
                 }) : /*#__PURE__*/(0, _jsxRuntime.jsx)(_components.FormInput, {
                   className: "input_edit",
                   placeholder: keyLabel,
                   density: "normal",
-                  name: "".concat(contentItem, ".data.key"),
+                  name: "".concat(rowPath, ".data.key"),
                   required: isKeyRequired,
                   validationRules: [{
                     name: 'uniqueness',
@@ -109,7 +109,7 @@ var FormKeyValueTable = function FormKeyValueTable(_ref) {
                   className: "input_edit",
                   placeholder: valueLabel,
                   density: "normal",
-                  name: "".concat(contentItem, ".data.value"),
+                  name: "".concat(rowPath, ".data.value"),
                   required: isValueRequired
                 })
               }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_elements.FormRowActions, {
@@ -153,7 +153,7 @@ var FormKeyValueTable = function FormKeyValueTable(_ref) {
           }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_elements.FormActionButton, {
             ref: bottomScrollRef,
             disabled: disabled,
-            hidden: editingItem === null || editingItem === void 0 ? void 0 : (_editingItem$ui3 = editingItem.ui) === null || _editingItem$ui3 === void 0 ? void 0 : _editingItem$ui3.isNew,
+            hidden: editingItem === null || editingItem === void 0 ? void 0 : (_editingItem$ui = editingItem.ui) === null || _editingItem$ui === void 0 ? void 0 : _editingItem$ui.isNew,
             fields: fields,
             label: addNewItemLabel,
             onClick: function onClick() {
