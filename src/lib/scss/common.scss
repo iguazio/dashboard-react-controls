@@ -148,15 +148,21 @@ textarea {
     background-color: $white;
     padding: 5px 0;
 
+    &.form-table__row_hidden {
+      display: none;
+    }
+
     &:not(.no-hover):hover {
-      background-color: $alabaster;
+      &:not(.form-table__row_invalid) {
+        background-color: $alabaster;
+      }
 
       .form-table__actions-cell {
         visibility: visible;
       }
     }
 
-    &.active {
+    &.form-table__row_active {
       background-color: $alabaster;
 
       .form-table__cell {
@@ -165,6 +171,10 @@ textarea {
           padding-bottom: 6px;
         }
       }
+    }
+
+    &.form-table__row_invalid {
+      background-color: rgba($amaranth, 0.15)
     }
 
     &_multiline {
@@ -230,6 +240,19 @@ textarea {
 
     &.disabled {
       color: $spunPearl;
+    }
+
+    .form-table__name {
+      display: flex;
+      overflow: hidden;
+
+      &.form-table__name_with-asterisk {
+        &::after {
+          content: ' * ';
+          color: $amaranth;
+          margin-right: 10px;
+        }
+      }
     }
   }
 

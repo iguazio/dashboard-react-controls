@@ -17,8 +17,9 @@ illegal under applicable law, and the grant of the foregoing license
 under the Apache 2.0 license is conditioned upon your compliance with
 such restriction.
 */
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useLayoutEffect, useRef, useState } from 'react'
 import { get, omit } from 'lodash'
+import { ARRAY_ERROR } from 'final-form'
 
 export const useFormTable = (formState) => {
   // `editingItem` should contain the `data` object with all fields that are used in the `formState`.
@@ -40,38 +41,55 @@ export const useFormTable = (formState) => {
   // }
   const [editingItem, setEditingItem] = useState(null)
   const editingItemRef = useRef(null)
+  const editingItemErrorsRef = useRef(null)
+  const formStateRef = useRef(null)
   const bottomScrollRef = useRef(null)
 
-  useEffect(() => {
-    editingItemRef.current = editingItem
-  }, [editingItem])
+  useLayoutEffect(() => {
+    const tableErrors = get(formState?.errors, editingItem?.ui.fieldsPath, [])
+    editingItemErrorsRef.current = get(tableErrors, editingItem?.ui.index, null)
+  }, [editingItem?.ui.fieldsPath, editingItem?.ui.index, formState?.errors])
+
+  useLayoutEffect(() => {
+    formStateRef.current = formState
+  }, [formState])
 
   useEffect(() => {
     return () => {
-      if (editingItemRef.current?.ui?.isNew) {
-        formState.form.mutators.remove(
-          editingItemRef.current.ui.fieldsPath,
-          editingItemRef.current.ui.index
-        )
+      if (editingItemRef?.current) {
+        if (!editingItemErrorsRef.current) {
+          exitEditMode()
+        } else {
+          if (editingItemRef.current?.ui?.isNew) {
+            const values = get(formStateRef.current.values, editingItemRef.current?.ui.fieldsPath)
 
-        if (editingItemRef.current.ui.index === 0) {
-          formState.form.mutators.concat(editingItemRef.current.ui.fieldsPath, [])
+            if (values?.length > 1) {
+              formStateRef.current.form.mutators.remove(
+                editingItemRef.current?.ui.fieldsPath,
+                editingItemRef.current?.ui.index
+              )
+            } else {
+              formStateRef.current.form.change(editingItemRef.current?.ui.fieldsPath, [])
+            }
+          } else {
+            formStateRef.current.form.mutators.update(
+              editingItemRef.current?.ui.fieldsPath,
+              editingItemRef.current?.ui.index,
+              omit(editingItemRef.current, ['ui'])
+            )
+          }
+
+          exitEditMode()
         }
-      } else if (editingItemRef.current) {
-        formState.form.mutators.update(
-          editingItemRef.current.ui.fieldsPath,
-          editingItemRef.current.ui.index,
-          omit(editingItemRef.current, ['ui'])
-        )
       }
     }
-  }, [formState.form.mutators])
+  }, [])
 
   const addNewRow = (event, fields, fieldsPath, newItem) => {
     applyOrDiscardOrDelete(event)
-    formState.form.mutators.push(fieldsPath, newItem)
+    formStateRef.current.form.mutators.push(fieldsPath, newItem)
     setEditingItem(() => {
-      return {
+      const newEditingItem = {
         ...newItem,
         ui: {
           isNew: true,
@@ -79,26 +97,27 @@ export const useFormTable = (formState) => {
           index: fields.value?.length || 0
         }
       }
+      editingItemRef.current = newEditingItem
+
+      return newEditingItem
     })
 
     scrollIntoView()
   }
 
   const applyChanges = (event, index) => {
-    if (editingItem) {
-      if (!get(formState?.errors, editingItem.ui.fieldsPath.split('.'), false)) {
-        exitEditMode()
-
-        if (editingItem.ui.isNew) {
+    if (editingItemRef.current) {
+      if (!editingItemErrorsRef.current) {
+        if (editingItemRef.current?.ui.isNew) {
           scrollIntoView()
         }
-      } else {
-        const errorField = get(formState.errors, editingItem.ui.fieldsPath.split('.'), {})[index]
 
+        exitEditMode()
+      } else {
         // Mark all empty fields as `modified` in order to highlight the error if the field is invalid
-        Object.entries(errorField.data).forEach(([fieldName]) => {
-          formState.form.mutators.setFieldState(
-            `${editingItem.ui.fieldsPath}[${index}].data.${fieldName}`,
+        Object.entries(editingItemErrorsRef.current?.data).forEach(([fieldName]) => {
+          formStateRef.current?.form.mutators.setFieldState(
+            `${editingItemRef.current?.ui.fieldsPath}[${index}].data.${fieldName}`,
             {
               modified: true
             }
@@ -108,45 +127,53 @@ export const useFormTable = (formState) => {
     }
   }
 
-  const applyOrDiscardOrDelete = (event = null) => {
-    if (editingItem) {
-      if (!get(formState?.errors, editingItem.ui.fieldsPath, false)) {
-        applyChanges(event, editingItem.ui.index)
-      } else {
-        discardOrDelete(event, editingItem.ui.fieldsPath, editingItem.ui.index)
-      }
-    }
-  }
-
   const deleteRow = (event, fieldsPath, index) => {
-    if (editingItem && index !== editingItem.ui.index) {
+    if (editingItemRef.current && index !== editingItemRef.current.ui.index) {
       applyOrDiscardOrDelete(event)
     }
 
-    exitEditMode()
-
-    const values = get(formState.values, fieldsPath)
+    const values = get(formStateRef.current.values, fieldsPath)
 
     if (values?.length > 1) {
-      formState.form.mutators.remove(fieldsPath, index)
+      formStateRef.current.form.mutators.remove(fieldsPath, index)
     } else {
-      formState.form.change(fieldsPath, [])
+      formStateRef.current.form.change(fieldsPath, [])
     }
+
+    exitEditMode()
 
     event && event.stopPropagation()
   }
 
   const discardChanges = (event, fieldsPath, index) => {
+    formStateRef.current.form.mutators.update(
+      fieldsPath,
+      index,
+      omit(editingItemRef.current, ['ui'])
+    )
     exitEditMode()
-    formState.form.mutators.update(fieldsPath, index, omit(editingItem, ['ui']))
     event && event.stopPropagation()
   }
 
   const discardOrDelete = (event, fieldsPath, index) => {
-    if (!editingItem || editingItem?.ui?.isNew) {
+    if (!editingItemRef.current || editingItemRef.current?.ui?.isNew) {
       deleteRow(event, fieldsPath, index)
     } else {
       discardChanges(event, fieldsPath, index)
+    }
+  }
+
+  const applyOrDiscardOrDelete = (event = null) => {
+    if (editingItemRef?.current) {
+      if (!editingItemErrorsRef.current) {
+        applyChanges(event, editingItemRef.current?.ui.index)
+      } else {
+        discardOrDelete(
+          event,
+          editingItemRef.current?.ui.fieldsPath,
+          editingItemRef.current?.ui.index
+        )
+      }
     }
   }
 
@@ -157,12 +184,27 @@ export const useFormTable = (formState) => {
       const editItem = fields.value[index]
 
       setEditingItem(() => {
-        return { ...editItem, ui: { fieldsPath, index } }
+        const newEditingItem = { ...editItem, ui: { fieldsPath, index } }
+        editingItemRef.current = newEditingItem
+
+        return newEditingItem
       })
     })
   }
 
   const exitEditMode = () => {
+    if (editingItemRef.current?.data) {
+      Object.entries(editingItemRef.current?.data).forEach(([fieldName]) => {
+        formStateRef.current?.form.mutators.setFieldState(
+          `${editingItemRef.current?.ui.fieldsPath}[${editingItemRef.current?.ui.index}].data.${fieldName}`,
+          {
+            modified: false
+          }
+        )
+      })
+    }
+
+    editingItemRef.current = null
     setEditingItem(null)
   }
 
@@ -175,7 +217,18 @@ export const useFormTable = (formState) => {
   }
 
   const isCurrentRowEditing = (rowPath) => {
-    return editingItem && `${editingItem.ui.fieldsPath}[${editingItem.ui.index}]` === rowPath
+    return (
+      editingItemRef?.current &&
+      `${editingItemRef.current.ui.fieldsPath}[${editingItemRef.current.ui.index}]` === rowPath
+    )
+  }
+
+  const getTableArrayErrors = (fieldsPath) => {
+    if (formState.submitFailed && formState.invalid) {
+      return get(formState, `errors.${fieldsPath}.${ARRAY_ERROR}`, [])
+    } else {
+      return []
+    }
   }
 
   return {
@@ -190,6 +243,7 @@ export const useFormTable = (formState) => {
     editingItemRef,
     enterEditMode,
     exitEditMode,
+    getTableArrayErrors,
     isCurrentRowEditing
   }
 }

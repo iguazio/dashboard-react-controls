@@ -41,13 +41,14 @@ const FormKeyValueTable = ({
 }) => {
   const tableClassNames = classnames('form-table form-key-value-table', className)
   const {
-    editingItem,
     addNewRow,
     applyChanges,
+    bottomScrollRef,
     deleteRow,
     discardOrDelete,
+    editingItem,
     enterEditMode,
-    bottomScrollRef
+    isCurrentRowEditing
   } = useFormTable(formState)
 
   const uniquenessValidator = (fields, newValue) => {
@@ -66,19 +67,17 @@ const FormKeyValueTable = ({
       <FieldArray name={fieldsPath}>
         {({ fields }) => (
           <>
-            {fields.map((contentItem, index) => {
+            {fields.map((rowPath, index) => {
               const tableRowClassNames = classnames(
                 'form-table__row',
-                fieldsPath === editingItem?.ui?.fieldsPath &&
-                editingItem?.ui?.index === index &&
-                'active'
+                isCurrentRowEditing(rowPath) && 'form-table__row_active'
               )
               return editingItem && index === editingItem.ui.index && !disabled ? (
                 <div className={tableRowClassNames} key={index}>
                   <div className="form-table__cell form-table__cell_1">
                     {keyOptions ? (
                       <FormSelect
-                        name={`${contentItem}.data.key`}
+                        name={`${rowPath}.data.key`}
                         density="normal"
                         options={keyOptions}
                       />
@@ -87,7 +86,7 @@ const FormKeyValueTable = ({
                         className="input_edit"
                         placeholder={keyLabel}
                         density="normal"
-                        name={`${contentItem}.data.key`}
+                        name={`${rowPath}.data.key`}
                         required={isKeyRequired}
                         validationRules={[
                           {
@@ -104,7 +103,7 @@ const FormKeyValueTable = ({
                       className="input_edit"
                       placeholder={valueLabel}
                       density="normal"
-                      name={`${contentItem}.data.value`}
+                      name={`${rowPath}.data.value`}
                       required={isValueRequired}
                     />
                   </div>
