@@ -7,6 +7,7 @@ Object.defineProperty(exports, "__esModule", {
 exports.useFormTable = void 0;
 var _react = require("react");
 var _lodash = require("lodash");
+var _finalForm = require("final-form");
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
 function _defineProperty(obj, key, value) { key = _toPropertyKey(key); if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
@@ -59,93 +60,117 @@ var useFormTable = function useFormTable(formState) {
     editingItem = _useState2[0],
     setEditingItem = _useState2[1];
   var editingItemRef = (0, _react.useRef)(null);
+  var editingItemErrorsRef = (0, _react.useRef)(null);
+  var formStateRef = (0, _react.useRef)(null);
   var bottomScrollRef = (0, _react.useRef)(null);
-  (0, _react.useEffect)(function () {
-    editingItemRef.current = editingItem;
-  }, [editingItem]);
+  (0, _react.useLayoutEffect)(function () {
+    var tableErrors = (0, _lodash.get)(formState === null || formState === void 0 ? void 0 : formState.errors, editingItem === null || editingItem === void 0 ? void 0 : editingItem.ui.fieldsPath, []);
+    editingItemErrorsRef.current = (0, _lodash.get)(tableErrors, editingItem === null || editingItem === void 0 ? void 0 : editingItem.ui.index, null);
+  }, [editingItem === null || editingItem === void 0 ? void 0 : editingItem.ui.fieldsPath, editingItem === null || editingItem === void 0 ? void 0 : editingItem.ui.index, formState === null || formState === void 0 ? void 0 : formState.errors]);
+  (0, _react.useLayoutEffect)(function () {
+    formStateRef.current = formState;
+  }, [formState]);
   (0, _react.useEffect)(function () {
     return function () {
-      var _editingItemRef$curre, _editingItemRef$curre2;
-      if ((_editingItemRef$curre = editingItemRef.current) !== null && _editingItemRef$curre !== void 0 && (_editingItemRef$curre2 = _editingItemRef$curre.ui) !== null && _editingItemRef$curre2 !== void 0 && _editingItemRef$curre2.isNew) {
-        formState.form.mutators.remove(editingItemRef.current.ui.fieldsPath, editingItemRef.current.ui.index);
-        if (editingItemRef.current.ui.index === 0) {
-          formState.form.mutators.concat(editingItemRef.current.ui.fieldsPath, []);
+      if (editingItemRef !== null && editingItemRef !== void 0 && editingItemRef.current) {
+        if (!editingItemErrorsRef.current) {
+          exitEditMode();
+        } else {
+          var _editingItemRef$curre, _editingItemRef$curre2;
+          if ((_editingItemRef$curre = editingItemRef.current) !== null && _editingItemRef$curre !== void 0 && (_editingItemRef$curre2 = _editingItemRef$curre.ui) !== null && _editingItemRef$curre2 !== void 0 && _editingItemRef$curre2.isNew) {
+            var _editingItemRef$curre3;
+            var values = (0, _lodash.get)(formStateRef.current.values, (_editingItemRef$curre3 = editingItemRef.current) === null || _editingItemRef$curre3 === void 0 ? void 0 : _editingItemRef$curre3.ui.fieldsPath);
+            if ((values === null || values === void 0 ? void 0 : values.length) > 1) {
+              var _editingItemRef$curre4, _editingItemRef$curre5;
+              formStateRef.current.form.mutators.remove((_editingItemRef$curre4 = editingItemRef.current) === null || _editingItemRef$curre4 === void 0 ? void 0 : _editingItemRef$curre4.ui.fieldsPath, (_editingItemRef$curre5 = editingItemRef.current) === null || _editingItemRef$curre5 === void 0 ? void 0 : _editingItemRef$curre5.ui.index);
+            } else {
+              var _editingItemRef$curre6;
+              formStateRef.current.form.change((_editingItemRef$curre6 = editingItemRef.current) === null || _editingItemRef$curre6 === void 0 ? void 0 : _editingItemRef$curre6.ui.fieldsPath, []);
+            }
+          } else {
+            var _editingItemRef$curre7, _editingItemRef$curre8;
+            formStateRef.current.form.mutators.update((_editingItemRef$curre7 = editingItemRef.current) === null || _editingItemRef$curre7 === void 0 ? void 0 : _editingItemRef$curre7.ui.fieldsPath, (_editingItemRef$curre8 = editingItemRef.current) === null || _editingItemRef$curre8 === void 0 ? void 0 : _editingItemRef$curre8.ui.index, (0, _lodash.omit)(editingItemRef.current, ['ui']));
+          }
+          exitEditMode();
         }
-      } else if (editingItemRef.current) {
-        formState.form.mutators.update(editingItemRef.current.ui.fieldsPath, editingItemRef.current.ui.index, (0, _lodash.omit)(editingItemRef.current, ['ui']));
       }
     };
-  }, [formState.form.mutators]);
+  }, []);
   var addNewRow = function addNewRow(event, fields, fieldsPath, newItem) {
     applyOrDiscardOrDelete(event);
-    formState.form.mutators.push(fieldsPath, newItem);
+    formStateRef.current.form.mutators.push(fieldsPath, newItem);
     setEditingItem(function () {
       var _fields$value;
-      return _objectSpread(_objectSpread({}, newItem), {}, {
+      var newEditingItem = _objectSpread(_objectSpread({}, newItem), {}, {
         ui: {
           isNew: true,
           fieldsPath: fieldsPath,
           index: ((_fields$value = fields.value) === null || _fields$value === void 0 ? void 0 : _fields$value.length) || 0
         }
       });
+      editingItemRef.current = newEditingItem;
+      return newEditingItem;
     });
     scrollIntoView();
   };
   var applyChanges = function applyChanges(event, index) {
-    if (editingItem) {
-      if (!(0, _lodash.get)(formState === null || formState === void 0 ? void 0 : formState.errors, editingItem.ui.fieldsPath.split('.'), false)) {
-        exitEditMode();
-        if (editingItem.ui.isNew) {
+    if (editingItemRef.current) {
+      if (!editingItemErrorsRef.current) {
+        var _editingItemRef$curre9;
+        if ((_editingItemRef$curre9 = editingItemRef.current) !== null && _editingItemRef$curre9 !== void 0 && _editingItemRef$curre9.ui.isNew) {
           scrollIntoView();
         }
+        exitEditMode();
       } else {
-        var errorField = (0, _lodash.get)(formState.errors, editingItem.ui.fieldsPath.split('.'), {})[index];
-
+        var _editingItemErrorsRef;
         // Mark all empty fields as `modified` in order to highlight the error if the field is invalid
-        Object.entries(errorField.data).forEach(function (_ref) {
+        Object.entries((_editingItemErrorsRef = editingItemErrorsRef.current) === null || _editingItemErrorsRef === void 0 ? void 0 : _editingItemErrorsRef.data).forEach(function (_ref) {
+          var _formStateRef$current, _editingItemRef$curre10;
           var _ref2 = _slicedToArray(_ref, 1),
             fieldName = _ref2[0];
-          formState.form.mutators.setFieldState("".concat(editingItem.ui.fieldsPath, "[").concat(index, "].data.").concat(fieldName), {
+          (_formStateRef$current = formStateRef.current) === null || _formStateRef$current === void 0 ? void 0 : _formStateRef$current.form.mutators.setFieldState("".concat((_editingItemRef$curre10 = editingItemRef.current) === null || _editingItemRef$curre10 === void 0 ? void 0 : _editingItemRef$curre10.ui.fieldsPath, "[").concat(index, "].data.").concat(fieldName), {
             modified: true
           });
         });
       }
     }
   };
-  var applyOrDiscardOrDelete = function applyOrDiscardOrDelete() {
-    var event = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
-    if (editingItem) {
-      if (!(0, _lodash.get)(formState === null || formState === void 0 ? void 0 : formState.errors, editingItem.ui.fieldsPath, false)) {
-        applyChanges(event, editingItem.ui.index);
-      } else {
-        discardOrDelete(event, editingItem.ui.fieldsPath, editingItem.ui.index);
-      }
-    }
-  };
   var deleteRow = function deleteRow(event, fieldsPath, index) {
-    if (editingItem && index !== editingItem.ui.index) {
+    if (editingItemRef.current && index !== editingItemRef.current.ui.index) {
       applyOrDiscardOrDelete(event);
     }
-    exitEditMode();
-    var values = (0, _lodash.get)(formState.values, fieldsPath);
+    var values = (0, _lodash.get)(formStateRef.current.values, fieldsPath);
     if ((values === null || values === void 0 ? void 0 : values.length) > 1) {
-      formState.form.mutators.remove(fieldsPath, index);
+      formStateRef.current.form.mutators.remove(fieldsPath, index);
     } else {
-      formState.form.change(fieldsPath, []);
+      formStateRef.current.form.change(fieldsPath, []);
     }
+    exitEditMode();
     event && event.stopPropagation();
   };
   var discardChanges = function discardChanges(event, fieldsPath, index) {
+    formStateRef.current.form.mutators.update(fieldsPath, index, (0, _lodash.omit)(editingItemRef.current, ['ui']));
     exitEditMode();
-    formState.form.mutators.update(fieldsPath, index, (0, _lodash.omit)(editingItem, ['ui']));
     event && event.stopPropagation();
   };
   var discardOrDelete = function discardOrDelete(event, fieldsPath, index) {
-    var _editingItem$ui;
-    if (!editingItem || editingItem !== null && editingItem !== void 0 && (_editingItem$ui = editingItem.ui) !== null && _editingItem$ui !== void 0 && _editingItem$ui.isNew) {
+    var _editingItemRef$curre11, _editingItemRef$curre12;
+    if (!editingItemRef.current || (_editingItemRef$curre11 = editingItemRef.current) !== null && _editingItemRef$curre11 !== void 0 && (_editingItemRef$curre12 = _editingItemRef$curre11.ui) !== null && _editingItemRef$curre12 !== void 0 && _editingItemRef$curre12.isNew) {
       deleteRow(event, fieldsPath, index);
     } else {
       discardChanges(event, fieldsPath, index);
+    }
+  };
+  var applyOrDiscardOrDelete = function applyOrDiscardOrDelete() {
+    var event = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
+    if (editingItemRef !== null && editingItemRef !== void 0 && editingItemRef.current) {
+      if (!editingItemErrorsRef.current) {
+        var _editingItemRef$curre13;
+        applyChanges(event, (_editingItemRef$curre13 = editingItemRef.current) === null || _editingItemRef$curre13 === void 0 ? void 0 : _editingItemRef$curre13.ui.index);
+      } else {
+        var _editingItemRef$curre14, _editingItemRef$curre15;
+        discardOrDelete(event, (_editingItemRef$curre14 = editingItemRef.current) === null || _editingItemRef$curre14 === void 0 ? void 0 : _editingItemRef$curre14.ui.fieldsPath, (_editingItemRef$curre15 = editingItemRef.current) === null || _editingItemRef$curre15 === void 0 ? void 0 : _editingItemRef$curre15.ui.index);
+      }
     }
   };
   var enterEditMode = function enterEditMode(event, fields, fieldsPath, index) {
@@ -153,16 +178,31 @@ var useFormTable = function useFormTable(formState) {
     setTimeout(function () {
       var editItem = fields.value[index];
       setEditingItem(function () {
-        return _objectSpread(_objectSpread({}, editItem), {}, {
+        var newEditingItem = _objectSpread(_objectSpread({}, editItem), {}, {
           ui: {
             fieldsPath: fieldsPath,
             index: index
           }
         });
+        editingItemRef.current = newEditingItem;
+        return newEditingItem;
       });
     });
   };
   var exitEditMode = function exitEditMode() {
+    var _editingItemRef$curre16;
+    if ((_editingItemRef$curre16 = editingItemRef.current) !== null && _editingItemRef$curre16 !== void 0 && _editingItemRef$curre16.data) {
+      var _editingItemRef$curre17;
+      Object.entries((_editingItemRef$curre17 = editingItemRef.current) === null || _editingItemRef$curre17 === void 0 ? void 0 : _editingItemRef$curre17.data).forEach(function (_ref3) {
+        var _formStateRef$current2, _editingItemRef$curre18, _editingItemRef$curre19;
+        var _ref4 = _slicedToArray(_ref3, 1),
+          fieldName = _ref4[0];
+        (_formStateRef$current2 = formStateRef.current) === null || _formStateRef$current2 === void 0 ? void 0 : _formStateRef$current2.form.mutators.setFieldState("".concat((_editingItemRef$curre18 = editingItemRef.current) === null || _editingItemRef$curre18 === void 0 ? void 0 : _editingItemRef$curre18.ui.fieldsPath, "[").concat((_editingItemRef$curre19 = editingItemRef.current) === null || _editingItemRef$curre19 === void 0 ? void 0 : _editingItemRef$curre19.ui.index, "].data.").concat(fieldName), {
+          modified: false
+        });
+      });
+    }
+    editingItemRef.current = null;
     setEditingItem(null);
   };
   var scrollIntoView = function scrollIntoView() {
@@ -176,7 +216,14 @@ var useFormTable = function useFormTable(formState) {
     }
   };
   var isCurrentRowEditing = function isCurrentRowEditing(rowPath) {
-    return editingItem && "".concat(editingItem.ui.fieldsPath, "[").concat(editingItem.ui.index, "]") === rowPath;
+    return (editingItemRef === null || editingItemRef === void 0 ? void 0 : editingItemRef.current) && "".concat(editingItemRef.current.ui.fieldsPath, "[").concat(editingItemRef.current.ui.index, "]") === rowPath;
+  };
+  var getTableArrayErrors = function getTableArrayErrors(fieldsPath) {
+    if (formState.submitFailed && formState.invalid) {
+      return (0, _lodash.get)(formState, "errors.".concat(fieldsPath, ".").concat(_finalForm.ARRAY_ERROR), []);
+    } else {
+      return [];
+    }
   };
   return {
     addNewRow: addNewRow,
@@ -190,6 +237,7 @@ var useFormTable = function useFormTable(formState) {
     editingItemRef: editingItemRef,
     enterEditMode: enterEditMode,
     exitEditMode: exitEditMode,
+    getTableArrayErrors: getTableArrayErrors,
     isCurrentRowEditing: isCurrentRowEditing
   };
 };
