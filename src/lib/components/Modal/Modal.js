@@ -29,7 +29,17 @@ import { ReactComponent as CloseIcon } from '../../images/close.svg'
 
 import './Modal.scss'
 
-const Modal = ({ actions, children, className, onClose, size, show, subTitle, title }) => {
+const Modal = ({
+  actions,
+  children,
+  className,
+  onClose,
+  previewText,
+  size,
+  show,
+  subTitle,
+  title
+}) => {
   const modalClassNames = classNames('modal', className, size && `modal-${size}`)
 
   return (
@@ -44,6 +54,7 @@ const Modal = ({ actions, children, className, onClose, size, show, subTitle, ti
           </div>
           <div className="modal__content">
             <div className="modal__header">
+              {previewText && <div className="modal__header-preview-text">{previewText}</div>}
               <h5 className="modal__header-title">{title}</h5>
               {subTitle && <h6 className="modal__header-sub-title">{subTitle}</h6>}
             </div>
@@ -66,6 +77,7 @@ const Modal = ({ actions, children, className, onClose, size, show, subTitle, ti
 
 Modal.defaultProps = {
   actions: [],
+  previewText: '',
   show: false,
   size: MODAL_MD,
   subTitle: null,
@@ -81,6 +93,7 @@ Modal.propTypes = {
     PropTypes.string
   ]).isRequired,
   onClose: PropTypes.func.isRequired,
+  previewText: PropTypes.string,
   show: PropTypes.bool.isRequired,
   size: MODAL_SIZES,
   subTitle: PropTypes.string,
