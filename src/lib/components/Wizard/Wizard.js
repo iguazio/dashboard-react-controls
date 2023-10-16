@@ -32,9 +32,10 @@ const Wizard = ({
   className,
   formState,
   isWizardOpen,
+  location,
   onWizardResolve,
   onWizardSubmit,
-  location,
+  previewText,
   size,
   subTitle,
   title,
@@ -67,7 +68,6 @@ const Wizard = ({
   const nextStepIsInvalid = useMemo(() => {
     return formState.submitting || (formState.invalid && formState.submitFailed)
   }, [formState.invalid, formState.submitFailed, formState.submitting])
-
 
   const goToNextStep = () => {
     setActiveStepNumber((prevStep) => Math.min(++prevStep, totalSteps))
@@ -129,18 +129,21 @@ const Wizard = ({
     <Modal
       actions={renderModalActions()}
       className={wizardClasses}
-      onClose={onWizardResolve}
       location={location}
+      onClose={onWizardResolve}
+      previewText={previewText}
       show={isWizardOpen}
       size={size}
       subTitle={subTitle}
       title={title}
     >
-      <WizardSteps activeStepNumber={activeStepNumber}
-                   handleSubmit={handleSubmit}
-                   jumpToStep={jumpToStep}
-                   nextStepIsInvalid={nextStepIsInvalid}
-                   steps={stepsMenu} />
+      <WizardSteps
+        activeStepNumber={activeStepNumber}
+        handleSubmit={handleSubmit}
+        jumpToStep={jumpToStep}
+        nextStepIsInvalid={nextStepIsInvalid}
+        steps={stepsMenu}
+      />
       <div className="wizard-form__content-container">
         <div className="wizard-form__content">{activeStepTemplate}</div>
       </div>
@@ -151,6 +154,7 @@ const Wizard = ({
 Wizard.defaultProps = {
   className: '',
   confirmClose: false,
+  previewText: '',
   size: MODAL_MD,
   stepsConfig: [],
   submitButtonLabel: 'Submit',
@@ -162,9 +166,10 @@ Wizard.propsTypes = {
   confirmClose: PropTypes.bool,
   formState: PropTypes.object.isRequired,
   isWizardOpen: PropTypes.bool.isRequired,
+  location: PropTypes.string.isRequired,
   onWizardResolve: PropTypes.func.isRequired,
   onWizardSubmit: PropTypes.func.isRequired,
-  location: PropTypes.string.isRequired,
+  previewText: PropTypes.string,
   size: MODAL_SIZES,
   subTitle: PropTypes.string,
   title: PropTypes.string.isRequired,
