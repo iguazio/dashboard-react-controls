@@ -38,6 +38,7 @@ var Modal = function Modal(_ref) {
     children = _ref.children,
     className = _ref.className,
     onClose = _ref.onClose,
+    previewText = _ref.previewText,
     size = _ref.size,
     show = _ref.show,
     subTitle = _ref.subTitle,
@@ -67,7 +68,10 @@ var Modal = function Modal(_ref) {
           className: "modal__content",
           children: [/*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
             className: "modal__header",
-            children: [/*#__PURE__*/(0, _jsxRuntime.jsx)("h5", {
+            children: [previewText && /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
+              className: "modal__header-preview-text",
+              children: previewText
+            }), /*#__PURE__*/(0, _jsxRuntime.jsx)("h5", {
               className: "modal__header-title",
               children: title
             }), subTitle && /*#__PURE__*/(0, _jsxRuntime.jsx)("h6", {
@@ -95,6 +99,7 @@ var Modal = function Modal(_ref) {
 };
 Modal.defaultProps = {
   actions: [],
+  previewText: '',
   show: false,
   size: _constants.MODAL_MD,
   subTitle: null,
@@ -104,6 +109,7 @@ Modal.propTypes = {
   actions: _propTypes.default.array,
   children: _propTypes.default.oneOfType([_propTypes.default.element, _propTypes.default.object, _propTypes.default.node, _propTypes.default.string]).isRequired,
   onClose: _propTypes.default.func.isRequired,
+  previewText: _propTypes.default.string,
   show: _propTypes.default.bool.isRequired,
   size: _types.MODAL_SIZES,
   subTitle: _propTypes.default.string,
