@@ -33,9 +33,9 @@ const RoundedIcon = React.forwardRef(
     )
 
     return (
-      <div className={wrapperClassNames} ref={ref}>
+      <div className={wrapperClassNames} ref={ref} data-testid={id}>
         <Tooltip hidden={!tooltipText} template={<TextTooltipTemplate text={tooltipText} />}>
-          <button onClick={onClick} disabled={disabled} id={id} className={IconClassNames}>
+          <button onClick={onClick} disabled={disabled} className={IconClassNames}>
             {children}
           </button>
         </Tooltip>
