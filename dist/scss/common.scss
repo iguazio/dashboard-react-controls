@@ -148,6 +148,12 @@ textarea {
     background-color: $white;
     padding: 5px 0;
 
+    &.form-table__row_excluded {
+      .form-table__cell {
+        color: $spunPearl;
+      }
+    }
+
     &.form-table__row_hidden {
       display: none;
     }

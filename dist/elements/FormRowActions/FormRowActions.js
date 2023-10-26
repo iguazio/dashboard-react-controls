@@ -37,7 +37,7 @@ such restriction.
 var FormRowActions = function FormRowActions(_ref) {
   var _editingItem$ui, _editingItem$ui2, _editingItem$ui3;
   var applyChanges = _ref.applyChanges,
-    deleteIsDisabled = _ref.deleteIsDisabled,
+    deleteButtonIsHidden = _ref.deleteButtonIsHidden,
     deleteRow = _ref.deleteRow,
     disabled = _ref.disabled,
     discardOrDelete = _ref.discardOrDelete,
@@ -73,26 +73,26 @@ var FormRowActions = function FormRowActions(_ref) {
         tooltipText: "Edit",
         disabled: disabled,
         children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_edit.ReactComponent, {})
-      }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_components.RoundedIcon, {
+      }), !deleteButtonIsHidden && /*#__PURE__*/(0, _jsxRuntime.jsx)(_components.RoundedIcon, {
         onClick: function onClick(event) {
           deleteRow(event, fieldsPath, index);
         },
         tooltipText: "Delete",
-        disabled: disabled || deleteIsDisabled,
+        disabled: disabled,
         children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_delete.ReactComponent, {})
       })]
     })
   });
 };
 FormRowActions.defaultProps = {
-  deleteIsDisabled: false,
+  deleteButtonIsHidden: false,
   disabled: false,
   editingItem: null,
   hidden: false
 };
 FormRowActions.propTypes = {
   applyChanges: _propTypes.default.func.isRequired,
-  deleteIsDisabled: _propTypes.default.bool,
+  deleteButtonIsHidden: _propTypes.default.bool,
   deleteRow: _propTypes.default.func.isRequired,
   disabled: _propTypes.default.bool,
   discardOrDelete: _propTypes.default.func.isRequired,

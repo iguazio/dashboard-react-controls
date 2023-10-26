@@ -1,6 +1,8 @@
 
 
-Create a new dist version 1.5.1
+Create a new dist version 1.6.0
 
 Collecting:
-- Impl [Batch Inference] Add Tech preview text (#199)
+- Impl [Download] Revamp Download by Figma (#203)
+- Fix [UI] add data-testid for buttons in models/artifacts/datasets screens (#204)
+- Impl [Batch-run] improved handling of parameters (#205)

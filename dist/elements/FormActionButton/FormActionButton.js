@@ -41,8 +41,9 @@ var FormActionButton = /*#__PURE__*/_react.default.forwardRef(function (_ref, re
       className: "form-table__row form-table__action-row no-hover",
       children: /*#__PURE__*/(0, _jsxRuntime.jsxs)("button", {
         onClick: function onClick(event) {
-          !disabled && _onClick(event, fields, fieldsPath);
+          return _onClick(event, fields, fieldsPath);
         },
+        disabled: disabled,
         children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_plus.ReactComponent, {}), label]
       })
     }), /*#__PURE__*/(0, _jsxRuntime.jsx)("span", {

@@ -42,6 +42,7 @@ var RoundedIcon = /*#__PURE__*/_react.default.forwardRef(function (_ref, ref) {
   return /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
     className: wrapperClassNames,
     ref: ref,
+    "data-testid": id,
     children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_Tooltip.default, {
       hidden: !tooltipText,
       template: /*#__PURE__*/(0, _jsxRuntime.jsx)(_TextTooltipTemplate.default, {
@@ -50,8 +51,8 @@ var RoundedIcon = /*#__PURE__*/_react.default.forwardRef(function (_ref, ref) {
       children: /*#__PURE__*/(0, _jsxRuntime.jsx)("button", {
         onClick: onClick,
         disabled: disabled,
-        id: id,
         className: IconClassNames,
+        id: id,
         children: children
       })
     })
