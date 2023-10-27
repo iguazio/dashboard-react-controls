@@ -1,6 +1,7 @@
 @import '../../scss/variables';
 @import '../../scss/colors';
 @import '../../scss/borders';
+@import '../../scss/shadows';
 
 .pop-up-dialog {
   position: relative;
@@ -10,7 +11,7 @@
   overflow-y: auto;
   background-color: $white;
   border-radius: $modalBorderRadius;
-  box-shadow: 0 6px 26px rgba($black, 0.2);
+  box-shadow: $previewBoxShadow;
 
   &__buttons_wrapper {
     display: flex;
