@@ -194,14 +194,14 @@ var FormChipCell = function FormChipCell(_ref) {
     onClick && onClick();
   }, [isEditable, onClick]);
   var validateFields = function validateFields(fieldsArray) {
+    if (!fieldsArray) return null;
+    var errorData = [];
     var uniquenessValidator = function uniquenessValidator(newValue, idx) {
       return !fieldsArray.some(function (_ref2, index) {
         var key = _ref2.key;
         return newValue === key && index !== idx;
       });
     };
-    var errorData = [];
-    if (!fieldsArray) return [];
     if (!(0, _lodash.isEmpty)(validationRules)) {
       errorData = fieldsArray.map(function (chip) {
         var _validateChip = validateChip(chip),
@@ -233,13 +233,13 @@ var FormChipCell = function FormChipCell(_ref) {
         }
       }
     });
-    if (!errorData && validator) {
+    if ((0, _lodash.isEmpty)(errorData) && validator) {
       errorData = validator(fieldsArray);
     }
     if (errorData.every(function (label) {
       return (0, _lodash.isNil)(label);
     })) {
-      return [];
+      return null;
     }
     return errorData;
   };
@@ -317,7 +317,7 @@ FormChipCell.defaultProps = {
   onClick: function onClick() {},
   shortChips: false,
   validationRules: {},
-  validator: function validator() {},
+  validator: null,
   visibleChipsMaxLength: null
 };
 FormChipCell.propTypes = {

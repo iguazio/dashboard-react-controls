@@ -24,6 +24,7 @@
     &__item {
       display: block;
       background-color: inherit;
+      color: $primary;
       border: 0;
       border-radius: 8px;
       font-size: 1em;
@@ -43,17 +44,13 @@
         }
       }
 
-      &.valid {
-        color: $primary;
-
-        .wizard-steps__indicator {
-          border-color: $malibu;
-          color: $malibu;
-          background-color: inherit;
-        }
+      .wizard-steps__indicator {
+        border-color: $malibu;
+        color: $malibu;
+        background-color: inherit;
       }
 
-      &.active {
+      &.wizard-steps__item_active {
         background-color: $malibuTwo;
         color: $cornflowerBlue;
 
@@ -61,6 +58,20 @@
           border-color: transparent;
           color: $white;
           background-color: $malibu;
+        }
+      }
+
+      &.wizard-steps__item_invalid {
+        color: $amaranth;
+
+        &.wizard-steps__item_active {
+          background-color: rgba($amaranth, 0.15);
+        }
+
+        .wizard-steps__indicator {
+          border-color: $amaranth;
+          color: $amaranth;
+          background-color: inherit;
         }
       }
 

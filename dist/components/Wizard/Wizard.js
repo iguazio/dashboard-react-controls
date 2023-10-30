@@ -8,6 +8,7 @@ exports.default = void 0;
 var _react = _interopRequireWildcard(require("react"));
 var _propTypes = _interopRequireDefault(require("prop-types"));
 var _classnames = _interopRequireDefault(require("classnames"));
+var _lodash = require("lodash");
 var _Button = _interopRequireDefault(require("../Button/Button"));
 var _Modal = _interopRequireDefault(require("../Modal/Modal"));
 var _WizardSteps = _interopRequireDefault(require("./WizardSteps/WizardSteps"));
@@ -18,6 +19,10 @@ var _jsxRuntime = require("react/jsx-runtime");
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter); }
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
 function _defineProperty(obj, key, value) { key = _toPropertyKey(key); if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
@@ -47,47 +52,73 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; } /*
 var Wizard = function Wizard(_ref) {
   var children = _ref.children,
     className = _ref.className,
-    formState = _ref.formState,
+    getActions = _ref.getActions,
     isWizardOpen = _ref.isWizardOpen,
     location = _ref.location,
     onWizardResolve = _ref.onWizardResolve,
-    onWizardSubmit = _ref.onWizardSubmit,
     previewText = _ref.previewText,
     size = _ref.size,
-    subTitle = _ref.subTitle,
-    title = _ref.title,
     stepsConfig = _ref.stepsConfig,
-    submitButtonLabel = _ref.submitButtonLabel;
+    subTitle = _ref.subTitle,
+    title = _ref.title;
   var wizardClasses = (0, _classnames.default)('wizard-form', className);
-  var _useState = (0, _react.useState)(0),
+  var _useState = (0, _react.useState)(false),
     _useState2 = _slicedToArray(_useState, 2),
-    activeStepNumber = _useState2[0],
-    setActiveStepNumber = _useState2[1];
-  var activeStepTemplate = (0, _react.useMemo)(function () {
-    return _react.default.Children.toArray(children)[activeStepNumber];
-  }, [children, activeStepNumber]);
-  var totalSteps = (0, _react.useMemo)(function () {
-    return stepsConfig.filter(function (stepConfig) {
-      return !stepConfig.isHidden;
-    }).length - 1 || 0;
+    jumpingToFirstInvalid = _useState2[0],
+    setJumpingToFirstInvalid = _useState2[1];
+  var _useState3 = (0, _react.useState)(0),
+    _useState4 = _slicedToArray(_useState3, 2),
+    activeStepNumber = _useState4[0],
+    setActiveStepNumber = _useState4[1];
+  var _useState5 = (0, _react.useState)(null),
+    _useState6 = _slicedToArray(_useState5, 2),
+    firstDisabledStepIdx = _useState6[0],
+    setFirstDisabledStepIdx = _useState6[1];
+  var visibleSteps = (0, _react.useMemo)(function () {
+    return (stepsConfig === null || stepsConfig === void 0 ? void 0 : stepsConfig.filter(function (step) {
+      return !step.hidden;
+    })) || [];
   }, [stepsConfig]);
+  (0, _react.useLayoutEffect)(function () {
+    var disabledStep = visibleSteps.find(function (step, stepIdx) {
+      if (step.disabled) {
+        setFirstDisabledStepIdx(stepIdx);
+      }
+      return step.disabled;
+    });
+    if (!disabledStep) {
+      setFirstDisabledStepIdx(null);
+    }
+  }, [visibleSteps]);
+  (0, _react.useEffect)(function () {
+    var firstInvalidStepIdx = visibleSteps.findIndex(function (step) {
+      return step.invalid;
+    });
+    if (jumpingToFirstInvalid && (0, _lodash.isNumber)(firstInvalidStepIdx) && firstInvalidStepIdx !== -1) {
+      setActiveStepNumber(firstInvalidStepIdx);
+      setJumpingToFirstInvalid(false);
+    }
+  }, [jumpingToFirstInvalid, visibleSteps]);
+  var stepsTemplate = (0, _react.useMemo)(function () {
+    return _react.default.Children.toArray(children).filter(function (child, idx) {
+      return !(0, _lodash.isEmpty)(stepsConfig) && !stepsConfig[idx].hidden;
+    }).map(function (child, idx) {
+      var stepIsActive = idx === activeStepNumber;
+      var newChild = !(0, _lodash.isNumber)(firstDisabledStepIdx) || idx < firstDisabledStepIdx ? /*#__PURE__*/_react.default.cloneElement(child, {
+        stepIsActive: stepIsActive
+      }) : null;
+      return /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
+        className: !stepIsActive ? 'wizard-form__hidden-content-item' : '',
+        children: newChild
+      }, idx);
+    });
+  }, [activeStepNumber, children, firstDisabledStepIdx, stepsConfig]);
+  var totalSteps = (0, _react.useMemo)(function () {
+    return visibleSteps.length - 1 || 0;
+  }, [visibleSteps]);
   var isLastStep = (0, _react.useMemo)(function () {
     return activeStepNumber === totalSteps;
   }, [activeStepNumber, totalSteps]);
-  var stepsMenu = (0, _react.useMemo)(function () {
-    return (stepsConfig === null || stepsConfig === void 0 ? void 0 : stepsConfig.filter(function (step) {
-      return !step.isHidden;
-    }).map(function (step) {
-      return {
-        id: step.id,
-        label: step.label,
-        disabled: step.disabled
-      };
-    })) || [];
-  }, [stepsConfig]);
-  var nextStepIsInvalid = (0, _react.useMemo)(function () {
-    return formState.submitting || formState.invalid && formState.submitFailed;
-  }, [formState.invalid, formState.submitFailed, formState.submitting]);
   var goToNextStep = function goToNextStep() {
     setActiveStepNumber(function (prevStep) {
       return Math.min(++prevStep, totalSteps);
@@ -98,51 +129,48 @@ var Wizard = function Wizard(_ref) {
       return Math.max(--prevStep, 0);
     });
   };
+  var goToFirstInvalidStep = function goToFirstInvalidStep() {
+    setJumpingToFirstInvalid(true);
+  };
   var jumpToStep = function jumpToStep(idx) {
     return setActiveStepNumber(idx);
   };
-  var handleSubmit = function handleSubmit() {
-    formState.handleSubmit();
-    if (formState.valid) {
-      if (isLastStep) {
-        onWizardSubmit(formState.values);
-      } else {
-        goToNextStep();
-      }
+  var getDefaultActions = function getDefaultActions(stepConfig) {
+    var defaultActions = [];
+    if (activeStepNumber !== 0) {
+      defaultActions.push( /*#__PURE__*/(0, _jsxRuntime.jsx)(_Button.default, {
+        onClick: goToPreviousStep,
+        disabled: activeStepNumber === 0,
+        label: "Back",
+        type: "button"
+      }));
     }
-  };
-  var getDefaultActions = function getDefaultActions() {
-    return [/*#__PURE__*/(0, _jsxRuntime.jsx)(_Button.default, {
-      onClick: goToPreviousStep,
-      disabled: activeStepNumber === 0,
-      label: "Back",
-      type: "button"
-    }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_Button.default, {
-      onClick: handleSubmit,
-      disabled: nextStepIsInvalid,
-      label: isLastStep ? submitButtonLabel : 'Next',
+    defaultActions.push( /*#__PURE__*/(0, _jsxRuntime.jsx)(_Button.default, {
+      disabled: stepConfig.nextIsDisabled || isLastStep,
+      onClick: goToNextStep,
+      label: 'Next',
       type: "button",
       variant: _constants.SECONDARY_BUTTON
-    })];
+    }));
+    return defaultActions;
   };
   var renderModalActions = function renderModalActions() {
-    var _filteredStepsConfig$;
-    var filteredStepsConfig = stepsConfig.filter(function (stepConfig) {
-      return !stepConfig.isHidden;
+    if ((0, _lodash.isEmpty)(visibleSteps)) return [];
+    var actionsList = getDefaultActions(visibleSteps[activeStepNumber]);
+    var allStepsAreEnabled = visibleSteps.every(function (step) {
+      return !step.disabled;
     });
-    if ((_filteredStepsConfig$ = filteredStepsConfig[activeStepNumber]) !== null && _filteredStepsConfig$ !== void 0 && _filteredStepsConfig$.getActions) {
-      return filteredStepsConfig[activeStepNumber].getActions({
-        formState: formState,
-        goToNextStep: goToNextStep,
-        goToPreviousStep: goToPreviousStep,
-        onWizardResolve: onWizardResolve,
-        handleSubmit: handleSubmit
-      }).map(function (action) {
+    if (getActions) {
+      var actions = getActions({
+        allStepsAreEnabled: allStepsAreEnabled,
+        goToFirstInvalidStep: goToFirstInvalidStep
+      });
+      var mainActions = actions.map(function (action) {
         return /*#__PURE__*/(0, _jsxRuntime.jsx)(_Button.default, _objectSpread({}, action));
       });
-    } else {
-      return getDefaultActions();
+      actionsList.push.apply(actionsList, _toConsumableArray(mainActions));
     }
+    return actionsList;
   };
   return /*#__PURE__*/(0, _jsxRuntime.jsxs)(_Modal.default, {
     actions: renderModalActions(),
@@ -156,42 +184,39 @@ var Wizard = function Wizard(_ref) {
     title: title,
     children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_WizardSteps.default, {
       activeStepNumber: activeStepNumber,
-      handleSubmit: handleSubmit,
+      firstDisabledStepIdx: firstDisabledStepIdx,
       jumpToStep: jumpToStep,
-      nextStepIsInvalid: nextStepIsInvalid,
-      steps: stepsMenu
+      steps: visibleSteps
     }), /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
       className: "wizard-form__content-container",
       children: /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
         className: "wizard-form__content",
-        children: activeStepTemplate
+        children: stepsTemplate
       })
     })]
   });
 };
 Wizard.defaultProps = {
   className: '',
+  getActions: null,
   confirmClose: false,
   previewText: '',
   size: _constants.MODAL_MD,
   stepsConfig: [],
-  submitButtonLabel: 'Submit',
   subTitle: null
 };
 Wizard.propsTypes = {
   className: _propTypes.default.string,
+  getActions: _propTypes.default.func,
   confirmClose: _propTypes.default.bool,
-  formState: _propTypes.default.object.isRequired,
   isWizardOpen: _propTypes.default.bool.isRequired,
   location: _propTypes.default.string.isRequired,
   onWizardResolve: _propTypes.default.func.isRequired,
-  onWizardSubmit: _propTypes.default.func.isRequired,
   previewText: _propTypes.default.string,
   size: _types.MODAL_SIZES,
-  subTitle: _propTypes.default.string,
-  title: _propTypes.default.string.isRequired,
   stepsConfig: _types.WIZARD_STEPS_CONFIG,
-  submitButtonLabel: _propTypes.default.string
+  subTitle: _propTypes.default.string,
+  title: _propTypes.default.string.isRequired
 };
 Wizard.Step = function (_ref2) {
   var children = _ref2.children;

@@ -37,7 +37,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; } /*
                                                                       under the Apache 2.0 license is conditioned upon your compliance with
                                                                       such restriction.
                                                                       */
-var useFormTable = function useFormTable(formState) {
+var useFormTable = function useFormTable(formState, exitEditModeTriggerItem) {
   // `editingItem` should contain the `data` object with all fields that are used in the `formState`.
   // Properties that aren't used in the `formState` should be placed directly in the `editingItem` object
   // `editingItem` also has an `ui` property which is used internally in this hook
@@ -70,32 +70,40 @@ var useFormTable = function useFormTable(formState) {
   (0, _react.useLayoutEffect)(function () {
     formStateRef.current = formState;
   }, [formState]);
+  var applyOrDiscardOrDeleteInEffect = (0, _react.useCallback)(function () {
+    if (editingItemRef !== null && editingItemRef !== void 0 && editingItemRef.current) {
+      if (!editingItemErrorsRef.current) {
+        exitEditMode();
+      } else {
+        var _editingItemRef$curre, _editingItemRef$curre2;
+        if ((_editingItemRef$curre = editingItemRef.current) !== null && _editingItemRef$curre !== void 0 && (_editingItemRef$curre2 = _editingItemRef$curre.ui) !== null && _editingItemRef$curre2 !== void 0 && _editingItemRef$curre2.isNew) {
+          var _editingItemRef$curre3;
+          var values = (0, _lodash.get)(formStateRef.current.values, (_editingItemRef$curre3 = editingItemRef.current) === null || _editingItemRef$curre3 === void 0 ? void 0 : _editingItemRef$curre3.ui.fieldsPath);
+          if ((values === null || values === void 0 ? void 0 : values.length) > 1) {
+            var _editingItemRef$curre4, _editingItemRef$curre5;
+            formStateRef.current.form.mutators.remove((_editingItemRef$curre4 = editingItemRef.current) === null || _editingItemRef$curre4 === void 0 ? void 0 : _editingItemRef$curre4.ui.fieldsPath, (_editingItemRef$curre5 = editingItemRef.current) === null || _editingItemRef$curre5 === void 0 ? void 0 : _editingItemRef$curre5.ui.index);
+          } else {
+            var _editingItemRef$curre6;
+            formStateRef.current.form.change((_editingItemRef$curre6 = editingItemRef.current) === null || _editingItemRef$curre6 === void 0 ? void 0 : _editingItemRef$curre6.ui.fieldsPath, []);
+          }
+        } else {
+          var _editingItemRef$curre7, _editingItemRef$curre8;
+          formStateRef.current.form.mutators.update((_editingItemRef$curre7 = editingItemRef.current) === null || _editingItemRef$curre7 === void 0 ? void 0 : _editingItemRef$curre7.ui.fieldsPath, (_editingItemRef$curre8 = editingItemRef.current) === null || _editingItemRef$curre8 === void 0 ? void 0 : _editingItemRef$curre8.ui.index, (0, _lodash.omit)(editingItemRef.current, ['ui']));
+        }
+        exitEditMode();
+      }
+    }
+  }, []);
+  (0, _react.useEffect)(function () {
+    if (editingItemRef !== null && editingItemRef !== void 0 && editingItemRef.current) {
+      applyOrDiscardOrDeleteInEffect();
+    }
+  }, [applyOrDiscardOrDeleteInEffect, exitEditModeTriggerItem]);
   (0, _react.useEffect)(function () {
     return function () {
-      if (editingItemRef !== null && editingItemRef !== void 0 && editingItemRef.current) {
-        if (!editingItemErrorsRef.current) {
-          exitEditMode();
-        } else {
-          var _editingItemRef$curre, _editingItemRef$curre2;
-          if ((_editingItemRef$curre = editingItemRef.current) !== null && _editingItemRef$curre !== void 0 && (_editingItemRef$curre2 = _editingItemRef$curre.ui) !== null && _editingItemRef$curre2 !== void 0 && _editingItemRef$curre2.isNew) {
-            var _editingItemRef$curre3;
-            var values = (0, _lodash.get)(formStateRef.current.values, (_editingItemRef$curre3 = editingItemRef.current) === null || _editingItemRef$curre3 === void 0 ? void 0 : _editingItemRef$curre3.ui.fieldsPath);
-            if ((values === null || values === void 0 ? void 0 : values.length) > 1) {
-              var _editingItemRef$curre4, _editingItemRef$curre5;
-              formStateRef.current.form.mutators.remove((_editingItemRef$curre4 = editingItemRef.current) === null || _editingItemRef$curre4 === void 0 ? void 0 : _editingItemRef$curre4.ui.fieldsPath, (_editingItemRef$curre5 = editingItemRef.current) === null || _editingItemRef$curre5 === void 0 ? void 0 : _editingItemRef$curre5.ui.index);
-            } else {
-              var _editingItemRef$curre6;
-              formStateRef.current.form.change((_editingItemRef$curre6 = editingItemRef.current) === null || _editingItemRef$curre6 === void 0 ? void 0 : _editingItemRef$curre6.ui.fieldsPath, []);
-            }
-          } else {
-            var _editingItemRef$curre7, _editingItemRef$curre8;
-            formStateRef.current.form.mutators.update((_editingItemRef$curre7 = editingItemRef.current) === null || _editingItemRef$curre7 === void 0 ? void 0 : _editingItemRef$curre7.ui.fieldsPath, (_editingItemRef$curre8 = editingItemRef.current) === null || _editingItemRef$curre8 === void 0 ? void 0 : _editingItemRef$curre8.ui.index, (0, _lodash.omit)(editingItemRef.current, ['ui']));
-          }
-          exitEditMode();
-        }
-      }
+      applyOrDiscardOrDeleteInEffect();
     };
-  }, []);
+  }, [applyOrDiscardOrDeleteInEffect]);
   var addNewRow = function addNewRow(event, fields, fieldsPath, newItem) {
     applyOrDiscardOrDelete(event);
     formStateRef.current.form.mutators.push(fieldsPath, newItem);

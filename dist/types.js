@@ -74,9 +74,11 @@ var CONFIRM_DIALOG_SUBMIT_BUTTON = _propTypes.default.shape({
 });
 exports.CONFIRM_DIALOG_SUBMIT_BUTTON = CONFIRM_DIALOG_SUBMIT_BUTTON;
 var WIZARD_STEPS_CONFIG = _propTypes.default.arrayOf(_propTypes.default.shape({
-  id: _propTypes.default.string,
-  label: _propTypes.default.string,
-  getActions: _propTypes.default.func
+  id: _propTypes.default.string.isRequired,
+  label: _propTypes.default.string.isRequired,
+  hidden: _propTypes.default.bool,
+  disabled: _propTypes.default.bool,
+  nextIsDisabled: _propTypes.default.bool
 }));
 exports.WIZARD_STEPS_CONFIG = WIZARD_STEPS_CONFIG;
 var INPUT_LINK = _propTypes.default.shape({

@@ -7,6 +7,7 @@ exports.default = void 0;
 var _react = _interopRequireDefault(require("react"));
 var _propTypes = _interopRequireDefault(require("prop-types"));
 var _classnames = _interopRequireDefault(require("classnames"));
+var _lodash = require("lodash");
 var _Button = _interopRequireDefault(require("../../Button/Button"));
 var _types = require("../../../types");
 require("./WizardSteps.scss");
@@ -31,31 +32,27 @@ such restriction.
 
 var WizardSteps = function WizardSteps(_ref) {
   var activeStepNumber = _ref.activeStepNumber,
-    handleSubmit = _ref.handleSubmit,
+    firstDisabledStepIdx = _ref.firstDisabledStepIdx,
     jumpToStep = _ref.jumpToStep,
-    nextStepIsInvalid = _ref.nextStepIsInvalid,
     steps = _ref.steps;
-  var getStepClassNames = function getStepClassNames(idx, stepIsInvalid) {
-    return (0, _classnames.default)('wizard-steps__item', idx === activeStepNumber && 'active', !stepIsInvalid && 'valid');
+  var getStepClassNames = function getStepClassNames(idx, invalid) {
+    return (0, _classnames.default)('wizard-steps__item', idx === activeStepNumber && 'wizard-steps__item_active', invalid && 'wizard-steps__item_invalid');
   };
   var handleJumpToStep = function handleJumpToStep(event, idx) {
     event.preventDefault();
-    if (idx === activeStepNumber + 1) {
-      handleSubmit();
-    } else {
-      jumpToStep(idx);
-    }
+    jumpToStep(idx);
   };
   return /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
     className: "wizard-steps",
     children: steps.map(function (_ref2, idx) {
       var id = _ref2.id,
         label = _ref2.label,
-        disabled = _ref2.disabled;
-      var stepIsInvalid = idx > activeStepNumber + 1 || idx === activeStepNumber + 1 && (nextStepIsInvalid || disabled);
+        disabled = _ref2.disabled,
+        invalid = _ref2.invalid;
+      var stepIsDisabled = (0, _lodash.isNumber)(firstDisabledStepIdx) && idx >= firstDisabledStepIdx;
       return /*#__PURE__*/(0, _jsxRuntime.jsx)(_Button.default, {
-        className: getStepClassNames(idx, stepIsInvalid),
-        disabled: stepIsInvalid,
+        className: getStepClassNames(idx, invalid),
+        disabled: stepIsDisabled,
         icon: /*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
           className: "wizard-steps__indicator",
           children: idx + 1
@@ -68,11 +65,13 @@ var WizardSteps = function WizardSteps(_ref) {
     })
   });
 };
+WizardSteps.defaultProps = {
+  firstDisabledStepIdx: null
+};
 WizardSteps.propTypes = {
   activeStepNumber: _propTypes.default.number.isRequired,
-  handleSubmit: _propTypes.default.func.isRequired,
+  firstDisabledStepIdx: _propTypes.default.oneOfType([_propTypes.default.number, _propTypes.default.oneOf([null])]),
   jumpToStep: _propTypes.default.func.isRequired,
-  nextStepIsInvalid: _propTypes.default.bool.isRequired,
   steps: _types.WIZARD_STEPS_CONFIG
 };
 var _default = WizardSteps;

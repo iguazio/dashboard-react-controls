@@ -35,6 +35,7 @@ var FormKeyValueTable = function FormKeyValueTable(_ref) {
     className = _ref.className,
     defaultKey = _ref.defaultKey,
     disabled = _ref.disabled,
+    exitEditModeTriggerItem = _ref.exitEditModeTriggerItem,
     fieldsPath = _ref.fieldsPath,
     formState = _ref.formState,
     isKeyRequired = _ref.isKeyRequired,
@@ -45,7 +46,7 @@ var FormKeyValueTable = function FormKeyValueTable(_ref) {
     valueHeader = _ref.valueHeader,
     valueLabel = _ref.valueLabel;
   var tableClassNames = (0, _classnames.default)('form-table form-key-value-table', className);
-  var _useFormTable = (0, _hooks.useFormTable)(formState),
+  var _useFormTable = (0, _hooks.useFormTable)(formState, exitEditModeTriggerItem),
     addNewRow = _useFormTable.addNewRow,
     applyChanges = _useFormTable.applyChanges,
     bottomScrollRef = _useFormTable.bottomScrollRef,
@@ -177,8 +178,9 @@ var FormKeyValueTable = function FormKeyValueTable(_ref) {
 FormKeyValueTable.defaultProps = {
   addNewItemLabel: 'Add new item',
   className: '',
-  disabled: false,
   defaultKey: '',
+  disabled: false,
+  exitEditModeTriggerItem: null,
   isKeyRequired: true,
   isValueRequired: true,
   keyHeader: 'Key',
@@ -190,8 +192,9 @@ FormKeyValueTable.defaultProps = {
 FormKeyValueTable.propTypes = {
   addNewItemLabel: _propTypes.default.string,
   className: _propTypes.default.string,
-  disabled: _propTypes.default.bool,
   defaultKey: _propTypes.default.string,
+  disabled: _propTypes.default.bool,
+  exitEditModeTriggerItem: _propTypes.default.any,
   fieldsPath: _propTypes.default.string.isRequired,
   formState: _propTypes.default.shape({}).isRequired,
   isKeyRequired: _propTypes.default.bool,
