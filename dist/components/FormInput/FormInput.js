@@ -231,13 +231,13 @@ var FormInput = /*#__PURE__*/_react.default.forwardRef(function (_ref, ref) {
         if (inputProps.max && +valueToValidate > +inputProps.max) {
           validationError = {
             name: 'maxValue',
-            label: "The maximum value should be ".concat(inputProps.max)
+            label: "The maximum value must be ".concat(inputProps.max)
           };
         }
         if (inputProps.min && +valueToValidate < +inputProps.min) {
           validationError = {
             name: 'minValue',
-            label: "The minimum value should be ".concat(inputProps.min)
+            label: "The minimum value must be ".concat(inputProps.min)
           };
         }
       }

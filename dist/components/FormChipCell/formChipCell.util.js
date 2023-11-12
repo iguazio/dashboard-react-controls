@@ -22,6 +22,6 @@ such restriction.
 */
 var uniquenessError = {
   name: 'uniqueness',
-  label: 'Key should be unique'
+  label: 'Key must be unique'
 };
 exports.uniquenessError = uniquenessError;

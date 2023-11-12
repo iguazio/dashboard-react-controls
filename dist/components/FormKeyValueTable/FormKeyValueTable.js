@@ -98,7 +98,7 @@ var FormKeyValueTable = function FormKeyValueTable(_ref) {
                   required: isKeyRequired,
                   validationRules: [{
                     name: 'uniqueness',
-                    label: 'Name should be unique',
+                    label: 'Name must be unique',
                     pattern: function pattern(newValue) {
                       return uniquenessValidator(fields, newValue);
                     }

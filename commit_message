@@ -1,7 +1,8 @@
 
 
-Create a new dist version 1.7.0
+Create a new dist version 1.7.1
 
 Collecting:
-- Impl [Wizards] should work as a single logical screen (#207)
-- Fix [Action Menu] Row background color on option hover (#208)
+- Fix [Table] workflow name is not expandable (#210)
+- Impl [Job][Details] Add header in the Artifact, Input and Result tabs (#211)
+- Impl [Projects] Provide validation rules on labels (#212)
