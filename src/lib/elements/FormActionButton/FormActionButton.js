@@ -23,7 +23,7 @@ import PropTypes from 'prop-types'
 import { ReactComponent as Plus } from '../../images/plus.svg'
 
 const FormActionButton = React.forwardRef(
-  ({ disabled, fields, fieldsPath, hidden, label, onClick }, ref) => {
+  ({ disabled, fields, fieldsPath, hidden, id, label, onClick }, ref) => {
     return (
       <>
         {!hidden && (
@@ -31,6 +31,7 @@ const FormActionButton = React.forwardRef(
             <button
               onClick={(event) => onClick(event, fields, fieldsPath)}
               disabled={disabled}
+              data-testid={id}
             >
               <Plus />
               {label}
@@ -46,6 +47,7 @@ const FormActionButton = React.forwardRef(
 
 FormActionButton.defaultProps = {
   disabled: false,
+  id: '',
   label: 'Add new item'
 }
 
@@ -53,6 +55,7 @@ FormActionButton.propTypes = {
   disabled: PropTypes.bool,
   fields: PropTypes.shape({}).isRequired,
   fieldsPath: PropTypes.string.isRequired,
+  id: PropTypes.string,
   label: PropTypes.string,
   onClick: PropTypes.func.isRequired
 }

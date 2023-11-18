@@ -32,6 +32,7 @@ const FormKeyValueTable = ({
   exitEditModeTriggerItem,
   fieldsPath,
   formState,
+  id,
   isKeyRequired,
   isValueRequired,
   keyHeader,
@@ -152,6 +153,7 @@ const FormKeyValueTable = ({
               disabled={disabled}
               hidden={editingItem?.ui?.isNew}
               fields={fields}
+              id={id}
               label={addNewItemLabel}
               onClick={(...addRowArgs) =>
                 addNewRow(...addRowArgs, {
@@ -176,6 +178,7 @@ FormKeyValueTable.defaultProps = {
   defaultKey: '',
   disabled: false,
   exitEditModeTriggerItem: null,
+  id: '',
   isKeyRequired: true,
   isValueRequired: true,
   keyHeader: 'Key',
@@ -193,6 +196,7 @@ FormKeyValueTable.propTypes = {
   exitEditModeTriggerItem: PropTypes.any,
   fieldsPath: PropTypes.string.isRequired,
   formState: PropTypes.shape({}).isRequired,
+  id: PropTypes.string,
   isKeyRequired: PropTypes.bool,
   isValueRequired: PropTypes.bool,
   keyHeader: PropTypes.string,
