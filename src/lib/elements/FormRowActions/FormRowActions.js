@@ -44,7 +44,7 @@ const FormRowActions = ({
     <div className="form-table__cell form-table__actions-cell" />
   ) : (
     <div className="form-table__cell form-table__actions-cell">
-      {editingItem?.ui?.index === index ? (
+      {editingItem?.ui?.index === index && (
         <>
           <RoundedIcon
             onClick={(event) => applyChanges(event, index)}
@@ -61,7 +61,8 @@ const FormRowActions = ({
             {editingItem.ui?.isNew ? <Delete /> : <Close />}
           </RoundedIcon>
         </>
-      ) : (
+      )}
+      {(!editingItem || editingItem?.ui?.index !== index) && (
         <>
           <RoundedIcon
             onClick={(event) => {
