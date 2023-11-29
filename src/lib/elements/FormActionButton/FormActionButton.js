@@ -23,12 +23,13 @@ import PropTypes from 'prop-types'
 import { ReactComponent as Plus } from '../../images/plus.svg'
 
 const FormActionButton = React.forwardRef(
-  ({ disabled, fields, fieldsPath, hidden, label, onClick }, ref) => {
+  ({ disabled, fields, fieldsPath, hidden, id, label, onClick }, ref) => {
     return (
       <>
         {!hidden && (
           <div className="form-table__row form-table__action-row no-hover">
             <button
+              data-testid={id}
               onClick={(event) => onClick(event, fields, fieldsPath)}
               disabled={disabled}
             >
@@ -53,6 +54,7 @@ FormActionButton.propTypes = {
   disabled: PropTypes.bool,
   fields: PropTypes.shape({}).isRequired,
   fieldsPath: PropTypes.string.isRequired,
+  id: PropTypes.string,
   label: PropTypes.string,
   onClick: PropTypes.func.isRequired
 }

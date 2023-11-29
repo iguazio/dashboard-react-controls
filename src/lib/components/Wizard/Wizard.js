@@ -119,6 +119,7 @@ const Wizard = ({
     if (activeStepNumber !== 0) {
       defaultActions.push(
         <Button
+          id="wizard-btn-back"
           onClick={goToPreviousStep}
           disabled={activeStepNumber === 0}
           label="Back"
@@ -129,6 +130,7 @@ const Wizard = ({
 
     defaultActions.push(
       <Button
+        id="wizard-btn-next"
         disabled={stepConfig.nextIsDisabled || isLastStep}
         onClick={goToNextStep}
         label={'Next'}

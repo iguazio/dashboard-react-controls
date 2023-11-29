@@ -27,15 +27,19 @@ import { TERTIARY_BUTTON } from '../../constants'
 import './Button.scss'
 
 const Button = forwardRef(
-  ({ className, density, icon, label, tooltip, variant, ...restProps }, ref) => {
+  ({ className, density, icon, id, label, tooltip, variant, ...restProps }, ref) => {
     const buttonClassName = classNames('btn', `btn-${variant}`, `btn-${density}`, className)
 
     return (
-      <button {...restProps} className={buttonClassName} ref={ref}>
+      <button {...restProps} className={buttonClassName} ref={ref} data-testid={id}>
         {icon}
-        <Tooltip template={<TextTooltipTemplate text={tooltip} />} hidden={!tooltip}>
-          {label && <span>{label}</span>}
-        </Tooltip>
+        {tooltip ? (
+          <Tooltip template={<TextTooltipTemplate text={tooltip} />}>
+            <span>{label}</span>
+          </Tooltip>
+        ) : (
+          <span>{label}</span>
+        )}
       </button>
     )
   }
@@ -44,6 +48,7 @@ const Button = forwardRef(
 Button.defaultProps = {
   className: '',
   density: 'normal',
+  id: 'btn',
   label: 'Button',
   tooltip: '',
   variant: TERTIARY_BUTTON
@@ -53,6 +58,7 @@ Button.propTypes = {
   className: PropTypes.string,
   density: PropTypes.oneOf(['dense', 'normal', 'medium', 'chunky']),
   icon: PropTypes.element,
+  id: PropTypes.string,
   label: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
   tooltip: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
   variant: BUTTON_VARIANTS

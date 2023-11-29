@@ -37,6 +37,7 @@ const FormSelect = ({
   density,
   disabled,
   hideSelectedOption,
+  id,
   label,
   multiple,
   name,
@@ -186,7 +187,9 @@ const FormSelect = ({
   }, [clickHandler, handleScroll, isOpen])
 
   const scrollOptionToView = useCallback(() => {
-    const selectedOptionEl = optionsListRef.current.querySelector(`[data-custom-id="${input.value}"]`)
+    const selectedOptionEl = optionsListRef.current.querySelector(
+      `[data-custom-id="${input.value}"]`
+    )
 
     if (!selectedOptionEl) return
 
@@ -261,14 +264,14 @@ const FormSelect = ({
           hidden={!tooltip}
         >
           <div
-            data-testid="select"
+            data-testid={id ? `${id}-form-field-select` : 'form-field-select'}
             ref={selectRef}
             className={`form-field-select ${className}`}
             onClick={toggleOpen}
           >
             {label && (
               <div className={selectLabelClassName}>
-                <label data-testid="select-label">
+                <label data-testid={id ? `${id}-form-select-label` : 'form-select-label'}>
                   {label}
                   {meta.error && <span className="form-field__label-mandatory"> *</span>}
                 </label>
@@ -415,6 +418,7 @@ FormSelect.propTypes = {
   density: PropTypes.oneOf(['dense', 'normal', 'medium', 'chunky']),
   disabled: PropTypes.bool,
   hideSelectedOption: PropTypes.bool,
+  id: PropTypes.string,
   label: PropTypes.string,
   name: PropTypes.string.isRequired,
   onClick: PropTypes.oneOfType([PropTypes.func, PropTypes.bool]),

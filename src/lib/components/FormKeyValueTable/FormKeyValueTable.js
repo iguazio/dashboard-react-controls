@@ -25,6 +25,7 @@ import { FormActionButton, FormRowActions } from '../../elements'
 import { useFormTable } from '../../hooks'
 
 const FormKeyValueTable = ({
+  actionButtonId,
   addNewItemLabel,
   className,
   defaultKey,
@@ -32,6 +33,7 @@ const FormKeyValueTable = ({
   exitEditModeTriggerItem,
   fieldsPath,
   formState,
+  id,
   isKeyRequired,
   isValueRequired,
   keyHeader,
@@ -59,7 +61,7 @@ const FormKeyValueTable = ({
   }
 
   return (
-    <div className={tableClassNames}>
+    <div className={tableClassNames} data-testid={id}>
       <div className="form-table__row form-table__header-row no-hover">
         <div className="form-table__cell form-table__cell_1">{keyHeader}</div>
         <div className="form-table__cell form-table__cell_1">{valueHeader}</div>
@@ -78,6 +80,7 @@ const FormKeyValueTable = ({
                   <div className="form-table__cell form-table__cell_1">
                     {keyOptions ? (
                       <FormSelect
+                        id={`${rowPath}-data-key`}
                         name={`${rowPath}.data.key`}
                         density="normal"
                         options={keyOptions}
@@ -85,6 +88,7 @@ const FormKeyValueTable = ({
                     ) : (
                       <FormInput
                         className="input_edit"
+                        id={`${rowPath}-data-key`}
                         placeholder={keyLabel}
                         density="normal"
                         name={`${rowPath}.data.key`}
@@ -102,6 +106,7 @@ const FormKeyValueTable = ({
                   <div className="form-table__cell form-table__cell_1">
                     <FormInput
                       className="input_edit"
+                      id={`${rowPath}-data-value`}
                       placeholder={valueLabel}
                       density="normal"
                       name={`${rowPath}.data.value`}
@@ -152,6 +157,7 @@ const FormKeyValueTable = ({
               disabled={disabled}
               hidden={editingItem?.ui?.isNew}
               fields={fields}
+              id={actionButtonId}
               label={addNewItemLabel}
               onClick={(...addRowArgs) =>
                 addNewRow(...addRowArgs, {
@@ -186,6 +192,7 @@ FormKeyValueTable.defaultProps = {
 }
 
 FormKeyValueTable.propTypes = {
+  actionButtonId: PropTypes.string,
   addNewItemLabel: PropTypes.string,
   className: PropTypes.string,
   defaultKey: PropTypes.string,
@@ -193,6 +200,7 @@ FormKeyValueTable.propTypes = {
   exitEditModeTriggerItem: PropTypes.any,
   fieldsPath: PropTypes.string.isRequired,
   formState: PropTypes.shape({}).isRequired,
+  id: PropTypes.string,
   isKeyRequired: PropTypes.bool,
   isValueRequired: PropTypes.bool,
   keyHeader: PropTypes.string,

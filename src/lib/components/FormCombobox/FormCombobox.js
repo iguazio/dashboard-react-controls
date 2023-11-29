@@ -41,6 +41,7 @@ const FormCombobox = ({
   density,
   disabled,
   hideSearchInput,
+  id,
   inputDefaultValue,
   inputPlaceholder,
   invalidText,
@@ -321,7 +322,7 @@ const FormCombobox = ({
   return (
     <Field name={name} validate={validateField}>
       {({ input, meta }) => (
-        <div className={comboboxClassNames} ref={comboboxRef}>
+        <div className={comboboxClassNames} ref={comboboxRef} data-testid={id ? `${id}-form-combobox` : 'form-combobox'}>
           {label && (
             <div className={labelClassNames}>
               <label data-testid="label" htmlFor={input.name}>
@@ -379,6 +380,7 @@ const FormCombobox = ({
             </div>
             <input
               className={inputClassNames}
+              data-testid={id ? `${id}-form-combobox-input` : 'form-combobox-input'}
               id={input.name}
               onChange={handleInputChange}
               onFocus={inputOnFocus}
@@ -404,6 +406,7 @@ const FormCombobox = ({
                   {!hideSearchInput && (
                     <div className="form-field-combobox__search-wrapper">
                       <input
+                        data-testid={id ? `${id}-form-combobox-search` : 'form-combobox-search'}
                         className="form-field-combobox__search form-field__control"
                         onChange={suggestionListSearchChange}
                         onFocus={() => setSearchIsFocused(true)}
@@ -490,6 +493,7 @@ FormCombobox.propTypes = {
   density: PropTypes.oneOf(['dense', 'normal', 'medium', 'chunky']),
   disabled: PropTypes.bool,
   hideSearchInput: PropTypes.bool,
+  id: PropTypes.string,
   inputDefaultValue: PropTypes.string,
   inputPlaceholder: PropTypes.string,
   invalidText: PropTypes.string,

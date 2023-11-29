@@ -25,9 +25,10 @@ import { isEveryObjectValueEmpty } from '../../utils/common.util'
 
 import './tooltip.scss'
 
-const Tooltip = ({ children, className, hidden, renderChildAsHtml, template, textShow }) => {
+const Tooltip = ({ children, className, hidden, id, renderChildAsHtml, template, textShow }) => {
   const [show, setShow] = useState(false)
   const [style, setStyle] = useState({})
+
   const tooltipClassNames = classnames('data-ellipsis', 'tooltip-wrapper', className)
   const duration = 200
   const parentRef = useRef()
@@ -152,13 +153,17 @@ const Tooltip = ({ children, className, hidden, renderChildAsHtml, template, tex
     <>
       {renderChildAsHtml ? (
         <div
-          data-testid="tooltip-wrapper"
+          data-testid={id ? `${id}-tooltip-wrapper` : 'tooltip-wrapper'}
           ref={parentRef}
           className={tooltipClassNames}
           dangerouslySetInnerHTML={{ __html: children }}
         />
       ) : (
-        <div data-testid="tooltip-wrapper" ref={parentRef} className={tooltipClassNames}>
+        <div
+          data-testid={id ? `${id}-tooltip-wrapper` : 'tooltip-wrapper'}
+          ref={parentRef}
+          className={tooltipClassNames}
+        >
           {children}
         </div>
       )}
@@ -166,7 +171,7 @@ const Tooltip = ({ children, className, hidden, renderChildAsHtml, template, tex
         createPortal(
           <CSSTransition classNames="fade" in={show} timeout={duration} unmountOnExit>
             <div
-              data-testid="tooltip"
+              data-testid={id ? `${id}-tooltip` : 'tooltip'}
               ref={tooltipRef}
               style={{
                 ...style
@@ -184,6 +189,7 @@ const Tooltip = ({ children, className, hidden, renderChildAsHtml, template, tex
 
 Tooltip.defaultProps = {
   hidden: false,
+  id: '',
   renderChildAsHtml: false,
   textShow: false
 }
@@ -191,6 +197,7 @@ Tooltip.defaultProps = {
 Tooltip.propTypes = {
   className: PropTypes.string,
   hidden: PropTypes.bool,
+  id: PropTypes.string,
   renderChildAsHtml: PropTypes.bool,
   template: PropTypes.element.isRequired,
   textShow: PropTypes.bool
