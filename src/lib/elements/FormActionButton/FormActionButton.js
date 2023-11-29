@@ -47,6 +47,7 @@ const FormActionButton = React.forwardRef(
 
 FormActionButton.defaultProps = {
   disabled: false,
+  id: 'add-an-item',
   label: 'Add new item'
 }
 
