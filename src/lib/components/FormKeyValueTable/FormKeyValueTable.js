@@ -33,7 +33,6 @@ const FormKeyValueTable = ({
   exitEditModeTriggerItem,
   fieldsPath,
   formState,
-  id,
   isKeyRequired,
   isValueRequired,
   keyHeader,
@@ -61,7 +60,7 @@ const FormKeyValueTable = ({
   }
 
   return (
-    <div className={tableClassNames} data-testid={id}>
+    <div className={tableClassNames} data-testid={fieldsPath}>
       <div className="form-table__row form-table__header-row no-hover">
         <div className="form-table__cell form-table__cell_1">{keyHeader}</div>
         <div className="form-table__cell form-table__cell_1">{valueHeader}</div>
@@ -200,7 +199,6 @@ FormKeyValueTable.propTypes = {
   exitEditModeTriggerItem: PropTypes.any,
   fieldsPath: PropTypes.string.isRequired,
   formState: PropTypes.shape({}).isRequired,
-  id: PropTypes.string,
   isKeyRequired: PropTypes.bool,
   isValueRequired: PropTypes.bool,
   keyHeader: PropTypes.string,

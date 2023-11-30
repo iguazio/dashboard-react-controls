@@ -24,7 +24,6 @@ import './formCheckBox.scss'
 const FormCheckBox = ({
   children,
   className,
-  id,
   highlightLabel,
   label,
   name,
@@ -48,7 +47,7 @@ const FormCheckBox = ({
               ref={inputRef}
               className={classNames(input.checked ? 'checked' : 'unchecked')}
               type="checkbox"
-              data-testid={id ? `${id}-form-checkbox` : 'form-checkbox'}
+              data-testid={inputProps.value ?? name ? `${name}-form-checkbox` : 'form-checkbox'}
               id={inputProps.value ?? name}
               {...{ ...input, ...inputProps }}
               value={String(input.checked)}
