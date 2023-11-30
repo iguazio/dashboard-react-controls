@@ -55,7 +55,7 @@ const FormRowActions = ({
             <Checkmark />
           </RoundedIcon>
           <RoundedIcon
-            id={editingItem.ui?.isNew ? 'delete-btn' : 'discard-btn'}
+            id='delete-discard-btn'
             onClick={(event) => discardOrDelete(event, fieldsPath, index)}
             tooltipText={editingItem.ui?.isNew ? 'Delete' : 'Discard changes'}
             disabled={disabled}
