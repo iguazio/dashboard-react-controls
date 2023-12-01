@@ -168,6 +168,7 @@ const FormChipCellView = React.forwardRef(
 
                   {isEditable && (
                     <button
+                      data-testid={`${name}-add-chip`}
                       className={buttonAddClassNames}
                       onClick={(e) => handleAddNewChip(e, fields)}
                     >

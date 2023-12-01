@@ -289,7 +289,7 @@ const FormChipCell = ({
   }
 
   return (
-    <div className={chipsClassName}>
+    <div className={chipsClassName} data-testid={`${name}-chips`}>
       {label && <div className="chips__label">{label}</div>}
       <div className={label ? 'chips__wrapper' : ''}>
         <FormChipCellView
