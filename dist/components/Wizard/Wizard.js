@@ -139,6 +139,7 @@ var Wizard = function Wizard(_ref) {
     var defaultActions = [];
     if (activeStepNumber !== 0) {
       defaultActions.push( /*#__PURE__*/(0, _jsxRuntime.jsx)(_Button.default, {
+        id: "wizard-btn-back",
         onClick: goToPreviousStep,
         disabled: activeStepNumber === 0,
         label: "Back",
@@ -146,6 +147,7 @@ var Wizard = function Wizard(_ref) {
       }));
     }
     defaultActions.push( /*#__PURE__*/(0, _jsxRuntime.jsx)(_Button.default, {
+      id: "wizard-btn-next",
       disabled: stepConfig.nextIsDisabled || isLastStep,
       onClick: goToNextStep,
       label: 'Next',

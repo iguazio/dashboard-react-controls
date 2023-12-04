@@ -35,7 +35,7 @@ such restriction.
 */
 
 var FormRowActions = function FormRowActions(_ref) {
-  var _editingItem$ui, _editingItem$ui2, _editingItem$ui3;
+  var _editingItem$ui, _editingItem$ui2, _editingItem$ui3, _editingItem$ui4;
   var applyChanges = _ref.applyChanges,
     deleteButtonIsHidden = _ref.deleteButtonIsHidden,
     deleteRow = _ref.deleteRow,
@@ -47,10 +47,11 @@ var FormRowActions = function FormRowActions(_ref) {
     index = _ref.index;
   return hidden ? /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
     className: "form-table__cell form-table__actions-cell"
-  }) : /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
+  }) : /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
     className: "form-table__cell form-table__actions-cell",
-    children: (editingItem === null || editingItem === void 0 ? void 0 : (_editingItem$ui = editingItem.ui) === null || _editingItem$ui === void 0 ? void 0 : _editingItem$ui.index) === index ? /*#__PURE__*/(0, _jsxRuntime.jsxs)(_jsxRuntime.Fragment, {
+    children: [(editingItem === null || editingItem === void 0 ? void 0 : (_editingItem$ui = editingItem.ui) === null || _editingItem$ui === void 0 ? void 0 : _editingItem$ui.index) === index && /*#__PURE__*/(0, _jsxRuntime.jsxs)(_jsxRuntime.Fragment, {
       children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_components.RoundedIcon, {
+        id: "apply-btn",
         onClick: function onClick(event) {
           return applyChanges(event, index);
         },
@@ -58,6 +59,7 @@ var FormRowActions = function FormRowActions(_ref) {
         disabled: disabled,
         children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_checkmark.ReactComponent, {})
       }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_components.RoundedIcon, {
+        id: "delete-discard-btn",
         onClick: function onClick(event) {
           return discardOrDelete(event, fieldsPath, index);
         },
@@ -65,8 +67,9 @@ var FormRowActions = function FormRowActions(_ref) {
         disabled: disabled,
         children: (_editingItem$ui3 = editingItem.ui) !== null && _editingItem$ui3 !== void 0 && _editingItem$ui3.isNew ? /*#__PURE__*/(0, _jsxRuntime.jsx)(_delete.ReactComponent, {}) : /*#__PURE__*/(0, _jsxRuntime.jsx)(_close.ReactComponent, {})
       })]
-    }) : /*#__PURE__*/(0, _jsxRuntime.jsxs)(_jsxRuntime.Fragment, {
+    }), (!editingItem || (editingItem === null || editingItem === void 0 ? void 0 : (_editingItem$ui4 = editingItem.ui) === null || _editingItem$ui4 === void 0 ? void 0 : _editingItem$ui4.index) !== index) && /*#__PURE__*/(0, _jsxRuntime.jsxs)(_jsxRuntime.Fragment, {
       children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_components.RoundedIcon, {
+        id: "edit-btn",
         onClick: function onClick(event) {
           event.preventDefault();
         },
@@ -74,6 +77,7 @@ var FormRowActions = function FormRowActions(_ref) {
         disabled: disabled,
         children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_edit.ReactComponent, {})
       }), !deleteButtonIsHidden && /*#__PURE__*/(0, _jsxRuntime.jsx)(_components.RoundedIcon, {
+        id: "delete-btn",
         onClick: function onClick(event) {
           deleteRow(event, fieldsPath, index);
         },
@@ -81,7 +85,7 @@ var FormRowActions = function FormRowActions(_ref) {
         disabled: disabled,
         children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_delete.ReactComponent, {})
       })]
-    })
+    })]
   });
 };
 FormRowActions.defaultProps = {

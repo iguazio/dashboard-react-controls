@@ -268,6 +268,7 @@ var FormChipCell = function FormChipCell(_ref) {
   };
   return /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
     className: chipsClassName,
+    "data-testid": "".concat(name, "-chips"),
     children: [label && /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
       className: "chips__label",
       children: label

@@ -331,6 +331,7 @@ var FormCombobox = function FormCombobox(_ref) {
       return /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
         className: comboboxClassNames,
         ref: comboboxRef,
+        "data-testid": name ? "".concat(name, "-form-combobox") : 'form-combobox',
         children: [label && /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
           className: labelClassNames,
           children: /*#__PURE__*/(0, _jsxRuntime.jsxs)("label", {
@@ -391,6 +392,7 @@ var FormCombobox = function FormCombobox(_ref) {
             })]
           }), /*#__PURE__*/(0, _jsxRuntime.jsx)("input", {
             className: inputClassNames,
+            "data-testid": name ? "".concat(name, "-form-combobox-input") : 'form-combobox-input',
             id: input.name,
             onChange: handleInputChange,
             onFocus: inputOnFocus,
@@ -412,6 +414,7 @@ var FormCombobox = function FormCombobox(_ref) {
               children: [!hideSearchInput && /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
                 className: "form-field-combobox__search-wrapper",
                 children: [/*#__PURE__*/(0, _jsxRuntime.jsx)("input", {
+                  "data-testid": name ? "".concat(name, "-form-combobox-search") : 'form-combobox-search',
                   className: "form-field-combobox__search form-field__control",
                   onChange: suggestionListSearchChange,
                   onFocus: function onFocus() {

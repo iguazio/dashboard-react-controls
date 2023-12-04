@@ -14,7 +14,7 @@ var _types = require("../../types");
 var _constants = require("../../constants");
 require("./Button.scss");
 var _jsxRuntime = require("react/jsx-runtime");
-var _excluded = ["className", "density", "icon", "label", "tooltip", "variant"];
+var _excluded = ["className", "density", "icon", "id", "label", "tooltip", "variant"];
 /*
 Copyright 2022 Iguazio Systems Ltd.
 Licensed under the Apache License, Version 2.0 (the "License") with
@@ -45,6 +45,7 @@ var Button = /*#__PURE__*/(0, _react.forwardRef)(function (_ref, ref) {
   var className = _ref.className,
     density = _ref.density,
     icon = _ref.icon,
+    id = _ref.id,
     label = _ref.label,
     tooltip = _ref.tooltip,
     variant = _ref.variant,
@@ -53,20 +54,23 @@ var Button = /*#__PURE__*/(0, _react.forwardRef)(function (_ref, ref) {
   return /*#__PURE__*/(0, _jsxRuntime.jsxs)("button", _objectSpread(_objectSpread({}, restProps), {}, {
     className: buttonClassName,
     ref: ref,
-    children: [icon, /*#__PURE__*/(0, _jsxRuntime.jsx)(_Tooltip.default, {
+    "data-testid": id,
+    children: [icon, tooltip ? /*#__PURE__*/(0, _jsxRuntime.jsx)(_Tooltip.default, {
       template: /*#__PURE__*/(0, _jsxRuntime.jsx)(_TextTooltipTemplate.default, {
         text: tooltip
       }),
-      hidden: !tooltip,
-      children: label && /*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
+      children: /*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
         children: label
       })
+    }) : /*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
+      children: label
     })]
   }));
 });
 Button.defaultProps = {
   className: '',
   density: 'normal',
+  id: 'btn',
   label: 'Button',
   tooltip: '',
   variant: _constants.TERTIARY_BUTTON
@@ -75,6 +79,7 @@ Button.propTypes = {
   className: _propTypes.default.string,
   density: _propTypes.default.oneOf(['dense', 'normal', 'medium', 'chunky']),
   icon: _propTypes.default.element,
+  id: _propTypes.default.string,
   label: _propTypes.default.oneOfType([_propTypes.default.string, _propTypes.default.element]),
   tooltip: _propTypes.default.oneOfType([_propTypes.default.string, _propTypes.default.element]),
   variant: _types.BUTTON_VARIANTS

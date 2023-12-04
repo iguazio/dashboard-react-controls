@@ -52,11 +52,12 @@ var FormToggle = function FormToggle(_ref) {
       var input = _ref2.input;
       return /*#__PURE__*/(0, _jsxRuntime.jsxs)("label", {
         className: "form-field-toggle",
+        "data-testid": name ? "".concat(name, "-form-field-toggle") : 'form-field-toggle',
         children: [label && /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
           className: "form-field__label",
           children: label
         }), /*#__PURE__*/(0, _jsxRuntime.jsx)("input", _objectSpread(_objectSpread({
-          "data-testid": "toggle",
+          "data-testid": name ? "".concat(name, "-form-toggle") : 'form-toggle',
           id: name
         }, _objectSpread(_objectSpread({}, input), inputProps)), {}, {
           onChange: function onChange(event) {

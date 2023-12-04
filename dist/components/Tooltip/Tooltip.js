@@ -47,6 +47,7 @@ var Tooltip = function Tooltip(_ref) {
   var children = _ref.children,
     className = _ref.className,
     hidden = _ref.hidden,
+    id = _ref.id,
     renderChildAsHtml = _ref.renderChildAsHtml,
     template = _ref.template,
     textShow = _ref.textShow;
@@ -151,14 +152,14 @@ var Tooltip = function Tooltip(_ref) {
   }, [clearStyles, style]);
   return /*#__PURE__*/(0, _jsxRuntime.jsxs)(_jsxRuntime.Fragment, {
     children: [renderChildAsHtml ? /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
-      "data-testid": "tooltip-wrapper",
+      "data-testid": id ? "".concat(id, "-tooltip-wrapper") : 'tooltip-wrapper',
       ref: parentRef,
       className: tooltipClassNames,
       dangerouslySetInnerHTML: {
         __html: children
       }
     }) : /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
-      "data-testid": "tooltip-wrapper",
+      "data-testid": id ? "".concat(id, "-tooltip-wrapper") : 'tooltip-wrapper',
       ref: parentRef,
       className: tooltipClassNames,
       children: children
@@ -168,7 +169,7 @@ var Tooltip = function Tooltip(_ref) {
       timeout: duration,
       unmountOnExit: true,
       children: /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
-        "data-testid": "tooltip",
+        "data-testid": id ? "".concat(id, "-tooltip") : 'tooltip',
         ref: tooltipRef,
         style: _objectSpread({}, style),
         className: "tooltip",
@@ -179,12 +180,14 @@ var Tooltip = function Tooltip(_ref) {
 };
 Tooltip.defaultProps = {
   hidden: false,
+  id: '',
   renderChildAsHtml: false,
   textShow: false
 };
 Tooltip.propTypes = {
   className: _propTypes.default.string,
   hidden: _propTypes.default.bool,
+  id: _propTypes.default.string,
   renderChildAsHtml: _propTypes.default.bool,
   template: _propTypes.default.element.isRequired,
   textShow: _propTypes.default.bool

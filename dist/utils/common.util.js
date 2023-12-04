@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.openPopUp = exports.openConfirmPopUp = exports.isEveryObjectValueEmpty = exports.getTransitionEndEventName = exports.getErrorDetail = exports.areArraysEqual = void 0;
+exports.openPopUp = exports.openConfirmPopUp = exports.isEveryObjectValueEmpty = exports.getTransitionEndEventName = exports.getErrorMsg = exports.getErrorDetail = exports.areArraysEqual = void 0;
 var _reactModalPromise = require("react-modal-promise");
 var _lodash = require("lodash");
 var _components = require("../components");
@@ -60,9 +60,16 @@ var areArraysEqual = function areArraysEqual(firstArray, secondArray) {
     return (0, _lodash.isEqual)((0, _lodash.omit)(a, omitBy), (0, _lodash.omit)(b, omitBy));
   }));
 };
+
+/**
+ * Get error information from the error object.
+ *
+ * @param {Error} error - The error object.
+ * @returns {string} - The detailed error information.
+ */
 exports.areArraysEqual = areArraysEqual;
 var getErrorDetail = function getErrorDetail(error) {
-  var errorDetail = (0, _lodash.get)(error, 'response.data.detail', '');
+  var errorDetail = (0, _lodash.get)(error, 'response.data.detail', null);
   if (typeof errorDetail === 'string') {
     return errorDetail;
   } else {
@@ -71,11 +78,29 @@ var getErrorDetail = function getErrorDetail(error) {
 };
 
 /**
+ * Get the error message from the error object or a default error message.
+ *
+ * @param {Error} error - The error object.
+ * @param {string} defaultError - The default error message.
+ * @returns {string} - The error message.
+ */
+exports.getErrorDetail = getErrorDetail;
+var getErrorMsg = function getErrorMsg(error, defaultError) {
+  var errorDetail = getErrorDetail(error);
+  var errorMsg = errorDetail || error.message;
+  if ((!errorMsg || errorMsg === 'Not Found' || errorMsg.startsWith('Request failed with status code')) && defaultError) {
+    return defaultError;
+  } else {
+    return errorMsg || '';
+  }
+};
+
+/**
  * Retrieves the appropriate transition end event name based on the browser.
  *
  * @returns {string} The transition end event name.
  */
-exports.getErrorDetail = getErrorDetail;
+exports.getErrorMsg = getErrorMsg;
 var getTransitionEndEventName = function getTransitionEndEventName() {
   var transitions = {
     transition: 'transitionend',

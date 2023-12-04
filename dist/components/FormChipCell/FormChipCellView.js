@@ -137,6 +137,7 @@ var FormChipCellView = /*#__PURE__*/_react.default.forwardRef(function (_ref, _r
               children: chips.hiddenChipsNumber
             })]
           }), isEditable && /*#__PURE__*/(0, _jsxRuntime.jsx)("button", {
+            "data-testid": "".concat(name, "-add-chip"),
             className: buttonAddClassNames,
             onClick: function onClick(e) {
               return handleAddNewChip(e, fields);

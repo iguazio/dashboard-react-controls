@@ -1,8 +1,9 @@
 
 
-Create a new dist version 1.7.1
+Create a new dist version 1.8.0
 
 Collecting:
-- Fix [Table] workflow name is not expandable (#210)
-- Impl [Job][Details] Add header in the Artifact, Input and Result tabs (#211)
-- Impl [Projects] Provide validation rules on labels (#212)
+- Fix [UI] add the 'data-testid' for 'Add volume' and 'Add node selector' buttons (#214)
+- Fix [Job Wizard] "Edit" tooltip does not disappear after data input apply (#215)
+- Fix [UI] add data-testid for elements in batch run wizard (#216)
+- Fix [General] Increase cancel timeout, fix error notifications (#217)

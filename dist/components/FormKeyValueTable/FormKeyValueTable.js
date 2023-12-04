@@ -31,7 +31,8 @@ such restriction.
 */
 
 var FormKeyValueTable = function FormKeyValueTable(_ref) {
-  var addNewItemLabel = _ref.addNewItemLabel,
+  var actionButtonId = _ref.actionButtonId,
+    addNewItemLabel = _ref.addNewItemLabel,
     className = _ref.className,
     defaultKey = _ref.defaultKey,
     disabled = _ref.disabled,
@@ -63,6 +64,7 @@ var FormKeyValueTable = function FormKeyValueTable(_ref) {
   };
   return /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
     className: tableClassNames,
+    "data-testid": fieldsPath,
     children: [/*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
       className: "form-table__row form-table__header-row no-hover",
       children: [/*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
@@ -156,6 +158,7 @@ var FormKeyValueTable = function FormKeyValueTable(_ref) {
             disabled: disabled,
             hidden: editingItem === null || editingItem === void 0 ? void 0 : (_editingItem$ui = editingItem.ui) === null || _editingItem$ui === void 0 ? void 0 : _editingItem$ui.isNew,
             fields: fields,
+            id: actionButtonId,
             label: addNewItemLabel,
             onClick: function onClick() {
               for (var _len = arguments.length, addRowArgs = new Array(_len), _key = 0; _key < _len; _key++) {
@@ -176,6 +179,7 @@ var FormKeyValueTable = function FormKeyValueTable(_ref) {
   });
 };
 FormKeyValueTable.defaultProps = {
+  actionButtonId: '',
   addNewItemLabel: 'Add new item',
   className: '',
   defaultKey: '',
@@ -190,6 +194,7 @@ FormKeyValueTable.defaultProps = {
   valueLabel: 'Value'
 };
 FormKeyValueTable.propTypes = {
+  actionButtonId: _propTypes.default.string,
   addNewItemLabel: _propTypes.default.string,
   className: _propTypes.default.string,
   defaultKey: _propTypes.default.string,

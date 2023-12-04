@@ -321,10 +321,11 @@ var FormInput = /*#__PURE__*/_react.default.forwardRef(function (_ref, ref) {
       return /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
         ref: ref,
         className: formFieldClassNames,
+        "data-testid": name ? "".concat(name, "-form-field-input") : 'form-field-input',
         children: [label && /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
           className: labelClassNames,
           children: [/*#__PURE__*/(0, _jsxRuntime.jsxs)("label", {
-            "data-testid": "label",
+            "data-testid": name ? "".concat(name, "-form-label") : 'form-label',
             htmlFor: input.name,
             children: [label, (required || validationRules.find(function (rule) {
               return rule.name === 'required';
@@ -354,7 +355,7 @@ var FormInput = /*#__PURE__*/_react.default.forwardRef(function (_ref, ref) {
           children: [/*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
             className: "form-field__control",
             children: /*#__PURE__*/(0, _jsxRuntime.jsx)("input", _objectSpread(_objectSpread({
-              "data-testid": "input",
+              "data-testid": name ? "".concat(name, "-form-input") : 'form-input',
               id: input.name,
               ref: inputRef,
               required: isInvalid || required

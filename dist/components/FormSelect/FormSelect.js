@@ -243,14 +243,14 @@ var FormSelect = function FormSelect(_ref) {
         }),
         hidden: !tooltip,
         children: /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
-          "data-testid": "select",
+          "data-testid": name ? "".concat(name, "-form-field-select") : 'form-field-select',
           ref: selectRef,
           className: "form-field-select ".concat(className),
           onClick: toggleOpen,
           children: [label && /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
             className: selectLabelClassName,
             children: /*#__PURE__*/(0, _jsxRuntime.jsxs)("label", {
-              "data-testid": "select-label",
+              "data-testid": name ? "".concat(name, "-form-select-label") : 'form-select-label',
               children: [label, meta.error && /*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
                 className: "form-field__label-mandatory",
                 children: " *"
