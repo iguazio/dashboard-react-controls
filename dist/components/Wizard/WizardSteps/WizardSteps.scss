@@ -48,10 +48,6 @@
         border-color: $malibu;
         color: $malibu;
         background-color: inherit;
-
-        & + * {
-          display: block;
-        }
       }
 
       &.wizard-steps__item_active {
