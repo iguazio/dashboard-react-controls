@@ -38,7 +38,7 @@ const Button = forwardRef(
             <span>{label}</span>
           </Tooltip>
         ) : (
-          <span>{label}</span>
+          <div>{label}</div>
         )}
       </button>
     )

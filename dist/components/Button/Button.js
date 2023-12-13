@@ -62,7 +62,7 @@ var Button = /*#__PURE__*/(0, _react.forwardRef)(function (_ref, ref) {
       children: /*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
         children: label
       })
-    }) : /*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
+    }) : /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
       children: label
     })]
   }));
