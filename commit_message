@@ -1,9 +1,6 @@
 
 
-Create a new dist version 1.8.0
+Create a new dist version 1.8.1
 
 Collecting:
-- Fix [UI] add the 'data-testid' for 'Add volume' and 'Add node selector' buttons (#214)
-- Fix [Job Wizard] "Edit" tooltip does not disappear after data input apply (#215)
-- Fix [UI] add data-testid for elements in batch run wizard (#216)
-- Fix [General] Increase cancel timeout, fix error notifications (#217)
+- Fix [Batch Run] Steps style is broken on Batch Run not full screen (#219)

@@ -59,10 +59,10 @@ var Button = /*#__PURE__*/(0, _react.forwardRef)(function (_ref, ref) {
       template: /*#__PURE__*/(0, _jsxRuntime.jsx)(_TextTooltipTemplate.default, {
         text: tooltip
       }),
-      children: /*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
+      children: /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
         children: label
       })
-    }) : /*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
+    }) : /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
       children: label
     })]
   }));
