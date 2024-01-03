@@ -342,11 +342,14 @@ const validationRules = {
     ]
   },
   job: {
-    label: [
-      generateRule.validCharactersWithPrefix('a-z A-Z 0-9 - _ .'),
-      generateRule.beginEndWith('a-z A-Z 0-9'),
-      generateRule.length({ max: 75 })
-    ]
+    label: {
+      key: [
+        generateRule.validCharactersWithPrefix('a-z A-Z 0-9 - _ .'),
+        generateRule.beginEndWith('a-z A-Z 0-9'),
+        generateRule.length({ max: 75 })
+      ],
+      value: generateRule.length({ max: 255 })
+    }
   }
 }
 
