@@ -1,6 +1,8 @@
 
 
-Create a new dist version 1.8.1
+Create a new dist version 1.8.2
 
 Collecting:
-- Fix [Batch Run] Steps style is broken on Batch Run not full screen (#219)
+- Fix [Batch run] fix labels validation (#223)
+- Fix [Labels] Wrong color of Invalid label key after fix label value (#222)
+- Fix [Artifacts] missing delete confirmation message (#221)

@@ -163,10 +163,10 @@ var NewChipForm = /*#__PURE__*/_react.default.forwardRef(function (_ref, ref) {
       }
       if (event.key === _constants.BACKSPACE || event.key === _constants.DELETE) {
         setChipData(function (prevState) {
-          return {
+          return _objectSpread(_objectSpread({}, prevState), {}, {
             keyFieldWidth: editConfig.isKeyFocused ? minWidthInput : prevState.keyFieldWidth,
             valueFieldWidth: editConfig.isValueFocused ? minWidthValueInput : prevState.valueFieldWidth
-          };
+          });
         });
       }
     }

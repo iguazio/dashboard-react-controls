@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.openPopUp = exports.openConfirmPopUp = exports.isEveryObjectValueEmpty = exports.getTransitionEndEventName = exports.getErrorMsg = exports.getErrorDetail = exports.areArraysEqual = void 0;
+exports.openPopUp = exports.openDeleteConfirmPopUp = exports.openConfirmPopUp = exports.isEveryObjectValueEmpty = exports.getTransitionEndEventName = exports.getErrorMsg = exports.getErrorDetail = exports.areArraysEqual = void 0;
 var _reactModalPromise = require("react-modal-promise");
 var _lodash = require("lodash");
 var _components = require("../components");
@@ -45,6 +45,22 @@ var openConfirmPopUp = function openConfirmPopUp(confirmHandler, message) {
   });
 };
 exports.openConfirmPopUp = openConfirmPopUp;
+var openDeleteConfirmPopUp = function openDeleteConfirmPopUp(header, message, confirmHandler) {
+  return openPopUp(_components.ConfirmDialog, {
+    cancelButton: {
+      label: 'Cancel',
+      variant: _constants.TERTIARY_BUTTON
+    },
+    confirmButton: {
+      label: 'Delete',
+      variant: _constants.DANGER_BUTTON,
+      handler: confirmHandler
+    },
+    header: header,
+    message: message
+  });
+};
+exports.openDeleteConfirmPopUp = openDeleteConfirmPopUp;
 var isEveryObjectValueEmpty = function isEveryObjectValueEmpty(obj) {
   return Object.values(obj).every(function (item) {
     return !item || item.length === 0;
