@@ -29,7 +29,8 @@ const InputNumberButtons = ({ disabled, min, max, onChange, step, value }) => {
     event.preventDefault()
     if (max && value >= max) return
 
-    const newValue = isCurrentValueEmpty() ? step : performFloatOperation(value, step, '+')
+    let newValue = isCurrentValueEmpty() ? step : performFloatOperation(value, step, '+')
+    newValue = max && newValue > max ? max : newValue
 
     onChange(newValue)
   }
@@ -39,7 +40,8 @@ const InputNumberButtons = ({ disabled, min, max, onChange, step, value }) => {
 
     if (min && value <= min) return
 
-    const newValue = isCurrentValueEmpty() ? -step : performFloatOperation(value, step, '-')
+    let newValue = isCurrentValueEmpty() ? -step : performFloatOperation(value, step, '-')
+    newValue = min && newValue < min ? min : newValue
 
     onChange(newValue)
   }
