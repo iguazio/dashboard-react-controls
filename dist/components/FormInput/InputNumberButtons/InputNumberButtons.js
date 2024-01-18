@@ -40,12 +40,14 @@ var InputNumberButtons = function InputNumberButtons(_ref) {
     event.preventDefault();
     if (max && value >= max) return;
     var newValue = isCurrentValueEmpty() ? step : (0, _math.performFloatOperation)(value, step, '+');
+    newValue = max && newValue > max ? max : newValue;
     onChange(newValue);
   };
   var handleDecrease = function handleDecrease(event) {
     event.preventDefault();
     if (min && value <= min) return;
     var newValue = isCurrentValueEmpty() ? -step : (0, _math.performFloatOperation)(value, step, '-');
+    newValue = min && newValue < min ? min : newValue;
     onChange(newValue);
   };
   var isCurrentValueEmpty = function isCurrentValueEmpty() {

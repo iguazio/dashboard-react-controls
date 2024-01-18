@@ -1,8 +1,7 @@
 
 
-Create a new dist version 1.8.2
+Create a new dist version 1.8.3
 
 Collecting:
-- Fix [Batch run] fix labels validation (#223)
-- Fix [Labels] Wrong color of Invalid label key after fix label value (#222)
-- Fix [Artifacts] missing delete confirmation message (#221)
+- Fix [CPU] Possibility to receive negative CPU values due to decrease value in range from 2 to 99 millicpu (#225)
+- Fix [Batch Run] Uncaught TypeError: u.handler is not a function (#226)

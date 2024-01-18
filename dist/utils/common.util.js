@@ -29,7 +29,7 @@ var openPopUp = function openPopUp(element, props) {
   return (0, _reactModalPromise.create)(element)(props);
 };
 exports.openPopUp = openPopUp;
-var openConfirmPopUp = function openConfirmPopUp(confirmHandler, message) {
+var openConfirmPopUp = function openConfirmPopUp(message, confirmHandler) {
   return openPopUp(_components.ConfirmDialog, {
     cancelButton: {
       label: 'Cancel',
