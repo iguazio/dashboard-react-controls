@@ -22,7 +22,7 @@ var _popout = require("../../images/popout.svg");
 var _warning = require("../../images/warning.svg");
 require("./formInput.scss");
 var _jsxRuntime = require("react/jsx-runtime");
-var _excluded = ["async", "className", "density", "disabled", "focused", "iconClass", "iconClick", "inputIcon", "invalidText", "label", "link", "name", "onBlur", "onChange", "pattern", "required", "suggestionList", "tip", "validationRules", "validator", "withoutBorder"];
+var _excluded = ["async", "className", "customRequiredLabel", "density", "disabled", "focused", "iconClass", "iconClick", "inputIcon", "invalidText", "label", "link", "name", "onBlur", "onChange", "onFocus", "pattern", "required", "suggestionList", "tip", "validationRules", "validator", "withoutBorder"];
 /*
 Copyright 2022 Iguazio Systems Ltd.
 Licensed under the Apache License, Version 2.0 (the "License") with
@@ -62,6 +62,7 @@ var FormInput = /*#__PURE__*/_react.default.forwardRef(function (_ref, ref) {
   var _ref2;
   var async = _ref.async,
     className = _ref.className,
+    customRequiredLabel = _ref.customRequiredLabel,
     density = _ref.density,
     disabled = _ref.disabled,
     focused = _ref.focused,
@@ -74,6 +75,7 @@ var FormInput = /*#__PURE__*/_react.default.forwardRef(function (_ref, ref) {
     name = _ref.name,
     onBlur = _ref.onBlur,
     onChange = _ref.onChange,
+    onFocus = _ref.onFocus,
     pattern = _ref.pattern,
     required = _ref.required,
     suggestionList = _ref.suggestionList,
@@ -181,6 +183,7 @@ var FormInput = /*#__PURE__*/_react.default.forwardRef(function (_ref, ref) {
   };
   var handleInputFocus = function handleInputFocus(event) {
     input.onFocus && input.onFocus(event);
+    onFocus && onFocus();
     setIsFocused(true);
   };
   var handleScroll = function handleScroll(event) {
@@ -207,7 +210,7 @@ var FormInput = /*#__PURE__*/_react.default.forwardRef(function (_ref, ref) {
     if (required && valueToValidate.trim().length === 0) {
       validationError = {
         name: 'required',
-        label: 'This field is required'
+        label: customRequiredLabel || 'This field is required'
       };
     } else if (!(0, _lodash.isEmpty)(rules) && !async) {
       var _checkPatternsValidit = (0, _validation.checkPatternsValidity)(rules, valueToValidate),
@@ -422,6 +425,7 @@ var FormInput = /*#__PURE__*/_react.default.forwardRef(function (_ref, ref) {
 FormInput.defaultProps = {
   async: false,
   className: '',
+  customRequiredLabel: '',
   density: 'normal',
   disabled: false,
   focused: false,
@@ -454,6 +458,7 @@ FormInput.defaultProps = {
 FormInput.propTypes = {
   async: _propTypes.default.bool,
   className: _propTypes.default.string,
+  customRequiredLabel: _propTypes.default.string,
   density: _propTypes.default.oneOf(['dense', 'normal', 'medium', 'chunky']),
   disabled: _propTypes.default.bool,
   focused: _propTypes.default.bool,
@@ -468,6 +473,7 @@ FormInput.propTypes = {
   name: _propTypes.default.string.isRequired,
   onBlur: _propTypes.default.func,
   onChange: _propTypes.default.func,
+  onFocus: _propTypes.default.func,
   onKeyDown: _propTypes.default.func,
   pattern: _propTypes.default.string,
   placeholder: _propTypes.default.string,

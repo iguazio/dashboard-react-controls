@@ -1,7 +1,6 @@
 
 
-Create a new dist version 1.8.3
+Create a new dist version 1.8.4
 
 Collecting:
-- Fix [CPU] Possibility to receive negative CPU values due to decrease value in range from 2 to 99 millicpu (#225)
-- Fix [Batch Run] Uncaught TypeError: u.handler is not a function (#226)
+- Fix [Batch Run] Access Key for a mount looks empty (#228)
