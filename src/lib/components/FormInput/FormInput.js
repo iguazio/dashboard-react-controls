@@ -40,6 +40,7 @@ const FormInput = React.forwardRef(
     {
       async,
       className,
+      customRequiredLabel,
       density,
       disabled,
       focused,
@@ -52,6 +53,7 @@ const FormInput = React.forwardRef(
       name,
       onBlur,
       onChange,
+      onFocus,
       pattern,
       required,
       suggestionList,
@@ -158,6 +160,7 @@ const FormInput = React.forwardRef(
     }
     const handleInputFocus = (event) => {
       input.onFocus && input.onFocus(event)
+      onFocus && onFocus()
       setIsFocused(true)
     }
 
@@ -191,7 +194,10 @@ const FormInput = React.forwardRef(
       let validationError = null
 
       if (required && valueToValidate.trim().length === 0) {
-        validationError = { name: 'required', label: 'This field is required' }
+        validationError = {
+          name: 'required',
+          label: customRequiredLabel || 'This field is required'
+        }
       } else if (!isEmpty(rules) && !async) {
         const [newRules, isValidField] = checkPatternsValidity(rules, valueToValidate)
         const invalidRules = newRules.filter((rule) => !rule.isValid)
@@ -263,10 +269,17 @@ const FormInput = React.forwardRef(
       <Field validate={async ? validateFieldAsync : validateField} name={name} parse={parseField}>
         {({ input }) => {
           return (
-            <div ref={ref} className={formFieldClassNames} data-testid={name ? `${name}-form-field-input` : 'form-field-input'}>
+            <div
+              ref={ref}
+              className={formFieldClassNames}
+              data-testid={name ? `${name}-form-field-input` : 'form-field-input'}
+            >
               {label && (
                 <div className={labelClassNames}>
-                  <label data-testid={name ? `${name}-form-label` : 'form-label'} htmlFor={input.name}>
+                  <label
+                    data-testid={name ? `${name}-form-label` : 'form-label'}
+                    htmlFor={input.name}
+                  >
                     {label}
                     {(required || validationRules.find((rule) => rule.name === 'required')) && (
                       <span className="form-field__label-mandatory"> *</span>
@@ -375,6 +388,7 @@ const FormInput = React.forwardRef(
 FormInput.defaultProps = {
   async: false,
   className: '',
+  customRequiredLabel: '',
   density: 'normal',
   disabled: false,
   focused: false,
@@ -405,6 +419,7 @@ FormInput.defaultProps = {
 FormInput.propTypes = {
   async: PropTypes.bool,
   className: PropTypes.string,
+  customRequiredLabel: PropTypes.string,
   density: PropTypes.oneOf(['dense', 'normal', 'medium', 'chunky']),
   disabled: PropTypes.bool,
   focused: PropTypes.bool,
@@ -419,6 +434,7 @@ FormInput.propTypes = {
   name: PropTypes.string.isRequired,
   onBlur: PropTypes.func,
   onChange: PropTypes.func,
+  onFocus: PropTypes.func,
   onKeyDown: PropTypes.func,
   pattern: PropTypes.string,
   placeholder: PropTypes.string,
