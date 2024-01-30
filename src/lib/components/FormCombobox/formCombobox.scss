@@ -66,10 +66,13 @@
     padding: 12px 0;
 
     &-wrapper {
+      position: sticky;
+      top: 0;
       display: flex;
       align-items: center;
       margin: 0 9px;
       border-bottom: $dividerBorder;
+      background-color: $white;
     }
   }
 

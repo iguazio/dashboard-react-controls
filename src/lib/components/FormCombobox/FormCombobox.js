@@ -129,7 +129,7 @@ const FormCombobox = ({
   )
 
   const handleScroll = (event) => {
-    if (comboboxRef.current.contains(event.target)) return
+    if (comboboxRef.current && comboboxRef.current.contains(event.target)) return
 
     if (
       !event.target.closest('.pop-up-dialog') &&
@@ -321,7 +321,11 @@ const FormCombobox = ({
   return (
     <Field name={name} validate={validateField}>
       {({ input, meta }) => (
-        <div className={comboboxClassNames} ref={comboboxRef} data-testid={name ? `${name}-form-combobox` : 'form-combobox'}>
+        <div
+          className={comboboxClassNames}
+          ref={comboboxRef}
+          data-testid={name ? `${name}-form-combobox` : 'form-combobox'}
+        >
           {label && (
             <div className={labelClassNames}>
               <label data-testid="label" htmlFor={input.name}>
