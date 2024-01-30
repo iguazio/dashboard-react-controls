@@ -159,7 +159,7 @@ var FormCombobox = function FormCombobox(_ref) {
     }
   }, [input, onBlur]);
   var handleScroll = function handleScroll(event) {
-    if (comboboxRef.current.contains(event.target)) return;
+    if (comboboxRef.current && comboboxRef.current.contains(event.target)) return;
     if (!event.target.closest('.pop-up-dialog') && !event.target.classList.contains('form-field-combobox')) {
       setShowValidationRules(false);
       setShowSelectDropdown(false);

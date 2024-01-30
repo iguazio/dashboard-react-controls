@@ -1,6 +1,6 @@
 
 
-Create a new dist version 1.8.4
+Create a new dist version 1.8.5
 
 Collecting:
-- Fix [Batch Run] Access Key for a mount looks empty (#228)
+- Fix [Batch Run] Blank project screen after setting model target path (#230)
