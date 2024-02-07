@@ -1,6 +1,6 @@
 
 
-Create a new dist version 1.8.5
+Create a new dist version 1.8.6
 
 Collecting:
-- Fix [Batch Run] Blank project screen after setting model target path (#230)
+- Fix [Jobs] change Abort Job confirm message (#232)

@@ -96,7 +96,7 @@ ConfirmDialog.propTypes = {
   confirmButton: _types.CONFIRM_DIALOG_SUBMIT_BUTTON,
   customPosition: _propTypes.default.object,
   header: _propTypes.default.string,
-  message: _propTypes.default.string,
+  message: _types.CONFIRM_DIALOG_MESSAGE,
   messageOnly: _propTypes.default.bool
 };
 var _default = ConfirmDialog;
