@@ -14,7 +14,7 @@ illegal under applicable law, and the grant of the foregoing license
 under the Apache 2.0 license is conditioned upon your compliance with
 such restriction.
 */
-import React, { useCallback, useEffect, useLayoutEffect, useRef } from 'react'
+import React, { useCallback, useEffect, useLayoutEffect, useRef, useState } from 'react'
 import PropTypes from 'prop-types'
 import classnames from 'classnames'
 import { createPortal } from 'react-dom'
@@ -37,11 +37,13 @@ const PopUpDialog = React.forwardRef(
       customPosition,
       headerIsHidden,
       headerText,
+      showPopUpDialog,
       style,
       tooltipText
     },
     ref
   ) => {
+    const [showPopUp, setShowPopUp] = useState(showPopUpDialog ?? true)
     const popUpOverlayRef = useRef(null)
     ref ??= popUpOverlayRef
     const popUpClassNames = classnames(
@@ -49,6 +51,11 @@ const PopUpDialog = React.forwardRef(
       'pop-up-dialog__overlay',
       customPosition.element && 'custom-position'
     )
+
+    const handleClosePopUp = useCallback(() => {
+      closePopUp && closePopUp()
+      setShowPopUp(false)
+    }, [closePopUp])
 
     const calculateCustomPopUpPosition = useCallback(() => {
       if (customPosition && customPosition.element) {
@@ -91,33 +98,35 @@ const PopUpDialog = React.forwardRef(
       }
     })
 
-    return createPortal(
-      <div ref={ref} className={popUpClassNames} style={style}>
-        <div data-testid="pop-up-dialog" className="pop-up-dialog">
-          {!headerIsHidden && (
-            <div className="pop-up-dialog__header">
-              {headerText && (
-                <div data-testid="pop-up-dialog-header" className="pop-up-dialog__header-text">
-                  <Tooltip template={<TextTooltipTemplate text={tooltipText || headerText} />}>
-                    <span>{headerText}</span>
-                  </Tooltip>
+    return showPopUp
+      ? createPortal(
+          <div ref={ref} className={popUpClassNames} style={style}>
+            <div data-testid="pop-up-dialog" className="pop-up-dialog">
+              {!headerIsHidden && (
+                <div className="pop-up-dialog__header">
+                  {headerText && (
+                    <div data-testid="pop-up-dialog-header" className="pop-up-dialog__header-text">
+                      <Tooltip template={<TextTooltipTemplate text={tooltipText || headerText} />}>
+                        <span>{headerText}</span>
+                      </Tooltip>
+                    </div>
+                  )}
+                  <RoundedIcon
+                    className="pop-up-dialog__btn_close"
+                    onClick={handleClosePopUp}
+                    tooltipText="Close"
+                    data-testid="pop-up-close-btn"
+                  >
+                    <CloseIcon />
+                  </RoundedIcon>
                 </div>
               )}
-              <RoundedIcon
-                className="pop-up-dialog__btn_close"
-                onClick={closePopUp}
-                tooltipText="Close"
-                data-testid="pop-up-close-btn"
-              >
-                <CloseIcon />
-              </RoundedIcon>
+              {children}
             </div>
-          )}
-          {children}
-        </div>
-      </div>,
-      document.getElementById('overlay_container')
-    )
+          </div>,
+          document.getElementById('overlay_container')
+        )
+      : null
   }
 )
 
@@ -127,6 +136,7 @@ PopUpDialog.defaultProps = {
   customPosition: {},
   headerIsHidden: false,
   headerText: '',
+  showPopUpDialog: true,
   style: {},
   tooltipText: ''
 }
@@ -137,6 +147,7 @@ PopUpDialog.propTypes = {
   customPosition: POP_UP_CUSTOM_POSITION,
   headerIsHidden: PropTypes.bool,
   headerText: PropTypes.string,
+  showPopUpDialog: PropTypes.bool,
   style: PropTypes.object,
   tooltipText: PropTypes.string
 }
