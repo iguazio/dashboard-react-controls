@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.WIZARD_STEPS_CONFIG = exports.SORT_PROPS = exports.SELECT_OPTIONS = exports.SELECT_OPTION = exports.POP_UP_CUSTOM_POSITION = exports.MODAL_SIZES = exports.INPUT_VALIDATION_RULES = exports.INPUT_LINK = exports.FORM_TABLE_EDITING_ITEM = exports.EXCLUDE_SORT_BY = exports.DEFAULT_SORT_BY = exports.CONFIRM_DIALOG_SUBMIT_BUTTON = exports.CONFIRM_DIALOG_CANCEL_BUTTON = exports.COMBOBOX_VALIDATION_RULES = exports.COMBOBOX_SUGGESTION_LIST = exports.COMBOBOX_SELECT_OPTIONS = exports.CHIP_OPTIONS = exports.CHIP_INPUT_LIST = exports.CHIPS = exports.CHIP = exports.BUTTON_VARIANTS = exports.ALLOW_SORT_BY = void 0;
+exports.WIZARD_STEPS_CONFIG = exports.SORT_PROPS = exports.SELECT_OPTIONS = exports.SELECT_OPTION = exports.POP_UP_CUSTOM_POSITION = exports.MODAL_SIZES = exports.INPUT_VALIDATION_RULES = exports.INPUT_LINK = exports.FORM_TABLE_EDITING_ITEM = exports.EXCLUDE_SORT_BY = exports.DEFAULT_SORT_BY = exports.CONFIRM_DIALOG_SUBMIT_BUTTON = exports.CONFIRM_DIALOG_MESSAGE = exports.CONFIRM_DIALOG_CANCEL_BUTTON = exports.COMBOBOX_VALIDATION_RULES = exports.COMBOBOX_SUGGESTION_LIST = exports.COMBOBOX_SELECT_OPTIONS = exports.CHIP_OPTIONS = exports.CHIP_INPUT_LIST = exports.CHIPS = exports.CHIP = exports.BUTTON_VARIANTS = exports.ALLOW_SORT_BY = void 0;
 var _propTypes = _interopRequireDefault(require("prop-types"));
 var _constants = require("./constants");
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -67,6 +67,8 @@ var CONFIRM_DIALOG_CANCEL_BUTTON = _propTypes.default.shape({
   variant: _propTypes.default.string.isRequired
 });
 exports.CONFIRM_DIALOG_CANCEL_BUTTON = CONFIRM_DIALOG_CANCEL_BUTTON;
+var CONFIRM_DIALOG_MESSAGE = _propTypes.default.oneOfType([_propTypes.default.element, _propTypes.default.string]);
+exports.CONFIRM_DIALOG_MESSAGE = CONFIRM_DIALOG_MESSAGE;
 var CONFIRM_DIALOG_SUBMIT_BUTTON = _propTypes.default.shape({
   handler: _propTypes.default.func.isRequired,
   label: _propTypes.default.string.isRequired,
