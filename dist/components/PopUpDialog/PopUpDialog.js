@@ -48,11 +48,20 @@ var PopUpDialog = /*#__PURE__*/_react.default.forwardRef(function (_ref, ref) {
     customPosition = _ref.customPosition,
     headerIsHidden = _ref.headerIsHidden,
     headerText = _ref.headerText,
+    showPopUpDialog = _ref.showPopUpDialog,
     style = _ref.style,
     tooltipText = _ref.tooltipText;
+  var _useState = (0, _react.useState)(showPopUpDialog !== null && showPopUpDialog !== void 0 ? showPopUpDialog : true),
+    _useState2 = _slicedToArray(_useState, 2),
+    showPopUp = _useState2[0],
+    setShowPopUp = _useState2[1];
   var popUpOverlayRef = (0, _react.useRef)(null);
   (_ref2 = ref) !== null && _ref2 !== void 0 ? _ref2 : ref = popUpOverlayRef;
   var popUpClassNames = (0, _classnames.default)(className, 'pop-up-dialog__overlay', customPosition.element && 'custom-position');
+  var handleClosePopUp = (0, _react.useCallback)(function () {
+    closePopUp && closePopUp();
+    setShowPopUp(false);
+  }, [closePopUp]);
   var calculateCustomPopUpPosition = (0, _react.useCallback)(function () {
     if (customPosition && customPosition.element) {
       var _ref3;
@@ -86,7 +95,7 @@ var PopUpDialog = /*#__PURE__*/_react.default.forwardRef(function (_ref, ref) {
       window.removeEventListener('resize', calculateCustomPopUpPosition);
     };
   });
-  return /*#__PURE__*/(0, _reactDom.createPortal)( /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
+  return showPopUp ? /*#__PURE__*/(0, _reactDom.createPortal)( /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
     ref: ref,
     className: popUpClassNames,
     style: style,
@@ -108,14 +117,14 @@ var PopUpDialog = /*#__PURE__*/_react.default.forwardRef(function (_ref, ref) {
           })
         }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_RoundedIcon.default, {
           className: "pop-up-dialog__btn_close",
-          onClick: closePopUp,
+          onClick: handleClosePopUp,
           tooltipText: "Close",
           "data-testid": "pop-up-close-btn",
           children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_close.ReactComponent, {})
         })]
       }), children]
     })
-  }), document.getElementById('overlay_container'));
+  }), document.getElementById('overlay_container')) : null;
 });
 PopUpDialog.defaultProps = {
   className: '',
@@ -123,6 +132,7 @@ PopUpDialog.defaultProps = {
   customPosition: {},
   headerIsHidden: false,
   headerText: '',
+  showPopUpDialog: true,
   style: {},
   tooltipText: ''
 };
@@ -132,6 +142,7 @@ PopUpDialog.propTypes = {
   customPosition: _types.POP_UP_CUSTOM_POSITION,
   headerIsHidden: _propTypes.default.bool,
   headerText: _propTypes.default.string,
+  showPopUpDialog: _propTypes.default.bool,
   style: _propTypes.default.object,
   tooltipText: _propTypes.default.string
 };

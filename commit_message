@@ -1,6 +1,6 @@
 
 
-Create a new dist version 1.8.6
+Create a new dist version 1.8.7
 
 Collecting:
-- Fix [Jobs] change Abort Job confirm message (#232)
+- Fix [Models] App crash on deploy a model (#236)
