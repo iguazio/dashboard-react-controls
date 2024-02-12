@@ -1,6 +1,6 @@
 
 
-Create a new dist version 1.8.7
+Create a new dist version 1.8.8
 
 Collecting:
-- Fix [Models] App crash on deploy a model (#236)
+- Impl [Wizard] jumpToStep function to action button

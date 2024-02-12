@@ -165,6 +165,7 @@ var Wizard = function Wizard(_ref) {
     if (getActions) {
       var actions = getActions({
         allStepsAreEnabled: allStepsAreEnabled,
+        jumpToStep: jumpToStep,
         goToFirstInvalidStep: goToFirstInvalidStep
       });
       var mainActions = actions.map(function (action) {
