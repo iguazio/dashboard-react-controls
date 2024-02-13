@@ -18,6 +18,7 @@ import React, { useCallback, useEffect, useLayoutEffect, useRef, useState } from
 import PropTypes from 'prop-types'
 import classnames from 'classnames'
 import { createPortal } from 'react-dom'
+import { throttle } from 'lodash'
 
 import RoundedIcon from '../RoundedIcon/RoundedIcon'
 import Tooltip from '../Tooltip/Tooltip'
@@ -58,22 +59,27 @@ const PopUpDialog = React.forwardRef(
     }, [closePopUp])
 
     const calculateCustomPopUpPosition = useCallback(() => {
-      if (customPosition && customPosition.element) {
+      if (customPosition?.element?.current && ref?.current) {
         const elementRect = customPosition.element.current.getBoundingClientRect()
-        const popUpRect = ref?.current.getBoundingClientRect()
+        const popUpRect = ref.current.getBoundingClientRect()
         const [verticalPosition, horizontalPosition] = customPosition.position.split('-')
-        const leftPosition =
+        const margin = 15
+        const marginToElement = 5
+        let leftPosition =
           horizontalPosition === 'left' ? elementRect.right - popUpRect.width : elementRect.left
+
         let topPosition
 
         if (verticalPosition === 'top') {
           topPosition =
-            elementRect.top > popUpRect.height ? elementRect.top - popUpRect.height - 5 : 5
+            elementRect.top > popUpRect.height + margin
+              ? elementRect.top - popUpRect.height - marginToElement
+              : margin
         } else {
           topPosition =
-            popUpRect.height + elementRect.bottom > window.innerHeight
-              ? window.innerHeight - popUpRect.height - 5
-              : elementRect.bottom + 5
+            popUpRect.height + elementRect.bottom + margin > window.innerHeight
+              ? window.innerHeight - popUpRect.height - margin
+              : elementRect.bottom + marginToElement
         }
 
         ref.current.style.top = `${topPosition}px`
@@ -91,10 +97,13 @@ const PopUpDialog = React.forwardRef(
     }, [calculateCustomPopUpPosition])
 
     useEffect(() => {
-      window.addEventListener('resize', calculateCustomPopUpPosition)
+      const throttledCalculatedCustomPopUpPosition = throttle(calculateCustomPopUpPosition, 100, {
+        trailing: true, leading: true
+      })
+      window.addEventListener('resize', throttledCalculatedCustomPopUpPosition)
 
       return () => {
-        window.removeEventListener('resize', calculateCustomPopUpPosition)
+        window.removeEventListener('resize', throttledCalculatedCustomPopUpPosition)
       }
     })
 
