@@ -63,8 +63,8 @@ const PopUpDialog = React.forwardRef(
         const elementRect = customPosition.element.current.getBoundingClientRect()
         const popUpRect = ref.current.getBoundingClientRect()
         const [verticalPosition, horizontalPosition] = customPosition.position.split('-')
-        const margin = 15
-        const marginToElement = 5
+        const popupMargin = 15
+        const elementMargin = 5
         let leftPosition =
           horizontalPosition === 'left' ? elementRect.right - popUpRect.width : elementRect.left
 
@@ -72,14 +72,14 @@ const PopUpDialog = React.forwardRef(
 
         if (verticalPosition === 'top') {
           topPosition =
-            elementRect.top > popUpRect.height + margin
-              ? elementRect.top - popUpRect.height - marginToElement
-              : margin
+            elementRect.top > popUpRect.height + popupMargin
+              ? elementRect.top - popUpRect.height - elementMargin
+              : popupMargin
         } else {
           topPosition =
-            popUpRect.height + elementRect.bottom + margin > window.innerHeight
-              ? window.innerHeight - popUpRect.height - margin
-              : elementRect.bottom + marginToElement
+            popUpRect.height + elementRect.bottom + popupMargin > window.innerHeight
+              ? window.innerHeight - popUpRect.height - popupMargin
+              : elementRect.bottom + elementMargin
         }
 
         ref.current.style.top = `${topPosition}px`
