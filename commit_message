@@ -1,6 +1,7 @@
 
 
-Create a new dist version 1.8.8
+Create a new dist version 1.8.9
 
 Collecting:
-- Impl [Wizard] jumpToStep function to action button
+- Fix [UI] Status indicator size (#242)
+- Fix [Datepicker] position should use window size (#241)

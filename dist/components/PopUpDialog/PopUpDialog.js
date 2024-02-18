@@ -9,6 +9,7 @@ var _react = _interopRequireWildcard(require("react"));
 var _propTypes = _interopRequireDefault(require("prop-types"));
 var _classnames = _interopRequireDefault(require("classnames"));
 var _reactDom = require("react-dom");
+var _lodash = require("lodash");
 var _RoundedIcon = _interopRequireDefault(require("../RoundedIcon/RoundedIcon"));
 var _Tooltip = _interopRequireDefault(require("../Tooltip/Tooltip"));
 var _TextTooltipTemplate = _interopRequireDefault(require("../TooltipTemplate/TextTooltipTemplate"));
@@ -63,20 +64,22 @@ var PopUpDialog = /*#__PURE__*/_react.default.forwardRef(function (_ref, ref) {
     setShowPopUp(false);
   }, [closePopUp]);
   var calculateCustomPopUpPosition = (0, _react.useCallback)(function () {
-    if (customPosition && customPosition.element) {
-      var _ref3;
+    var _customPosition$eleme, _ref3;
+    if (customPosition !== null && customPosition !== void 0 && (_customPosition$eleme = customPosition.element) !== null && _customPosition$eleme !== void 0 && _customPosition$eleme.current && (_ref3 = ref) !== null && _ref3 !== void 0 && _ref3.current) {
       var elementRect = customPosition.element.current.getBoundingClientRect();
-      var popUpRect = (_ref3 = ref) === null || _ref3 === void 0 ? void 0 : _ref3.current.getBoundingClientRect();
+      var popUpRect = ref.current.getBoundingClientRect();
       var _customPosition$posit = customPosition.position.split('-'),
         _customPosition$posit2 = _slicedToArray(_customPosition$posit, 2),
         verticalPosition = _customPosition$posit2[0],
         horizontalPosition = _customPosition$posit2[1];
+      var popupMargin = 15;
+      var elementMargin = 5;
       var leftPosition = horizontalPosition === 'left' ? elementRect.right - popUpRect.width : elementRect.left;
       var topPosition;
       if (verticalPosition === 'top') {
-        topPosition = elementRect.top > popUpRect.height ? elementRect.top - popUpRect.height - 5 : 5;
+        topPosition = elementRect.top > popUpRect.height + popupMargin ? elementRect.top - popUpRect.height - elementMargin : popupMargin;
       } else {
-        topPosition = popUpRect.height + elementRect.bottom > window.innerHeight ? window.innerHeight - popUpRect.height - 5 : elementRect.bottom + 5;
+        topPosition = popUpRect.height + elementRect.bottom + popupMargin > window.innerHeight ? window.innerHeight - popUpRect.height - popupMargin : elementRect.bottom + elementMargin;
       }
       ref.current.style.top = "".concat(topPosition, "px");
       if (style.left) {
@@ -90,9 +93,13 @@ var PopUpDialog = /*#__PURE__*/_react.default.forwardRef(function (_ref, ref) {
     calculateCustomPopUpPosition();
   }, [calculateCustomPopUpPosition]);
   (0, _react.useEffect)(function () {
-    window.addEventListener('resize', calculateCustomPopUpPosition);
+    var throttledCalculatedCustomPopUpPosition = (0, _lodash.throttle)(calculateCustomPopUpPosition, 100, {
+      trailing: true,
+      leading: true
+    });
+    window.addEventListener('resize', throttledCalculatedCustomPopUpPosition);
     return function () {
-      window.removeEventListener('resize', calculateCustomPopUpPosition);
+      window.removeEventListener('resize', throttledCalculatedCustomPopUpPosition);
     };
   });
   return showPopUp ? /*#__PURE__*/(0, _reactDom.createPortal)( /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
