@@ -76,7 +76,9 @@ export const CHIPS = PropTypes.arrayOf(CHIP)
 
 export const POP_UP_CUSTOM_POSITION = PropTypes.shape({
   element: PropTypes.shape({}),
-  position: PropTypes.oneOf(['top-left', 'top-right', 'bottom-left', 'bottom-right'])
+  position: PropTypes.oneOf(['top-left', 'top-right', 'bottom-left', 'bottom-right']),
+  switchOppositeHorizontal: PropTypes.bool,
+  switchOppositeVertical: PropTypes.bool
 })
 
 export const MODAL_SIZES = PropTypes.oneOf([MODAL_SM, MODAL_MD, MODAL_LG, MODAL_MIN, MODAL_MAX])

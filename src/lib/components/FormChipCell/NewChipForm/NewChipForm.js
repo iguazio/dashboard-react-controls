@@ -17,7 +17,7 @@ such restriction.
 import React, { useState, useCallback, useEffect, useLayoutEffect, useMemo } from 'react'
 import PropTypes from 'prop-types'
 import classnames from 'classnames'
-import { isEmpty, get } from 'lodash'
+import { isEmpty, get, isNil } from 'lodash'
 
 import NewChipInput from '../NewChipInput/NewChipInput'
 import OptionsMenu from '../../../elements/OptionsMenu/OptionsMenu'
@@ -93,6 +93,11 @@ const NewChipForm = React.forwardRef(
       !isEmpty(get(meta, ['error', chipIndex, 'value'], [])) &&
         !isEmpty(chipData.value) &&
         'item_edited_invalid'
+    )
+
+    const closeButtonClass = classnames(
+      'edit-chip__icon-close',
+      (editConfig.chipIndex === chipIndex || !isEditable) && 'hidden'
     )
 
     useLayoutEffect(() => {
@@ -187,13 +192,12 @@ const NewChipForm = React.forwardRef(
 
     const focusChip = useCallback(
       (event) => {
-        event.stopPropagation()
 
         if (editConfig.chipIndex === chipIndex && isEditable) {
           if (!event.shiftKey && event.key === TAB && editConfig.isValueFocused) {
-            onChange(event, TAB)
+            return onChange(event, TAB)
           } else if (event.shiftKey && event.key === TAB && editConfig.isKeyFocused) {
-            onChange(event, TAB_SHIFT)
+            return onChange(event, TAB_SHIFT)
           }
 
           if (event.key === BACKSPACE || event.key === DELETE) {
@@ -206,14 +210,17 @@ const NewChipForm = React.forwardRef(
             }))
           }
         }
+
+        event.stopPropagation()
       },
       [editConfig, onChange, chipIndex, isEditable]
     )
 
     const handleOnFocus = useCallback(
       (event) => {
+        const isKeyFocused = event.target.name === keyName
         if (editConfig.chipIndex === chipIndex) {
-          if (event.target.name === keyName) {
+          if (isKeyFocused) {
             refInputKey.current.selectionStart = refInputKey.current.selectionEnd
 
             setEditConfig((prevConfig) => ({
@@ -232,6 +239,14 @@ const NewChipForm = React.forwardRef(
           }
 
           event && event.stopPropagation()
+          
+        } else if (isNil(editConfig.chipIndex)) {
+          setEditConfig({
+            chipIndex,
+            isEdit: true,
+            isKeyFocused: isKeyFocused,
+            isValueFocused: !isKeyFocused
+          })
         }
       },
       [keyName, refInputKey, refInputValue, setEditConfig, editConfig.chipIndex, chipIndex]
@@ -275,7 +290,7 @@ const NewChipForm = React.forwardRef(
       [maxWidthInput, refInputKey, refInputValue, keyName]
     )
 
-    useEffect(() => {
+    useLayoutEffect(() => {
       if (editConfig.chipIndex === chipIndex) {
         setSelectedInput(
           editConfig.isKeyFocused ? 'key' : editConfig.isValueFocused ? 'value' : null
@@ -325,7 +340,9 @@ const NewChipForm = React.forwardRef(
       >
         <NewChipInput
           className={labelKeyClassName}
-          disabled={!isEditable || (editConfig.chipIndex && editConfig.chipIndex !== chipIndex)}
+          disabled={
+            !isEditable || (!isNil(editConfig.chipIndex) && editConfig.chipIndex !== chipIndex)
+          }
           name={keyName}
           onChange={handleOnChange}
           onFocus={handleOnFocus}
@@ -337,7 +354,9 @@ const NewChipForm = React.forwardRef(
         {!chipData.isKeyOnly && (
           <NewChipInput
             className={labelValueClassName}
-            disabled={!isEditable || (editConfig.chipIndex && editConfig.chipIndex !== chipIndex)}
+            disabled={
+              !isEditable || (!isNil(editConfig.chipIndex) && editConfig.chipIndex !== chipIndex)
+            }
             name={valueName}
             onChange={handleOnChange}
             onFocus={handleOnFocus}
@@ -347,19 +366,17 @@ const NewChipForm = React.forwardRef(
           />
         )}
 
-        {editConfig.chipIndex !== chipIndex && isEditable && (
-          <button
-            className="edit-chip__icon-close"
-            onClick={(event) => handleRemoveChip(event, chipIndex)}
-          >
-            <Close />
-          </button>
-        )}
+        <button
+          className={closeButtonClass}
+          onClick={(event) => handleRemoveChip(event, chipIndex)}
+        >
+          <Close />
+        </button>
 
         {(editConfig.isKeyFocused ? !isEmpty(chipData.key) : !isEmpty(chipData.value)) &&
           editConfig.chipIndex === chipIndex &&
           !isEmpty(get(meta, ['error', editConfig.chipIndex, selectedInput], [])) && (
-            <OptionsMenu show={showValidationRules} ref={ref}>
+            <OptionsMenu show={showValidationRules} ref={refInputContainer}>
               {getValidationRules()}
             </OptionsMenu>
           )}

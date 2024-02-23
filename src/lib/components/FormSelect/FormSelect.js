@@ -14,7 +14,7 @@ illegal under applicable law, and the grant of the foregoing license
 under the Apache 2.0 license is conditioned upon your compliance with
 such restriction.
 */
-import React, { useState, useEffect, useCallback, useMemo, useRef, useLayoutEffect } from 'react'
+import React, { useState, useEffect, useCallback, useMemo, useRef } from 'react'
 import PropTypes from 'prop-types'
 import classNames from 'classnames'
 import { Field, useField } from 'react-final-form'
@@ -54,13 +54,12 @@ const FormSelect = ({
   const [isInvalid, setIsInvalid] = useState(false)
   const [isConfirmDialogOpen, setConfirmDialogOpen] = useState(false)
   const [isOpen, setIsOpen] = useState(false)
-  const [position, setPosition] = useState('bottom-right')
   const [searchValue, setSearchValue] = useState('')
   const optionsListRef = useRef()
   const popUpRef = useRef()
   const selectRef = useRef()
   const searchRef = useRef()
-  const { width: selectWidth, left: selectLeft } = selectRef?.current?.getBoundingClientRect() || {}
+  const { width: selectWidth } = selectRef?.current?.getBoundingClientRect() || {}
 
   const selectWrapperClassNames = classNames(
     'form-field__wrapper',
@@ -161,16 +160,6 @@ const FormSelect = ({
     },
     [closeMenu]
   )
-
-  useLayoutEffect(() => {
-    if (popUpRef?.current) {
-      const { width } = popUpRef.current.getBoundingClientRect()
-
-      selectLeft + width > window.innerWidth
-        ? setPosition('bottom-left')
-        : setPosition('bottom-right')
-    }
-  }, [isOpen, selectLeft])
 
   useEffect(() => {
     if (isOpen) {
@@ -345,7 +334,8 @@ const FormSelect = ({
                 ref={popUpRef}
                 customPosition={{
                   element: selectRef,
-                  position
+                  position: 'bottom-right',
+                  switchOppositeHorizontal: true
                 }}
                 style={{
                   maxWidth: `${selectWidth < 500 ? 500 : selectWidth}px`,

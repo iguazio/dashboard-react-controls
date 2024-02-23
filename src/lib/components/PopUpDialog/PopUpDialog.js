@@ -65,26 +65,59 @@ const PopUpDialog = React.forwardRef(
         const [verticalPosition, horizontalPosition] = customPosition.position.split('-')
         const popupMargin = 15
         const elementMargin = 5
+        const isEnoughSpaceFromLeft = elementRect.right >= popUpRect.width + popupMargin
+        const isEnoughSpaceFromRight =
+          window.innerWidth - elementRect.left >= popUpRect.width + popupMargin
+        const isEnoughSpaceFromTop =
+          elementRect.top > popUpRect.height + popupMargin + elementMargin
+        const isEnoughSpaceFromBottom =
+          elementRect.bottom + popUpRect.height + popupMargin + elementMargin <= window.innerHeight
         let leftPosition =
           horizontalPosition === 'left' ? elementRect.right - popUpRect.width : elementRect.left
 
         let topPosition
 
         if (verticalPosition === 'top') {
-          topPosition =
-            elementRect.top > popUpRect.height + popupMargin
-              ? elementRect.top - popUpRect.height - elementMargin
-              : popupMargin
+          topPosition = isEnoughSpaceFromTop
+            ? elementRect.top - popUpRect.height - elementMargin
+            : popupMargin
         } else {
-          topPosition =
-            popUpRect.height + elementRect.bottom + popupMargin > window.innerHeight
-              ? window.innerHeight - popUpRect.height - popupMargin
-              : elementRect.bottom + elementMargin
+          topPosition = isEnoughSpaceFromBottom
+            ? elementRect.bottom + elementMargin
+            : window.innerHeight - popUpRect.height - popupMargin
+        }
+
+        if (customPosition.switchOppositeVertical) {
+          if (verticalPosition === 'top') {
+            if (!isEnoughSpaceFromTop && isEnoughSpaceFromBottom) {
+              topPosition = elementRect.bottom + elementMargin
+            }
+          } else {
+            if (isEnoughSpaceFromTop && !isEnoughSpaceFromBottom) {
+              topPosition = elementRect.top - popUpRect.height - elementMargin
+            }
+          }
+        }
+
+        if (customPosition.switchOppositeHorizontal) {
+          if (verticalPosition === 'left') {
+            if (!isEnoughSpaceFromLeft && isEnoughSpaceFromRight) {
+              leftPosition = elementRect.left
+            } else if (!isEnoughSpaceFromLeft && !isEnoughSpaceFromRight) {
+              leftPosition = popupMargin
+            }
+          } else {
+            if (isEnoughSpaceFromLeft && !isEnoughSpaceFromRight) {
+              leftPosition = elementRect.right - popUpRect.width
+            } else if (!isEnoughSpaceFromLeft && !isEnoughSpaceFromRight) {
+              leftPosition = window.innerWidth - popUpRect.width - popupMargin
+            }
+          }
         }
 
         ref.current.style.top = `${topPosition}px`
 
-        if (style.left) {
+        if (style.left && !(customPosition.switchOppositeHorizontal && isEnoughSpaceFromRight)) {
           ref.current.style.left = `calc(${leftPosition}px + ${style.left})`
         } else {
           ref.current.style.left = `${leftPosition}px`

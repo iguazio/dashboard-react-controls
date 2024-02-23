@@ -31,9 +31,11 @@ const OptionsMenu = React.forwardRef(({ children, show, timeout }, ref) => {
         className="options-menu"
         customPosition={{
           element: ref,
-          position: 'bottom-right'
+          position: 'bottom-right',
+          switchOppositeVertical: true,
+          switchOppositeHorizontal: true
         }}
-        style={{ width: `${dropdownWidth}px` }}
+        style={{ 'minWidth': `${dropdownWidth}px` }}
       >
         <ul className="options-menu__body">{children}</ul>
       </PopUpDialog>
@@ -50,7 +52,7 @@ OptionsMenu.defaultProps = {
 OptionsMenu.propTypes = {
   children: PropTypes.arrayOf(PropTypes.element),
   show: PropTypes.bool.isRequired,
-  timout: PropTypes.number
+  timeout: PropTypes.number
 }
 
 export default OptionsMenu

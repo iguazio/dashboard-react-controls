@@ -151,6 +151,7 @@ const FormChipCell = ({
     (event, fields, nameEvent) => {
       const { key, value } = fields.value[editConfig.chipIndex]
       const isChipNotEmpty = !!(key?.trim() && value?.trim())
+      let preventDefault = true
 
       if (nameEvent === CLICK) {
         if (!isChipNotEmpty) {
@@ -172,13 +173,14 @@ const FormChipCell = ({
 
         setEditConfig((prevState) => {
           const lastChipSelected = prevState.chipIndex + 1 > fields.value.length - 1
+          preventDefault = !lastChipSelected
 
           isChipNotEmpty && lastChipSelected && onExitEditModeCallback && onExitEditModeCallback()
 
           return {
             chipIndex: lastChipSelected ? null : prevState.chipIndex + 1,
             isEdit: !lastChipSelected,
-            isKeyFocused: true,
+            isKeyFocused: !lastChipSelected,
             isValueFocused: false,
             isNewChip: false
           }
@@ -189,7 +191,8 @@ const FormChipCell = ({
         }
 
         setEditConfig((prevState) => {
-          const isPrevChipIndexExists = prevState.chipIndex - 1 < 0
+          const firstChipSelected = prevState.chipIndex === 0
+          preventDefault = !firstChipSelected
 
           isChipNotEmpty &&
             isPrevChipIndexExists &&
@@ -197,17 +200,20 @@ const FormChipCell = ({
             onExitEditModeCallback()
 
           return {
-            chipIndex: isPrevChipIndexExists ? null : prevState.chipIndex - 1,
-            isEdit: !isPrevChipIndexExists,
-            isKeyFocused: isPrevChipIndexExists,
-            isValueFocused: !isPrevChipIndexExists,
+            chipIndex: firstChipSelected ? null : prevState.chipIndex - 1,
+            isEdit: !firstChipSelected,
+            isKeyFocused: false,
+            isValueFocused: !firstChipSelected,
             isNewChip: false
           }
         })
       }
 
       checkChipsList(get(formState.values, name))
-      event && event.preventDefault()
+
+      if (preventDefault) {
+        event && event.preventDefault()
+      }
     },
     [
       editConfig.chipIndex,
@@ -222,14 +228,33 @@ const FormChipCell = ({
   const handleToEditMode = useCallback(
     (event, index) => {
       if (isEditable) {
+        const { clientX, clientY } = event
+        let isKeyClicked = false
+        const isClickedInElement = (x, y, element) => {
+          if (element) {
+            const { top, left, right, bottom } = element.getBoundingClientRect()
+            if (x > right || x < left) return false
+            if (y > bottom || y < top) return false
+
+            return true
+          }
+        }
         event.stopPropagation()
+
+        if (event.target.nodeName !== 'INPUT') {
+          if (event.target.firstElementChild) {
+            isKeyClicked = isClickedInElement(clientX, clientY, event.target.firstElementChild)
+          }
+        } else {
+          isKeyClicked = event.target.id?.endsWith?.('key')
+        }
 
         setEditConfig((preState) => ({
           ...preState,
           chipIndex: index,
           isEdit: true,
-          isKeyFocused: true,
-          isValueFocused: false
+          isKeyFocused: isKeyClicked ? true : false,
+          isValueFocused: isKeyClicked ? false : true
         }))
       }
 
