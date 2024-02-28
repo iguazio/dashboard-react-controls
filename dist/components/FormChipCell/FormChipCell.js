@@ -61,6 +61,7 @@ var FormChipCell = function FormChipCell(_ref) {
     shortChips = _ref.shortChips,
     validationRules = _ref.validationRules,
     validator = _ref.validator,
+    onExitEditModeCallback = _ref.onExitEditModeCallback,
     visibleChipsMaxLength = _ref.visibleChipsMaxLength;
   var chipsClassName = (0, _classnames.default)('chips', className);
   var _useChipCell = (0, _hooks.useChipCell)(isEditable, visibleChipsMaxLength),
@@ -129,8 +130,9 @@ var FormChipCell = function FormChipCell(_ref) {
       return index !== chipIndex;
     }).value());
     fields.remove(chipIndex);
+    onExitEditModeCallback && onExitEditModeCallback();
     event && event.stopPropagation();
-  }, [checkChipsList, formState, name]);
+  }, [checkChipsList, formState, name, onExitEditModeCallback]);
   var handleEditChip = (0, _react.useCallback)(function (event, fields, nameEvent) {
     var _fields$value$editCon = fields.value[editConfig.chipIndex],
       key = _fields$value$editCon.key,
@@ -147,12 +149,14 @@ var FormChipCell = function FormChipCell(_ref) {
         isValueFocused: false,
         isNewChip: false
       });
+      isChipNotEmpty && onExitEditModeCallback && onExitEditModeCallback();
     } else if (nameEvent === _constants.TAB) {
       if (!isChipNotEmpty) {
         handleRemoveChip(event, fields, editConfig.chipIndex);
       }
       setEditConfig(function (prevState) {
         var lastChipSelected = prevState.chipIndex + 1 > fields.value.length - 1;
+        isChipNotEmpty && lastChipSelected && onExitEditModeCallback && onExitEditModeCallback();
         return {
           chipIndex: lastChipSelected ? null : prevState.chipIndex + 1,
           isEdit: !lastChipSelected,
@@ -167,6 +171,7 @@ var FormChipCell = function FormChipCell(_ref) {
       }
       setEditConfig(function (prevState) {
         var isPrevChipIndexExists = prevState.chipIndex - 1 < 0;
+        isChipNotEmpty && isPrevChipIndexExists && onExitEditModeCallback && onExitEditModeCallback();
         return {
           chipIndex: isPrevChipIndexExists ? null : prevState.chipIndex - 1,
           isEdit: !isPrevChipIndexExists,
@@ -178,7 +183,7 @@ var FormChipCell = function FormChipCell(_ref) {
     }
     checkChipsList((0, _lodash.get)(formState.values, name));
     event && event.preventDefault();
-  }, [editConfig.chipIndex, handleRemoveChip, checkChipsList, formState.values, name]);
+  }, [editConfig.chipIndex, checkChipsList, formState.values, name, onExitEditModeCallback, handleRemoveChip]);
   var handleToEditMode = (0, _react.useCallback)(function (event, index) {
     if (isEditable) {
       event.stopPropagation();
@@ -278,6 +283,7 @@ var FormChipCell = function FormChipCell(_ref) {
         chipOptions: chipOptions,
         chips: chips,
         editConfig: editConfig,
+        formState: formState,
         handleAddNewChip: handleAddNewChip,
         handleEditChip: handleEditChip,
         handleRemoveChip: handleRemoveChip,

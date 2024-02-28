@@ -40,6 +40,7 @@ var FormChipCellView = /*#__PURE__*/_react.default.forwardRef(function (_ref, _r
   var chipOptions = _ref.chipOptions,
     chips = _ref.chips,
     editConfig = _ref.editConfig,
+    formState = _ref.formState,
     handleAddNewChip = _ref.handleAddNewChip,
     _handleEditChip = _ref.handleEditChip,
     _handleRemoveChip = _ref.handleRemoveChip,
@@ -63,6 +64,7 @@ var FormChipCellView = /*#__PURE__*/_react.default.forwardRef(function (_ref, _r
   var chipClassNames = (0, _classnames.default)('chip', 'chip__content', isEditable && 'data-ellipsis', shortChips && 'chip_short', chips.hiddenChips && 'chip_hidden', chipOptions.density && "chip-density_".concat(chipOptions.density), chipOptions.borderRadius && "chip-border_".concat(chipOptions.borderRadius), chipOptions.background && "chip-background_".concat(chipOptions.background), chipOptions.borderColor && "chip-border_".concat(chipOptions.borderColor), chipOptions.font && "chip-font_".concat(chipOptions.font), isEditable && 'editable', (showChips || isEditable) && 'chip_visible');
   return /*#__PURE__*/(0, _jsxRuntime.jsx)(_reactFinalFormArrays.FieldArray, {
     name: name,
+    initialValue: formState.initialValues[name],
     validate: validateFields,
     children: function children(_ref3) {
       var fields = _ref3.fields,
@@ -79,8 +81,9 @@ var FormChipCellView = /*#__PURE__*/_react.default.forwardRef(function (_ref, _r
           className: wrapperClassNames,
           ref: chipsWrapperRef,
           children: [fields.map(function (contentItem, index) {
+            var _chips$visibleChips;
             var chipData = fields.value[index];
-            return index < chips.visibleChips.length && /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
+            return index < ((_chips$visibleChips = chips.visibleChips) === null || _chips$visibleChips === void 0 ? void 0 : _chips$visibleChips.length) && /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
               className: "chip-block",
               children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_Tooltip.default, {
                 hidden: editConfig.isEdit,
@@ -166,6 +169,7 @@ FormChipCellView.propTypes = {
   chipOptions: _types.CHIP_OPTIONS,
   chips: _propTypes.default.object.isRequired,
   editConfig: _propTypes.default.object.isRequired,
+  formState: _propTypes.default.object.isRequired,
   handleAddNewChip: _propTypes.default.func.isRequired,
   handleEditChip: _propTypes.default.func.isRequired,
   handleRemoveChip: _propTypes.default.func.isRequired,

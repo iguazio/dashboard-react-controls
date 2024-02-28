@@ -26,7 +26,15 @@
     height: 100%;
 
     .wizard-form__hidden-content-item {
-      display: none;
+      position: absolute;
+      visibility: hidden;
+      height: 0;
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .wizard-form__visible-content-item {
+      height: 100%;
     }
   }
 }

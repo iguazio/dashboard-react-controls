@@ -79,6 +79,9 @@ var FormTextarea = /*#__PURE__*/_react.default.forwardRef(function (_ref, ref) {
   var formFieldClassNames = (0, _classnames.default)('form-field-textarea', className);
   var labelClassNames = (0, _classnames.default)('form-field__label', disabled && 'form-field__label-disabled');
   var textAreaClassNames = (0, _classnames.default)('form-field__wrapper', disabled && 'form-field__wrapper-disabled', isInvalid && 'form-field__wrapper-invalid', withoutBorder && 'without-border');
+  (0, _react.useLayoutEffect)(function () {
+    setTextAreaCount(input.value.length);
+  }, [input.value.length]);
   (0, _react.useEffect)(function () {
     if (focused) {
       textAreaRef.current.focus();
@@ -93,7 +96,6 @@ var FormTextarea = /*#__PURE__*/_react.default.forwardRef(function (_ref, ref) {
   };
   var handleInputChange = function handleInputChange(event) {
     input.onChange(event);
-    setTextAreaCount(event.target.value.length);
     onChange && onChange(event.target.value);
   };
   var handleInputFocus = function handleInputFocus(event) {

@@ -44,10 +44,11 @@ var FormKeyValueTable = function FormKeyValueTable(_ref) {
     keyHeader = _ref.keyHeader,
     keyLabel = _ref.keyLabel,
     keyOptions = _ref.keyOptions,
+    onExitEditModeCallback = _ref.onExitEditModeCallback,
     valueHeader = _ref.valueHeader,
     valueLabel = _ref.valueLabel;
   var tableClassNames = (0, _classnames.default)('form-table form-key-value-table', className);
-  var _useFormTable = (0, _hooks.useFormTable)(formState, exitEditModeTriggerItem),
+  var _useFormTable = (0, _hooks.useFormTable)(formState, exitEditModeTriggerItem, onExitEditModeCallback),
     addNewRow = _useFormTable.addNewRow,
     applyChanges = _useFormTable.applyChanges,
     bottomScrollRef = _useFormTable.bottomScrollRef,
@@ -190,6 +191,7 @@ FormKeyValueTable.defaultProps = {
   keyHeader: 'Key',
   keyLabel: 'Key',
   keyOptions: null,
+  onExitEditModeCallback: function onExitEditModeCallback() {},
   valueHeader: 'Value',
   valueLabel: 'Value'
 };
@@ -210,6 +212,7 @@ FormKeyValueTable.propTypes = {
     label: _propTypes.default.string.isRequired,
     id: _propTypes.default.string.isRequired
   })),
+  onExitEditModeCallback: _propTypes.default.func,
   valueHeader: _propTypes.default.string,
   valueLabel: _propTypes.default.string
 };

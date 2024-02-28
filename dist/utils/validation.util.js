@@ -58,8 +58,7 @@ var convertToLabel = function convertToLabel(chars) {
  * @param {string} chars - characters to convert
  * @returns {string} - converted string
  * @example
- * convertToPattern('a-z A-Z - _ *');
- * // => 'a-zA-Z\-\_\*'
+ * convertToPattern('a-z A-Z - _ *') => 'a-zA-Z\-\_\*'
  */
 var convertToPattern = function convertToPattern(chars) {
   return chars.split(' ').map(function (patternItem) {
@@ -283,22 +282,67 @@ var generateRule = {
     };
   }
 };
+var commonRules = {
+  prefixedQualifiedName: [{
+    name: 'nameValidCharacters',
+    label: "[Name] ".concat(_constants.validation.VALID_CHARACTERS, " : a\u2013z, A\u2013Z, 0\u20139, \u2013, _, ."),
+    pattern: /^([^/]+\/)?[\w.-]+$/
+  }, {
+    name: 'nameBeginEnd',
+    label: "[Name] ".concat(_constants.validation.BEGIN_END_WITH, ": a\u2013z, A\u2013Z, 0\u20139"),
+    pattern: /^([^/]+\/)?([A-Za-z0-9][^/]*)?[A-Za-z0-9]$/
+  }, {
+    name: 'nameMaxLength',
+    label: '[Name] Max length - 63 characters',
+    pattern: /^([^/]+\/)?[^/]{1,63}$/
+  }, {
+    name: 'prefixValidCharacters',
+    label: "[Prefix] ".concat(_constants.validation.VALID_CHARACTERS, ": a\u2013z, 0\u20139, \u2013, ."),
+    pattern: /^([a-z0-9.-]+\/)?[^/]+$/
+  }, {
+    name: 'prefixBeginEnd',
+    label: "[Prefix] ".concat(_constants.validation.BEGIN_END_WITH, ": a\u2013z, 0\u20139"),
+    pattern: /^([a-z0-9]([^/]*[a-z0-9])?\/)?[^/]+$/
+  }, {
+    name: 'prefixMaxLength',
+    label: '[Prefix] Max length - 253 characters',
+    pattern: /^(?![^/]{254,}\/)/
+  }],
+  k8sLabels: {
+    value: [{
+      name: 'valueBeginEnd',
+      label: "[Value] ".concat(_constants.validation.BEGIN_END_WITH, " : a\u2013z, A\u2013Z, 0\u20139"),
+      pattern: /^([^/]+\/)?([A-Za-z0-9][^/]*)?[A-Za-z0-9]$/
+    }, {
+      name: 'valueMaxLength',
+      label: '[Value] Max length - 63 characters',
+      pattern: /^([^/]+\/)?[^/]{1,63}$/
+    }, {
+      name: 'valueValidCharacters',
+      label: "[Value] ".concat(_constants.validation.VALID_CHARACTERS, ": a\u2013z, A\u2013Z, 0\u20139, \u2013, _, ."),
+      pattern: /^[a-zA-Z0-9\-_.]+$/
+    }]
+  }
+  // email: [
+  //   generateRule.beginEndNotWith('@ .'),
+  //   {
+  //     name: 'exactlyOne',
+  //     label: ValidationConstants.MUST_CONTAIN_EXACTLY_ONE + ': @',
+  //     pattern: /^[^@]+@[^@]+$/
+  //   },
+  //   {
+  //     name: 'dotAfterAt',
+  //     label: ValidationConstants.MUST_HAVE_DOT_AFTER_AT,
+  //     pattern: /@.+\..+$/
+  //   }
+  // ]
+};
 
-//const commonRules = {
-// email: [
-//   generateRule.beginEndNotWith('@ .'),
-//   {
-//     name: 'exactlyOne',
-//     label: ValidationConstants.MUST_CONTAIN_EXACTLY_ONE + ': @',
-//     pattern: /^[^@]+@[^@]+$/
-//   },
-//   {
-//     name: 'dotAfterAt',
-//     label: ValidationConstants.MUST_HAVE_DOT_AFTER_AT,
-//     pattern: /@.+\..+$/
-//   }
-// ]
-//}
+commonRules.k8sLabels.key = commonRules.prefixedQualifiedName.concat({
+  name: 'prefixNotStart',
+  label: "[Prefix] Must not start with 'kubernetes.io', 'k8s.io'",
+  pattern: /^(?!kubernetes\.io\/)(?!k8s\.io\/)/
+});
 var validationRules = {
   artifact: {
     name: [generateRule.validCharacters('a-z A-Z 0-9 - _ .'), generateRule.beginEndWith('a-z A-Z 0-9'), generateRule.length({
@@ -334,7 +378,11 @@ var validationRules = {
   project: {
     name: [generateRule.validCharacters('a-z 0-9 -'), generateRule.beginWith('a-z'), generateRule.endWith('a-z 0-9'), generateRule.length({
       max: 63
-    }), generateRule.required()]
+    }), generateRule.required()],
+    labels: {
+      key: commonRules.k8sLabels.key,
+      value: commonRules.k8sLabels.value
+    }
   },
   environmentVariables: {
     secretName: [generateRule.validCharacters('a-z A-Z 0-9 - _ .'), generateRule.beginEndWith('a-z A-Z 0-9'), generateRule.noConsecutiveCharacters('.., .–, –.'), generateRule.maxLengthBetweenDelimiters(/[\.\-\_]/, 63, 'periods'), generateRule.length({

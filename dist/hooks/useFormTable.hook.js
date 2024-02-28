@@ -37,7 +37,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; } /*
                                                                       under the Apache 2.0 license is conditioned upon your compliance with
                                                                       such restriction.
                                                                       */
-var useFormTable = function useFormTable(formState, exitEditModeTriggerItem) {
+var useFormTable = function useFormTable(formState, exitEditModeTriggerItem, onExitEditModeCallback) {
   // `editingItem` should contain the `data` object with all fields that are used in the `formState`.
   // Properties that aren't used in the `formState` should be placed directly in the `editingItem` object
   // `editingItem` also has an `ui` property which is used internally in this hook
@@ -63,6 +63,7 @@ var useFormTable = function useFormTable(formState, exitEditModeTriggerItem) {
   var editingItemErrorsRef = (0, _react.useRef)(null);
   var formStateRef = (0, _react.useRef)(null);
   var bottomScrollRef = (0, _react.useRef)(null);
+  var onExitEditModeCallbackRef = (0, _react.useRef)(onExitEditModeCallback);
   (0, _react.useLayoutEffect)(function () {
     var tableErrors = (0, _lodash.get)(formState === null || formState === void 0 ? void 0 : formState.errors, editingItem === null || editingItem === void 0 ? void 0 : editingItem.ui.fieldsPath, []);
     editingItemErrorsRef.current = (0, _lodash.get)(tableErrors, editingItem === null || editingItem === void 0 ? void 0 : editingItem.ui.index, null);
@@ -70,40 +71,55 @@ var useFormTable = function useFormTable(formState, exitEditModeTriggerItem) {
   (0, _react.useLayoutEffect)(function () {
     formStateRef.current = formState;
   }, [formState]);
-  var applyOrDiscardOrDeleteInEffect = (0, _react.useCallback)(function () {
-    if (editingItemRef !== null && editingItemRef !== void 0 && editingItemRef.current) {
-      if (!editingItemErrorsRef.current) {
-        exitEditMode();
-      } else {
-        var _editingItemRef$curre, _editingItemRef$curre2;
-        if ((_editingItemRef$curre = editingItemRef.current) !== null && _editingItemRef$curre !== void 0 && (_editingItemRef$curre2 = _editingItemRef$curre.ui) !== null && _editingItemRef$curre2 !== void 0 && _editingItemRef$curre2.isNew) {
-          var _editingItemRef$curre3;
-          var values = (0, _lodash.get)(formStateRef.current.values, (_editingItemRef$curre3 = editingItemRef.current) === null || _editingItemRef$curre3 === void 0 ? void 0 : _editingItemRef$curre3.ui.fieldsPath);
-          if ((values === null || values === void 0 ? void 0 : values.length) > 1) {
-            var _editingItemRef$curre4, _editingItemRef$curre5;
-            formStateRef.current.form.mutators.remove((_editingItemRef$curre4 = editingItemRef.current) === null || _editingItemRef$curre4 === void 0 ? void 0 : _editingItemRef$curre4.ui.fieldsPath, (_editingItemRef$curre5 = editingItemRef.current) === null || _editingItemRef$curre5 === void 0 ? void 0 : _editingItemRef$curre5.ui.index);
-          } else {
-            var _editingItemRef$curre6;
-            formStateRef.current.form.change((_editingItemRef$curre6 = editingItemRef.current) === null || _editingItemRef$curre6 === void 0 ? void 0 : _editingItemRef$curre6.ui.fieldsPath, []);
-          }
+  (0, _react.useLayoutEffect)(function () {
+    onExitEditModeCallbackRef.current = onExitEditModeCallback;
+  }, [onExitEditModeCallback]);
+  var exitEditMode = function exitEditMode() {
+    var _editingItemRef$curre;
+    if ((_editingItemRef$curre = editingItemRef.current) !== null && _editingItemRef$curre !== void 0 && _editingItemRef$curre.data) {
+      var _editingItemRef$curre2;
+      Object.entries((_editingItemRef$curre2 = editingItemRef.current) === null || _editingItemRef$curre2 === void 0 ? void 0 : _editingItemRef$curre2.data).forEach(function (_ref) {
+        var _formStateRef$current, _editingItemRef$curre3, _editingItemRef$curre4;
+        var _ref2 = _slicedToArray(_ref, 1),
+          fieldName = _ref2[0];
+        (_formStateRef$current = formStateRef.current) === null || _formStateRef$current === void 0 ? void 0 : _formStateRef$current.form.mutators.setFieldState("".concat((_editingItemRef$curre3 = editingItemRef.current) === null || _editingItemRef$curre3 === void 0 ? void 0 : _editingItemRef$curre3.ui.fieldsPath, "[").concat((_editingItemRef$curre4 = editingItemRef.current) === null || _editingItemRef$curre4 === void 0 ? void 0 : _editingItemRef$curre4.ui.index, "].data.").concat(fieldName), {
+          modified: false
+        });
+      });
+    }
+    editingItemRef.current = null;
+    setEditingItem(null);
+    (onExitEditModeCallbackRef === null || onExitEditModeCallbackRef === void 0 ? void 0 : onExitEditModeCallbackRef.current) && onExitEditModeCallbackRef.current();
+  };
+  (0, _react.useEffect)(function () {
+    var applyOrDiscardOrDeleteInEffect = function applyOrDiscardOrDeleteInEffect() {
+      if (editingItemRef !== null && editingItemRef !== void 0 && editingItemRef.current) {
+        if (!editingItemErrorsRef.current) {
+          exitEditMode();
         } else {
-          var _editingItemRef$curre7, _editingItemRef$curre8;
-          formStateRef.current.form.mutators.update((_editingItemRef$curre7 = editingItemRef.current) === null || _editingItemRef$curre7 === void 0 ? void 0 : _editingItemRef$curre7.ui.fieldsPath, (_editingItemRef$curre8 = editingItemRef.current) === null || _editingItemRef$curre8 === void 0 ? void 0 : _editingItemRef$curre8.ui.index, (0, _lodash.omit)(editingItemRef.current, ['ui']));
+          var _editingItemRef$curre5, _editingItemRef$curre6;
+          if ((_editingItemRef$curre5 = editingItemRef.current) !== null && _editingItemRef$curre5 !== void 0 && (_editingItemRef$curre6 = _editingItemRef$curre5.ui) !== null && _editingItemRef$curre6 !== void 0 && _editingItemRef$curre6.isNew) {
+            var _editingItemRef$curre7;
+            var values = (0, _lodash.get)(formStateRef.current.values, (_editingItemRef$curre7 = editingItemRef.current) === null || _editingItemRef$curre7 === void 0 ? void 0 : _editingItemRef$curre7.ui.fieldsPath);
+            if ((values === null || values === void 0 ? void 0 : values.length) > 1) {
+              var _editingItemRef$curre8, _editingItemRef$curre9;
+              formStateRef.current.form.mutators.remove((_editingItemRef$curre8 = editingItemRef.current) === null || _editingItemRef$curre8 === void 0 ? void 0 : _editingItemRef$curre8.ui.fieldsPath, (_editingItemRef$curre9 = editingItemRef.current) === null || _editingItemRef$curre9 === void 0 ? void 0 : _editingItemRef$curre9.ui.index);
+            } else {
+              var _editingItemRef$curre10;
+              formStateRef.current.form.change((_editingItemRef$curre10 = editingItemRef.current) === null || _editingItemRef$curre10 === void 0 ? void 0 : _editingItemRef$curre10.ui.fieldsPath, []);
+            }
+          } else {
+            var _editingItemRef$curre11, _editingItemRef$curre12;
+            formStateRef.current.form.mutators.update((_editingItemRef$curre11 = editingItemRef.current) === null || _editingItemRef$curre11 === void 0 ? void 0 : _editingItemRef$curre11.ui.fieldsPath, (_editingItemRef$curre12 = editingItemRef.current) === null || _editingItemRef$curre12 === void 0 ? void 0 : _editingItemRef$curre12.ui.index, (0, _lodash.omit)(editingItemRef.current, ['ui']));
+          }
+          exitEditMode();
         }
-        exitEditMode();
       }
-    }
-  }, []);
-  (0, _react.useEffect)(function () {
-    if (editingItemRef !== null && editingItemRef !== void 0 && editingItemRef.current) {
-      applyOrDiscardOrDeleteInEffect();
-    }
-  }, [applyOrDiscardOrDeleteInEffect, exitEditModeTriggerItem]);
-  (0, _react.useEffect)(function () {
+    };
     return function () {
       applyOrDiscardOrDeleteInEffect();
     };
-  }, [applyOrDiscardOrDeleteInEffect]);
+  }, [exitEditModeTriggerItem]);
   var addNewRow = function addNewRow(event, fields, fieldsPath, newItem) {
     applyOrDiscardOrDelete(event);
     formStateRef.current.form.mutators.push(fieldsPath, newItem);
@@ -124,19 +140,19 @@ var useFormTable = function useFormTable(formState, exitEditModeTriggerItem) {
   var applyChanges = function applyChanges(event, index) {
     if (editingItemRef.current) {
       if (!editingItemErrorsRef.current) {
-        var _editingItemRef$curre9;
-        if ((_editingItemRef$curre9 = editingItemRef.current) !== null && _editingItemRef$curre9 !== void 0 && _editingItemRef$curre9.ui.isNew) {
+        var _editingItemRef$curre13;
+        if ((_editingItemRef$curre13 = editingItemRef.current) !== null && _editingItemRef$curre13 !== void 0 && _editingItemRef$curre13.ui.isNew) {
           scrollIntoView();
         }
         exitEditMode();
       } else {
         var _editingItemErrorsRef;
         // Mark all empty fields as `modified` in order to highlight the error if the field is invalid
-        Object.entries((_editingItemErrorsRef = editingItemErrorsRef.current) === null || _editingItemErrorsRef === void 0 ? void 0 : _editingItemErrorsRef.data).forEach(function (_ref) {
-          var _formStateRef$current, _editingItemRef$curre10;
-          var _ref2 = _slicedToArray(_ref, 1),
-            fieldName = _ref2[0];
-          (_formStateRef$current = formStateRef.current) === null || _formStateRef$current === void 0 ? void 0 : _formStateRef$current.form.mutators.setFieldState("".concat((_editingItemRef$curre10 = editingItemRef.current) === null || _editingItemRef$curre10 === void 0 ? void 0 : _editingItemRef$curre10.ui.fieldsPath, "[").concat(index, "].data.").concat(fieldName), {
+        Object.entries((_editingItemErrorsRef = editingItemErrorsRef.current) === null || _editingItemErrorsRef === void 0 ? void 0 : _editingItemErrorsRef.data).forEach(function (_ref3) {
+          var _formStateRef$current2, _editingItemRef$curre14;
+          var _ref4 = _slicedToArray(_ref3, 1),
+            fieldName = _ref4[0];
+          (_formStateRef$current2 = formStateRef.current) === null || _formStateRef$current2 === void 0 ? void 0 : _formStateRef$current2.form.mutators.setFieldState("".concat((_editingItemRef$curre14 = editingItemRef.current) === null || _editingItemRef$curre14 === void 0 ? void 0 : _editingItemRef$curre14.ui.fieldsPath, "[").concat(index, "].data.").concat(fieldName), {
             modified: true
           });
         });
@@ -162,8 +178,8 @@ var useFormTable = function useFormTable(formState, exitEditModeTriggerItem) {
     event && event.stopPropagation();
   };
   var discardOrDelete = function discardOrDelete(event, fieldsPath, index) {
-    var _editingItemRef$curre11, _editingItemRef$curre12;
-    if (!editingItemRef.current || (_editingItemRef$curre11 = editingItemRef.current) !== null && _editingItemRef$curre11 !== void 0 && (_editingItemRef$curre12 = _editingItemRef$curre11.ui) !== null && _editingItemRef$curre12 !== void 0 && _editingItemRef$curre12.isNew) {
+    var _editingItemRef$curre15, _editingItemRef$curre16;
+    if (!editingItemRef.current || (_editingItemRef$curre15 = editingItemRef.current) !== null && _editingItemRef$curre15 !== void 0 && (_editingItemRef$curre16 = _editingItemRef$curre15.ui) !== null && _editingItemRef$curre16 !== void 0 && _editingItemRef$curre16.isNew) {
       deleteRow(event, fieldsPath, index);
     } else {
       discardChanges(event, fieldsPath, index);
@@ -173,11 +189,11 @@ var useFormTable = function useFormTable(formState, exitEditModeTriggerItem) {
     var event = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
     if (editingItemRef !== null && editingItemRef !== void 0 && editingItemRef.current) {
       if (!editingItemErrorsRef.current) {
-        var _editingItemRef$curre13;
-        applyChanges(event, (_editingItemRef$curre13 = editingItemRef.current) === null || _editingItemRef$curre13 === void 0 ? void 0 : _editingItemRef$curre13.ui.index);
+        var _editingItemRef$curre17;
+        applyChanges(event, (_editingItemRef$curre17 = editingItemRef.current) === null || _editingItemRef$curre17 === void 0 ? void 0 : _editingItemRef$curre17.ui.index);
       } else {
-        var _editingItemRef$curre14, _editingItemRef$curre15;
-        discardOrDelete(event, (_editingItemRef$curre14 = editingItemRef.current) === null || _editingItemRef$curre14 === void 0 ? void 0 : _editingItemRef$curre14.ui.fieldsPath, (_editingItemRef$curre15 = editingItemRef.current) === null || _editingItemRef$curre15 === void 0 ? void 0 : _editingItemRef$curre15.ui.index);
+        var _editingItemRef$curre18, _editingItemRef$curre19;
+        discardOrDelete(event, (_editingItemRef$curre18 = editingItemRef.current) === null || _editingItemRef$curre18 === void 0 ? void 0 : _editingItemRef$curre18.ui.fieldsPath, (_editingItemRef$curre19 = editingItemRef.current) === null || _editingItemRef$curre19 === void 0 ? void 0 : _editingItemRef$curre19.ui.index);
       }
     }
   };
@@ -196,22 +212,6 @@ var useFormTable = function useFormTable(formState, exitEditModeTriggerItem) {
         return newEditingItem;
       });
     });
-  };
-  var exitEditMode = function exitEditMode() {
-    var _editingItemRef$curre16;
-    if ((_editingItemRef$curre16 = editingItemRef.current) !== null && _editingItemRef$curre16 !== void 0 && _editingItemRef$curre16.data) {
-      var _editingItemRef$curre17;
-      Object.entries((_editingItemRef$curre17 = editingItemRef.current) === null || _editingItemRef$curre17 === void 0 ? void 0 : _editingItemRef$curre17.data).forEach(function (_ref3) {
-        var _formStateRef$current2, _editingItemRef$curre18, _editingItemRef$curre19;
-        var _ref4 = _slicedToArray(_ref3, 1),
-          fieldName = _ref4[0];
-        (_formStateRef$current2 = formStateRef.current) === null || _formStateRef$current2 === void 0 ? void 0 : _formStateRef$current2.form.mutators.setFieldState("".concat((_editingItemRef$curre18 = editingItemRef.current) === null || _editingItemRef$curre18 === void 0 ? void 0 : _editingItemRef$curre18.ui.fieldsPath, "[").concat((_editingItemRef$curre19 = editingItemRef.current) === null || _editingItemRef$curre19 === void 0 ? void 0 : _editingItemRef$curre19.ui.index, "].data.").concat(fieldName), {
-          modified: false
-        });
-      });
-    }
-    editingItemRef.current = null;
-    setEditingItem(null);
   };
   var scrollIntoView = function scrollIntoView() {
     if (bottomScrollRef.current) {

@@ -108,7 +108,7 @@ var Wizard = function Wizard(_ref) {
         stepIsActive: stepIsActive
       }) : null;
       return /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
-        className: !stepIsActive ? 'wizard-form__hidden-content-item' : '',
+        className: !stepIsActive ? 'wizard-form__hidden-content-item' : 'wizard-form__visible-content-item',
         children: newChild
       }, idx);
     });

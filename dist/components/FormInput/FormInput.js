@@ -22,7 +22,7 @@ var _popout = require("../../images/popout.svg");
 var _warning = require("../../images/warning.svg");
 require("./formInput.scss");
 var _jsxRuntime = require("react/jsx-runtime");
-var _excluded = ["async", "className", "customRequiredLabel", "density", "disabled", "focused", "iconClass", "iconClick", "inputIcon", "invalidText", "label", "link", "name", "onBlur", "onChange", "onFocus", "pattern", "required", "suggestionList", "tip", "validationRules", "validator", "withoutBorder"];
+var _excluded = ["async", "className", "customRequiredLabel", "density", "disabled", "focused", "iconClass", "iconClick", "inputIcon", "invalidText", "label", "link", "name", "onBlur", "onChange", "onFocus", "onKeyDown", "pattern", "required", "suggestionList", "tip", "validationRules", "validator", "withoutBorder"];
 /*
 Copyright 2022 Iguazio Systems Ltd.
 Licensed under the Apache License, Version 2.0 (the "License") with
@@ -76,6 +76,7 @@ var FormInput = /*#__PURE__*/_react.default.forwardRef(function (_ref, ref) {
     onBlur = _ref.onBlur,
     onChange = _ref.onChange,
     onFocus = _ref.onFocus,
+    onKeyDown = _ref.onKeyDown,
     pattern = _ref.pattern,
     required = _ref.required,
     suggestionList = _ref.suggestionList,
@@ -183,8 +184,12 @@ var FormInput = /*#__PURE__*/_react.default.forwardRef(function (_ref, ref) {
   };
   var handleInputFocus = function handleInputFocus(event) {
     input.onFocus && input.onFocus(event);
-    onFocus && onFocus();
+    onFocus && onFocus(event);
     setIsFocused(true);
+  };
+  var handleInputKeyDown = function handleInputKeyDown(event) {
+    input.onKeyDown && input.onKeyDown(event);
+    onKeyDown && onKeyDown(event);
   };
   var handleScroll = function handleScroll(event) {
     if (inputRef.current && inputRef.current.contains(event.target)) return;
@@ -368,6 +373,7 @@ var FormInput = /*#__PURE__*/_react.default.forwardRef(function (_ref, ref) {
             }, inputProps), input)), {}, {
               autoComplete: (_inputProps$autocompl = inputProps.autocomplete) !== null && _inputProps$autocompl !== void 0 ? _inputProps$autocompl : 'off',
               onBlur: handleInputBlur,
+              onKeyDown: handleInputKeyDown,
               onFocus: handleInputFocus
             }))
           }), /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {

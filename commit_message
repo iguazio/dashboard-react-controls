@@ -1,7 +1,7 @@
 
 
-Create a new dist version 1.8.9
+Create a new dist version 1.8.10
 
 Collecting:
-- Fix [UI] Status indicator size (#242)
-- Fix [Datepicker] position should use window size (#241)
+- Fix [Batch run] Display selected function on return to step 1 (#244)
+- Impl [Project setting] Provide validation rules on labels in UI (#245)
