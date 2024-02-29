@@ -194,10 +194,7 @@ const FormChipCell = ({
           const firstChipSelected = prevState.chipIndex === 0
           preventDefault = !firstChipSelected
 
-          isChipNotEmpty &&
-            isPrevChipIndexExists &&
-            onExitEditModeCallback &&
-            onExitEditModeCallback()
+          isChipNotEmpty && firstChipSelected && onExitEditModeCallback && onExitEditModeCallback()
 
           return {
             chipIndex: firstChipSelected ? null : prevState.chipIndex - 1,
