@@ -58,7 +58,7 @@ const FormChip = React.forwardRef(
     }, [chipIndex, setChipsSizes])
 
     return (
-      <div onClick={(event) => handleToEditMode(event, chipIndex)} ref={chipRef}>
+      <div onClick={(event) => handleToEditMode(event, chipIndex, keyName)} ref={chipRef}>
         <NewChipForm
           chip={chip}
           chipIndex={chipIndex}

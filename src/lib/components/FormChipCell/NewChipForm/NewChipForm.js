@@ -192,7 +192,6 @@ const NewChipForm = React.forwardRef(
 
     const focusChip = useCallback(
       (event) => {
-
         if (editConfig.chipIndex === chipIndex && isEditable) {
           if (!event.shiftKey && event.key === TAB && editConfig.isValueFocused) {
             return onChange(event, TAB)
@@ -201,12 +200,32 @@ const NewChipForm = React.forwardRef(
           }
 
           if (event.key === BACKSPACE || event.key === DELETE) {
+
+            const changeWidth = (inputRef) => {
+              if (inputRef.current?.selectionStart === 0 && event.key === BACKSPACE) {
+
+                return false
+              } else if (
+                inputRef.current?.selectionEnd === inputRef.current?.value?.length &&
+                event.key === DELETE
+              ) {
+
+                return false
+              }
+
+              return true
+            }
+
             setChipData((prevState) => ({
               ...prevState,
-              keyFieldWidth: editConfig.isKeyFocused ? minWidthInput : prevState.keyFieldWidth,
-              valueFieldWidth: editConfig.isValueFocused
-                ? minWidthValueInput
-                : prevState.valueFieldWidth
+              keyFieldWidth:
+                editConfig.isKeyFocused && changeWidth(refInputKey)
+                  ? minWidthInput
+                  : prevState.keyFieldWidth,
+              valueFieldWidth:
+                editConfig.isValueFocused && changeWidth(refInputValue)
+                  ? minWidthValueInput
+                  : prevState.valueFieldWidth
             }))
           }
         }
@@ -239,8 +258,12 @@ const NewChipForm = React.forwardRef(
           }
 
           event && event.stopPropagation()
-          
         } else if (isNil(editConfig.chipIndex)) {
+          if (isKeyFocused) {
+            refInputKey.current.selectionStart = refInputKey.current.selectionEnd
+          } else {
+            refInputValue.current.selectionStart = refInputValue.current.selectionEnd
+          }
           setEditConfig({
             chipIndex,
             isEdit: true,

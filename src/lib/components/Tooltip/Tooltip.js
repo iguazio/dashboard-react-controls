@@ -49,7 +49,7 @@ const Tooltip = ({ children, className, hidden, id, renderChildAsHtml, template,
     ) {
       setShow(false)
     }
-  }, [])
+  }, [hidden])
 
   const handleMouseEnter = useCallback(
     (event) => {
