@@ -1,7 +1,7 @@
 
 
-Create a new dist version 1.8.10
+Create a new dist version 1.8.11
 
 Collecting:
-- Fix [Batch run] Display selected function on return to step 1 (#244)
-- Impl [Project setting] Provide validation rules on labels in UI (#245)
+- Fix [Project Settings] Validation on parameter - trailing white spaces (#247)
+- Impl [Artifacts] lazy load of Data (#248)

@@ -50,7 +50,7 @@ function _toPrimitive(input, hint) { if (_typeof(input) !== "object" || input ==
  * // => 'a–z, A–Z, –, _, *'
  */
 var convertToLabel = function convertToLabel(chars) {
-  return chars.replace(/-/g, '–').replace(/\s/g, ', ').replace(/\bs\b/);
+  return chars.replace(/-/g, '–').replace(/\s/g, ', ').replace(/\bs\b/, 'spaces');
 };
 
 /**
@@ -382,6 +382,10 @@ var validationRules = {
     labels: {
       key: commonRules.k8sLabels.key,
       value: commonRules.k8sLabels.value
+    },
+    params: {
+      key: [generateRule.beginEndNotWith('s')],
+      value: [generateRule.beginEndNotWith('s')]
     }
   },
   environmentVariables: {
