@@ -97,7 +97,7 @@ const NewChipForm = React.forwardRef(
 
     const closeButtonClass = classnames(
       'edit-chip__icon-close',
-      (editConfig.chipIndex === chipIndex || !isEditable) && 'edit-chip__icon-close-hidden'
+      (editConfig.chipIndex === chipIndex || !isEditable) && 'edit-chip__icon-close_hidden'
     )
 
     useLayoutEffect(() => {
@@ -229,7 +229,6 @@ const NewChipForm = React.forwardRef(
             }))
           }
         }
-
         event.stopPropagation()
       },
       [editConfig, onChange, chipIndex, isEditable]
@@ -238,6 +237,7 @@ const NewChipForm = React.forwardRef(
     const handleOnFocus = useCallback(
       (event) => {
         const isKeyFocused = event.target.name === keyName
+
         if (editConfig.chipIndex === chipIndex) {
           if (isKeyFocused) {
             refInputKey.current.selectionStart = refInputKey.current.selectionEnd

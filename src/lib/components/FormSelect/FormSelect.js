@@ -335,7 +335,7 @@ const FormSelect = ({
                 customPosition={{
                   element: selectRef,
                   position: 'bottom-right',
-                  switchOppositeHorizontal: true
+                  autoHorizontalPosition: true
                 }}
                 style={{
                   maxWidth: `${selectWidth < 500 ? 500 : selectWidth}px`,

@@ -32,8 +32,8 @@ const OptionsMenu = React.forwardRef(({ children, show, timeout }, ref) => {
         customPosition={{
           element: ref,
           position: 'bottom-right',
-          switchOppositeVertical: true,
-          switchOppositeHorizontal: true
+          autoVerticalPosition: true,
+          autoHorizontalPosition : true
         }}
         style={{ 'minWidth': `${dropdownWidth}px` }}
       >

@@ -87,7 +87,7 @@ const PopUpDialog = React.forwardRef(
             : window.innerHeight - popUpRect.height - popupMargin
         }
 
-        if (customPosition.switchOppositeVertical) {
+        if (customPosition.autoVerticalPosition) {
           if (verticalPosition === 'top') {
             if (!isEnoughSpaceFromTop && isEnoughSpaceFromBottom) {
               topPosition = elementRect.bottom + elementMargin
@@ -99,7 +99,7 @@ const PopUpDialog = React.forwardRef(
           }
         }
 
-        if (customPosition.switchOppositeHorizontal) {
+        if (customPosition.autoHorizontalPosition) {
           if (verticalPosition === 'left') {
             if (!isEnoughSpaceFromLeft && isEnoughSpaceFromRight) {
               leftPosition = elementRect.left
@@ -117,7 +117,7 @@ const PopUpDialog = React.forwardRef(
 
         ref.current.style.top = `${topPosition}px`
 
-        if (style.left && !(customPosition.switchOppositeHorizontal && isEnoughSpaceFromRight)) {
+        if (style.left && !(customPosition.autoHorizontalPosition && isEnoughSpaceFromRight)) {
           ref.current.style.left = `calc(${leftPosition}px + ${style.left})`
         } else {
           ref.current.style.left = `${leftPosition}px`

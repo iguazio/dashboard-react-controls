@@ -151,9 +151,6 @@ const FormChipCell = ({
     (event, fields, nameEvent) => {
       const { key, value } = fields.value[editConfig.chipIndex]
       const isChipNotEmpty = !!(key?.trim() && value?.trim())
-      const doNotPreventDefault =
-        (editConfig.chipIndex === 0 && nameEvent === TAB_SHIFT) ||
-        (editConfig.chipIndex === fields.value.length - 1 && nameEvent === TAB)
 
       if (nameEvent === CLICK) {
         if (!isChipNotEmpty) {
@@ -192,15 +189,15 @@ const FormChipCell = ({
         }
 
         setEditConfig((prevState) => {
-          const firstChipSelected = prevState.chipIndex === 0
+          const firstChipIsSelected = prevState.chipIndex === 0
 
-          isChipNotEmpty && firstChipSelected && onExitEditModeCallback && onExitEditModeCallback()
+          isChipNotEmpty && firstChipIsSelected && onExitEditModeCallback && onExitEditModeCallback()
 
           return {
-            chipIndex: firstChipSelected ? null : prevState.chipIndex - 1,
-            isEdit: !firstChipSelected,
+            chipIndex: firstChipIsSelected ? null : prevState.chipIndex - 1,
+            isEdit: !firstChipIsSelected,
             isKeyFocused: false,
-            isValueFocused: !firstChipSelected,
+            isValueFocused: !firstChipIsSelected,
             isNewChip: false
           }
         })
@@ -208,7 +205,11 @@ const FormChipCell = ({
 
       checkChipsList(get(formState.values, name))
 
-      if (!doNotPreventDefault) {
+      if (
+        (editConfig.chipIndex > 0 && editConfig.chipIndex < fields.value.length - 1) ||
+        (editConfig.chipIndex === 0 && nameEvent !== TAB_SHIFT) ||
+        (editConfig.chipIndex === fields.value.length - 1 && nameEvent !== TAB)
+      ) {
         event && event.preventDefault()
       }
     },
@@ -227,14 +228,14 @@ const FormChipCell = ({
       if (isEditable) {
         const { clientX: pointerCoordinateX, clientY: pointerCoordinateY } = event
         let isKeyClicked = false
-        const isClickedInsideElement = (pointerCoordinateX, pointerCoordinateY, element) => {
-          if (element) {
+        const isClickedInsideInputElement = (pointerCoordinateX, pointerCoordinateY, inputElement) => {
+          if (inputElement) {
             const {
               top: topPosition,
               left: leftPosition,
               right: rightPosition,
               bottom: bottomPosition
-            } = element.getBoundingClientRect()
+            } = inputElement.getBoundingClientRect()
             if (pointerCoordinateX > rightPosition || pointerCoordinateX < leftPosition)
               return false
             if (pointerCoordinateY > bottomPosition || pointerCoordinateY < topPosition)
@@ -247,7 +248,7 @@ const FormChipCell = ({
 
         if (event.target.nodeName !== 'INPUT') {
           if (event.target.firstElementChild) {
-            isKeyClicked = isClickedInsideElement(
+            isKeyClicked = isClickedInsideInputElement(
               pointerCoordinateX,
               pointerCoordinateY,
               event.target.firstElementChild
@@ -261,8 +262,8 @@ const FormChipCell = ({
           ...preState,
           chipIndex,
           isEdit: true,
-          isKeyFocused: isKeyClicked ? true : false,
-          isValueFocused: isKeyClicked ? false : true
+          isKeyFocused: isKeyClicked,
+          isValueFocused: !isKeyClicked
         }))
       }
 
