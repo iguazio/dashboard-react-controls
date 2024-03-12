@@ -14,7 +14,7 @@
     input {
       display: flex;
       padding: 0;
-      font-size: 14px;
+      font-size: 14px; // if  you need to change font size, also change in it getInputWidthByValue util
       background-color: transparent;
       border: none;
 

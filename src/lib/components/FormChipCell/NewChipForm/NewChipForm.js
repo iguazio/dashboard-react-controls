@@ -24,7 +24,8 @@ import OptionsMenu from '../../../elements/OptionsMenu/OptionsMenu'
 import ValidationTemplate from '../../../elements/ValidationTemplate/ValidationTemplate'
 
 import { CHIP_OPTIONS } from '../../../types'
-import { BACKSPACE, CLICK, DELETE, TAB, TAB_SHIFT } from '../../../constants'
+import { CLICK, TAB, TAB_SHIFT } from '../../../constants'
+import { getInputWidthByValue } from '../formChipCell.util'
 
 import { ReactComponent as Close } from '../../../images/close.svg'
 
@@ -198,36 +199,6 @@ const NewChipForm = React.forwardRef(
           } else if (event.shiftKey && event.key === TAB && editConfig.isKeyFocused) {
             return onChange(event, TAB_SHIFT)
           }
-
-          if (event.key === BACKSPACE || event.key === DELETE) {
-
-            const changeWidth = (inputRef) => {
-              if (inputRef.current?.selectionStart === 0 && event.key === BACKSPACE) {
-
-                return false
-              } else if (
-                inputRef.current?.selectionEnd === inputRef.current?.value?.length &&
-                event.key === DELETE
-              ) {
-
-                return false
-              }
-
-              return true
-            }
-
-            setChipData((prevState) => ({
-              ...prevState,
-              keyFieldWidth:
-                editConfig.isKeyFocused && changeWidth(refInputKey)
-                  ? minWidthInput
-                  : prevState.keyFieldWidth,
-              valueFieldWidth:
-                editConfig.isValueFocused && changeWidth(refInputValue)
-                  ? minWidthValueInput
-                  : prevState.valueFieldWidth
-            }))
-          }
         }
         event.stopPropagation()
       },
@@ -279,7 +250,7 @@ const NewChipForm = React.forwardRef(
       (event) => {
         event.preventDefault()
         if (event.target.name === keyName) {
-          const currentWidthKeyInput = refInputKey.current.scrollWidth
+          const currentWidthKeyInput = getInputWidthByValue(refInputKey.current.value)
 
           setChipData((prevState) => ({
             ...prevState,
@@ -294,7 +265,7 @@ const NewChipForm = React.forwardRef(
                 : minWidthInput
           }))
         } else {
-          const currentWidthValueInput = refInputValue.current.scrollWidth
+          const currentWidthValueInput = getInputWidthByValue(refInputValue.current.value)
 
           setChipData((prevState) => ({
             ...prevState,

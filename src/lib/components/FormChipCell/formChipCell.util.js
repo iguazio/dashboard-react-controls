@@ -15,3 +15,31 @@ under the Apache 2.0 license is conditioned upon your compliance with
 such restriction.
 */
 export const uniquenessError = { name: 'uniqueness', label: 'Key must be unique' }
+
+export const getInputWidthByValue = (value) => {
+  let input = document.getElementById('chips-hidden-util-input')
+
+  if (!input) {
+    input = document.createElement('input')
+    const styles = {
+      position: 'absolute',
+      left: '-10000px',
+      top: "auto",
+      width: '20px',
+      visibility: 'hidden',
+      'font-size': '14px'
+    }
+
+    for (const [key, value] of Object.entries(styles)) {
+      input.style[key] = value;
+    }
+
+    input.id = 'chips-hidden-util-input'
+    input.tabIndex  = -1
+    document.body.append(input)
+  }
+
+  input.value = value
+
+  return input.scrollWidth ?? 0
+}
