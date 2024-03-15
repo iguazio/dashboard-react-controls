@@ -25,7 +25,7 @@ import ValidationTemplate from '../../../elements/ValidationTemplate/ValidationT
 
 import { CHIP_OPTIONS } from '../../../types'
 import { CLICK, TAB, TAB_SHIFT } from '../../../constants'
-import { getInputWidthByValue } from '../formChipCell.util'
+import { getTextWidth } from '../formChipCell.util'
 
 import { ReactComponent as Close } from '../../../images/close.svg'
 
@@ -250,7 +250,7 @@ const NewChipForm = React.forwardRef(
       (event) => {
         event.preventDefault()
         if (event.target.name === keyName) {
-          const currentWidthKeyInput = getInputWidthByValue(refInputKey.current.value)
+          const currentWidthKeyInput = getTextWidth(refInputKey.current)
 
           setChipData((prevState) => ({
             ...prevState,
@@ -265,7 +265,7 @@ const NewChipForm = React.forwardRef(
                 : minWidthInput
           }))
         } else {
-          const currentWidthValueInput = getInputWidthByValue(refInputValue.current.value)
+          const currentWidthValueInput = getTextWidth(refInputValue.current)
 
           setChipData((prevState) => ({
             ...prevState,

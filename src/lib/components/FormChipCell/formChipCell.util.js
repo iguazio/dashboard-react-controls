@@ -16,30 +16,31 @@ such restriction.
 */
 export const uniquenessError = { name: 'uniqueness', label: 'Key must be unique' }
 
-export const getInputWidthByValue = (value) => {
-  let input = document.getElementById('chips-hidden-util-input')
+export const getTextWidth = (elementWitText) => {
+  if (!elementWitText) {
+    return 0
+  }
+  let span = document.getElementById('chips-hidden-utils-helper-element')
 
-  if (!input) {
-    input = document.createElement('input')
+  if (!span) {
+    span = document.createElement('span')
     const styles = {
       position: 'absolute',
       left: '-10000px',
       top: "auto",
-      width: '20px',
-      visibility: 'hidden',
-      'font-size': '14px'
+      visibility: 'hidden'
     }
 
     for (const [key, value] of Object.entries(styles)) {
-      input.style[key] = value;
+      span.style[key] = value;
     }
 
-    input.id = 'chips-hidden-util-input'
-    input.tabIndex  = -1
-    document.body.append(input)
+    span.style.font = window.getComputedStyle(elementWitText).font
+    span.id = 'chips-hidden-utils-helper-element'
+    span.tabIndex  = -1
+    document.body.append(span)
   }
+  span.textContent = elementWitText.value
 
-  input.value = value
-
-  return input.scrollWidth ?? 0
+  return span.offsetWidth ?? 0
 }
