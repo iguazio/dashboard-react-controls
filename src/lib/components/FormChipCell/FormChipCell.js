@@ -207,8 +207,8 @@ const FormChipCell = ({
 
       if (
         (editConfig.chipIndex > 0 && editConfig.chipIndex < fields.value.length - 1) ||
-        (editConfig.chipIndex === 0 && nameEvent !== TAB_SHIFT) ||
-        (editConfig.chipIndex === fields.value.length - 1 && nameEvent !== TAB)
+        (fields.value.length > 1 && editConfig.chipIndex === 0 && nameEvent !== TAB_SHIFT) ||
+        (fields.value.length > 1 && editConfig.chipIndex === fields.value.length - 1 && nameEvent !== TAB)
       ) {
         event && event.preventDefault()
       }
