@@ -56,7 +56,9 @@ var CHIPS = _propTypes.default.arrayOf(CHIP);
 exports.CHIPS = CHIPS;
 var POP_UP_CUSTOM_POSITION = _propTypes.default.shape({
   element: _propTypes.default.shape({}),
-  position: _propTypes.default.oneOf(['top-left', 'top-right', 'bottom-left', 'bottom-right'])
+  position: _propTypes.default.oneOf(['top-left', 'top-right', 'bottom-left', 'bottom-right']),
+  autoHorizontalPosition: _propTypes.default.bool,
+  autoVerticalPosition: _propTypes.default.bool
 });
 exports.POP_UP_CUSTOM_POSITION = POP_UP_CUSTOM_POSITION;
 var MODAL_SIZES = _propTypes.default.oneOf([_constants.MODAL_SM, _constants.MODAL_MD, _constants.MODAL_LG, _constants.MODAL_MIN, _constants.MODAL_MAX]);

@@ -85,21 +85,16 @@ var FormSelect = function FormSelect(_ref) {
     _useState6 = _slicedToArray(_useState5, 2),
     isOpen = _useState6[0],
     setIsOpen = _useState6[1];
-  var _useState7 = (0, _react.useState)('bottom-right'),
+  var _useState7 = (0, _react.useState)(''),
     _useState8 = _slicedToArray(_useState7, 2),
-    position = _useState8[0],
-    setPosition = _useState8[1];
-  var _useState9 = (0, _react.useState)(''),
-    _useState10 = _slicedToArray(_useState9, 2),
-    searchValue = _useState10[0],
-    setSearchValue = _useState10[1];
+    searchValue = _useState8[0],
+    setSearchValue = _useState8[1];
   var optionsListRef = (0, _react.useRef)();
   var popUpRef = (0, _react.useRef)();
   var selectRef = (0, _react.useRef)();
   var searchRef = (0, _react.useRef)();
   var _ref2 = (selectRef === null || selectRef === void 0 ? void 0 : (_selectRef$current = selectRef.current) === null || _selectRef$current === void 0 ? void 0 : _selectRef$current.getBoundingClientRect()) || {},
-    selectWidth = _ref2.width,
-    selectLeft = _ref2.left;
+    selectWidth = _ref2.width;
   var selectWrapperClassNames = (0, _classnames.default)('form-field__wrapper', "form-field__wrapper-".concat(density), disabled && 'form-field__wrapper-disabled', isOpen && 'form-field__wrapper-active', isInvalid && 'form-field__wrapper-invalid', withoutBorder && 'without-border');
   var selectLabelClassName = (0, _classnames.default)('form-field__label', disabled && 'form-field__label-disabled');
   var selectValueClassName = (0, _classnames.default)('form-field__select-value', !input.value && 'form-field__select-placeholder');
@@ -160,13 +155,6 @@ var FormSelect = function FormSelect(_ref) {
       closeMenu();
     }
   }, [closeMenu]);
-  (0, _react.useLayoutEffect)(function () {
-    if (popUpRef !== null && popUpRef !== void 0 && popUpRef.current) {
-      var _popUpRef$current$get = popUpRef.current.getBoundingClientRect(),
-        width = _popUpRef$current$get.width;
-      selectLeft + width > window.innerWidth ? setPosition('bottom-left') : setPosition('bottom-right');
-    }
-  }, [isOpen, selectLeft]);
   (0, _react.useEffect)(function () {
     if (isOpen) {
       window.addEventListener('scroll', handleScroll, true);
@@ -324,7 +312,8 @@ var FormSelect = function FormSelect(_ref) {
             ref: popUpRef,
             customPosition: {
               element: selectRef,
-              position: position
+              position: 'bottom-right',
+              autoHorizontalPosition: true
             },
             style: {
               maxWidth: "".concat(selectWidth < 500 ? 500 : selectWidth, "px"),

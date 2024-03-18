@@ -14,6 +14,7 @@ var _OptionsMenu = _interopRequireDefault(require("../../../elements/OptionsMenu
 var _ValidationTemplate = _interopRequireDefault(require("../../../elements/ValidationTemplate/ValidationTemplate"));
 var _types = require("../../../types");
 var _constants = require("../../../constants");
+var _formChipCell = require("../formChipCell.util");
 var _close = require("../../../images/close.svg");
 require("./newChipForm.scss");
 var _jsxRuntime = require("react/jsx-runtime");
@@ -99,6 +100,7 @@ var NewChipForm = /*#__PURE__*/_react.default.forwardRef(function (_ref, ref) {
   var labelKeyClassName = (0, _classnames.default)(className, !editConfig.isKeyFocused && 'item_edited', !(0, _lodash.isEmpty)((0, _lodash.get)(meta, ['error', chipIndex, 'key'], [])) && !(0, _lodash.isEmpty)(chipData.key) && 'item_edited_invalid');
   var labelContainerClassName = (0, _classnames.default)('edit-chip-container', background && "edit-chip-container-background_".concat(background), borderColor && "edit-chip-container-border_".concat(borderColor), font && "edit-chip-container-font_".concat(font), density && "edit-chip-container-density_".concat(density), borderRadius && "edit-chip-container-border_".concat(borderRadius), (editConfig.isEdit || editConfig.isNewChip) && 'edit-chip-container_edited');
   var labelValueClassName = (0, _classnames.default)('input-label-value', !editConfig.isValueFocused && 'item_edited', !(0, _lodash.isEmpty)((0, _lodash.get)(meta, ['error', chipIndex, 'value'], [])) && !(0, _lodash.isEmpty)(chipData.value) && 'item_edited_invalid');
+  var closeButtonClass = (0, _classnames.default)('edit-chip__icon-close', (editConfig.chipIndex === chipIndex || !isEditable) && 'edit-chip__icon-close_hidden');
   (0, _react.useLayoutEffect)(function () {
     if (!chipData.keyFieldWidth && !chipData.valueFieldWidth) {
       var currentWidthKeyInput = refInputKey.current.scrollWidth + 1;
@@ -154,26 +156,19 @@ var NewChipForm = /*#__PURE__*/_react.default.forwardRef(function (_ref, ref) {
     }
   }, [outsideClick, editConfig.isEdit]);
   var focusChip = (0, _react.useCallback)(function (event) {
-    event.stopPropagation();
     if (editConfig.chipIndex === chipIndex && isEditable) {
       if (!event.shiftKey && event.key === _constants.TAB && editConfig.isValueFocused) {
-        onChange(event, _constants.TAB);
+        return onChange(event, _constants.TAB);
       } else if (event.shiftKey && event.key === _constants.TAB && editConfig.isKeyFocused) {
-        onChange(event, _constants.TAB_SHIFT);
-      }
-      if (event.key === _constants.BACKSPACE || event.key === _constants.DELETE) {
-        setChipData(function (prevState) {
-          return _objectSpread(_objectSpread({}, prevState), {}, {
-            keyFieldWidth: editConfig.isKeyFocused ? minWidthInput : prevState.keyFieldWidth,
-            valueFieldWidth: editConfig.isValueFocused ? minWidthValueInput : prevState.valueFieldWidth
-          });
-        });
+        return onChange(event, _constants.TAB_SHIFT);
       }
     }
+    event.stopPropagation();
   }, [editConfig, onChange, chipIndex, isEditable]);
   var handleOnFocus = (0, _react.useCallback)(function (event) {
+    var isKeyFocused = event.target.name === keyName;
     if (editConfig.chipIndex === chipIndex) {
-      if (event.target.name === keyName) {
+      if (isKeyFocused) {
         refInputKey.current.selectionStart = refInputKey.current.selectionEnd;
         setEditConfig(function (prevConfig) {
           return _objectSpread(_objectSpread({}, prevConfig), {}, {
@@ -191,12 +186,24 @@ var NewChipForm = /*#__PURE__*/_react.default.forwardRef(function (_ref, ref) {
         });
       }
       event && event.stopPropagation();
+    } else if ((0, _lodash.isNil)(editConfig.chipIndex)) {
+      if (isKeyFocused) {
+        refInputKey.current.selectionStart = refInputKey.current.selectionEnd;
+      } else {
+        refInputValue.current.selectionStart = refInputValue.current.selectionEnd;
+      }
+      setEditConfig({
+        chipIndex: chipIndex,
+        isEdit: true,
+        isKeyFocused: isKeyFocused,
+        isValueFocused: !isKeyFocused
+      });
     }
   }, [keyName, refInputKey, refInputValue, setEditConfig, editConfig.chipIndex, chipIndex]);
   var handleOnChange = (0, _react.useCallback)(function (event) {
     event.preventDefault();
     if (event.target.name === keyName) {
-      var currentWidthKeyInput = refInputKey.current.scrollWidth;
+      var currentWidthKeyInput = (0, _formChipCell.getTextWidth)(refInputKey.current);
       setChipData(function (prevState) {
         return _objectSpread(_objectSpread({}, prevState), {}, {
           key: refInputKey.current.value,
@@ -204,7 +211,7 @@ var NewChipForm = /*#__PURE__*/_react.default.forwardRef(function (_ref, ref) {
         });
       });
     } else {
-      var currentWidthValueInput = refInputValue.current.scrollWidth;
+      var currentWidthValueInput = (0, _formChipCell.getTextWidth)(refInputValue.current);
       setChipData(function (prevState) {
         var _refInputValue$curren;
         return _objectSpread(_objectSpread({}, prevState), {}, {
@@ -214,7 +221,7 @@ var NewChipForm = /*#__PURE__*/_react.default.forwardRef(function (_ref, ref) {
       });
     }
   }, [maxWidthInput, refInputKey, refInputValue, keyName]);
-  (0, _react.useEffect)(function () {
+  (0, _react.useLayoutEffect)(function () {
     if (editConfig.chipIndex === chipIndex) {
       setSelectedInput(editConfig.isKeyFocused ? 'key' : editConfig.isValueFocused ? 'value' : null);
     }
@@ -260,7 +267,7 @@ var NewChipForm = /*#__PURE__*/_react.default.forwardRef(function (_ref, ref) {
     ref: refInputContainer,
     children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_NewChipInput.default, {
       className: labelKeyClassName,
-      disabled: !isEditable || editConfig.chipIndex && editConfig.chipIndex !== chipIndex,
+      disabled: !isEditable || !(0, _lodash.isNil)(editConfig.chipIndex) && editConfig.chipIndex !== chipIndex,
       name: keyName,
       onChange: handleOnChange,
       onFocus: handleOnFocus,
@@ -274,7 +281,7 @@ var NewChipForm = /*#__PURE__*/_react.default.forwardRef(function (_ref, ref) {
       children: ":"
     }), !chipData.isKeyOnly && /*#__PURE__*/(0, _jsxRuntime.jsx)(_NewChipInput.default, {
       className: labelValueClassName,
-      disabled: !isEditable || editConfig.chipIndex && editConfig.chipIndex !== chipIndex,
+      disabled: !isEditable || !(0, _lodash.isNil)(editConfig.chipIndex) && editConfig.chipIndex !== chipIndex,
       name: valueName,
       onChange: handleOnChange,
       onFocus: handleOnFocus,
@@ -283,15 +290,15 @@ var NewChipForm = /*#__PURE__*/_react.default.forwardRef(function (_ref, ref) {
       style: {
         width: chipData.valueFieldWidth
       }
-    }), editConfig.chipIndex !== chipIndex && isEditable && /*#__PURE__*/(0, _jsxRuntime.jsx)("button", {
-      className: "edit-chip__icon-close",
+    }), /*#__PURE__*/(0, _jsxRuntime.jsx)("button", {
+      className: closeButtonClass,
       onClick: function onClick(event) {
         return handleRemoveChip(event, chipIndex);
       },
       children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_close.ReactComponent, {})
     }), (editConfig.isKeyFocused ? !(0, _lodash.isEmpty)(chipData.key) : !(0, _lodash.isEmpty)(chipData.value)) && editConfig.chipIndex === chipIndex && !(0, _lodash.isEmpty)((0, _lodash.get)(meta, ['error', editConfig.chipIndex, selectedInput], [])) && /*#__PURE__*/(0, _jsxRuntime.jsx)(_OptionsMenu.default, {
       show: showValidationRules,
-      ref: ref,
+      ref: refInputContainer,
       children: getValidationRules()
     })]
   });

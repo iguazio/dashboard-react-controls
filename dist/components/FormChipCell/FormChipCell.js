@@ -160,7 +160,7 @@ var FormChipCell = function FormChipCell(_ref) {
         return {
           chipIndex: lastChipSelected ? null : prevState.chipIndex + 1,
           isEdit: !lastChipSelected,
-          isKeyFocused: true,
+          isKeyFocused: !lastChipSelected,
           isValueFocused: false,
           isNewChip: false
         };
@@ -170,29 +170,53 @@ var FormChipCell = function FormChipCell(_ref) {
         handleRemoveChip(event, fields, editConfig.chipIndex);
       }
       setEditConfig(function (prevState) {
-        var isPrevChipIndexExists = prevState.chipIndex - 1 < 0;
-        isChipNotEmpty && isPrevChipIndexExists && onExitEditModeCallback && onExitEditModeCallback();
+        var firstChipIsSelected = prevState.chipIndex === 0;
+        isChipNotEmpty && firstChipIsSelected && onExitEditModeCallback && onExitEditModeCallback();
         return {
-          chipIndex: isPrevChipIndexExists ? null : prevState.chipIndex - 1,
-          isEdit: !isPrevChipIndexExists,
-          isKeyFocused: isPrevChipIndexExists,
-          isValueFocused: !isPrevChipIndexExists,
+          chipIndex: firstChipIsSelected ? null : prevState.chipIndex - 1,
+          isEdit: !firstChipIsSelected,
+          isKeyFocused: false,
+          isValueFocused: !firstChipIsSelected,
           isNewChip: false
         };
       });
     }
     checkChipsList((0, _lodash.get)(formState.values, name));
-    event && event.preventDefault();
+    if (editConfig.chipIndex > 0 && editConfig.chipIndex < fields.value.length - 1 || fields.value.length > 1 && editConfig.chipIndex === 0 && nameEvent !== _constants.TAB_SHIFT || fields.value.length > 1 && editConfig.chipIndex === fields.value.length - 1 && nameEvent !== _constants.TAB) {
+      event && event.preventDefault();
+    }
   }, [editConfig.chipIndex, checkChipsList, formState.values, name, onExitEditModeCallback, handleRemoveChip]);
-  var handleToEditMode = (0, _react.useCallback)(function (event, index) {
+  var handleToEditMode = (0, _react.useCallback)(function (event, chipIndex, keyName) {
     if (isEditable) {
+      var pointerCoordinateX = event.clientX,
+        pointerCoordinateY = event.clientY;
+      var isKeyClicked = false;
+      var isClickedInsideInputElement = function isClickedInsideInputElement(pointerCoordinateX, pointerCoordinateY, inputElement) {
+        if (inputElement) {
+          var _inputElement$getBoun = inputElement.getBoundingClientRect(),
+            topPosition = _inputElement$getBoun.top,
+            leftPosition = _inputElement$getBoun.left,
+            rightPosition = _inputElement$getBoun.right,
+            bottomPosition = _inputElement$getBoun.bottom;
+          if (pointerCoordinateX > rightPosition || pointerCoordinateX < leftPosition) return false;
+          if (pointerCoordinateY > bottomPosition || pointerCoordinateY < topPosition) return false;
+          return true;
+        }
+      };
       event.stopPropagation();
+      if (event.target.nodeName !== 'INPUT') {
+        if (event.target.firstElementChild) {
+          isKeyClicked = isClickedInsideInputElement(pointerCoordinateX, pointerCoordinateY, event.target.firstElementChild);
+        }
+      } else {
+        isKeyClicked = event.target.name === keyName;
+      }
       setEditConfig(function (preState) {
         return _objectSpread(_objectSpread({}, preState), {}, {
-          chipIndex: index,
+          chipIndex: chipIndex,
           isEdit: true,
-          isKeyFocused: true,
-          isValueFocused: false
+          isKeyFocused: isKeyClicked,
+          isValueFocused: !isKeyClicked
         });
       });
     }

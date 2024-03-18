@@ -44,10 +44,12 @@ var OptionsMenu = /*#__PURE__*/_react.default.forwardRef(function (_ref, ref) {
       className: "options-menu",
       customPosition: {
         element: ref,
-        position: 'bottom-right'
+        position: 'bottom-right',
+        autoVerticalPosition: true,
+        autoHorizontalPosition: true
       },
       style: {
-        width: "".concat(dropdownWidth, "px")
+        'minWidth': "".concat(dropdownWidth, "px")
       },
       children: /*#__PURE__*/(0, _jsxRuntime.jsx)("ul", {
         className: "options-menu__body",
@@ -64,7 +66,7 @@ OptionsMenu.defaultProps = {
 OptionsMenu.propTypes = {
   children: _propTypes.default.arrayOf(_propTypes.default.element),
   show: _propTypes.default.bool.isRequired,
-  timout: _propTypes.default.number
+  timeout: _propTypes.default.number
 };
 var _default = OptionsMenu;
 exports.default = _default;

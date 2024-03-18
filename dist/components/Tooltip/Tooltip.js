@@ -68,10 +68,10 @@ var Tooltip = function Tooltip(_ref) {
     setShow(false);
   };
   var handleMouseLeave = (0, _react.useCallback)(function (event) {
-    if (tooltipRef.current && !tooltipRef.current.contains(event.relatedTarget) && parentRef.current && !parentRef.current.contains(event.relatedTarget)) {
+    if (tooltipRef.current && !tooltipRef.current.contains(event.relatedTarget) && parentRef.current && !parentRef.current.contains(event.relatedTarget) || hidden) {
       setShow(false);
     }
-  }, []);
+  }, [hidden]);
   var handleMouseEnter = (0, _react.useCallback)(function (event) {
     if (!show) {
       var _parentRef$current$ch = _slicedToArray(parentRef.current.childNodes, 1),

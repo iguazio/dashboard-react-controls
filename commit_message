@@ -1,7 +1,7 @@
 
 
-Create a new dist version 1.8.11
+Create a new dist version 1.9.0
 
 Collecting:
-- Fix [Project Settings] Validation on parameter - trailing white spaces (#247)
-- Impl [Artifacts] lazy load of Data (#248)
+- Fix [Jobs] Change "Aborted" job status color (#250)
+- Fix [FormChipCell] issues with labels (#251)

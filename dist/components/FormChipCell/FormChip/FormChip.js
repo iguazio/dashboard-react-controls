@@ -62,7 +62,7 @@ var FormChip = /*#__PURE__*/_react.default.forwardRef(function (_ref, ref) {
   }, [chipIndex, setChipsSizes]);
   return /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
     onClick: function onClick(event) {
-      return handleToEditMode(event, chipIndex);
+      return handleToEditMode(event, chipIndex, keyName);
     },
     ref: chipRef,
     children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_NewChipForm.default, {
