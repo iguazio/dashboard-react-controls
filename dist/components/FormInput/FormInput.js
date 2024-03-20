@@ -17,7 +17,7 @@ var _components = require("../../components");
 var _types = require("../../types");
 var _validation = require("../../utils/validation.util");
 var _hooks = require("../../hooks");
-var _invalid = require("../../images/invalid.svg");
+var _exclamationMark = require("../../images/exclamation-mark.svg");
 var _popout = require("../../images/popout.svg");
 var _warning = require("../../images/warning.svg");
 require("./formInput.scss");
@@ -384,7 +384,7 @@ var FormInput = /*#__PURE__*/_react.default.forwardRef(function (_ref, ref) {
                 text: (_errorsRef$current$la = (_errorsRef$current = errorsRef.current) === null || _errorsRef$current === void 0 ? void 0 : _errorsRef$current.label) !== null && _errorsRef$current$la !== void 0 ? _errorsRef$current$la : invalidText,
                 warning: true
               }),
-              children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_invalid.ReactComponent, {})
+              children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_exclamationMark.ReactComponent, {})
             }), isInvalid && Array.isArray(errorsRef.current) && /*#__PURE__*/(0, _jsxRuntime.jsx)("button", {
               className: "form-field__warning",
               onClick: toggleValidationRulesMenu,

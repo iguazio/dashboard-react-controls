@@ -1,7 +1,6 @@
 
 
-Create a new dist version 1.9.0
+Create a new dist version 1.9.1
 
 Collecting:
-- Fix [Jobs] Change "Aborted" job status color (#250)
-- Fix [FormChipCell] issues with labels (#251)
+- Fix [Workflow] Unclear presentation of a workflow step (#253)

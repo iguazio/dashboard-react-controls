@@ -12,7 +12,7 @@ var _reactFinalForm = require("react-final-form");
 var _TextTooltipTemplate = _interopRequireDefault(require("../TooltipTemplate/TextTooltipTemplate"));
 var _Tip = _interopRequireDefault(require("../Tip/Tip"));
 var _Tooltip = _interopRequireDefault(require("../Tooltip/Tooltip"));
-var _invalid = require("../../images/invalid.svg");
+var _exclamationMark = require("../../images/exclamation-mark.svg");
 require("./formTextarea.scss");
 var _jsxRuntime = require("react/jsx-runtime");
 var _excluded = ["className", "disabled", "focused", "iconClass", "invalidText", "label", "maxLength", "name", "onBlur", "onChange", "required", "textAreaIcon", "tip", "withoutBorder"];
@@ -162,7 +162,7 @@ var FormTextarea = /*#__PURE__*/_react.default.forwardRef(function (_ref, ref) {
                 text: (_meta$error$label = (_meta$error = meta.error) === null || _meta$error === void 0 ? void 0 : _meta$error.label) !== null && _meta$error$label !== void 0 ? _meta$error$label : invalidText,
                 warning: true
               }),
-              children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_invalid.ReactComponent, {})
+              children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_exclamationMark.ReactComponent, {})
             }), tip && !required && /*#__PURE__*/(0, _jsxRuntime.jsx)(_Tip.default, {
               text: tip,
               className: "form-field__tip"

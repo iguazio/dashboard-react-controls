@@ -20,7 +20,7 @@ var _types = require("../../types");
 var _arrow = require("../../images/arrow.svg");
 var _search = require("../../images/search.svg");
 var _warning = require("../../images/warning.svg");
-var _invalid = require("../../images/invalid.svg");
+var _exclamationMark = require("../../images/exclamation-mark.svg");
 require("./formCombobox.scss");
 var _jsxRuntime = require("react/jsx-runtime");
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -447,7 +447,7 @@ var FormCombobox = function FormCombobox(_ref) {
                 text: (_meta$error$label = (_meta$error = meta.error) === null || _meta$error === void 0 ? void 0 : _meta$error.label) !== null && _meta$error$label !== void 0 ? _meta$error$label : invalidText,
                 warning: true
               }),
-              children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_invalid.ReactComponent, {})
+              children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_exclamationMark.ReactComponent, {})
             }), isInvalid && Array.isArray(meta.error) && /*#__PURE__*/(0, _jsxRuntime.jsx)("button", {
               className: "form-field__warning",
               onClick: warningIconClick,

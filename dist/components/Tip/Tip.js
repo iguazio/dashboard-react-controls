@@ -11,6 +11,7 @@ var _reactTransitionGroup = require("react-transition-group");
 var _classnames = _interopRequireDefault(require("classnames"));
 var _reactDom = require("react-dom");
 var _questionMark = require("../../images/question-mark.svg");
+var _exclamationMark = require("../../images/exclamation-mark.svg");
 var _tip = _interopRequireDefault(require("./tip.scss"));
 var _jsxRuntime = require("react/jsx-runtime");
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -43,7 +44,8 @@ var iconLength = parseInt(_tip.default.iconlength);
 var minTextLength = 40;
 var Tip = function Tip(_ref) {
   var className = _ref.className,
-    text = _ref.text;
+    text = _ref.text,
+    withExclamationMark = _ref.withExclamationMark;
   var _useState = (0, _react.useState)(false),
     _useState2 = _slicedToArray(_useState, 2),
     isShow = _useState2[0],
@@ -92,7 +94,9 @@ var Tip = function Tip(_ref) {
     children: [/*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
       ref: iconRef,
       className: "tip-wrapper",
-      children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_questionMark.ReactComponent, {
+      children: withExclamationMark ? /*#__PURE__*/(0, _jsxRuntime.jsx)(_exclamationMark.ReactComponent, {
+        "data-testid": "tip-icon"
+      }) : /*#__PURE__*/(0, _jsxRuntime.jsx)(_questionMark.ReactComponent, {
         "data-testid": "tip-icon"
       })
     }), /*#__PURE__*/(0, _reactDom.createPortal)( /*#__PURE__*/(0, _jsxRuntime.jsx)(_reactTransitionGroup.CSSTransition, {
