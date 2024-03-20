@@ -126,6 +126,14 @@
   .edit-label-separator {
     color: $fontColor;
   }
+
+  .item-icon-close {
+    svg {
+      path {
+        fill: $fontColor;
+      }
+    }
+  }
 }
 
 @mixin chipButtonAddColor($color) {
