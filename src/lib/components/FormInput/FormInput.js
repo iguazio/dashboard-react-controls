@@ -28,6 +28,7 @@ import { TextTooltipTemplate, Tip, Tooltip } from '../../components'
 import { INPUT_LINK, INPUT_VALIDATION_RULES } from '../../types'
 import { checkPatternsValidity, checkPatternsValidityAsync } from '../../utils/validation.util'
 import { useDetectOutsideClick, useDebounce } from '../../hooks'
+import { validation as ValidationConstants } from '../../constants'
 
 import { ReactComponent as InvalidIcon } from '../../images/invalid.svg'
 import { ReactComponent as Popout } from '../../images/popout.svg'
@@ -77,6 +78,7 @@ const FormInput = React.forwardRef(
     ref ??= wrapperRef
     const inputRef = useRef()
     const errorsRef = useRef()
+    const isRequiredRulePresentRef = useRef(false)
     useDetectOutsideClick(ref, () => setShowValidationRules(false))
     const debounceAsync = useDebounce()
 
@@ -130,15 +132,19 @@ const FormInput = React.forwardRef(
     }, [focused])
 
     useEffect(() => {
-      setValidationRules(() =>
-        rules.map((rule) => ({
-          ...rule,
-          isValid:
-            !errorsRef.current || !Array.isArray(errorsRef.current)
-              ? true
-              : !errorsRef.current.some((err) => err.name === rule.name)
-        }))
-      )
+      setValidationRules(() => {
+        isRequiredRulePresentRef.current = false
+        return rules.map((rule) => {
+          if (rule.label === ValidationConstants.REQUIRED) isRequiredRulePresentRef.current = true
+          return {
+            ...rule,
+            isValid:
+              !errorsRef.current || !Array.isArray(errorsRef.current)
+                ? true
+                : !errorsRef.current.some((err) => err.name === rule.name)
+          }
+        })
+      })
     }, [rules])
 
     const getValidationRules = () => {
@@ -199,7 +205,11 @@ const FormInput = React.forwardRef(
 
       let validationError = null
 
-      if (required && valueToValidate.trim().length === 0) {
+      if (
+        required &&
+        valueToValidate.trim().length === 0 &&
+        (isEmpty(rules) || !isRequiredRulePresentRef.current)
+      ) {
         validationError = {
           name: 'required',
           label: customRequiredLabel || 'This field is required'
