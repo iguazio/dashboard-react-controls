@@ -134,8 +134,12 @@ const FormInput = React.forwardRef(
     useEffect(() => {
       setValidationRules(() => {
         isRequiredRulePresentRef.current = false
+
         return rules.map((rule) => {
-          if (rule.label === ValidationConstants.REQUIRED) isRequiredRulePresentRef.current = true
+          if (rule.name === ValidationConstants.REQUIRED.NAME) {
+            isRequiredRulePresentRef.current = true
+          }
+
           return {
             ...rule,
             isValid:
@@ -205,11 +209,7 @@ const FormInput = React.forwardRef(
 
       let validationError = null
 
-      if (
-        required &&
-        valueToValidate.trim().length === 0 &&
-        (isEmpty(rules) || !isRequiredRulePresentRef.current)
-      ) {
+      if (required && valueToValidate.trim().length === 0 && !isRequiredRulePresentRef.current) {
         validationError = {
           name: 'required',
           label: customRequiredLabel || 'This field is required'

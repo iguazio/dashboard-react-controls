@@ -117,29 +117,29 @@ export const checkPatternsValidityAsync = async (validationRules, value) => {
 const generateRule = {
   beginWith: (chars) => {
     return {
-      name: 'begin',
-      label: ValidationConstants.BEGIN_WITH + ': ' + convertToLabel(chars),
+      name: ValidationConstants.BEGIN_WITH.NAME,
+      label: ValidationConstants.BEGIN_WITH.LABEL + ': ' + convertToLabel(chars),
       pattern: new RegExp('^[' + convertToPattern(chars) + ']')
     }
   },
   beginNotWith: (chars) => {
     return {
-      name: 'beginNot',
-      label: ValidationConstants.BEGIN_NOT_WITH + ': ' + convertToLabel(chars),
+      name: ValidationConstants.BEGIN_NOT_WITH.NAME,
+      label: ValidationConstants.BEGIN_NOT_WITH.LABEL + ': ' + convertToLabel(chars),
       pattern: new RegExp('^[^' + convertToPattern(chars) + ']')
     }
   },
   endWith: (chars) => {
     return {
-      name: 'end',
-      label: ValidationConstants.END_WITH + ': ' + convertToLabel(chars),
+      name: ValidationConstants.END_WITH.NAME,
+      label: ValidationConstants.END_WITH.LABEL + ': ' + convertToLabel(chars),
       pattern: new RegExp('[' + convertToPattern(chars) + ']$')
     }
   },
   endNotWith: (chars) => {
     return {
-      name: 'endNot',
-      label: ValidationConstants.END_NOT_WITH + ': ' + convertToLabel(chars),
+      name: ValidationConstants.END_NOT_WITH.NAME,
+      label: ValidationConstants.END_NOT_WITH.LABEL + ': ' + convertToLabel(chars),
       pattern: new RegExp('[^' + convertToPattern(chars) + ']$')
     }
   },
@@ -147,8 +147,8 @@ const generateRule = {
     const convertedPattern = convertToPattern(chars)
 
     return {
-      name: 'beginEnd',
-      label: ValidationConstants.BEGIN_END_WITH + ': ' + convertToLabel(chars),
+      name: ValidationConstants.BEGIN_END_WITH.NAME,
+      label: ValidationConstants.BEGIN_END_WITH.LABEL + ': ' + convertToLabel(chars),
       pattern: new RegExp('^([' + convertedPattern + '].*)?[' + convertedPattern + ']$')
     }
   },
@@ -156,8 +156,8 @@ const generateRule = {
     const convertedPattern = convertToPattern(chars)
 
     return {
-      name: 'beginEndNot',
-      label: ValidationConstants.BEGIN_END_NOT_WITH + ': ' + convertToLabel(chars),
+      name: ValidationConstants.BEGIN_END_NOT_WITH.NAME,
+      label: ValidationConstants.BEGIN_END_NOT_WITH.LABEL + ': ' + convertToLabel(chars),
       pattern: new RegExp('^([^' + convertedPattern + '].*)?[^' + convertedPattern + ']$')
     }
   },
@@ -165,22 +165,22 @@ const generateRule = {
     const convertedPattern = convertToPattern(chars)
 
     return {
-      name: 'onlyAtTheBeginning',
-      label: ValidationConstants.ONLY_AT_THE_BEGINNING + ': ' + convertToLabel(chars),
+      name: ValidationConstants.ONLY_AT_THE_BEGINNING.NAME,
+      label: ValidationConstants.ONLY_AT_THE_BEGINNING.LABEL + ': ' + convertToLabel(chars),
       pattern: new RegExp('^([' + convertedPattern + '])?[^' + convertedPattern + ']+$')
     }
   },
   validCharacters: (chars) => {
     return {
-      name: 'validCharacters',
-      label: ValidationConstants.VALID_CHARACTERS + ': ' + convertToLabel(chars),
+      name: ValidationConstants.VALID_CHARACTERS.NAME,
+      label: ValidationConstants.VALID_CHARACTERS.LABEL + ': ' + convertToLabel(chars),
       pattern: new RegExp('^[' + convertToPattern(chars) + ']+$')
     }
   },
   validCharactersWithPrefix: (chars) => {
     return {
-      name: 'validCharactersWithPrefix',
-      label: ValidationConstants.VALID_CHARACTERS + ': ' + convertToLabel(chars),
+      name: ValidationConstants.VALID_CHARACTERS_WITH_REFIX.NAME,
+      label: ValidationConstants.VALID_CHARACTERS_WITH_REFIX.LABEL + ': ' + convertToLabel(chars),
       pattern: new RegExp(
         '^([' + convertToPattern(chars) + ']+/)?[' + convertToPattern(chars) + ']+$'
       )
@@ -197,8 +197,8 @@ const generateRule = {
       .join('')
 
     return {
-      name: 'noConsecutiveCharacters',
-      label: ValidationConstants.NO_CONSECUTIVE_CHARACTER + ': ' + convertToLabel(chars),
+      name: ValidationConstants.NO_CONSECUTIVE_CHARACTER.NAME,
+      label: ValidationConstants.NO_CONSECUTIVE_CHARACTER.LABEL + ': ' + convertToLabel(chars),
       pattern: new RegExp('^' + convertedPattern)
     }
   },
@@ -220,8 +220,8 @@ const generateRule = {
     const wordsArray = words.split(' ')
 
     return {
-      name: 'mustNotBe',
-      label: ValidationConstants.MUST_NOT_BE + ': ' + convertToLabel(words),
+      name: ValidationConstants.MUST_NOT_BE.NAME,
+      label: ValidationConstants.MUST_NOT_BE.LABEL + ': ' + convertToLabel(words),
       pattern: function (value) {
         return !lodash.includes(wordsArray, value)
       }
@@ -246,8 +246,8 @@ const generateRule = {
   },
   required: () => {
     return {
-      name: 'required',
-      label: ValidationConstants.REQUIRED,
+      name: ValidationConstants.REQUIRED.NAME,
+      label: ValidationConstants.REQUIRED.LABEL,
       pattern: new RegExp('\\S')
     }
   }
@@ -257,12 +257,12 @@ const commonRules = {
   prefixedQualifiedName: [
     {
       name: 'nameValidCharacters',
-      label: `[Name] ${ValidationConstants.VALID_CHARACTERS} : a–z, A–Z, 0–9, –, _, .`,
+      label: `[Name] ${ValidationConstants.VALID_CHARACTERS.LABEL} : a–z, A–Z, 0–9, –, _, .`,
       pattern: /^([^/]+\/)?[\w.-]+$/
     },
     {
       name: 'nameBeginEnd',
-      label: `[Name] ${ValidationConstants.BEGIN_END_WITH}: a–z, A–Z, 0–9`,
+      label: `[Name] ${ValidationConstants.BEGIN_END_WITH.LABEL}: a–z, A–Z, 0–9`,
       pattern: /^([^/]+\/)?([A-Za-z0-9][^/]*)?[A-Za-z0-9]$/
     },
     {
@@ -272,12 +272,12 @@ const commonRules = {
     },
     {
       name: 'prefixValidCharacters',
-      label: `[Prefix] ${ValidationConstants.VALID_CHARACTERS}: a–z, 0–9, –, .`,
+      label: `[Prefix] ${ValidationConstants.VALID_CHARACTERS.LABEL}: a–z, 0–9, –, .`,
       pattern: /^([a-z0-9.-]+\/)?[^/]+$/
     },
     {
       name: 'prefixBeginEnd',
-      label: `[Prefix] ${ValidationConstants.BEGIN_END_WITH}: a–z, 0–9`,
+      label: `[Prefix] ${ValidationConstants.BEGIN_END_WITH.LABEL}: a–z, 0–9`,
       pattern: /^([a-z0-9]([^/]*[a-z0-9])?\/)?[^/]+$/
     },
     {
@@ -290,7 +290,7 @@ const commonRules = {
     value: [
       {
         name: 'valueBeginEnd',
-        label: `[Value] ${ValidationConstants.BEGIN_END_WITH} : a–z, A–Z, 0–9`,
+        label: `[Value] ${ValidationConstants.BEGIN_END_WITH.LABEL} : a–z, A–Z, 0–9`,
         pattern: /^([^/]+\/)?([A-Za-z0-9][^/]*)?[A-Za-z0-9]$/
       },
       {
@@ -300,7 +300,7 @@ const commonRules = {
       },
       {
         name: 'valueValidCharacters',
-        label: `[Value] ${ValidationConstants.VALID_CHARACTERS}: a–z, A–Z, 0–9, –, _, .`,
+        label: `[Value] ${ValidationConstants.VALID_CHARACTERS.LABEL}: a–z, A–Z, 0–9, –, _, .`,
         pattern: /^[a-zA-Z0-9\-_.]+$/
       }
     ]
@@ -308,13 +308,13 @@ const commonRules = {
   // email: [
   //   generateRule.beginEndNotWith('@ .'),
   //   {
-  //     name: 'exactlyOne',
-  //     label: ValidationConstants.MUST_CONTAIN_EXACTLY_ONE + ': @',
+  //     name: ValidationConstants.MUST_CONTAIN_EXACTLY_ONE.NAME,
+  //     label: ValidationConstants.MUST_CONTAIN_EXACTLY_ONE.LABEL + ': @',
   //     pattern: /^[^@]+@[^@]+$/
   //   },
   //   {
-  //     name: 'dotAfterAt',
-  //     label: ValidationConstants.MUST_HAVE_DOT_AFTER_AT,
+  //     name: ValidationConstants.MUST_HAVE_DOT_AFTER_AT.NAME,
+  //     label: ValidationConstants.MUST_HAVE_DOT_AFTER_AT.LABEL,
   //     pattern: /@.+\..+$/
   //   }
   // ]
