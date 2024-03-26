@@ -17,6 +17,7 @@ var _components = require("../../components");
 var _types = require("../../types");
 var _validation = require("../../utils/validation.util");
 var _hooks = require("../../hooks");
+var _constants = require("../../constants");
 var _exclamationMark = require("../../images/exclamation-mark.svg");
 var _popout = require("../../images/popout.svg");
 var _warning = require("../../images/warning.svg");
@@ -115,6 +116,7 @@ var FormInput = /*#__PURE__*/_react.default.forwardRef(function (_ref, ref) {
   (_ref2 = ref) !== null && _ref2 !== void 0 ? _ref2 : ref = wrapperRef;
   var inputRef = (0, _react.useRef)();
   var errorsRef = (0, _react.useRef)();
+  var isRequiredRulePresentRef = (0, _react.useRef)(false);
   (0, _hooks.useDetectOutsideClick)(ref, function () {
     return setShowValidationRules(false);
   });
@@ -150,7 +152,11 @@ var FormInput = /*#__PURE__*/_react.default.forwardRef(function (_ref, ref) {
   }, [focused]);
   (0, _react.useEffect)(function () {
     setValidationRules(function () {
+      isRequiredRulePresentRef.current = false;
       return rules.map(function (rule) {
+        if (rule.name === _constants.validation.REQUIRED.NAME) {
+          isRequiredRulePresentRef.current = true;
+        }
         return _objectSpread(_objectSpread({}, rule), {}, {
           isValid: !errorsRef.current || !Array.isArray(errorsRef.current) ? true : !errorsRef.current.some(function (err) {
             return err.name === rule.name;
@@ -212,7 +218,7 @@ var FormInput = /*#__PURE__*/_react.default.forwardRef(function (_ref, ref) {
     var valueToValidate = (0, _lodash.isNil)(value) ? '' : String(value);
     if (isValueEmptyAndValid(valueToValidate)) return;
     var validationError = null;
-    if (required && valueToValidate.trim().length === 0) {
+    if (required && valueToValidate.trim().length === 0 && !isRequiredRulePresentRef.current) {
       validationError = {
         name: 'required',
         label: customRequiredLabel || 'This field is required'

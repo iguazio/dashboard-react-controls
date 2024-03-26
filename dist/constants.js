@@ -46,19 +46,62 @@ var LABEL_BUTTON = 'label';
 /*=========== VALITATION =============*/
 exports.LABEL_BUTTON = LABEL_BUTTON;
 var validation = {
-  BEGIN_END_NOT_WITH: 'Must not begin and end with',
-  BEGIN_END_WITH: 'Must begin and end with',
-  BEGIN_NOT_WITH: 'Must not begin with',
-  BEGIN_WITH: 'Must begin with',
-  END_NOT_WITH: 'Must not end with',
-  END_WITH: 'Must end with',
-  MUST_CONTAIN_EXACTLY_ONE: 'Must contain exactly one',
-  MUST_HAVE_DOT_AFTER_AT: 'Must have at least one . after @',
-  MUST_NOT_BE: 'Must not be',
-  NO_CONSECUTIVE_CHARACTER: 'No consecutive characters',
-  ONLY_AT_THE_BEGINNING: 'Only at the beginning',
-  REQUIRED: 'This field is required',
-  VALID_CHARACTERS: 'Valid characters'
+  BEGIN_END_NOT_WITH: {
+    LABEL: 'Must not begin and end with',
+    NAME: 'beginEndNot'
+  },
+  BEGIN_END_WITH: {
+    LABEL: 'Must begin and end with',
+    NAME: 'beginEnd'
+  },
+  BEGIN_NOT_WITH: {
+    LABEL: 'Must not begin with',
+    NAME: 'beginNot'
+  },
+  BEGIN_WITH: {
+    LABEL: 'Must begin with',
+    NAME: 'begin'
+  },
+  END_NOT_WITH: {
+    LABEL: 'Must not end with',
+    NAME: 'endNot'
+  },
+  END_WITH: {
+    LABEL: 'Must end with',
+    NAME: 'end'
+  },
+  MUST_CONTAIN_EXACTLY_ONE: {
+    LABEL: 'Must contain exactly one',
+    NAME: 'exactlyOne'
+  },
+  MUST_HAVE_DOT_AFTER_AT: {
+    LABEL: 'Must have at least one . after @',
+    NAME: 'dotAfterAt'
+  },
+  MUST_NOT_BE: {
+    LABEL: 'Must not be',
+    NAME: 'mustNotBe'
+  },
+  NO_CONSECUTIVE_CHARACTER: {
+    LABEL: 'No consecutive characters',
+    NAME: 'noConsecutiveCharacters'
+  },
+  ONLY_AT_THE_BEGINNING: {
+    LABEL: 'Only at the beginning',
+    NAME: 'onlyAtTheBeginning'
+  },
+  REQUIRED: {
+    LABEL: 'This field is required',
+    NAME: 'required'
+  },
+  VALID_CHARACTERS_WITH_REFIX: {
+    LABEL: 'Valid characters',
+    NAME: 'validCharactersWithPrefix'
+  },
+  VALID_CHARACTERS: {
+    LABEL: 'Valid characters',
+    NAME: 'validCharacters'
+  }
 };
 
 /*=========== STATUS CODES =============*/

@@ -51,23 +51,23 @@
     &-font {
       @include chipsFont(EditableChip);
     }
+
+    .item-icon-close {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+  
+      &_hidden {
+        visibility: hidden;
+      }
+  
+      svg {
+        transform: scale(0.7);
+      }
+    }
   }
 
   &-separator {
     margin-right: 5px;
-  }
-
-  &__icon-close {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    &_hidden {
-      visibility: hidden;
-    }
-
-    svg {
-      transform: scale(0.7);
-    }
   }
 }

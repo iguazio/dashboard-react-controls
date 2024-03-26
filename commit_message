@@ -1,6 +1,7 @@
 
 
-Create a new dist version 1.9.1
+Create a new dist version 1.9.2
 
 Collecting:
-- Fix [Workflow] Unclear presentation of a workflow step (#253)
+- Impl [UI] Warning displaying for empty fields with validation rules (#255)
+- Fix [Feature Vectors] Provide validation rules on labels (#256)

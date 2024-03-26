@@ -166,67 +166,67 @@ exports.checkPatternsValidityAsync = checkPatternsValidityAsync;
 var generateRule = {
   beginWith: function beginWith(chars) {
     return {
-      name: 'begin',
-      label: _constants.validation.BEGIN_WITH + ': ' + convertToLabel(chars),
+      name: _constants.validation.BEGIN_WITH.NAME,
+      label: _constants.validation.BEGIN_WITH.LABEL + ': ' + convertToLabel(chars),
       pattern: new RegExp('^[' + convertToPattern(chars) + ']')
     };
   },
   beginNotWith: function beginNotWith(chars) {
     return {
-      name: 'beginNot',
-      label: _constants.validation.BEGIN_NOT_WITH + ': ' + convertToLabel(chars),
+      name: _constants.validation.BEGIN_NOT_WITH.NAME,
+      label: _constants.validation.BEGIN_NOT_WITH.LABEL + ': ' + convertToLabel(chars),
       pattern: new RegExp('^[^' + convertToPattern(chars) + ']')
     };
   },
   endWith: function endWith(chars) {
     return {
-      name: 'end',
-      label: _constants.validation.END_WITH + ': ' + convertToLabel(chars),
+      name: _constants.validation.END_WITH.NAME,
+      label: _constants.validation.END_WITH.LABEL + ': ' + convertToLabel(chars),
       pattern: new RegExp('[' + convertToPattern(chars) + ']$')
     };
   },
   endNotWith: function endNotWith(chars) {
     return {
-      name: 'endNot',
-      label: _constants.validation.END_NOT_WITH + ': ' + convertToLabel(chars),
+      name: _constants.validation.END_NOT_WITH.NAME,
+      label: _constants.validation.END_NOT_WITH.LABEL + ': ' + convertToLabel(chars),
       pattern: new RegExp('[^' + convertToPattern(chars) + ']$')
     };
   },
   beginEndWith: function beginEndWith(chars) {
     var convertedPattern = convertToPattern(chars);
     return {
-      name: 'beginEnd',
-      label: _constants.validation.BEGIN_END_WITH + ': ' + convertToLabel(chars),
+      name: _constants.validation.BEGIN_END_WITH.NAME,
+      label: _constants.validation.BEGIN_END_WITH.LABEL + ': ' + convertToLabel(chars),
       pattern: new RegExp('^([' + convertedPattern + '].*)?[' + convertedPattern + ']$')
     };
   },
   beginEndNotWith: function beginEndNotWith(chars) {
     var convertedPattern = convertToPattern(chars);
     return {
-      name: 'beginEndNot',
-      label: _constants.validation.BEGIN_END_NOT_WITH + ': ' + convertToLabel(chars),
+      name: _constants.validation.BEGIN_END_NOT_WITH.NAME,
+      label: _constants.validation.BEGIN_END_NOT_WITH.LABEL + ': ' + convertToLabel(chars),
       pattern: new RegExp('^([^' + convertedPattern + '].*)?[^' + convertedPattern + ']$')
     };
   },
   onlyAtTheBeginning: function onlyAtTheBeginning(chars) {
     var convertedPattern = convertToPattern(chars);
     return {
-      name: 'onlyAtTheBeginning',
-      label: _constants.validation.ONLY_AT_THE_BEGINNING + ': ' + convertToLabel(chars),
+      name: _constants.validation.ONLY_AT_THE_BEGINNING.NAME,
+      label: _constants.validation.ONLY_AT_THE_BEGINNING.LABEL + ': ' + convertToLabel(chars),
       pattern: new RegExp('^([' + convertedPattern + '])?[^' + convertedPattern + ']+$')
     };
   },
   validCharacters: function validCharacters(chars) {
     return {
-      name: 'validCharacters',
-      label: _constants.validation.VALID_CHARACTERS + ': ' + convertToLabel(chars),
+      name: _constants.validation.VALID_CHARACTERS.NAME,
+      label: _constants.validation.VALID_CHARACTERS.LABEL + ': ' + convertToLabel(chars),
       pattern: new RegExp('^[' + convertToPattern(chars) + ']+$')
     };
   },
   validCharactersWithPrefix: function validCharactersWithPrefix(chars) {
     return {
-      name: 'validCharactersWithPrefix',
-      label: _constants.validation.VALID_CHARACTERS + ': ' + convertToLabel(chars),
+      name: _constants.validation.VALID_CHARACTERS_WITH_REFIX.NAME,
+      label: _constants.validation.VALID_CHARACTERS_WITH_REFIX.LABEL + ': ' + convertToLabel(chars),
       pattern: new RegExp('^([' + convertToPattern(chars) + ']+/)?[' + convertToPattern(chars) + ']+$')
     };
   },
@@ -236,8 +236,8 @@ var generateRule = {
       return "(?!.*\\".concat(charsPairArray[0], "\\").concat(charsPairArray[1], ")");
     }).join('');
     return {
-      name: 'noConsecutiveCharacters',
-      label: _constants.validation.NO_CONSECUTIVE_CHARACTER + ': ' + convertToLabel(chars),
+      name: _constants.validation.NO_CONSECUTIVE_CHARACTER.NAME,
+      label: _constants.validation.NO_CONSECUTIVE_CHARACTER.LABEL + ': ' + convertToLabel(chars),
       pattern: new RegExp('^' + convertedPattern)
     };
   },
@@ -255,8 +255,8 @@ var generateRule = {
   mustNotBe: function mustNotBe(words) {
     var wordsArray = words.split(' ');
     return {
-      name: 'mustNotBe',
-      label: _constants.validation.MUST_NOT_BE + ': ' + convertToLabel(words),
+      name: _constants.validation.MUST_NOT_BE.NAME,
+      label: _constants.validation.MUST_NOT_BE.LABEL + ': ' + convertToLabel(words),
       pattern: function pattern(value) {
         return !_lodash.default.includes(wordsArray, value);
       }
@@ -276,8 +276,8 @@ var generateRule = {
   },
   required: function required() {
     return {
-      name: 'required',
-      label: _constants.validation.REQUIRED,
+      name: _constants.validation.REQUIRED.NAME,
+      label: _constants.validation.REQUIRED.LABEL,
       pattern: new RegExp('\\S')
     };
   }
@@ -285,11 +285,11 @@ var generateRule = {
 var commonRules = {
   prefixedQualifiedName: [{
     name: 'nameValidCharacters',
-    label: "[Name] ".concat(_constants.validation.VALID_CHARACTERS, " : a\u2013z, A\u2013Z, 0\u20139, \u2013, _, ."),
+    label: "[Name] ".concat(_constants.validation.VALID_CHARACTERS.LABEL, " : a\u2013z, A\u2013Z, 0\u20139, \u2013, _, ."),
     pattern: /^([^/]+\/)?[\w.-]+$/
   }, {
     name: 'nameBeginEnd',
-    label: "[Name] ".concat(_constants.validation.BEGIN_END_WITH, ": a\u2013z, A\u2013Z, 0\u20139"),
+    label: "[Name] ".concat(_constants.validation.BEGIN_END_WITH.LABEL, ": a\u2013z, A\u2013Z, 0\u20139"),
     pattern: /^([^/]+\/)?([A-Za-z0-9][^/]*)?[A-Za-z0-9]$/
   }, {
     name: 'nameMaxLength',
@@ -297,11 +297,11 @@ var commonRules = {
     pattern: /^([^/]+\/)?[^/]{1,63}$/
   }, {
     name: 'prefixValidCharacters',
-    label: "[Prefix] ".concat(_constants.validation.VALID_CHARACTERS, ": a\u2013z, 0\u20139, \u2013, ."),
+    label: "[Prefix] ".concat(_constants.validation.VALID_CHARACTERS.LABEL, ": a\u2013z, 0\u20139, \u2013, ."),
     pattern: /^([a-z0-9.-]+\/)?[^/]+$/
   }, {
     name: 'prefixBeginEnd',
-    label: "[Prefix] ".concat(_constants.validation.BEGIN_END_WITH, ": a\u2013z, 0\u20139"),
+    label: "[Prefix] ".concat(_constants.validation.BEGIN_END_WITH.LABEL, ": a\u2013z, 0\u20139"),
     pattern: /^([a-z0-9]([^/]*[a-z0-9])?\/)?[^/]+$/
   }, {
     name: 'prefixMaxLength',
@@ -311,7 +311,7 @@ var commonRules = {
   k8sLabels: {
     value: [{
       name: 'valueBeginEnd',
-      label: "[Value] ".concat(_constants.validation.BEGIN_END_WITH, " : a\u2013z, A\u2013Z, 0\u20139"),
+      label: "[Value] ".concat(_constants.validation.BEGIN_END_WITH.LABEL, " : a\u2013z, A\u2013Z, 0\u20139"),
       pattern: /^([^/]+\/)?([A-Za-z0-9][^/]*)?[A-Za-z0-9]$/
     }, {
       name: 'valueMaxLength',
@@ -319,20 +319,20 @@ var commonRules = {
       pattern: /^([^/]+\/)?[^/]{1,63}$/
     }, {
       name: 'valueValidCharacters',
-      label: "[Value] ".concat(_constants.validation.VALID_CHARACTERS, ": a\u2013z, A\u2013Z, 0\u20139, \u2013, _, ."),
+      label: "[Value] ".concat(_constants.validation.VALID_CHARACTERS.LABEL, ": a\u2013z, A\u2013Z, 0\u20139, \u2013, _, ."),
       pattern: /^[a-zA-Z0-9\-_.]+$/
     }]
   }
   // email: [
   //   generateRule.beginEndNotWith('@ .'),
   //   {
-  //     name: 'exactlyOne',
-  //     label: ValidationConstants.MUST_CONTAIN_EXACTLY_ONE + ': @',
+  //     name: ValidationConstants.MUST_CONTAIN_EXACTLY_ONE.NAME,
+  //     label: ValidationConstants.MUST_CONTAIN_EXACTLY_ONE.LABEL + ': @',
   //     pattern: /^[^@]+@[^@]+$/
   //   },
   //   {
-  //     name: 'dotAfterAt',
-  //     label: ValidationConstants.MUST_HAVE_DOT_AFTER_AT,
+  //     name: ValidationConstants.MUST_HAVE_DOT_AFTER_AT.NAME,
+  //     label: ValidationConstants.MUST_HAVE_DOT_AFTER_AT.LABEL,
   //     pattern: /@.+\..+$/
   //   }
   // ]
