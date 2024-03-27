@@ -1,7 +1,6 @@
 
 
-Create a new dist version 1.9.2
+Create a new dist version 1.9.3
 
 Collecting:
-- Impl [UI] Warning displaying for empty fields with validation rules (#255)
-- Fix [Feature Vectors] Provide validation rules on labels (#256)
+- Impl [Cross projects Jobs] Add counters per tab (#258)
