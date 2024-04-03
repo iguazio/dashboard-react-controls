@@ -36,7 +36,7 @@ const SelectOption = ({ item, name, onClick, multiple, selectedId, withSelectedI
   if (multiple) {
     return (
       <div data-testid="select-checkbox" className={selectClassName}>
-        <FormCheckBox name={name} value={item.id} label={item.label}>
+        <FormCheckBox name={name} value={item.id} label={item.label} disabled={item.disabled || false}>
           {item.status && <span className={`state-${item.status}-job status`} />}
         </FormCheckBox>
       </div>
