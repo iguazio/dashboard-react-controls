@@ -47,27 +47,31 @@ const Tip = ({ className, text, withExclamationMark }) => {
 
   const handleMouseEnter = useCallback((event) => {
     setIsShow(true)
-
-    const iconRect = iconRef.current.getBoundingClientRect()
-    const tipRect = tipBodyRef.current.getBoundingClientRect()
-    const widthPosition = iconRect.left > tipRect.width - arrowOffset ? 'tip_left' : 'tip_right'
-    const heightPosition = iconRect.top > tipRect.height + arrowLength ? 'tip_top' : 'tip_bottom'
-
-    setTipClassName(`${heightPosition} ${widthPosition}`)
-
-    if (widthPosition === 'tip_left') {
-      const computedArrowOffset = arrowOffset + (iconLength + arrowLength) / 2
-      tipBodyRef.current.style.left = `${iconRect.left - (tipRect.width - computedArrowOffset)}px`
-    } else {
-      const computedArrowOffset = arrowOffset - (iconLength - arrowLength) / 2
-      tipBodyRef.current.style.left = `${iconRect.left - computedArrowOffset}px`
-    }
-
-    tipBodyRef.current.style.top =
-      heightPosition === 'tip_top'
-        ? `${iconRect.top - tipRect.height - arrowLength}px`
-        : `${iconRect.bottom + arrowLength}px`
   }, [])
+
+  useEffect(() => {
+    if(isShow) {
+      const iconRect = iconRef.current.getBoundingClientRect()
+      const tipRect = tipBodyRef.current.getBoundingClientRect()
+      const widthPosition = iconRect.left > tipRect.width - arrowOffset ? 'tip_left' : 'tip_right'
+      const heightPosition = iconRect.top > tipRect.height + arrowLength ? 'tip_top' : 'tip_bottom'
+
+      setTipClassName(`${heightPosition} ${widthPosition}`)
+
+      if (widthPosition === 'tip_left') {
+        const computedArrowOffset = arrowOffset + (iconLength + arrowLength) / 2
+        tipBodyRef.current.style.left = `${iconRect.left - (tipRect.width - computedArrowOffset)}px`
+      } else {
+        const computedArrowOffset = arrowOffset - (iconLength - arrowLength) / 2
+        tipBodyRef.current.style.left = `${iconRect.left - computedArrowOffset}px`
+      }
+
+      tipBodyRef.current.style.top =
+          heightPosition === 'tip_top'
+              ? `${iconRect.top - tipRect.height - arrowLength}px`
+              : `${iconRect.bottom + arrowLength}px`
+    }
+  }, [isShow])
 
   const handleMouseLeave = () => {
     setIsShow(false)

@@ -36,9 +36,13 @@ export const useChipCell = (isEditMode, visibleChipsMaxLength) => {
   const hiddenChipsCounterRef = useRef()
   const hiddenChipsPopUpRef = useRef()
 
-  const handleShowElements = useCallback(() => {
+  const handleShowElements = useCallback((event) => {
     if (!isEditMode || (isEditMode && visibleChipsMaxLength)) {
-      setShowHiddenChips((state) => !state)
+      if (!hiddenChipsCounterRef.current?.contains(event.target)) {
+        setShowHiddenChips(false)
+      } else {
+        setShowHiddenChips(true)
+      }
     }
   }, [isEditMode, visibleChipsMaxLength])
 
