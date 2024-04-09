@@ -29,22 +29,22 @@ under the Apache 2.0 license is conditioned upon your compliance with
 such restriction.
 */
 
-var FormActionButton = /*#__PURE__*/_react.default.forwardRef(function (_ref, ref) {
-  var disabled = _ref.disabled,
-    fields = _ref.fields,
-    fieldsPath = _ref.fieldsPath,
-    hidden = _ref.hidden,
-    id = _ref.id,
-    label = _ref.label,
-    _onClick = _ref.onClick;
+const FormActionButton = /*#__PURE__*/_react.default.forwardRef((_ref, ref) => {
+  let {
+    disabled,
+    fields,
+    fieldsPath,
+    hidden,
+    id,
+    label,
+    onClick
+  } = _ref;
   return /*#__PURE__*/(0, _jsxRuntime.jsxs)(_jsxRuntime.Fragment, {
     children: [!hidden && /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
       className: "form-table__row form-table__action-row no-hover",
       children: /*#__PURE__*/(0, _jsxRuntime.jsxs)("button", {
         "data-testid": id ? id : "".concat(fieldsPath, "-add-btn"),
-        onClick: function onClick(event) {
-          return _onClick(event, fields, fieldsPath);
-        },
+        onClick: event => onClick(event, fields, fieldsPath),
         disabled: disabled,
         children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_plus.ReactComponent, {}), label]
       })
@@ -66,5 +66,4 @@ FormActionButton.propTypes = {
   label: _propTypes.default.string,
   onClick: _propTypes.default.func.isRequired
 };
-var _default = FormActionButton;
-exports.default = _default;
+var _default = exports.default = FormActionButton;

@@ -29,16 +29,18 @@ under the Apache 2.0 license is conditioned upon your compliance with
 such restriction.
 */
 
-var RoundedIcon = /*#__PURE__*/_react.default.forwardRef(function (_ref, ref) {
-  var children = _ref.children,
-    className = _ref.className,
-    disabled = _ref.disabled,
-    id = _ref.id,
-    isActive = _ref.isActive,
-    onClick = _ref.onClick,
-    tooltipText = _ref.tooltipText;
-  var wrapperClassNames = (0, _classnames.default)('round-icon-cp', className);
-  var IconClassNames = (0, _classnames.default)('round-icon-cp__circle', isActive && 'round-icon-cp__circle-active', disabled && 'round-icon-cp__circle-disabled');
+const RoundedIcon = /*#__PURE__*/_react.default.forwardRef((_ref, ref) => {
+  let {
+    children,
+    className,
+    disabled,
+    id,
+    isActive,
+    onClick,
+    tooltipText
+  } = _ref;
+  const wrapperClassNames = (0, _classnames.default)('round-icon-cp', className);
+  const IconClassNames = (0, _classnames.default)('round-icon-cp__circle', isActive && 'round-icon-cp__circle-active', disabled && 'round-icon-cp__circle-disabled');
   return /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
     className: wrapperClassNames,
     ref: ref,
@@ -63,7 +65,7 @@ RoundedIcon.defaultProps = {
   disabled: false,
   id: '',
   isActive: false,
-  onClick: function onClick() {},
+  onClick: () => {},
   tooltipText: ''
 };
 RoundedIcon.propTypes = {
@@ -75,5 +77,4 @@ RoundedIcon.propTypes = {
   onClick: _propTypes.default.func,
   tooltipText: _propTypes.default.string
 };
-var _default = /*#__PURE__*/_react.default.memo(RoundedIcon);
-exports.default = _default;
+var _default = exports.default = /*#__PURE__*/_react.default.memo(RoundedIcon);

@@ -36,42 +36,46 @@ under the Apache 2.0 license is conditioned upon your compliance with
 such restriction.
 */
 
-var FormChipCellView = /*#__PURE__*/_react.default.forwardRef(function (_ref, _ref2) {
-  var chipOptions = _ref.chipOptions,
-    chips = _ref.chips,
-    editConfig = _ref.editConfig,
-    formState = _ref.formState,
-    handleAddNewChip = _ref.handleAddNewChip,
-    _handleEditChip = _ref.handleEditChip,
-    _handleRemoveChip = _ref.handleRemoveChip,
-    handleShowElements = _ref.handleShowElements,
-    handleToEditMode = _ref.handleToEditMode,
-    isEditable = _ref.isEditable,
-    name = _ref.name,
-    setChipsSizes = _ref.setChipsSizes,
-    setEditConfig = _ref.setEditConfig,
-    shortChips = _ref.shortChips,
-    showChips = _ref.showChips,
-    showHiddenChips = _ref.showHiddenChips,
-    validateFields = _ref.validateFields,
-    validationRules = _ref.validationRules;
-  var chipsCellRef = _ref2.chipsCellRef,
-    chipsWrapperRef = _ref2.chipsWrapperRef,
-    hiddenChipsCounterRef = _ref2.hiddenChipsCounterRef,
-    hiddenChipsPopUpRef = _ref2.hiddenChipsPopUpRef;
-  var buttonAddClassNames = (0, _classnames.default)('button-add', chipOptions.background && "button-add-background_".concat(chipOptions.background), chipOptions.borderColor && "button-add-border_".concat(chipOptions.borderColor), chipOptions.font && "button-add-font_".concat(chipOptions.font), chipOptions.density && "button-add-density_".concat(chipOptions.density));
-  var wrapperClassNames = (0, _classnames.default)('chips-wrapper', isEditable && 'fixed-max-width');
-  var chipClassNames = (0, _classnames.default)('chip', 'chip__content', isEditable && 'data-ellipsis', shortChips && 'chip_short', chips.hiddenChips && 'chip_hidden', chipOptions.density && "chip-density_".concat(chipOptions.density), chipOptions.borderRadius && "chip-border_".concat(chipOptions.borderRadius), chipOptions.background && "chip-background_".concat(chipOptions.background), chipOptions.borderColor && "chip-border_".concat(chipOptions.borderColor), chipOptions.font && "chip-font_".concat(chipOptions.font), isEditable && 'editable', (showChips || isEditable) && 'chip_visible');
+const FormChipCellView = /*#__PURE__*/_react.default.forwardRef((_ref, _ref2) => {
+  let {
+    chipOptions,
+    chips,
+    editConfig,
+    formState,
+    handleAddNewChip,
+    handleEditChip,
+    handleRemoveChip,
+    handleShowElements,
+    handleToEditMode,
+    isEditable,
+    name,
+    setChipsSizes,
+    setEditConfig,
+    shortChips,
+    showChips,
+    showHiddenChips,
+    validateFields,
+    validationRules
+  } = _ref;
+  let {
+    chipsCellRef,
+    chipsWrapperRef,
+    hiddenChipsCounterRef,
+    hiddenChipsPopUpRef
+  } = _ref2;
+  const buttonAddClassNames = (0, _classnames.default)('button-add', chipOptions.background && "button-add-background_".concat(chipOptions.background), chipOptions.borderColor && "button-add-border_".concat(chipOptions.borderColor), chipOptions.font && "button-add-font_".concat(chipOptions.font), chipOptions.density && "button-add-density_".concat(chipOptions.density));
+  const wrapperClassNames = (0, _classnames.default)('chips-wrapper', isEditable && 'fixed-max-width');
+  const chipClassNames = (0, _classnames.default)('chip', 'chip__content', isEditable && 'data-ellipsis', shortChips && 'chip_short', chips.hiddenChips && 'chip_hidden', chipOptions.density && "chip-density_".concat(chipOptions.density), chipOptions.borderRadius && "chip-border_".concat(chipOptions.borderRadius), chipOptions.background && "chip-background_".concat(chipOptions.background), chipOptions.borderColor && "chip-border_".concat(chipOptions.borderColor), chipOptions.font && "chip-font_".concat(chipOptions.font), isEditable && 'editable', (showChips || isEditable) && 'chip_visible');
   return /*#__PURE__*/(0, _jsxRuntime.jsx)(_reactFinalFormArrays.FieldArray, {
     name: name,
     initialValue: formState.initialValues[name],
     validate: validateFields,
-    children: function children(_ref3) {
-      var fields = _ref3.fields,
-        meta = _ref3.meta;
-      if (!(0, _lodash.isEmpty)(validationRules) && validationRules.key.every(function (rule) {
-        return rule.name !== _formChipCell.uniquenessError.name;
-      })) {
+    children: _ref3 => {
+      let {
+        fields,
+        meta
+      } = _ref3;
+      if (!(0, _lodash.isEmpty)(validationRules) && validationRules.key.every(rule => rule.name !== _formChipCell.uniquenessError.name)) {
         validationRules.key.push(_formChipCell.uniquenessError);
       }
       return (isEditable || !(0, _common.isEveryObjectValueEmpty)(fields)) && /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
@@ -80,9 +84,9 @@ var FormChipCellView = /*#__PURE__*/_react.default.forwardRef(function (_ref, _r
         children: /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
           className: wrapperClassNames,
           ref: chipsWrapperRef,
-          children: [fields.map(function (contentItem, index) {
+          children: [fields.map((contentItem, index) => {
             var _chips$visibleChips;
-            var chipData = fields.value[index];
+            const chipData = fields.value[index];
             return index < ((_chips$visibleChips = chips.visibleChips) === null || _chips$visibleChips === void 0 ? void 0 : _chips$visibleChips.length) && /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
               className: "chip-block",
               children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_Tooltip.default, {
@@ -103,12 +107,8 @@ var FormChipCellView = /*#__PURE__*/_react.default.forwardRef(function (_ref, _r
                   chipIndex: index,
                   chipOptions: chipOptions,
                   editConfig: editConfig,
-                  handleEditChip: function handleEditChip(event, nameEvent) {
-                    return _handleEditChip(event, fields, nameEvent);
-                  },
-                  handleRemoveChip: function handleRemoveChip(event, index) {
-                    return _handleRemoveChip(event, fields, index);
-                  },
+                  handleEditChip: (event, nameEvent) => handleEditChip(event, fields, nameEvent),
+                  handleRemoveChip: (event, index) => handleRemoveChip(event, fields, index),
                   handleToEditMode: handleToEditMode,
                   isEditable: isEditable,
                   keyName: "".concat(contentItem, ".key"),
@@ -129,8 +129,8 @@ var FormChipCellView = /*#__PURE__*/_react.default.forwardRef(function (_ref, _r
               chips: chips.hiddenChips,
               handleShowElements: handleShowElements,
               ref: {
-                hiddenChipsCounterRef: hiddenChipsCounterRef,
-                hiddenChipsPopUpRef: hiddenChipsPopUpRef
+                hiddenChipsCounterRef,
+                hiddenChipsPopUpRef
               },
               textOverflowEllipsis: true
             }), chips.hiddenChipsNumber && /*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
@@ -142,9 +142,7 @@ var FormChipCellView = /*#__PURE__*/_react.default.forwardRef(function (_ref, _r
           }), isEditable && /*#__PURE__*/(0, _jsxRuntime.jsx)("button", {
             "data-testid": "".concat(name, "-add-chip"),
             className: buttonAddClassNames,
-            onClick: function onClick(e) {
-              return handleAddNewChip(e, fields);
-            },
+            onClick: e => handleAddNewChip(e, fields),
             children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_add.ReactComponent, {})
           })]
         })
@@ -185,5 +183,4 @@ FormChipCellView.propTypes = {
   validateFields: _propTypes.default.func.isRequired,
   validationRules: _propTypes.default.object
 };
-var _default = FormChipCellView;
-exports.default = _default;
+var _default = exports.default = FormChipCellView;

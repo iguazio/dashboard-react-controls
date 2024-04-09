@@ -26,9 +26,11 @@ under the Apache 2.0 license is conditioned upon your compliance with
 such restriction.
 */
 
-var ProducerTooltipTemplate = function ProducerTooltipTemplate(_ref) {
-  var kind = _ref.kind,
-    owner = _ref.owner;
+const ProducerTooltipTemplate = _ref => {
+  let {
+    kind,
+    owner
+  } = _ref;
   return /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
     className: "tooltip-container",
     children: [/*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
@@ -52,5 +54,4 @@ ProducerTooltipTemplate.propTypes = {
   kind: _propTypes.default.string.isRequired,
   owner: _propTypes.default.string.isRequired
 };
-var _default = ProducerTooltipTemplate;
-exports.default = _default;
+var _default = exports.default = ProducerTooltipTemplate;

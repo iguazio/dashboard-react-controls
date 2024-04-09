@@ -30,26 +30,28 @@ under the Apache 2.0 license is conditioned upon your compliance with
 such restriction.
 */
 
-var WizardSteps = function WizardSteps(_ref) {
-  var activeStepNumber = _ref.activeStepNumber,
-    firstDisabledStepIdx = _ref.firstDisabledStepIdx,
-    jumpToStep = _ref.jumpToStep,
-    steps = _ref.steps;
-  var getStepClassNames = function getStepClassNames(idx, invalid) {
-    return (0, _classnames.default)('wizard-steps__item', idx === activeStepNumber && 'wizard-steps__item_active', invalid && 'wizard-steps__item_invalid');
-  };
-  var handleJumpToStep = function handleJumpToStep(event, idx) {
+const WizardSteps = _ref => {
+  let {
+    activeStepNumber,
+    firstDisabledStepIdx,
+    jumpToStep,
+    steps
+  } = _ref;
+  const getStepClassNames = (idx, invalid) => (0, _classnames.default)('wizard-steps__item', idx === activeStepNumber && 'wizard-steps__item_active', invalid && 'wizard-steps__item_invalid');
+  const handleJumpToStep = (event, idx) => {
     event.preventDefault();
     jumpToStep(idx);
   };
   return /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
     className: "wizard-steps",
-    children: steps.map(function (_ref2, idx) {
-      var id = _ref2.id,
-        label = _ref2.label,
-        disabled = _ref2.disabled,
-        invalid = _ref2.invalid;
-      var stepIsDisabled = (0, _lodash.isNumber)(firstDisabledStepIdx) && idx >= firstDisabledStepIdx;
+    children: steps.map((_ref2, idx) => {
+      let {
+        id,
+        label,
+        disabled,
+        invalid
+      } = _ref2;
+      const stepIsDisabled = (0, _lodash.isNumber)(firstDisabledStepIdx) && idx >= firstDisabledStepIdx;
       return /*#__PURE__*/(0, _jsxRuntime.jsx)(_Button.default, {
         className: getStepClassNames(idx, invalid),
         disabled: stepIsDisabled,
@@ -58,9 +60,7 @@ var WizardSteps = function WizardSteps(_ref) {
           children: idx + 1
         }),
         label: label,
-        onClick: function onClick(e) {
-          return handleJumpToStep(e, idx);
-        }
+        onClick: e => handleJumpToStep(e, idx)
       }, id);
     })
   });
@@ -74,5 +74,4 @@ WizardSteps.propTypes = {
   jumpToStep: _propTypes.default.func.isRequired,
   steps: _types.WIZARD_STEPS_CONFIG
 };
-var _default = WizardSteps;
-exports.default = _default;
+var _default = exports.default = WizardSteps;

@@ -1,6 +1,5 @@
 "use strict";
 
-function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
@@ -19,114 +18,96 @@ var _close = require("../../../images/close.svg");
 require("./newChipForm.scss");
 var _jsxRuntime = require("react/jsx-runtime");
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
-function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
-function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
-function _defineProperty(obj, key, value) { key = _toPropertyKey(key); if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-function _toPropertyKey(arg) { var key = _toPrimitive(arg, "string"); return _typeof(key) === "symbol" ? key : String(key); }
-function _toPrimitive(input, hint) { if (_typeof(input) !== "object" || input === null) return input; var prim = input[Symbol.toPrimitive]; if (prim !== undefined) { var res = prim.call(input, hint || "default"); if (_typeof(res) !== "object") return res; throw new TypeError("@@toPrimitive must return a primitive value."); } return (hint === "string" ? String : Number)(input); }
-function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
-function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
-function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
-function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i]; return arr2; }
-function _iterableToArrayLimit(arr, i) { var _i = null == arr ? null : "undefined" != typeof Symbol && arr[Symbol.iterator] || arr["@@iterator"]; if (null != _i) { var _s, _e, _x, _r, _arr = [], _n = !0, _d = !1; try { if (_x = (_i = _i.call(arr)).next, 0 === i) { if (Object(_i) !== _i) return; _n = !1; } else for (; !(_n = (_s = _x.call(_i)).done) && (_arr.push(_s.value), _arr.length !== i); _n = !0); } catch (err) { _d = !0, _e = err; } finally { try { if (!_n && null != _i.return && (_r = _i.return(), Object(_r) !== _r)) return; } finally { if (_d) throw _e; } } return _arr; } }
-function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; } /*
-                                                                      Copyright 2022 Iguazio Systems Ltd.
-                                                                      Licensed under the Apache License, Version 2.0 (the "License") with
-                                                                      an addition restriction as set forth herein. You may not use this
-                                                                      file except in compliance with the License. You may obtain a copy of
-                                                                      the License at http://www.apache.org/licenses/LICENSE-2.0.
-                                                                      Unless required by applicable law or agreed to in writing, software
-                                                                      distributed under the License is distributed on an "AS IS" BASIS,
-                                                                      WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or
-                                                                      implied. See the License for the specific language governing
-                                                                      permissions and limitations under the License.
-                                                                      In addition, you may not use the software for any purposes that are
-                                                                      illegal under applicable law, and the grant of the foregoing license
-                                                                      under the Apache 2.0 license is conditioned upon your compliance with
-                                                                      such restriction.
-                                                                      */
-var NewChipForm = /*#__PURE__*/_react.default.forwardRef(function (_ref, ref) {
-  var chip = _ref.chip,
-    chipIndex = _ref.chipIndex,
-    chipOptions = _ref.chipOptions,
-    className = _ref.className,
-    editConfig = _ref.editConfig,
-    handleRemoveChip = _ref.handleRemoveChip,
-    isEditable = _ref.isEditable,
-    keyName = _ref.keyName,
-    meta = _ref.meta,
-    onChange = _ref.onChange,
-    setEditConfig = _ref.setEditConfig,
-    rules = _ref.validationRules,
-    valueName = _ref.valueName;
-  var _useState = (0, _react.useState)({
-      isKeyOnly: chip.isKeyOnly,
-      key: chip.key,
-      value: chip.value,
-      keyFieldWidth: 0,
-      valueFieldWidth: 0
-    }),
-    _useState2 = _slicedToArray(_useState, 2),
-    chipData = _useState2[0],
-    setChipData = _useState2[1];
-  var _useState3 = (0, _react.useState)('key'),
-    _useState4 = _slicedToArray(_useState3, 2),
-    selectedInput = _useState4[0],
-    setSelectedInput = _useState4[1];
-  var _useState5 = (0, _react.useState)(rules),
-    _useState6 = _slicedToArray(_useState5, 2),
-    validationRules = _useState6[0],
-    setValidationRules = _useState6[1];
-  var _useState7 = (0, _react.useState)(false),
-    _useState8 = _slicedToArray(_useState7, 2),
-    showValidationRules = _useState8[0],
-    setShowValidationRules = _useState8[1];
-  var maxWidthInput = (0, _react.useMemo)(function () {
+function _getRequireWildcardCache(e) { if ("function" != typeof WeakMap) return null; var r = new WeakMap(), t = new WeakMap(); return (_getRequireWildcardCache = function (e) { return e ? t : r; })(e); }
+function _interopRequireWildcard(e, r) { if (!r && e && e.__esModule) return e; if (null === e || "object" != typeof e && "function" != typeof e) return { default: e }; var t = _getRequireWildcardCache(r); if (t && t.has(e)) return t.get(e); var n = { __proto__: null }, a = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var u in e) if ("default" !== u && {}.hasOwnProperty.call(e, u)) { var i = a ? Object.getOwnPropertyDescriptor(e, u) : null; i && (i.get || i.set) ? Object.defineProperty(n, u, i) : n[u] = e[u]; } return n.default = e, t && t.set(e, n), n; }
+/*
+Copyright 2022 Iguazio Systems Ltd.
+Licensed under the Apache License, Version 2.0 (the "License") with
+an addition restriction as set forth herein. You may not use this
+file except in compliance with the License. You may obtain a copy of
+the License at http://www.apache.org/licenses/LICENSE-2.0.
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or
+implied. See the License for the specific language governing
+permissions and limitations under the License.
+In addition, you may not use the software for any purposes that are
+illegal under applicable law, and the grant of the foregoing license
+under the Apache 2.0 license is conditioned upon your compliance with
+such restriction.
+*/
+
+const NewChipForm = /*#__PURE__*/_react.default.forwardRef((_ref, ref) => {
+  let {
+    chip,
+    chipIndex,
+    chipOptions,
+    className,
+    editConfig,
+    handleRemoveChip,
+    isEditable,
+    keyName,
+    meta,
+    onChange,
+    setEditConfig,
+    validationRules: rules,
+    valueName
+  } = _ref;
+  const [chipData, setChipData] = (0, _react.useState)({
+    isKeyOnly: chip.isKeyOnly,
+    key: chip.key,
+    value: chip.value,
+    keyFieldWidth: 0,
+    valueFieldWidth: 0
+  });
+  const [selectedInput, setSelectedInput] = (0, _react.useState)('key');
+  const [validationRules, setValidationRules] = (0, _react.useState)(rules);
+  const [showValidationRules, setShowValidationRules] = (0, _react.useState)(false);
+  const maxWidthInput = (0, _react.useMemo)(() => {
     var _ref$current;
     return ((_ref$current = ref.current) === null || _ref$current === void 0 ? void 0 : _ref$current.clientWidth) - 50;
   }, [ref]);
-  var background = chipOptions.background,
-    borderColor = chipOptions.borderColor,
-    borderRadius = chipOptions.borderRadius,
-    density = chipOptions.density,
-    font = chipOptions.font;
-  var minWidthInput = 25;
-  var minWidthValueInput = 35;
-  var refInputKey = _react.default.useRef({});
-  var refInputValue = _react.default.useRef({});
-  var refInputContainer = _react.default.useRef();
-  var labelKeyClassName = (0, _classnames.default)(className, !editConfig.isKeyFocused && 'item_edited', !(0, _lodash.isEmpty)((0, _lodash.get)(meta, ['error', chipIndex, 'key'], [])) && !(0, _lodash.isEmpty)(chipData.key) && 'item_edited_invalid');
-  var labelContainerClassName = (0, _classnames.default)('edit-chip-container', background && "edit-chip-container-background_".concat(background), borderColor && "edit-chip-container-border_".concat(borderColor), font && "edit-chip-container-font_".concat(font), density && "edit-chip-container-density_".concat(density), borderRadius && "edit-chip-container-border_".concat(borderRadius), (editConfig.isEdit || editConfig.isNewChip) && 'edit-chip-container_edited');
-  var labelValueClassName = (0, _classnames.default)('input-label-value', !editConfig.isValueFocused && 'item_edited', !(0, _lodash.isEmpty)((0, _lodash.get)(meta, ['error', chipIndex, 'value'], [])) && !(0, _lodash.isEmpty)(chipData.value) && 'item_edited_invalid');
-  var closeButtonClass = (0, _classnames.default)('item-icon-close', (editConfig.chipIndex === chipIndex || !isEditable) && 'item-icon-close_hidden');
-  (0, _react.useLayoutEffect)(function () {
+  const {
+    background,
+    borderColor,
+    borderRadius,
+    density,
+    font
+  } = chipOptions;
+  const minWidthInput = 25;
+  const minWidthValueInput = 35;
+  const refInputKey = _react.default.useRef({});
+  const refInputValue = _react.default.useRef({});
+  const refInputContainer = _react.default.useRef();
+  const labelKeyClassName = (0, _classnames.default)(className, !editConfig.isKeyFocused && 'item_edited', !(0, _lodash.isEmpty)((0, _lodash.get)(meta, ['error', chipIndex, 'key'], [])) && !(0, _lodash.isEmpty)(chipData.key) && 'item_edited_invalid');
+  const labelContainerClassName = (0, _classnames.default)('edit-chip-container', background && "edit-chip-container-background_".concat(background), borderColor && "edit-chip-container-border_".concat(borderColor), font && "edit-chip-container-font_".concat(font), density && "edit-chip-container-density_".concat(density), borderRadius && "edit-chip-container-border_".concat(borderRadius), (editConfig.isEdit || editConfig.isNewChip) && 'edit-chip-container_edited');
+  const labelValueClassName = (0, _classnames.default)('input-label-value', !editConfig.isValueFocused && 'item_edited', !(0, _lodash.isEmpty)((0, _lodash.get)(meta, ['error', chipIndex, 'value'], [])) && !(0, _lodash.isEmpty)(chipData.value) && 'item_edited_invalid');
+  const closeButtonClass = (0, _classnames.default)('item-icon-close', (editConfig.chipIndex === chipIndex || !isEditable) && 'item-icon-close_hidden');
+  (0, _react.useLayoutEffect)(() => {
     if (!chipData.keyFieldWidth && !chipData.valueFieldWidth) {
-      var currentWidthKeyInput = refInputKey.current.scrollWidth + 1;
-      var currentWidthValueInput = refInputValue.current.scrollWidth + 1;
-      var keyFieldWidth = !chipData.key || currentWidthKeyInput <= minWidthInput ? minWidthInput : currentWidthKeyInput >= maxWidthInput ? maxWidthInput : currentWidthKeyInput;
-      var valueFieldWidth = !chipData.value || currentWidthValueInput <= minWidthValueInput ? minWidthValueInput : currentWidthValueInput >= maxWidthInput ? maxWidthInput : currentWidthValueInput;
-      setChipData(function (prevState) {
-        return _objectSpread(_objectSpread({}, prevState), {}, {
-          keyFieldWidth: keyFieldWidth,
-          valueFieldWidth: valueFieldWidth
-        });
-      });
+      const currentWidthKeyInput = refInputKey.current.scrollWidth + 1;
+      const currentWidthValueInput = refInputValue.current.scrollWidth + 1;
+      const keyFieldWidth = !chipData.key || currentWidthKeyInput <= minWidthInput ? minWidthInput : currentWidthKeyInput >= maxWidthInput ? maxWidthInput : currentWidthKeyInput;
+      const valueFieldWidth = !chipData.value || currentWidthValueInput <= minWidthValueInput ? minWidthValueInput : currentWidthValueInput >= maxWidthInput ? maxWidthInput : currentWidthValueInput;
+      setChipData(prevState => ({
+        ...prevState,
+        keyFieldWidth,
+        valueFieldWidth
+      }));
     }
   }, [chipData.key, chipData.value, chipData.keyFieldWidth, chipData.valueFieldWidth, maxWidthInput, refInputKey, refInputValue]);
-  var handleScroll = function handleScroll() {
+  const handleScroll = () => {
     setShowValidationRules(false);
   };
-  (0, _react.useEffect)(function () {
+  (0, _react.useEffect)(() => {
     if (showValidationRules) {
       window.addEventListener('scroll', handleScroll, true);
     }
-    return function () {
+    return () => {
       window.removeEventListener('scroll', handleScroll, true);
     };
   }, [showValidationRules]);
-  (0, _react.useEffect)(function () {
+  (0, _react.useEffect)(() => {
     if (editConfig.chipIndex === chipIndex) {
       if (editConfig.isKeyFocused) {
         refInputKey.current.focus();
@@ -135,10 +116,10 @@ var NewChipForm = /*#__PURE__*/_react.default.forwardRef(function (_ref, ref) {
       }
     }
   }, [editConfig.isKeyFocused, editConfig.isValueFocused, refInputKey, refInputValue, chipIndex, editConfig.chipIndex]);
-  var outsideClick = (0, _react.useCallback)(function (event) {
+  const outsideClick = (0, _react.useCallback)(event => {
     if (editConfig.chipIndex === chipIndex) {
       var _event$path, _event$composedPath;
-      var elementPath = (_event$path = event.path) !== null && _event$path !== void 0 ? _event$path : (_event$composedPath = event.composedPath) === null || _event$composedPath === void 0 ? void 0 : _event$composedPath.call(event);
+      const elementPath = (_event$path = event.path) !== null && _event$path !== void 0 ? _event$path : (_event$composedPath = event.composedPath) === null || _event$composedPath === void 0 ? void 0 : _event$composedPath.call(event);
       if (!elementPath.includes(refInputContainer.current)) {
         onChange(event, _constants.CLICK);
         window.getSelection().removeAllRanges();
@@ -147,15 +128,15 @@ var NewChipForm = /*#__PURE__*/_react.default.forwardRef(function (_ref, ref) {
       }
     }
   }, [onChange, refInputContainer, chipIndex, editConfig.chipIndex]);
-  (0, _react.useEffect)(function () {
+  (0, _react.useEffect)(() => {
     if (editConfig.isEdit) {
       document.addEventListener('click', outsideClick, true);
-      return function () {
+      return () => {
         document.removeEventListener('click', outsideClick, true);
       };
     }
   }, [outsideClick, editConfig.isEdit]);
-  var focusChip = (0, _react.useCallback)(function (event) {
+  const focusChip = (0, _react.useCallback)(event => {
     if (editConfig.chipIndex === chipIndex && isEditable) {
       if (!event.shiftKey && event.key === _constants.TAB && editConfig.isValueFocused) {
         return onChange(event, _constants.TAB);
@@ -165,25 +146,23 @@ var NewChipForm = /*#__PURE__*/_react.default.forwardRef(function (_ref, ref) {
     }
     event.stopPropagation();
   }, [editConfig, onChange, chipIndex, isEditable]);
-  var handleOnFocus = (0, _react.useCallback)(function (event) {
-    var isKeyFocused = event.target.name === keyName;
+  const handleOnFocus = (0, _react.useCallback)(event => {
+    const isKeyFocused = event.target.name === keyName;
     if (editConfig.chipIndex === chipIndex) {
       if (isKeyFocused) {
         refInputKey.current.selectionStart = refInputKey.current.selectionEnd;
-        setEditConfig(function (prevConfig) {
-          return _objectSpread(_objectSpread({}, prevConfig), {}, {
-            isKeyFocused: true,
-            isValueFocused: false
-          });
-        });
+        setEditConfig(prevConfig => ({
+          ...prevConfig,
+          isKeyFocused: true,
+          isValueFocused: false
+        }));
       } else {
         refInputValue.current.selectionStart = refInputValue.current.selectionEnd;
-        setEditConfig(function (prevConfig) {
-          return _objectSpread(_objectSpread({}, prevConfig), {}, {
-            isKeyFocused: false,
-            isValueFocused: true
-          });
-        });
+        setEditConfig(prevConfig => ({
+          ...prevConfig,
+          isKeyFocused: false,
+          isValueFocused: true
+        }));
       }
       event && event.stopPropagation();
     } else if ((0, _lodash.isNil)(editConfig.chipIndex)) {
@@ -193,66 +172,69 @@ var NewChipForm = /*#__PURE__*/_react.default.forwardRef(function (_ref, ref) {
         refInputValue.current.selectionStart = refInputValue.current.selectionEnd;
       }
       setEditConfig({
-        chipIndex: chipIndex,
+        chipIndex,
         isEdit: true,
         isKeyFocused: isKeyFocused,
         isValueFocused: !isKeyFocused
       });
     }
   }, [keyName, refInputKey, refInputValue, setEditConfig, editConfig.chipIndex, chipIndex]);
-  var handleOnChange = (0, _react.useCallback)(function (event) {
+  const handleOnChange = (0, _react.useCallback)(event => {
     event.preventDefault();
     if (event.target.name === keyName) {
-      var currentWidthKeyInput = (0, _formChipCell.getTextWidth)(refInputKey.current);
-      setChipData(function (prevState) {
-        return _objectSpread(_objectSpread({}, prevState), {}, {
-          key: refInputKey.current.value,
-          keyFieldWidth: refInputKey.current.value.length <= 1 ? minWidthInput : currentWidthKeyInput >= maxWidthInput ? maxWidthInput : currentWidthKeyInput > minWidthInput ? currentWidthKeyInput + 2 : minWidthInput
-        });
-      });
+      const currentWidthKeyInput = (0, _formChipCell.getTextWidth)(refInputKey.current);
+      setChipData(prevState => ({
+        ...prevState,
+        key: refInputKey.current.value,
+        keyFieldWidth: refInputKey.current.value.length <= 1 ? minWidthInput : currentWidthKeyInput >= maxWidthInput ? maxWidthInput : currentWidthKeyInput > minWidthInput ? currentWidthKeyInput + 2 : minWidthInput
+      }));
     } else {
-      var currentWidthValueInput = (0, _formChipCell.getTextWidth)(refInputValue.current);
-      setChipData(function (prevState) {
+      const currentWidthValueInput = (0, _formChipCell.getTextWidth)(refInputValue.current);
+      setChipData(prevState => {
         var _refInputValue$curren;
-        return _objectSpread(_objectSpread({}, prevState), {}, {
+        return {
+          ...prevState,
           value: refInputValue.current.value,
           valueFieldWidth: ((_refInputValue$curren = refInputValue.current.value) === null || _refInputValue$curren === void 0 ? void 0 : _refInputValue$curren.length) <= 1 ? minWidthValueInput : currentWidthValueInput >= maxWidthInput ? maxWidthInput : currentWidthValueInput > minWidthValueInput ? currentWidthValueInput + 2 : minWidthValueInput
-        });
+        };
       });
     }
   }, [maxWidthInput, refInputKey, refInputValue, keyName]);
-  (0, _react.useLayoutEffect)(function () {
+  (0, _react.useLayoutEffect)(() => {
     if (editConfig.chipIndex === chipIndex) {
       setSelectedInput(editConfig.isKeyFocused ? 'key' : editConfig.isValueFocused ? 'value' : null);
     }
   }, [editConfig.isKeyFocused, editConfig.isValueFocused, editConfig.chipIndex, chipIndex]);
-  (0, _react.useEffect)(function () {
+  (0, _react.useEffect)(() => {
     if (meta.valid && showValidationRules) {
       setShowValidationRules(false);
     }
   }, [meta.valid, showValidationRules]);
-  (0, _react.useEffect)(function () {
+  (0, _react.useEffect)(() => {
     if (meta.error) {
-      setValidationRules(function (prevState) {
+      setValidationRules(prevState => {
         var _prevState$selectedIn;
-        return _objectSpread(_objectSpread({}, prevState), {}, _defineProperty({}, selectedInput, (_prevState$selectedIn = prevState[selectedInput]) === null || _prevState$selectedIn === void 0 ? void 0 : _prevState$selectedIn.map(function (rule) {
-          return _objectSpread(_objectSpread({}, rule), {}, {
-            isValid: (0, _lodash.isEmpty)((0, _lodash.get)(meta, ['error', editConfig.chipIndex, selectedInput], [])) ? true : !meta.error[editConfig.chipIndex][selectedInput].some(function (err) {
-              return err && err.name === rule.name;
-            })
-          });
-        })));
+        return {
+          ...prevState,
+          [selectedInput]: (_prevState$selectedIn = prevState[selectedInput]) === null || _prevState$selectedIn === void 0 ? void 0 : _prevState$selectedIn.map(rule => {
+            return {
+              ...rule,
+              isValid: (0, _lodash.isEmpty)((0, _lodash.get)(meta, ['error', editConfig.chipIndex, selectedInput], [])) ? true : !meta.error[editConfig.chipIndex][selectedInput].some(err => err && err.name === rule.name)
+            };
+          })
+        };
       });
       !showValidationRules && setShowValidationRules(true);
     }
   }, [meta, showValidationRules, selectedInput, editConfig.chipIndex]);
-  var getValidationRules = (0, _react.useCallback)(function () {
+  const getValidationRules = (0, _react.useCallback)(() => {
     var _validationRules$sele;
-    return (_validationRules$sele = validationRules[selectedInput]) === null || _validationRules$sele === void 0 ? void 0 : _validationRules$sele.map(function (_ref2) {
-      var _ref2$isValid = _ref2.isValid,
-        isValid = _ref2$isValid === void 0 ? false : _ref2$isValid,
-        label = _ref2.label,
-        name = _ref2.name;
+    return (_validationRules$sele = validationRules[selectedInput]) === null || _validationRules$sele === void 0 ? void 0 : _validationRules$sele.map(_ref2 => {
+      let {
+        isValid = false,
+        label,
+        name
+      } = _ref2;
       return /*#__PURE__*/(0, _jsxRuntime.jsx)(_ValidationTemplate.default, {
         valid: isValid,
         validationMessage: label
@@ -261,9 +243,7 @@ var NewChipForm = /*#__PURE__*/_react.default.forwardRef(function (_ref, ref) {
   }, [selectedInput, validationRules]);
   return /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
     className: labelContainerClassName,
-    onKeyDown: function onKeyDown(event) {
-      return editConfig.isEdit && focusChip(event);
-    },
+    onKeyDown: event => editConfig.isEdit && focusChip(event),
     ref: refInputContainer,
     children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_NewChipInput.default, {
       className: labelKeyClassName,
@@ -292,9 +272,7 @@ var NewChipForm = /*#__PURE__*/_react.default.forwardRef(function (_ref, ref) {
       }
     }), /*#__PURE__*/(0, _jsxRuntime.jsx)("button", {
       className: closeButtonClass,
-      onClick: function onClick(event) {
-        return handleRemoveChip(event, chipIndex);
-      },
+      onClick: event => handleRemoveChip(event, chipIndex),
       children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_close.ReactComponent, {})
     }), (editConfig.isKeyFocused ? !(0, _lodash.isEmpty)(chipData.key) : !(0, _lodash.isEmpty)(chipData.value)) && editConfig.chipIndex === chipIndex && !(0, _lodash.isEmpty)((0, _lodash.get)(meta, ['error', editConfig.chipIndex, selectedInput], [])) && /*#__PURE__*/(0, _jsxRuntime.jsx)(_OptionsMenu.default, {
       show: showValidationRules,
@@ -322,5 +300,4 @@ NewChipForm.propTypes = {
   validationRules: _propTypes.default.object,
   valueName: _propTypes.default.string.isRequired
 };
-var _default = NewChipForm;
-exports.default = _default;
+var _default = exports.default = NewChipForm;

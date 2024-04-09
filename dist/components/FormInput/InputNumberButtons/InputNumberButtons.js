@@ -29,28 +29,30 @@ under the Apache 2.0 license is conditioned upon your compliance with
 such restriction.
 */
 
-var InputNumberButtons = function InputNumberButtons(_ref) {
-  var disabled = _ref.disabled,
-    min = _ref.min,
-    max = _ref.max,
-    onChange = _ref.onChange,
-    step = _ref.step,
-    value = _ref.value;
-  var handleIncrease = function handleIncrease(event) {
+const InputNumberButtons = _ref => {
+  let {
+    disabled,
+    min,
+    max,
+    onChange,
+    step,
+    value
+  } = _ref;
+  const handleIncrease = event => {
     event.preventDefault();
     if (max && value >= max) return;
-    var newValue = isCurrentValueEmpty() ? step : (0, _math.performFloatOperation)(value, step, '+');
+    let newValue = isCurrentValueEmpty() ? step : (0, _math.performFloatOperation)(value, step, '+');
     newValue = max && newValue > max ? max : newValue;
     onChange(newValue);
   };
-  var handleDecrease = function handleDecrease(event) {
+  const handleDecrease = event => {
     event.preventDefault();
     if (min && value <= min) return;
-    var newValue = isCurrentValueEmpty() ? -step : (0, _math.performFloatOperation)(value, step, '-');
+    let newValue = isCurrentValueEmpty() ? -step : (0, _math.performFloatOperation)(value, step, '-');
     newValue = min && newValue < min ? min : newValue;
     onChange(newValue);
   };
-  var isCurrentValueEmpty = function isCurrentValueEmpty() {
+  const isCurrentValueEmpty = () => {
     return (0, _lodash.isNil)(value) || value === '';
   };
   return /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
@@ -92,5 +94,4 @@ InputNumberButtons.propTypes = {
   step: _propTypes.default.number,
   value: _propTypes.default.oneOfType([_propTypes.default.string, _propTypes.default.number]).isRequired
 };
-var _default = /*#__PURE__*/_react.default.memo(InputNumberButtons);
-exports.default = _default;
+var _default = exports.default = /*#__PURE__*/_react.default.memo(InputNumberButtons);

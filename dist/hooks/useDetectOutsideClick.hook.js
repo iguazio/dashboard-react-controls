@@ -28,9 +28,9 @@ such restriction.
  * @param {React.node} ref
  * @param {function} handler A callback function to use on outside click
  */
-var useDetectOutsideClick = function useDetectOutsideClick(ref, handler) {
-  (0, _react.useEffect)(function () {
-    var onClick = function onClick(e) {
+const useDetectOutsideClick = (ref, handler) => {
+  (0, _react.useEffect)(() => {
+    const onClick = e => {
       e.stopPropagation();
       // If the active element exists and is clicked outside of
       if (ref.current !== null && !ref.current.contains(e.target)) {
@@ -39,7 +39,7 @@ var useDetectOutsideClick = function useDetectOutsideClick(ref, handler) {
     };
     // If the item is active (ie open) then listen for clicks outside
     window.addEventListener('click', onClick);
-    return function () {
+    return () => {
       window.removeEventListener('click', onClick);
     };
   }, [ref, handler]);

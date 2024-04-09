@@ -29,10 +29,12 @@ under the Apache 2.0 license is conditioned upon your compliance with
 such restriction.
 */
 
-var ValidationTemplate = function ValidationTemplate(_ref) {
-  var valid = _ref.valid,
-    validationMessage = _ref.validationMessage;
-  var validationClasses = (0, _classnames.default)('validation-option', valid && 'text-muted');
+const ValidationTemplate = _ref => {
+  let {
+    valid,
+    validationMessage
+  } = _ref;
+  const validationClasses = (0, _classnames.default)('validation-option', valid && 'text-muted');
   return /*#__PURE__*/(0, _jsxRuntime.jsxs)("li", {
     className: validationClasses,
     children: [/*#__PURE__*/(0, _jsxRuntime.jsx)("i", {
@@ -51,5 +53,4 @@ ValidationTemplate.propTypes = {
   valid: _propTypes.default.bool.isRequired,
   validationMessage: _propTypes.default.string.isRequired
 };
-var _default = ValidationTemplate;
-exports.default = _default;
+var _default = exports.default = ValidationTemplate;

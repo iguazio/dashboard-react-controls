@@ -5,109 +5,109 @@ Object.defineProperty(exports, "__esModule", {
 });
 Object.defineProperty(exports, "Button", {
   enumerable: true,
-  get: function get() {
+  get: function () {
     return _Button.default;
   }
 });
 Object.defineProperty(exports, "ConfirmDialog", {
   enumerable: true,
-  get: function get() {
+  get: function () {
     return _ConfirmDialog.default;
   }
 });
 Object.defineProperty(exports, "FormCheckBox", {
   enumerable: true,
-  get: function get() {
+  get: function () {
     return _FormCheckBox.default;
   }
 });
 Object.defineProperty(exports, "FormChipCell", {
   enumerable: true,
-  get: function get() {
+  get: function () {
     return _FormChipCell.default;
   }
 });
 Object.defineProperty(exports, "FormCombobox", {
   enumerable: true,
-  get: function get() {
+  get: function () {
     return _FormCombobox.default;
   }
 });
 Object.defineProperty(exports, "FormInput", {
   enumerable: true,
-  get: function get() {
+  get: function () {
     return _FormInput.default;
   }
 });
 Object.defineProperty(exports, "FormKeyValueTable", {
   enumerable: true,
-  get: function get() {
+  get: function () {
     return _FormKeyValueTable.default;
   }
 });
 Object.defineProperty(exports, "FormRadio", {
   enumerable: true,
-  get: function get() {
+  get: function () {
     return _FormRadio.default;
   }
 });
 Object.defineProperty(exports, "FormSelect", {
   enumerable: true,
-  get: function get() {
+  get: function () {
     return _FormSelect.default;
   }
 });
 Object.defineProperty(exports, "FormTextarea", {
   enumerable: true,
-  get: function get() {
+  get: function () {
     return _FormTextarea.default;
   }
 });
 Object.defineProperty(exports, "FormToggle", {
   enumerable: true,
-  get: function get() {
+  get: function () {
     return _FormToggle.default;
   }
 });
 Object.defineProperty(exports, "Modal", {
   enumerable: true,
-  get: function get() {
+  get: function () {
     return _Modal.default;
   }
 });
 Object.defineProperty(exports, "PopUpDialog", {
   enumerable: true,
-  get: function get() {
+  get: function () {
     return _PopUpDialog.default;
   }
 });
 Object.defineProperty(exports, "RoundedIcon", {
   enumerable: true,
-  get: function get() {
+  get: function () {
     return _RoundedIcon.default;
   }
 });
 Object.defineProperty(exports, "TextTooltipTemplate", {
   enumerable: true,
-  get: function get() {
+  get: function () {
     return _TextTooltipTemplate.default;
   }
 });
 Object.defineProperty(exports, "Tip", {
   enumerable: true,
-  get: function get() {
+  get: function () {
     return _Tip.default;
   }
 });
 Object.defineProperty(exports, "Tooltip", {
   enumerable: true,
-  get: function get() {
+  get: function () {
     return _Tooltip.default;
   }
 });
 Object.defineProperty(exports, "Wizard", {
   enumerable: true,
-  get: function get() {
+  get: function () {
     return _Wizard.default;
   }
 });

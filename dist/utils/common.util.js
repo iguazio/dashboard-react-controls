@@ -25,11 +25,11 @@ under the Apache 2.0 license is conditioned upon your compliance with
 such restriction.
 */
 
-var openPopUp = function openPopUp(element, props) {
+const openPopUp = (element, props) => {
   return (0, _reactModalPromise.create)(element)(props);
 };
 exports.openPopUp = openPopUp;
-var openConfirmPopUp = function openConfirmPopUp(message, confirmHandler) {
+const openConfirmPopUp = (message, confirmHandler) => {
   return openPopUp(_components.ConfirmDialog, {
     cancelButton: {
       label: 'Cancel',
@@ -41,11 +41,11 @@ var openConfirmPopUp = function openConfirmPopUp(message, confirmHandler) {
       handler: confirmHandler
     },
     header: 'Are you sure?',
-    message: message
+    message
   });
 };
 exports.openConfirmPopUp = openConfirmPopUp;
-var openDeleteConfirmPopUp = function openDeleteConfirmPopUp(header, message, confirmHandler) {
+const openDeleteConfirmPopUp = (header, message, confirmHandler) => {
   return openPopUp(_components.ConfirmDialog, {
     cancelButton: {
       label: 'Cancel',
@@ -56,23 +56,19 @@ var openDeleteConfirmPopUp = function openDeleteConfirmPopUp(header, message, co
       variant: _constants.DANGER_BUTTON,
       handler: confirmHandler
     },
-    header: header,
-    message: message
+    header,
+    message
   });
 };
 exports.openDeleteConfirmPopUp = openDeleteConfirmPopUp;
-var isEveryObjectValueEmpty = function isEveryObjectValueEmpty(obj) {
-  return Object.values(obj).every(function (item) {
-    return !item || item.length === 0;
-  });
-};
+const isEveryObjectValueEmpty = obj => Object.values(obj).every(item => !item || item.length === 0);
 
 // Checks, whether two arrays of objects are equal, can omit some keys if their comparison is not necessary
 exports.isEveryObjectValueEmpty = isEveryObjectValueEmpty;
-var areArraysEqual = function areArraysEqual(firstArray, secondArray) {
-  var omitBy = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : [];
+const areArraysEqual = function (firstArray, secondArray) {
+  let omitBy = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : [];
   if (firstArray.length !== secondArray.length) return false;
-  return (0, _lodash.isEmpty)((0, _lodash.differenceWith)(firstArray, secondArray, function (a, b) {
+  return (0, _lodash.isEmpty)((0, _lodash.differenceWith)(firstArray, secondArray, (a, b) => {
     return (0, _lodash.isEqual)((0, _lodash.omit)(a, omitBy), (0, _lodash.omit)(b, omitBy));
   }));
 };
@@ -84,8 +80,8 @@ var areArraysEqual = function areArraysEqual(firstArray, secondArray) {
  * @returns {string} - The detailed error information.
  */
 exports.areArraysEqual = areArraysEqual;
-var getErrorDetail = function getErrorDetail(error) {
-  var errorDetail = (0, _lodash.get)(error, 'response.data.detail', null);
+const getErrorDetail = error => {
+  const errorDetail = (0, _lodash.get)(error, 'response.data.detail', null);
   if (typeof errorDetail === 'string') {
     return errorDetail;
   } else {
@@ -101,9 +97,9 @@ var getErrorDetail = function getErrorDetail(error) {
  * @returns {string} - The error message.
  */
 exports.getErrorDetail = getErrorDetail;
-var getErrorMsg = function getErrorMsg(error, defaultError) {
-  var errorDetail = getErrorDetail(error);
-  var errorMsg = errorDetail || error.message;
+const getErrorMsg = (error, defaultError) => {
+  const errorDetail = getErrorDetail(error);
+  const errorMsg = errorDetail || error.message;
   if ((!errorMsg || errorMsg === 'Not Found' || errorMsg.startsWith('Request failed with status code')) && defaultError) {
     return defaultError;
   } else {
@@ -117,15 +113,15 @@ var getErrorMsg = function getErrorMsg(error, defaultError) {
  * @returns {string} The transition end event name.
  */
 exports.getErrorMsg = getErrorMsg;
-var getTransitionEndEventName = function getTransitionEndEventName() {
-  var transitions = {
+const getTransitionEndEventName = () => {
+  const transitions = {
     transition: 'transitionend',
     OTransition: 'oTransitionEnd',
     MozTransition: 'transitionend',
     WebkitTransition: 'webkitTransitionEnd'
   };
-  var bodyStyle = document.body.style;
-  for (var transition in transitions) {
+  let bodyStyle = document.body.style;
+  for (let transition in transitions) {
     if (bodyStyle[transition] !== undefined) {
       return transitions[transition];
     }

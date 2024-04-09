@@ -14,59 +14,62 @@ var _hooks = require("../../hooks");
 var _types = require("../../types");
 var _jsxRuntime = require("react/jsx-runtime");
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
-function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
-function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
-function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter); }
-function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
-function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i]; return arr2; } /*
-                                                                                                                                                                                    Copyright 2022 Iguazio Systems Ltd.
-                                                                                                                                                                                    Licensed under the Apache License, Version 2.0 (the "License") with
-                                                                                                                                                                                    an addition restriction as set forth herein. You may not use this
-                                                                                                                                                                                    file except in compliance with the License. You may obtain a copy of
-                                                                                                                                                                                    the License at http://www.apache.org/licenses/LICENSE-2.0.
-                                                                                                                                                                                    Unless required by applicable law or agreed to in writing, software
-                                                                                                                                                                                    distributed under the License is distributed on an "AS IS" BASIS,
-                                                                                                                                                                                    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or
-                                                                                                                                                                                    implied. See the License for the specific language governing
-                                                                                                                                                                                    permissions and limitations under the License.
-                                                                                                                                                                                    In addition, you may not use the software for any purposes that are
-                                                                                                                                                                                    illegal under applicable law, and the grant of the foregoing license
-                                                                                                                                                                                    under the Apache 2.0 license is conditioned upon your compliance with
-                                                                                                                                                                                    such restriction.
-                                                                                                                                                                                    */
-var FormKeyValueTable = function FormKeyValueTable(_ref) {
-  var actionButtonId = _ref.actionButtonId,
-    addNewItemLabel = _ref.addNewItemLabel,
-    className = _ref.className,
-    defaultKey = _ref.defaultKey,
-    disabled = _ref.disabled,
-    exitEditModeTriggerItem = _ref.exitEditModeTriggerItem,
-    fieldsPath = _ref.fieldsPath,
-    formState = _ref.formState,
-    isKeyRequired = _ref.isKeyRequired,
-    isValueRequired = _ref.isValueRequired,
-    keyHeader = _ref.keyHeader,
-    keyLabel = _ref.keyLabel,
-    keyOptions = _ref.keyOptions,
-    keyValidationRules = _ref.keyValidationRules,
-    onExitEditModeCallback = _ref.onExitEditModeCallback,
-    valueHeader = _ref.valueHeader,
-    valueLabel = _ref.valueLabel,
-    valueValidationRules = _ref.valueValidationRules;
-  var tableClassNames = (0, _classnames.default)('form-table form-key-value-table', className);
-  var _useFormTable = (0, _hooks.useFormTable)(formState, exitEditModeTriggerItem, onExitEditModeCallback),
-    addNewRow = _useFormTable.addNewRow,
-    applyChanges = _useFormTable.applyChanges,
-    bottomScrollRef = _useFormTable.bottomScrollRef,
-    deleteRow = _useFormTable.deleteRow,
-    discardOrDelete = _useFormTable.discardOrDelete,
-    editingItem = _useFormTable.editingItem,
-    enterEditMode = _useFormTable.enterEditMode,
-    isCurrentRowEditing = _useFormTable.isCurrentRowEditing;
-  var uniquenessValidator = function uniquenessValidator(fields, newValue) {
-    return !fields.value.some(function (_ref2, index) {
-      var key = _ref2.data.key;
+/*
+Copyright 2022 Iguazio Systems Ltd.
+Licensed under the Apache License, Version 2.0 (the "License") with
+an addition restriction as set forth herein. You may not use this
+file except in compliance with the License. You may obtain a copy of
+the License at http://www.apache.org/licenses/LICENSE-2.0.
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or
+implied. See the License for the specific language governing
+permissions and limitations under the License.
+In addition, you may not use the software for any purposes that are
+illegal under applicable law, and the grant of the foregoing license
+under the Apache 2.0 license is conditioned upon your compliance with
+such restriction.
+*/
+
+const FormKeyValueTable = _ref => {
+  let {
+    actionButtonId,
+    addNewItemLabel,
+    className,
+    defaultKey,
+    disabled,
+    exitEditModeTriggerItem,
+    fieldsPath,
+    formState,
+    isKeyRequired,
+    isValueRequired,
+    keyHeader,
+    keyLabel,
+    keyOptions,
+    keyValidationRules,
+    onExitEditModeCallback,
+    valueHeader,
+    valueLabel,
+    valueValidationRules
+  } = _ref;
+  const tableClassNames = (0, _classnames.default)('form-table form-key-value-table', className);
+  const {
+    addNewRow,
+    applyChanges,
+    bottomScrollRef,
+    deleteRow,
+    discardOrDelete,
+    editingItem,
+    enterEditMode,
+    isCurrentRowEditing
+  } = (0, _hooks.useFormTable)(formState, exitEditModeTriggerItem, onExitEditModeCallback);
+  const uniquenessValidator = (fields, newValue) => {
+    return !fields.value.some((_ref2, index) => {
+      let {
+        data: {
+          key
+        }
+      } = _ref2;
       return newValue.trim() === key.trim() && index !== editingItem.ui.index;
     });
   };
@@ -86,12 +89,14 @@ var FormKeyValueTable = function FormKeyValueTable(_ref) {
       })]
     }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_reactFinalFormArrays.FieldArray, {
       name: fieldsPath,
-      children: function children(_ref3) {
+      children: _ref3 => {
         var _editingItem$ui;
-        var fields = _ref3.fields;
+        let {
+          fields
+        } = _ref3;
         return /*#__PURE__*/(0, _jsxRuntime.jsxs)(_jsxRuntime.Fragment, {
-          children: [fields.map(function (rowPath, index) {
-            var tableRowClassNames = (0, _classnames.default)('form-table__row', isCurrentRowEditing(rowPath) && 'form-table__row_active');
+          children: [fields.map((rowPath, index) => {
+            const tableRowClassNames = (0, _classnames.default)('form-table__row', isCurrentRowEditing(rowPath) && 'form-table__row_active');
             return editingItem && index === editingItem.ui.index && !disabled ? /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
               className: tableRowClassNames,
               children: [/*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
@@ -106,13 +111,11 @@ var FormKeyValueTable = function FormKeyValueTable(_ref) {
                   density: "normal",
                   name: "".concat(rowPath, ".data.key"),
                   required: isKeyRequired,
-                  validationRules: [].concat(_toConsumableArray(keyValidationRules), [{
+                  validationRules: [...keyValidationRules, {
                     name: 'uniqueness',
                     label: 'Name must be unique',
-                    pattern: function pattern(newValue) {
-                      return uniquenessValidator(fields, newValue);
-                    }
-                  }])
+                    pattern: newValue => uniquenessValidator(fields, newValue)
+                  }]
                 })
               }), /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
                 className: "form-table__cell form-table__cell_1",
@@ -134,9 +137,7 @@ var FormKeyValueTable = function FormKeyValueTable(_ref) {
               })]
             }, index) : /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
               className: tableRowClassNames,
-              onClick: function onClick(event) {
-                return enterEditMode(event, fields, fieldsPath, index);
-              },
+              onClick: event => enterEditMode(event, fields, fieldsPath, index),
               children: [/*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
                 className: "form-table__cell form-table__cell_1",
                 children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_components.Tooltip, {
@@ -165,20 +166,20 @@ var FormKeyValueTable = function FormKeyValueTable(_ref) {
           }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_elements.FormActionButton, {
             ref: bottomScrollRef,
             disabled: disabled,
-            hidden: editingItem === null || editingItem === void 0 ? void 0 : (_editingItem$ui = editingItem.ui) === null || _editingItem$ui === void 0 ? void 0 : _editingItem$ui.isNew,
+            hidden: editingItem === null || editingItem === void 0 || (_editingItem$ui = editingItem.ui) === null || _editingItem$ui === void 0 ? void 0 : _editingItem$ui.isNew,
             fields: fields,
             id: actionButtonId,
             label: addNewItemLabel,
-            onClick: function onClick() {
+            onClick: function () {
               for (var _len = arguments.length, addRowArgs = new Array(_len), _key = 0; _key < _len; _key++) {
                 addRowArgs[_key] = arguments[_key];
               }
-              return addNewRow.apply(void 0, addRowArgs.concat([{
+              return addNewRow(...addRowArgs, {
                 data: {
                   key: defaultKey || '',
                   value: ''
                 }
-              }]));
+              });
             },
             fieldsPath: fieldsPath
           })]
@@ -200,7 +201,7 @@ FormKeyValueTable.defaultProps = {
   keyLabel: 'Key',
   keyOptions: null,
   keyValidationRules: [],
-  onExitEditModeCallback: function onExitEditModeCallback() {},
+  onExitEditModeCallback: () => {},
   valueHeader: 'Value',
   valueLabel: 'Value',
   valueValidationRules: []
@@ -228,5 +229,4 @@ FormKeyValueTable.propTypes = {
   valueLabel: _propTypes.default.string,
   valueValidationRules: _types.INPUT_VALIDATION_RULES
 };
-var _default = FormKeyValueTable;
-exports.default = _default;
+var _default = exports.default = FormKeyValueTable;

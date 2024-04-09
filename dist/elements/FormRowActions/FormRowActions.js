@@ -34,43 +34,41 @@ under the Apache 2.0 license is conditioned upon your compliance with
 such restriction.
 */
 
-var FormRowActions = function FormRowActions(_ref) {
+const FormRowActions = _ref => {
   var _editingItem$ui, _editingItem$ui2, _editingItem$ui3, _editingItem$ui4;
-  var applyChanges = _ref.applyChanges,
-    deleteButtonIsHidden = _ref.deleteButtonIsHidden,
-    deleteRow = _ref.deleteRow,
-    disabled = _ref.disabled,
-    discardOrDelete = _ref.discardOrDelete,
-    editingItem = _ref.editingItem,
-    fieldsPath = _ref.fieldsPath,
-    hidden = _ref.hidden,
-    index = _ref.index;
+  let {
+    applyChanges,
+    deleteButtonIsHidden,
+    deleteRow,
+    disabled,
+    discardOrDelete,
+    editingItem,
+    fieldsPath,
+    hidden,
+    index
+  } = _ref;
   return hidden ? /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
     className: "form-table__cell form-table__actions-cell"
   }) : /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
     className: "form-table__cell form-table__actions-cell",
-    children: [(editingItem === null || editingItem === void 0 ? void 0 : (_editingItem$ui = editingItem.ui) === null || _editingItem$ui === void 0 ? void 0 : _editingItem$ui.index) === index && /*#__PURE__*/(0, _jsxRuntime.jsxs)(_jsxRuntime.Fragment, {
+    children: [(editingItem === null || editingItem === void 0 || (_editingItem$ui = editingItem.ui) === null || _editingItem$ui === void 0 ? void 0 : _editingItem$ui.index) === index && /*#__PURE__*/(0, _jsxRuntime.jsxs)(_jsxRuntime.Fragment, {
       children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_components.RoundedIcon, {
         id: "apply-btn",
-        onClick: function onClick(event) {
-          return applyChanges(event, index);
-        },
+        onClick: event => applyChanges(event, index),
         tooltipText: "Apply",
         disabled: disabled,
         children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_checkmark.ReactComponent, {})
       }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_components.RoundedIcon, {
         id: "delete-discard-btn",
-        onClick: function onClick(event) {
-          return discardOrDelete(event, fieldsPath, index);
-        },
+        onClick: event => discardOrDelete(event, fieldsPath, index),
         tooltipText: (_editingItem$ui2 = editingItem.ui) !== null && _editingItem$ui2 !== void 0 && _editingItem$ui2.isNew ? 'Delete' : 'Discard changes',
         disabled: disabled,
         children: (_editingItem$ui3 = editingItem.ui) !== null && _editingItem$ui3 !== void 0 && _editingItem$ui3.isNew ? /*#__PURE__*/(0, _jsxRuntime.jsx)(_delete.ReactComponent, {}) : /*#__PURE__*/(0, _jsxRuntime.jsx)(_close.ReactComponent, {})
       })]
-    }), (!editingItem || (editingItem === null || editingItem === void 0 ? void 0 : (_editingItem$ui4 = editingItem.ui) === null || _editingItem$ui4 === void 0 ? void 0 : _editingItem$ui4.index) !== index) && /*#__PURE__*/(0, _jsxRuntime.jsxs)(_jsxRuntime.Fragment, {
+    }), (!editingItem || (editingItem === null || editingItem === void 0 || (_editingItem$ui4 = editingItem.ui) === null || _editingItem$ui4 === void 0 ? void 0 : _editingItem$ui4.index) !== index) && /*#__PURE__*/(0, _jsxRuntime.jsxs)(_jsxRuntime.Fragment, {
       children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_components.RoundedIcon, {
         id: "edit-btn",
-        onClick: function onClick(event) {
+        onClick: event => {
           event.preventDefault();
         },
         tooltipText: "Edit",
@@ -78,7 +76,7 @@ var FormRowActions = function FormRowActions(_ref) {
         children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_edit.ReactComponent, {})
       }), !deleteButtonIsHidden && /*#__PURE__*/(0, _jsxRuntime.jsx)(_components.RoundedIcon, {
         id: "delete-btn",
-        onClick: function onClick(event) {
+        onClick: event => {
           deleteRow(event, fieldsPath, index);
         },
         tooltipText: "Delete",
@@ -105,5 +103,4 @@ FormRowActions.propTypes = {
   hidden: _propTypes.default.bool,
   index: _propTypes.default.number.isRequired
 };
-var _default = FormRowActions;
-exports.default = _default;
+var _default = exports.default = FormRowActions;

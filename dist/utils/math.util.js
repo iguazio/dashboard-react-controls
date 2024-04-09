@@ -29,9 +29,9 @@ such restriction.
  * @param {string} operator - The operator to use for the operation. Supported operators are '+', and '-'.
  * @returns {number} The result of the arithmetic operation.
  */
-var performFloatOperation = function performFloatOperation(num1, num2, operator) {
-  var precision = Math.max((num1.toString().split('.')[1] || '').length, (num2.toString().split('.')[1] || '').length);
-  var multiplier = Math.pow(10, precision);
+const performFloatOperation = (num1, num2, operator) => {
+  const precision = Math.max((num1.toString().split('.')[1] || '').length, (num2.toString().split('.')[1] || '').length);
+  const multiplier = Math.pow(10, precision);
   switch (operator) {
     case '+':
       return (Math.round(num1 * multiplier) + Math.round(num2 * multiplier)) / multiplier;

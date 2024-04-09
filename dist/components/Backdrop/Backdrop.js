@@ -27,11 +27,12 @@ under the Apache 2.0 license is conditioned upon your compliance with
 such restriction.
 */
 
-var Backdrop = function Backdrop(_ref) {
-  var _ref$duration = _ref.duration,
-    duration = _ref$duration === void 0 ? 300 : _ref$duration,
-    show = _ref.show,
-    onClose = _ref.onClose;
+const Backdrop = _ref => {
+  let {
+    duration = 300,
+    show,
+    onClose
+  } = _ref;
   return /*#__PURE__*/(0, _jsxRuntime.jsx)(_reactTransitionGroup.CSSTransition, {
     in: show,
     timeout: duration,
@@ -51,5 +52,4 @@ Backdrop.defaultProps = {
 Backdrop.propTypes = {
   show: _propTypes.default.bool.isRequired
 };
-var _default = Backdrop;
-exports.default = _default;
+var _default = exports.default = Backdrop;

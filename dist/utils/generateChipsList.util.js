@@ -20,15 +20,15 @@ illegal under applicable law, and the grant of the foregoing license
 under the Apache 2.0 license is conditioned upon your compliance with
 such restriction.
 */
-var generateChipsList = function generateChipsList(chips, maxLength) {
+const generateChipsList = (chips, maxLength) => {
   if (chips.length > maxLength) {
-    var hiddenChipsNumber = "+ ".concat(chips.length - maxLength);
-    var hiddenChips = chips.slice(maxLength);
-    var visibleChips = chips.slice(0, maxLength);
+    let hiddenChipsNumber = "+ ".concat(chips.length - maxLength);
+    const hiddenChips = chips.slice(maxLength);
+    const visibleChips = chips.slice(0, maxLength);
     return {
-      visibleChips: visibleChips,
-      hiddenChips: hiddenChips,
-      hiddenChipsNumber: hiddenChipsNumber
+      visibleChips,
+      hiddenChips,
+      hiddenChipsNumber
     };
   }
   return {

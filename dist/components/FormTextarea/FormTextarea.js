@@ -1,6 +1,5 @@
 "use strict";
 
-function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
@@ -15,7 +14,9 @@ var _Tooltip = _interopRequireDefault(require("../Tooltip/Tooltip"));
 var _exclamationMark = require("../../images/exclamation-mark.svg");
 require("./formTextarea.scss");
 var _jsxRuntime = require("react/jsx-runtime");
-var _excluded = ["className", "disabled", "focused", "iconClass", "invalidText", "label", "maxLength", "name", "onBlur", "onChange", "required", "textAreaIcon", "tip", "withoutBorder"];
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _getRequireWildcardCache(e) { if ("function" != typeof WeakMap) return null; var r = new WeakMap(), t = new WeakMap(); return (_getRequireWildcardCache = function (e) { return e ? t : r; })(e); }
+function _interopRequireWildcard(e, r) { if (!r && e && e.__esModule) return e; if (null === e || "object" != typeof e && "function" != typeof e) return { default: e }; var t = _getRequireWildcardCache(r); if (t && t.has(e)) return t.get(e); var n = { __proto__: null }, a = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var u in e) if ("default" !== u && {}.hasOwnProperty.call(e, u)) { var i = a ? Object.getOwnPropertyDescriptor(e, u) : null; i && (i.get || i.set) ? Object.defineProperty(n, u, i) : n[u] = e[u]; } return n.default = e, t && t.set(e, n), n; }
 /*
 Copyright 2022 Iguazio Systems Ltd.
 Licensed under the Apache License, Version 2.0 (the "License") with
@@ -32,78 +33,60 @@ illegal under applicable law, and the grant of the foregoing license
 under the Apache 2.0 license is conditioned upon your compliance with
 such restriction.
 */
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
-function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
-function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
-function _defineProperty(obj, key, value) { key = _toPropertyKey(key); if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-function _toPropertyKey(arg) { var key = _toPrimitive(arg, "string"); return _typeof(key) === "symbol" ? key : String(key); }
-function _toPrimitive(input, hint) { if (_typeof(input) !== "object" || input === null) return input; var prim = input[Symbol.toPrimitive]; if (prim !== undefined) { var res = prim.call(input, hint || "default"); if (_typeof(res) !== "object") return res; throw new TypeError("@@toPrimitive must return a primitive value."); } return (hint === "string" ? String : Number)(input); }
-function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
-function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
-function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
-function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i]; return arr2; }
-function _iterableToArrayLimit(arr, i) { var _i = null == arr ? null : "undefined" != typeof Symbol && arr[Symbol.iterator] || arr["@@iterator"]; if (null != _i) { var _s, _e, _x, _r, _arr = [], _n = !0, _d = !1; try { if (_x = (_i = _i.call(arr)).next, 0 === i) { if (Object(_i) !== _i) return; _n = !1; } else for (; !(_n = (_s = _x.call(_i)).done) && (_arr.push(_s.value), _arr.length !== i); _n = !0); } catch (err) { _d = !0, _e = err; } finally { try { if (!_n && null != _i.return && (_r = _i.return(), Object(_r) !== _r)) return; } finally { if (_d) throw _e; } } return _arr; } }
-function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
-function _objectWithoutProperties(source, excluded) { if (source == null) return {}; var target = _objectWithoutPropertiesLoose(source, excluded); var key, i; if (Object.getOwnPropertySymbols) { var sourceSymbolKeys = Object.getOwnPropertySymbols(source); for (i = 0; i < sourceSymbolKeys.length; i++) { key = sourceSymbolKeys[i]; if (excluded.indexOf(key) >= 0) continue; if (!Object.prototype.propertyIsEnumerable.call(source, key)) continue; target[key] = source[key]; } } return target; }
-function _objectWithoutPropertiesLoose(source, excluded) { if (source == null) return {}; var target = {}; var sourceKeys = Object.keys(source); var key, i; for (i = 0; i < sourceKeys.length; i++) { key = sourceKeys[i]; if (excluded.indexOf(key) >= 0) continue; target[key] = source[key]; } return target; }
-var FormTextarea = /*#__PURE__*/_react.default.forwardRef(function (_ref, ref) {
-  var className = _ref.className,
-    disabled = _ref.disabled,
-    focused = _ref.focused,
-    iconClass = _ref.iconClass,
-    invalidText = _ref.invalidText,
-    label = _ref.label,
-    maxLength = _ref.maxLength,
-    name = _ref.name,
-    onBlur = _ref.onBlur,
-    onChange = _ref.onChange,
-    required = _ref.required,
-    textAreaIcon = _ref.textAreaIcon,
-    tip = _ref.tip,
-    withoutBorder = _ref.withoutBorder,
-    textareaProps = _objectWithoutProperties(_ref, _excluded);
-  var _useField = (0, _reactFinalForm.useField)(name),
-    input = _useField.input,
-    meta = _useField.meta;
-  var _useState = (0, _react.useState)(false),
-    _useState2 = _slicedToArray(_useState, 2),
-    isInvalid = _useState2[0],
-    setIsInvalid = _useState2[1];
-  var _useState3 = (0, _react.useState)(input.value.length),
-    _useState4 = _slicedToArray(_useState3, 2),
-    textAreaCount = _useState4[0],
-    setTextAreaCount = _useState4[1];
-  var textAreaRef = /*#__PURE__*/_react.default.createRef();
-  var formFieldClassNames = (0, _classnames.default)('form-field-textarea', className);
-  var labelClassNames = (0, _classnames.default)('form-field__label', disabled && 'form-field__label-disabled');
-  var textAreaClassNames = (0, _classnames.default)('form-field__wrapper', disabled && 'form-field__wrapper-disabled', isInvalid && 'form-field__wrapper-invalid', withoutBorder && 'without-border');
-  (0, _react.useLayoutEffect)(function () {
+
+const FormTextarea = /*#__PURE__*/_react.default.forwardRef((_ref, ref) => {
+  let {
+    className,
+    disabled,
+    focused,
+    iconClass,
+    invalidText,
+    label,
+    maxLength,
+    name,
+    onBlur,
+    onChange,
+    required,
+    textAreaIcon,
+    tip,
+    withoutBorder,
+    ...textareaProps
+  } = _ref;
+  const {
+    input,
+    meta
+  } = (0, _reactFinalForm.useField)(name);
+  const [isInvalid, setIsInvalid] = (0, _react.useState)(false);
+  const [textAreaCount, setTextAreaCount] = (0, _react.useState)(input.value.length);
+  const textAreaRef = /*#__PURE__*/_react.default.createRef();
+  const formFieldClassNames = (0, _classnames.default)('form-field-textarea', className);
+  const labelClassNames = (0, _classnames.default)('form-field__label', disabled && 'form-field__label-disabled');
+  const textAreaClassNames = (0, _classnames.default)('form-field__wrapper', disabled && 'form-field__wrapper-disabled', isInvalid && 'form-field__wrapper-invalid', withoutBorder && 'without-border');
+  (0, _react.useLayoutEffect)(() => {
     setTextAreaCount(input.value.length);
   }, [input.value.length]);
-  (0, _react.useEffect)(function () {
+  (0, _react.useEffect)(() => {
     if (focused) {
       textAreaRef.current.focus();
     }
   }, [focused, textAreaRef]);
-  (0, _react.useEffect)(function () {
+  (0, _react.useEffect)(() => {
     setIsInvalid(meta.invalid && (meta.validating || meta.modified || meta.submitFailed && meta.touched));
   }, [meta.invalid, meta.modified, meta.submitFailed, meta.touched, meta.validating]);
-  var handleInputBlur = function handleInputBlur(event) {
+  const handleInputBlur = event => {
     input.onBlur(event);
     onBlur && onBlur(event);
   };
-  var handleInputChange = function handleInputChange(event) {
+  const handleInputChange = event => {
     input.onChange(event);
     onChange && onChange(event.target.value);
   };
-  var handleInputFocus = function handleInputFocus(event) {
+  const handleInputFocus = event => {
     input.onFocus(event);
   };
-  var validateField = function validateField(value) {
-    var valueToValidate = value !== null && value !== void 0 ? value : '';
-    var validationError = null;
+  const validateField = value => {
+    const valueToValidate = value !== null && value !== void 0 ? value : '';
+    let validationError = null;
     if (valueToValidate.startsWith(' ')) {
       validationError = {
         name: 'empty',
@@ -120,10 +103,12 @@ var FormTextarea = /*#__PURE__*/_react.default.forwardRef(function (_ref, ref) {
   return /*#__PURE__*/(0, _jsxRuntime.jsx)(_reactFinalForm.Field, {
     validate: validateField,
     name: name,
-    children: function children(_ref2) {
+    children: _ref2 => {
       var _meta$error$label, _meta$error;
-      var input = _ref2.input,
-        meta = _ref2.meta;
+      let {
+        input,
+        meta
+      } = _ref2;
       return /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
         ref: ref,
         className: formFieldClassNames,
@@ -141,19 +126,19 @@ var FormTextarea = /*#__PURE__*/_react.default.forwardRef(function (_ref, ref) {
           className: textAreaClassNames,
           children: [/*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
             className: "form-field__control",
-            children: /*#__PURE__*/(0, _jsxRuntime.jsx)("textarea", _objectSpread(_objectSpread({
+            children: /*#__PURE__*/(0, _jsxRuntime.jsx)("textarea", {
               "data-testid": "textarea",
               id: input.name,
               maxLength: maxLength,
               ref: textAreaRef,
-              required: isInvalid || required
-            }, _objectSpread(_objectSpread({
-              disabled: disabled
-            }, textareaProps), input)), {}, {
+              required: isInvalid || required,
+              disabled,
+              ...textareaProps,
+              ...input,
               onBlur: handleInputBlur,
               onChange: handleInputChange,
               onFocus: handleInputFocus
-            }))
+            })
           }), /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
             className: "form-field__icons",
             children: [isInvalid && /*#__PURE__*/(0, _jsxRuntime.jsx)(_Tooltip.default, {
@@ -189,8 +174,8 @@ FormTextarea.defaultProps = {
   invalidText: 'This field is invalid',
   label: '',
   maxLength: null,
-  onBlur: function onBlur() {},
-  onChange: function onChange() {},
+  onBlur: () => {},
+  onChange: () => {},
   placeholder: '',
   required: false,
   rows: 3,
@@ -212,5 +197,4 @@ FormTextarea.propTypes = {
   required: _propTypes.default.bool,
   tip: _propTypes.default.string
 };
-var _default = /*#__PURE__*/_react.default.memo(FormTextarea);
-exports.default = _default;
+var _default = exports.default = /*#__PURE__*/_react.default.memo(FormTextarea);

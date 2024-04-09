@@ -1,6 +1,6 @@
 
 
-Create a new dist version 1.9.3
+Create a new dist version 2.0.0
 
 Collecting:
-- Impl [Cross projects Jobs] Add counters per tab (#258)
+- Impl [UI] Upgrade DRC React library to version 18 (#260)

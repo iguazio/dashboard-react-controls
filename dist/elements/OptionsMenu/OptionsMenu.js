@@ -28,12 +28,15 @@ under the Apache 2.0 license is conditioned upon your compliance with
 such restriction.
 */
 
-var OptionsMenu = /*#__PURE__*/_react.default.forwardRef(function (_ref, ref) {
-  var children = _ref.children,
-    show = _ref.show,
-    timeout = _ref.timeout;
-  var _ref2 = ref.current ? ref.current.getBoundingClientRect() : {},
-    dropdownWidth = _ref2.width;
+const OptionsMenu = /*#__PURE__*/_react.default.forwardRef((_ref, ref) => {
+  let {
+    children,
+    show,
+    timeout
+  } = _ref;
+  const {
+    width: dropdownWidth
+  } = ref.current ? ref.current.getBoundingClientRect() : {};
   return /*#__PURE__*/(0, _jsxRuntime.jsx)(_reactTransitionGroup.CSSTransition, {
     in: show,
     timeout: timeout,
@@ -68,5 +71,4 @@ OptionsMenu.propTypes = {
   show: _propTypes.default.bool.isRequired,
   timeout: _propTypes.default.number
 };
-var _default = OptionsMenu;
-exports.default = _default;
+var _default = exports.default = OptionsMenu;

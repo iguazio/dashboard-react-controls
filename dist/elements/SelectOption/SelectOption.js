@@ -30,15 +30,17 @@ under the Apache 2.0 license is conditioned upon your compliance with
 such restriction.
 */
 
-var SelectOption = function SelectOption(_ref) {
+const SelectOption = _ref => {
   var _item$labelHtml;
-  var item = _ref.item,
-    name = _ref.name,
-    _onClick = _ref.onClick,
-    multiple = _ref.multiple,
-    selectedId = _ref.selectedId,
-    withSelectedIcon = _ref.withSelectedIcon;
-  var selectClassName = (0, _classnames.default)('select__item', multiple && 'multiple', item.hidden && 'hidden', item.disabled && 'disabled');
+  let {
+    item,
+    name,
+    onClick,
+    multiple,
+    selectedId,
+    withSelectedIcon
+  } = _ref;
+  const selectClassName = (0, _classnames.default)('select__item', multiple && 'multiple', item.hidden && 'hidden', item.disabled && 'disabled');
   if (multiple) {
     return /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
       "data-testid": "select-checkbox",
@@ -56,8 +58,8 @@ var SelectOption = function SelectOption(_ref) {
   return /*#__PURE__*/(0, _jsxRuntime.jsx)("li", {
     "data-testid": "select-option",
     className: selectClassName,
-    onClick: function onClick() {
-      !item.disabled && _onClick(item.id);
+    onClick: () => {
+      !item.disabled && onClick(item.id);
     },
     "data-custom-id": item.id,
     children: /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
@@ -95,7 +97,7 @@ var SelectOption = function SelectOption(_ref) {
   });
 };
 SelectOption.defaultProps = {
-  onClick: function onClick() {},
+  onClick: () => {},
   multiple: false,
   withSelectedIcon: true
 };
@@ -107,5 +109,4 @@ SelectOption.propTypes = {
   selectedId: _propTypes.default.string,
   withSelectedIcon: _propTypes.default.bool
 };
-var _default = SelectOption;
-exports.default = _default;
+var _default = exports.default = SelectOption;

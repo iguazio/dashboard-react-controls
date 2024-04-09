@@ -33,17 +33,19 @@ under the Apache 2.0 license is conditioned upon your compliance with
 such restriction.
 */
 
-var Modal = function Modal(_ref) {
-  var actions = _ref.actions,
-    children = _ref.children,
-    className = _ref.className,
-    onClose = _ref.onClose,
-    previewText = _ref.previewText,
-    size = _ref.size,
-    show = _ref.show,
-    subTitle = _ref.subTitle,
-    title = _ref.title;
-  var modalClassNames = (0, _classnames.default)('modal', className, size && "modal-".concat(size));
+const Modal = _ref => {
+  let {
+    actions,
+    children,
+    className,
+    onClose,
+    previewText,
+    size,
+    show,
+    subTitle,
+    title
+  } = _ref;
+  const modalClassNames = (0, _classnames.default)('modal', className, size && "modal-".concat(size));
   return /*#__PURE__*/(0, _jsxRuntime.jsxs)(_jsxRuntime.Fragment, {
     children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_Backdrop.default, {
       onClose: onClose,
@@ -85,11 +87,9 @@ var Modal = function Modal(_ref) {
             className: "modal__footer",
             children: /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
               className: "modal__footer-actions",
-              children: actions.map(function (action, idx) {
-                return /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
-                  children: action
-                }, idx);
-              })
+              children: actions.map((action, idx) => /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
+                children: action
+              }, idx))
             })
           })]
         })]
@@ -115,5 +115,4 @@ Modal.propTypes = {
   subTitle: _propTypes.default.string,
   title: _propTypes.default.string
 };
-var _default = Modal;
-exports.default = _default;
+var _default = exports.default = Modal;

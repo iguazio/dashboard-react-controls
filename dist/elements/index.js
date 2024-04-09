@@ -5,31 +5,31 @@ Object.defineProperty(exports, "__esModule", {
 });
 Object.defineProperty(exports, "FormActionButton", {
   enumerable: true,
-  get: function get() {
+  get: function () {
     return _FormActionButton.default;
   }
 });
 Object.defineProperty(exports, "FormRowActions", {
   enumerable: true,
-  get: function get() {
+  get: function () {
     return _FormRowActions.default;
   }
 });
 Object.defineProperty(exports, "OptionsMenu", {
   enumerable: true,
-  get: function get() {
+  get: function () {
     return _OptionsMenu.default;
   }
 });
 Object.defineProperty(exports, "SelectOption", {
   enumerable: true,
-  get: function get() {
+  get: function () {
     return _SelectOption.default;
   }
 });
 Object.defineProperty(exports, "ValidationTemplate", {
   enumerable: true,
-  get: function get() {
+  get: function () {
     return _ValidationTemplate.default;
   }
 });

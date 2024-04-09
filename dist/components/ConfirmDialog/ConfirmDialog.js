@@ -30,27 +30,29 @@ under the Apache 2.0 license is conditioned upon your compliance with
 such restriction.
 */
 
-var ConfirmDialog = function ConfirmDialog(_ref) {
-  var cancelButton = _ref.cancelButton,
-    className = _ref.className,
-    closePopUp = _ref.closePopUp,
-    confirmButton = _ref.confirmButton,
-    customPosition = _ref.customPosition,
-    header = _ref.header,
-    isOpen = _ref.isOpen,
-    message = _ref.message,
-    messageOnly = _ref.messageOnly,
-    onResolve = _ref.onResolve;
-  var messageClassNames = (0, _classnames.default)('confirm-dialog__message', messageOnly && 'confirm-dialog__message-only');
-  var handleCancelDialog = function handleCancelDialog(event) {
+const ConfirmDialog = _ref => {
+  let {
+    cancelButton,
+    className,
+    closePopUp,
+    confirmButton,
+    customPosition,
+    header,
+    isOpen,
+    message,
+    messageOnly,
+    onResolve
+  } = _ref;
+  const messageClassNames = (0, _classnames.default)('confirm-dialog__message', messageOnly && 'confirm-dialog__message-only');
+  const handleCancelDialog = event => {
     onResolve && onResolve();
     cancelButton.handler && cancelButton.handler(event);
   };
-  var handleCloseDialog = function handleCloseDialog(event) {
+  const handleCloseDialog = event => {
     onResolve && onResolve();
     closePopUp && closePopUp(event);
   };
-  var handleConfirmDialog = function handleConfirmDialog(event) {
+  const handleConfirmDialog = event => {
     onResolve && onResolve();
     confirmButton.handler && confirmButton.handler(event);
   };
@@ -99,5 +101,4 @@ ConfirmDialog.propTypes = {
   message: _types.CONFIRM_DIALOG_MESSAGE,
   messageOnly: _propTypes.default.bool
 };
-var _default = ConfirmDialog;
-exports.default = _default;
+var _default = exports.default = ConfirmDialog;

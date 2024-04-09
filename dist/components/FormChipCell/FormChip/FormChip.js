@@ -11,59 +11,56 @@ var _types = require("../../../types");
 require("./formChip.scss");
 var _jsxRuntime = require("react/jsx-runtime");
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
-function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
-function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
-function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
-function _defineProperty(obj, key, value) { key = _toPropertyKey(key); if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-function _toPropertyKey(arg) { var key = _toPrimitive(arg, "string"); return _typeof(key) === "symbol" ? key : String(key); }
-function _toPrimitive(input, hint) { if (_typeof(input) !== "object" || input === null) return input; var prim = input[Symbol.toPrimitive]; if (prim !== undefined) { var res = prim.call(input, hint || "default"); if (_typeof(res) !== "object") return res; throw new TypeError("@@toPrimitive must return a primitive value."); } return (hint === "string" ? String : Number)(input); } /*
-                                                                                                                                                                                                                                                                                                                                                                                              Copyright 2022 Iguazio Systems Ltd.
-                                                                                                                                                                                                                                                                                                                                                                                              Licensed under the Apache License, Version 2.0 (the "License") with
-                                                                                                                                                                                                                                                                                                                                                                                              an addition restriction as set forth herein. You may not use this
-                                                                                                                                                                                                                                                                                                                                                                                              file except in compliance with the License. You may obtain a copy of
-                                                                                                                                                                                                                                                                                                                                                                                              the License at http://www.apache.org/licenses/LICENSE-2.0.
-                                                                                                                                                                                                                                                                                                                                                                                              Unless required by applicable law or agreed to in writing, software
-                                                                                                                                                                                                                                                                                                                                                                                              distributed under the License is distributed on an "AS IS" BASIS,
-                                                                                                                                                                                                                                                                                                                                                                                              WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or
-                                                                                                                                                                                                                                                                                                                                                                                              implied. See the License for the specific language governing
-                                                                                                                                                                                                                                                                                                                                                                                              permissions and limitations under the License.
-                                                                                                                                                                                                                                                                                                                                                                                              In addition, you may not use the software for any purposes that are
-                                                                                                                                                                                                                                                                                                                                                                                              illegal under applicable law, and the grant of the foregoing license
-                                                                                                                                                                                                                                                                                                                                                                                              under the Apache 2.0 license is conditioned upon your compliance with
-                                                                                                                                                                                                                                                                                                                                                                                              such restriction.
-                                                                                                                                                                                                                                                                                                                                                                                              */
-var FormChip = /*#__PURE__*/_react.default.forwardRef(function (_ref, ref) {
-  var chip = _ref.chip,
-    chipIndex = _ref.chipIndex,
-    chipOptions = _ref.chipOptions,
-    editConfig = _ref.editConfig,
-    handleEditChip = _ref.handleEditChip,
-    handleRemoveChip = _ref.handleRemoveChip,
-    handleToEditMode = _ref.handleToEditMode,
-    isDeleteMode = _ref.isDeleteMode,
-    isEditable = _ref.isEditable,
-    keyName = _ref.keyName,
-    meta = _ref.meta,
-    setChipsSizes = _ref.setChipsSizes,
-    setEditConfig = _ref.setEditConfig,
-    validationRules = _ref.validationRules,
-    valueName = _ref.valueName;
-  var chipRef = _react.default.useRef();
-  (0, _react.useEffect)(function () {
-    queueMicrotask(function () {
+function _getRequireWildcardCache(e) { if ("function" != typeof WeakMap) return null; var r = new WeakMap(), t = new WeakMap(); return (_getRequireWildcardCache = function (e) { return e ? t : r; })(e); }
+function _interopRequireWildcard(e, r) { if (!r && e && e.__esModule) return e; if (null === e || "object" != typeof e && "function" != typeof e) return { default: e }; var t = _getRequireWildcardCache(r); if (t && t.has(e)) return t.get(e); var n = { __proto__: null }, a = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var u in e) if ("default" !== u && {}.hasOwnProperty.call(e, u)) { var i = a ? Object.getOwnPropertyDescriptor(e, u) : null; i && (i.get || i.set) ? Object.defineProperty(n, u, i) : n[u] = e[u]; } return n.default = e, t && t.set(e, n), n; }
+/*
+Copyright 2022 Iguazio Systems Ltd.
+Licensed under the Apache License, Version 2.0 (the "License") with
+an addition restriction as set forth herein. You may not use this
+file except in compliance with the License. You may obtain a copy of
+the License at http://www.apache.org/licenses/LICENSE-2.0.
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or
+implied. See the License for the specific language governing
+permissions and limitations under the License.
+In addition, you may not use the software for any purposes that are
+illegal under applicable law, and the grant of the foregoing license
+under the Apache 2.0 license is conditioned upon your compliance with
+such restriction.
+*/
+
+const FormChip = /*#__PURE__*/_react.default.forwardRef((_ref, ref) => {
+  let {
+    chip,
+    chipIndex,
+    chipOptions,
+    editConfig,
+    handleEditChip,
+    handleRemoveChip,
+    handleToEditMode,
+    isDeleteMode,
+    isEditable,
+    keyName,
+    meta,
+    setChipsSizes,
+    setEditConfig,
+    validationRules,
+    valueName
+  } = _ref;
+  const chipRef = _react.default.useRef();
+  (0, _react.useEffect)(() => {
+    queueMicrotask(() => {
       if (chipRef.current && setChipsSizes) {
-        setChipsSizes(function (state) {
-          return _objectSpread(_objectSpread({}, state), {}, _defineProperty({}, chipIndex, chipRef.current.getBoundingClientRect().width));
-        });
+        setChipsSizes(state => ({
+          ...state,
+          [chipIndex]: chipRef.current.getBoundingClientRect().width
+        }));
       }
     });
   }, [chipIndex, setChipsSizes]);
   return /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
-    onClick: function onClick(event) {
-      return handleToEditMode(event, chipIndex, keyName);
-    },
+    onClick: event => handleToEditMode(event, chipIndex, keyName),
     ref: chipRef,
     children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_NewChipForm.default, {
       chip: chip,
@@ -115,5 +112,4 @@ FormChip.propTypes = {
   validationRules: _propTypes.default.object,
   valueName: _propTypes.default.string
 };
-var _default = FormChip;
-exports.default = _default;
+var _default = exports.default = FormChip;

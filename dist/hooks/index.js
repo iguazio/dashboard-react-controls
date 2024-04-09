@@ -5,31 +5,31 @@ Object.defineProperty(exports, "__esModule", {
 });
 Object.defineProperty(exports, "useChipCell", {
   enumerable: true,
-  get: function get() {
+  get: function () {
     return _useChipCell.useChipCell;
   }
 });
 Object.defineProperty(exports, "useDebounce", {
   enumerable: true,
-  get: function get() {
+  get: function () {
     return _useDebounce.useDebounce;
   }
 });
 Object.defineProperty(exports, "useDetectOutsideClick", {
   enumerable: true,
-  get: function get() {
+  get: function () {
     return _useDetectOutsideClick.useDetectOutsideClick;
   }
 });
 Object.defineProperty(exports, "useFormTable", {
   enumerable: true,
-  get: function get() {
+  get: function () {
     return _useFormTable.useFormTable;
   }
 });
 Object.defineProperty(exports, "useHiddenChipsBlock", {
   enumerable: true,
-  get: function get() {
+  get: function () {
     return _useHiddenChipsBlock.useHiddenChipsBlock;
   }
 });

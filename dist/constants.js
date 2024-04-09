@@ -21,31 +21,23 @@ under the Apache 2.0 license is conditioned upon your compliance with
 such restriction.
 */
 /*=========== EVENT KEYS =============*/
-var BACKSPACE = 'Backspace';
-exports.BACKSPACE = BACKSPACE;
-var CLICK = 'Click';
-exports.CLICK = CLICK;
-var DELETE = 'Delete';
-exports.DELETE = DELETE;
-var TAB = 'Tab';
-exports.TAB = TAB;
-var TAB_SHIFT = 'Tab+Shift';
+const BACKSPACE = exports.BACKSPACE = 'Backspace';
+const CLICK = exports.CLICK = 'Click';
+const DELETE = exports.DELETE = 'Delete';
+const TAB = exports.TAB = 'Tab';
+const TAB_SHIFT = exports.TAB_SHIFT = 'Tab+Shift';
 
 /*=========== BUTTONS =============*/
-exports.TAB_SHIFT = TAB_SHIFT;
-var PRIMARY_BUTTON = 'primary';
-exports.PRIMARY_BUTTON = PRIMARY_BUTTON;
-var SECONDARY_BUTTON = 'secondary';
-exports.SECONDARY_BUTTON = SECONDARY_BUTTON;
-var TERTIARY_BUTTON = 'tertiary';
-exports.TERTIARY_BUTTON = TERTIARY_BUTTON;
-var DANGER_BUTTON = 'danger';
-exports.DANGER_BUTTON = DANGER_BUTTON;
-var LABEL_BUTTON = 'label';
+
+const PRIMARY_BUTTON = exports.PRIMARY_BUTTON = 'primary';
+const SECONDARY_BUTTON = exports.SECONDARY_BUTTON = 'secondary';
+const TERTIARY_BUTTON = exports.TERTIARY_BUTTON = 'tertiary';
+const DANGER_BUTTON = exports.DANGER_BUTTON = 'danger';
+const LABEL_BUTTON = exports.LABEL_BUTTON = 'label';
 
 /*=========== VALITATION =============*/
-exports.LABEL_BUTTON = LABEL_BUTTON;
-var validation = {
+
+const validation = exports.validation = {
   BEGIN_END_NOT_WITH: {
     LABEL: 'Must not begin and end with',
     NAME: 'beginEndNot'
@@ -105,28 +97,18 @@ var validation = {
 };
 
 /*=========== STATUS CODES =============*/
-exports.validation = validation;
-var BADREQUEST_ERROR_STATUS_CODE = 400;
-exports.BADREQUEST_ERROR_STATUS_CODE = BADREQUEST_ERROR_STATUS_CODE;
-var FORBIDDEN_ERROR_STATUS_CODE = 403;
-exports.FORBIDDEN_ERROR_STATUS_CODE = FORBIDDEN_ERROR_STATUS_CODE;
-var NOTFOUND_ERROR_STATUS_CODE = 404;
-exports.NOTFOUND_ERROR_STATUS_CODE = NOTFOUND_ERROR_STATUS_CODE;
-var CONFLICT_ERROR_STATUS_CODE = 409;
-exports.CONFLICT_ERROR_STATUS_CODE = CONFLICT_ERROR_STATUS_CODE;
-var INTERNAL_SERVER_ERROR_STATUS_CODE = 500;
-exports.INTERNAL_SERVER_ERROR_STATUS_CODE = INTERNAL_SERVER_ERROR_STATUS_CODE;
-var GATEWAY_TIMEOUT_STATUS_CODE = 504;
+
+const BADREQUEST_ERROR_STATUS_CODE = exports.BADREQUEST_ERROR_STATUS_CODE = 400;
+const FORBIDDEN_ERROR_STATUS_CODE = exports.FORBIDDEN_ERROR_STATUS_CODE = 403;
+const NOTFOUND_ERROR_STATUS_CODE = exports.NOTFOUND_ERROR_STATUS_CODE = 404;
+const CONFLICT_ERROR_STATUS_CODE = exports.CONFLICT_ERROR_STATUS_CODE = 409;
+const INTERNAL_SERVER_ERROR_STATUS_CODE = exports.INTERNAL_SERVER_ERROR_STATUS_CODE = 500;
+const GATEWAY_TIMEOUT_STATUS_CODE = exports.GATEWAY_TIMEOUT_STATUS_CODE = 504;
 
 /*=========== MODAL =============*/
-exports.GATEWAY_TIMEOUT_STATUS_CODE = GATEWAY_TIMEOUT_STATUS_CODE;
-var MODAL_SM = 'sm';
-exports.MODAL_SM = MODAL_SM;
-var MODAL_MD = 'md';
-exports.MODAL_MD = MODAL_MD;
-var MODAL_LG = 'lg';
-exports.MODAL_LG = MODAL_LG;
-var MODAL_MIN = 'min';
-exports.MODAL_MIN = MODAL_MIN;
-var MODAL_MAX = 'max';
-exports.MODAL_MAX = MODAL_MAX;
+
+const MODAL_SM = exports.MODAL_SM = 'sm';
+const MODAL_MD = exports.MODAL_MD = 'md';
+const MODAL_LG = exports.MODAL_LG = 'lg';
+const MODAL_MIN = exports.MODAL_MIN = 'min';
+const MODAL_MAX = exports.MODAL_MAX = 'max';
