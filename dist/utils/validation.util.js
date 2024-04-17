@@ -331,6 +331,10 @@ const validationRules = {
       value: [generateRule.beginEndNotWith('s')]
     }
   },
+  nodeSelectors: {
+    key: commonRules.k8sLabels.key,
+    value: commonRules.k8sLabels.value
+  },
   environmentVariables: {
     secretName: [generateRule.validCharacters('a-z A-Z 0-9 - _ .'), generateRule.beginEndWith('a-z A-Z 0-9'), generateRule.noConsecutiveCharacters('.., .–, –.'), generateRule.maxLengthBetweenDelimiters(/[\.\-\_]/, 63, 'periods'), generateRule.length({
       max: 253
