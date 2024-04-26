@@ -1,7 +1,6 @@
 
 
-Create a new dist version 2.0.1
+Create a new dist version 2.0.2
 
 Collecting:
-- Impl [Settings] add to project setting the ability to define node selectors (#263)
-- Impl [General] UI partial load (phase2) (#264)
+- Fix [UI] Projects dashboard - notify when mlrun isn't reachable (#266)
