@@ -1,6 +1,6 @@
 
 
-Create a new dist version 2.0.3
+Create a new dist version 2.0.4
 
 Collecting:
-- Impl [Functions] Add 'Application' type info (#268)
+- Fix [Node Selector] Different naming convention for Node Selector key between Nuclio and Project setting/ Mlrun func (#270)

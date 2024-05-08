@@ -332,7 +332,7 @@ const validationRules = {
     }
   },
   nodeSelectors: {
-    key: commonRules.k8sLabels.key,
+    key: commonRules.prefixedQualifiedName,
     value: commonRules.k8sLabels.value
   },
   environmentVariables: {
