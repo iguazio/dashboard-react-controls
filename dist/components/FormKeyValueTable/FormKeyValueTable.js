@@ -41,6 +41,7 @@ const FormKeyValueTable = _ref => {
     exitEditModeTriggerItem,
     fieldsPath,
     formState,
+    isKeyEditable,
     isKeyRequired,
     isValueRequired,
     keyHeader,
@@ -50,9 +51,10 @@ const FormKeyValueTable = _ref => {
     onExitEditModeCallback,
     valueHeader,
     valueLabel,
+    valueType,
     valueValidationRules
   } = _ref;
-  const tableClassNames = (0, _classnames.default)('form-table form-key-value-table', className);
+  const tableClassNames = (0, _classnames.default)('form-table form-key-value-table', disabled && 'form-table_disabled', className);
   const {
     addNewRow,
     applyChanges,
@@ -71,6 +73,14 @@ const FormKeyValueTable = _ref => {
         }
       } = _ref2;
       return newValue.trim() === key.trim() && index !== editingItem.ui.index;
+    });
+  };
+  const getKeyTextTemplate = keyValue => {
+    return /*#__PURE__*/(0, _jsxRuntime.jsx)(_components.Tooltip, {
+      template: /*#__PURE__*/(0, _jsxRuntime.jsx)(_components.TextTooltipTemplate, {
+        text: keyValue
+      }),
+      children: keyValue
     });
   };
   return /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
@@ -105,7 +115,7 @@ const FormKeyValueTable = _ref => {
                   name: "".concat(rowPath, ".data.key"),
                   density: "normal",
                   options: keyOptions
-                }) : /*#__PURE__*/(0, _jsxRuntime.jsx)(_components.FormInput, {
+                }) : isKeyEditable || editingItem.ui.isNew ? /*#__PURE__*/(0, _jsxRuntime.jsx)(_components.FormInput, {
                   className: "input_edit",
                   placeholder: keyLabel,
                   density: "normal",
@@ -116,7 +126,7 @@ const FormKeyValueTable = _ref => {
                     label: 'Name must be unique',
                     pattern: newValue => uniquenessValidator(fields, newValue)
                   }]
-                })
+                }) : getKeyTextTemplate(fields.value[index].data.key)
               }), /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
                 className: "form-table__cell form-table__cell_1",
                 children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_components.FormInput, {
@@ -124,6 +134,7 @@ const FormKeyValueTable = _ref => {
                   placeholder: valueLabel,
                   density: "normal",
                   name: "".concat(rowPath, ".data.value"),
+                  type: valueType,
                   required: isValueRequired,
                   validationRules: valueValidationRules
                 })
@@ -137,22 +148,17 @@ const FormKeyValueTable = _ref => {
               })]
             }, index) : /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
               className: tableRowClassNames,
-              onClick: event => enterEditMode(event, fields, fieldsPath, index),
+              onClick: event => !disabled && enterEditMode(event, fields, fieldsPath, index),
               children: [/*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
                 className: "form-table__cell form-table__cell_1",
-                children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_components.Tooltip, {
-                  template: /*#__PURE__*/(0, _jsxRuntime.jsx)(_components.TextTooltipTemplate, {
-                    text: fields.value[index].data.key
-                  }),
-                  children: fields.value[index].data.key
-                })
+                children: getKeyTextTemplate(fields.value[index].data.key)
               }), /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
                 className: "form-table__cell form-table__cell_1",
                 children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_components.Tooltip, {
                   template: /*#__PURE__*/(0, _jsxRuntime.jsx)(_components.TextTooltipTemplate, {
-                    text: fields.value[index].data.value
+                    text: valueType === 'password' ? null : fields.value[index].data.value
                   }),
-                  children: fields.value[index].data.value
+                  children: valueType === 'password' ? '*****' : fields.value[index].data.value
                 })
               }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_elements.FormRowActions, {
                 applyChanges: applyChanges,
@@ -195,6 +201,7 @@ FormKeyValueTable.defaultProps = {
   defaultKey: '',
   disabled: false,
   exitEditModeTriggerItem: null,
+  isKeyEditable: true,
   isKeyRequired: true,
   isValueRequired: true,
   keyHeader: 'Key',
@@ -204,6 +211,7 @@ FormKeyValueTable.defaultProps = {
   onExitEditModeCallback: () => {},
   valueHeader: 'Value',
   valueLabel: 'Value',
+  valueType: 'text',
   valueValidationRules: []
 };
 FormKeyValueTable.propTypes = {
@@ -215,6 +223,7 @@ FormKeyValueTable.propTypes = {
   exitEditModeTriggerItem: _propTypes.default.any,
   fieldsPath: _propTypes.default.string.isRequired,
   formState: _propTypes.default.shape({}).isRequired,
+  isKeyEditable: _propTypes.default.bool,
   isKeyRequired: _propTypes.default.bool,
   isValueRequired: _propTypes.default.bool,
   keyHeader: _propTypes.default.string,
@@ -227,6 +236,7 @@ FormKeyValueTable.propTypes = {
   onExitEditModeCallback: _propTypes.default.func,
   valueHeader: _propTypes.default.string,
   valueLabel: _propTypes.default.string,
+  valueType: _propTypes.default.string,
   valueValidationRules: _types.INPUT_VALIDATION_RULES
 };
 var _default = exports.default = FormKeyValueTable;

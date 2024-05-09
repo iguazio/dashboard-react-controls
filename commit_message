@@ -1,6 +1,6 @@
 
 
-Create a new dist version 2.0.4
+Create a new dist version 2.0.5
 
 Collecting:
-- Fix [Node Selector] Different naming convention for Node Selector key between Nuclio and Project setting/ Mlrun func (#270)
+- Impl [Project Secrets] Add new Secrets table with validation (#272)

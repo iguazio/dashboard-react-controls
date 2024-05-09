@@ -303,6 +303,28 @@ textarea {
   }
 }
 
+.form-table_disabled {
+  .form-table__row {
+    &:not(.no-hover):hover {
+      .form-table__actions-cell {
+        visibility: hidden;
+      }
+    }
+  }
+
+  .form-table__action-row {
+    button {
+      color: $spunPearl;
+
+      svg {
+        rect {
+          fill: $spunPearl;
+        }
+      }
+    }
+  }
+}
+
 .chip-block-hidden {
   position: fixed;
   display: flex;
