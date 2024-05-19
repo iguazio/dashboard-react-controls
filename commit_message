@@ -1,6 +1,7 @@
 
 
-Create a new dist version 2.0.5
+Create a new dist version 2.0.6
 
 Collecting:
-- Impl [Project Secrets] Add new Secrets table with validation (#272)
+- Fix [Tip] Broken text near screen edge (#274)
+- Impl [Models endpoints monitoring] Metrics dropdown selector (#275)

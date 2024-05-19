@@ -66,36 +66,38 @@ const Tooltip = _ref => {
       If the child node is a text node and the text of the child node inside the container is greater than the width of the container, then show tooltip.
       */
       child.nodeType === Node.TEXT_NODE && parentRef.current.scrollWidth > parentRef.current.offsetWidth));
-      if (show) {
-        var _parentRef$current$ge, _parentRef$current, _tooltipRef$current$g, _tooltipRef$current;
-        setShow(true);
-        let {
-          height,
-          top,
-          bottom
-        } = (_parentRef$current$ge = parentRef === null || parentRef === void 0 || (_parentRef$current = parentRef.current) === null || _parentRef$current === void 0 ? void 0 : _parentRef$current.getBoundingClientRect()) !== null && _parentRef$current$ge !== void 0 ? _parentRef$current$ge : {};
-        const {
-          height: tooltipHeight,
-          width: tooltipWidth
-        } = (_tooltipRef$current$g = (_tooltipRef$current = tooltipRef.current) === null || _tooltipRef$current === void 0 ? void 0 : _tooltipRef$current.getBoundingClientRect()) !== null && _tooltipRef$current$g !== void 0 ? _tooltipRef$current$g : {
-          height: 0,
-          width: 0
-        };
-        const leftPosition = event.x - (event.x + tooltipWidth - window.innerWidth + offset);
-        const left = event.x + tooltipWidth + offset > window.innerWidth ? leftPosition > offset ? leftPosition : offset : event.x + offset;
-        if (top + height + offset + tooltipHeight >= window.innerHeight) {
-          const topPosition = bottom - height - offset - tooltipHeight;
-          setStyle({
-            top: topPosition > 0 ? topPosition : offset,
-            left
-          });
-        } else {
-          setStyle({
-            top: top + height + offset,
-            left
-          });
+      setShow(show);
+      setTimeout(() => {
+        if (show) {
+          var _parentRef$current$ge, _parentRef$current, _tooltipRef$current$g, _tooltipRef$current;
+          let {
+            height,
+            top,
+            bottom
+          } = (_parentRef$current$ge = parentRef === null || parentRef === void 0 || (_parentRef$current = parentRef.current) === null || _parentRef$current === void 0 ? void 0 : _parentRef$current.getBoundingClientRect()) !== null && _parentRef$current$ge !== void 0 ? _parentRef$current$ge : {};
+          const {
+            height: tooltipHeight,
+            width: tooltipWidth
+          } = (_tooltipRef$current$g = (_tooltipRef$current = tooltipRef.current) === null || _tooltipRef$current === void 0 ? void 0 : _tooltipRef$current.getBoundingClientRect()) !== null && _tooltipRef$current$g !== void 0 ? _tooltipRef$current$g : {
+            height: 0,
+            width: 0
+          };
+          const leftPosition = event.x - (event.x + tooltipWidth - window.innerWidth + offset);
+          const left = event.x + tooltipWidth + offset > window.innerWidth ? leftPosition > offset ? leftPosition : offset : event.x + offset;
+          if (top + height + offset + tooltipHeight >= window.innerHeight) {
+            const topPosition = bottom - height - offset - tooltipHeight;
+            setStyle({
+              top: topPosition > 0 ? topPosition : offset,
+              left
+            });
+          } else {
+            setStyle({
+              top: top + height + offset,
+              left
+            });
+          }
         }
-      }
+      }, 0);
     }
   }, [hidden, textShow, show]);
   const clearStyles = (0, _lodash.debounce)(() => {

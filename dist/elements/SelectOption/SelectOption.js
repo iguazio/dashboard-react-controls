@@ -49,6 +49,7 @@ const SelectOption = _ref => {
         name: name,
         value: item.id,
         label: item.label,
+        disabled: item.disabled || false,
         children: item.status && /*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
           className: "state-".concat(item.status, "-job status")
         })
