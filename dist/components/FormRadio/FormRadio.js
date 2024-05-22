@@ -8,6 +8,8 @@ var _react = _interopRequireDefault(require("react"));
 var _propTypes = _interopRequireDefault(require("prop-types"));
 var _reactFinalForm = require("react-final-form");
 var _classnames = _interopRequireDefault(require("classnames"));
+var _Tooltip = _interopRequireDefault(require("../Tooltip/Tooltip"));
+var _TextTooltipTemplate = _interopRequireDefault(require("../TooltipTemplate/TextTooltipTemplate"));
 require("./FormRadio.scss");
 var _jsxRuntime = require("react/jsx-runtime");
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -34,6 +36,7 @@ const FormRadio = _ref => {
     name,
     label,
     readOnly,
+    tooltip,
     ...inputProps
   } = _ref;
   const formFieldClassNames = (0, _classnames.default)('form-field-radio', readOnly && 'form-field-radio_readonly', className);
@@ -56,7 +59,16 @@ const FormRadio = _ref => {
           ...inputProps,
           checked: input.checked,
           id: name + inputProps.value
-        }), /*#__PURE__*/(0, _jsxRuntime.jsx)("label", {
+        }), tooltip ? /*#__PURE__*/(0, _jsxRuntime.jsx)(_Tooltip.default, {
+          className: "label",
+          template: /*#__PURE__*/(0, _jsxRuntime.jsx)(_TextTooltipTemplate.default, {
+            text: tooltip
+          }),
+          children: /*#__PURE__*/(0, _jsxRuntime.jsx)("label", {
+            htmlFor: name + inputProps.value,
+            children: label
+          })
+        }) : /*#__PURE__*/(0, _jsxRuntime.jsx)("label", {
           htmlFor: name + inputProps.value,
           children: label
         })]

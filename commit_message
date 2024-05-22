@@ -1,7 +1,6 @@
 
 
-Create a new dist version 2.0.6
+Create a new dist version 2.0.7
 
 Collecting:
-- Fix [Tip] Broken text near screen edge (#274)
-- Impl [Models endpoints monitoring] Metrics dropdown selector (#275)
+- Impl [Artifacts] Delete single artifact data (#277)
