@@ -45,6 +45,12 @@ Object.defineProperty(exports, "FormKeyValueTable", {
     return _FormKeyValueTable.default;
   }
 });
+Object.defineProperty(exports, "FormOnChange", {
+  enumerable: true,
+  get: function () {
+    return _FormOnChange.default;
+  }
+});
 Object.defineProperty(exports, "FormRadio", {
   enumerable: true,
   get: function () {
@@ -117,11 +123,12 @@ var _FormCheckBox = _interopRequireDefault(require("./FormCheckBox/FormCheckBox"
 var _FormChipCell = _interopRequireDefault(require("./FormChipCell/FormChipCell"));
 var _FormCombobox = _interopRequireDefault(require("./FormCombobox/FormCombobox"));
 var _FormInput = _interopRequireDefault(require("./FormInput/FormInput"));
-var _FormToggle = _interopRequireDefault(require("./FormToggle/FormToggle"));
+var _FormOnChange = _interopRequireDefault(require("./FormOnChange/FormOnChange"));
 var _FormKeyValueTable = _interopRequireDefault(require("./FormKeyValueTable/FormKeyValueTable"));
 var _FormRadio = _interopRequireDefault(require("./FormRadio/FormRadio"));
 var _FormSelect = _interopRequireDefault(require("./FormSelect/FormSelect"));
 var _FormTextarea = _interopRequireDefault(require("./FormTextarea/FormTextarea"));
+var _FormToggle = _interopRequireDefault(require("./FormToggle/FormToggle"));
 var _Modal = _interopRequireDefault(require("./Modal/Modal"));
 var _PopUpDialog = _interopRequireDefault(require("./PopUpDialog/PopUpDialog"));
 var _RoundedIcon = _interopRequireDefault(require("./RoundedIcon/RoundedIcon"));

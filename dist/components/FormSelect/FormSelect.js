@@ -17,6 +17,7 @@ var _types = require("../../types");
 var _constants = require("../../constants");
 var _dropdown = require("../../images/dropdown.svg");
 require("./formSelect.scss");
+var _lodash = require("lodash");
 var _jsxRuntime = require("react/jsx-runtime");
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 function _getRequireWildcardCache(e) { if ("function" != typeof WeakMap) return null; var r = new WeakMap(), t = new WeakMap(); return (_getRequireWildcardCache = function (e) { return e ? t : r; })(e); }
@@ -100,7 +101,8 @@ const FormSelect = _ref => {
     if (!input.value || !input.value.length) {
       return "Select Option".concat(multiple ? 's' : '');
     }
-    return !multiple ? selectedOption === null || selectedOption === void 0 ? void 0 : selectedOption.label : input.value.length <= 2 ? options.filter(option => input.value.includes(option.id)).map(option => option.label).join(', ') : "".concat(input.value.length, " items selected");
+    const multipleValue = multiple && input.value.includes('all') && input.value.length > 1 ? options.filter(option => option.id !== 'all').filter(option => input.value.includes(option.id)).map(option => option.label).join(', ') : options.filter(option => input.value.includes(option.id)).map(option => option.label).join(', ');
+    return !multiple ? selectedOption === null || selectedOption === void 0 ? void 0 : selectedOption.label : input.value.length <= 2 ? multipleValue : "".concat(input.value.length, " items selected");
   };
   (0, _react.useEffect)(() => {
     setIsInvalid(meta.invalid && (meta.validating || meta.modified || meta.submitFailed && meta.touched));
