@@ -83,7 +83,7 @@ FormCheckBox.propTypes = {
   className: _propTypes.default.string,
   highlightLabel: _propTypes.default.bool,
   name: _propTypes.default.string.isRequired,
-  label: _propTypes.default.string,
+  label: _propTypes.default.oneOfType([_propTypes.default.string, _propTypes.default.element]),
   readOnly: _propTypes.default.bool
 };
 var _default = exports.default = /*#__PURE__*/_react.default.memo(FormCheckBox);

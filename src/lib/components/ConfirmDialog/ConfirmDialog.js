@@ -31,6 +31,7 @@ import './confirmDialog.scss'
 
 const ConfirmDialog = ({
   cancelButton,
+  children,
   className,
   closePopUp,
   confirmButton,
@@ -71,6 +72,7 @@ const ConfirmDialog = ({
       >
         <div className="confirm-dialog">
           {message && <div className={messageClassNames}>{message}</div>}
+          {children && <div className="confirm-dialog__body">{children}</div>}
           <div className="confirm-dialog__btn-container">
             {cancelButton && (
               <Button
@@ -78,6 +80,7 @@ const ConfirmDialog = ({
                 label={cancelButton.label}
                 onClick={handleCancelDialog}
                 variant={cancelButton.variant}
+                disabled={cancelButton.disabled}
               />
             )}
             {confirmButton && (
@@ -85,6 +88,7 @@ const ConfirmDialog = ({
                 label={confirmButton.label}
                 onClick={handleConfirmDialog}
                 variant={confirmButton.variant}
+                disabled={confirmButton.disabled}
               />
             )}
           </div>

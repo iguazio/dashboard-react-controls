@@ -33,6 +33,7 @@ such restriction.
 const ConfirmDialog = _ref => {
   let {
     cancelButton,
+    children,
     className,
     closePopUp,
     confirmButton,
@@ -66,17 +67,22 @@ const ConfirmDialog = _ref => {
       children: [message && /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
         className: messageClassNames,
         children: message
+      }), children && /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
+        className: "confirm-dialog__body",
+        children: children
       }), /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
         className: "confirm-dialog__btn-container",
         children: [cancelButton && /*#__PURE__*/(0, _jsxRuntime.jsx)(_Button.default, {
           className: "pop-up-dialog__btn_cancel",
           label: cancelButton.label,
           onClick: handleCancelDialog,
-          variant: cancelButton.variant
+          variant: cancelButton.variant,
+          disabled: cancelButton.disabled
         }), confirmButton && /*#__PURE__*/(0, _jsxRuntime.jsx)(_Button.default, {
           label: confirmButton.label,
           onClick: handleConfirmDialog,
-          variant: confirmButton.variant
+          variant: confirmButton.variant,
+          disabled: confirmButton.disabled
         })]
       })]
     })

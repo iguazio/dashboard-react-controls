@@ -19,9 +19,12 @@ import PropTypes from 'prop-types'
 import { Field } from 'react-final-form'
 import classNames from 'classnames'
 
+import Tooltip from '../Tooltip/Tooltip'
+import TextTooltipTemplate from '../TooltipTemplate/TextTooltipTemplate'
+
 import './FormRadio.scss'
 
-const FormRadio = ({ className, name, label, readOnly, ...inputProps }) => {
+const FormRadio = ({ className, name, label, readOnly, tooltip, ...inputProps }) => {
   const formFieldClassNames = classNames(
     'form-field-radio',
     readOnly && 'form-field-radio_readonly',
@@ -31,7 +34,10 @@ const FormRadio = ({ className, name, label, readOnly, ...inputProps }) => {
   return (
     <Field name={name} value={inputProps.value} type="radio">
       {({ input }) => (
-        <div className={formFieldClassNames} data-testid={name ? `${name}-${inputProps.value}-form-radio` : 'form-field-radio'}>
+        <div
+          className={formFieldClassNames}
+          data-testid={name ? `${name}-${inputProps.value}-form-radio` : 'form-field-radio'}
+        >
           <input
             className={classNames(input.checked ? 'checked' : 'unchecked')}
             type="radio"
@@ -43,7 +49,13 @@ const FormRadio = ({ className, name, label, readOnly, ...inputProps }) => {
             checked={input.checked}
             id={name + inputProps.value}
           />
-          <label htmlFor={name + inputProps.value}>{label}</label>
+          {tooltip ? (
+            <Tooltip className="label" template={<TextTooltipTemplate text={tooltip} />}>
+              <label htmlFor={name + inputProps.value}>{label}</label>
+            </Tooltip>
+          ) : (
+            <label htmlFor={name + inputProps.value}>{label}</label>
+          )}
         </div>
       )}
     </Field>

@@ -74,7 +74,7 @@ FormCheckBox.propTypes = {
   className: PropTypes.string,
   highlightLabel: PropTypes.bool,
   name: PropTypes.string.isRequired,
-  label: PropTypes.string,
+  label: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
   readOnly: PropTypes.bool
 }
 

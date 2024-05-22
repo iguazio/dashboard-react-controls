@@ -115,7 +115,7 @@ export const SELECT_OPTION = PropTypes.shape({
   hidden: PropTypes.bool,
   icon: PropTypes.element,
   id: PropTypes.string.isRequired,
-  label: PropTypes.string.isRequired,
+  label: PropTypes.oneOfType([PropTypes.string, PropTypes.element]).isRequired,
   labelHtml: PropTypes.string,
   status: PropTypes.string,
   subLabel: PropTypes.string
