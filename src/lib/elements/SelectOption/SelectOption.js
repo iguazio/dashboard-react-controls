@@ -33,6 +33,7 @@ const SelectOption = ({ item, name, onClick, multiple, selectedId, withSelectedI
     item.hidden && 'hidden',
     item.disabled && 'disabled'
   )
+
   if (multiple) {
     return (
       <div data-testid="select-checkbox" className={selectClassName}>

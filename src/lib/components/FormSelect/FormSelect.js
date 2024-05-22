@@ -31,6 +31,7 @@ import { TERTIARY_BUTTON } from '../../constants'
 import { ReactComponent as Caret } from '../../images/dropdown.svg'
 
 import './formSelect.scss'
+import { debounce } from 'lodash'
 
 const FormSelect = ({
   className,
@@ -113,14 +114,24 @@ const FormSelect = ({
     if (!input.value || !input.value.length) {
       return `Select Option${multiple ? 's' : ''}`
     }
+
+    const multipleValue =
+      multiple && input.value.includes('all') && input.value.length > 1
+        ? options
+            .filter((option) => option.id !== 'all')
+            .filter((option) => input.value.includes(option.id))
+            .map((option) => option.label)
+            .join(', ')
+        : options
+            .filter((option) => input.value.includes(option.id))
+            .map((option) => option.label)
+            .join(', ')
+
     return !multiple
       ? selectedOption?.label
       : input.value.length <= 2
-      ? options
-          .filter((option) => input.value.includes(option.id))
-          .map((option) => option.label)
-          .join(', ')
-      : `${input.value.length} items selected`
+        ? multipleValue
+        : `${input.value.length} items selected`
   }
 
   useEffect(() => {
@@ -215,6 +226,7 @@ const FormSelect = ({
     (event) => {
       event.stopPropagation()
       if (multiple) return
+
       if (
         !event.target.classList.contains('disabled') &&
         !event.target.closest('.options-list__search')
