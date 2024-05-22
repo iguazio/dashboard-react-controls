@@ -1,6 +1,6 @@
 
 
-Create a new dist version 2.0.7
+Create a new dist version 2.0.8
 
 Collecting:
-- Impl [Artifacts] Delete single artifact data (#277)
+- Fix [UI] Missing icon (#279)
