@@ -1,6 +1,7 @@
 
 
-Create a new dist version 2.0.9
+Create a new dist version 2.0.10
 
 Collecting:
-- Impl [Cross projects Jobs] Support multiple status selection (#281)
+- Impl [UI] Add metric type icons to Metrics Selector dropdown (#283)
+- Impl [Models endpoints monitoring] Graph over time (#284)
