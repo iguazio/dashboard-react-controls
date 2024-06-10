@@ -98,26 +98,29 @@ const FormChipCellView = React.forwardRef(
                 <div className={wrapperClassNames} ref={chipsWrapperRef}>
                   {fields.map((contentItem, index) => {
                     const chipData = fields.value[index]
+
                     return (
                       index < chips.visibleChips?.length && (
                         <div className="chip-block" key={chipData.id}>
                           <Tooltip
-                            hidden={editConfig.isEdit}
+                            hidden={editConfig.isEdit && !chipData.tooltip}
                             key={chipData.id}
                             template={
                               <TextTooltipTemplate
                                 text={
-                                  <span className="chip__content">
-                                    {chipData.key}
-                                    {!chipData.isKeyOnly && (
-                                      <>
-                                        <span className="chip__delimiter">
-                                          {chipData.delimiter ? chipData.delimiter : ':'}
-                                        </span>
-                                        {chipData.value}
-                                      </>
-                                    )}
-                                  </span>
+                                  chipData.tooltip || (
+                                    <span className="chip__content">
+                                      {chipData.key}
+                                      {!chipData.isKeyOnly && (
+                                        <>
+                                          <span className="chip__delimiter">
+                                            {chipData.delimiter ? chipData.delimiter : ':'}
+                                          </span>
+                                          {chipData.value}
+                                        </>
+                                      )}
+                                    </span>
+                                  )
                                 }
                               />
                             }

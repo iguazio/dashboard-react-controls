@@ -307,6 +307,10 @@
     &_purple {
       @include editableChipFont($amethyst);
     }
+
+    &_disabled {
+      @include editableChipFont($spunPearl)
+    }
   } @else if $component == Chip {
     &_white {
       @include chipFont($white);

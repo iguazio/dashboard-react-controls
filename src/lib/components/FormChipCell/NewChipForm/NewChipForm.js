@@ -77,6 +77,7 @@ const NewChipForm = React.forwardRef(
       !editConfig.isKeyFocused && 'item_edited',
       !isEmpty(get(meta, ['error', chipIndex, 'key'], [])) &&
         !isEmpty(chipData.key) &&
+        !chip.disabled &&
         'item_edited_invalid'
     )
     const labelContainerClassName = classnames(
@@ -86,7 +87,8 @@ const NewChipForm = React.forwardRef(
       font && `edit-chip-container-font_${font}`,
       density && `edit-chip-container-density_${density}`,
       borderRadius && `edit-chip-container-border_${borderRadius}`,
-      (editConfig.isEdit || editConfig.isNewChip) && 'edit-chip-container_edited'
+      (editConfig.isEdit || editConfig.isNewChip) && 'edit-chip-container_edited',
+      chip.disabled && 'edit-chip-container_disabled edit-chip-container-font_disabled'
     )
     const labelValueClassName = classnames(
       'input-label-value',
@@ -98,7 +100,9 @@ const NewChipForm = React.forwardRef(
 
     const closeButtonClass = classnames(
       'item-icon-close',
-      (editConfig.chipIndex === chipIndex || !isEditable) && 'item-icon-close_hidden'
+      !chip.disabled &&
+        (editConfig.chipIndex === chipIndex || !isEditable) &&
+        'item-icon-close_hidden'
     )
 
     useLayoutEffect(() => {
@@ -110,14 +114,14 @@ const NewChipForm = React.forwardRef(
           !chipData.key || currentWidthKeyInput <= minWidthInput
             ? minWidthInput
             : currentWidthKeyInput >= maxWidthInput
-            ? maxWidthInput
-            : currentWidthKeyInput
+              ? maxWidthInput
+              : currentWidthKeyInput
         const valueFieldWidth =
           !chipData.value || currentWidthValueInput <= minWidthValueInput
             ? minWidthValueInput
             : currentWidthValueInput >= maxWidthInput
-            ? maxWidthInput
-            : currentWidthValueInput
+              ? maxWidthInput
+              : currentWidthValueInput
 
         setChipData((prevState) => ({
           ...prevState,
@@ -259,10 +263,10 @@ const NewChipForm = React.forwardRef(
               refInputKey.current.value.length <= 1
                 ? minWidthInput
                 : currentWidthKeyInput >= maxWidthInput
-                ? maxWidthInput
-                : currentWidthKeyInput > minWidthInput
-                ? currentWidthKeyInput + 2
-                : minWidthInput
+                  ? maxWidthInput
+                  : currentWidthKeyInput > minWidthInput
+                    ? currentWidthKeyInput + 2
+                    : minWidthInput
           }))
         } else {
           const currentWidthValueInput = getTextWidth(refInputValue.current)
@@ -274,10 +278,10 @@ const NewChipForm = React.forwardRef(
               refInputValue.current.value?.length <= 1
                 ? minWidthValueInput
                 : currentWidthValueInput >= maxWidthInput
-                ? maxWidthInput
-                : currentWidthValueInput > minWidthValueInput
-                ? currentWidthValueInput + 2
-                : minWidthValueInput
+                  ? maxWidthInput
+                  : currentWidthValueInput > minWidthValueInput
+                    ? currentWidthValueInput + 2
+                    : minWidthValueInput
           }))
         }
       },
@@ -329,13 +333,15 @@ const NewChipForm = React.forwardRef(
     return (
       <div
         className={labelContainerClassName}
-        onKeyDown={(event) => editConfig.isEdit && focusChip(event)}
+        onKeyDown={(event) => !chip.disabled && editConfig.isEdit && focusChip(event)}
         ref={refInputContainer}
       >
         <NewChipInput
           className={labelKeyClassName}
           disabled={
-            !isEditable || (!isNil(editConfig.chipIndex) && editConfig.chipIndex !== chipIndex)
+            chip.disabled ||
+            !isEditable ||
+            (!isNil(editConfig.chipIndex) && editConfig.chipIndex !== chipIndex)
           }
           name={keyName}
           onChange={handleOnChange}
@@ -349,7 +355,9 @@ const NewChipForm = React.forwardRef(
           <NewChipInput
             className={labelValueClassName}
             disabled={
-              !isEditable || (!isNil(editConfig.chipIndex) && editConfig.chipIndex !== chipIndex)
+              chip.disabled ||
+              !isEditable ||
+              (!isNil(editConfig.chipIndex) && editConfig.chipIndex !== chipIndex)
             }
             name={valueName}
             onChange={handleOnChange}
@@ -361,13 +369,15 @@ const NewChipForm = React.forwardRef(
         )}
 
         <button
+          disabled={chip.disabled}
           className={closeButtonClass}
-          onClick={(event) => handleRemoveChip(event, chipIndex)}
+          onClick={(event) => !chip.disabled && handleRemoveChip(event, chipIndex)}
         >
           <Close />
         </button>
 
-        {(editConfig.isKeyFocused ? !isEmpty(chipData.key) : !isEmpty(chipData.value)) &&
+        {!chip.disabled &&
+          (editConfig.isKeyFocused ? !isEmpty(chipData.key) : !isEmpty(chipData.value)) &&
           editConfig.chipIndex === chipIndex &&
           !isEmpty(get(meta, ['error', editConfig.chipIndex, selectedInput], [])) && (
             <OptionsMenu show={showValidationRules} ref={refInputContainer}>
