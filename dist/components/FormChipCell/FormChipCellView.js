@@ -90,9 +90,9 @@ const FormChipCellView = /*#__PURE__*/_react.default.forwardRef((_ref, _ref2) =>
             return index < ((_chips$visibleChips = chips.visibleChips) === null || _chips$visibleChips === void 0 ? void 0 : _chips$visibleChips.length) && /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
               className: "chip-block",
               children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_Tooltip.default, {
-                hidden: editConfig.isEdit,
+                hidden: editConfig.isEdit && !chipData.tooltip,
                 template: /*#__PURE__*/(0, _jsxRuntime.jsx)(_TextTooltipTemplate.default, {
-                  text: /*#__PURE__*/(0, _jsxRuntime.jsxs)("span", {
+                  text: chipData.tooltip || /*#__PURE__*/(0, _jsxRuntime.jsxs)("span", {
                     className: "chip__content",
                     children: [chipData.key, !chipData.isKeyOnly && /*#__PURE__*/(0, _jsxRuntime.jsxs)(_jsxRuntime.Fragment, {
                       children: [/*#__PURE__*/(0, _jsxRuntime.jsx)("span", {

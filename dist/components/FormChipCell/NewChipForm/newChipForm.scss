@@ -56,14 +56,18 @@
       display: flex;
       align-items: center;
       justify-content: center;
-  
+
       &_hidden {
         visibility: hidden;
       }
-  
+
       svg {
         transform: scale(0.7);
       }
+    }
+
+    &_disabled {
+      cursor: not-allowed;
     }
   }
 

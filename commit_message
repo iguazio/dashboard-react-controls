@@ -1,7 +1,6 @@
 
 
-Create a new dist version 2.0.10
+Create a new dist version 2.0.11
 
 Collecting:
-- Impl [UI] Add metric type icons to Metrics Selector dropdown (#283)
-- Impl [Models endpoints monitoring] Graph over time (#284)
+- Fix [Jobs] Filtering through custom labels isn't working as intended (#286)

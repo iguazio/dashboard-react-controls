@@ -79,10 +79,10 @@ const NewChipForm = /*#__PURE__*/_react.default.forwardRef((_ref, ref) => {
   const refInputKey = _react.default.useRef({});
   const refInputValue = _react.default.useRef({});
   const refInputContainer = _react.default.useRef();
-  const labelKeyClassName = (0, _classnames.default)(className, !editConfig.isKeyFocused && 'item_edited', !(0, _lodash.isEmpty)((0, _lodash.get)(meta, ['error', chipIndex, 'key'], [])) && !(0, _lodash.isEmpty)(chipData.key) && 'item_edited_invalid');
-  const labelContainerClassName = (0, _classnames.default)('edit-chip-container', background && "edit-chip-container-background_".concat(background), borderColor && "edit-chip-container-border_".concat(borderColor), font && "edit-chip-container-font_".concat(font), density && "edit-chip-container-density_".concat(density), borderRadius && "edit-chip-container-border_".concat(borderRadius), (editConfig.isEdit || editConfig.isNewChip) && 'edit-chip-container_edited');
+  const labelKeyClassName = (0, _classnames.default)(className, !editConfig.isKeyFocused && 'item_edited', !(0, _lodash.isEmpty)((0, _lodash.get)(meta, ['error', chipIndex, 'key'], [])) && !(0, _lodash.isEmpty)(chipData.key) && !chip.disabled && 'item_edited_invalid');
+  const labelContainerClassName = (0, _classnames.default)('edit-chip-container', background && "edit-chip-container-background_".concat(background), borderColor && "edit-chip-container-border_".concat(borderColor), font && "edit-chip-container-font_".concat(font), density && "edit-chip-container-density_".concat(density), borderRadius && "edit-chip-container-border_".concat(borderRadius), (editConfig.isEdit || editConfig.isNewChip) && 'edit-chip-container_edited', chip.disabled && 'edit-chip-container_disabled edit-chip-container-font_disabled');
   const labelValueClassName = (0, _classnames.default)('input-label-value', !editConfig.isValueFocused && 'item_edited', !(0, _lodash.isEmpty)((0, _lodash.get)(meta, ['error', chipIndex, 'value'], [])) && !(0, _lodash.isEmpty)(chipData.value) && 'item_edited_invalid');
-  const closeButtonClass = (0, _classnames.default)('item-icon-close', (editConfig.chipIndex === chipIndex || !isEditable) && 'item-icon-close_hidden');
+  const closeButtonClass = (0, _classnames.default)('item-icon-close', !chip.disabled && (editConfig.chipIndex === chipIndex || !isEditable) && 'item-icon-close_hidden');
   (0, _react.useLayoutEffect)(() => {
     if (!chipData.keyFieldWidth && !chipData.valueFieldWidth) {
       const currentWidthKeyInput = refInputKey.current.scrollWidth + 1;
@@ -243,11 +243,11 @@ const NewChipForm = /*#__PURE__*/_react.default.forwardRef((_ref, ref) => {
   }, [selectedInput, validationRules]);
   return /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
     className: labelContainerClassName,
-    onKeyDown: event => editConfig.isEdit && focusChip(event),
+    onKeyDown: event => !chip.disabled && editConfig.isEdit && focusChip(event),
     ref: refInputContainer,
     children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_NewChipInput.default, {
       className: labelKeyClassName,
-      disabled: !isEditable || !(0, _lodash.isNil)(editConfig.chipIndex) && editConfig.chipIndex !== chipIndex,
+      disabled: chip.disabled || !isEditable || !(0, _lodash.isNil)(editConfig.chipIndex) && editConfig.chipIndex !== chipIndex,
       name: keyName,
       onChange: handleOnChange,
       onFocus: handleOnFocus,
@@ -261,7 +261,7 @@ const NewChipForm = /*#__PURE__*/_react.default.forwardRef((_ref, ref) => {
       children: ":"
     }), !chipData.isKeyOnly && /*#__PURE__*/(0, _jsxRuntime.jsx)(_NewChipInput.default, {
       className: labelValueClassName,
-      disabled: !isEditable || !(0, _lodash.isNil)(editConfig.chipIndex) && editConfig.chipIndex !== chipIndex,
+      disabled: chip.disabled || !isEditable || !(0, _lodash.isNil)(editConfig.chipIndex) && editConfig.chipIndex !== chipIndex,
       name: valueName,
       onChange: handleOnChange,
       onFocus: handleOnFocus,
@@ -271,10 +271,11 @@ const NewChipForm = /*#__PURE__*/_react.default.forwardRef((_ref, ref) => {
         width: chipData.valueFieldWidth
       }
     }), /*#__PURE__*/(0, _jsxRuntime.jsx)("button", {
+      disabled: chip.disabled,
       className: closeButtonClass,
-      onClick: event => handleRemoveChip(event, chipIndex),
+      onClick: event => !chip.disabled && handleRemoveChip(event, chipIndex),
       children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_close.ReactComponent, {})
-    }), (editConfig.isKeyFocused ? !(0, _lodash.isEmpty)(chipData.key) : !(0, _lodash.isEmpty)(chipData.value)) && editConfig.chipIndex === chipIndex && !(0, _lodash.isEmpty)((0, _lodash.get)(meta, ['error', editConfig.chipIndex, selectedInput], [])) && /*#__PURE__*/(0, _jsxRuntime.jsx)(_OptionsMenu.default, {
+    }), !chip.disabled && (editConfig.isKeyFocused ? !(0, _lodash.isEmpty)(chipData.key) : !(0, _lodash.isEmpty)(chipData.value)) && editConfig.chipIndex === chipIndex && !(0, _lodash.isEmpty)((0, _lodash.get)(meta, ['error', editConfig.chipIndex, selectedInput], [])) && /*#__PURE__*/(0, _jsxRuntime.jsx)(_OptionsMenu.default, {
       show: showValidationRules,
       ref: refInputContainer,
       children: getValidationRules()

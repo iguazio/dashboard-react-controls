@@ -224,6 +224,15 @@ const generateRule = {
       label: _constants.validation.REQUIRED.LABEL,
       pattern: new RegExp('\\S')
     };
+  },
+  checkForValidCustomLabels: internalLabels => {
+    return {
+      name: 'customLabels',
+      label: 'System-defined labels cannot be modified.',
+      pattern: value => {
+        return !internalLabels.includes(value);
+      }
+    };
   }
 };
 const commonRules = {
@@ -316,14 +325,15 @@ const validationRules = {
     tag: [generateRule.validCharacters('a-z A-Z 0-9 - _ .'), generateRule.beginEndWith('a-z A-Z 0-9'), generateRule.length({
       max: 56
     })],
-    combobox: [generateRule.required()]
+    combobox: [generateRule.required()],
+    labels: [internalLabels => generateRule.checkForValidCustomLabels(internalLabels)]
   },
   project: {
     name: [generateRule.validCharacters('a-z 0-9 -'), generateRule.beginWith('a-z'), generateRule.endWith('a-z 0-9'), generateRule.length({
       max: 63
     }), generateRule.required()],
     labels: {
-      key: commonRules.k8sLabels.key,
+      key: [...commonRules.k8sLabels.key, internalLabels => generateRule.checkForValidCustomLabels(internalLabels)],
       value: commonRules.k8sLabels.value
     },
     params: {
@@ -350,7 +360,7 @@ const validationRules = {
     label: {
       key: [generateRule.validCharactersWithPrefix('a-z A-Z 0-9 - _ .'), generateRule.beginEndWith('a-z A-Z 0-9'), generateRule.length({
         max: 75
-      })],
+      }), internalLabels => generateRule.checkForValidCustomLabels(internalLabels)],
       value: generateRule.length({
         max: 255
       })
@@ -363,9 +373,15 @@ const validationRules = {
  * @function getValidationRules
  * @param {string} type - The property path to the list of validation rules.
  * @param {Array.<Object>} [additionalRules] - Additional rules to append.
- * @returns {Array.<Object>} the rule list of type `type` with `additionalRules` appended to it if provided.
+ * @param {Array.<Object>} [customData] - Additional data to be passed to the custom rule functions.
+ * @returns {Array.<Object>} The rule list of type `type` with `additionalRules` appended to it if provided.
  */
-const getValidationRules = (type, additionalRules) => {
-  return _lodash.default.chain(validationRules).get(type).defaultTo([]).cloneDeep().concat(_lodash.default.defaultTo(additionalRules, [])).value();
+const getValidationRules = (type, additionalRules, customData) => {
+  return _lodash.default.chain(validationRules).get(type).defaultTo([]).cloneDeep().map(rule => {
+    if (typeof rule === 'function') {
+      return rule(customData);
+    }
+    return rule;
+  }).concat(_lodash.default.defaultTo(additionalRules, [])).value();
 };
 exports.getValidationRules = getValidationRules;
