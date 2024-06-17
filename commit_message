@@ -1,6 +1,6 @@
 
 
-Create a new dist version 2.0.11
+Create a new dist version 2.0.12
 
 Collecting:
-- Fix [Jobs] Filtering through custom labels isn't working as intended (#286)
+- Impl [Models endpoints monitoring] Invocation graph (#288)
