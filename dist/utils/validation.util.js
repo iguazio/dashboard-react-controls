@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.required = exports.getValidationRules = exports.checkPatternsValidityAsync = exports.checkPatternsValidity = void 0;
+exports.required = exports.getValidationRules = exports.getInternalLabelsValidationRule = exports.checkPatternsValidityAsync = exports.checkPatternsValidity = void 0;
 var _lodash = _interopRequireWildcard(require("lodash"));
 var _constants = require("../constants");
 function _getRequireWildcardCache(e) { if ("function" != typeof WeakMap) return null; var r = new WeakMap(), t = new WeakMap(); return (_getRequireWildcardCache = function (e) { return e ? t : r; })(e); }
@@ -224,15 +224,6 @@ const generateRule = {
       label: _constants.validation.REQUIRED.LABEL,
       pattern: new RegExp('\\S')
     };
-  },
-  checkForValidCustomLabels: internalLabels => {
-    return {
-      name: 'customLabels',
-      label: 'System-defined labels cannot be modified.',
-      pattern: value => {
-        return !internalLabels.includes(value);
-      }
-    };
   }
 };
 const commonRules = {
@@ -325,15 +316,14 @@ const validationRules = {
     tag: [generateRule.validCharacters('a-z A-Z 0-9 - _ .'), generateRule.beginEndWith('a-z A-Z 0-9'), generateRule.length({
       max: 56
     })],
-    combobox: [generateRule.required()],
-    labels: [internalLabels => generateRule.checkForValidCustomLabels(internalLabels)]
+    combobox: [generateRule.required()]
   },
   project: {
     name: [generateRule.validCharacters('a-z 0-9 -'), generateRule.beginWith('a-z'), generateRule.endWith('a-z 0-9'), generateRule.length({
       max: 63
     }), generateRule.required()],
     labels: {
-      key: [...commonRules.k8sLabels.key, internalLabels => generateRule.checkForValidCustomLabels(internalLabels)],
+      key: commonRules.k8sLabels.key,
       value: commonRules.k8sLabels.value
     },
     params: {
@@ -360,7 +350,7 @@ const validationRules = {
     label: {
       key: [generateRule.validCharactersWithPrefix('a-z A-Z 0-9 - _ .'), generateRule.beginEndWith('a-z A-Z 0-9'), generateRule.length({
         max: 75
-      }), internalLabels => generateRule.checkForValidCustomLabels(internalLabels)],
+      })],
       value: generateRule.length({
         max: 255
       })
@@ -372,16 +362,27 @@ const validationRules = {
  * Returns the list of validation rules for `type`, optionally appending provided additional rules.
  * @function getValidationRules
  * @param {string} type - The property path to the list of validation rules.
- * @param {Array.<Object>} [additionalRules] - Additional rules to append.
- * @param {Array.<Object>} [customData] - Additional data to be passed to the custom rule functions.
+ * @param {Array.<Object> | Object} [additionalRules] - Additional rules or rule to append.
  * @returns {Array.<Object>} The rule list of type `type` with `additionalRules` appended to it if provided.
  */
-const getValidationRules = (type, additionalRules, customData) => {
-  return _lodash.default.chain(validationRules).get(type).defaultTo([]).cloneDeep().map(rule => {
-    if (typeof rule === 'function') {
-      return rule(customData);
-    }
-    return rule;
-  }).concat(_lodash.default.defaultTo(additionalRules, [])).value();
+const getValidationRules = (type, additionalRules) => {
+  return _lodash.default.chain(validationRules).get(type).defaultTo([]).cloneDeep().concat(_lodash.default.defaultTo(additionalRules, [])).value();
 };
+
+/**
+ * Creates a validation rule to ensure system-defined labels cannot be modified.
+ * @function getInternalLabelsValidationRule
+ * @param {string} internalLabels - An array of defined labels that should not be modified.
+ * @returns {Object} The rule that checks if a value is not in the internal labels.
+ */
 exports.getValidationRules = getValidationRules;
+const getInternalLabelsValidationRule = internalLabels => {
+  return {
+    name: 'customLabels',
+    label: 'System-defined labels cannot be modified.',
+    pattern: value => {
+      return !internalLabels.includes(value);
+    }
+  };
+};
+exports.getInternalLabelsValidationRule = getInternalLabelsValidationRule;

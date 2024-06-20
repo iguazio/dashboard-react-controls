@@ -263,7 +263,8 @@ const FormChipCell = _ref => {
   const validateChip = _ref3 => {
     let {
       key,
-      value
+      value,
+      disabled
     } = _ref3;
     const validateField = (value, field) => {
       const [newRules, isValidField] = (0, _validation.checkPatternsValidity)(validationRules[field].filter(rule => rule.pattern), value);
@@ -274,7 +275,7 @@ const FormChipCell = _ref => {
         label: rule.label
       }));
     };
-    return [validateField(key, 'key'), validateField(value, 'value')];
+    return disabled ? [null, null] : [validateField(key, 'key'), validateField(value, 'value')];
   };
   return /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
     className: chipsClassName,

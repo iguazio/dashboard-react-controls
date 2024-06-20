@@ -1,6 +1,7 @@
 
 
-Create a new dist version 2.0.12
+Create a new dist version 2.1.0
 
 Collecting:
-- Impl [Models endpoints monitoring] Invocation graph (#288)
+- Fix [Cross projects] change filters state for Error and Skipped (#291)
+- Fix [Batch run] unable to rerun batch job - blocked on 'Run Details' step (#290)
