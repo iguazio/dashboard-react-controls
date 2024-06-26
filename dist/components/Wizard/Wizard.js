@@ -115,7 +115,7 @@ const Wizard = _ref => {
     }
     defaultActions.push( /*#__PURE__*/(0, _jsxRuntime.jsx)(_Button.default, {
       id: "wizard-btn-next",
-      disabled: stepConfig.nextIsDisabled || isLastStep,
+      disabled: (stepConfig === null || stepConfig === void 0 ? void 0 : stepConfig.nextIsDisabled) || isLastStep,
       onClick: goToNextStep,
       label: 'Next',
       type: "button",

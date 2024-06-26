@@ -1,7 +1,7 @@
 
 
-Create a new dist version 2.1.0
+Create a new dist version 2.1.1
 
 Collecting:
-- Fix [Cross projects] change filters state for Error and Skipped (#291)
-- Fix [Batch run] unable to rerun batch job - blocked on 'Run Details' step (#290)
+- Impl [Models endpoints monitoring, metrics] Remove Metrics Color Randomization (#293)
+- Fix [Batch run] crash 'TypeError: Cannot read properties of undefined (#294)
