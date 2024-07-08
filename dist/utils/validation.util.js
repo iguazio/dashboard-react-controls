@@ -185,6 +185,13 @@ const generateRule = {
       pattern: new RegExp('^' + convertedPattern)
     };
   },
+  notContainCharacters: chars => {
+    return {
+      name: _constants.validation.NOT_CONTAIN.NAME,
+      label: _constants.validation.NOT_CONTAIN.LABEL + ': ' + convertToLabel(chars),
+      pattern: new RegExp('^[^' + convertToPattern(chars) + ']+$')
+    };
+  },
   maxLengthBetweenDelimiters: (delimiter, maxLength, delimiterDescription) => {
     return {
       name: 'labelsLength',
@@ -327,7 +334,7 @@ const validationRules = {
       value: commonRules.k8sLabels.value
     },
     params: {
-      key: [generateRule.beginEndNotWith('s')],
+      key: [generateRule.notContainCharacters('s')],
       value: [generateRule.beginEndNotWith('s')]
     },
     secrets: {

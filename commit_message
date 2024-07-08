@@ -1,7 +1,7 @@
 
 
-Create a new dist version 2.1.1
+Create a new dist version 2.1.2
 
 Collecting:
-- Impl [Models endpoints monitoring, metrics] Remove Metrics Color Randomization (#293)
-- Fix [Batch run] crash 'TypeError: Cannot read properties of undefined (#294)
+- Fix [Project Settings] Validation on parameter - trailing white spaces (#296)
+- Fix [UI] Tooltip doesn’t always hide on mouse out (#297)

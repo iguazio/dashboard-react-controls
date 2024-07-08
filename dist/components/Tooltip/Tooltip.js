@@ -54,7 +54,7 @@ const Tooltip = _ref => {
     setShow(false);
   };
   const handleMouseLeave = (0, _react.useCallback)(event => {
-    if (tooltipRef.current && !tooltipRef.current.contains(event.relatedTarget) && parentRef.current && !parentRef.current.contains(event.relatedTarget) || hidden) {
+    if (!tooltipRef.current || hidden || tooltipRef.current && !tooltipRef.current.contains(event.relatedTarget) && parentRef.current && !parentRef.current.contains(event.relatedTarget)) {
       setShow(false);
     }
   }, [hidden]);

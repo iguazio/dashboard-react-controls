@@ -78,6 +78,10 @@ const validation = exports.validation = {
     LABEL: 'No consecutive characters',
     NAME: 'noConsecutiveCharacters'
   },
+  NOT_CONTAIN: {
+    LABEL: 'Must not contain',
+    NAME: 'notContainCharacters'
+  },
   ONLY_AT_THE_BEGINNING: {
     LABEL: 'Only at the beginning',
     NAME: 'onlyAtTheBeginning'
