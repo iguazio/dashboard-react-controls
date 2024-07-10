@@ -1,7 +1,6 @@
 
 
-Create a new dist version 2.1.2
+Create a new dist version 2.1.3
 
 Collecting:
-- Fix [Project Settings] Validation on parameter - trailing white spaces (#296)
-- Fix [UI] Tooltip doesn’t always hide on mouse out (#297)
+- Fix [Models Endpoints Monitoring, Metrics] Percentage change calculation for Invocation graph (#299)
