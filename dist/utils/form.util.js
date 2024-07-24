@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.setFieldState = exports.parseObjectToKeyValue = exports.generateObjectFromKeyValue = exports.areFormValuesChanged = void 0;
+exports.setFieldState = exports.parseObjectToKeyValue = exports.isSubmitDisabled = exports.generateObjectFromKeyValue = exports.areFormValuesChanged = void 0;
 var _lodash = require("lodash");
 /*
 Copyright 2022 Iguazio Systems Ltd.
@@ -64,3 +64,7 @@ const parseObjectToKeyValue = function () {
   });
 };
 exports.parseObjectToKeyValue = parseObjectToKeyValue;
+const isSubmitDisabled = formState => {
+  return formState.submitting || formState.invalid && formState.submitFailed;
+};
+exports.isSubmitDisabled = isSubmitDisabled;

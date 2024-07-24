@@ -136,11 +136,12 @@ const generateRule = {
       pattern: new RegExp('[^' + convertToPattern(chars) + ']$')
     };
   },
-  beginEndWith: chars => {
+  beginEndWith: function (chars) {
+    let labelPrefix = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : '';
     const convertedPattern = convertToPattern(chars);
     return {
       name: _constants.validation.BEGIN_END_WITH.NAME,
-      label: _constants.validation.BEGIN_END_WITH.LABEL + ': ' + convertToLabel(chars),
+      label: labelPrefix + _constants.validation.BEGIN_END_WITH.LABEL + ': ' + convertToLabel(chars),
       pattern: new RegExp('^([' + convertedPattern + '].*)?[' + convertedPattern + ']$')
     };
   },
@@ -160,10 +161,11 @@ const generateRule = {
       pattern: new RegExp('^([' + convertedPattern + '])?[^' + convertedPattern + ']+$')
     };
   },
-  validCharacters: chars => {
+  validCharacters: function (chars) {
+    let labelPrefix = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : '';
     return {
       name: _constants.validation.VALID_CHARACTERS.NAME,
-      label: _constants.validation.VALID_CHARACTERS.LABEL + ': ' + convertToLabel(chars),
+      label: labelPrefix + _constants.validation.VALID_CHARACTERS.LABEL + ': ' + convertToLabel(chars),
       pattern: new RegExp('^[' + convertToPattern(chars) + ']+$')
     };
   },
@@ -213,14 +215,15 @@ const generateRule = {
       }
     };
   },
-  length: options => {
+  length: function (options) {
+    let labelPrefix = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : '';
     const min = Number.isSafeInteger(options.min) ? options.min : 0;
     const max = Number.isSafeInteger(options.max) ? options.max : '';
     if (min || max) {
       const label = 'Length – ' + (min ? 'min: ' + options.min + '\xa0\xa0' : '') + (max ? 'max: ' + options.max : '');
       return {
         name: 'length',
-        label: label,
+        label: labelPrefix + label,
         pattern: new RegExp('^[\\S\\s]{' + min + ',' + max + '}$')
       };
     }
@@ -260,19 +263,13 @@ const commonRules = {
     pattern: /^(?![^/]{254,}\/)/
   }],
   k8sLabels: {
-    value: [{
-      name: 'valueBeginEnd',
-      label: "[Value] ".concat(_constants.validation.BEGIN_END_WITH.LABEL, " : a\u2013z, A\u2013Z, 0\u20139"),
-      pattern: /^([^/]+\/)?([A-Za-z0-9][^/]*)?[A-Za-z0-9]$/
-    }, {
-      name: 'valueMaxLength',
-      label: '[Value] Max length - 63 characters',
-      pattern: /^([^/]+\/)?[^/]{1,63}$/
-    }, {
-      name: 'valueValidCharacters',
-      label: "[Value] ".concat(_constants.validation.VALID_CHARACTERS.LABEL, ": a\u2013z, A\u2013Z, 0\u20139, \u2013, _, ."),
-      pattern: /^[a-zA-Z0-9\-_.]+$/
-    }]
+    getValue: function () {
+      let withPrefix = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
+      let labelPrefix = withPrefix ? '[Value] ' : '';
+      return [generateRule.beginEndWith('a-z A-Z 0-9', labelPrefix), generateRule.length({
+        max: 63
+      }, labelPrefix), generateRule.validCharacters('a-z A-Z 0-9 - _ .', labelPrefix)];
+    }
   }
   // email: [
   //   generateRule.beginEndNotWith('@ .'),
@@ -331,7 +328,7 @@ const validationRules = {
     }), generateRule.required()],
     labels: {
       key: commonRules.k8sLabels.key,
-      value: commonRules.k8sLabels.value
+      value: commonRules.k8sLabels.getValue(true)
     },
     params: {
       key: [generateRule.notContainCharacters('s')],
@@ -343,7 +340,7 @@ const validationRules = {
   },
   nodeSelectors: {
     key: commonRules.prefixedQualifiedName,
-    value: commonRules.k8sLabels.value
+    value: commonRules.k8sLabels.getValue(false)
   },
   environmentVariables: {
     secretName: [generateRule.validCharacters('a-z A-Z 0-9 - _ .'), generateRule.beginEndWith('a-z A-Z 0-9'), generateRule.noConsecutiveCharacters('.., .–, –.'), generateRule.maxLengthBetweenDelimiters(/[\.\-\_]/, 63, 'periods'), generateRule.length({

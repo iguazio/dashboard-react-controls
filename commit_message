@@ -1,6 +1,7 @@
 
 
-Create a new dist version 2.1.3
+Create a new dist version 2.1.4
 
 Collecting:
-- Fix [Models Endpoints Monitoring, Metrics] Percentage change calculation for Invocation graph (#299)
+- Fix [Node Selector] Add validation to key:value as in mlrun (#302)
+- Fix [Feature Vectors] Unify the conditions for the 'Tag' field (#301)
