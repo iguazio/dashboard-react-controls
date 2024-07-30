@@ -30,15 +30,15 @@ import { ReactComponent as CloseIcon } from '../../images/close.svg'
 import './Modal.scss'
 
 const Modal = ({
-  actions,
+  actions = [],
   children,
   className,
   onClose,
-  previewText,
-  size,
-  show,
-  subTitle,
-  title
+  previewText = '',
+  size = MODAL_MD,
+  show = false,
+  subTitle = null,
+  title = ''
 }) => {
   const modalClassNames = classNames('modal', className, size && `modal-${size}`)
 
@@ -73,15 +73,6 @@ const Modal = ({
       </CSSTransition>
     </>
   )
-}
-
-Modal.defaultProps = {
-  actions: [],
-  previewText: '',
-  show: false,
-  size: MODAL_MD,
-  subTitle: null,
-  title: ''
 }
 
 Modal.propTypes = {

@@ -31,25 +31,24 @@ import { TERTIARY_BUTTON } from '../../constants'
 import { ReactComponent as Caret } from '../../images/dropdown.svg'
 
 import './formSelect.scss'
-import { debounce } from 'lodash'
 
 const FormSelect = ({
-  className,
-  density,
-  disabled,
-  hideSelectedOption,
-  label,
-  multiple,
+  className = '',
+  density = 'normal',
+  disabled = false,
+  hideSelectedOption = false,
+  label = '',
+  multiple = false,
   name,
   onChange,
   options,
   required,
-  search,
+  search = false,
   selectedItemAction,
-  scrollToView,
-  tooltip,
-  withoutBorder,
-  withSelectedIcon
+  scrollToView = true,
+  tooltip = '',
+  withoutBorder = false,
+  withSelectedIcon = true
 }) => {
   const { input, meta } = useField(name)
   const [isInvalid, setIsInvalid] = useState(false)
@@ -399,21 +398,6 @@ const FormSelect = ({
   )
 }
 
-FormSelect.defaultProps = {
-  className: '',
-  density: 'normal',
-  disabled: false,
-  hideSelectedOption: false,
-  label: '',
-  onClick: null,
-  search: false,
-  tooltip: '',
-  multiple: false,
-  scrollToView: true,
-  withoutBorder: false,
-  withSelectedIcon: true
-}
-
 FormSelect.propTypes = {
   className: PropTypes.string,
   density: PropTypes.oneOf(['dense', 'normal', 'medium', 'chunky']),
@@ -421,7 +405,6 @@ FormSelect.propTypes = {
   hideSelectedOption: PropTypes.bool,
   label: PropTypes.string,
   name: PropTypes.string.isRequired,
-  onClick: PropTypes.oneOfType([PropTypes.func, PropTypes.bool]),
   options: SELECT_OPTIONS.isRequired,
   search: PropTypes.bool,
   tooltip: PropTypes.string,

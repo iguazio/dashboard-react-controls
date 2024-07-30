@@ -27,7 +27,7 @@ import { useHiddenChipsBlock } from '../../../hooks'
 
 const HiddenChipsBlock = React.forwardRef(
   (
-    { chipClassNames, chipOptions, chips, handleShowElements, textOverflowEllipsis },
+    { chipClassNames, chipOptions, chips, handleShowElements, textOverflowEllipsis = false },
     { hiddenChipsCounterRef, hiddenChipsPopUpRef }
   ) => {
     const { hiddenChipsBlockClassNames } = useHiddenChipsBlock(
@@ -99,10 +99,6 @@ const HiddenChipsBlock = React.forwardRef(
     )
   }
 )
-
-HiddenChipsBlock.defaultProps = {
-  textOverflowEllipsis: false
-}
 
 HiddenChipsBlock.propTypes = {
   chipClassNames: PropTypes.string.isRequired,

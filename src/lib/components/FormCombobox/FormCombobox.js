@@ -37,27 +37,31 @@ import { ReactComponent as ExclamationMarkIcon } from '../../images/exclamation-
 import './formCombobox.scss'
 
 const FormCombobox = ({
-  comboboxClassName,
-  density,
-  disabled,
-  hideSearchInput,
-  inputDefaultValue,
-  inputPlaceholder,
+  comboboxClassName = '',
+  density = 'normal',
+  disabled = false,
+  hideSearchInput = false,
+  inputDefaultValue = '',
+  inputPlaceholder = '',
   invalidText,
-  label,
-  maxSuggestedMatches,
+  label = '',
+  maxSuggestedMatches = 1,
   name,
-  onBlur,
-  onChange,
-  onFocus,
-  required,
-  rules,
-  selectDefaultValue,
+  onBlur = null,
+  onChange = null,
+  onFocus = null,
+  required = false,
+  rules = [],
+  selectDefaultValue = {
+    label: '',
+    id: '',
+    className: ''
+  },
   selectOptions,
-  selectPlaceholder,
-  suggestionList,
-  validator,
-  withoutBorder
+  selectPlaceholder = '',
+  suggestionList = [],
+  validator = null,
+  withoutBorder = false
 }) => {
   const { input, meta } = useField(name)
   const [inputValue, setInputValue] = useState(inputDefaultValue)
@@ -464,31 +468,6 @@ const FormCombobox = ({
       )}
     </Field>
   )
-}
-
-FormCombobox.defaultProps = {
-  comboboxClassName: '',
-  density: 'normal',
-  disabled: false,
-  hideSearchInput: false,
-  inputDefaultValue: '',
-  inputPlaceholder: '',
-  label: '',
-  maxSuggestedMatches: 1,
-  onBlur: null,
-  onFocus: null,
-  onChange: null,
-  required: false,
-  rules: [],
-  selectDefaultValue: {
-    label: '',
-    id: '',
-    className: ''
-  },
-  selectPlaceholder: '',
-  suggestionList: [],
-  validator: null,
-  withoutBorder: false
 }
 
 FormCombobox.propTypes = {

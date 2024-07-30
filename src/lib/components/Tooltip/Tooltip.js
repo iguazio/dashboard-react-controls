@@ -25,7 +25,15 @@ import { isEveryObjectValueEmpty } from '../../utils/common.util'
 
 import './tooltip.scss'
 
-const Tooltip = ({ children, className, hidden, id, renderChildAsHtml, template, textShow }) => {
+const Tooltip = ({
+  children,
+  className,
+  hidden = false,
+  id = '',
+  renderChildAsHtml = false,
+  template,
+  textShow = false
+}) => {
   const [show, setShow] = useState(false)
   const [style, setStyle] = useState({})
 
@@ -39,15 +47,21 @@ const Tooltip = ({ children, className, hidden, id, renderChildAsHtml, template,
     setShow(false)
   }
 
-  const handleMouseLeave = useCallback((event) => {
-    if (
-      !tooltipRef.current || hidden ||
-      (tooltipRef.current && !tooltipRef.current.contains(event.relatedTarget) &&
-        parentRef.current && !parentRef.current.contains(event.relatedTarget))
-    ) {
-      setShow(false)
-    }
-  }, [hidden])
+  const handleMouseLeave = useCallback(
+    (event) => {
+      if (
+        !tooltipRef.current ||
+        hidden ||
+        (tooltipRef.current &&
+          !tooltipRef.current.contains(event.relatedTarget) &&
+          parentRef.current &&
+          !parentRef.current.contains(event.relatedTarget))
+      ) {
+        setShow(false)
+      }
+    },
+    [hidden]
+  )
 
   const handleMouseEnter = useCallback(
     (event) => {
@@ -58,13 +72,13 @@ const Tooltip = ({ children, className, hidden, id, renderChildAsHtml, template,
           (textShow
             ? true
             : !child
-            ? false
-            : child.nodeType !== Node.TEXT_NODE ||
-              /*
+              ? false
+              : child.nodeType !== Node.TEXT_NODE ||
+                /*
             If the child node is a text node and the text of the child node inside the container is greater than the width of the container, then show tooltip.
           */
-              (child.nodeType === Node.TEXT_NODE &&
-                parentRef.current.scrollWidth > parentRef.current.offsetWidth))
+                (child.nodeType === Node.TEXT_NODE &&
+                  parentRef.current.scrollWidth > parentRef.current.offsetWidth))
 
         setShow(show)
 
@@ -72,10 +86,10 @@ const Tooltip = ({ children, className, hidden, id, renderChildAsHtml, template,
           if (show) {
             let { height, top, bottom } = parentRef?.current?.getBoundingClientRect() ?? {}
             const { height: tooltipHeight, width: tooltipWidth } =
-            tooltipRef.current?.getBoundingClientRect() ?? {
-              height: 0,
-              width: 0
-            }
+              tooltipRef.current?.getBoundingClientRect() ?? {
+                height: 0,
+                width: 0
+              }
             const leftPosition = event.x - (event.x + tooltipWidth - window.innerWidth + offset)
             const left =
               event.x + tooltipWidth + offset > window.innerWidth
@@ -188,13 +202,6 @@ const Tooltip = ({ children, className, hidden, id, renderChildAsHtml, template,
         )}
     </>
   )
-}
-
-Tooltip.defaultProps = {
-  hidden: false,
-  id: '',
-  renderChildAsHtml: false,
-  textShow: false
 }
 
 Tooltip.propTypes = {

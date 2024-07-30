@@ -32,20 +32,27 @@ import { useChipCell } from '../../hooks'
 import './formChipCell.scss'
 
 const FormChipCell = ({
-  chipOptions,
-  className,
-  delimiter,
+  chipOptions = {
+    background: 'purple',
+    boldValue: false,
+    borderRadius: 'primary',
+    borderColor: 'transparent',
+    density: 'dense',
+    font: 'purple'
+  },
+  className = '',
+  delimiter = null,
   formState,
   initialValues,
-  isEditable,
-  label,
+  isEditable = false,
+  label = null,
   name,
-  onClick,
-  shortChips,
-  validationRules,
-  validator,
+  onClick = () => {},
+  shortChips = false,
+  validationRules = {},
+  validator = null,
   onExitEditModeCallback,
-  visibleChipsMaxLength
+  visibleChipsMaxLength = null
 }) => {
   const chipsClassName = classnames('chips', className)
   const {
@@ -191,7 +198,10 @@ const FormChipCell = ({
         setEditConfig((prevState) => {
           const firstChipIsSelected = prevState.chipIndex === 0
 
-          isChipNotEmpty && firstChipIsSelected && onExitEditModeCallback && onExitEditModeCallback()
+          isChipNotEmpty &&
+            firstChipIsSelected &&
+            onExitEditModeCallback &&
+            onExitEditModeCallback()
 
           return {
             chipIndex: firstChipIsSelected ? null : prevState.chipIndex - 1,
@@ -208,7 +218,9 @@ const FormChipCell = ({
       if (
         (editConfig.chipIndex > 0 && editConfig.chipIndex < fields.value.length - 1) ||
         (fields.value.length > 1 && editConfig.chipIndex === 0 && nameEvent !== TAB_SHIFT) ||
-        (fields.value.length > 1 && editConfig.chipIndex === fields.value.length - 1 && nameEvent !== TAB)
+        (fields.value.length > 1 &&
+          editConfig.chipIndex === fields.value.length - 1 &&
+          nameEvent !== TAB)
       ) {
         event && event.preventDefault()
       }
@@ -228,7 +240,11 @@ const FormChipCell = ({
       if (isEditable) {
         const { clientX: pointerCoordinateX, clientY: pointerCoordinateY } = event
         let isKeyClicked = false
-        const isClickedInsideInputElement = (pointerCoordinateX, pointerCoordinateY, inputElement) => {
+        const isClickedInsideInputElement = (
+          pointerCoordinateX,
+          pointerCoordinateY,
+          inputElement
+        ) => {
           if (inputElement) {
             const {
               top: topPosition,
@@ -366,26 +382,6 @@ const FormChipCell = ({
       </div>
     </div>
   )
-}
-
-FormChipCell.defaultProps = {
-  chipOptions: {
-    background: 'purple',
-    boldValue: false,
-    borderRadius: 'primary',
-    borderColor: 'transparent',
-    density: 'dense',
-    font: 'purple'
-  },
-  className: '',
-  delimiter: null,
-  isEditable: false,
-  label: null,
-  onClick: () => {},
-  shortChips: false,
-  validationRules: {},
-  validator: null,
-  visibleChipsMaxLength: null
 }
 
 FormChipCell.propTypes = {

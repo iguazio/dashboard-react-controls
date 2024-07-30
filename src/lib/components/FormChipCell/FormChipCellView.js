@@ -34,7 +34,14 @@ import { ReactComponent as Add } from '../../images/add.svg'
 const FormChipCellView = React.forwardRef(
   (
     {
-      chipOptions,
+      chipOptions = {
+        background: 'purple',
+        boldValue: false,
+        borderRadius: 'primary',
+        borderColor: 'transparent',
+        density: 'dense',
+        font: 'purple'
+      },
       chips,
       editConfig,
       formState,
@@ -43,15 +50,15 @@ const FormChipCellView = React.forwardRef(
       handleRemoveChip,
       handleShowElements,
       handleToEditMode,
-      isEditable,
+      isEditable = false,
       name,
       setChipsSizes,
       setEditConfig,
-      shortChips,
+      shortChips = false,
       showChips,
       showHiddenChips,
       validateFields,
-      validationRules
+      validationRules = {}
     },
     { chipsCellRef, chipsWrapperRef, hiddenChipsCounterRef, hiddenChipsPopUpRef }
   ) => {
@@ -192,20 +199,6 @@ const FormChipCellView = React.forwardRef(
     )
   }
 )
-
-FormChipCellView.defaultProps = {
-  chipOptions: {
-    background: 'purple',
-    boldValue: false,
-    borderRadius: 'primary',
-    borderColor: 'transparent',
-    density: 'dense',
-    font: 'purple'
-  },
-  isEditable: false,
-  shortChips: false,
-  validationRules: {}
-}
 
 FormChipCellView.propTypes = {
   chipOptions: CHIP_OPTIONS,

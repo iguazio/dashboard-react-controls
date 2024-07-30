@@ -31,7 +31,7 @@ const arrowLength = parseInt(tipStyle.arrowlength)
 const iconLength = parseInt(tipStyle.iconlength)
 const minTextLength = 40
 
-const Tip = ({ className, text, withExclamationMark }) => {
+const Tip = ({ className = '', text, withExclamationMark }) => {
   const [isShow, setIsShow] = useState(false)
   const [tipClassName, setTipClassName] = useState('tip_top tip_left')
 
@@ -50,7 +50,7 @@ const Tip = ({ className, text, withExclamationMark }) => {
   }, [])
 
   useEffect(() => {
-    if(isShow) {
+    if (isShow) {
       const iconRect = iconRef.current.getBoundingClientRect()
       const tipRect = tipBodyRef.current.getBoundingClientRect()
       const widthPosition = iconRect.left > tipRect.width - arrowOffset ? 'tip_left' : 'tip_right'
@@ -67,9 +67,9 @@ const Tip = ({ className, text, withExclamationMark }) => {
       }
 
       tipBodyRef.current.style.top =
-          heightPosition === 'tip_top'
-              ? `${iconRect.top - tipRect.height - arrowLength}px`
-              : `${iconRect.bottom + arrowLength}px`
+        heightPosition === 'tip_top'
+          ? `${iconRect.top - tipRect.height - arrowLength}px`
+          : `${iconRect.bottom + arrowLength}px`
     }
   }, [isShow])
 
@@ -110,10 +110,6 @@ const Tip = ({ className, text, withExclamationMark }) => {
       )}
     </div>
   )
-}
-
-Tip.defaultProps = {
-  className: ''
 }
 
 Tip.propTypes = {

@@ -24,7 +24,14 @@ import { ReactComponent as Arrow } from '../../../images/range-arrow-small.svg'
 
 import './InputNumberButtons.scss'
 
-const InputNumberButtons = ({ disabled, min, max, onChange, step, value }) => {
+const InputNumberButtons = ({
+  disabled = false,
+  min = null,
+  max = null,
+  onChange,
+  step = 1,
+  value
+}) => {
   const handleIncrease = (event) => {
     event.preventDefault()
     if (max && value >= max) return
@@ -72,13 +79,6 @@ const InputNumberButtons = ({ disabled, min, max, onChange, step, value }) => {
       </div>
     </div>
   )
-}
-
-InputNumberButtons.defaultProps = {
-  disabled: false,
-  min: null,
-  max: null,
-  step: 1
 }
 
 InputNumberButtons.propTypes = {

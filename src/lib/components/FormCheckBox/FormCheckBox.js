@@ -23,11 +23,11 @@ import './formCheckBox.scss'
 
 const FormCheckBox = ({
   children,
-  className,
-  highlightLabel,
-  label,
+  className = '',
+  highlightLabel = false,
+  label = '',
   name,
-  readOnly,
+  readOnly = false,
   ...inputProps
 }) => {
   const formFieldClassNames = classNames(
@@ -61,13 +61,6 @@ const FormCheckBox = ({
       }}
     </Field>
   )
-}
-
-FormCheckBox.defaultProps = {
-  className: '',
-  highlightLabel: false,
-  label: '',
-  readOnly: false
 }
 
 FormCheckBox.propTypes = {

@@ -28,19 +28,25 @@ const FormChip = React.forwardRef(
     {
       chip,
       chipIndex,
-      chipOptions,
+      chipOptions = {
+        background: 'purple',
+        boldValue: false,
+        borderRadius: 'primary',
+        borderColor: 'transparent',
+        density: 'dense',
+        font: 'purple'
+      },
       editConfig,
       handleEditChip,
       handleRemoveChip,
       handleToEditMode,
-      isDeleteMode,
-      isEditable,
-      keyName,
+      isEditable = false,
+      keyName = '',
       meta,
       setChipsSizes,
       setEditConfig,
-      validationRules,
-      valueName
+      validationRules = {},
+      valueName = ''
     },
     ref
   ) => {
@@ -80,22 +86,6 @@ const FormChip = React.forwardRef(
   }
 )
 
-FormChip.defaultProps = {
-  chipOptions: {
-    background: 'purple',
-    boldValue: false,
-    borderRadius: 'primary',
-    borderColor: 'transparent',
-    density: 'dense',
-    font: 'purple'
-  },
-  isDeleteMode: false,
-  isEditable: false,
-  keyName: '',
-  validationRules: {},
-  valueName: ''
-}
-
 FormChip.propTypes = {
   chip: PropTypes.object.isRequired,
   chipIndex: PropTypes.number.isRequired,
@@ -104,7 +94,6 @@ FormChip.propTypes = {
   handleEditChip: PropTypes.func.isRequired,
   handleRemoveChip: PropTypes.func.isRequired,
   handleToEditMode: PropTypes.func.isRequired,
-  isDeleteMode: PropTypes.bool,
   isEditable: PropTypes.bool,
   keyName: PropTypes.string,
   meta: PropTypes.object.isRequired,

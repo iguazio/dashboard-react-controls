@@ -30,19 +30,19 @@ import './formTextarea.scss'
 const FormTextarea = React.forwardRef(
   (
     {
-      className,
-      disabled,
-      focused,
-      iconClass,
-      invalidText,
-      label,
-      maxLength,
+      className = '',
+      disabled = false,
+      focused = false,
+      iconClass = '',
+      invalidText = 'This field is invalid',
+      label = '',
+      maxLength = null,
       name,
-      onBlur,
-      onChange,
-      required,
+      onBlur = () => {},
+      onChange = () => {},
+      required = false,
       textAreaIcon,
-      tip,
+      tip = '',
       withoutBorder,
       ...textareaProps
     },
@@ -169,23 +169,6 @@ const FormTextarea = React.forwardRef(
   }
 )
 
-FormTextarea.defaultProps = {
-  className: '',
-  disabled: false,
-  focused: false,
-  iconClass: '',
-  textAreaIcon: null,
-  invalidText: 'This field is invalid',
-  label: '',
-  maxLength: null,
-  onBlur: () => {},
-  onChange: () => {},
-  placeholder: '',
-  required: false,
-  rows: 3,
-  tip: ''
-}
-
 FormTextarea.propTypes = {
   className: PropTypes.string,
   disabled: PropTypes.bool,
@@ -198,7 +181,6 @@ FormTextarea.propTypes = {
   name: PropTypes.string.isRequired,
   onBlur: PropTypes.func,
   onChange: PropTypes.func,
-  placeholder: PropTypes.string,
   required: PropTypes.bool,
   tip: PropTypes.string
 }

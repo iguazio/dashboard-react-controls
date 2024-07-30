@@ -30,15 +30,15 @@ import './Wizard.scss'
 
 const Wizard = ({
   children,
-  className,
-  getActions,
+  className = '',
+  getActions = null,
   isWizardOpen,
   location,
   onWizardResolve,
-  previewText,
-  size,
-  stepsConfig,
-  subTitle,
+  previewText = '',
+  size = MODAL_MD,
+  stepsConfig = [],
+  subTitle = null,
   title
 }) => {
   const wizardClasses = classNames('wizard-form', className)
@@ -189,20 +189,9 @@ const Wizard = ({
   )
 }
 
-Wizard.defaultProps = {
-  className: '',
-  getActions: null,
-  confirmClose: false,
-  previewText: '',
-  size: MODAL_MD,
-  stepsConfig: [],
-  subTitle: null
-}
-
 Wizard.propsTypes = {
   className: PropTypes.string,
   getActions: PropTypes.func,
-  confirmClose: PropTypes.bool,
   isWizardOpen: PropTypes.bool.isRequired,
   location: PropTypes.string.isRequired,
   onWizardResolve: PropTypes.func.isRequired,

@@ -25,7 +25,7 @@ import { WIZARD_STEPS_CONFIG } from '../../../types'
 
 import './WizardSteps.scss'
 
-const WizardSteps = ({ activeStepNumber, firstDisabledStepIdx, jumpToStep, steps }) => {
+const WizardSteps = ({ activeStepNumber, firstDisabledStepIdx = null, jumpToStep, steps }) => {
   const getStepClassNames = (idx, invalid) =>
     classNames(
       'wizard-steps__item',
@@ -56,10 +56,6 @@ const WizardSteps = ({ activeStepNumber, firstDisabledStepIdx, jumpToStep, steps
       })}
     </div>
   )
-}
-
-WizardSteps.defaultProps = {
-  firstDisabledStepIdx: null
 }
 
 WizardSteps.propTypes = {

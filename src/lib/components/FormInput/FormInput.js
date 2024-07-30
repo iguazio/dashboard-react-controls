@@ -36,33 +36,45 @@ import { ReactComponent as WarningIcon } from '../../images/warning.svg'
 
 import './formInput.scss'
 
+const defaultProps = {
+  iconClick: () => {},
+  link: { show: '', value: '' },
+  onBlur: () => {},
+  onChange: () => {},
+  onKeyDown: () => {},
+  validator: () => {},
+  rules: []
+}
+
 const FormInput = React.forwardRef(
   (
     {
-      async,
-      className,
-      customRequiredLabel,
-      density,
-      disabled,
-      focused,
-      iconClass,
-      iconClick,
-      inputIcon,
-      invalidText,
-      label,
-      link,
+      async = false,
+      className = '',
+      customRequiredLabel = '',
+      density = 'normal',
+      disabled = false,
+      focused = false,
+      iconClass = '',
+      iconClick = defaultProps.iconClick,
+      inputIcon = null,
+      invalidText = 'This field is invalid',
+      label = '',
+      link = defaultProps.link,
       name,
-      onBlur,
-      onChange,
+      onBlur = defaultProps.onBlur,
+      onChange = defaultProps.onChange,
       onFocus,
-      onKeyDown,
-      pattern,
-      required,
-      suggestionList,
-      tip,
-      validationRules: rules,
-      validator,
-      withoutBorder,
+      onKeyDown = defaultProps.onKeyDown,
+      pattern = null,
+      required = false,
+      suggestionList = [],
+      step = '1',
+      tip = '',
+      type = 'text',
+      validationRules: rules = defaultProps.rules,
+      validator = defaultProps.validator,
+      withoutBorder = false,
       ...inputProps
     },
     ref
@@ -224,7 +236,7 @@ const FormInput = React.forwardRef(
       }
 
       if (isEmpty(validationError)) {
-        if (inputProps.type === 'number') {
+        if (type === 'number') {
           if (inputProps.max && +valueToValidate > +inputProps.max) {
             validationError = {
               name: 'maxValue',
@@ -278,7 +290,7 @@ const FormInput = React.forwardRef(
     }, 400)
 
     const parseField = (val) => {
-      return inputProps.type === 'number' && val ? parseFloat(val) || val : val
+      return type === 'number' && val ? parseFloat(val) || val : val
     }
 
     return (
@@ -362,10 +374,8 @@ const FormInput = React.forwardRef(
                     </span>
                   )}
                 </div>
-                {inputProps.type === 'number' && (
-                  <InputNumberButtons
-                    {...{ ...inputProps, step: +inputProps.step, ...input, disabled }}
-                  />
+                {type === 'number' && (
+                  <InputNumberButtons {...{ ...inputProps, step: +step, ...input, disabled }} />
                 )}
               </div>
               {suggestionList?.length > 0 && isFocused && (
@@ -401,37 +411,6 @@ const FormInput = React.forwardRef(
     )
   }
 )
-
-FormInput.defaultProps = {
-  async: false,
-  className: '',
-  customRequiredLabel: '',
-  density: 'normal',
-  disabled: false,
-  focused: false,
-  iconClass: '',
-  iconClick: () => {},
-  inputIcon: null,
-  invalidText: 'This field is invalid',
-  label: '',
-  link: { show: '', value: '' },
-  min: null,
-  max: null,
-  onBlur: () => {},
-  onChange: () => {},
-  onKeyDown: () => {},
-  pattern: null,
-  placeholder: '',
-  required: false,
-  step: '1',
-  suggestionList: [],
-  tip: '',
-  type: 'text',
-  validationRules: [],
-  validator: () => {},
-  value: '',
-  withoutBorder: false
-}
 
 FormInput.propTypes = {
   async: PropTypes.bool,

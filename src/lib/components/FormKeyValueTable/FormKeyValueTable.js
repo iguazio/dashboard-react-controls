@@ -26,26 +26,26 @@ import { useFormTable } from '../../hooks'
 import { INPUT_VALIDATION_RULES } from '../../types'
 
 const FormKeyValueTable = ({
-  actionButtonId,
-  addNewItemLabel,
-  className,
-  defaultKey,
-  disabled,
-  exitEditModeTriggerItem,
+  actionButtonId = '',
+  addNewItemLabel = 'Add new item',
+  className = '',
+  defaultKey = '',
+  disabled = false,
+  exitEditModeTriggerItem = null,
   fieldsPath,
   formState,
-  isKeyEditable,
-  isKeyRequired,
-  isValueRequired,
-  keyHeader,
-  keyLabel,
-  keyOptions,
-  keyValidationRules,
-  onExitEditModeCallback,
-  valueHeader,
-  valueLabel,
-  valueType,
-  valueValidationRules
+  isKeyEditable = true,
+  isKeyRequired = true,
+  isValueRequired = true,
+  keyHeader = 'Key',
+  keyLabel = 'Key',
+  keyOptions = null,
+  keyValidationRules = [],
+  onExitEditModeCallback = () => {},
+  valueHeader = 'Value',
+  valueLabel = 'Value',
+  valueType = 'text',
+  valueValidationRules = []
 }) => {
   const tableClassNames = classnames(
     'form-table form-key-value-table',
@@ -192,27 +192,6 @@ const FormKeyValueTable = ({
       </FieldArray>
     </div>
   )
-}
-
-FormKeyValueTable.defaultProps = {
-  actionButtonId: '',
-  addNewItemLabel: 'Add new item',
-  className: '',
-  defaultKey: '',
-  disabled: false,
-  exitEditModeTriggerItem: null,
-  isKeyEditable: true,
-  isKeyRequired: true,
-  isValueRequired: true,
-  keyHeader: 'Key',
-  keyLabel: 'Key',
-  keyOptions: null,
-  keyValidationRules: [],
-  onExitEditModeCallback: () => {},
-  valueHeader: 'Value',
-  valueLabel: 'Value',
-  valueType: 'text',
-  valueValidationRules: []
 }
 
 FormKeyValueTable.propTypes = {

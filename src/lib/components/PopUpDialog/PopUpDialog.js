@@ -33,14 +33,14 @@ const PopUpDialog = React.forwardRef(
   (
     {
       children,
-      className,
-      closePopUp,
-      customPosition,
-      headerIsHidden,
-      headerText,
-      showPopUpDialog,
-      style,
-      tooltipText
+      className = '',
+      closePopUp = () => {},
+      customPosition = {},
+      headerIsHidden = false,
+      headerText = '',
+      showPopUpDialog = true,
+      style = {},
+      tooltipText = ''
     },
     ref
   ) => {
@@ -131,7 +131,8 @@ const PopUpDialog = React.forwardRef(
 
     useEffect(() => {
       const throttledCalculatedCustomPopUpPosition = throttle(calculateCustomPopUpPosition, 100, {
-        trailing: true, leading: true
+        trailing: true,
+        leading: true
       })
       window.addEventListener('resize', throttledCalculatedCustomPopUpPosition)
 
@@ -171,17 +172,6 @@ const PopUpDialog = React.forwardRef(
       : null
   }
 )
-
-PopUpDialog.defaultProps = {
-  className: '',
-  closePopUp: () => {},
-  customPosition: {},
-  headerIsHidden: false,
-  headerText: '',
-  showPopUpDialog: true,
-  style: {},
-  tooltipText: ''
-}
 
 PopUpDialog.propTypes = {
   className: PropTypes.string,

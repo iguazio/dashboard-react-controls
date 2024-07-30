@@ -26,7 +26,14 @@ import { ReactComponent as Checkmark } from '../../images/checkmark.svg'
 
 import './selectOption.scss'
 
-const SelectOption = ({ item, name, onClick, multiple, selectedId, withSelectedIcon }) => {
+const SelectOption = ({
+  item,
+  name,
+  onClick = () => {},
+  multiple = false,
+  selectedId,
+  withSelectedIcon = true
+}) => {
   const selectClassName = classnames(
     'select__item',
     multiple && 'multiple',
@@ -37,7 +44,12 @@ const SelectOption = ({ item, name, onClick, multiple, selectedId, withSelectedI
   if (multiple) {
     return (
       <div data-testid="select-checkbox" className={selectClassName}>
-        <FormCheckBox name={name} value={item.id} label={item.label} disabled={item.disabled || false}>
+        <FormCheckBox
+          name={name}
+          value={item.id}
+          label={item.label}
+          disabled={item.disabled || false}
+        >
           {item.status && <span className={`state-${item.status}-job status`} />}
         </FormCheckBox>
       </div>
@@ -82,12 +94,6 @@ const SelectOption = ({ item, name, onClick, multiple, selectedId, withSelectedI
       </div>
     </li>
   )
-}
-
-SelectOption.defaultProps = {
-  onClick: () => {},
-  multiple: false,
-  withSelectedIcon: true
 }
 
 SelectOption.propTypes = {

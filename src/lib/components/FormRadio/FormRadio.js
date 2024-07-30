@@ -24,7 +24,7 @@ import TextTooltipTemplate from '../TooltipTemplate/TextTooltipTemplate'
 
 import './FormRadio.scss'
 
-const FormRadio = ({ className, name, label, readOnly, tooltip, ...inputProps }) => {
+const FormRadio = ({ className = '', name, label, readOnly = false, tooltip, ...inputProps }) => {
   const formFieldClassNames = classNames(
     'form-field-radio',
     readOnly && 'form-field-radio_readonly',
@@ -60,11 +60,6 @@ const FormRadio = ({ className, name, label, readOnly, tooltip, ...inputProps })
       )}
     </Field>
   )
-}
-
-FormRadio.defaultProps = {
-  className: '',
-  readOnly: false
 }
 
 FormRadio.propTypes = {

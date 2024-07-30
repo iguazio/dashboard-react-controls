@@ -31,13 +31,17 @@ import { ReactComponent as Close } from '../../../images/close.svg'
 
 import './newChipForm.scss'
 
+const defaultProps = {
+  rules: {}
+}
+
 const NewChipForm = React.forwardRef(
   (
     {
       chip,
       chipIndex,
       chipOptions,
-      className,
+      className = '',
       editConfig,
       handleRemoveChip,
       isEditable,
@@ -45,7 +49,7 @@ const NewChipForm = React.forwardRef(
       meta,
       onChange,
       setEditConfig,
-      validationRules: rules,
+      validationRules: rules = defaultProps.rules,
       valueName
     },
     ref
@@ -388,11 +392,6 @@ const NewChipForm = React.forwardRef(
     )
   }
 )
-
-NewChipForm.defaultProps = {
-  className: '',
-  validationRules: {}
-}
 
 NewChipForm.propTypes = {
   chip: PropTypes.object.isRequired,

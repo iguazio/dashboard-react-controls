@@ -20,7 +20,7 @@ import { CSSTransition } from 'react-transition-group'
 
 import './Backdrop.scss'
 
-const Backdrop = ({ duration = 300, show, onClose }) => {
+const Backdrop = ({ duration = 300, show = false, onClose }) => {
   return (
     <CSSTransition
       in={show}
@@ -32,11 +32,6 @@ const Backdrop = ({ duration = 300, show, onClose }) => {
       <div className="backdrop" onClick={onClose}></div>
     </CSSTransition>
   )
-}
-
-Backdrop.defaultProps = {
-  duration: 300,
-  show: false
 }
 
 Backdrop.propTypes = {

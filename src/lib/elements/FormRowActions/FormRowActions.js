@@ -31,13 +31,13 @@ import { ReactComponent as Checkmark } from '../../images/checkmark2.svg'
 
 const FormRowActions = ({
   applyChanges,
-  deleteButtonIsHidden,
+  deleteButtonIsHidden = false,
   deleteRow,
-  disabled,
+  disabled = false,
   discardOrDelete,
-  editingItem,
+  editingItem = null,
   fieldsPath,
-  hidden,
+  hidden = false,
   index
 }) => {
   return hidden ? (
@@ -55,7 +55,7 @@ const FormRowActions = ({
             <Checkmark />
           </RoundedIcon>
           <RoundedIcon
-            id='delete-discard-btn'
+            id="delete-discard-btn"
             onClick={(event) => discardOrDelete(event, fieldsPath, index)}
             tooltipText={editingItem.ui?.isNew ? 'Delete' : 'Discard changes'}
             disabled={disabled}
@@ -93,13 +93,6 @@ const FormRowActions = ({
       )}
     </div>
   )
-}
-
-FormRowActions.defaultProps = {
-  deleteButtonIsHidden: false,
-  disabled: false,
-  editingItem: null,
-  hidden: false
 }
 
 FormRowActions.propTypes = {

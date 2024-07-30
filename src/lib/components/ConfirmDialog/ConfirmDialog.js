@@ -30,16 +30,16 @@ import {
 import './confirmDialog.scss'
 
 const ConfirmDialog = ({
-  cancelButton,
+  cancelButton = null,
   children,
-  className,
+  className = '',
   closePopUp,
-  confirmButton,
-  customPosition,
-  header,
+  confirmButton = null,
+  customPosition = {},
+  header = '',
   isOpen,
-  message,
-  messageOnly,
+  message = '',
+  messageOnly = false,
   onResolve
 }) => {
   const messageClassNames = classnames(
@@ -96,16 +96,6 @@ const ConfirmDialog = ({
       </PopUpDialog>
     )
   )
-}
-
-ConfirmDialog.defaultProps = {
-  cancelButton: null,
-  className: '',
-  confirmButton: null,
-  customPosition: {},
-  header: '',
-  message: '',
-  messageOnly: false
 }
 
 ConfirmDialog.propTypes = {

@@ -19,7 +19,7 @@ import PropTypes from 'prop-types'
 
 import './producerTooltipTemplate.scss'
 
-const ProducerTooltipTemplate = ({ kind, owner }) => {
+const ProducerTooltipTemplate = ({ kind = '', owner = '' }) => {
   return (
     <div className="tooltip-container">
       <div className="tooltip-container__kind">
@@ -30,11 +30,6 @@ const ProducerTooltipTemplate = ({ kind, owner }) => {
       </div>
     </div>
   )
-}
-
-ProducerTooltipTemplate.defaultProps = {
-  kind: '',
-  owner: ''
 }
 
 ProducerTooltipTemplate.propTypes = {
