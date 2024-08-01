@@ -147,7 +147,7 @@ const FormInput = React.forwardRef(
       setValidationRules(() => {
         isRequiredRulePresentRef.current = false
 
-        return rules.map((rule) => {
+        return rules.map(rule => {
           if (rule.name === ValidationConstants.REQUIRED.NAME) {
             isRequiredRulePresentRef.current = true
           }
@@ -157,7 +157,7 @@ const FormInput = React.forwardRef(
             isValid:
               !errorsRef.current || !Array.isArray(errorsRef.current)
                 ? true
-                : !errorsRef.current.some((err) => err.name === rule.name)
+                : !errorsRef.current.some(err => err.name === rule.name)
           }
         })
       })
@@ -169,11 +169,11 @@ const FormInput = React.forwardRef(
       })
     }
 
-    const isValueEmptyAndValid = (value) => {
+    const isValueEmptyAndValid = value => {
       return (!value && !required) || disabled
     }
 
-    const handleInputBlur = (event) => {
+    const handleInputBlur = event => {
       input.onBlur && input.onBlur(event)
 
       if (!event.relatedTarget || !event.relatedTarget?.closest('.form-field__suggestion-list')) {
@@ -181,18 +181,18 @@ const FormInput = React.forwardRef(
         onBlur && onBlur(event)
       }
     }
-    const handleInputFocus = (event) => {
+    const handleInputFocus = event => {
       input.onFocus && input.onFocus(event)
       onFocus && onFocus(event)
       setIsFocused(true)
     }
 
-    const handleInputKeyDown = (event) => {
+    const handleInputKeyDown = event => {
       input.onKeyDown && input.onKeyDown(event)
       onKeyDown && onKeyDown(event)
     }
 
-    const handleScroll = (event) => {
+    const handleScroll = event => {
       if (inputRef.current && inputRef.current.contains(event.target)) return
 
       if (
@@ -203,7 +203,7 @@ const FormInput = React.forwardRef(
       }
     }
 
-    const handleSuggestionClick = (item) => {
+    const handleSuggestionClick = item => {
       input.onChange && input.onChange(item)
       setIsFocused(false)
       onBlur()
@@ -211,7 +211,7 @@ const FormInput = React.forwardRef(
 
     const toggleValidationRulesMenu = () => {
       inputRef.current.focus()
-      setShowValidationRules((state) => !state)
+      setShowValidationRules(state => !state)
     }
 
     const validateField = (value, allValues) => {
@@ -228,10 +228,10 @@ const FormInput = React.forwardRef(
         }
       } else if (!isEmpty(rules) && !async) {
         const [newRules, isValidField] = checkPatternsValidity(rules, valueToValidate)
-        const invalidRules = newRules.filter((rule) => !rule.isValid)
+        const invalidRules = newRules.filter(rule => !rule.isValid)
 
         if (!isValidField) {
-          validationError = invalidRules.map((rule) => ({ name: rule.name, label: rule.label }))
+          validationError = invalidRules.map(rule => ({ name: rule.name, label: rule.label }))
         }
       }
 
@@ -277,10 +277,10 @@ const FormInput = React.forwardRef(
       if (!isEmpty(rules)) {
         const [newRules, isValidField] = await checkPatternsValidityAsync(rules, valueToValidate)
 
-        const invalidRules = newRules.filter((rule) => !rule.isValid)
+        const invalidRules = newRules.filter(rule => !rule.isValid)
 
         if (!isValidField) {
-          validationError = invalidRules.map((rule) => ({ name: rule.name, label: rule.label }))
+          validationError = invalidRules.map(rule => ({ name: rule.name, label: rule.label }))
         }
       }
 
@@ -289,7 +289,7 @@ const FormInput = React.forwardRef(
       return validationError
     }, 400)
 
-    const parseField = (val) => {
+    const parseField = val => {
       return type === 'number' && val ? parseFloat(val) || val : val
     }
 
@@ -309,7 +309,7 @@ const FormInput = React.forwardRef(
                     htmlFor={input.name}
                   >
                     {label}
-                    {(required || validationRules.find((rule) => rule.name === 'required')) && (
+                    {(required || validationRules.find(rule => rule.name === 'required')) && (
                       <span className="form-field__label-mandatory"> *</span>
                     )}
                   </label>
@@ -318,7 +318,7 @@ const FormInput = React.forwardRef(
                       <Tooltip template={<TextTooltipTemplate text={link.url || typedValue} />}>
                         <a
                           href={link.url || typedValue}
-                          onClick={(event) => event.stopPropagation()}
+                          onClick={event => event.stopPropagation()}
                           target="_blank"
                           rel="noreferrer"
                         >
@@ -339,6 +339,7 @@ const FormInput = React.forwardRef(
                     {...{
                       disabled,
                       pattern,
+                      type,
                       ...inputProps,
                       ...input
                     }}
@@ -390,7 +391,7 @@ const FormInput = React.forwardRef(
                         }}
                         tabIndex={index}
                         dangerouslySetInnerHTML={{
-                          __html: item.replace(new RegExp(typedValue, 'gi'), (match) =>
+                          __html: item.replace(new RegExp(typedValue, 'gi'), match =>
                             match ? `<b>${match}</b>` : match
                           )
                         }}
