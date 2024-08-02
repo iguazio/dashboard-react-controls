@@ -41,6 +41,7 @@ const FormTextarea = React.forwardRef(
       onBlur = () => {},
       onChange = () => {},
       required = false,
+      rows = 3,
       textAreaIcon,
       tip = '',
       withoutBorder,
@@ -81,21 +82,21 @@ const FormTextarea = React.forwardRef(
       )
     }, [meta.invalid, meta.modified, meta.submitFailed, meta.touched, meta.validating])
 
-    const handleInputBlur = (event) => {
+    const handleInputBlur = event => {
       input.onBlur(event)
       onBlur && onBlur(event)
     }
 
-    const handleInputChange = (event) => {
+    const handleInputChange = event => {
       input.onChange(event)
       onChange && onChange(event.target.value)
     }
 
-    const handleInputFocus = (event) => {
+    const handleInputFocus = event => {
       input.onFocus(event)
     }
 
-    const validateField = (value) => {
+    const validateField = value => {
       const valueToValidate = value ?? ''
       let validationError = null
 
@@ -128,6 +129,7 @@ const FormTextarea = React.forwardRef(
                   maxLength={maxLength}
                   ref={textAreaRef}
                   required={isInvalid || required}
+                  rows
                   {...{
                     disabled,
                     ...textareaProps,
