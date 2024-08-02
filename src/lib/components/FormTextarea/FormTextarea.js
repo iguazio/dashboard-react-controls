@@ -129,9 +129,9 @@ const FormTextarea = React.forwardRef(
                   maxLength={maxLength}
                   ref={textAreaRef}
                   required={isInvalid || required}
-                  rows
                   {...{
                     disabled,
+                    rows,
                     ...textareaProps,
                     ...input
                   }}
