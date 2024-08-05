@@ -39,7 +39,7 @@ const HiddenChipsBlock = /*#__PURE__*/_react.default.forwardRef((_ref, _ref2) =>
     chipOptions,
     chips,
     handleShowElements,
-    textOverflowEllipsis
+    textOverflowEllipsis = false
   } = _ref;
   let {
     hiddenChipsCounterRef,
@@ -97,9 +97,6 @@ const HiddenChipsBlock = /*#__PURE__*/_react.default.forwardRef((_ref, _ref2) =>
     })
   }), document.getElementById('overlay_container'));
 });
-HiddenChipsBlock.defaultProps = {
-  textOverflowEllipsis: false
-};
 HiddenChipsBlock.propTypes = {
   chipClassNames: _propTypes.default.string.isRequired,
   chipOptions: _types.CHIP_OPTIONS.isRequired,

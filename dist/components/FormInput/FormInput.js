@@ -42,33 +42,47 @@ under the Apache 2.0 license is conditioned upon your compliance with
 such restriction.
 */
 
+const defaultProps = {
+  iconClick: () => {},
+  link: {
+    show: '',
+    value: ''
+  },
+  onBlur: () => {},
+  onChange: () => {},
+  onKeyDown: () => {},
+  validator: () => {},
+  rules: []
+};
 const FormInput = /*#__PURE__*/_react.default.forwardRef((_ref, ref) => {
   var _ref2;
   let {
-    async,
-    className,
-    customRequiredLabel,
-    density,
-    disabled,
-    focused,
-    iconClass,
-    iconClick,
-    inputIcon,
-    invalidText,
-    label,
-    link,
+    async = false,
+    className = '',
+    customRequiredLabel = '',
+    density = 'normal',
+    disabled = false,
+    focused = false,
+    iconClass = '',
+    iconClick = defaultProps.iconClick,
+    inputIcon = null,
+    invalidText = 'This field is invalid',
+    label = '',
+    link = defaultProps.link,
     name,
-    onBlur,
-    onChange,
+    onBlur = defaultProps.onBlur,
+    onChange = defaultProps.onChange,
     onFocus,
-    onKeyDown,
-    pattern,
-    required,
-    suggestionList,
-    tip,
-    validationRules: rules,
-    validator,
-    withoutBorder,
+    onKeyDown = defaultProps.onKeyDown,
+    pattern = null,
+    required = false,
+    suggestionList = [],
+    step = '1',
+    tip = '',
+    type = 'text',
+    validationRules: rules = defaultProps.rules,
+    validator = defaultProps.validator,
+    withoutBorder = false,
     ...inputProps
   } = _ref;
   const {
@@ -199,7 +213,7 @@ const FormInput = /*#__PURE__*/_react.default.forwardRef((_ref, ref) => {
       }
     }
     if ((0, _lodash.isEmpty)(validationError)) {
-      if (inputProps.type === 'number') {
+      if (type === 'number') {
         if (inputProps.max && +valueToValidate > +inputProps.max) {
           validationError = {
             name: 'maxValue',
@@ -249,7 +263,7 @@ const FormInput = /*#__PURE__*/_react.default.forwardRef((_ref, ref) => {
     return validationError;
   }, 400);
   const parseField = val => {
-    return inputProps.type === 'number' && val ? parseFloat(val) || val : val;
+    return type === 'number' && val ? parseFloat(val) || val : val;
   };
   return /*#__PURE__*/(0, _jsxRuntime.jsx)(_reactFinalForm.Field, {
     validate: async ? validateFieldAsync : validateField,
@@ -299,6 +313,7 @@ const FormInput = /*#__PURE__*/_react.default.forwardRef((_ref, ref) => {
               required: isInvalid || required,
               disabled,
               pattern,
+              type,
               ...inputProps,
               ...input,
               autoComplete: (_inputProps$autocompl = inputProps.autocomplete) !== null && _inputProps$autocompl !== void 0 ? _inputProps$autocompl : 'off',
@@ -328,9 +343,9 @@ const FormInput = /*#__PURE__*/_react.default.forwardRef((_ref, ref) => {
               onClick: iconClick,
               children: inputIcon
             })]
-          }), inputProps.type === 'number' && /*#__PURE__*/(0, _jsxRuntime.jsx)(_InputNumberButtons.default, {
+          }), type === 'number' && /*#__PURE__*/(0, _jsxRuntime.jsx)(_InputNumberButtons.default, {
             ...inputProps,
-            step: +inputProps.step,
+            step: +step,
             ...input,
             disabled
           })]
@@ -357,39 +372,6 @@ const FormInput = /*#__PURE__*/_react.default.forwardRef((_ref, ref) => {
     }
   });
 });
-FormInput.defaultProps = {
-  async: false,
-  className: '',
-  customRequiredLabel: '',
-  density: 'normal',
-  disabled: false,
-  focused: false,
-  iconClass: '',
-  iconClick: () => {},
-  inputIcon: null,
-  invalidText: 'This field is invalid',
-  label: '',
-  link: {
-    show: '',
-    value: ''
-  },
-  min: null,
-  max: null,
-  onBlur: () => {},
-  onChange: () => {},
-  onKeyDown: () => {},
-  pattern: null,
-  placeholder: '',
-  required: false,
-  step: '1',
-  suggestionList: [],
-  tip: '',
-  type: 'text',
-  validationRules: [],
-  validator: () => {},
-  value: '',
-  withoutBorder: false
-};
 FormInput.propTypes = {
   async: _propTypes.default.bool,
   className: _propTypes.default.string,

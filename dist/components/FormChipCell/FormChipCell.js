@@ -40,20 +40,27 @@ such restriction.
 
 const FormChipCell = _ref => {
   let {
-    chipOptions,
-    className,
-    delimiter,
+    chipOptions = {
+      background: 'purple',
+      boldValue: false,
+      borderRadius: 'primary',
+      borderColor: 'transparent',
+      density: 'dense',
+      font: 'purple'
+    },
+    className = '',
+    delimiter = null,
     formState,
     initialValues,
-    isEditable,
-    label,
+    isEditable = false,
+    label = null,
     name,
-    onClick,
-    shortChips,
-    validationRules,
-    validator,
+    onClick = () => {},
+    shortChips = false,
+    validationRules = {},
+    validator = null,
     onExitEditModeCallback,
-    visibleChipsMaxLength
+    visibleChipsMaxLength = null
   } = _ref;
   const chipsClassName = (0, _classnames.default)('chips', className);
   const {
@@ -313,25 +320,6 @@ const FormChipCell = _ref => {
       })
     })]
   });
-};
-FormChipCell.defaultProps = {
-  chipOptions: {
-    background: 'purple',
-    boldValue: false,
-    borderRadius: 'primary',
-    borderColor: 'transparent',
-    density: 'dense',
-    font: 'purple'
-  },
-  className: '',
-  delimiter: null,
-  isEditable: false,
-  label: null,
-  onClick: () => {},
-  shortChips: false,
-  validationRules: {},
-  validator: null,
-  visibleChipsMaxLength: null
 };
 FormChipCell.propTypes = {
   chipOptions: _types.CHIP_OPTIONS,

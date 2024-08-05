@@ -38,7 +38,14 @@ such restriction.
 
 const FormChipCellView = /*#__PURE__*/_react.default.forwardRef((_ref, _ref2) => {
   let {
-    chipOptions,
+    chipOptions = {
+      background: 'purple',
+      boldValue: false,
+      borderRadius: 'primary',
+      borderColor: 'transparent',
+      density: 'dense',
+      font: 'purple'
+    },
     chips,
     editConfig,
     formState,
@@ -47,15 +54,15 @@ const FormChipCellView = /*#__PURE__*/_react.default.forwardRef((_ref, _ref2) =>
     handleRemoveChip,
     handleShowElements,
     handleToEditMode,
-    isEditable,
+    isEditable = false,
     name,
     setChipsSizes,
     setEditConfig,
-    shortChips,
+    shortChips = false,
     showChips,
     showHiddenChips,
     validateFields,
-    validationRules
+    validationRules = {}
   } = _ref;
   let {
     chipsCellRef,
@@ -150,19 +157,6 @@ const FormChipCellView = /*#__PURE__*/_react.default.forwardRef((_ref, _ref2) =>
     }
   });
 });
-FormChipCellView.defaultProps = {
-  chipOptions: {
-    background: 'purple',
-    boldValue: false,
-    borderRadius: 'primary',
-    borderColor: 'transparent',
-    density: 'dense',
-    font: 'purple'
-  },
-  isEditable: false,
-  shortChips: false,
-  validationRules: {}
-};
 FormChipCellView.propTypes = {
   chipOptions: _types.CHIP_OPTIONS,
   chips: _propTypes.default.object.isRequired,

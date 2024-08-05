@@ -33,11 +33,11 @@ such restriction.
 const FormCheckBox = _ref => {
   let {
     children,
-    className,
-    highlightLabel,
-    label,
+    className = '',
+    highlightLabel = false,
+    label = '',
     name,
-    readOnly,
+    readOnly = false,
     ...inputProps
   } = _ref;
   const formFieldClassNames = (0, _classnames.default)('form-field-checkbox', readOnly && 'form-field-checkbox_readonly', className);
@@ -72,12 +72,6 @@ const FormCheckBox = _ref => {
       });
     }
   });
-};
-FormCheckBox.defaultProps = {
-  className: '',
-  highlightLabel: false,
-  label: '',
-  readOnly: false
 };
 FormCheckBox.propTypes = {
   className: _propTypes.default.string,

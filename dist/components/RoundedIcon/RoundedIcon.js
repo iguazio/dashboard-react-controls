@@ -32,12 +32,12 @@ such restriction.
 const RoundedIcon = /*#__PURE__*/_react.default.forwardRef((_ref, ref) => {
   let {
     children,
-    className,
-    disabled,
-    id,
-    isActive,
-    onClick,
-    tooltipText
+    className = '',
+    disabled = false,
+    id = '',
+    isActive = false,
+    onClick = () => {},
+    tooltipText = ''
   } = _ref;
   const wrapperClassNames = (0, _classnames.default)('round-icon-cp', className);
   const IconClassNames = (0, _classnames.default)('round-icon-cp__circle', isActive && 'round-icon-cp__circle-active', disabled && 'round-icon-cp__circle-disabled');
@@ -60,14 +60,6 @@ const RoundedIcon = /*#__PURE__*/_react.default.forwardRef((_ref, ref) => {
     })
   });
 });
-RoundedIcon.defaultProps = {
-  className: '',
-  disabled: false,
-  id: '',
-  isActive: false,
-  onClick: () => {},
-  tooltipText: ''
-};
 RoundedIcon.propTypes = {
   children: _propTypes.default.node.isRequired,
   className: _propTypes.default.string,

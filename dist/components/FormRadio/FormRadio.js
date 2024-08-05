@@ -32,10 +32,10 @@ such restriction.
 
 const FormRadio = _ref => {
   let {
-    className,
+    className = '',
     name,
     label,
-    readOnly,
+    readOnly = false,
     tooltip,
     ...inputProps
   } = _ref;
@@ -75,10 +75,6 @@ const FormRadio = _ref => {
       });
     }
   });
-};
-FormRadio.defaultProps = {
-  className: '',
-  readOnly: false
 };
 FormRadio.propTypes = {
   className: _propTypes.default.string,

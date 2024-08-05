@@ -1,7 +1,6 @@
 
 
-Create a new dist version 2.1.4
+Create a new dist version 2.1.5
 
 Collecting:
-- Fix [Node Selector] Add validation to key:value as in mlrun (#302)
-- Fix [Feature Vectors] Unify the conditions for the 'Tag' field (#301)
+- Fix [UI] Deprecated param - Support for defaultProps will be removed (#305)

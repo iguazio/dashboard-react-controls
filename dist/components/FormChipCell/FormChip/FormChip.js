@@ -34,19 +34,25 @@ const FormChip = /*#__PURE__*/_react.default.forwardRef((_ref, ref) => {
   let {
     chip,
     chipIndex,
-    chipOptions,
+    chipOptions = {
+      background: 'purple',
+      boldValue: false,
+      borderRadius: 'primary',
+      borderColor: 'transparent',
+      density: 'dense',
+      font: 'purple'
+    },
     editConfig,
     handleEditChip,
     handleRemoveChip,
     handleToEditMode,
-    isDeleteMode,
-    isEditable,
-    keyName,
+    isEditable = false,
+    keyName = '',
     meta,
     setChipsSizes,
     setEditConfig,
-    validationRules,
-    valueName
+    validationRules = {},
+    valueName = ''
   } = _ref;
   const chipRef = _react.default.useRef();
   (0, _react.useEffect)(() => {
@@ -80,21 +86,6 @@ const FormChip = /*#__PURE__*/_react.default.forwardRef((_ref, ref) => {
     })
   });
 });
-FormChip.defaultProps = {
-  chipOptions: {
-    background: 'purple',
-    boldValue: false,
-    borderRadius: 'primary',
-    borderColor: 'transparent',
-    density: 'dense',
-    font: 'purple'
-  },
-  isDeleteMode: false,
-  isEditable: false,
-  keyName: '',
-  validationRules: {},
-  valueName: ''
-};
 FormChip.propTypes = {
   chip: _propTypes.default.object.isRequired,
   chipIndex: _propTypes.default.number.isRequired,
@@ -103,7 +94,6 @@ FormChip.propTypes = {
   handleEditChip: _propTypes.default.func.isRequired,
   handleRemoveChip: _propTypes.default.func.isRequired,
   handleToEditMode: _propTypes.default.func.isRequired,
-  isDeleteMode: _propTypes.default.bool,
   isEditable: _propTypes.default.bool,
   keyName: _propTypes.default.string,
   meta: _propTypes.default.object.isRequired,

@@ -17,7 +17,6 @@ var _types = require("../../types");
 var _constants = require("../../constants");
 var _dropdown = require("../../images/dropdown.svg");
 require("./formSelect.scss");
-var _lodash = require("lodash");
 var _jsxRuntime = require("react/jsx-runtime");
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 function _getRequireWildcardCache(e) { if ("function" != typeof WeakMap) return null; var r = new WeakMap(), t = new WeakMap(); return (_getRequireWildcardCache = function (e) { return e ? t : r; })(e); }
@@ -42,22 +41,22 @@ such restriction.
 const FormSelect = _ref => {
   var _selectRef$current;
   let {
-    className,
-    density,
-    disabled,
-    hideSelectedOption,
-    label,
-    multiple,
+    className = '',
+    density = 'normal',
+    disabled = false,
+    hideSelectedOption = false,
+    label = '',
+    multiple = false,
     name,
     onChange,
     options,
     required,
-    search,
+    search = false,
     selectedItemAction,
-    scrollToView,
-    tooltip,
-    withoutBorder,
-    withSelectedIcon
+    scrollToView = true,
+    tooltip = '',
+    withoutBorder = false,
+    withSelectedIcon = true
   } = _ref;
   const {
     input,
@@ -335,20 +334,6 @@ const FormSelect = _ref => {
     }
   });
 };
-FormSelect.defaultProps = {
-  className: '',
-  density: 'normal',
-  disabled: false,
-  hideSelectedOption: false,
-  label: '',
-  onClick: null,
-  search: false,
-  tooltip: '',
-  multiple: false,
-  scrollToView: true,
-  withoutBorder: false,
-  withSelectedIcon: true
-};
 FormSelect.propTypes = {
   className: _propTypes.default.string,
   density: _propTypes.default.oneOf(['dense', 'normal', 'medium', 'chunky']),
@@ -356,7 +341,6 @@ FormSelect.propTypes = {
   hideSelectedOption: _propTypes.default.bool,
   label: _propTypes.default.string,
   name: _propTypes.default.string.isRequired,
-  onClick: _propTypes.default.oneOfType([_propTypes.default.func, _propTypes.default.bool]),
   options: _types.SELECT_OPTIONS.isRequired,
   search: _propTypes.default.bool,
   tooltip: _propTypes.default.string,

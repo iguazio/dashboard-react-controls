@@ -35,13 +35,13 @@ such restriction.
 
 const Button = /*#__PURE__*/(0, _react.forwardRef)((_ref, ref) => {
   let {
-    className,
-    density,
+    className = '',
+    density = 'normal',
     icon,
-    id,
-    label,
-    tooltip,
-    variant,
+    id = 'btn',
+    label = 'Button',
+    tooltip = '',
+    variant = _constants.TERTIARY_BUTTON,
     ...restProps
   } = _ref;
   const buttonClassName = (0, _classnames.default)('btn', "btn-".concat(variant), "btn-".concat(density), className);
@@ -62,14 +62,6 @@ const Button = /*#__PURE__*/(0, _react.forwardRef)((_ref, ref) => {
     })]
   });
 });
-Button.defaultProps = {
-  className: '',
-  density: 'normal',
-  id: 'btn',
-  label: 'Button',
-  tooltip: '',
-  variant: _constants.TERTIARY_BUTTON
-};
 Button.propTypes = {
   className: _propTypes.default.string,
   density: _propTypes.default.oneOf(['dense', 'normal', 'medium', 'chunky']),

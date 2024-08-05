@@ -35,15 +35,15 @@ such restriction.
 
 const Modal = _ref => {
   let {
-    actions,
+    actions = [],
     children,
     className,
     onClose,
-    previewText,
-    size,
-    show,
-    subTitle,
-    title
+    previewText = '',
+    size = _constants.MODAL_MD,
+    show = false,
+    subTitle = null,
+    title = ''
   } = _ref;
   const modalClassNames = (0, _classnames.default)('modal', className, size && "modal-".concat(size));
   return /*#__PURE__*/(0, _jsxRuntime.jsxs)(_jsxRuntime.Fragment, {
@@ -96,14 +96,6 @@ const Modal = _ref => {
       })
     })]
   });
-};
-Modal.defaultProps = {
-  actions: [],
-  previewText: '',
-  show: false,
-  size: _constants.MODAL_MD,
-  subTitle: null,
-  title: ''
 };
 Modal.propTypes = {
   actions: _propTypes.default.array,

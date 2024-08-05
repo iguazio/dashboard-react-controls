@@ -30,7 +30,7 @@ such restriction.
 const Backdrop = _ref => {
   let {
     duration = 300,
-    show,
+    show = false,
     onClose
   } = _ref;
   return /*#__PURE__*/(0, _jsxRuntime.jsx)(_reactTransitionGroup.CSSTransition, {
@@ -44,10 +44,6 @@ const Backdrop = _ref => {
       onClick: onClose
     })
   });
-};
-Backdrop.defaultProps = {
-  duration: 300,
-  show: false
 };
 Backdrop.propTypes = {
   show: _propTypes.default.bool.isRequired

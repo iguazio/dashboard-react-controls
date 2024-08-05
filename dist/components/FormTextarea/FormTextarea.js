@@ -36,19 +36,20 @@ such restriction.
 
 const FormTextarea = /*#__PURE__*/_react.default.forwardRef((_ref, ref) => {
   let {
-    className,
-    disabled,
-    focused,
-    iconClass,
-    invalidText,
-    label,
-    maxLength,
+    className = '',
+    disabled = false,
+    focused = false,
+    iconClass = '',
+    invalidText = 'This field is invalid',
+    label = '',
+    maxLength = null,
     name,
-    onBlur,
-    onChange,
-    required,
+    onBlur = () => {},
+    onChange = () => {},
+    required = false,
+    rows = 3,
     textAreaIcon,
-    tip,
+    tip = '',
     withoutBorder,
     ...textareaProps
   } = _ref;
@@ -133,6 +134,7 @@ const FormTextarea = /*#__PURE__*/_react.default.forwardRef((_ref, ref) => {
               ref: textAreaRef,
               required: isInvalid || required,
               disabled,
+              rows,
               ...textareaProps,
               ...input,
               onBlur: handleInputBlur,
@@ -165,22 +167,6 @@ const FormTextarea = /*#__PURE__*/_react.default.forwardRef((_ref, ref) => {
     }
   });
 });
-FormTextarea.defaultProps = {
-  className: '',
-  disabled: false,
-  focused: false,
-  iconClass: '',
-  textAreaIcon: null,
-  invalidText: 'This field is invalid',
-  label: '',
-  maxLength: null,
-  onBlur: () => {},
-  onChange: () => {},
-  placeholder: '',
-  required: false,
-  rows: 3,
-  tip: ''
-};
 FormTextarea.propTypes = {
   className: _propTypes.default.string,
   disabled: _propTypes.default.bool,
@@ -193,7 +179,6 @@ FormTextarea.propTypes = {
   name: _propTypes.default.string.isRequired,
   onBlur: _propTypes.default.func,
   onChange: _propTypes.default.func,
-  placeholder: _propTypes.default.string,
   required: _propTypes.default.bool,
   tip: _propTypes.default.string
 };

@@ -37,12 +37,15 @@ under the Apache 2.0 license is conditioned upon your compliance with
 such restriction.
 */
 
+const defaultProps = {
+  rules: {}
+};
 const NewChipForm = /*#__PURE__*/_react.default.forwardRef((_ref, ref) => {
   let {
     chip,
     chipIndex,
     chipOptions,
-    className,
+    className = '',
     editConfig,
     handleRemoveChip,
     isEditable,
@@ -50,7 +53,7 @@ const NewChipForm = /*#__PURE__*/_react.default.forwardRef((_ref, ref) => {
     meta,
     onChange,
     setEditConfig,
-    validationRules: rules,
+    validationRules: rules = defaultProps.rules,
     valueName
   } = _ref;
   const [chipData, setChipData] = (0, _react.useState)({
@@ -282,10 +285,6 @@ const NewChipForm = /*#__PURE__*/_react.default.forwardRef((_ref, ref) => {
     })]
   });
 });
-NewChipForm.defaultProps = {
-  className: '',
-  validationRules: {}
-};
 NewChipForm.propTypes = {
   chip: _propTypes.default.object.isRequired,
   chipIndex: _propTypes.default.number.isRequired,

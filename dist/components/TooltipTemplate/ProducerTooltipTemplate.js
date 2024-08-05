@@ -28,8 +28,8 @@ such restriction.
 
 const ProducerTooltipTemplate = _ref => {
   let {
-    kind,
-    owner
+    kind = '',
+    owner = ''
   } = _ref;
   return /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
     className: "tooltip-container",
@@ -45,10 +45,6 @@ const ProducerTooltipTemplate = _ref => {
       }), " ", owner]
     })]
   });
-};
-ProducerTooltipTemplate.defaultProps = {
-  kind: '',
-  owner: ''
 };
 ProducerTooltipTemplate.propTypes = {
   kind: _propTypes.default.string.isRequired,

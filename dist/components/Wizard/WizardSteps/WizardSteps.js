@@ -33,7 +33,7 @@ such restriction.
 const WizardSteps = _ref => {
   let {
     activeStepNumber,
-    firstDisabledStepIdx,
+    firstDisabledStepIdx = null,
     jumpToStep,
     steps
   } = _ref;
@@ -64,9 +64,6 @@ const WizardSteps = _ref => {
       }, id);
     })
   });
-};
-WizardSteps.defaultProps = {
-  firstDisabledStepIdx: null
 };
 WizardSteps.propTypes = {
   activeStepNumber: _propTypes.default.number.isRequired,

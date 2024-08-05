@@ -44,27 +44,31 @@ such restriction.
 
 const FormCombobox = _ref => {
   let {
-    comboboxClassName,
-    density,
-    disabled,
-    hideSearchInput,
-    inputDefaultValue,
-    inputPlaceholder,
+    comboboxClassName = '',
+    density = 'normal',
+    disabled = false,
+    hideSearchInput = false,
+    inputDefaultValue = '',
+    inputPlaceholder = '',
     invalidText,
-    label,
-    maxSuggestedMatches,
+    label = '',
+    maxSuggestedMatches = 1,
     name,
-    onBlur,
-    onChange,
-    onFocus,
-    required,
-    rules,
-    selectDefaultValue,
+    onBlur = null,
+    onChange = null,
+    onFocus = null,
+    required = false,
+    rules = [],
+    selectDefaultValue = {
+      label: '',
+      id: '',
+      className: ''
+    },
     selectOptions,
-    selectPlaceholder,
-    suggestionList,
-    validator,
-    withoutBorder
+    selectPlaceholder = '',
+    suggestionList = [],
+    validator = null,
+    withoutBorder = false
   } = _ref;
   const {
     input,
@@ -402,30 +406,6 @@ const FormCombobox = _ref => {
       });
     }
   });
-};
-FormCombobox.defaultProps = {
-  comboboxClassName: '',
-  density: 'normal',
-  disabled: false,
-  hideSearchInput: false,
-  inputDefaultValue: '',
-  inputPlaceholder: '',
-  label: '',
-  maxSuggestedMatches: 1,
-  onBlur: null,
-  onFocus: null,
-  onChange: null,
-  required: false,
-  rules: [],
-  selectDefaultValue: {
-    label: '',
-    id: '',
-    className: ''
-  },
-  selectPlaceholder: '',
-  suggestionList: [],
-  validator: null,
-  withoutBorder: false
 };
 FormCombobox.propTypes = {
   comboboxClassName: _propTypes.default.string,

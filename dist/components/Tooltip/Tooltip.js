@@ -37,11 +37,11 @@ const Tooltip = _ref => {
   let {
     children,
     className,
-    hidden,
-    id,
-    renderChildAsHtml,
+    hidden = false,
+    id = '',
+    renderChildAsHtml = false,
     template,
-    textShow
+    textShow = false
   } = _ref;
   const [show, setShow] = (0, _react.useState)(false);
   const [style, setStyle] = (0, _react.useState)({});
@@ -166,12 +166,6 @@ const Tooltip = _ref => {
       })
     }), document.getElementById('overlay_container'))]
   });
-};
-Tooltip.defaultProps = {
-  hidden: false,
-  id: '',
-  renderChildAsHtml: false,
-  textShow: false
 };
 Tooltip.propTypes = {
   className: _propTypes.default.string,

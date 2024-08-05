@@ -31,12 +31,12 @@ such restriction.
 
 const FormActionButton = /*#__PURE__*/_react.default.forwardRef((_ref, ref) => {
   let {
-    disabled,
+    disabled = false,
     fields,
     fieldsPath,
     hidden,
-    id,
-    label,
+    id = '',
+    label = 'Add new item',
     onClick
   } = _ref;
   return /*#__PURE__*/(0, _jsxRuntime.jsxs)(_jsxRuntime.Fragment, {
@@ -53,11 +53,6 @@ const FormActionButton = /*#__PURE__*/_react.default.forwardRef((_ref, ref) => {
     })]
   });
 });
-FormActionButton.defaultProps = {
-  disabled: false,
-  id: '',
-  label: 'Add new item'
-};
 FormActionButton.propTypes = {
   disabled: _propTypes.default.bool,
   fields: _propTypes.default.shape({}).isRequired,

@@ -35,10 +35,10 @@ const SelectOption = _ref => {
   let {
     item,
     name,
-    onClick,
-    multiple,
+    onClick = () => {},
+    multiple = false,
     selectedId,
-    withSelectedIcon
+    withSelectedIcon = true
   } = _ref;
   const selectClassName = (0, _classnames.default)('select__item', multiple && 'multiple', item.hidden && 'hidden', item.disabled && 'disabled');
   if (multiple) {
@@ -96,11 +96,6 @@ const SelectOption = _ref => {
       })]
     })
   });
-};
-SelectOption.defaultProps = {
-  onClick: () => {},
-  multiple: false,
-  withSelectedIcon: true
 };
 SelectOption.propTypes = {
   name: _propTypes.default.string.isRequired,

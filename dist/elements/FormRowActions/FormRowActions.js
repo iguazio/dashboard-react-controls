@@ -38,13 +38,13 @@ const FormRowActions = _ref => {
   var _editingItem$ui, _editingItem$ui2, _editingItem$ui3, _editingItem$ui4;
   let {
     applyChanges,
-    deleteButtonIsHidden,
+    deleteButtonIsHidden = false,
     deleteRow,
-    disabled,
+    disabled = false,
     discardOrDelete,
-    editingItem,
+    editingItem = null,
     fieldsPath,
-    hidden,
+    hidden = false,
     index
   } = _ref;
   return hidden ? /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
@@ -85,12 +85,6 @@ const FormRowActions = _ref => {
       })]
     })]
   });
-};
-FormRowActions.defaultProps = {
-  deleteButtonIsHidden: false,
-  disabled: false,
-  editingItem: null,
-  hidden: false
 };
 FormRowActions.propTypes = {
   applyChanges: _propTypes.default.func.isRequired,

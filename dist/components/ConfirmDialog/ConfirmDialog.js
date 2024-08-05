@@ -32,16 +32,16 @@ such restriction.
 
 const ConfirmDialog = _ref => {
   let {
-    cancelButton,
+    cancelButton = null,
     children,
-    className,
+    className = '',
     closePopUp,
-    confirmButton,
-    customPosition,
-    header,
+    confirmButton = null,
+    customPosition = {},
+    header = '',
     isOpen,
-    message,
-    messageOnly,
+    message = '',
+    messageOnly = false,
     onResolve
   } = _ref;
   const messageClassNames = (0, _classnames.default)('confirm-dialog__message', messageOnly && 'confirm-dialog__message-only');
@@ -87,15 +87,6 @@ const ConfirmDialog = _ref => {
       })]
     })
   });
-};
-ConfirmDialog.defaultProps = {
-  cancelButton: null,
-  className: '',
-  confirmButton: null,
-  customPosition: {},
-  header: '',
-  message: '',
-  messageOnly: false
 };
 ConfirmDialog.propTypes = {
   cancelButton: _types.CONFIRM_DIALOG_CANCEL_BUTTON,

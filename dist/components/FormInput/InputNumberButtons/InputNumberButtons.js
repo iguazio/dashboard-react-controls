@@ -31,11 +31,11 @@ such restriction.
 
 const InputNumberButtons = _ref => {
   let {
-    disabled,
-    min,
-    max,
+    disabled = false,
+    min = null,
+    max = null,
     onChange,
-    step,
+    step = 1,
     value
   } = _ref;
   const handleIncrease = event => {
@@ -79,12 +79,6 @@ const InputNumberButtons = _ref => {
       })]
     })
   });
-};
-InputNumberButtons.defaultProps = {
-  disabled: false,
-  min: null,
-  max: null,
-  step: 1
 };
 InputNumberButtons.propTypes = {
   disabled: _propTypes.default.bool,

@@ -40,14 +40,14 @@ const PopUpDialog = /*#__PURE__*/_react.default.forwardRef((_ref, ref) => {
   var _ref2;
   let {
     children,
-    className,
-    closePopUp,
-    customPosition,
-    headerIsHidden,
-    headerText,
-    showPopUpDialog,
-    style,
-    tooltipText
+    className = '',
+    closePopUp = () => {},
+    customPosition = {},
+    headerIsHidden = false,
+    headerText = '',
+    showPopUpDialog = true,
+    style = {},
+    tooltipText = ''
   } = _ref;
   const [showPopUp, setShowPopUp] = (0, _react.useState)(showPopUpDialog !== null && showPopUpDialog !== void 0 ? showPopUpDialog : true);
   const popUpOverlayRef = (0, _react.useRef)(null);
@@ -154,16 +154,6 @@ const PopUpDialog = /*#__PURE__*/_react.default.forwardRef((_ref, ref) => {
     })
   }), document.getElementById('overlay_container')) : null;
 });
-PopUpDialog.defaultProps = {
-  className: '',
-  closePopUp: () => {},
-  customPosition: {},
-  headerIsHidden: false,
-  headerText: '',
-  showPopUpDialog: true,
-  style: {},
-  tooltipText: ''
-};
 PopUpDialog.propTypes = {
   className: _propTypes.default.string,
   closePopUp: _propTypes.default.func,

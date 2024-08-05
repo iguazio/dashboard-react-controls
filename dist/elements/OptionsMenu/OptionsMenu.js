@@ -30,9 +30,9 @@ such restriction.
 
 const OptionsMenu = /*#__PURE__*/_react.default.forwardRef((_ref, ref) => {
   let {
-    children,
-    show,
-    timeout
+    children = [],
+    show = false,
+    timeout = 300
   } = _ref;
   const {
     width: dropdownWidth
@@ -52,7 +52,7 @@ const OptionsMenu = /*#__PURE__*/_react.default.forwardRef((_ref, ref) => {
         autoHorizontalPosition: true
       },
       style: {
-        'minWidth': "".concat(dropdownWidth, "px")
+        minWidth: "".concat(dropdownWidth, "px")
       },
       children: /*#__PURE__*/(0, _jsxRuntime.jsx)("ul", {
         className: "options-menu__body",
@@ -61,11 +61,6 @@ const OptionsMenu = /*#__PURE__*/_react.default.forwardRef((_ref, ref) => {
     })
   });
 });
-OptionsMenu.defaultProps = {
-  children: [],
-  show: false,
-  timeout: 300
-};
 OptionsMenu.propTypes = {
   children: _propTypes.default.arrayOf(_propTypes.default.element),
   show: _propTypes.default.bool.isRequired,

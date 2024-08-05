@@ -33,26 +33,26 @@ such restriction.
 
 const FormKeyValueTable = _ref => {
   let {
-    actionButtonId,
-    addNewItemLabel,
-    className,
-    defaultKey,
-    disabled,
-    exitEditModeTriggerItem,
+    actionButtonId = '',
+    addNewItemLabel = 'Add new item',
+    className = '',
+    defaultKey = '',
+    disabled = false,
+    exitEditModeTriggerItem = null,
     fieldsPath,
     formState,
-    isKeyEditable,
-    isKeyRequired,
-    isValueRequired,
-    keyHeader,
-    keyLabel,
-    keyOptions,
-    keyValidationRules,
-    onExitEditModeCallback,
-    valueHeader,
-    valueLabel,
-    valueType,
-    valueValidationRules
+    isKeyEditable = true,
+    isKeyRequired = true,
+    isValueRequired = true,
+    keyHeader = 'Key',
+    keyLabel = 'Key',
+    keyOptions = null,
+    keyValidationRules = [],
+    onExitEditModeCallback = () => {},
+    valueHeader = 'Value',
+    valueLabel = 'Value',
+    valueType = 'text',
+    valueValidationRules = []
   } = _ref;
   const tableClassNames = (0, _classnames.default)('form-table form-key-value-table', disabled && 'form-table_disabled', className);
   const {
@@ -193,26 +193,6 @@ const FormKeyValueTable = _ref => {
       }
     })]
   });
-};
-FormKeyValueTable.defaultProps = {
-  actionButtonId: '',
-  addNewItemLabel: 'Add new item',
-  className: '',
-  defaultKey: '',
-  disabled: false,
-  exitEditModeTriggerItem: null,
-  isKeyEditable: true,
-  isKeyRequired: true,
-  isValueRequired: true,
-  keyHeader: 'Key',
-  keyLabel: 'Key',
-  keyOptions: null,
-  keyValidationRules: [],
-  onExitEditModeCallback: () => {},
-  valueHeader: 'Value',
-  valueLabel: 'Value',
-  valueType: 'text',
-  valueValidationRules: []
 };
 FormKeyValueTable.propTypes = {
   actionButtonId: _propTypes.default.string,

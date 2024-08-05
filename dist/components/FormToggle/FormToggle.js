@@ -30,11 +30,11 @@ such restriction.
 
 const FormToggle = _ref => {
   let {
-    className,
+    className = '',
     density,
-    label,
+    label = '',
     name,
-    onChange,
+    onChange = () => {},
     ...inputProps
   } = _ref;
   const toggleWrapperClassNames = (0, _classnames.default)('form-field__wrapper', density && "form-field__wrapper-".concat(density));
@@ -71,11 +71,6 @@ const FormToggle = _ref => {
       });
     }
   });
-};
-FormToggle.defaultProps = {
-  className: '',
-  label: '',
-  onChange: () => {}
 };
 FormToggle.propTypes = {
   className: _propTypes.default.string,

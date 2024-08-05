@@ -38,15 +38,15 @@ such restriction.
 const Wizard = _ref => {
   let {
     children,
-    className,
-    getActions,
+    className = '',
+    getActions = null,
     isWizardOpen,
     location,
     onWizardResolve,
-    previewText,
-    size,
-    stepsConfig,
-    subTitle,
+    previewText = '',
+    size = _constants.MODAL_MD,
+    stepsConfig = [],
+    subTitle = null,
     title
   } = _ref;
   const wizardClasses = (0, _classnames.default)('wizard-form', className);
@@ -164,19 +164,9 @@ const Wizard = _ref => {
     })]
   });
 };
-Wizard.defaultProps = {
-  className: '',
-  getActions: null,
-  confirmClose: false,
-  previewText: '',
-  size: _constants.MODAL_MD,
-  stepsConfig: [],
-  subTitle: null
-};
 Wizard.propsTypes = {
   className: _propTypes.default.string,
   getActions: _propTypes.default.func,
-  confirmClose: _propTypes.default.bool,
   isWizardOpen: _propTypes.default.bool.isRequired,
   location: _propTypes.default.string.isRequired,
   onWizardResolve: _propTypes.default.func.isRequired,

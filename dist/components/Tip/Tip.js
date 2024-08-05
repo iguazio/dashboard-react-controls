@@ -39,7 +39,7 @@ const iconLength = parseInt(_tip.default.iconlength);
 const minTextLength = 40;
 const Tip = _ref => {
   let {
-    className,
+    className = '',
     text,
     withExclamationMark
   } = _ref;
@@ -107,9 +107,6 @@ const Tip = _ref => {
       })
     }), document.getElementById('overlay_container'))]
   });
-};
-Tip.defaultProps = {
-  className: ''
 };
 Tip.propTypes = {
   className: _propTypes.default.string,
