@@ -447,7 +447,7 @@ export const getValidationRules = (type, additionalRules) => {
  * @param {string} internalLabels - An array of defined labels that should not be modified.
  * @returns {Object} The rule that checks if a value is not in the internal labels.
  */
-export const getInternalLabelsValidationRule = internalLabels => {
+export const getInternalLabelsValidationRule = (internalLabels = []) => {
   return {
     name: 'customLabels',
     label: 'System-defined labels cannot be modified.',
