@@ -380,7 +380,8 @@ const getValidationRules = (type, additionalRules) => {
  * @returns {Object} The rule that checks if a value is not in the internal labels.
  */
 exports.getValidationRules = getValidationRules;
-const getInternalLabelsValidationRule = internalLabels => {
+const getInternalLabelsValidationRule = function () {
+  let internalLabels = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
   return {
     name: 'customLabels',
     label: 'System-defined labels cannot be modified.',

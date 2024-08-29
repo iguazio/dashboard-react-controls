@@ -22,29 +22,31 @@ under the Apache 2.0 license is conditioned upon your compliance with
 such restriction.
 */
 
-const useDebounce = () => (validate, time) => {
+const useDebounce = () => {
   const timeout = (0, _react.useRef)(null);
   const lastValue = (0, _react.useRef)(null);
   const lastResult = (0, _react.useRef)(null);
-  return function (value) {
-    return new Promise(resolve => {
-      if (timeout.current) {
-        timeout.current();
-      }
-      if (value !== lastValue.current) {
-        const timerId = setTimeout(() => {
-          lastValue.current = value;
-          lastResult.current = validate(value);
+  return (0, _react.useCallback)((validate, time) => {
+    return value => {
+      return new Promise(resolve => {
+        if (timeout.current) {
+          timeout.current();
+        }
+        if (value !== lastValue.current) {
+          const timerId = setTimeout(() => {
+            lastValue.current = value;
+            lastResult.current = validate(value);
+            resolve(lastResult.current);
+          }, time);
+          timeout.current = () => {
+            clearTimeout(timerId);
+            resolve(true);
+          };
+        } else {
           resolve(lastResult.current);
-        }, time);
-        timeout.current = () => {
-          clearTimeout(timerId);
-          resolve(true);
-        };
-      } else {
-        resolve(lastResult.current);
-      }
-    });
-  };
+        }
+      });
+    };
+  }, []);
 };
 exports.useDebounce = useDebounce;

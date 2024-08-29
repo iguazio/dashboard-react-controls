@@ -85,7 +85,7 @@ const NewChipForm = /*#__PURE__*/_react.default.forwardRef((_ref, ref) => {
   const labelKeyClassName = (0, _classnames.default)(className, !editConfig.isKeyFocused && 'item_edited', !(0, _lodash.isEmpty)((0, _lodash.get)(meta, ['error', chipIndex, 'key'], [])) && !(0, _lodash.isEmpty)(chipData.key) && !chip.disabled && 'item_edited_invalid');
   const labelContainerClassName = (0, _classnames.default)('edit-chip-container', background && "edit-chip-container-background_".concat(background), borderColor && "edit-chip-container-border_".concat(borderColor), font && "edit-chip-container-font_".concat(font), density && "edit-chip-container-density_".concat(density), borderRadius && "edit-chip-container-border_".concat(borderRadius), (editConfig.isEdit || editConfig.isNewChip) && 'edit-chip-container_edited', chip.disabled && 'edit-chip-container_disabled edit-chip-container-font_disabled');
   const labelValueClassName = (0, _classnames.default)('input-label-value', !editConfig.isValueFocused && 'item_edited', !(0, _lodash.isEmpty)((0, _lodash.get)(meta, ['error', chipIndex, 'value'], [])) && !(0, _lodash.isEmpty)(chipData.value) && 'item_edited_invalid');
-  const closeButtonClass = (0, _classnames.default)('item-icon-close', !chip.disabled && (editConfig.chipIndex === chipIndex || !isEditable) && 'item-icon-close_hidden');
+  const closeButtonClass = (0, _classnames.default)('item-icon-close', !chip.disabled && editConfig.chipIndex === chipIndex && isEditable && 'item-icon-close_invisible', !isEditable && 'item-icon-close_hidden');
   (0, _react.useLayoutEffect)(() => {
     if (!chipData.keyFieldWidth && !chipData.valueFieldWidth) {
       const currentWidthKeyInput = refInputKey.current.scrollWidth + 1;

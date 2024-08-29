@@ -1,6 +1,8 @@
 
 
-Create a new dist version 2.1.5
+Create a new dist version 2.1.6
 
 Collecting:
-- Fix [UI] Deprecated param - Support for defaultProps will be removed (#305)
+- Fix [DRC] ESLint Error: useRef in Callback (#307)
+- Fix [UI] Labels don't use all the block width (#308)
+- Fix [Model endpoints] switching to model/feature set overview is malfunctioning (#309)

@@ -61,6 +61,7 @@ const HiddenChipsBlock = /*#__PURE__*/_react.default.forwardRef((_ref, _ref2) =>
   return /*#__PURE__*/(0, _reactDom.createPortal)( /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
     ref: hiddenChipsPopUpRef,
     className: hiddenChipsBlockClassNames,
+    onClick: event => event.stopPropagation(),
     children: /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
       className: "chip-block-hidden__scrollable-container",
       children: chips === null || chips === void 0 ? void 0 : chips.map(element => {
