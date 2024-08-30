@@ -134,12 +134,17 @@ const PopUpDialog = React.forwardRef(
         trailing: true,
         leading: true
       })
+      const popupObserver = new ResizeObserver(throttledCalculatedCustomPopUpPosition)
+      const popupElement = ref.current
+
+      popupObserver.observe(popupElement)
       window.addEventListener('resize', throttledCalculatedCustomPopUpPosition)
 
       return () => {
+        popupObserver.unobserve(popupElement)
         window.removeEventListener('resize', throttledCalculatedCustomPopUpPosition)
       }
-    })
+    }, [calculateCustomPopUpPosition, ref])
 
     return showPopUp
       ? createPortal(
