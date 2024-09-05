@@ -118,11 +118,15 @@ const PopUpDialog = /*#__PURE__*/_react.default.forwardRef((_ref, ref) => {
       trailing: true,
       leading: true
     });
+    const popupObserver = new ResizeObserver(throttledCalculatedCustomPopUpPosition);
+    const popupElement = ref.current;
+    popupObserver.observe(popupElement);
     window.addEventListener('resize', throttledCalculatedCustomPopUpPosition);
     return () => {
+      popupObserver.unobserve(popupElement);
       window.removeEventListener('resize', throttledCalculatedCustomPopUpPosition);
     };
-  });
+  }, [calculateCustomPopUpPosition, ref]);
   return showPopUp ? /*#__PURE__*/(0, _reactDom.createPortal)( /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
     ref: ref,
     className: popUpClassNames,

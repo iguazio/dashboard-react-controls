@@ -315,7 +315,7 @@
     }
 
     &_disabled {
-      @include editableChipFont($spunPearl)
+      @include editableChipFont($spunPearl);
     }
   } @else if $component == Chip {
     &_white {
@@ -1002,19 +1002,19 @@
 
 @mixin stats() {
   &_total {
-    @include statsAddBorderAndTextColor($totalBorder, $black)
+    @include statsAddBorderAndTextColor($totalBorder, $black);
   }
 
   &_running {
-    @include statsAddBorderAndTextColor($runningBorder, $pictonBlue)
+    @include statsAddBorderAndTextColor($runningBorder, $pictonBlue);
   }
 
   &_failed {
-    @include statsAddBorderAndTextColor($failedBorder, $amaranth)
+    @include statsAddBorderAndTextColor($failedBorder, $amaranth);
   }
 
   &_completed {
-    @include statsAddBorderAndTextColor($completedBorder, $brightTurquoise)
+    @include statsAddBorderAndTextColor($completedBorder, $brightTurquoise);
   }
 }
 
@@ -1136,7 +1136,8 @@
     pointer-events: none;
     opacity: 0.5;
 
-    ~ label, ~ .label {
+    ~ label,
+    ~ .label {
       pointer-events: none;
       opacity: 0.5;
     }
@@ -1175,7 +1176,8 @@
       border-color: currentColor;
     }
 
-    ~ label, ~ .label {
+    ~ label,
+    ~ .label {
       color: $spunPearl;
       cursor: not-allowed;
     }
@@ -1202,7 +1204,8 @@
     }
   }
 
-  ~ label, ~ .label {
+  ~ label,
+  ~ .label {
     display: flex;
     flex: 1;
     align-items: center;

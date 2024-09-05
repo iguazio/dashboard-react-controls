@@ -1,8 +1,8 @@
 
 
-Create a new dist version 2.1.6
+Create a new dist version 2.2.0
 
 Collecting:
-- Fix [DRC] ESLint Error: useRef in Callback (#307)
-- Fix [UI] Labels don't use all the block width (#308)
-- Fix [Model endpoints] switching to model/feature set overview is malfunctioning (#309)
+- Fix [DRC] Apply ESLint & Prettier Formatting Adjustments (#312)
+- Fix [Models endpoints monitoring, metrics] The 'Choose metrics' dropdown is closing unexpectedly (#311)
+- Fix [Round Icon] Tooltip doesn't disappear (#313)

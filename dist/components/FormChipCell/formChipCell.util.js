@@ -36,7 +36,7 @@ const getTextWidth = elementWithText => {
     const styles = {
       position: 'absolute',
       left: '-10000px',
-      top: "auto",
+      top: 'auto',
       visibility: 'hidden'
     };
     for (const [styleName, styleValue] of Object.entries(styles)) {

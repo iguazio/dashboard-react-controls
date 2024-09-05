@@ -144,11 +144,13 @@ const Tooltip = _ref => {
       className: tooltipClassNames,
       dangerouslySetInnerHTML: {
         __html: children
-      }
+      },
+      onClick: handleMouseLeave
     }) : /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
       "data-testid": id ? "".concat(id, "-tooltip-wrapper") : 'tooltip-wrapper',
       ref: parentRef,
       className: tooltipClassNames,
+      onClick: handleMouseLeave,
       children: children
     }), !hidden && /*#__PURE__*/(0, _reactDom.createPortal)( /*#__PURE__*/(0, _jsxRuntime.jsx)(_reactTransitionGroup.CSSTransition, {
       classNames: "fade",
