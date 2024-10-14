@@ -1,8 +1,8 @@
 
 
-Create a new dist version 2.2.1
+Create a new dist version 2.2.2
 
 Collecting:
-- Fix [UI] UI crash when closing pop-up dialogs (#315)
-- Fix [Chips] Hidden chips block doesn't close (#316)
-- Tests [UI] Add Initial Workflow to Enable GitHub Actions for Forked Repositories (#319)
+- Tests [UI] Add GitHub Action Workflow for "dashboard-react-controls" Repository (#317)
+- Fix [UI] UI small fixes (#321)
+- Fix [Tests] Add Branch Patterns for CI workflow pull_request Triggers in GitHub Action (#323)
