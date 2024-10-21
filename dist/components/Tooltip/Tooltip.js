@@ -60,12 +60,13 @@ const Tooltip = _ref => {
   }, [hidden]);
   const handleMouseEnter = (0, _react.useCallback)(event => {
     if (!show) {
+      var _child$childNodes, _child$childNodes2;
       const [child] = parentRef.current.childNodes;
-      let show = !hidden && (textShow ? true : !child ? false : child.nodeType !== Node.TEXT_NODE || (
+      let show = !hidden && (textShow ? true : !child ? false : child.nodeType !== Node.TEXT_NODE && ((_child$childNodes = child.childNodes) === null || _child$childNodes === void 0 || (_child$childNodes = _child$childNodes[0]) === null || _child$childNodes === void 0 ? void 0 : _child$childNodes.nodeType) !== Node.TEXT_NODE || (
       /*
       If the child node is a text node and the text of the child node inside the container is greater than the width of the container, then show tooltip.
       */
-      child.nodeType === Node.TEXT_NODE && parentRef.current.scrollWidth > parentRef.current.offsetWidth));
+      (child.nodeType === Node.TEXT_NODE || ((_child$childNodes2 = child.childNodes) === null || _child$childNodes2 === void 0 || (_child$childNodes2 = _child$childNodes2[0]) === null || _child$childNodes2 === void 0 ? void 0 : _child$childNodes2.nodeType) === Node.TEXT_NODE) && parentRef.current.scrollWidth > parentRef.current.offsetWidth));
       setShow(show);
       setTimeout(() => {
         if (show) {
