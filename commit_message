@@ -1,8 +1,7 @@
 
 
-Create a new dist version 2.2.2
+Create a new dist version 2.2.3
 
 Collecting:
-- Tests [UI] Add GitHub Action Workflow for "dashboard-react-controls" Repository (#317)
-- Fix [UI] UI small fixes (#321)
-- Fix [Tests] Add Branch Patterns for CI workflow pull_request Triggers in GitHub Action (#323)
+- Fix [UI] Warning icon overlay on input text (#328)
+- Impl [NPM] Upgrade webpack package in DRC (#326)
