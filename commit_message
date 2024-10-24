@@ -1,7 +1,6 @@
 
 
-Create a new dist version 2.2.3
+Create a new dist version 2.2.4
 
 Collecting:
-- Fix [UI] Warning icon overlay on input text (#328)
-- Impl [NPM] Upgrade webpack package in DRC (#326)
+- Impl [UI] Add retry option for workflows (#331)
