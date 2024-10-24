@@ -14,7 +14,7 @@ illegal under applicable law, and the grant of the foregoing license
 under the Apache 2.0 license is conditioned upon your compliance with
 such restriction.
 */
-import React, { useEffect, useLayoutEffect, useState } from 'react'
+import React, { useEffect, useLayoutEffect, useRef, useState } from 'react'
 import classnames from 'classnames'
 import PropTypes from 'prop-types'
 import { Field, useField } from 'react-final-form'
@@ -52,7 +52,7 @@ const FormTextarea = React.forwardRef(
     const { input, meta } = useField(name)
     const [isInvalid, setIsInvalid] = useState(false)
     const [textAreaCount, setTextAreaCount] = useState(input.value.length)
-    const textAreaRef = React.createRef()
+    const textAreaRef = useRef()
 
     const formFieldClassNames = classnames('form-field-textarea', className)
     const labelClassNames = classnames(
