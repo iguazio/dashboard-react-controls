@@ -39,7 +39,6 @@ const NewChipInput = React.forwardRef(({ name, onChange, onFocus, ...inputProps 
           data-testid="input"
           ref={ref}
           type="text"
-          id={input.name}
           {...{
             ...inputProps,
             ...input
