@@ -122,13 +122,14 @@ const FormChipCell = _ref => {
     });
     event && event.preventDefault();
   }, [editConfig.isEdit, editConfig.chipIndex, showHiddenChips, formState.form.mutators, name, delimiter, setShowHiddenChips]);
-  const handleRemoveChip = (0, _react.useCallback)((event, fields, chipIndex) => {
+  const handleRemoveChip = (0, _react.useCallback)(function (event, fields, chipIndex) {
+    let isOutsideClick = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : false;
     checkChipsList(_lodash.default.chain(formState).get(['values', name]).filter((_, index) => index !== chipIndex).value());
     fields.remove(chipIndex);
     onExitEditModeCallback && onExitEditModeCallback();
-    event && event.stopPropagation();
+    event && !isOutsideClick && event.stopPropagation();
   }, [checkChipsList, formState, name, onExitEditModeCallback]);
-  const handleEditChip = (0, _react.useCallback)((event, fields, nameEvent) => {
+  const handleEditChip = (0, _react.useCallback)((event, fields, nameEvent, isOutsideClick) => {
     const {
       key,
       value
@@ -136,7 +137,7 @@ const FormChipCell = _ref => {
     const isChipNotEmpty = !!(key !== null && key !== void 0 && key.trim() && value !== null && value !== void 0 && value.trim());
     if (nameEvent === _constants.CLICK) {
       if (!isChipNotEmpty) {
-        handleRemoveChip(event, fields, editConfig.chipIndex);
+        handleRemoveChip(event, fields, editConfig.chipIndex, isOutsideClick);
       }
       setEditConfig({
         chipIndex: null,

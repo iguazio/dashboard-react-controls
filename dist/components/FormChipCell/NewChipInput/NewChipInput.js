@@ -55,7 +55,6 @@ const NewChipInput = /*#__PURE__*/_react.default.forwardRef((_ref, ref) => {
         "data-testid": "input",
         ref: ref,
         type: "text",
-        id: input.name,
         ...inputProps,
         ...input,
         onChange: handleInputChange,

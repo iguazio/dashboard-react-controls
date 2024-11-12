@@ -59,7 +59,7 @@ const FormTextarea = /*#__PURE__*/_react.default.forwardRef((_ref, ref) => {
   } = (0, _reactFinalForm.useField)(name);
   const [isInvalid, setIsInvalid] = (0, _react.useState)(false);
   const [textAreaCount, setTextAreaCount] = (0, _react.useState)(input.value.length);
-  const textAreaRef = /*#__PURE__*/_react.default.createRef();
+  const textAreaRef = (0, _react.useRef)();
   const formFieldClassNames = (0, _classnames.default)('form-field-textarea', className);
   const labelClassNames = (0, _classnames.default)('form-field__label', disabled && 'form-field__label-disabled');
   const textAreaClassNames = (0, _classnames.default)('form-field__wrapper', disabled && 'form-field__wrapper-disabled', isInvalid && 'form-field__wrapper-invalid', withoutBorder && 'without-border');

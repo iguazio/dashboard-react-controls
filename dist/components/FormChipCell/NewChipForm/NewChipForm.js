@@ -128,7 +128,7 @@ const NewChipForm = /*#__PURE__*/_react.default.forwardRef((_ref, ref) => {
       var _event$path, _event$composedPath;
       const elementPath = (_event$path = event.path) !== null && _event$path !== void 0 ? _event$path : (_event$composedPath = event.composedPath) === null || _event$composedPath === void 0 ? void 0 : _event$composedPath.call(event);
       if (!elementPath.includes(refInputContainer.current)) {
-        onChange(event, _constants.CLICK);
+        onChange(event, _constants.CLICK, true);
         window.getSelection().removeAllRanges();
       } else {
         event.stopPropagation();
@@ -206,7 +206,7 @@ const NewChipForm = /*#__PURE__*/_react.default.forwardRef((_ref, ref) => {
         };
       });
     }
-  }, [maxWidthInput, refInputKey, refInputValue, keyName]);
+  }, [keyName, minWidthInput, maxWidthInput, minWidthValueInput]);
   (0, _react.useLayoutEffect)(() => {
     if (editConfig.chipIndex === chipIndex) {
       setSelectedInput(editConfig.isKeyFocused ? 'key' : editConfig.isValueFocused ? 'value' : null);

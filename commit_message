@@ -1,6 +1,8 @@
 
 
-Create a new dist version 2.2.4
+Create a new dist version 2.2.5
 
 Collecting:
-- Impl [UI] Add retry option for workflows (#331)
+- Cleanup [React] Replace createRef across the code (#333)
+- Fix [Labels chip] duplicated id (#334)
+- Fix [Feature store, Models] Label editing action issues (#335)
