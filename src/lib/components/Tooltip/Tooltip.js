@@ -190,7 +190,13 @@ const Tooltip = ({
       )}
       {!hidden &&
         createPortal(
-          <CSSTransition classNames="fade" in={show} timeout={duration} unmountOnExit>
+          <CSSTransition
+            classNames="fade"
+            in={show}
+            timeout={duration}
+            unmountOnExit
+            nodeRef={tooltipRef}
+          >
             <div
               data-testid={id ? `${id}-tooltip` : 'tooltip'}
               ref={tooltipRef}
