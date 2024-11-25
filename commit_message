@@ -1,8 +1,7 @@
 
 
-Create a new dist version 2.2.5
+Create a new dist version 2.2.6
 
 Collecting:
-- Cleanup [React] Replace createRef across the code (#333)
-- Fix [Labels chip] duplicated id (#334)
-- Fix [Feature store, Models] Label editing action issues (#335)
+- Fix [Tooltip] add ref (#337)
+- Impl [UI] Show details in a popup instead of redirection (#338)

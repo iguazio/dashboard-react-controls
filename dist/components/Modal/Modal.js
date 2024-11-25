@@ -38,6 +38,7 @@ const Modal = _ref => {
     actions = [],
     children,
     className,
+    noHeader = false,
     onClose,
     previewText = '',
     size = _constants.MODAL_MD,
@@ -68,7 +69,7 @@ const Modal = _ref => {
           })
         }), /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
           className: "modal__content",
-          children: [/*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
+          children: [!noHeader && /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
             className: "modal__header",
             children: [previewText && /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
               className: "modal__header-preview-text",

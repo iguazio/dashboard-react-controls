@@ -158,6 +158,7 @@ const Tooltip = _ref => {
       in: show,
       timeout: duration,
       unmountOnExit: true,
+      nodeRef: tooltipRef,
       children: /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
         "data-testid": id ? "".concat(id, "-tooltip") : 'tooltip',
         ref: tooltipRef,
