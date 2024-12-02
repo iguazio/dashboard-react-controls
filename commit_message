@@ -1,7 +1,6 @@
 
 
-Create a new dist version 2.2.6
+Create a new dist version 2.2.7
 
 Collecting:
-- Fix [Tooltip] add ref (#337)
-- Impl [UI] Show details in a popup instead of redirection (#338)
+- Impl [Jobs] Pagination (#340)
