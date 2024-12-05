@@ -1,6 +1,6 @@
 
 
-Create a new dist version 2.2.8
+Create a new dist version 2.2.9
 
 Collecting:
-- Impl [Project Alerts] Add “Alerts Table” (#342)
+- Impl [VectorDB] new "Documents" page and navigation (#344)
