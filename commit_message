@@ -1,6 +1,6 @@
 
 
-Create a new dist version 2.2.9
+Create a new dist version 2.2.10
 
 Collecting:
-- Impl [VectorDB] new "Documents" page and navigation (#344)
+- Impl [Pagination] Change functions grouping behavior (#346)
