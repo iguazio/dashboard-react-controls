@@ -47,10 +47,10 @@ const Button = forwardRef(
         {icon}
         {tooltip ? (
           <Tooltip template={<TextTooltipTemplate text={tooltip} />}>
-            <div>{label}</div>
+            {label && <div>{label}</div>}
           </Tooltip>
         ) : (
-          <div>{label}</div>
+          label && <div>{label}</div>
         )}
       </button>
     )
