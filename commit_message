@@ -1,6 +1,6 @@
 
 
-Create a new dist version 2.2.10
+Create a new dist version 2.2.11
 
 Collecting:
-- Impl [Pagination] Change functions grouping behavior (#346)
+- Impl [Projects] move sort to the right (#348)
