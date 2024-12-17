@@ -17,7 +17,7 @@ such restriction.
 import React from 'react'
 
 import ConfirmDialog from './ConfirmDialog'
-import { SECONDARY_BUTTON, TERTIARY_BUTTON } from '../../constants'
+import { PRIMARY_BUTTON, TERTIARY_BUTTON } from '../../constants'
 
 export default {
   title: 'Example/ConfirmDialog',
@@ -28,7 +28,7 @@ const commonArgs = {
   confirmButton: {
     handler: () => null,
     label: 'Confirm',
-    variant: SECONDARY_BUTTON
+    variant: PRIMARY_BUTTON
   },
   cancelButton: {
     handler: () => null,

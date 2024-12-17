@@ -23,7 +23,7 @@ import Button from '../Button/Button'
 import Modal from '../Modal/Modal'
 import WizardSteps from './WizardSteps/WizardSteps'
 
-import { MODAL_MD, SECONDARY_BUTTON } from '../../constants'
+import { LABEL_BUTTON, MODAL_MD } from '../../constants'
 import { MODAL_SIZES, WIZARD_STEPS_CONFIG } from '../../types'
 
 import './Wizard.scss'
@@ -131,6 +131,7 @@ const Wizard = ({
           disabled={activeStepNumber === 0}
           label="Back"
           type="button"
+          variant={LABEL_BUTTON}
         />
       )
     }
@@ -142,7 +143,7 @@ const Wizard = ({
         onClick={goToNextStep}
         label={'Next'}
         type="button"
-        variant={SECONDARY_BUTTON}
+        variant={LABEL_BUTTON}
       />
     )
 
