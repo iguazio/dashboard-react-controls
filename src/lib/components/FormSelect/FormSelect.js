@@ -48,7 +48,8 @@ const FormSelect = ({
   scrollToView = true,
   tooltip = '',
   withoutBorder = false,
-  withSelectedIcon = true
+  withSelectedIcon = true,
+  doNotGrowOverSelectWidth = false,
 }) => {
   const { input, meta } = useField(name)
   const [isInvalid, setIsInvalid] = useState(false)
@@ -349,7 +350,7 @@ const FormSelect = ({
                   autoHorizontalPosition: true
                 }}
                 style={{
-                  maxWidth: `${selectWidth < 500 ? 500 : selectWidth}px`,
+                  maxWidth: `${selectWidth < 500 && !doNotGrowOverSelectWidth ? 500 : selectWidth}px`,
                   minWidth: `${selectWidth}px`
                 }}
               >
