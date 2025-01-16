@@ -1,6 +1,6 @@
 
 
-Create a new dist version 2.2.11
+Create a new dist version 2.2.12
 
 Collecting:
-- Impl [Projects] move sort to the right (#348)
+- Impl [Alerts history] Add alerts to navigation (#350)
