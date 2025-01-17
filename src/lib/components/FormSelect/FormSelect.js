@@ -407,6 +407,7 @@ FormSelect.propTypes = {
   label: PropTypes.string,
   name: PropTypes.string.isRequired,
   options: SELECT_OPTIONS.isRequired,
+  preventWidthOverflow: PropTypes.bool,
   search: PropTypes.bool,
   tooltip: PropTypes.string,
   multiple: PropTypes.bool,
