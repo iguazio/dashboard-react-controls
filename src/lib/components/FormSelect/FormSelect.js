@@ -405,13 +405,13 @@ FormSelect.propTypes = {
   disabled: PropTypes.bool,
   hideSelectedOption: PropTypes.bool,
   label: PropTypes.string,
+  multiple: PropTypes.bool,
   name: PropTypes.string.isRequired,
   options: SELECT_OPTIONS.isRequired,
   preventWidthOverflow: PropTypes.bool,
+  scrollToView: PropTypes.bool,
   search: PropTypes.bool,
   tooltip: PropTypes.string,
-  multiple: PropTypes.bool,
-  scrollToView: PropTypes.bool,
   withoutBorder: PropTypes.bool,
   withSelectedIcon: PropTypes.bool
 }
