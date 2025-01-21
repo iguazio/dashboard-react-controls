@@ -1,6 +1,6 @@
 
 
-Create a new dist version 2.2.13
+Create a new dist version 2.2.14
 
 Collecting:
-- Impl [Alerts history] Add alerts to navigation (#352)
+- Fix [Feature vector] The Project dropdown closes the Filter by pop-up (#354)

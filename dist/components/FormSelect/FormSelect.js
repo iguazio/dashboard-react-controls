@@ -50,10 +50,11 @@ const FormSelect = _ref => {
     name,
     onChange,
     options,
+    preventWidthOverflow = false,
     required,
+    scrollToView = true,
     search = false,
     selectedItemAction,
-    scrollToView = true,
     tooltip = '',
     withoutBorder = false,
     withSelectedIcon = true
@@ -291,7 +292,7 @@ const FormSelect = _ref => {
               autoHorizontalPosition: true
             },
             style: {
-              maxWidth: "".concat(selectWidth < 500 ? 500 : selectWidth, "px"),
+              maxWidth: "".concat(selectWidth < 500 && !preventWidthOverflow ? 500 : selectWidth, "px"),
               minWidth: "".concat(selectWidth, "px")
             },
             children: /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
@@ -340,12 +341,13 @@ FormSelect.propTypes = {
   disabled: _propTypes.default.bool,
   hideSelectedOption: _propTypes.default.bool,
   label: _propTypes.default.string,
+  multiple: _propTypes.default.bool,
   name: _propTypes.default.string.isRequired,
   options: _types.SELECT_OPTIONS.isRequired,
+  preventWidthOverflow: _propTypes.default.bool,
+  scrollToView: _propTypes.default.bool,
   search: _propTypes.default.bool,
   tooltip: _propTypes.default.string,
-  multiple: _propTypes.default.bool,
-  scrollToView: _propTypes.default.bool,
   withoutBorder: _propTypes.default.bool,
   withSelectedIcon: _propTypes.default.bool
 };
