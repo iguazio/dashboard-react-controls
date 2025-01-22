@@ -1,6 +1,6 @@
 
 
-Create a new dist version 2.2.14
+Create a new dist version 2.2.15
 
 Collecting:
-- Fix [Feature vector] The Project dropdown closes the Filter by pop-up (#354)
+- Impl [Pagination] Opening an object through a URL should show the object, even if it is not on the paginated list (#356)
