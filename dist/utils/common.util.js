@@ -37,7 +37,7 @@ const openConfirmPopUp = (message, confirmHandler) => {
     },
     confirmButton: {
       label: 'OK',
-      variant: _constants.SECONDARY_BUTTON,
+      variant: _constants.PRIMARY_BUTTON,
       handler: confirmHandler
     },
     header: 'Are you sure?',

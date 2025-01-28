@@ -110,7 +110,8 @@ const Wizard = _ref => {
         onClick: goToPreviousStep,
         disabled: activeStepNumber === 0,
         label: "Back",
-        type: "button"
+        type: "button",
+        variant: _constants.LABEL_BUTTON
       }));
     }
     defaultActions.push( /*#__PURE__*/(0, _jsxRuntime.jsx)(_Button.default, {
@@ -119,7 +120,7 @@ const Wizard = _ref => {
       onClick: goToNextStep,
       label: 'Next',
       type: "button",
-      variant: _constants.SECONDARY_BUTTON
+      variant: _constants.LABEL_BUTTON
     }));
     return defaultActions;
   };

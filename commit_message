@@ -1,6 +1,6 @@
 
 
-Create a new dist version 2.2.15
+Create a new dist version 2.2.16
 
 Collecting:
-- Impl [Pagination] Opening an object through a URL should show the object, even if it is not on the paginated list (#356)
+- Fix [UI] Change all green buttons to blue (#358)
