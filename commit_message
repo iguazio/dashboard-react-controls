@@ -1,6 +1,6 @@
 
 
-Create a new dist version 2.2.16
+Create a new dist version 2.2.17
 
 Collecting:
-- Fix [UI] Change all green buttons to blue (#358)
+- Fix [Feature store, Models] Label editing action issues (#360)
