@@ -338,12 +338,12 @@ const validationRules = {
       key: [
         generateRule.validCharacters('a-z A-Z 0-9 - _ .'),
         generateRule.beginEndWith('a-z A-Z 0-9'),
-        generateRule.length({ max: 253 })
+        generateRule.length({ max: 255 })
       ],
       value: [
         generateRule.validCharacters('a-z A-Z 0-9 / - _ . :'),
         generateRule.beginEndWith('a-z A-Z 0-9'),
-        generateRule.length({ max: 80 })
+        generateRule.length({ max: 255 })
       ]
     }
   },
