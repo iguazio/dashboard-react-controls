@@ -103,7 +103,7 @@ const useChipCell = (isEditMode, visibleChipsMaxLength) => {
       setShowChips(true);
     }
   }, [chipsSizes, isEditMode]);
-  (0, _react.useEffect)(() => {
+  (0, _react.useLayoutEffect)(() => {
     resizeChipCell();
   }, [resizeChipCell]);
   (0, _react.useEffect)(() => {

@@ -294,7 +294,15 @@ const validationRules = {
   artifact: {
     name: [generateRule.validCharacters('a-z A-Z 0-9 - _ .'), generateRule.beginEndWith('a-z A-Z 0-9'), generateRule.length({
       max: 253
-    }), generateRule.required()]
+    }), generateRule.required()],
+    labels: {
+      key: [generateRule.notContainCharacters(':'), generateRule.beginEndWith('a-z A-Z 0-9'), generateRule.length({
+        max: 255
+      })],
+      value: [generateRule.beginEndWith('a-z A-Z 0-9'), generateRule.length({
+        max: 255
+      })]
+    }
   },
   feature: {
     sets: {

@@ -1,6 +1,7 @@
 
 
-Create a new dist version 2.2.17
+Create a new dist version 2.2.18
 
 Collecting:
-- Fix [Feature store, Models] Label editing action issues (#360)
+- Fix [Jobs] Table row render issue (#363)
+- Fix [Artifacts] special characters in artifact label value should be considered legit (#362)
