@@ -23,8 +23,10 @@ import Button from '../Button/Button'
 import Modal from '../Modal/Modal'
 import WizardSteps from './WizardSteps/WizardSteps'
 
-import { LABEL_BUTTON, MODAL_MD } from '../../constants'
+import { MODAL_MD, TERTIARY_BUTTON } from '../../constants'
 import { MODAL_SIZES, WIZARD_STEPS_CONFIG } from '../../types'
+
+import { ReactComponent as Back } from '../../images/back-arrow.svg'
 
 import './Wizard.scss'
 
@@ -127,11 +129,13 @@ const Wizard = ({
       defaultActions.push(
         <Button
           id="wizard-btn-back"
+          icon={<Back />}
+          className="wizard-form__back-button"
           onClick={goToPreviousStep}
           disabled={activeStepNumber === 0}
           label="Back"
           type="button"
-          variant={LABEL_BUTTON}
+          variant={TERTIARY_BUTTON}
         />
       )
     }
@@ -139,11 +143,14 @@ const Wizard = ({
     defaultActions.push(
       <Button
         id="wizard-btn-next"
+        icon={<Back />}
+        iconPosition="right"
+        className="wizard-form__next-button"
         disabled={stepConfig?.nextIsDisabled || isLastStep}
         onClick={goToNextStep}
-        label={'Next'}
+        label="Next"
         type="button"
-        variant={LABEL_BUTTON}
+        variant={TERTIARY_BUTTON}
       />
     )
 

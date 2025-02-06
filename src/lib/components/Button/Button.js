@@ -32,6 +32,7 @@ const Button = forwardRef(
       className = '',
       density = 'normal',
       icon,
+      iconPosition = 'left',
       id = 'btn',
       label = 'Button',
       tooltip = '',
@@ -44,14 +45,15 @@ const Button = forwardRef(
 
     return (
       <button {...restProps} className={buttonClassName} ref={ref} data-testid={id}>
-        {icon}
+        {icon && iconPosition === 'left' && icon}
         {tooltip ? (
           <Tooltip template={<TextTooltipTemplate text={tooltip} />}>
-            {label && <div>{label}</div>}
+            {label && <span>{label}</span>}
           </Tooltip>
         ) : (
-          label && <div>{label}</div>
+          label && <span>{label}</span>
         )}
+        {icon && iconPosition === 'right' && icon}
       </button>
     )
   }
