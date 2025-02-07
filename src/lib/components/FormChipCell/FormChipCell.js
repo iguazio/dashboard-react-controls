@@ -76,10 +76,6 @@ const FormChipCell = ({
     isNewChip: false
   })
 
-  useEffect(() => {
-    formState.form.change('labelsAreInEditMode', editConfig.isEdit)
-  }, [editConfig.isEdit, formState.form])
-
   let chips = useMemo(() => {
     return isEditable || visibleChipsMaxLength === 'all'
       ? {
