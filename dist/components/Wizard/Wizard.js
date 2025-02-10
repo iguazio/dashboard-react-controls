@@ -13,6 +13,7 @@ var _Modal = _interopRequireDefault(require("../Modal/Modal"));
 var _WizardSteps = _interopRequireDefault(require("./WizardSteps/WizardSteps"));
 var _constants = require("../../constants");
 var _types = require("../../types");
+var _backArrow = require("../../images/back-arrow.svg");
 require("./Wizard.scss");
 var _jsxRuntime = require("react/jsx-runtime");
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -107,20 +108,25 @@ const Wizard = _ref => {
     if (activeStepNumber !== 0) {
       defaultActions.push( /*#__PURE__*/(0, _jsxRuntime.jsx)(_Button.default, {
         id: "wizard-btn-back",
+        icon: /*#__PURE__*/(0, _jsxRuntime.jsx)(_backArrow.ReactComponent, {}),
+        className: "wizard-form__back-button",
         onClick: goToPreviousStep,
         disabled: activeStepNumber === 0,
         label: "Back",
         type: "button",
-        variant: _constants.LABEL_BUTTON
+        variant: _constants.TERTIARY_BUTTON
       }));
     }
     defaultActions.push( /*#__PURE__*/(0, _jsxRuntime.jsx)(_Button.default, {
       id: "wizard-btn-next",
+      icon: /*#__PURE__*/(0, _jsxRuntime.jsx)(_backArrow.ReactComponent, {}),
+      iconPosition: "right",
+      className: "wizard-form__next-button",
       disabled: (stepConfig === null || stepConfig === void 0 ? void 0 : stepConfig.nextIsDisabled) || isLastStep,
       onClick: goToNextStep,
-      label: 'Next',
+      label: "Next",
       type: "button",
-      variant: _constants.LABEL_BUTTON
+      variant: _constants.TERTIARY_BUTTON
     }));
     return defaultActions;
   };

@@ -38,6 +38,7 @@ const Button = /*#__PURE__*/(0, _react.forwardRef)((_ref, ref) => {
     className = '',
     density = 'normal',
     icon,
+    iconPosition = 'left',
     id = 'btn',
     label = 'Button',
     tooltip = '',
@@ -50,16 +51,16 @@ const Button = /*#__PURE__*/(0, _react.forwardRef)((_ref, ref) => {
     className: buttonClassName,
     ref: ref,
     "data-testid": id,
-    children: [icon, tooltip ? /*#__PURE__*/(0, _jsxRuntime.jsx)(_Tooltip.default, {
+    children: [icon && iconPosition === 'left' && icon, tooltip ? /*#__PURE__*/(0, _jsxRuntime.jsx)(_Tooltip.default, {
       template: /*#__PURE__*/(0, _jsxRuntime.jsx)(_TextTooltipTemplate.default, {
         text: tooltip
       }),
-      children: label && /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
+      children: label && /*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
         children: label
       })
-    }) : label && /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
+    }) : label && /*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
       children: label
-    })]
+    }), icon && iconPosition === 'right' && icon]
   });
 });
 Button.propTypes = {

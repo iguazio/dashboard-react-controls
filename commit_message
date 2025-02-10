@@ -1,7 +1,7 @@
 
 
-Create a new dist version 2.2.18
+Create a new dist version 2.2.19
 
 Collecting:
-- Fix [Jobs] Table row render issue (#363)
-- Fix [Artifacts] special characters in artifact label value should be considered legit (#362)
+- Fix [Wizard] batch run - back/next buttons does not look like "button" (#365)
+- Fix [UI] "All changes will be lost" pop up appears upon artifact register / job schedule (#366)

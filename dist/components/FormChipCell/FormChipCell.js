@@ -82,9 +82,6 @@ const FormChipCell = _ref => {
     isValueFocused: false,
     isNewChip: false
   });
-  (0, _react.useEffect)(() => {
-    formState.form.change('labelsAreInEditMode', editConfig.isEdit);
-  }, [editConfig.isEdit, formState.form]);
   let chips = (0, _react.useMemo)(() => {
     return isEditable || visibleChipsMaxLength === 'all' ? {
       visibleChips: (0, _lodash.get)(formState.values, name),

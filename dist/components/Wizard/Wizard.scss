@@ -37,4 +37,17 @@
       height: 100%;
     }
   }
+
+  &__back-button,
+  &__next-button {
+    svg {
+      width: 14px;
+    }
+  }
+
+  &__next-button {
+    svg {
+      rotate: 180deg;
+    }
+  }
 }
