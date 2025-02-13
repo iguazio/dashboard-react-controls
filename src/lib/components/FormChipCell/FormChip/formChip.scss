@@ -12,11 +12,6 @@
   visibility: hidden;
   cursor: default;
 
-  &__object {
-    flex: 1 1 50%;
-    max-width: fit-content;
-  }
-
   &_visible {
     visibility: visible;
   }
@@ -24,6 +19,11 @@
   &__content {
     display: flex;
     align-items: center;
+
+    &-item {
+      flex: 1 1 50%;
+      max-width: fit-content;
+    }
   }
 
   &__delimiter {
