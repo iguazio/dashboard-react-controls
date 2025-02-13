@@ -113,13 +113,13 @@ const FormChipCellView = React.forwardRef(
                                 text={
                                   chipData.tooltip || (
                                     <span className="chip__content">
-                                      {chipData.key}
+                                      <span className='chip__object'>{chipData.key}</span>
                                       {!chipData.isKeyOnly && (
                                         <>
                                           <span className="chip__delimiter">
                                             {chipData.delimiter ? chipData.delimiter : ':'}
                                           </span>
-                                          {chipData.value}
+                                          <span className='chip__object'>{chipData.value}</span>
                                         </>
                                       )}
                                     </span>
