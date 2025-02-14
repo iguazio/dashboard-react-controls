@@ -16,7 +16,7 @@ such restriction.
 */
 import { create } from 'react-modal-promise'
 import { differenceWith, isEqual, get, omit, isEmpty } from 'lodash'
-import { ConfirmDialog } from '../components'
+import ConfirmDialog from '../components/ConfirmDialog/ConfirmDialog'
 import { DANGER_BUTTON, PRIMARY_BUTTON, TERTIARY_BUTTON } from '../constants'
 
 export const openPopUp = (element, props) => {
@@ -128,4 +128,8 @@ export const getTransitionEndEventName = () => {
       return transitions[transition]
     }
   }
+}
+
+export const getScssVariableValue = variableName => {
+  return getComputedStyle(document.documentElement).getPropertyValue(variableName).trim()
 }

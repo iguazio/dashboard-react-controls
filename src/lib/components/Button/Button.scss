@@ -1,35 +1,35 @@
-@import '../../scss/variables';
-@import '../../scss/colors';
-@import '../../scss/borders';
+@use '../../scss/variables';
+@use '../../scss/colors';
+@use '../../scss/borders';
 
 .btn {
   display: flex;
   align-items: center;
   justify-content: center;
   min-width: 90px;
-  height: $fieldNormal;
+  height: variables.$fieldNormal;
   padding: 0 16px;
-  color: $white;
+  color: colors.$white;
   font-weight: 500;
   font-size: 0.875rem;
   font-style: normal;
-  border: $transparentBorder;
-  border-radius: $mainBorderRadius;
+  border: borders.$transparentBorder;
+  border-radius: variables.$mainBorderRadius;
 
   &-dense {
-    height: $fieldDense;
+    height: variables.$fieldDense;
   }
 
   &-normal {
-    height: $fieldNormal;
+    height: variables.$fieldNormal;
   }
 
   &-medium {
-    height: $fieldMedium;
+    height: variables.$fieldMedium;
   }
 
   &-chunky {
-    height: $fieldChunky;
+    height: variables.$fieldChunky;
   }
 
   svg {
@@ -39,26 +39,26 @@
   }
 
   &:focus {
-    border-color: rgba($black, 0.4);
+    border-color: rgba(colors.$black, 0.4);
   }
 
   &:active {
-    border-color: rgba($black, 0.4);
+    border-color: rgba(colors.$black, 0.4);
   }
 
   &:disabled {
-    color: $spunPearl;
-    background: $white;
+    color: colors.$spunPearl;
+    background: colors.$white;
     cursor: not-allowed;
 
     svg {
       & > * {
-        fill: $alto;
+        fill: colors.$alto;
       }
     }
   }
 
-  :not(last-child) {
+  :not(:last-child) {
     margin-right: 10px;
   }
 
@@ -67,87 +67,87 @@
   }
 
   &-secondary {
-    background: $brightTurquoise;
+    background: colors.$brightTurquoise;
 
     &:hover:not(:disabled) {
-      background: $javaLight;
+      background: colors.$javaLight;
     }
 
     &:active:not(:disabled) {
-      background: $mountainMeadow;
+      background: colors.$mountainMeadow;
     }
 
     &:disabled {
-      border: 1px solid $brightTurquoise;
+      border: 1px solid colors.$brightTurquoise;
     }
   }
 
   &-tertiary {
-    color: $primary;
-    background: $white;
-    border: $primaryBorder;
+    color: colors.$primary;
+    background: colors.$white;
+    border: borders.$primaryBorder;
 
     svg {
       & > * {
-        fill: $primary;
+        fill: colors.$primary;
       }
     }
 
     &:hover:not(:disabled) {
-      background: $alabaster;
+      background: colors.$alabaster;
     }
 
     &:active:not(:disabled) {
-      background: $mercury;
+      background: colors.$mercury;
     }
 
     &:disabled {
-      border: $primaryBorder;
+      border: borders.$primaryBorder;
     }
   }
 
   &-primary {
-    color: $white;
-    background: $malibu;
+    color: colors.$white;
+    background: colors.$malibu;
 
     &:hover:not(:disabled) {
-      background: $cornflowerBlue;
+      background: colors.$cornflowerBlue;
     }
 
     &:active:not(:disabled) {
-      background: $indigo;
+      background: colors.$indigo;
     }
 
     &:disabled {
-      border: 1px solid $malibu;
+      border: 1px solid colors.$malibu;
     }
   }
 
   &-danger {
-    color: $white;
-    background: $amaranth;
+    color: colors.$white;
+    background: colors.$amaranth;
 
     &:hover:not(:disabled) {
-      background: $ceriseRed;
+      background: colors.$ceriseRed;
     }
 
     &:active:not(:disabled) {
-      background: $maroonFlash;
+      background: colors.$maroonFlash;
     }
 
     &:disabled {
-      border: 1px solid $amaranth;
+      border: 1px solid colors.$amaranth;
     }
   }
 
   &-label {
-    color: $primary;
+    color: colors.$primary;
     background: transparent;
     border: 0;
 
     svg {
       & > * {
-        fill: $primary;
+        fill: colors.$primary;
       }
     }
 
@@ -156,11 +156,11 @@
     }
 
     &:hover:not(:disabled) {
-      color: $topaz;
+      color: colors.$topaz;
     }
 
     &:active:not(:disabled) {
-      color: $black;
+      color: colors.$black;
       border-color: transparent;
     }
 

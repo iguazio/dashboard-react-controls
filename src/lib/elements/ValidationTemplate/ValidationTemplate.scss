@@ -1,4 +1,4 @@
-@import '../../scss/colors';
+@use '../../scss/colors';
 
 .validation-option {
   display: flex;
@@ -20,7 +20,7 @@
       height: 15px;
 
       path {
-        fill: $brightTurquoise;
+        fill: colors.$brightTurquoise;
       }
     }
 
@@ -29,7 +29,7 @@
       height: 12px;
 
       path {
-        fill: $amaranth;
+        fill: colors.$amaranth;
       }
     }
   }

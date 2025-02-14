@@ -1,22 +1,20 @@
-@import '../../scss/colors';
-
-$arrowLength: 10px;
-$iconLength: 16px;
-$arrowOffset: 20px;
+@use '../../scss/colors';
 
 .tip-container {
   position: relative;
   display: inline-flex;
   align-items: center;
+  justify-content: center;
+  width: var(--arrow-length);
 }
 
 .tip {
   position: fixed;
   display: block;
   padding: 10px;
-  color: $white;
+  color: colors.$white;
   white-space: pre-line;
-  background: $primary;
+  background: colors.$primary;
   border-radius: 4px;
   z-index: 9;
 
@@ -27,25 +25,25 @@ $arrowOffset: 20px;
 
   &_top {
     &::after {
-      bottom: calc(-#{$arrowLength} / 2);
+      bottom: calc(var(--tipArrowLength) * -0.5);
     }
   }
 
   &_bottom {
     &::after {
-      top: calc(-#{$arrowLength} / 2);
+      top: calc(var(--tipArrowLength) * -0.5);
     }
   }
 
   &_left {
     &::after {
-      right: calc(#{$arrowOffset});
+      right: calc(#{var(--tipArrowOffset)});
     }
   }
 
   &_right {
     &::after {
-      left: calc(#{$arrowOffset});
+      left: calc(#{var(--tipArrowOffset)});
     }
   }
 
@@ -61,9 +59,9 @@ $arrowOffset: 20px;
 
   &::after {
     position: absolute;
-    width: $arrowLength;
-    height: $arrowLength;
-    background: $primary;
+    width: var(--tipArrowLength);
+    height: var(--tipArrowLength);
+    background: colors.$primary;
     transform: rotate(45deg);
     content: '';
   }
@@ -85,10 +83,4 @@ $arrowOffset: 20px;
 .fade-exit-active {
   opacity: 0;
   transition: opacity 200ms;
-}
-
-:export {
-  arrowlength: $arrowLength;
-  iconlength: $iconLength;
-  arrowoffset: $arrowOffset;
 }

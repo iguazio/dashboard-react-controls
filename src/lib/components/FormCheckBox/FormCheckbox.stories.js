@@ -17,7 +17,7 @@ such restriction.
 import React from 'react'
 import { Form } from 'react-final-form'
 
-import { FormCheckBox } from '/src/lib/components'
+import FormCheckBox from '/src/lib/components/FormCheckBox/FormCheckBox.jsx'
 
 export default {
   title: 'Example/FormCheckBox',

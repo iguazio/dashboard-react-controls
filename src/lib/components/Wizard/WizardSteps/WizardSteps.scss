@@ -1,11 +1,9 @@
-@import '../../../scss/variables';
-@import '../../../scss/colors';
-@import '../../../scss/borders';
+@use '../../../scss/colors';
 
 .wizard-steps {
   display: flex;
   flex-flow: row nowrap;
-  background-color: $white;
+  background-color: colors.$white;
   min-width: 260px;
   margin: 1.5rem 0;
   padding: 0 2rem;
@@ -24,7 +22,7 @@
     &__item {
       display: block;
       background-color: inherit;
-      color: $primary;
+      color: colors.$primary;
       border: 0;
       border-radius: 8px;
       font-size: 1em;
@@ -45,43 +43,43 @@
       }
 
       .wizard-steps__indicator {
-        border-color: $malibu;
-        color: $malibu;
+        border-color: colors.$malibu;
+        color: colors.$malibu;
         background-color: inherit;
       }
 
       &.wizard-steps__item_active {
-        background-color: $malibuTwo;
-        color: $cornflowerBlue;
+        background-color: colors.$malibuTwo;
+        color: colors.$cornflowerBlue;
 
         .wizard-steps__indicator {
           border-color: transparent;
-          color: $white;
-          background-color: $malibu;
+          color: colors.$white;
+          background-color: colors.$malibu;
         }
       }
 
       &.wizard-steps__item_invalid {
-        color: $amaranth;
+        color: colors.$amaranth;
 
         &.wizard-steps__item_active {
-          background-color: rgba($amaranth, 0.15);
+          background-color: rgba(colors.$amaranth, 0.15);
         }
 
         .wizard-steps__indicator {
-          border-color: $amaranth;
-          color: $amaranth;
+          border-color: colors.$amaranth;
+          color: colors.$amaranth;
           background-color: inherit;
         }
       }
 
       &:disabled {
         border: 0;
-        color: $spunPearl;
+        color: colors.$spunPearl;
 
         .wizard-steps__indicator {
-          border-color: $spunPearl;
-          color: $spunPearl;
+          border-color: colors.$spunPearl;
+          color: colors.$spunPearl;
           background-color: inherit;
         }
       }

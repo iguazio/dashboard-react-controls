@@ -48,8 +48,8 @@ const getVersionFromBranch = branch => {
 const currentBranchVersion = getVersionFromBranch(currentBranch)
 const targetBranchVersion = getVersionFromBranch(`remotes/origin/${targetBranch}`)
 
-console.log(`Version in branch ${currentBranch}: ${currentBranchVersion}`)
-console.log(`Version in branch ${targetBranch}: ${targetBranchVersion}`)
+console.info(`Version in branch ${currentBranch}: ${currentBranchVersion}`)
+console.info(`Version in branch ${targetBranch}: ${targetBranchVersion}`)
 
 const isVersionGreater = (targetBranchVersion, currentBranchVersion) => {
   const parseVersion = version => version.split('.').map(Number)
@@ -65,7 +65,7 @@ const isVersionGreater = (targetBranchVersion, currentBranchVersion) => {
 }
 
 if (isVersionGreater(targetBranchVersion, currentBranchVersion)) {
-  console.log(
+  console.info(
     `\x1b[32mCurrent version (${currentBranchVersion}) is greater than the target version (${targetBranchVersion}).\x1b[0m`
   )
   process.exit(0)

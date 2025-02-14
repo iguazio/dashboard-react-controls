@@ -14,22 +14,45 @@ illegal under applicable law, and the grant of the foregoing license
 under the Apache 2.0 license is conditioned upon your compliance with
 such restriction.
 */
-export { default as Button } from './Button/Button'
-export { default as ConfirmDialog } from './ConfirmDialog/ConfirmDialog'
-export { default as FormCheckBox } from './FormCheckBox/FormCheckBox'
-export { default as FormChipCell } from './FormChipCell/FormChipCell'
-export { default as FormCombobox } from './FormCombobox/FormCombobox'
-export { default as FormInput } from './FormInput/FormInput'
-export { default as FormOnChange } from './FormOnChange/FormOnChange'
-export { default as FormKeyValueTable } from './FormKeyValueTable/FormKeyValueTable'
-export { default as FormRadio } from './FormRadio/FormRadio'
-export { default as FormSelect } from './FormSelect/FormSelect'
-export { default as FormTextarea } from './FormTextarea/FormTextarea'
-export { default as FormToggle } from './FormToggle/FormToggle'
-export { default as Modal } from './Modal/Modal'
-export { default as PopUpDialog } from './PopUpDialog/PopUpDialog'
-export { default as RoundedIcon } from './RoundedIcon/RoundedIcon'
-export { default as TextTooltipTemplate } from './TooltipTemplate/TextTooltipTemplate'
-export { default as Tip } from './Tip/Tip'
-export { default as Tooltip } from './Tooltip/Tooltip'
-export { default as Wizard } from './Wizard/Wizard'
+
+import Button from './Button/Button'
+import ConfirmDialog from './ConfirmDialog/ConfirmDialog'
+import FormCheckBox from './FormCheckBox/FormCheckBox'
+import FormChipCell from './FormChipCell/FormChipCell'
+import FormCombobox from './FormCombobox/FormCombobox'
+import FormInput from './FormInput/FormInput'
+import FormKeyValueTable from './FormKeyValueTable/FormKeyValueTable'
+import FormOnChange from './FormOnChange/FormOnChange'
+import FormRadio from './FormRadio/FormRadio'
+import FormSelect from './FormSelect/FormSelect'
+import FormTextarea from './FormTextarea/FormTextarea'
+import FormToggle from './FormToggle/FormToggle'
+import Modal from './Modal/Modal'
+import PopUpDialog from './PopUpDialog/PopUpDialog'
+import RoundedIcon from './RoundedIcon/RoundedIcon'
+import TextTooltipTemplate from './TooltipTemplate/TextTooltipTemplate'
+import Tip from './Tip/Tip'
+import Tooltip from './Tooltip/Tooltip'
+import Wizard from './Wizard/Wizard'
+
+export {
+  Button,
+  ConfirmDialog,
+  FormCheckBox,
+  FormChipCell,
+  FormCombobox,
+  FormInput,
+  FormKeyValueTable,
+  FormOnChange,
+  FormRadio,
+  FormSelect,
+  FormTextarea,
+  FormToggle,
+  Modal,
+  PopUpDialog,
+  RoundedIcon,
+  TextTooltipTemplate,
+  Tip,
+  Tooltip,
+  Wizard
+}

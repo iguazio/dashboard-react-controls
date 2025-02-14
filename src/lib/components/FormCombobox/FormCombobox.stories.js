@@ -17,7 +17,7 @@ such restriction.
 import React from 'react'
 import { Form } from 'react-final-form'
 
-import { FormCombobox } from '/src/lib/components'
+import FormCombobox from '/src/lib/components/FormCombobox/FormCombobox'
 
 export default {
   title: 'Example/FormCombobox',

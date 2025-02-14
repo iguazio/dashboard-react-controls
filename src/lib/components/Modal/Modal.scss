@@ -1,6 +1,6 @@
-@import '../../scss/variables';
-@import '../../scss/colors';
-@import '../../scss/borders';
+@use '../../scss/variables';
+@use '../../scss/colors';
+@use '../../scss/borders';
 
 .modal {
   position: fixed;
@@ -50,15 +50,15 @@
     height: 100%;
     width: 100%;
     max-height: 100%;
-    background-color: $white;
-    border-radius: $modalBorderRadius;
-    box-shadow: 0 6px 26px rgba($black, 0.2);
+    background-color: colors.$white;
+    border-radius: variables.$modalBorderRadius;
+    box-shadow: 0 6px 26px rgba(colors.$black, 0.2);
     text-align: left;
   }
 
   &__header {
     position: relative;
-    border-bottom: $primaryBorder;
+    border-bottom: borders.$primaryBorder;
     min-height: 92px;
     padding: 1rem 3rem;
     display: flex;
@@ -67,14 +67,14 @@
     flex-direction: column;
 
     &-title {
-      color: $primary;
+      color: colors.$primary;
       font-size: 2em;
       text-transform: capitalize;
       margin: 0;
     }
 
     &-sub-title {
-      color: $topaz;
+      color: colors.$topaz;
       font-size: 1.5em;
       font-weight: 500;
       margin: 10px 0 0;

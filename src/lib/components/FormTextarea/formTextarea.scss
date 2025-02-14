@@ -1,7 +1,5 @@
-@import '../../scss/colors';
-@import '../../scss/borders';
-@import '../../scss/shadows';
-@import '../../scss/mixins';
+@use '../../scss/colors';
+@use '../../scss/mixins';
 
 .form-field-textarea {
   width: 100%;
@@ -14,7 +12,7 @@
   }
 
   .form-field {
-    @include inputSelectField;
+    @include mixins.inputSelectField;
 
     &__wrapper {
       .form-field__control {
@@ -23,7 +21,7 @@
     }
 
     &__counter {
-      color: $topaz;
+      color: colors.$topaz;
       font-size: 12px;
       margin-top: 5px;
       text-align: right;

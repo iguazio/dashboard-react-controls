@@ -1,6 +1,6 @@
-@import '../../scss/colors';
-@import '../../scss/shadows';
-@import '../../scss/borders';
+@use '../../scss/colors';
+@use '../../scss/shadows';
+@use '../../scss/borders';
 
 .options-menu {
   &__body {
@@ -9,13 +9,13 @@
     margin: 0;
     padding: 0;
     overflow-y: auto;
-    color: $mulledWineTwo;
+    color: colors.$mulledWineTwo;
     font-size: 1rem;
     list-style-type: none;
-    background-color: $white;
-    border: $primaryBorder;
+    background-color: colors.$white;
+    border: borders.$primaryBorder;
     border-radius: 4px;
-    box-shadow: $previewBoxShadow;
+    box-shadow: shadows.$previewBoxShadow;
   }
 
   .pop-up-dialog {

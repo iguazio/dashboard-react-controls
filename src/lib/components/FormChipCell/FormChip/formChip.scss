@@ -1,7 +1,4 @@
-@import '../../../scss/variables';
-@import '../../../scss/colors';
-@import '../../../scss/borders';
-@import '../../../scss/mixins';
+@use '../../../scss/mixins';
 
 .chip {
   position: relative;
@@ -46,19 +43,19 @@
   }
 
   &-background {
-    @include chipBackground(false);
+    @include mixins.chipBackground(false);
   }
 
   &-border {
-    @include chipBorder();
+    @include mixins.chipBorder();
   }
 
   &-density {
-    @include chipDensity(false, false);
+    @include mixins.chipDensity(false, false);
   }
 
   &-font {
-    @include chipsFont(Chip);
+    @include mixins.chipsFont(Chip);
   }
 
   &-value_bold {

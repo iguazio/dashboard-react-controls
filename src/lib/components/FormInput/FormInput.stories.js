@@ -17,7 +17,7 @@ such restriction.
 import React from 'react'
 import { Form } from 'react-final-form'
 
-import { FormInput } from '/src/lib/components'
+import FormInput from '/src/lib/components/FormInput/FormInput'
 import { getValidationRules } from '/src/lib/utils/validation.util'
 
 export default {

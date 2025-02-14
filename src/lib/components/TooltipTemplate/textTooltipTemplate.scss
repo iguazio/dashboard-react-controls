@@ -1,5 +1,5 @@
-@import '../../scss/colors';
-@import '../../scss/shadows';
+@use '../../scss/colors';
+@use '../../scss/shadows';
 
 .tooltip {
   &-template {
@@ -8,14 +8,14 @@
   }
 
   &__text {
-    color: $white;
-    background-color: $primary;
+    color: colors.$white;
+    background-color: colors.$primary;
     border-radius: 4px;
   }
 
   &__warning {
-    color: $amaranth;
-    background-color: $white;
-    box-shadow: $tooltipShadow;
+    color: colors.$amaranth;
+    background-color: colors.$white;
+    box-shadow: shadows.$tooltipShadow;
   }
 }

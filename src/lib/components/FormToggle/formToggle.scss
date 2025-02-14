@@ -1,5 +1,5 @@
-@import '../../scss/colors';
-@import '../../scss/mixins';
+@use '../../scss/colors';
+@use '../../scss/mixins';
 
 .form-field-toggle {
   position: relative;
@@ -10,7 +10,7 @@
     display: flex;
     cursor: pointer;
     align-items: center;
-    background-color: $alto;
+    background-color: colors.$alto;
     border-radius: 20px;
     transition: all 0.2s ease;
 
@@ -18,7 +18,7 @@
       content: '';
       width: 20px;
       height: 20px;
-      background-color: $white;
+      background-color: colors.$white;
       border-radius: 50%;
       transform: translateX(2px);
       transition: all 0.2s ease;
@@ -26,7 +26,7 @@
   }
 
   .form-field {
-    @include inputSelectField;
+    @include mixins.inputSelectField;
 
     &__wrapper {
       border: none;
@@ -48,7 +48,8 @@
 
     &:checked {
       & + * .form-field-toggle__switch {
-        background-color: $malibu;
+        background-color: colors.$malibu;
+
         &:before {
           transform: translateX(26px);
         }

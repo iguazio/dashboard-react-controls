@@ -1,5 +1,5 @@
-@import '../../scss/colors';
-@import '../../scss/mixins';
+@use '../../scss/colors';
+@use '../../scss/mixins';
 
 .select {
   &__item {
@@ -31,13 +31,13 @@
     }
 
     &:hover {
-      background-color: $alabaster;
+      background-color: colors.$alabaster;
       cursor: pointer;
     }
 
     &.disabled {
-      color: $spunPearl;
-      background: $white;
+      color: colors.$spunPearl;
+      background: colors.$white;
       cursor: not-allowed;
     }
 
@@ -48,7 +48,7 @@
     .all {
       margin: 0;
 
-      @include statusState(none, false);
+      @include mixins.statusState(none, false);
     }
 
     .label-row {
@@ -91,7 +91,7 @@
       margin: 0 0 0 10px;
 
       path {
-        fill: $chateauGreen;
+        fill: colors.$chateauGreen;
       }
     }
   }

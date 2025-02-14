@@ -1,6 +1,7 @@
-@import '../../scss/mixins';
-@import '../../scss/colors';
-@import '../../scss/shadows';
+@use '../../scss/mixins';
+@use '../../scss/colors';
+@use '../../scss/shadows';
+@use '../../scss/borders';
 
 .select-tooltip {
   width: 100%;
@@ -10,13 +11,13 @@
   width: 100%;
 
   .form-field {
-    @include inputSelectField;
+    @include mixins.inputSelectField;
 
     &__wrapper {
       cursor: pointer;
 
       &-active {
-        background: $alabaster;
+        background: colors.$alabaster;
       }
 
       &-disabled {
@@ -24,7 +25,7 @@
 
         .form-field__caret {
           path {
-            fill: $spunPearl;
+            fill: colors.$spunPearl;
           }
         }
       }
@@ -45,14 +46,14 @@
       }
 
       &-placeholder {
-        color: $spunPearl;
+        color: colors.$spunPearl;
       }
 
       &-sub_label {
         display: block;
         margin-left: 10px;
         overflow: hidden;
-        color: $topaz;
+        color: colors.$topaz;
         white-space: nowrap;
         text-overflow: ellipsis;
       }
@@ -75,11 +76,11 @@
 
       &__body {
         width: 100%;
-        color: $mulledWineTwo;
-        background-color: $white;
-        border: $primaryBorder;
+        color: colors.$mulledWineTwo;
+        background-color: colors.$white;
+        border: borders.$primaryBorder;
         border-radius: 4px;
-        box-shadow: $filterShadow;
+        box-shadow: shadows.$filterShadow;
       }
 
       &__search {
@@ -89,7 +90,7 @@
           width: 100%;
           padding: 10px;
           border: none;
-          border-bottom: $primaryBorder;
+          border-bottom: borders.$primaryBorder;
         }
       }
     }

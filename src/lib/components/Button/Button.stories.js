@@ -26,8 +26,8 @@ import {
   TERTIARY_BUTTON
 } from '../../constants'
 
-import { ReactComponent as EyeIcon } from '../../images/eye.svg'
-import { ReactComponent as CaretIcon } from '../../images/dropdown.svg'
+import EyeIcon from '../../images/eye.svg?react'
+import CaretIcon from '../../images/dropdown.svg?react'
 
 export default {
   title: 'Example/Button',

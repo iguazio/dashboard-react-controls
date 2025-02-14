@@ -1,10 +1,9 @@
-@import '../../scss/colors';
-@import '../../scss/borders';
-@import '../../scss/mixins';
+@use '../../scss/mixins';
 
 .chips {
-  @include inputSelectField;
   height: auto;
+
+  @include mixins.inputSelectField;
 
   &__wrapper {
     padding: 12px 16px;
@@ -41,19 +40,19 @@
       border-radius: 32px;
 
       &-background {
-        @include chipBackground(true);
+        @include mixins.chipBackground(true);
       }
 
       &_border {
-        @include chipBorder();
+        @include mixins.chipBorder();
       }
 
       &-density {
-        @include chipDensity(false, true);
+        @include mixins.chipDensity(false, true);
       }
 
       &-font {
-        @include chipsFont(ButtonAddChip);
+        @include mixins.chipsFont(ButtonAddChip);
       }
     }
   }

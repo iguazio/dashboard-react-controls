@@ -1,0 +1,19 @@
+{
+  "compilerOptions": {
+    "allowJs": true,
+    "declaration": true,
+    "declarationMap": true,
+    "emitDeclarationOnly": true,
+    "isolatedModules": true,
+    "maxNodeModuleJsDepth": 1,
+    "outDir": "dist",
+    "skipLibCheck": true
+  },
+  "include": [
+    "src"
+  ],
+  "exclude": [
+    "src/lib/components/**/*",
+    "src/lib/elements/**/*"
+  ]
+}

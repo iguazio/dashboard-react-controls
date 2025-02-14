@@ -17,7 +17,7 @@ such restriction.
 import React from 'react'
 import { Form } from 'react-final-form'
 
-import { FormSelect } from '/src/lib/components'
+import FormSelect from '/src/lib/components/FormSelect/FormSelect'
 
 export default {
   title: 'Example/FormSelect',

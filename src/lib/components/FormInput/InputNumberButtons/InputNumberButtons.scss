@@ -1,5 +1,5 @@
-@import '../../../scss/colors';
-@import '../../../scss/borders';
+@use '../../../scss/colors';
+@use '../../../scss/borders';
 
 .form-field-range {
   align-self: stretch;
@@ -20,36 +20,36 @@
       align-items: center;
       justify-content: center;
       padding: 0;
-      background-color: $wildSand;
+      background-color: colors.$wildSand;
       cursor: pointer;
 
       svg {
         path {
-          fill: $topaz;
+          fill: colors.$topaz;
         }
       }
 
       &:hover {
-        background-color: $mercury;
+        background-color: colors.$mercury;
 
         svg {
           path {
-            fill: $primary;
+            fill: colors.$primary;
           }
         }
       }
 
       &:focus {
-        border: $focusBorder;
+        border: borders.$focusBorder;
       }
 
       &:active {
-        background-color: rgba($black, 0.2);
-        border: $focusBorder;
+        background-color: rgba(colors.$black, 0.2);
+        border: borders.$focusBorder;
 
         svg {
           path {
-            fill: $primary;
+            fill: colors.$primary;
           }
         }
       }
@@ -59,7 +59,7 @@
 
         svg {
           path {
-            fill: $spunPearl;
+            fill: colors.$spunPearl;
           }
         }
 
@@ -68,19 +68,19 @@
         }
 
         &:hover {
-          background-color: $wildSand;
+          background-color: colors.$wildSand;
         }
       }
 
       &-increase {
-        border-bottom: $transparentBorder;
-        border-left: $transparentBorder;
+        border-bottom: borders.$transparentBorder;
+        border-left: borders.$transparentBorder;
         border-top-right-radius: 4px;
       }
 
       &-decrease {
-        border-top: $transparentBorder;
-        border-left: $transparentBorder;
+        border-top: borders.$transparentBorder;
+        border-left: borders.$transparentBorder;
         border-bottom-right-radius: 4px;
       }
 
@@ -90,25 +90,25 @@
     }
 
     &-warning {
-      border: $errorBorder;
+      border: borders.$errorBorder;
 
       &_asterisk {
         position: absolute;
         top: 50%;
         right: 35px;
-        color: $amaranth;
+        color: colors.$amaranth;
         transform: translateY(-50%);
       }
 
       .range__button {
         &-increase {
-          border-top: $errorBorder;
-          border-right: $errorBorder;
+          border-top: borders.$errorBorder;
+          border-right: borders.$errorBorder;
         }
 
         &-decrease {
-          border-right: $errorBorder;
-          border-bottom: $errorBorder;
+          border-right: borders.$errorBorder;
+          border-bottom: borders.$errorBorder;
         }
       }
     }

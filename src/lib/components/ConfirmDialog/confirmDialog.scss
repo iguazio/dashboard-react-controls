@@ -1,7 +1,7 @@
-@import '../../scss/colors';
+@use '../../scss/colors';
 
 .confirm-dialog {
-  color: $primary;
+  color: colors.$primary;
 
   &__message {
     font-size: 15px;

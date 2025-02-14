@@ -1,4 +1,4 @@
-@import '../../scss/colors.scss';
+@use '../../scss/colors';
 
 .round-icon-cp {
   position: relative;
@@ -28,7 +28,7 @@
       z-index: 1;
       width: inherit;
       height: inherit;
-      background-color: $mulledWineThree;
+      background-color: colors.$mulledWineThree;
       border-radius: 50%;
       opacity: 0;
       transition: opacity 0.3s ease-in-out;
@@ -44,7 +44,7 @@
 
     &-disabled {
       path {
-        fill: $spunPearl;
+        fill: colors.$spunPearl;
       }
 
       &:hover {

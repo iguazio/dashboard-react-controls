@@ -1,6 +1,5 @@
-@import '../../../scss/colors';
-@import '../../../scss/borders';
-@import '../../../scss/mixins';
+@use '../../../scss/colors';
+@use '../../../scss/mixins';
 
 .edit-chip {
   &-container {
@@ -24,32 +23,32 @@
 
       &.item_edited {
         &_invalid {
-          color: $amaranth;
+          color: colors.$amaranth;
         }
       }
 
       &.input-label-key,
       &.input-label-value {
         &::placeholder {
-          color: $topaz;
+          color: colors.$topaz;
         }
       }
     }
 
     &-background {
-      @include chipBackground(false);
+      @include mixins.chipBackground(false);
     }
 
     &-border {
-      @include chipBorder();
+      @include mixins.chipBorder();
     }
 
     &-density {
-      @include chipDensity(true, false);
+      @include mixins.chipDensity(true, false);
     }
 
     &-font {
-      @include chipsFont(EditableChip);
+      @include mixins.chipsFont(EditableChip);
     }
 
     .item-icon-close {

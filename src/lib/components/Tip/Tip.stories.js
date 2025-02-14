@@ -16,7 +16,7 @@ such restriction.
 */
 import React from 'react'
 
-import { Tip } from '/src/lib/components'
+import Tip from '/src/lib/components/Tip/Tip'
 
 export default {
   title: 'Example/Tip',

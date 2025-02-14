@@ -18,7 +18,7 @@ import React from 'react'
 
 import RoundedIcon from './RoundedIcon'
 
-import { ReactComponent as RefreshIcon } from '../../images/refresh.svg'
+import RefreshIcon from '../../images/refresh.svg?react'
 
 export default {
   title: 'Example/RoundedIcon',

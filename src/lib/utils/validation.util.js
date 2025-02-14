@@ -411,7 +411,7 @@ const validationRules = {
       generateRule.validCharacters('a-z A-Z 0-9 - _ .'),
       generateRule.beginEndWith('a-z A-Z 0-9'),
       generateRule.noConsecutiveCharacters('.., .–, –.'),
-      generateRule.maxLengthBetweenDelimiters(/[\.\-\_]/, 63, 'periods'),
+      generateRule.maxLengthBetweenDelimiters(/[.\-_]/, 63, 'periods'),
       generateRule.length({ max: 253 }),
       generateRule.required()
     ],

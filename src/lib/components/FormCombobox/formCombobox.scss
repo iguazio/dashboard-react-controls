@@ -1,13 +1,13 @@
-@import '../../scss/colors';
-@import '../../scss/borders';
-@import '../../scss/shadows';
-@import '../../scss/mixins';
+@use '../../scss/colors';
+@use '../../scss/borders';
+@use '../../scss/shadows';
+@use '../../scss/mixins';
 
 .form-field.form-field-combobox {
   width: 100%;
 
   .form-field {
-    @include inputSelectField;
+    @include mixins.inputSelectField;
 
     &__icons {
       .form-field-combobox__icon {
@@ -24,7 +24,7 @@
 
     &-combobox {
       &__placeholder {
-        color: $topaz;
+        color: colors.$topaz;
         font-size: 15px;
         text-align: left;
         text-transform: capitalize;
@@ -71,8 +71,8 @@
       display: flex;
       align-items: center;
       margin: 0 9px;
-      border-bottom: $dividerBorder;
-      background-color: $white;
+      border-bottom: borders.$dividerBorder;
+      background-color: colors.$white;
     }
   }
 
@@ -97,7 +97,7 @@
         cursor: pointer;
 
         &:hover {
-          background-color: $alabaster;
+          background-color: colors.$alabaster;
         }
       }
     }
@@ -112,11 +112,11 @@
   .path-type,
   &__dropdown .path-type {
     &-store {
-      color: $amethyst;
+      color: colors.$amethyst;
     }
 
     &-v3io {
-      color: $cornflowerBlueTwo;
+      color: colors.$cornflowerBlueTwo;
     }
 
     &-az,
@@ -124,11 +124,11 @@
     &-http,
     &-https,
     &-s3 {
-      color: $sorbus;
+      color: colors.$sorbus;
     }
 
     &-dbfs {
-      color: $chateauGreen;
+      color: colors.$chateauGreen;
     }
   }
 }

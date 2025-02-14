@@ -17,7 +17,7 @@ such restriction.
 import React from 'react'
 import { Form } from 'react-final-form'
 
-import { FormTextarea } from '/src/lib/components'
+import FormTextarea from '/src/lib/components/FormTextarea/FormTextarea'
 
 export default {
   title: 'Example/FormTextarea',

@@ -16,9 +16,9 @@ such restriction.
 */
 import React from 'react'
 
-import { Tooltip } from '/src/lib/components'
-import { TextTooltipTemplate } from '/src/lib/components'
-import { ReactComponent as EyeIcon } from '../../images/eye.svg'
+import Tooltip from '/src/lib/components/Tooltip/Tooltip'
+import TextTooltipTemplate from '/src/lib/components/TooltipTemplate/TextTooltipTemplate'
+import EyeIcon from '../../images/eye.svg?react'
 
 export default {
   title: 'Example/Tooltip',

@@ -17,7 +17,7 @@ such restriction.
 import React from 'react'
 import { Form } from 'react-final-form'
 
-import { FormRadio } from '/src/lib/components'
+import FormRadio from '/src/lib/components/FormRadio/FormRadio.jsx'
 
 export default {
   title: 'Example/FormRadio',
