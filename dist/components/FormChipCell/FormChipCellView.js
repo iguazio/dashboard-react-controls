@@ -100,11 +100,17 @@ const FormChipCellView = /*#__PURE__*/_react.default.forwardRef((_ref, _ref2) =>
                 template: /*#__PURE__*/(0, _jsxRuntime.jsx)(_TextTooltipTemplate.default, {
                   text: chipData.tooltip || /*#__PURE__*/(0, _jsxRuntime.jsxs)("span", {
                     className: "chip__content",
-                    children: [chipData.key, !chipData.isKeyOnly && /*#__PURE__*/(0, _jsxRuntime.jsxs)(_jsxRuntime.Fragment, {
+                    children: [/*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
+                      className: "chip__content-item",
+                      children: chipData.key
+                    }), !chipData.isKeyOnly && /*#__PURE__*/(0, _jsxRuntime.jsxs)(_jsxRuntime.Fragment, {
                       children: [/*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
                         className: "chip__delimiter",
                         children: chipData.delimiter ? chipData.delimiter : ':'
-                      }), chipData.value]
+                      }), /*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
+                        className: "chip__content-item",
+                        children: chipData.value
+                      })]
                     })]
                   })
                 }),

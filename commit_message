@@ -1,7 +1,6 @@
 
 
-Create a new dist version 2.2.19
+Create a new dist version 2.2.20
 
 Collecting:
-- Fix [Wizard] batch run - back/next buttons does not look like "button" (#365)
-- Fix [UI] "All changes will be lost" pop up appears upon artifact register / job schedule (#366)
+- Fix [Artifact] tooltip label hover pop up issue (#368)
