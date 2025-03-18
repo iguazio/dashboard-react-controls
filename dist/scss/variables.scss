@@ -1,4 +1,4 @@
-@import './colors';
+@use './colors';
 
 $heightRowTable: 55px;
 $leftRowOffset: 49px;
@@ -9,8 +9,8 @@ $navbarTogglerWidth: 35px;
 
 $headerHeight: 64px;
 
-$primaryTextColor: $primary;
-$secondaryTextColor: $topaz;
+$primaryTextColor: colors.$primary;
+$secondaryTextColor: colors.$topaz;
 
 $actionsCellWidth: 82px;
 
