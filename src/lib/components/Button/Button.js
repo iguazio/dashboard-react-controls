@@ -46,12 +46,10 @@ const Button = forwardRef(
     return (
       <button {...restProps} className={buttonClassName} ref={ref} data-testid={id}>
         {icon && iconPosition === 'left' && icon}
-        {tooltip ? (
-          <Tooltip template={<TextTooltipTemplate text={tooltip} />}>
+        {(tooltip || label) && (
+          <Tooltip template={<TextTooltipTemplate text={tooltip || label} />}>
             {label && <span>{label}</span>}
           </Tooltip>
-        ) : (
-          label && <span>{label}</span>
         )}
         {icon && iconPosition === 'right' && icon}
       </button>
