@@ -4,7 +4,7 @@ var _react = _interopRequireDefault(require("react"));
 var _react2 = require("@testing-library/react");
 var _SelectOption = _interopRequireDefault(require("./SelectOption"));
 var _jsxRuntime = require("react/jsx-runtime");
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
 /*
 Copyright 2022 Iguazio Systems Ltd.
 Licensed under the Apache License, Version 2.0 (the "License") with
@@ -22,7 +22,7 @@ under the Apache 2.0 license is conditioned upon your compliance with
 such restriction.
 */
 
-const renderComponent = props => (0, _react2.render)( /*#__PURE__*/(0, _jsxRuntime.jsx)(_SelectOption.default, {
+const renderComponent = props => (0, _react2.render)(/*#__PURE__*/(0, _jsxRuntime.jsx)(_SelectOption.default, {
   ...props
 }));
 jest.mock('../../images/checkbox-unchecked.svg', () => ({
@@ -52,7 +52,7 @@ describe('SelectOption component', () => {
     expect(wrapper.queryByTestId('select-option')).not.toBeNull();
   });
   it('should display checkbox inside option if props selectType is "checkbox"', () => {
-    wrapper.rerender( /*#__PURE__*/(0, _jsxRuntime.jsx)(_SelectOption.default, {
+    wrapper.rerender(/*#__PURE__*/(0, _jsxRuntime.jsx)(_SelectOption.default, {
       item: {
         label: 'Test1',
         id: 'test1'
@@ -67,7 +67,7 @@ describe('SelectOption component', () => {
   });
   it('should won\'t call onClick callback if props disable set to "true"', () => {
     const mockCLick = jest.fn();
-    wrapper.rerender( /*#__PURE__*/(0, _jsxRuntime.jsx)(_SelectOption.default, {
+    wrapper.rerender(/*#__PURE__*/(0, _jsxRuntime.jsx)(_SelectOption.default, {
       item: {
         label: 'Test1',
         id: 'test1'
@@ -84,7 +84,7 @@ describe('SelectOption component', () => {
     expect(wrapper.queryByTestId('tooltip-wrapper')).not.toBeNull();
   });
   it('should add class "disabled" to SelectOption if props disabled set to "true"', () => {
-    wrapper.rerender( /*#__PURE__*/(0, _jsxRuntime.jsx)(_SelectOption.default, {
+    wrapper.rerender(/*#__PURE__*/(0, _jsxRuntime.jsx)(_SelectOption.default, {
       item: {
         label: 'Test1',
         id: 'test1'

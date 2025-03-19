@@ -12,7 +12,7 @@ var _Tooltip = _interopRequireDefault(require("../Tooltip/Tooltip"));
 var _TextTooltipTemplate = _interopRequireDefault(require("../TooltipTemplate/TextTooltipTemplate"));
 require("./FormRadio.scss");
 var _jsxRuntime = require("react/jsx-runtime");
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
 /*
 Copyright 2022 Iguazio Systems Ltd.
 Licensed under the Apache License, Version 2.0 (the "License") with
@@ -50,11 +50,11 @@ const FormRadio = _ref => {
       } = _ref2;
       return /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
         className: formFieldClassNames,
-        "data-testid": name ? "".concat(name, "-").concat(inputProps.value, "-form-radio") : 'form-field-radio',
+        "data-testid": name ? `${name}-${inputProps.value}-form-radio` : 'form-field-radio',
         children: [/*#__PURE__*/(0, _jsxRuntime.jsx)("input", {
           className: (0, _classnames.default)(input.checked ? 'checked' : 'unchecked'),
           type: "radio",
-          "data-testid": name ? "".concat(name, "-").concat(inputProps.value, "-radio") : 'form-radio',
+          "data-testid": name ? `${name}-${inputProps.value}-radio` : 'form-radio',
           ...input,
           ...inputProps,
           checked: input.checked,

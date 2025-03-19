@@ -13,7 +13,7 @@ var _edit = require("../../images/edit.svg");
 var _delete = require("../../images/delete.svg");
 var _checkmark = require("../../images/checkmark2.svg");
 var _jsxRuntime = require("react/jsx-runtime");
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
 /*
 Copyright 2019 Iguazio Systems Ltd.
 
@@ -35,7 +35,6 @@ such restriction.
 */
 
 const FormRowActions = _ref => {
-  var _editingItem$ui, _editingItem$ui2, _editingItem$ui3, _editingItem$ui4;
   let {
     applyChanges,
     deleteButtonIsHidden = false,
@@ -51,7 +50,7 @@ const FormRowActions = _ref => {
     className: "form-table__cell form-table__actions-cell"
   }) : /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
     className: "form-table__cell form-table__actions-cell",
-    children: [(editingItem === null || editingItem === void 0 || (_editingItem$ui = editingItem.ui) === null || _editingItem$ui === void 0 ? void 0 : _editingItem$ui.index) === index && /*#__PURE__*/(0, _jsxRuntime.jsxs)(_jsxRuntime.Fragment, {
+    children: [editingItem?.ui?.index === index && /*#__PURE__*/(0, _jsxRuntime.jsxs)(_jsxRuntime.Fragment, {
       children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_components.RoundedIcon, {
         id: "apply-btn",
         onClick: event => applyChanges(event, index),
@@ -61,11 +60,11 @@ const FormRowActions = _ref => {
       }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_components.RoundedIcon, {
         id: "delete-discard-btn",
         onClick: event => discardOrDelete(event, fieldsPath, index),
-        tooltipText: (_editingItem$ui2 = editingItem.ui) !== null && _editingItem$ui2 !== void 0 && _editingItem$ui2.isNew ? 'Delete' : 'Discard changes',
+        tooltipText: editingItem.ui?.isNew ? 'Delete' : 'Discard changes',
         disabled: disabled,
-        children: (_editingItem$ui3 = editingItem.ui) !== null && _editingItem$ui3 !== void 0 && _editingItem$ui3.isNew ? /*#__PURE__*/(0, _jsxRuntime.jsx)(_delete.ReactComponent, {}) : /*#__PURE__*/(0, _jsxRuntime.jsx)(_close.ReactComponent, {})
+        children: editingItem.ui?.isNew ? /*#__PURE__*/(0, _jsxRuntime.jsx)(_delete.ReactComponent, {}) : /*#__PURE__*/(0, _jsxRuntime.jsx)(_close.ReactComponent, {})
       })]
-    }), (!editingItem || (editingItem === null || editingItem === void 0 || (_editingItem$ui4 = editingItem.ui) === null || _editingItem$ui4 === void 0 ? void 0 : _editingItem$ui4.index) !== index) && /*#__PURE__*/(0, _jsxRuntime.jsxs)(_jsxRuntime.Fragment, {
+    }), (!editingItem || editingItem?.ui?.index !== index) && /*#__PURE__*/(0, _jsxRuntime.jsxs)(_jsxRuntime.Fragment, {
       children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_components.RoundedIcon, {
         id: "edit-btn",
         onClick: event => {

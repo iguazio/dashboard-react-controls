@@ -13,7 +13,7 @@ var _TextTooltipTemplate = _interopRequireDefault(require("../../TooltipTemplate
 var _types = require("../../../types");
 var _hooks = require("../../../hooks");
 var _jsxRuntime = require("react/jsx-runtime");
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
 function _getRequireWildcardCache(e) { if ("function" != typeof WeakMap) return null; var r = new WeakMap(), t = new WeakMap(); return (_getRequireWildcardCache = function (e) { return e ? t : r; })(e); }
 function _interopRequireWildcard(e, r) { if (!r && e && e.__esModule) return e; if (null === e || "object" != typeof e && "function" != typeof e) return { default: e }; var t = _getRequireWildcardCache(r); if (t && t.has(e)) return t.get(e); var n = { __proto__: null }, a = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var u in e) if ("default" !== u && {}.hasOwnProperty.call(e, u)) { var i = a ? Object.getOwnPropertyDescriptor(e, u) : null; i && (i.get || i.set) ? Object.defineProperty(n, u, i) : n[u] = e[u]; } return n.default = e, t && t.set(e, n), n; }
 /*
@@ -51,21 +51,20 @@ const HiddenChipsBlock = /*#__PURE__*/_react.default.forwardRef((_ref, _ref2) =>
   const chipLabelClassNames = (0, _classnames.default)('chip__label', textOverflowEllipsis && 'data-ellipsis');
   const chipValueClassNames = (0, _classnames.default)('chip__value', textOverflowEllipsis && 'data-ellipsis', chipOptions.boldValue && 'chip-value_bold');
   const generateChipData = chip => {
-    return chip.isKeyOnly ? chip.key : "".concat(chip.key).concat(chip.delimiter ? chip.delimiter : ':', " ").concat(chip.value);
+    return chip.isKeyOnly ? chip.key : `${chip.key}${chip.delimiter ? chip.delimiter : ':'} ${chip.value}`;
   };
   (0, _react.useEffect)(() => {
     if (chips.length === 0) {
       handleShowElements();
     }
   });
-  return /*#__PURE__*/(0, _reactDom.createPortal)( /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
+  return /*#__PURE__*/(0, _reactDom.createPortal)(/*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
     ref: hiddenChipsPopUpRef,
     className: hiddenChipsBlockClassNames,
     onClick: event => event.stopPropagation(),
     children: /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
       className: "chip-block-hidden__scrollable-container",
-      children: chips === null || chips === void 0 ? void 0 : chips.map(element => {
-        var _element$delimiter;
+      children: chips?.map(element => {
         return /*#__PURE__*/(0, _jsxRuntime.jsx)(_Tooltip.default, {
           template: /*#__PURE__*/(0, _jsxRuntime.jsx)(_TextTooltipTemplate.default, {
             text: element.delimiter ? /*#__PURE__*/(0, _jsxRuntime.jsxs)("span", {
@@ -86,7 +85,7 @@ const HiddenChipsBlock = /*#__PURE__*/_react.default.forwardRef((_ref, _ref2) =>
             }), element.value && /*#__PURE__*/(0, _jsxRuntime.jsxs)(_jsxRuntime.Fragment, {
               children: [/*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
                 className: "chip__delimiter",
-                children: (_element$delimiter = element.delimiter) !== null && _element$delimiter !== void 0 ? _element$delimiter : ':'
+                children: element.delimiter ?? ':'
               }), /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
                 className: chipValueClassNames,
                 children: element.value

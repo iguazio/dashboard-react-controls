@@ -12,7 +12,7 @@ var _types = require("../../types");
 var _checkmark = require("../../images/checkmark.svg");
 require("./selectOption.scss");
 var _jsxRuntime = require("react/jsx-runtime");
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
 /*
 Copyright 2022 Iguazio Systems Ltd.
 Licensed under the Apache License, Version 2.0 (the "License") with
@@ -31,7 +31,6 @@ such restriction.
 */
 
 const SelectOption = _ref => {
-  var _item$labelHtml;
   let {
     item,
     name,
@@ -51,7 +50,7 @@ const SelectOption = _ref => {
         label: item.label,
         disabled: item.disabled || false,
         children: item.status && /*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
-          className: "state-".concat(item.status, "-job status")
+          className: `state-${item.status}-job status`
         })
       })
     });
@@ -74,9 +73,9 @@ const SelectOption = _ref => {
             className: "select__item-icon",
             children: item.icon
           }), item.status && /*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
-            className: "state-".concat(item.status, "-job status")
+            className: `state-${item.status}-job status`
           }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_components.Tooltip, {
-            renderChildAsHtml: ((_item$labelHtml = item.labelHtml) === null || _item$labelHtml === void 0 ? void 0 : _item$labelHtml.length) > 0,
+            renderChildAsHtml: item.labelHtml?.length > 0,
             template: /*#__PURE__*/(0, _jsxRuntime.jsx)(_components.TextTooltipTemplate, {
               text: item.label
             }),

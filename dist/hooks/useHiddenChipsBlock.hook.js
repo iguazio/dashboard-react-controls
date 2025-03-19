@@ -7,7 +7,7 @@ exports.useHiddenChipsBlock = void 0;
 var _react = require("react");
 var _classnames = _interopRequireDefault(require("classnames"));
 var _common = require("../utils/common.util");
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
 /*
 Copyright 2019 Iguazio Systems Ltd.
 
@@ -35,7 +35,7 @@ const useHiddenChipsBlock = (hiddenChipsCounterRef, hiddenChipsPopUpRef) => {
   const transitionEndEventName = (0, _react.useMemo)(() => (0, _common.getTransitionEndEventName)(), []);
   const hiddenChipsBlockClassNames = (0, _classnames.default)('chip-block-hidden', isTop ? 'chip-block-hidden_top' : 'chip-block-hidden_bottom', isLeft ? 'chip-block-hidden_left' : 'chip-block-hidden_right', isVisible && 'chip-block-hidden_visible');
   const resizePopUp = (0, _react.useCallback)(() => {
-    if (hiddenChipsPopUpRef !== null && hiddenChipsPopUpRef !== void 0 && hiddenChipsPopUpRef.current && hiddenChipsCounterRef !== null && hiddenChipsCounterRef !== void 0 && hiddenChipsCounterRef.current) {
+    if (hiddenChipsPopUpRef?.current && hiddenChipsCounterRef?.current) {
       const offset = 10;
       const offsetMargin = 20;
       const elementRect = hiddenChipsCounterRef.current.getBoundingClientRect();
@@ -59,10 +59,10 @@ const useHiddenChipsBlock = (hiddenChipsCounterRef, hiddenChipsPopUpRef) => {
         // Compare elementRect.left and elementRectRight to choose the larger value as the max width
         isLeftPosition = elementRect.left > elementRectRight;
         const popUpMaxWidth = Math.max(elementRect.left, elementRectRight);
-        hiddenChipsPopUpRef.current.style.maxWidth = "".concat(popUpMaxWidth, "px");
+        hiddenChipsPopUpRef.current.style.maxWidth = `${popUpMaxWidth}px`;
       }
-      hiddenChipsPopUpRef.current.style.right = isLeftPosition ? "".concat(elementRectRight, "px") : 'unset';
-      hiddenChipsPopUpRef.current.style.left = isLeftPosition ? 'unset' : "".concat(elementRect.left, "px");
+      hiddenChipsPopUpRef.current.style.right = isLeftPosition ? `${elementRectRight}px` : 'unset';
+      hiddenChipsPopUpRef.current.style.left = isLeftPosition ? 'unset' : `${elementRect.left}px`;
 
       // Determine if the top position is preferred based on the element's position and available height
       if (elementRect.top > hiddenChipsPopUpRef.current.clientHeight + offset + offsetMargin) {
@@ -73,17 +73,17 @@ const useHiddenChipsBlock = (hiddenChipsCounterRef, hiddenChipsPopUpRef) => {
         // Compare elementRect.top and elementRectBottom to choose the larger value as the max height
         isTopPosition = elementRect.top > elementRectBottom + offset;
         const popUpMaxHeight = Math.max(elementRect.top, elementRectBottom) - offset - offsetMargin;
-        hiddenChipsPopUpRef.current.style.maxHeight = "".concat(popUpMaxHeight, "px");
+        hiddenChipsPopUpRef.current.style.maxHeight = `${popUpMaxHeight}px`;
       }
-      hiddenChipsPopUpRef.current.style.bottom = isTopPosition ? "".concat(elementRectBottom + elementRect.height + offset, "px") : 'unset';
-      hiddenChipsPopUpRef.current.style.top = isTopPosition ? 'unset' : "".concat(elementRect.bottom + offset, "px");
+      hiddenChipsPopUpRef.current.style.bottom = isTopPosition ? `${elementRectBottom + elementRect.height + offset}px` : 'unset';
+      hiddenChipsPopUpRef.current.style.top = isTopPosition ? 'unset' : `${elementRect.bottom + offset}px`;
       setIsTop(isTopPosition);
       setIsLeft(isLeftPosition);
       setIsVisible(true);
     }
   }, [hiddenChipsCounterRef, hiddenChipsPopUpRef]);
   (0, _react.useEffect)(() => {
-    if (hiddenChipsPopUpRef !== null && hiddenChipsPopUpRef !== void 0 && hiddenChipsPopUpRef.current && hiddenChipsCounterRef !== null && hiddenChipsCounterRef !== void 0 && hiddenChipsCounterRef.current) {
+    if (hiddenChipsPopUpRef?.current && hiddenChipsCounterRef?.current) {
       window.addEventListener('resize', resizePopUp);
       window.addEventListener(transitionEndEventName, resizePopUp);
       return () => {

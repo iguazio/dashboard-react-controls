@@ -38,4 +38,4 @@ var _FormRowActions = _interopRequireDefault(require("./FormRowActions/FormRowAc
 var _OptionsMenu = _interopRequireDefault(require("./OptionsMenu/OptionsMenu"));
 var _SelectOption = _interopRequireDefault(require("./SelectOption/SelectOption"));
 var _ValidationTemplate = _interopRequireDefault(require("./ValidationTemplate/ValidationTemplate"));
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }

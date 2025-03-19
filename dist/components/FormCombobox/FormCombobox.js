@@ -22,7 +22,7 @@ var _warning = require("../../images/warning.svg");
 var _exclamationMark = require("../../images/exclamation-mark.svg");
 require("./formCombobox.scss");
 var _jsxRuntime = require("react/jsx-runtime");
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
 function _getRequireWildcardCache(e) { if ("function" != typeof WeakMap) return null; var r = new WeakMap(), t = new WeakMap(); return (_getRequireWildcardCache = function (e) { return e ? t : r; })(e); }
 function _interopRequireWildcard(e, r) { if (!r && e && e.__esModule) return e; if (null === e || "object" != typeof e && "function" != typeof e) return { default: e }; var t = _getRequireWildcardCache(r); if (t && t.has(e)) return t.get(e); var n = { __proto__: null }, a = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var u in e) if ("default" !== u && {}.hasOwnProperty.call(e, u)) { var i = a ? Object.getOwnPropertyDescriptor(e, u) : null; i && (i.get || i.set) ? Object.defineProperty(n, u, i) : n[u] = e[u]; } return n.default = e, t && t.set(e, n), n; }
 /*
@@ -157,13 +157,13 @@ const FormCombobox = _ref => {
   const handleInputChange = event => {
     const target = event.target;
     setDropdownStyle({
-      left: "".concat(target.selectionStart < 30 ? target.selectionStart : 30, "ch")
+      left: `${target.selectionStart < 30 ? target.selectionStart : 30}ch`
     });
     if (searchIsFocused) {
       setSearchIsFocused(false);
     }
     setInputValue(target.value);
-    input.onChange("".concat(selectValue.id).concat(target.value));
+    input.onChange(`${selectValue.id}${target.value}`);
     onChange && onChange(selectValue.id, target.value);
     if (dropdownList.length > 0) {
       setShowSuggestionList(true);
@@ -183,7 +183,7 @@ const FormCombobox = _ref => {
   const handleSuggestionListOptionClick = option => {
     const inputValueItems = inputValue.split('/');
     const valueIndex = inputValueItems.length - 1;
-    let formattedValue = option.customDelimiter ? inputValueItems[valueIndex].replace(new RegExp("".concat(option.customDelimiter, ".*")), '') + option.id : option.id;
+    let formattedValue = option.customDelimiter ? inputValueItems[valueIndex].replace(new RegExp(`${option.customDelimiter}.*`), '') + option.id : option.id;
     if (inputValueItems.length <= maxSuggestedMatches - 1) formattedValue += '/';
     inputValueItems[valueIndex] = formattedValue;
     if (searchIsFocused) {
@@ -191,13 +191,13 @@ const FormCombobox = _ref => {
     }
     if (inputValueItems.join('/') !== inputValue) {
       setInputValue(inputValueItems.join('/'));
-      input.onChange("".concat(selectValue.id).concat(inputValueItems.join('/')));
+      input.onChange(`${selectValue.id}${inputValueItems.join('/')}`);
       onChange && onChange(selectValue.id, inputValueItems.join('/'));
     }
     setShowSuggestionList(false);
     inputRef.current.focus();
     setDropdownStyle({
-      left: "".concat(inputRef.current.selectionStart < 30 ? inputRef.current.selectionStart : 30, "ch")
+      left: `${inputRef.current.selectionStart < 30 ? inputRef.current.selectionStart : 30}ch`
     });
   };
   const inputOnFocus = () => {
@@ -233,7 +233,7 @@ const FormCombobox = _ref => {
   const validateField = function () {
     let value = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '';
     let allValues = arguments.length > 1 ? arguments[1] : undefined;
-    const valueToValidate = value.startsWith(selectValue.id) ? value.substring(selectValue.id.length) : value !== null && value !== void 0 ? value : '';
+    const valueToValidate = value.startsWith(selectValue.id) ? value.substring(selectValue.id.length) : value ?? '';
     let validationError = null;
     if (!(0, _lodash.isEmpty)(validationRules)) {
       const [newRules, isValidField] = (0, _validation.checkPatternsValidity)(rules, valueToValidate);
@@ -270,12 +270,11 @@ const FormCombobox = _ref => {
   const comboboxClassNames = (0, _classnames.default)(comboboxClassName, 'form-field-combobox', 'form-field', isInvalid && 'form-field-combobox_invalid');
   const iconClassNames = (0, _classnames.default)(showSelectDropdown && 'form-field-combobox__icon_open', 'form-field-combobox__icon');
   const selectValueClassNames = (0, _classnames.default)(selectValue.className);
-  const wrapperClassNames = (0, _classnames.default)('form-field__wrapper', "form-field__wrapper-".concat(density), disabled && 'form-field__wrapper-disabled', isInvalid && 'form-field__wrapper-invalid', withoutBorder && 'without-border');
+  const wrapperClassNames = (0, _classnames.default)('form-field__wrapper', `form-field__wrapper-${density}`, disabled && 'form-field__wrapper-disabled', isInvalid && 'form-field__wrapper-invalid', withoutBorder && 'without-border');
   return /*#__PURE__*/(0, _jsxRuntime.jsx)(_reactFinalForm.Field, {
     name: name,
     validate: validateField,
     children: _ref3 => {
-      var _meta$error$label, _meta$error;
       let {
         input,
         meta
@@ -283,7 +282,7 @@ const FormCombobox = _ref => {
       return /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
         className: comboboxClassNames,
         ref: comboboxRef,
-        "data-testid": name ? "".concat(name, "-form-combobox") : 'form-combobox',
+        "data-testid": name ? `${name}-form-combobox` : 'form-combobox',
         children: [label && /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
           className: labelClassNames,
           children: /*#__PURE__*/(0, _jsxRuntime.jsxs)("label", {
@@ -340,7 +339,7 @@ const FormCombobox = _ref => {
             })]
           }), /*#__PURE__*/(0, _jsxRuntime.jsx)("input", {
             className: inputClassNames,
-            "data-testid": name ? "".concat(name, "-form-combobox-input") : 'form-combobox-input',
+            "data-testid": name ? `${name}-form-combobox-input` : 'form-combobox-input',
             id: input.name,
             onChange: handleInputChange,
             onFocus: inputOnFocus,
@@ -364,7 +363,7 @@ const FormCombobox = _ref => {
               children: [!hideSearchInput && /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
                 className: "form-field-combobox__search-wrapper",
                 children: [/*#__PURE__*/(0, _jsxRuntime.jsx)("input", {
-                  "data-testid": name ? "".concat(name, "-form-combobox-search") : 'form-combobox-search',
+                  "data-testid": name ? `${name}-form-combobox-search` : 'form-combobox-search',
                   className: "form-field-combobox__search form-field__control",
                   onChange: suggestionListSearchChange,
                   onFocus: () => setSearchIsFocused(true),
@@ -388,7 +387,7 @@ const FormCombobox = _ref => {
             children: [isInvalid && !Array.isArray(meta.error) && /*#__PURE__*/(0, _jsxRuntime.jsx)(_Tooltip.default, {
               className: "form-field__warning",
               template: /*#__PURE__*/(0, _jsxRuntime.jsx)(_TextTooltipTemplate.default, {
-                text: (_meta$error$label = (_meta$error = meta.error) === null || _meta$error === void 0 ? void 0 : _meta$error.label) !== null && _meta$error$label !== void 0 ? _meta$error$label : invalidText,
+                text: meta.error?.label ?? invalidText,
                 warning: true
               }),
               children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_exclamationMark.ReactComponent, {})

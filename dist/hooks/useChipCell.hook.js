@@ -39,16 +39,14 @@ const useChipCell = (isEditMode, visibleChipsMaxLength) => {
   const hiddenChipsCounterRef = (0, _react.useRef)();
   const hiddenChipsPopUpRef = (0, _react.useRef)();
   const handleShowElements = (0, _react.useCallback)(event => {
-    var _hiddenChipsCounterRe2;
     if (!isEditMode || isEditMode && visibleChipsMaxLength) {
-      var _hiddenChipsCounterRe;
-      if ((_hiddenChipsCounterRe = hiddenChipsCounterRef.current) !== null && _hiddenChipsCounterRe !== void 0 && _hiddenChipsCounterRe.contains(event.target) && !showHiddenChips) {
+      if (hiddenChipsCounterRef.current?.contains(event.target) && !showHiddenChips) {
         setShowHiddenChips(true);
       } else {
         setShowHiddenChips(false);
       }
     }
-    event && ((_hiddenChipsCounterRe2 = hiddenChipsCounterRef.current) === null || _hiddenChipsCounterRe2 === void 0 ? void 0 : _hiddenChipsCounterRe2.contains(event.target)) && event.stopPropagation();
+    event && hiddenChipsCounterRef.current?.contains(event.target) && event.stopPropagation();
   }, [isEditMode, showHiddenChips, visibleChipsMaxLength]);
   (0, _react.useEffect)(() => {
     if (showHiddenChips) {
@@ -57,7 +55,7 @@ const useChipCell = (isEditMode, visibleChipsMaxLength) => {
     return () => window.removeEventListener('click', handleShowElements, true);
   }, [showHiddenChips, handleShowElements]);
   const handleScroll = (0, _react.useCallback)(event => {
-    if (event.target.parentElement !== (hiddenChipsPopUpRef === null || hiddenChipsPopUpRef === void 0 ? void 0 : hiddenChipsPopUpRef.current)) {
+    if (event.target.parentElement !== hiddenChipsPopUpRef?.current) {
       setShowHiddenChips(false);
     }
   }, [hiddenChipsPopUpRef]);
@@ -68,11 +66,10 @@ const useChipCell = (isEditMode, visibleChipsMaxLength) => {
     return () => window.removeEventListener('scroll', handleScroll, true);
   }, [handleScroll, showHiddenChips]);
   const resizeChipCell = (0, _react.useCallback)(() => {
-    if (hiddenChipsPopUpRef !== null && hiddenChipsPopUpRef !== void 0 && hiddenChipsPopUpRef.current) {
-      var _hiddenChipsCounterRe3;
+    if (hiddenChipsPopUpRef?.current) {
       const scrollableParent = (0, _getFirstScrollableParent.getFirstScrollableParent)(hiddenChipsCounterRef.current.offsetParent);
       const scrollableParentRect = scrollableParent.getBoundingClientRect();
-      const hiddenChipsCounterRect = (_hiddenChipsCounterRe3 = hiddenChipsCounterRef.current) === null || _hiddenChipsCounterRe3 === void 0 ? void 0 : _hiddenChipsCounterRe3.getBoundingClientRect();
+      const hiddenChipsCounterRect = hiddenChipsCounterRef.current?.getBoundingClientRect();
 
       // Check if the hiddenChipsCounterRect is outside the boundaries of the scrollableParentRect or the window
       if (hiddenChipsCounterRect.left < scrollableParentRect.left || hiddenChipsCounterRect.top < scrollableParentRect.top || hiddenChipsCounterRect.right > scrollableParentRect.right || hiddenChipsCounterRect.bottom > scrollableParentRect.bottom || hiddenChipsCounterRect.right > window.innerWidth || hiddenChipsCounterRect.bottom > window.innerHeight) {
@@ -80,8 +77,7 @@ const useChipCell = (isEditMode, visibleChipsMaxLength) => {
       }
     }
     if (!isEditMode && !(0, _common.isEveryObjectValueEmpty)(chipsSizes)) {
-      var _chipsCellRef$current;
-      const parentSize = (_chipsCellRef$current = chipsCellRef.current) === null || _chipsCellRef$current === void 0 ? void 0 : _chipsCellRef$current.getBoundingClientRect().width;
+      const parentSize = chipsCellRef.current?.getBoundingClientRect().width;
       let maxLength = 0;
       let chipIndex = 0;
       const padding = 65;

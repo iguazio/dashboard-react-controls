@@ -22,7 +22,7 @@ var _popout = require("../../images/popout.svg");
 var _warning = require("../../images/warning.svg");
 require("./formInput.scss");
 var _jsxRuntime = require("react/jsx-runtime");
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
 function _getRequireWildcardCache(e) { if ("function" != typeof WeakMap) return null; var r = new WeakMap(), t = new WeakMap(); return (_getRequireWildcardCache = function (e) { return e ? t : r; })(e); }
 function _interopRequireWildcard(e, r) { if (!r && e && e.__esModule) return e; if (null === e || "object" != typeof e && "function" != typeof e) return { default: e }; var t = _getRequireWildcardCache(r); if (t && t.has(e)) return t.get(e); var n = { __proto__: null }, a = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var u in e) if ("default" !== u && {}.hasOwnProperty.call(e, u)) { var i = a ? Object.getOwnPropertyDescriptor(e, u) : null; i && (i.get || i.set) ? Object.defineProperty(n, u, i) : n[u] = e[u]; } return n.default = e, t && t.set(e, n), n; }
 /*
@@ -55,7 +55,6 @@ const defaultProps = {
   rules: []
 };
 const FormInput = /*#__PURE__*/_react.default.forwardRef((_ref, ref) => {
-  var _ref2;
   let {
     async = false,
     className = '',
@@ -96,14 +95,14 @@ const FormInput = /*#__PURE__*/_react.default.forwardRef((_ref, ref) => {
   const [validationRules, setValidationRules] = (0, _react.useState)(rules);
   const [showValidationRules, setShowValidationRules] = (0, _react.useState)(false);
   const wrapperRef = (0, _react.useRef)();
-  (_ref2 = ref) !== null && _ref2 !== void 0 ? _ref2 : ref = wrapperRef;
+  ref ??= wrapperRef;
   const inputRef = (0, _react.useRef)();
   const errorsRef = (0, _react.useRef)();
   const isRequiredRulePresentRef = (0, _react.useRef)(false);
   (0, _hooks.useDetectOutsideClick)(ref, () => setShowValidationRules(false));
   const debounceAsync = (0, _hooks.useDebounce)();
   const formFieldClassNames = (0, _classnames.default)('form-field-input', className);
-  const inputWrapperClassNames = (0, _classnames.default)('form-field__wrapper', "form-field__wrapper-".concat(density), disabled && 'form-field__wrapper-disabled', isInvalid && 'form-field__wrapper-invalid', withoutBorder && 'without-border');
+  const inputWrapperClassNames = (0, _classnames.default)('form-field__wrapper', `form-field__wrapper-${density}`, disabled && 'form-field__wrapper-disabled', isInvalid && 'form-field__wrapper-invalid', withoutBorder && 'without-border');
   const labelClassNames = (0, _classnames.default)('form-field__label', disabled && 'form-field__label-disabled');
   (0, _react.useEffect)(() => {
     setTypedValue(String(input.value)); // convert from number to string
@@ -146,12 +145,12 @@ const FormInput = /*#__PURE__*/_react.default.forwardRef((_ref, ref) => {
     });
   }, [rules]);
   const getValidationRules = () => {
-    return validationRules.map(_ref3 => {
+    return validationRules.map(_ref2 => {
       let {
         isValid = false,
         label,
         name
-      } = _ref3;
+      } = _ref2;
       return /*#__PURE__*/(0, _jsxRuntime.jsx)(_ValidationTemplate.default, {
         valid: isValid,
         validationMessage: label
@@ -162,9 +161,8 @@ const FormInput = /*#__PURE__*/_react.default.forwardRef((_ref, ref) => {
     return !value && !required || disabled;
   };
   const handleInputBlur = event => {
-    var _event$relatedTarget;
     input.onBlur && input.onBlur(event);
-    if (!event.relatedTarget || !((_event$relatedTarget = event.relatedTarget) !== null && _event$relatedTarget !== void 0 && _event$relatedTarget.closest('.form-field__suggestion-list'))) {
+    if (!event.relatedTarget || !event.relatedTarget?.closest('.form-field__suggestion-list')) {
       setIsFocused(false);
       onBlur && onBlur(event);
     }
@@ -217,13 +215,13 @@ const FormInput = /*#__PURE__*/_react.default.forwardRef((_ref, ref) => {
         if (inputProps.max && +valueToValidate > +inputProps.max) {
           validationError = {
             name: 'maxValue',
-            label: "The maximum value must be ".concat(inputProps.max)
+            label: `The maximum value must be ${inputProps.max}`
           };
         }
         if (inputProps.min && +valueToValidate < +inputProps.min) {
           validationError = {
             name: 'minValue',
-            label: "The minimum value must be ".concat(inputProps.min)
+            label: `The minimum value must be ${inputProps.min}`
           };
         }
       }
@@ -269,19 +267,18 @@ const FormInput = /*#__PURE__*/_react.default.forwardRef((_ref, ref) => {
     validate: async ? validateFieldAsync : validateField,
     name: name,
     parse: parseField,
-    children: _ref4 => {
-      var _inputProps$autocompl, _errorsRef$current$la, _errorsRef$current;
+    children: _ref3 => {
       let {
         input
-      } = _ref4;
+      } = _ref3;
       return /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
         ref: ref,
         className: formFieldClassNames,
-        "data-testid": name ? "".concat(name, "-form-field-input") : 'form-field-input',
+        "data-testid": name ? `${name}-form-field-input` : 'form-field-input',
         children: [label && /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
           className: labelClassNames,
           children: [/*#__PURE__*/(0, _jsxRuntime.jsxs)("label", {
-            "data-testid": name ? "".concat(name, "-form-label") : 'form-label',
+            "data-testid": name ? `${name}-form-label` : 'form-label',
             htmlFor: input.name,
             children: [label, (required || validationRules.find(rule => rule.name === 'required')) && /*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
               className: "form-field__label-mandatory",
@@ -307,7 +304,7 @@ const FormInput = /*#__PURE__*/_react.default.forwardRef((_ref, ref) => {
           children: [/*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
             className: "form-field__control",
             children: /*#__PURE__*/(0, _jsxRuntime.jsx)("input", {
-              "data-testid": name ? "".concat(name, "-form-input") : 'form-input',
+              "data-testid": name ? `${name}-form-input` : 'form-input',
               id: input.name,
               ref: inputRef,
               required: isInvalid || required,
@@ -316,7 +313,7 @@ const FormInput = /*#__PURE__*/_react.default.forwardRef((_ref, ref) => {
               type,
               ...inputProps,
               ...input,
-              autoComplete: (_inputProps$autocompl = inputProps.autocomplete) !== null && _inputProps$autocompl !== void 0 ? _inputProps$autocompl : 'off',
+              autoComplete: inputProps.autocomplete ?? 'off',
               onBlur: handleInputBlur,
               onKeyDown: handleInputKeyDown,
               onFocus: handleInputFocus
@@ -326,7 +323,7 @@ const FormInput = /*#__PURE__*/_react.default.forwardRef((_ref, ref) => {
             children: [isInvalid && !Array.isArray(errorsRef.current) && /*#__PURE__*/(0, _jsxRuntime.jsx)(_components.Tooltip, {
               className: "form-field__warning",
               template: /*#__PURE__*/(0, _jsxRuntime.jsx)(_components.TextTooltipTemplate, {
-                text: (_errorsRef$current$la = (_errorsRef$current = errorsRef.current) === null || _errorsRef$current === void 0 ? void 0 : _errorsRef$current.label) !== null && _errorsRef$current$la !== void 0 ? _errorsRef$current$la : invalidText,
+                text: errorsRef.current?.label ?? invalidText,
                 warning: true
               }),
               children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_exclamationMark.ReactComponent, {})
@@ -349,7 +346,7 @@ const FormInput = /*#__PURE__*/_react.default.forwardRef((_ref, ref) => {
             ...input,
             disabled
           })]
-        }), (suggestionList === null || suggestionList === void 0 ? void 0 : suggestionList.length) > 0 && isFocused && /*#__PURE__*/(0, _jsxRuntime.jsx)("ul", {
+        }), suggestionList?.length > 0 && isFocused && /*#__PURE__*/(0, _jsxRuntime.jsx)("ul", {
           className: "form-field__suggestion-list",
           children: suggestionList.map((item, index) => {
             return /*#__PURE__*/(0, _jsxRuntime.jsx)("li", {
@@ -359,9 +356,9 @@ const FormInput = /*#__PURE__*/_react.default.forwardRef((_ref, ref) => {
               },
               tabIndex: index,
               dangerouslySetInnerHTML: {
-                __html: item.replace(new RegExp(typedValue, 'gi'), match => match ? "<b>".concat(match, "</b>") : match)
+                __html: item.replace(new RegExp(typedValue, 'gi'), match => match ? `<b>${match}</b>` : match)
               }
-            }, "".concat(item).concat(index));
+            }, `${item}${index}`);
           })
         }), !(0, _lodash.isEmpty)(validationRules) && isInvalid && Array.isArray(errorsRef.current) && /*#__PURE__*/(0, _jsxRuntime.jsx)(_OptionsMenu.default, {
           show: showValidationRules,

@@ -18,7 +18,7 @@ var _constants = require("../../constants");
 var _dropdown = require("../../images/dropdown.svg");
 require("./formSelect.scss");
 var _jsxRuntime = require("react/jsx-runtime");
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
 function _getRequireWildcardCache(e) { if ("function" != typeof WeakMap) return null; var r = new WeakMap(), t = new WeakMap(); return (_getRequireWildcardCache = function (e) { return e ? t : r; })(e); }
 function _interopRequireWildcard(e, r) { if (!r && e && e.__esModule) return e; if (null === e || "object" != typeof e && "function" != typeof e) return { default: e }; var t = _getRequireWildcardCache(r); if (t && t.has(e)) return t.get(e); var n = { __proto__: null }, a = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var u in e) if ("default" !== u && {}.hasOwnProperty.call(e, u)) { var i = a ? Object.getOwnPropertyDescriptor(e, u) : null; i && (i.get || i.set) ? Object.defineProperty(n, u, i) : n[u] = e[u]; } return n.default = e, t && t.set(e, n), n; }
 /*
@@ -39,7 +39,6 @@ such restriction.
 */
 
 const FormSelect = _ref => {
-  var _selectRef$current;
   let {
     className = '',
     density = 'normal',
@@ -73,8 +72,8 @@ const FormSelect = _ref => {
   const searchRef = (0, _react.useRef)();
   const {
     width: selectWidth
-  } = (selectRef === null || selectRef === void 0 || (_selectRef$current = selectRef.current) === null || _selectRef$current === void 0 ? void 0 : _selectRef$current.getBoundingClientRect()) || {};
-  const selectWrapperClassNames = (0, _classnames.default)('form-field__wrapper', "form-field__wrapper-".concat(density), disabled && 'form-field__wrapper-disabled', isOpen && 'form-field__wrapper-active', isInvalid && 'form-field__wrapper-invalid', withoutBorder && 'without-border');
+  } = selectRef?.current?.getBoundingClientRect() || {};
+  const selectWrapperClassNames = (0, _classnames.default)('form-field__wrapper', `form-field__wrapper-${density}`, disabled && 'form-field__wrapper-disabled', isOpen && 'form-field__wrapper-active', isInvalid && 'form-field__wrapper-invalid', withoutBorder && 'without-border');
   const selectLabelClassName = (0, _classnames.default)('form-field__label', disabled && 'form-field__label-disabled');
   const selectValueClassName = (0, _classnames.default)('form-field__select-value', !input.value && 'form-field__select-placeholder');
   const selectedOption = options.find(option => option.id === input.value);
@@ -99,10 +98,10 @@ const FormSelect = _ref => {
   }, [input.value, getFilteredOptions, options, scrollToView]);
   const getSelectValue = () => {
     if (!input.value || !input.value.length) {
-      return "Select Option".concat(multiple ? 's' : '');
+      return `Select Option${multiple ? 's' : ''}`;
     }
     const multipleValue = multiple && input.value.includes('all') && input.value.length > 1 ? options.filter(option => option.id !== 'all').filter(option => input.value.includes(option.id)).map(option => option.label).join(', ') : options.filter(option => input.value.includes(option.id)).map(option => option.label).join(', ');
-    return !multiple ? selectedOption === null || selectedOption === void 0 ? void 0 : selectedOption.label : input.value.length <= 2 ? multipleValue : "".concat(input.value.length, " items selected");
+    return !multiple ? selectedOption?.label : input.value.length <= 2 ? multipleValue : `${input.value.length} items selected`;
   };
   (0, _react.useEffect)(() => {
     setIsInvalid(meta.invalid && (meta.validating || meta.modified || meta.submitFailed && meta.touched));
@@ -140,7 +139,7 @@ const FormSelect = _ref => {
     };
   }, [clickHandler, handleScroll, isOpen]);
   const scrollOptionToView = (0, _react.useCallback)(() => {
-    const selectedOptionEl = optionsListRef.current.querySelector("[data-custom-id=\"".concat(input.value, "\"]"));
+    const selectedOptionEl = optionsListRef.current.querySelector(`[data-custom-id="${input.value}"]`);
     if (!selectedOptionEl) return;
     searchValue ? optionsListRef.current.scrollTo({
       top: 0,
@@ -207,14 +206,14 @@ const FormSelect = _ref => {
         }),
         hidden: !tooltip,
         children: /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
-          "data-testid": name ? "".concat(name, "-form-field-select") : 'form-field-select',
+          "data-testid": name ? `${name}-form-field-select` : 'form-field-select',
           ref: selectRef,
-          className: "form-field-select ".concat(className),
+          className: `form-field-select ${className}`,
           onClick: toggleOpen,
           children: [label && /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
             className: selectLabelClassName,
             children: /*#__PURE__*/(0, _jsxRuntime.jsxs)("label", {
-              "data-testid": name ? "".concat(name, "-form-select-label") : 'form-select-label',
+              "data-testid": name ? `${name}-form-select-label` : 'form-select-label',
               children: [label, meta.error && /*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
                 className: "form-field__label-mandatory",
                 children: " *"
@@ -292,8 +291,8 @@ const FormSelect = _ref => {
               autoHorizontalPosition: true
             },
             style: {
-              maxWidth: "".concat(selectWidth < 500 && !preventWidthOverflow ? 500 : selectWidth, "px"),
-              minWidth: "".concat(selectWidth, "px")
+              maxWidth: `${selectWidth < 500 && !preventWidthOverflow ? 500 : selectWidth}px`,
+              minWidth: `${selectWidth}px`
             },
             children: /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
               "data-testid": "select-body",

@@ -15,7 +15,7 @@ var _types = require("../../types");
 var _close = require("../../images/close.svg");
 require("./Modal.scss");
 var _jsxRuntime = require("react/jsx-runtime");
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
 /*
 Copyright 2022 Iguazio Systems Ltd.
 Licensed under the Apache License, Version 2.0 (the "License") with
@@ -46,7 +46,7 @@ const Modal = _ref => {
     subTitle = null,
     title = ''
   } = _ref;
-  const modalClassNames = (0, _classnames.default)('modal', className, size && "modal-".concat(size));
+  const modalClassNames = (0, _classnames.default)('modal', className, size && `modal-${size}`);
   return /*#__PURE__*/(0, _jsxRuntime.jsxs)(_jsxRuntime.Fragment, {
     children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_Backdrop.default, {
       onClose: onClose,

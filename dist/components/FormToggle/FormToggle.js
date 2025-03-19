@@ -10,7 +10,7 @@ var _propTypes = _interopRequireDefault(require("prop-types"));
 var _reactFinalForm = require("react-final-form");
 require("./formToggle.scss");
 var _jsxRuntime = require("react/jsx-runtime");
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
 /*
 Copyright 2022 Iguazio Systems Ltd.
 Licensed under the Apache License, Version 2.0 (the "License") with
@@ -37,7 +37,7 @@ const FormToggle = _ref => {
     onChange = () => {},
     ...inputProps
   } = _ref;
-  const toggleWrapperClassNames = (0, _classnames.default)('form-field__wrapper', density && "form-field__wrapper-".concat(density));
+  const toggleWrapperClassNames = (0, _classnames.default)('form-field__wrapper', density && `form-field__wrapper-${density}`);
   return /*#__PURE__*/(0, _jsxRuntime.jsx)(_reactFinalForm.Field, {
     name: name,
     value: inputProps.value,
@@ -48,12 +48,12 @@ const FormToggle = _ref => {
       } = _ref2;
       return /*#__PURE__*/(0, _jsxRuntime.jsxs)("label", {
         className: "form-field-toggle",
-        "data-testid": name ? "".concat(name, "-form-field-toggle") : 'form-field-toggle',
+        "data-testid": name ? `${name}-form-field-toggle` : 'form-field-toggle',
         children: [label && /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
           className: "form-field__label",
           children: label
         }), /*#__PURE__*/(0, _jsxRuntime.jsx)("input", {
-          "data-testid": name ? "".concat(name, "-form-toggle") : 'form-toggle',
+          "data-testid": name ? `${name}-form-toggle` : 'form-toggle',
           id: name,
           ...input,
           ...inputProps,
