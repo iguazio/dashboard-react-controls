@@ -4,7 +4,7 @@ var _react = _interopRequireDefault(require("react"));
 var _react2 = require("@testing-library/react");
 var _Tip = _interopRequireDefault(require("./Tip"));
 var _jsxRuntime = require("react/jsx-runtime");
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
 /*
 Copyright 2022 Iguazio Systems Ltd.
 Licensed under the Apache License, Version 2.0 (the "License") with
@@ -25,7 +25,7 @@ such restriction.
 jest.mock('../../images/question-mark.svg', () => ({
   ReactComponent: 'Question-icon'
 }));
-const renderComponent = props => (0, _react2.render)( /*#__PURE__*/(0, _jsxRuntime.jsx)(_Tip.default, {
+const renderComponent = props => (0, _react2.render)(/*#__PURE__*/(0, _jsxRuntime.jsx)(_Tip.default, {
   ...props
 }));
 describe('Tip component', () => {
@@ -53,7 +53,7 @@ describe('Tip component', () => {
     expect(tipText).toBeUndefined();
   });
   it('should add the class "tip_big" if the length of the prop text is more than 40 characters', () => {
-    wrapper.rerender( /*#__PURE__*/(0, _jsxRuntime.jsx)(_Tip.default, {
+    wrapper.rerender(/*#__PURE__*/(0, _jsxRuntime.jsx)(_Tip.default, {
       text: "Lorem Ipsum is simply dummy text of the printing and typesetting"
     }));
     const tipIcon = wrapper.getByTestId('tip-icon');

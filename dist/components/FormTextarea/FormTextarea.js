@@ -14,7 +14,7 @@ var _Tooltip = _interopRequireDefault(require("../Tooltip/Tooltip"));
 var _exclamationMark = require("../../images/exclamation-mark.svg");
 require("./formTextarea.scss");
 var _jsxRuntime = require("react/jsx-runtime");
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
 function _getRequireWildcardCache(e) { if ("function" != typeof WeakMap) return null; var r = new WeakMap(), t = new WeakMap(); return (_getRequireWildcardCache = function (e) { return e ? t : r; })(e); }
 function _interopRequireWildcard(e, r) { if (!r && e && e.__esModule) return e; if (null === e || "object" != typeof e && "function" != typeof e) return { default: e }; var t = _getRequireWildcardCache(r); if (t && t.has(e)) return t.get(e); var n = { __proto__: null }, a = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var u in e) if ("default" !== u && {}.hasOwnProperty.call(e, u)) { var i = a ? Object.getOwnPropertyDescriptor(e, u) : null; i && (i.get || i.set) ? Object.defineProperty(n, u, i) : n[u] = e[u]; } return n.default = e, t && t.set(e, n), n; }
 /*
@@ -86,7 +86,7 @@ const FormTextarea = /*#__PURE__*/_react.default.forwardRef((_ref, ref) => {
     input.onFocus(event);
   };
   const validateField = value => {
-    const valueToValidate = value !== null && value !== void 0 ? value : '';
+    const valueToValidate = value ?? '';
     let validationError = null;
     if (valueToValidate.startsWith(' ')) {
       validationError = {
@@ -105,7 +105,6 @@ const FormTextarea = /*#__PURE__*/_react.default.forwardRef((_ref, ref) => {
     validate: validateField,
     name: name,
     children: _ref2 => {
-      var _meta$error$label, _meta$error;
       let {
         input,
         meta
@@ -146,7 +145,7 @@ const FormTextarea = /*#__PURE__*/_react.default.forwardRef((_ref, ref) => {
             children: [isInvalid && /*#__PURE__*/(0, _jsxRuntime.jsx)(_Tooltip.default, {
               className: "form-field__warning",
               template: /*#__PURE__*/(0, _jsxRuntime.jsx)(_TextTooltipTemplate.default, {
-                text: (_meta$error$label = (_meta$error = meta.error) === null || _meta$error === void 0 ? void 0 : _meta$error.label) !== null && _meta$error$label !== void 0 ? _meta$error$label : invalidText,
+                text: meta.error?.label ?? invalidText,
                 warning: true
               }),
               children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_exclamationMark.ReactComponent, {})
@@ -161,7 +160,7 @@ const FormTextarea = /*#__PURE__*/_react.default.forwardRef((_ref, ref) => {
           })]
         }), maxLength && /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
           className: "form-field__counter",
-          children: "".concat(maxLength - textAreaCount, " ").concat(maxLength - textAreaCount !== 1 ? 'characters' : 'character', " left")
+          children: `${maxLength - textAreaCount} ${maxLength - textAreaCount !== 1 ? 'characters' : 'character'} left`
         })]
       });
     }

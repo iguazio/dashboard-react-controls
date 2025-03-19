@@ -8,7 +8,7 @@ var _react = _interopRequireDefault(require("react"));
 var _propTypes = _interopRequireDefault(require("prop-types"));
 var _plus = require("../../images/plus.svg");
 var _jsxRuntime = require("react/jsx-runtime");
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
 /*
 Copyright 2019 Iguazio Systems Ltd.
 
@@ -43,7 +43,7 @@ const FormActionButton = /*#__PURE__*/_react.default.forwardRef((_ref, ref) => {
     children: [!hidden && /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
       className: "form-table__row form-table__action-row no-hover",
       children: /*#__PURE__*/(0, _jsxRuntime.jsxs)("button", {
-        "data-testid": id ? id : "".concat(fieldsPath, "-add-btn"),
+        "data-testid": id ? id : `${fieldsPath}-add-btn`,
         onClick: event => onClick(event, fields, fieldsPath),
         disabled: disabled,
         children: [/*#__PURE__*/(0, _jsxRuntime.jsx)(_plus.ReactComponent, {}), label]

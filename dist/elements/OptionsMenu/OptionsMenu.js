@@ -10,7 +10,7 @@ var _reactTransitionGroup = require("react-transition-group");
 var _components = require("../../components");
 require("./optionsMenu.scss");
 var _jsxRuntime = require("react/jsx-runtime");
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
 /*
 Copyright 2022 Iguazio Systems Ltd.
 Licensed under the Apache License, Version 2.0 (the "License") with
@@ -52,7 +52,7 @@ const OptionsMenu = /*#__PURE__*/_react.default.forwardRef((_ref, ref) => {
         autoHorizontalPosition: true
       },
       style: {
-        minWidth: "".concat(dropdownWidth, "px")
+        minWidth: `${dropdownWidth}px`
       },
       children: /*#__PURE__*/(0, _jsxRuntime.jsx)("ul", {
         className: "options-menu__body",

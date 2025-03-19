@@ -16,7 +16,7 @@ var _types = require("../../types");
 var _close = require("../../images/close.svg");
 require("./popUpDialog.scss");
 var _jsxRuntime = require("react/jsx-runtime");
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
 function _getRequireWildcardCache(e) { if ("function" != typeof WeakMap) return null; var r = new WeakMap(), t = new WeakMap(); return (_getRequireWildcardCache = function (e) { return e ? t : r; })(e); }
 function _interopRequireWildcard(e, r) { if (!r && e && e.__esModule) return e; if (null === e || "object" != typeof e && "function" != typeof e) return { default: e }; var t = _getRequireWildcardCache(r); if (t && t.has(e)) return t.get(e); var n = { __proto__: null }, a = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var u in e) if ("default" !== u && {}.hasOwnProperty.call(e, u)) { var i = a ? Object.getOwnPropertyDescriptor(e, u) : null; i && (i.get || i.set) ? Object.defineProperty(n, u, i) : n[u] = e[u]; } return n.default = e, t && t.set(e, n), n; }
 /*
@@ -37,7 +37,6 @@ such restriction.
 */
 
 const PopUpDialog = /*#__PURE__*/_react.default.forwardRef((_ref, ref) => {
-  var _ref2;
   let {
     children,
     className = '',
@@ -49,17 +48,16 @@ const PopUpDialog = /*#__PURE__*/_react.default.forwardRef((_ref, ref) => {
     style = {},
     tooltipText = ''
   } = _ref;
-  const [showPopUp, setShowPopUp] = (0, _react.useState)(showPopUpDialog !== null && showPopUpDialog !== void 0 ? showPopUpDialog : true);
+  const [showPopUp, setShowPopUp] = (0, _react.useState)(showPopUpDialog ?? true);
   const popUpOverlayRef = (0, _react.useRef)(null);
-  (_ref2 = ref) !== null && _ref2 !== void 0 ? _ref2 : ref = popUpOverlayRef;
+  ref ??= popUpOverlayRef;
   const popUpClassNames = (0, _classnames.default)(className, 'pop-up-dialog__overlay', customPosition.element && 'custom-position');
   const handleClosePopUp = (0, _react.useCallback)(() => {
     closePopUp && closePopUp();
     setShowPopUp(false);
   }, [closePopUp]);
   const calculateCustomPopUpPosition = (0, _react.useCallback)(() => {
-    var _customPosition$eleme, _ref3;
-    if (customPosition !== null && customPosition !== void 0 && (_customPosition$eleme = customPosition.element) !== null && _customPosition$eleme !== void 0 && _customPosition$eleme.current && (_ref3 = ref) !== null && _ref3 !== void 0 && _ref3.current) {
+    if (customPosition?.element?.current && ref?.current) {
       const elementRect = customPosition.element.current.getBoundingClientRect();
       const popUpRect = ref.current.getBoundingClientRect();
       const [verticalPosition, horizontalPosition] = customPosition.position.split('-');
@@ -102,11 +100,11 @@ const PopUpDialog = /*#__PURE__*/_react.default.forwardRef((_ref, ref) => {
           }
         }
       }
-      ref.current.style.top = "".concat(topPosition, "px");
+      ref.current.style.top = `${topPosition}px`;
       if (style.left && !(customPosition.autoHorizontalPosition && isEnoughSpaceFromRight)) {
-        ref.current.style.left = "calc(".concat(leftPosition, "px + ").concat(style.left, ")");
+        ref.current.style.left = `calc(${leftPosition}px + ${style.left})`;
       } else {
-        ref.current.style.left = "".concat(leftPosition, "px");
+        ref.current.style.left = `${leftPosition}px`;
       }
     }
   }, [customPosition, style.left, ref]);
@@ -129,7 +127,7 @@ const PopUpDialog = /*#__PURE__*/_react.default.forwardRef((_ref, ref) => {
       };
     }
   }, [calculateCustomPopUpPosition, ref, showPopUp]);
-  return showPopUp ? /*#__PURE__*/(0, _reactDom.createPortal)( /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
+  return showPopUp ? /*#__PURE__*/(0, _reactDom.createPortal)(/*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
     ref: ref,
     className: popUpClassNames,
     style: style,

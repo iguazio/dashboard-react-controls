@@ -18,7 +18,7 @@ var _common = require("../../utils/common.util");
 var _formChipCell = require("./formChipCell.util");
 var _add = require("../../images/add.svg");
 var _jsxRuntime = require("react/jsx-runtime");
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
 /*
 Copyright 2022 Iguazio Systems Ltd.
 Licensed under the Apache License, Version 2.0 (the "License") with
@@ -70,9 +70,9 @@ const FormChipCellView = /*#__PURE__*/_react.default.forwardRef((_ref, _ref2) =>
     hiddenChipsCounterRef,
     hiddenChipsPopUpRef
   } = _ref2;
-  const buttonAddClassNames = (0, _classnames.default)('button-add', chipOptions.background && "button-add-background_".concat(chipOptions.background), chipOptions.borderColor && "button-add-border_".concat(chipOptions.borderColor), chipOptions.font && "button-add-font_".concat(chipOptions.font), chipOptions.density && "button-add-density_".concat(chipOptions.density));
+  const buttonAddClassNames = (0, _classnames.default)('button-add', chipOptions.background && `button-add-background_${chipOptions.background}`, chipOptions.borderColor && `button-add-border_${chipOptions.borderColor}`, chipOptions.font && `button-add-font_${chipOptions.font}`, chipOptions.density && `button-add-density_${chipOptions.density}`);
   const wrapperClassNames = (0, _classnames.default)('chips-wrapper', isEditable && 'fixed-max-width');
-  const chipClassNames = (0, _classnames.default)('chip', 'chip__content', isEditable && 'data-ellipsis', shortChips && 'chip_short', chips.hiddenChips && 'chip_hidden', chipOptions.density && "chip-density_".concat(chipOptions.density), chipOptions.borderRadius && "chip-border_".concat(chipOptions.borderRadius), chipOptions.background && "chip-background_".concat(chipOptions.background), chipOptions.borderColor && "chip-border_".concat(chipOptions.borderColor), chipOptions.font && "chip-font_".concat(chipOptions.font), isEditable && 'editable', (showChips || isEditable) && 'chip_visible');
+  const chipClassNames = (0, _classnames.default)('chip', 'chip__content', isEditable && 'data-ellipsis', shortChips && 'chip_short', chips.hiddenChips && 'chip_hidden', chipOptions.density && `chip-density_${chipOptions.density}`, chipOptions.borderRadius && `chip-border_${chipOptions.borderRadius}`, chipOptions.background && `chip-background_${chipOptions.background}`, chipOptions.borderColor && `chip-border_${chipOptions.borderColor}`, chipOptions.font && `chip-font_${chipOptions.font}`, isEditable && 'editable', (showChips || isEditable) && 'chip_visible');
   return /*#__PURE__*/(0, _jsxRuntime.jsx)(_reactFinalFormArrays.FieldArray, {
     name: name,
     validate: validateFields,
@@ -91,9 +91,8 @@ const FormChipCellView = /*#__PURE__*/_react.default.forwardRef((_ref, _ref2) =>
           className: wrapperClassNames,
           ref: chipsWrapperRef,
           children: [fields.map((contentItem, index) => {
-            var _chips$visibleChips;
             const chipData = fields.value[index];
-            return index < ((_chips$visibleChips = chips.visibleChips) === null || _chips$visibleChips === void 0 ? void 0 : _chips$visibleChips.length) && /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
+            return index < chips.visibleChips?.length && /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
               className: "chip-block",
               children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_Tooltip.default, {
                 hidden: editConfig.isEdit && !chipData.tooltip,
@@ -123,13 +122,13 @@ const FormChipCellView = /*#__PURE__*/_react.default.forwardRef((_ref, _ref2) =>
                   handleRemoveChip: (event, index) => handleRemoveChip(event, fields, index),
                   handleToEditMode: handleToEditMode,
                   isEditable: isEditable,
-                  keyName: "".concat(contentItem, ".key"),
+                  keyName: `${contentItem}.key`,
                   meta: meta,
                   ref: chipsCellRef,
                   setChipsSizes: setChipsSizes,
                   setEditConfig: setEditConfig,
                   validationRules: validationRules,
-                  valueName: "".concat(contentItem, ".value")
+                  valueName: `${contentItem}.value`
                 })
               }, chipData.id)
             }, chipData.id);
@@ -147,12 +146,12 @@ const FormChipCellView = /*#__PURE__*/_react.default.forwardRef((_ref, _ref2) =>
               textOverflowEllipsis: true
             }), chips.hiddenChipsNumber && /*#__PURE__*/(0, _jsxRuntime.jsx)("span", {
               ref: hiddenChipsCounterRef,
-              className: "".concat(chipClassNames, " chips_button"),
+              className: `${chipClassNames} chips_button`,
               onClick: handleShowElements,
               children: chips.hiddenChipsNumber
             })]
           }), isEditable && /*#__PURE__*/(0, _jsxRuntime.jsx)("button", {
-            "data-testid": "".concat(name, "-add-chip"),
+            "data-testid": `${name}-add-chip`,
             className: buttonAddClassNames,
             onClick: e => handleAddNewChip(e, fields),
             children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_add.ReactComponent, {})

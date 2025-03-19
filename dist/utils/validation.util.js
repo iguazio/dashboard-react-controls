@@ -179,7 +179,7 @@ const generateRule = {
   noConsecutiveCharacters: chars => {
     const convertedPattern = chars.split(' ').map(charPair => {
       const charsPairArray = charPair.split('');
-      return "(?!.*\\".concat(charsPairArray[0], "\\").concat(charsPairArray[1], ")");
+      return `(?!.*\\${charsPairArray[0]}\\${charsPairArray[1]})`;
     }).join('');
     return {
       name: _constants.validation.NO_CONSECUTIVE_CHARACTER.NAME,
@@ -197,7 +197,7 @@ const generateRule = {
   maxLengthBetweenDelimiters: (delimiter, maxLength, delimiterDescription) => {
     return {
       name: 'labelsLength',
-      label: "Max length between two ".concat(_lodash.default.defaultTo(delimiterDescription, delimiter), ": ").concat(maxLength),
+      label: `Max length between two ${_lodash.default.defaultTo(delimiterDescription, delimiter)}: ${maxLength}`,
       pattern: value => {
         return value.split(delimiter).every(item => {
           return item.length >= 1 && item.length <= maxLength;
@@ -239,11 +239,11 @@ const generateRule = {
 const commonRules = {
   prefixedQualifiedName: [{
     name: 'nameValidCharacters',
-    label: "[Name] ".concat(_constants.validation.VALID_CHARACTERS.LABEL, " : a\u2013z, A\u2013Z, 0\u20139, \u2013, _, ."),
+    label: `[Name] ${_constants.validation.VALID_CHARACTERS.LABEL} : a–z, A–Z, 0–9, –, _, .`,
     pattern: /^([^/]+\/)?[\w.-]+$/
   }, {
     name: 'nameBeginEnd',
-    label: "[Name] ".concat(_constants.validation.BEGIN_END_WITH.LABEL, ": a\u2013z, A\u2013Z, 0\u20139"),
+    label: `[Name] ${_constants.validation.BEGIN_END_WITH.LABEL}: a–z, A–Z, 0–9`,
     pattern: /^([^/]+\/)?([A-Za-z0-9][^/]*)?[A-Za-z0-9]$/
   }, {
     name: 'nameMaxLength',
@@ -251,11 +251,11 @@ const commonRules = {
     pattern: /^([^/]+\/)?[^/]{1,63}$/
   }, {
     name: 'prefixValidCharacters',
-    label: "[Prefix] ".concat(_constants.validation.VALID_CHARACTERS.LABEL, ": a\u2013z, 0\u20139, \u2013, ."),
+    label: `[Prefix] ${_constants.validation.VALID_CHARACTERS.LABEL}: a–z, 0–9, –, .`,
     pattern: /^([a-z0-9.-]+\/)?[^/]+$/
   }, {
     name: 'prefixBeginEnd',
-    label: "[Prefix] ".concat(_constants.validation.BEGIN_END_WITH.LABEL, ": a\u2013z, 0\u20139"),
+    label: `[Prefix] ${_constants.validation.BEGIN_END_WITH.LABEL}: a–z, 0–9`,
     pattern: /^([a-z0-9]([^/]*[a-z0-9])?\/)?[^/]+$/
   }, {
     name: 'prefixMaxLength',

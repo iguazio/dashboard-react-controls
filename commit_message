@@ -1,6 +1,6 @@
 
 
-Create a new dist version 2.2.20
+Create a new dist version 2.2.21
 
 Collecting:
-- Fix [Artifact] tooltip label hover pop up issue (#368)
+- Fix [Wizard] Steps in small resolution (#373)

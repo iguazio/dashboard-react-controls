@@ -18,7 +18,7 @@ var _formChipCell = require("./formChipCell.util");
 var _hooks = require("../../hooks");
 require("./formChipCell.scss");
 var _jsxRuntime = require("react/jsx-runtime");
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
 function _getRequireWildcardCache(e) { if ("function" != typeof WeakMap) return null; var r = new WeakMap(), t = new WeakMap(); return (_getRequireWildcardCache = function (e) { return e ? t : r; })(e); }
 function _interopRequireWildcard(e, r) { if (!r && e && e.__esModule) return e; if (null === e || "object" != typeof e && "function" != typeof e) return { default: e }; var t = _getRequireWildcardCache(r); if (t && t.has(e)) return t.get(e); var n = { __proto__: null }, a = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var u in e) if ("default" !== u && {}.hasOwnProperty.call(e, u)) { var i = a ? Object.getOwnPropertyDescriptor(e, u) : null; i && (i.get || i.set) ? Object.defineProperty(n, u, i) : n[u] = e[u]; } return n.default = e, t && t.set(e, n), n; }
 /*
@@ -100,8 +100,7 @@ const FormChipCell = _ref => {
     });
   }, [initialValues, name, formState]);
   const handleAddNewChip = (0, _react.useCallback)((event, fields) => {
-    var _fields$value;
-    const fieldsLength = ((_fields$value = fields.value) === null || _fields$value === void 0 ? void 0 : _fields$value.length) || 0;
+    const fieldsLength = fields.value?.length || 0;
     if (!editConfig.isEdit && !editConfig.chipIndex) {
       formState.form.mutators.push(name, {
         id: fieldsLength + new Date(),
@@ -134,7 +133,7 @@ const FormChipCell = _ref => {
       key,
       value
     } = fields.value[editConfig.chipIndex];
-    const isChipNotEmpty = !!(key !== null && key !== void 0 && key.trim() && value !== null && value !== void 0 && value.trim());
+    const isChipNotEmpty = !!(key?.trim() && value?.trim());
     if (nameEvent === _constants.CLICK) {
       if (!isChipNotEmpty) {
         handleRemoveChip(event, fields, editConfig.chipIndex, isOutsideClick);
@@ -287,7 +286,7 @@ const FormChipCell = _ref => {
   };
   return /*#__PURE__*/(0, _jsxRuntime.jsxs)("div", {
     className: chipsClassName,
-    "data-testid": "".concat(name, "-chips"),
+    "data-testid": `${name}-chips`,
     children: [label && /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
       className: "chips__label",
       children: label

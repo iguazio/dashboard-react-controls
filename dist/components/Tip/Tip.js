@@ -13,7 +13,7 @@ var _questionMark = require("../../images/question-mark.svg");
 var _exclamationMark = require("../../images/exclamation-mark.svg");
 var _tip = _interopRequireDefault(require("./tip.scss"));
 var _jsxRuntime = require("react/jsx-runtime");
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
 function _getRequireWildcardCache(e) { if ("function" != typeof WeakMap) return null; var r = new WeakMap(), t = new WeakMap(); return (_getRequireWildcardCache = function (e) { return e ? t : r; })(e); }
 function _interopRequireWildcard(e, r) { if (!r && e && e.__esModule) return e; if (null === e || "object" != typeof e && "function" != typeof e) return { default: e }; var t = _getRequireWildcardCache(r); if (t && t.has(e)) return t.get(e); var n = { __proto__: null }, a = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var u in e) if ("default" !== u && {}.hasOwnProperty.call(e, u)) { var i = a ? Object.getOwnPropertyDescriptor(e, u) : null; i && (i.get || i.set) ? Object.defineProperty(n, u, i) : n[u] = e[u]; } return n.default = e, t && t.set(e, n), n; }
 /*
@@ -58,15 +58,15 @@ const Tip = _ref => {
       const tipRect = tipBodyRef.current.getBoundingClientRect();
       const widthPosition = iconRect.left > tipRect.width - arrowOffset ? 'tip_left' : 'tip_right';
       const heightPosition = iconRect.top > tipRect.height + arrowLength ? 'tip_top' : 'tip_bottom';
-      setTipClassName("".concat(heightPosition, " ").concat(widthPosition));
+      setTipClassName(`${heightPosition} ${widthPosition}`);
       if (widthPosition === 'tip_left') {
         const computedArrowOffset = arrowOffset + (iconLength + arrowLength) / 2;
-        tipBodyRef.current.style.left = "".concat(iconRect.left - (tipRect.width - computedArrowOffset), "px");
+        tipBodyRef.current.style.left = `${iconRect.left - (tipRect.width - computedArrowOffset)}px`;
       } else {
         const computedArrowOffset = arrowOffset - (iconLength - arrowLength) / 2;
-        tipBodyRef.current.style.left = "".concat(iconRect.left - computedArrowOffset, "px");
+        tipBodyRef.current.style.left = `${iconRect.left - computedArrowOffset}px`;
       }
-      tipBodyRef.current.style.top = heightPosition === 'tip_top' ? "".concat(iconRect.top - tipRect.height - arrowLength, "px") : "".concat(iconRect.bottom + arrowLength, "px");
+      tipBodyRef.current.style.top = heightPosition === 'tip_top' ? `${iconRect.top - tipRect.height - arrowLength}px` : `${iconRect.bottom + arrowLength}px`;
     }
   }, [isShow]);
   const handleMouseLeave = () => {
@@ -94,7 +94,7 @@ const Tip = _ref => {
       }) : /*#__PURE__*/(0, _jsxRuntime.jsx)(_questionMark.ReactComponent, {
         "data-testid": "tip-icon"
       })
-    }), /*#__PURE__*/(0, _reactDom.createPortal)( /*#__PURE__*/(0, _jsxRuntime.jsx)(_reactTransitionGroup.CSSTransition, {
+    }), /*#__PURE__*/(0, _reactDom.createPortal)(/*#__PURE__*/(0, _jsxRuntime.jsx)(_reactTransitionGroup.CSSTransition, {
       in: isShow,
       timeout: 200,
       classNames: "fade",

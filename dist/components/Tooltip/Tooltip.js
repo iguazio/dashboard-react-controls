@@ -13,7 +13,7 @@ var _lodash = require("lodash");
 var _common = require("../../utils/common.util");
 require("./tooltip.scss");
 var _jsxRuntime = require("react/jsx-runtime");
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
 function _getRequireWildcardCache(e) { if ("function" != typeof WeakMap) return null; var r = new WeakMap(), t = new WeakMap(); return (_getRequireWildcardCache = function (e) { return e ? t : r; })(e); }
 function _interopRequireWildcard(e, r) { if (!r && e && e.__esModule) return e; if (null === e || "object" != typeof e && "function" != typeof e) return { default: e }; var t = _getRequireWildcardCache(r); if (t && t.has(e)) return t.get(e); var n = { __proto__: null }, a = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var u in e) if ("default" !== u && {}.hasOwnProperty.call(e, u)) { var i = a ? Object.getOwnPropertyDescriptor(e, u) : null; i && (i.get || i.set) ? Object.defineProperty(n, u, i) : n[u] = e[u]; } return n.default = e, t && t.set(e, n), n; }
 /*
@@ -60,26 +60,24 @@ const Tooltip = _ref => {
   }, [hidden]);
   const handleMouseEnter = (0, _react.useCallback)(event => {
     if (!show) {
-      var _child$childNodes, _child$childNodes2;
       const [child] = parentRef.current.childNodes;
-      let show = !hidden && (textShow ? true : !child ? false : child.nodeType !== Node.TEXT_NODE && ((_child$childNodes = child.childNodes) === null || _child$childNodes === void 0 || (_child$childNodes = _child$childNodes[0]) === null || _child$childNodes === void 0 ? void 0 : _child$childNodes.nodeType) !== Node.TEXT_NODE || (
+      let show = !hidden && (textShow ? true : !child ? false : child.nodeType !== Node.TEXT_NODE && child.childNodes?.[0]?.nodeType !== Node.TEXT_NODE || (
       /*
       If the child node is a text node and the text of the child node inside the container is greater than the width of the container, then show tooltip.
       */
-      (child.nodeType === Node.TEXT_NODE || ((_child$childNodes2 = child.childNodes) === null || _child$childNodes2 === void 0 || (_child$childNodes2 = _child$childNodes2[0]) === null || _child$childNodes2 === void 0 ? void 0 : _child$childNodes2.nodeType) === Node.TEXT_NODE) && parentRef.current.scrollWidth > parentRef.current.offsetWidth));
+      (child.nodeType === Node.TEXT_NODE || child.childNodes?.[0]?.nodeType === Node.TEXT_NODE) && parentRef.current.scrollWidth > parentRef.current.offsetWidth));
       setShow(show);
       setTimeout(() => {
         if (show) {
-          var _parentRef$current$ge, _parentRef$current, _tooltipRef$current$g, _tooltipRef$current;
           let {
             height,
             top,
             bottom
-          } = (_parentRef$current$ge = parentRef === null || parentRef === void 0 || (_parentRef$current = parentRef.current) === null || _parentRef$current === void 0 ? void 0 : _parentRef$current.getBoundingClientRect()) !== null && _parentRef$current$ge !== void 0 ? _parentRef$current$ge : {};
+          } = parentRef?.current?.getBoundingClientRect() ?? {};
           const {
             height: tooltipHeight,
             width: tooltipWidth
-          } = (_tooltipRef$current$g = (_tooltipRef$current = tooltipRef.current) === null || _tooltipRef$current === void 0 ? void 0 : _tooltipRef$current.getBoundingClientRect()) !== null && _tooltipRef$current$g !== void 0 ? _tooltipRef$current$g : {
+          } = tooltipRef.current?.getBoundingClientRect() ?? {
             height: 0,
             width: 0
           };
@@ -140,7 +138,7 @@ const Tooltip = _ref => {
   }, [clearStyles, style]);
   return /*#__PURE__*/(0, _jsxRuntime.jsxs)(_jsxRuntime.Fragment, {
     children: [renderChildAsHtml ? /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
-      "data-testid": id ? "".concat(id, "-tooltip-wrapper") : 'tooltip-wrapper',
+      "data-testid": id ? `${id}-tooltip-wrapper` : 'tooltip-wrapper',
       ref: parentRef,
       className: tooltipClassNames,
       dangerouslySetInnerHTML: {
@@ -148,19 +146,19 @@ const Tooltip = _ref => {
       },
       onClick: handleMouseLeave
     }) : /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
-      "data-testid": id ? "".concat(id, "-tooltip-wrapper") : 'tooltip-wrapper',
+      "data-testid": id ? `${id}-tooltip-wrapper` : 'tooltip-wrapper',
       ref: parentRef,
       className: tooltipClassNames,
       onClick: handleMouseLeave,
       children: children
-    }), !hidden && /*#__PURE__*/(0, _reactDom.createPortal)( /*#__PURE__*/(0, _jsxRuntime.jsx)(_reactTransitionGroup.CSSTransition, {
+    }), !hidden && /*#__PURE__*/(0, _reactDom.createPortal)(/*#__PURE__*/(0, _jsxRuntime.jsx)(_reactTransitionGroup.CSSTransition, {
       classNames: "fade",
       in: show,
       timeout: duration,
       unmountOnExit: true,
       nodeRef: tooltipRef,
       children: /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
-        "data-testid": id ? "".concat(id, "-tooltip") : 'tooltip',
+        "data-testid": id ? `${id}-tooltip` : 'tooltip',
         ref: tooltipRef,
         style: {
           ...style

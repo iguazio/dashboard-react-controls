@@ -13,7 +13,7 @@ var _elements = require("../../elements");
 var _hooks = require("../../hooks");
 var _types = require("../../types");
 var _jsxRuntime = require("react/jsx-runtime");
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
 /*
 Copyright 2022 Iguazio Systems Ltd.
 Licensed under the Apache License, Version 2.0 (the "License") with
@@ -100,7 +100,6 @@ const FormKeyValueTable = _ref => {
     }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_reactFinalFormArrays.FieldArray, {
       name: fieldsPath,
       children: _ref3 => {
-        var _editingItem$ui;
         let {
           fields
         } = _ref3;
@@ -112,14 +111,14 @@ const FormKeyValueTable = _ref => {
               children: [/*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
                 className: "form-table__cell form-table__cell_1",
                 children: keyOptions ? /*#__PURE__*/(0, _jsxRuntime.jsx)(_components.FormSelect, {
-                  name: "".concat(rowPath, ".data.key"),
+                  name: `${rowPath}.data.key`,
                   density: "normal",
                   options: keyOptions
                 }) : isKeyEditable || editingItem.ui.isNew ? /*#__PURE__*/(0, _jsxRuntime.jsx)(_components.FormInput, {
                   className: "input_edit",
                   placeholder: keyLabel,
                   density: "normal",
-                  name: "".concat(rowPath, ".data.key"),
+                  name: `${rowPath}.data.key`,
                   required: isKeyRequired,
                   validationRules: [...keyValidationRules, {
                     name: 'uniqueness',
@@ -133,7 +132,7 @@ const FormKeyValueTable = _ref => {
                   className: "input_edit",
                   placeholder: valueLabel,
                   density: "normal",
-                  name: "".concat(rowPath, ".data.value"),
+                  name: `${rowPath}.data.value`,
                   type: valueType,
                   required: isValueRequired,
                   validationRules: valueValidationRules
@@ -172,7 +171,7 @@ const FormKeyValueTable = _ref => {
           }), /*#__PURE__*/(0, _jsxRuntime.jsx)(_elements.FormActionButton, {
             ref: bottomScrollRef,
             disabled: disabled,
-            hidden: editingItem === null || editingItem === void 0 || (_editingItem$ui = editingItem.ui) === null || _editingItem$ui === void 0 ? void 0 : _editingItem$ui.isNew,
+            hidden: editingItem?.ui?.isNew,
             fields: fields,
             id: actionButtonId,
             label: addNewItemLabel,

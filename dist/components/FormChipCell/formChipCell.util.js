@@ -25,7 +25,6 @@ const uniquenessError = exports.uniquenessError = {
   label: 'Key must be unique'
 };
 const getTextWidth = elementWithText => {
-  var _hiddenElement$offset;
   if (!elementWithText) {
     return 0;
   }
@@ -48,6 +47,6 @@ const getTextWidth = elementWithText => {
     document.body.append(hiddenElement);
   }
   hiddenElement.textContent = elementWithText.value;
-  return (_hiddenElement$offset = hiddenElement.offsetWidth) !== null && _hiddenElement$offset !== void 0 ? _hiddenElement$offset : 0;
+  return hiddenElement.offsetWidth ?? 0;
 };
 exports.getTextWidth = getTextWidth;

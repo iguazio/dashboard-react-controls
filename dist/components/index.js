@@ -136,4 +136,4 @@ var _TextTooltipTemplate = _interopRequireDefault(require("./TooltipTemplate/Tex
 var _Tip = _interopRequireDefault(require("./Tip/Tip"));
 var _Tooltip = _interopRequireDefault(require("./Tooltip/Tooltip"));
 var _Wizard = _interopRequireDefault(require("./Wizard/Wizard"));
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
