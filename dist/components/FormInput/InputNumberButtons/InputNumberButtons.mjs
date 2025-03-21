@@ -1,4 +1,4 @@
-import { j as jsxDevRuntimeExports } from "../../../_virtual/jsx-dev-runtime.mjs";
+import { jsxDEV } from "react/jsx-dev-runtime";
 import React__default from "react";
 import PropTypes from "prop-types";
 import { isNil } from "lodash";
@@ -30,15 +30,15 @@ const InputNumberButtons = ({
   const isCurrentValueEmpty = () => {
     return isNil(value) || value === "";
   };
-  return /* @__PURE__ */ jsxDevRuntimeExports.jsxDEV("div", { "data-testid": "range-input-container", className: "form-field-range", children: /* @__PURE__ */ jsxDevRuntimeExports.jsxDEV("div", { className: "range__buttons", children: [
-    /* @__PURE__ */ jsxDevRuntimeExports.jsxDEV(
+  return /* @__PURE__ */ jsxDEV("div", { "data-testid": "range-input-container", className: "form-field-range", children: /* @__PURE__ */ jsxDEV("div", { className: "range__buttons", children: [
+    /* @__PURE__ */ jsxDEV(
       "button",
       {
         "data-testid": "btn-increase",
         className: "range__button range__button-increase",
         disabled,
         onClick: handleIncrease,
-        children: /* @__PURE__ */ jsxDevRuntimeExports.jsxDEV(SvgRangeArrowSmall, { className: "increase" }, void 0, false, {
+        children: /* @__PURE__ */ jsxDEV(SvgRangeArrowSmall, { className: "increase" }, void 0, false, {
           fileName: "/Users/Ilan_Kader/Development/dashboard-react-controls/src/lib/components/FormInput/InputNumberButtons/InputNumberButtons.jsx",
           lineNumber: 69,
           columnNumber: 11
@@ -53,14 +53,14 @@ const InputNumberButtons = ({
       },
       void 0
     ),
-    /* @__PURE__ */ jsxDevRuntimeExports.jsxDEV(
+    /* @__PURE__ */ jsxDEV(
       "button",
       {
         "data-testid": "btn-decrease",
         className: "range__button range__button-decrease",
         disabled,
         onClick: handleDecrease,
-        children: /* @__PURE__ */ jsxDevRuntimeExports.jsxDEV(SvgRangeArrowSmall, { className: "decrease" }, void 0, false, {
+        children: /* @__PURE__ */ jsxDEV(SvgRangeArrowSmall, { className: "decrease" }, void 0, false, {
           fileName: "/Users/Ilan_Kader/Development/dashboard-react-controls/src/lib/components/FormInput/InputNumberButtons/InputNumberButtons.jsx",
           lineNumber: 77,
           columnNumber: 11

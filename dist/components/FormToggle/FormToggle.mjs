@@ -1,4 +1,4 @@
-import { j as jsxDevRuntimeExports } from "../../_virtual/jsx-dev-runtime.mjs";
+import { jsxDEV } from "react/jsx-dev-runtime";
 import "react";
 import classnames from "classnames";
 import PropTypes from "prop-types";
@@ -10,19 +10,19 @@ const FormToggle = ({ density, label = "", name, onChange = () => {
     "form-field__wrapper",
     density && `form-field__wrapper-${density}`
   );
-  return /* @__PURE__ */ jsxDevRuntimeExports.jsxDEV(Field, { name, value: inputProps.value, type: "checkbox", children: ({ input }) => {
-    return /* @__PURE__ */ jsxDevRuntimeExports.jsxDEV(
+  return /* @__PURE__ */ jsxDEV(Field, { name, value: inputProps.value, type: "checkbox", children: ({ input }) => {
+    return /* @__PURE__ */ jsxDEV(
       "label",
       {
         className: "form-field-toggle",
         "data-testid": name ? `${name}-form-field-toggle` : "form-field-toggle",
         children: [
-          label && /* @__PURE__ */ jsxDevRuntimeExports.jsxDEV("div", { className: "form-field__label", children: label }, void 0, false, {
+          label && /* @__PURE__ */ jsxDEV("div", { className: "form-field__label", children: label }, void 0, false, {
             fileName: "/Users/Ilan_Kader/Development/dashboard-react-controls/src/lib/components/FormToggle/FormToggle.jsx",
             lineNumber: 38,
             columnNumber: 23
           }, void 0),
-          /* @__PURE__ */ jsxDevRuntimeExports.jsxDEV(
+          /* @__PURE__ */ jsxDEV(
             "input",
             {
               "data-testid": name ? `${name}-form-toggle` : "form-toggle",
@@ -43,7 +43,7 @@ const FormToggle = ({ density, label = "", name, onChange = () => {
             },
             void 0
           ),
-          /* @__PURE__ */ jsxDevRuntimeExports.jsxDEV("div", { className: toggleWrapperClassNames, children: /* @__PURE__ */ jsxDevRuntimeExports.jsxDEV("span", { className: "form-field-toggle__switch" }, void 0, false, {
+          /* @__PURE__ */ jsxDEV("div", { className: toggleWrapperClassNames, children: /* @__PURE__ */ jsxDEV("span", { className: "form-field-toggle__switch" }, void 0, false, {
             fileName: "/Users/Ilan_Kader/Development/dashboard-react-controls/src/lib/components/FormToggle/FormToggle.jsx",
             lineNumber: 50,
             columnNumber: 15

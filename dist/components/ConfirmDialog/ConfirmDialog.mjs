@@ -1,4 +1,4 @@
-import { j as jsxDevRuntimeExports } from "../../_virtual/jsx-dev-runtime.mjs";
+import { jsxDEV } from "react/jsx-dev-runtime";
 import "react";
 import PropTypes from "prop-types";
 import classnames from "classnames";
@@ -35,26 +35,26 @@ const ConfirmDialog = ({
     onResolve && onResolve();
     confirmButton.handler && confirmButton.handler(event);
   };
-  return isOpen && /* @__PURE__ */ jsxDevRuntimeExports.jsxDEV(
+  return isOpen && /* @__PURE__ */ jsxDEV(
     PopUpDialog,
     {
       className,
       closePopUp: handleCloseDialog,
       customPosition,
       headerText: header,
-      children: /* @__PURE__ */ jsxDevRuntimeExports.jsxDEV("div", { className: "confirm-dialog", children: [
-        message && /* @__PURE__ */ jsxDevRuntimeExports.jsxDEV("div", { className: messageClassNames, children: message }, void 0, false, {
+      children: /* @__PURE__ */ jsxDEV("div", { className: "confirm-dialog", children: [
+        message && /* @__PURE__ */ jsxDEV("div", { className: messageClassNames, children: message }, void 0, false, {
           fileName: "/Users/Ilan_Kader/Development/dashboard-react-controls/src/lib/components/ConfirmDialog/ConfirmDialog.jsx",
           lineNumber: 74,
           columnNumber: 23
         }, void 0),
-        children && /* @__PURE__ */ jsxDevRuntimeExports.jsxDEV("div", { className: "confirm-dialog__body", children }, void 0, false, {
+        children && /* @__PURE__ */ jsxDEV("div", { className: "confirm-dialog__body", children }, void 0, false, {
           fileName: "/Users/Ilan_Kader/Development/dashboard-react-controls/src/lib/components/ConfirmDialog/ConfirmDialog.jsx",
           lineNumber: 75,
           columnNumber: 24
         }, void 0),
-        /* @__PURE__ */ jsxDevRuntimeExports.jsxDEV("div", { className: "confirm-dialog__btn-container", children: [
-          cancelButton && /* @__PURE__ */ jsxDevRuntimeExports.jsxDEV(
+        /* @__PURE__ */ jsxDEV("div", { className: "confirm-dialog__btn-container", children: [
+          cancelButton && /* @__PURE__ */ jsxDEV(
             Button,
             {
               className: "pop-up-dialog__btn_cancel",
@@ -72,7 +72,7 @@ const ConfirmDialog = ({
             },
             void 0
           ),
-          confirmButton && /* @__PURE__ */ jsxDevRuntimeExports.jsxDEV(
+          confirmButton && /* @__PURE__ */ jsxDEV(
             Button,
             {
               label: confirmButton.label,

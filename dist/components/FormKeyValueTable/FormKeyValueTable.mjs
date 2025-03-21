@@ -1,4 +1,4 @@
-import { j as jsxDevRuntimeExports } from "../../_virtual/jsx-dev-runtime.mjs";
+import { jsxDEV, Fragment } from "react/jsx-dev-runtime";
 import "react";
 import PropTypes from "prop-types";
 import classnames from "classnames";
@@ -56,7 +56,7 @@ const FormKeyValueTable = ({
     });
   };
   const getKeyTextTemplate = (keyValue) => {
-    return /* @__PURE__ */ jsxDevRuntimeExports.jsxDEV(Tooltip, { template: /* @__PURE__ */ jsxDevRuntimeExports.jsxDEV(TextTooltipTemplate, { text: keyValue }, void 0, false, {
+    return /* @__PURE__ */ jsxDEV(Tooltip, { template: /* @__PURE__ */ jsxDEV(TextTooltipTemplate, { text: keyValue }, void 0, false, {
       fileName: "/Users/Ilan_Kader/Development/dashboard-react-controls/src/lib/components/FormKeyValueTable/FormKeyValueTable.jsx",
       lineNumber: 77,
       columnNumber: 31
@@ -66,19 +66,19 @@ const FormKeyValueTable = ({
       columnNumber: 12
     }, void 0);
   };
-  return /* @__PURE__ */ jsxDevRuntimeExports.jsxDEV("div", { className: tableClassNames, "data-testid": fieldsPath, children: [
-    /* @__PURE__ */ jsxDevRuntimeExports.jsxDEV("div", { className: "form-table__row form-table__header-row no-hover", children: [
-      /* @__PURE__ */ jsxDevRuntimeExports.jsxDEV("div", { className: "form-table__cell form-table__cell_1", children: keyHeader }, void 0, false, {
+  return /* @__PURE__ */ jsxDEV("div", { className: tableClassNames, "data-testid": fieldsPath, children: [
+    /* @__PURE__ */ jsxDEV("div", { className: "form-table__row form-table__header-row no-hover", children: [
+      /* @__PURE__ */ jsxDEV("div", { className: "form-table__cell form-table__cell_1", children: keyHeader }, void 0, false, {
         fileName: "/Users/Ilan_Kader/Development/dashboard-react-controls/src/lib/components/FormKeyValueTable/FormKeyValueTable.jsx",
         lineNumber: 83,
         columnNumber: 9
       }, void 0),
-      /* @__PURE__ */ jsxDevRuntimeExports.jsxDEV("div", { className: "form-table__cell form-table__cell_1", children: valueHeader }, void 0, false, {
+      /* @__PURE__ */ jsxDEV("div", { className: "form-table__cell form-table__cell_1", children: valueHeader }, void 0, false, {
         fileName: "/Users/Ilan_Kader/Development/dashboard-react-controls/src/lib/components/FormKeyValueTable/FormKeyValueTable.jsx",
         lineNumber: 84,
         columnNumber: 9
       }, void 0),
-      /* @__PURE__ */ jsxDevRuntimeExports.jsxDEV("div", { className: "form-table__cell form-table__actions-cell" }, void 0, false, {
+      /* @__PURE__ */ jsxDEV("div", { className: "form-table__cell form-table__actions-cell" }, void 0, false, {
         fileName: "/Users/Ilan_Kader/Development/dashboard-react-controls/src/lib/components/FormKeyValueTable/FormKeyValueTable.jsx",
         lineNumber: 85,
         columnNumber: 9
@@ -88,16 +88,16 @@ const FormKeyValueTable = ({
       lineNumber: 82,
       columnNumber: 7
     }, void 0),
-    /* @__PURE__ */ jsxDevRuntimeExports.jsxDEV(FieldArray, { name: fieldsPath, children: ({ fields }) => {
+    /* @__PURE__ */ jsxDEV(FieldArray, { name: fieldsPath, children: ({ fields }) => {
       var _a;
-      return /* @__PURE__ */ jsxDevRuntimeExports.jsxDEV(jsxDevRuntimeExports.Fragment, { children: [
+      return /* @__PURE__ */ jsxDEV(Fragment, { children: [
         fields.map((rowPath, index) => {
           const tableRowClassNames = classnames(
             "form-table__row",
             isCurrentRowEditing(rowPath) && "form-table__row_active"
           );
-          return editingItem && index === editingItem.ui.index && !disabled ? /* @__PURE__ */ jsxDevRuntimeExports.jsxDEV("div", { className: tableRowClassNames, children: [
-            /* @__PURE__ */ jsxDevRuntimeExports.jsxDEV("div", { className: "form-table__cell form-table__cell_1", children: keyOptions ? /* @__PURE__ */ jsxDevRuntimeExports.jsxDEV(
+          return editingItem && index === editingItem.ui.index && !disabled ? /* @__PURE__ */ jsxDEV("div", { className: tableRowClassNames, children: [
+            /* @__PURE__ */ jsxDEV("div", { className: "form-table__cell form-table__cell_1", children: keyOptions ? /* @__PURE__ */ jsxDEV(
               FormSelect,
               {
                 name: `${rowPath}.data.key`,
@@ -112,7 +112,7 @@ const FormKeyValueTable = ({
                 columnNumber: 23
               },
               void 0
-            ) : isKeyEditable || editingItem.ui.isNew ? /* @__PURE__ */ jsxDevRuntimeExports.jsxDEV(
+            ) : isKeyEditable || editingItem.ui.isNew ? /* @__PURE__ */ jsxDEV(
               FormInput,
               {
                 className: "input_edit",
@@ -142,7 +142,7 @@ const FormKeyValueTable = ({
               lineNumber: 98,
               columnNumber: 19
             }, void 0),
-            /* @__PURE__ */ jsxDevRuntimeExports.jsxDEV("div", { className: "form-table__cell form-table__cell_1", children: /* @__PURE__ */ jsxDevRuntimeExports.jsxDEV(
+            /* @__PURE__ */ jsxDEV("div", { className: "form-table__cell form-table__cell_1", children: /* @__PURE__ */ jsxDEV(
               FormInput,
               {
                 className: "input_edit",
@@ -166,7 +166,7 @@ const FormKeyValueTable = ({
               lineNumber: 125,
               columnNumber: 19
             }, void 0),
-            /* @__PURE__ */ jsxDevRuntimeExports.jsxDEV(
+            /* @__PURE__ */ jsxDEV(
               FormRowActions,
               {
                 applyChanges,
@@ -189,21 +189,21 @@ const FormKeyValueTable = ({
             fileName: "/Users/Ilan_Kader/Development/dashboard-react-controls/src/lib/components/FormKeyValueTable/FormKeyValueTable.jsx",
             lineNumber: 97,
             columnNumber: 17
-          }, void 0) : /* @__PURE__ */ jsxDevRuntimeExports.jsxDEV(
+          }, void 0) : /* @__PURE__ */ jsxDEV(
             "div",
             {
               className: tableRowClassNames,
               onClick: (event) => !disabled && enterEditMode(event, fields, fieldsPath, index),
               children: [
-                /* @__PURE__ */ jsxDevRuntimeExports.jsxDEV("div", { className: "form-table__cell form-table__cell_1", children: getKeyTextTemplate(fields.value[index].data.key) }, void 0, false, {
+                /* @__PURE__ */ jsxDEV("div", { className: "form-table__cell form-table__cell_1", children: getKeyTextTemplate(fields.value[index].data.key) }, void 0, false, {
                   fileName: "/Users/Ilan_Kader/Development/dashboard-react-controls/src/lib/components/FormKeyValueTable/FormKeyValueTable.jsx",
                   lineNumber: 151,
                   columnNumber: 19
                 }, void 0),
-                /* @__PURE__ */ jsxDevRuntimeExports.jsxDEV("div", { className: "form-table__cell form-table__cell_1", children: /* @__PURE__ */ jsxDevRuntimeExports.jsxDEV(
+                /* @__PURE__ */ jsxDEV("div", { className: "form-table__cell form-table__cell_1", children: /* @__PURE__ */ jsxDEV(
                   Tooltip,
                   {
-                    template: /* @__PURE__ */ jsxDevRuntimeExports.jsxDEV(
+                    template: /* @__PURE__ */ jsxDEV(
                       TextTooltipTemplate,
                       {
                         text: valueType === "password" ? null : fields.value[index].data.value
@@ -232,7 +232,7 @@ const FormKeyValueTable = ({
                   lineNumber: 154,
                   columnNumber: 19
                 }, void 0),
-                /* @__PURE__ */ jsxDevRuntimeExports.jsxDEV(
+                /* @__PURE__ */ jsxDEV(
                   FormRowActions,
                   {
                     applyChanges,
@@ -263,7 +263,7 @@ const FormKeyValueTable = ({
             void 0
           );
         }),
-        /* @__PURE__ */ jsxDevRuntimeExports.jsxDEV(
+        /* @__PURE__ */ jsxDEV(
           FormActionButton,
           {
             ref: bottomScrollRef,

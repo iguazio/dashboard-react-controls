@@ -1,4 +1,4 @@
-import { j as jsxDevRuntimeExports } from "../../_virtual/jsx-dev-runtime.mjs";
+import { jsxDEV, Fragment } from "react/jsx-dev-runtime";
 import React__default, { useState, useRef, useCallback, useMemo, useEffect } from "react";
 import PropTypes from "prop-types";
 import classnames from "classnames";
@@ -185,17 +185,17 @@ const FormSelect = ({
       return value ? void 0 : "Required";
     }
   };
-  return /* @__PURE__ */ jsxDevRuntimeExports.jsxDEV(Field, { name, validate: validateField, children: ({ input: input2, meta: meta2 }) => /* @__PURE__ */ jsxDevRuntimeExports.jsxDEV(
+  return /* @__PURE__ */ jsxDEV(Field, { name, validate: validateField, children: ({ input: input2, meta: meta2 }) => /* @__PURE__ */ jsxDEV(
     Tooltip,
     {
       className: "select-tooltip",
-      template: /* @__PURE__ */ jsxDevRuntimeExports.jsxDEV(TextTooltipTemplate, { text: tooltip }, void 0, false, {
+      template: /* @__PURE__ */ jsxDEV(TextTooltipTemplate, { text: tooltip }, void 0, false, {
         fileName: "/Users/Ilan_Kader/Development/dashboard-react-controls/src/lib/components/FormSelect/FormSelect.jsx",
         lineNumber: 263,
         columnNumber: 21
       }, void 0),
       hidden: !tooltip,
-      children: /* @__PURE__ */ jsxDevRuntimeExports.jsxDEV(
+      children: /* @__PURE__ */ jsxDEV(
         "div",
         {
           "data-testid": name ? `${name}-form-field-select` : "form-field-select",
@@ -203,9 +203,9 @@ const FormSelect = ({
           className: `form-field-select ${className}`,
           onClick: toggleOpen,
           children: [
-            label && /* @__PURE__ */ jsxDevRuntimeExports.jsxDEV("div", { className: selectLabelClassName, children: /* @__PURE__ */ jsxDevRuntimeExports.jsxDEV("label", { "data-testid": name ? `${name}-form-select-label` : "form-select-label", children: [
+            label && /* @__PURE__ */ jsxDEV("div", { className: selectLabelClassName, children: /* @__PURE__ */ jsxDEV("label", { "data-testid": name ? `${name}-form-select-label` : "form-select-label", children: [
               label,
-              meta2.error && /* @__PURE__ */ jsxDevRuntimeExports.jsxDEV("span", { className: "form-field__label-mandatory", children: " *" }, void 0, false, {
+              meta2.error && /* @__PURE__ */ jsxDEV("span", { className: "form-field__label-mandatory", children: " *" }, void 0, false, {
                 fileName: "/Users/Ilan_Kader/Development/dashboard-react-controls/src/lib/components/FormSelect/FormSelect.jsx",
                 lineNumber: 276,
                 columnNumber: 34
@@ -219,8 +219,8 @@ const FormSelect = ({
               lineNumber: 273,
               columnNumber: 15
             }, void 0),
-            /* @__PURE__ */ jsxDevRuntimeExports.jsxDEV("div", { "data-testid": "select-header", className: selectWrapperClassNames, children: [
-              /* @__PURE__ */ jsxDevRuntimeExports.jsxDEV("div", { className: "form-field__control", children: !hideSelectedOption && /* @__PURE__ */ jsxDevRuntimeExports.jsxDEV("div", { "data-testid": "selected-option", className: "form-field__select", children: /* @__PURE__ */ jsxDevRuntimeExports.jsxDEV("span", { className: selectValueClassName, children: getSelectValue() }, void 0, false, {
+            /* @__PURE__ */ jsxDEV("div", { "data-testid": "select-header", className: selectWrapperClassNames, children: [
+              /* @__PURE__ */ jsxDEV("div", { className: "form-field__control", children: !hideSelectedOption && /* @__PURE__ */ jsxDEV("div", { "data-testid": "selected-option", className: "form-field__select", children: /* @__PURE__ */ jsxDEV("span", { className: selectValueClassName, children: getSelectValue() }, void 0, false, {
                 fileName: "/Users/Ilan_Kader/Development/dashboard-react-controls/src/lib/components/FormSelect/FormSelect.jsx",
                 lineNumber: 284,
                 columnNumber: 21
@@ -233,12 +233,12 @@ const FormSelect = ({
                 lineNumber: 281,
                 columnNumber: 15
               }, void 0),
-              /* @__PURE__ */ jsxDevRuntimeExports.jsxDEV("div", { className: "form-field__icons", children: [
-                input2.value && selectedItemAction && /* @__PURE__ */ jsxDevRuntimeExports.jsxDEV(jsxDevRuntimeExports.Fragment, { children: selectedItemAction.handler ? /* @__PURE__ */ jsxDevRuntimeExports.jsxDEV(Tooltip, { template: /* @__PURE__ */ jsxDevRuntimeExports.jsxDEV(TextTooltipTemplate, { text: selectedItemAction.tooltip }, void 0, false, {
+              /* @__PURE__ */ jsxDEV("div", { className: "form-field__icons", children: [
+                input2.value && selectedItemAction && /* @__PURE__ */ jsxDEV(Fragment, { children: selectedItemAction.handler ? /* @__PURE__ */ jsxDEV(Tooltip, { template: /* @__PURE__ */ jsxDEV(TextTooltipTemplate, { text: selectedItemAction.tooltip }, void 0, false, {
                   fileName: "/Users/Ilan_Kader/Development/dashboard-react-controls/src/lib/components/FormSelect/FormSelect.jsx",
                   lineNumber: 292,
                   columnNumber: 42
-                }, void 0), children: /* @__PURE__ */ jsxDevRuntimeExports.jsxDEV(
+                }, void 0), children: /* @__PURE__ */ jsxDEV(
                   "button",
                   {
                     onClick: (event) => {
@@ -263,7 +263,7 @@ const FormSelect = ({
                   fileName: "/Users/Ilan_Kader/Development/dashboard-react-controls/src/lib/components/FormSelect/FormSelect.jsx",
                   lineNumber: 292,
                   columnNumber: 23
-                }, void 0) : /* @__PURE__ */ jsxDevRuntimeExports.jsxDEV("span", { children: selectedItemAction.icon }, void 0, false, {
+                }, void 0) : /* @__PURE__ */ jsxDEV("span", { children: selectedItemAction.icon }, void 0, false, {
                   fileName: "/Users/Ilan_Kader/Development/dashboard-react-controls/src/lib/components/FormSelect/FormSelect.jsx",
                   lineNumber: 308,
                   columnNumber: 23
@@ -272,7 +272,7 @@ const FormSelect = ({
                   lineNumber: 290,
                   columnNumber: 19
                 }, void 0),
-                /* @__PURE__ */ jsxDevRuntimeExports.jsxDEV("span", { children: /* @__PURE__ */ jsxDevRuntimeExports.jsxDEV(SvgDropdown, { className: "form-field__caret" }, void 0, false, {
+                /* @__PURE__ */ jsxDEV("span", { children: /* @__PURE__ */ jsxDEV(SvgDropdown, { className: "form-field__caret" }, void 0, false, {
                   fileName: "/Users/Ilan_Kader/Development/dashboard-react-controls/src/lib/components/FormSelect/FormSelect.jsx",
                   lineNumber: 313,
                   columnNumber: 19
@@ -291,7 +291,7 @@ const FormSelect = ({
               lineNumber: 280,
               columnNumber: 13
             }, void 0),
-            isConfirmDialogOpen && /* @__PURE__ */ jsxDevRuntimeExports.jsxDEV(
+            isConfirmDialogOpen && /* @__PURE__ */ jsxDEV(
               ConfirmDialog,
               {
                 cancelButton: {
@@ -325,7 +325,7 @@ const FormSelect = ({
               },
               void 0
             ),
-            isOpen && /* @__PURE__ */ jsxDevRuntimeExports.jsxDEV(
+            isOpen && /* @__PURE__ */ jsxDEV(
               PopUpDialog,
               {
                 className: "form-field form-field-select__options-list",
@@ -340,14 +340,14 @@ const FormSelect = ({
                   maxWidth: `${selectWidth < 500 && !preventWidthOverflow ? 500 : selectWidth}px`,
                   minWidth: `${selectWidth}px`
                 },
-                children: /* @__PURE__ */ jsxDevRuntimeExports.jsxDEV(
+                children: /* @__PURE__ */ jsxDEV(
                   "div",
                   {
                     "data-testid": "select-body",
                     className: "options-list__body",
                     onClick: handleCloseSelectBody,
                     children: [
-                      search && /* @__PURE__ */ jsxDevRuntimeExports.jsxDEV("div", { className: "options-list__search", children: /* @__PURE__ */ jsxDevRuntimeExports.jsxDEV(
+                      search && /* @__PURE__ */ jsxDEV("div", { className: "options-list__search", children: /* @__PURE__ */ jsxDEV(
                         "input",
                         {
                           type: "text",
@@ -370,8 +370,8 @@ const FormSelect = ({
                         lineNumber: 363,
                         columnNumber: 21
                       }, void 0),
-                      /* @__PURE__ */ jsxDevRuntimeExports.jsxDEV("ul", { className: "options-list", ref: optionsListRef, children: sortedOptionsList.map((option) => {
-                        return /* @__PURE__ */ jsxDevRuntimeExports.jsxDEV(
+                      /* @__PURE__ */ jsxDEV("ul", { className: "options-list", ref: optionsListRef, children: sortedOptionsList.map((option) => {
+                        return /* @__PURE__ */ jsxDEV(
                           SelectOption,
                           {
                             item: option,
@@ -418,7 +418,7 @@ const FormSelect = ({
               },
               void 0
             ),
-            /* @__PURE__ */ jsxDevRuntimeExports.jsxDEV("input", { ...input2, type: "hidden" }, void 0, false, {
+            /* @__PURE__ */ jsxDEV("input", { ...input2, type: "hidden" }, void 0, false, {
               fileName: "/Users/Ilan_Kader/Development/dashboard-react-controls/src/lib/components/FormSelect/FormSelect.jsx",
               lineNumber: 394,
               columnNumber: 13

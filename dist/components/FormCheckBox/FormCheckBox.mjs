@@ -1,4 +1,4 @@
-import { j as jsxDevRuntimeExports } from "../../_virtual/jsx-dev-runtime.mjs";
+import { jsxDEV } from "react/jsx-dev-runtime";
 import React__default, { useRef } from "react";
 import PropTypes from "prop-types";
 import { Field } from "react-final-form";
@@ -20,9 +20,9 @@ const FormCheckBox = ({
   );
   const labelClassNames = classnames(highlightLabel && "highlighted");
   const inputRef = useRef(null);
-  return /* @__PURE__ */ jsxDevRuntimeExports.jsxDEV(Field, { name, value: inputProps.value, type: "checkbox", children: ({ input }) => {
-    return /* @__PURE__ */ jsxDevRuntimeExports.jsxDEV("div", { className: formFieldClassNames, "data-testid": "form-field-checkbox", children: [
-      /* @__PURE__ */ jsxDevRuntimeExports.jsxDEV(
+  return /* @__PURE__ */ jsxDEV(Field, { name, value: inputProps.value, type: "checkbox", children: ({ input }) => {
+    return /* @__PURE__ */ jsxDEV("div", { className: formFieldClassNames, "data-testid": "form-field-checkbox", children: [
+      /* @__PURE__ */ jsxDEV(
         "input",
         {
           ref: inputRef,
@@ -42,7 +42,7 @@ const FormCheckBox = ({
         },
         void 0
       ),
-      /* @__PURE__ */ jsxDevRuntimeExports.jsxDEV("label", { htmlFor: inputProps.value ?? name, className: labelClassNames, children: [
+      /* @__PURE__ */ jsxDEV("label", { htmlFor: inputProps.value ?? name, className: labelClassNames, children: [
         label ? label : "",
         children
       ] }, void 0, true, {

@@ -1,4 +1,4 @@
-import { j as jsxDevRuntimeExports } from "../../_virtual/jsx-dev-runtime.mjs";
+import { jsxDEV } from "react/jsx-dev-runtime";
 import React__default, { useState, useMemo, useLayoutEffect, useEffect, createElement } from "react";
 import PropTypes from "prop-types";
 import classnames from "classnames";
@@ -52,7 +52,7 @@ const Wizard = ({
     return React__default.Children.toArray(children).filter((child, idx) => !isEmpty(stepsConfig) && !stepsConfig[idx].hidden).map((child, idx) => {
       const stepIsActive = idx === activeStepNumber;
       const newChild = !isNumber(firstDisabledStepIdx) || idx < firstDisabledStepIdx ? React__default.cloneElement(child, { stepIsActive }) : null;
-      return /* @__PURE__ */ jsxDevRuntimeExports.jsxDEV(
+      return /* @__PURE__ */ jsxDEV(
         "div",
         {
           className: !stepIsActive ? "wizard-form__hidden-content-item" : "wizard-form__visible-content-item",
@@ -89,11 +89,11 @@ const Wizard = ({
     const defaultActions = [];
     if (activeStepNumber !== 0) {
       defaultActions.push(
-        /* @__PURE__ */ jsxDevRuntimeExports.jsxDEV(
+        /* @__PURE__ */ jsxDEV(
           Button,
           {
             id: "wizard-btn-back",
-            icon: /* @__PURE__ */ jsxDevRuntimeExports.jsxDEV(SvgBackArrow, {}, void 0, false, {
+            icon: /* @__PURE__ */ jsxDEV(SvgBackArrow, {}, void 0, false, {
               fileName: "/Users/Ilan_Kader/Development/dashboard-react-controls/src/lib/components/Wizard/Wizard.jsx",
               lineNumber: 132,
               columnNumber: 17
@@ -117,11 +117,11 @@ const Wizard = ({
       );
     }
     defaultActions.push(
-      /* @__PURE__ */ jsxDevRuntimeExports.jsxDEV(
+      /* @__PURE__ */ jsxDEV(
         Button,
         {
           id: "wizard-btn-next",
-          icon: /* @__PURE__ */ jsxDevRuntimeExports.jsxDEV(SvgBackArrow, {}, void 0, false, {
+          icon: /* @__PURE__ */ jsxDEV(SvgBackArrow, {}, void 0, false, {
             fileName: "/Users/Ilan_Kader/Development/dashboard-react-controls/src/lib/components/Wizard/Wizard.jsx",
             lineNumber: 146,
             columnNumber: 15
@@ -157,7 +157,7 @@ const Wizard = ({
     }
     return actionsList;
   };
-  return /* @__PURE__ */ jsxDevRuntimeExports.jsxDEV(
+  return /* @__PURE__ */ jsxDEV(
     Modal,
     {
       actions: renderModalActions(),
@@ -170,7 +170,7 @@ const Wizard = ({
       subTitle,
       title,
       children: [
-        /* @__PURE__ */ jsxDevRuntimeExports.jsxDEV(
+        /* @__PURE__ */ jsxDEV(
           WizardSteps,
           {
             activeStepNumber,
@@ -187,7 +187,7 @@ const Wizard = ({
           },
           void 0
         ),
-        /* @__PURE__ */ jsxDevRuntimeExports.jsxDEV("div", { className: "wizard-form__content-container", children: /* @__PURE__ */ jsxDevRuntimeExports.jsxDEV("div", { className: "wizard-form__content", children: stepsTemplate }, void 0, false, {
+        /* @__PURE__ */ jsxDEV("div", { className: "wizard-form__content-container", children: /* @__PURE__ */ jsxDEV("div", { className: "wizard-form__content", children: stepsTemplate }, void 0, false, {
           fileName: "/Users/Ilan_Kader/Development/dashboard-react-controls/src/lib/components/Wizard/Wizard.jsx",
           lineNumber: 194,
           columnNumber: 9

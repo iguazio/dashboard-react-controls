@@ -1,4 +1,4 @@
-import { j as jsxDevRuntimeExports } from "../../_virtual/jsx-dev-runtime.mjs";
+import { jsxDEV } from "react/jsx-dev-runtime";
 import "react";
 import PropTypes from "prop-types";
 import classnames from "classnames";
@@ -7,12 +7,12 @@ import SvgClose from "../../images/close.svg.mjs";
 /* empty css                         */
 const ValidationTemplate = ({ valid, validationMessage }) => {
   const validationClasses = classnames("validation-option", valid && "text-muted");
-  return /* @__PURE__ */ jsxDevRuntimeExports.jsxDEV("li", { className: validationClasses, children: [
-    /* @__PURE__ */ jsxDevRuntimeExports.jsxDEV("i", { className: "validation-option__icon", children: valid ? /* @__PURE__ */ jsxDevRuntimeExports.jsxDEV(SvgSuccessDone, { className: "validation-option__icon_valid" }, void 0, false, {
+  return /* @__PURE__ */ jsxDEV("li", { className: validationClasses, children: [
+    /* @__PURE__ */ jsxDEV("i", { className: "validation-option__icon", children: valid ? /* @__PURE__ */ jsxDEV(SvgSuccessDone, { className: "validation-option__icon_valid" }, void 0, false, {
       fileName: "/Users/Ilan_Kader/Development/dashboard-react-controls/src/lib/elements/ValidationTemplate/ValidationTemplate.jsx",
       lineNumber: 33,
       columnNumber: 11
-    }, void 0) : /* @__PURE__ */ jsxDevRuntimeExports.jsxDEV(SvgClose, { className: "validation-option__icon_invalid" }, void 0, false, {
+    }, void 0) : /* @__PURE__ */ jsxDEV(SvgClose, { className: "validation-option__icon_invalid" }, void 0, false, {
       fileName: "/Users/Ilan_Kader/Development/dashboard-react-controls/src/lib/elements/ValidationTemplate/ValidationTemplate.jsx",
       lineNumber: 35,
       columnNumber: 11
@@ -21,7 +21,7 @@ const ValidationTemplate = ({ valid, validationMessage }) => {
       lineNumber: 31,
       columnNumber: 7
     }, void 0),
-    /* @__PURE__ */ jsxDevRuntimeExports.jsxDEV("span", { children: validationMessage }, void 0, false, {
+    /* @__PURE__ */ jsxDEV("span", { children: validationMessage }, void 0, false, {
       fileName: "/Users/Ilan_Kader/Development/dashboard-react-controls/src/lib/elements/ValidationTemplate/ValidationTemplate.jsx",
       lineNumber: 38,
       columnNumber: 7

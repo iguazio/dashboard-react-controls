@@ -1,4 +1,4 @@
-import { j as jsxDevRuntimeExports } from "../../_virtual/jsx-dev-runtime.mjs";
+import { jsxDEV } from "react/jsx-dev-runtime";
 import React__default from "react";
 import PropTypes from "prop-types";
 import classnames from "classnames";
@@ -22,17 +22,17 @@ const RoundedIcon = React__default.forwardRef(
       isActive && "round-icon-cp__circle-active",
       disabled && "round-icon-cp__circle-disabled"
     );
-    return /* @__PURE__ */ jsxDevRuntimeExports.jsxDEV("div", { className: wrapperClassNames, ref, "data-testid": id, children: /* @__PURE__ */ jsxDevRuntimeExports.jsxDEV(
+    return /* @__PURE__ */ jsxDEV("div", { className: wrapperClassNames, ref, "data-testid": id, children: /* @__PURE__ */ jsxDEV(
       Tooltip,
       {
         hidden: !tooltipText,
         id,
-        template: /* @__PURE__ */ jsxDevRuntimeExports.jsxDEV(TextTooltipTemplate, { text: tooltipText }, void 0, false, {
+        template: /* @__PURE__ */ jsxDEV(TextTooltipTemplate, { text: tooltipText }, void 0, false, {
           fileName: "/Users/Ilan_Kader/Development/dashboard-react-controls/src/lib/components/RoundedIcon/RoundedIcon.jsx",
           lineNumber: 51,
           columnNumber: 21
         }, void 0),
-        children: /* @__PURE__ */ jsxDevRuntimeExports.jsxDEV("button", { onClick, disabled, className: IconClassNames, children }, void 0, false, {
+        children: /* @__PURE__ */ jsxDEV("button", { onClick, disabled, className: IconClassNames, children }, void 0, false, {
           fileName: "/Users/Ilan_Kader/Development/dashboard-react-controls/src/lib/components/RoundedIcon/RoundedIcon.jsx",
           lineNumber: 53,
           columnNumber: 11

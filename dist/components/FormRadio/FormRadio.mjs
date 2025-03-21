@@ -1,4 +1,4 @@
-import { j as jsxDevRuntimeExports } from "../../_virtual/jsx-dev-runtime.mjs";
+import { jsxDEV } from "react/jsx-dev-runtime";
 import React__default from "react";
 import PropTypes from "prop-types";
 import { Field } from "react-final-form";
@@ -19,13 +19,13 @@ const FormRadio = ({
     readOnly && "form-field-radio_readonly",
     className
   );
-  return /* @__PURE__ */ jsxDevRuntimeExports.jsxDEV(Field, { name, value: inputProps.value, type: "radio", children: ({ input }) => /* @__PURE__ */ jsxDevRuntimeExports.jsxDEV(
+  return /* @__PURE__ */ jsxDEV(Field, { name, value: inputProps.value, type: "radio", children: ({ input }) => /* @__PURE__ */ jsxDEV(
     "div",
     {
       className: formFieldClassNames,
       "data-testid": name ? `${name}-${inputProps.value}-form-radio` : "form-field-radio",
       children: [
-        /* @__PURE__ */ jsxDevRuntimeExports.jsxDEV(
+        /* @__PURE__ */ jsxDEV(
           "input",
           {
             className: classnames(input.checked ? "checked" : "unchecked"),
@@ -47,11 +47,11 @@ const FormRadio = ({
           },
           void 0
         ),
-        tooltip ? /* @__PURE__ */ jsxDevRuntimeExports.jsxDEV(Tooltip, { className: "label", template: /* @__PURE__ */ jsxDevRuntimeExports.jsxDEV(TextTooltipTemplate, { text: tooltip }, void 0, false, {
+        tooltip ? /* @__PURE__ */ jsxDEV(Tooltip, { className: "label", template: /* @__PURE__ */ jsxDEV(TextTooltipTemplate, { text: tooltip }, void 0, false, {
           fileName: "/Users/Ilan_Kader/Development/dashboard-react-controls/src/lib/components/FormRadio/FormRadio.jsx",
           lineNumber: 60,
           columnNumber: 50
-        }, void 0), children: /* @__PURE__ */ jsxDevRuntimeExports.jsxDEV("label", { htmlFor: name + inputProps.value, children: label }, void 0, false, {
+        }, void 0), children: /* @__PURE__ */ jsxDEV("label", { htmlFor: name + inputProps.value, children: label }, void 0, false, {
           fileName: "/Users/Ilan_Kader/Development/dashboard-react-controls/src/lib/components/FormRadio/FormRadio.jsx",
           lineNumber: 61,
           columnNumber: 15
@@ -59,7 +59,7 @@ const FormRadio = ({
           fileName: "/Users/Ilan_Kader/Development/dashboard-react-controls/src/lib/components/FormRadio/FormRadio.jsx",
           lineNumber: 60,
           columnNumber: 13
-        }, void 0) : /* @__PURE__ */ jsxDevRuntimeExports.jsxDEV("label", { htmlFor: name + inputProps.value, children: label }, void 0, false, {
+        }, void 0) : /* @__PURE__ */ jsxDEV("label", { htmlFor: name + inputProps.value, children: label }, void 0, false, {
           fileName: "/Users/Ilan_Kader/Development/dashboard-react-controls/src/lib/components/FormRadio/FormRadio.jsx",
           lineNumber: 64,
           columnNumber: 13

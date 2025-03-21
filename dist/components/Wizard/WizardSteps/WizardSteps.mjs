@@ -1,4 +1,4 @@
-import { j as jsxDevRuntimeExports } from "../../../_virtual/jsx-dev-runtime.mjs";
+import { jsxDEV } from "react/jsx-dev-runtime";
 import "react";
 import PropTypes from "prop-types";
 import classnames from "classnames";
@@ -16,14 +16,14 @@ const WizardSteps = ({ activeStepNumber, firstDisabledStepIdx = null, jumpToStep
     event.preventDefault();
     jumpToStep(idx);
   };
-  return /* @__PURE__ */ jsxDevRuntimeExports.jsxDEV("div", { className: "wizard-steps", children: steps.map(({ id, label, invalid }, idx) => {
+  return /* @__PURE__ */ jsxDEV("div", { className: "wizard-steps", children: steps.map(({ id, label, invalid }, idx) => {
     const stepIsDisabled = isNumber(firstDisabledStepIdx) && idx >= firstDisabledStepIdx;
-    return /* @__PURE__ */ jsxDevRuntimeExports.jsxDEV(
+    return /* @__PURE__ */ jsxDEV(
       Button,
       {
         className: getStepClassNames(idx, invalid),
         disabled: stepIsDisabled,
-        icon: /* @__PURE__ */ jsxDevRuntimeExports.jsxDEV("span", { className: "wizard-steps__indicator", children: idx + 1 }, void 0, false, {
+        icon: /* @__PURE__ */ jsxDEV("span", { className: "wizard-steps__indicator", children: idx + 1 }, void 0, false, {
           fileName: "/Users/Ilan_Kader/Development/dashboard-react-controls/src/lib/components/Wizard/WizardSteps/WizardSteps.jsx",
           lineNumber: 50,
           columnNumber: 19

@@ -1,4 +1,4 @@
-import { j as jsxDevRuntimeExports } from "../../../_virtual/jsx-dev-runtime.mjs";
+import { jsxDEV } from "react/jsx-dev-runtime";
 import React__default from "react";
 import PropTypes from "prop-types";
 import { useField, Field } from "react-final-form";
@@ -12,7 +12,7 @@ const NewChipInput = React__default.forwardRef(({ name, onChange, onFocus, ...in
     input.onFocus(event);
     onFocus(event);
   };
-  return /* @__PURE__ */ jsxDevRuntimeExports.jsxDEV(Field, { name, children: ({ input: input2 }) => /* @__PURE__ */ jsxDevRuntimeExports.jsxDEV(
+  return /* @__PURE__ */ jsxDEV(Field, { name, children: ({ input: input2 }) => /* @__PURE__ */ jsxDEV(
     "input",
     {
       autoComplete: "off",

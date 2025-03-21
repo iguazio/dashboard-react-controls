@@ -1,4 +1,4 @@
-import { j as jsxDevRuntimeExports } from "../../../_virtual/jsx-dev-runtime.mjs";
+import { jsxDEV, Fragment } from "react/jsx-dev-runtime";
 import React__default, { useEffect } from "react";
 import { createPortal } from "react-dom";
 import PropTypes from "prop-types";
@@ -29,23 +29,23 @@ const HiddenChipsBlock = React__default.forwardRef(
       }
     });
     return createPortal(
-      /* @__PURE__ */ jsxDevRuntimeExports.jsxDEV(
+      /* @__PURE__ */ jsxDEV(
         "div",
         {
           ref: hiddenChipsPopUpRef,
           className: hiddenChipsBlockClassNames,
           onClick: (event) => event.stopPropagation(),
-          children: /* @__PURE__ */ jsxDevRuntimeExports.jsxDEV("div", { className: "chip-block-hidden__scrollable-container", children: chips == null ? void 0 : chips.map((element) => {
-            return /* @__PURE__ */ jsxDevRuntimeExports.jsxDEV(
+          children: /* @__PURE__ */ jsxDEV("div", { className: "chip-block-hidden__scrollable-container", children: chips == null ? void 0 : chips.map((element) => {
+            return /* @__PURE__ */ jsxDEV(
               Tooltip,
               {
-                template: /* @__PURE__ */ jsxDevRuntimeExports.jsxDEV(
+                template: /* @__PURE__ */ jsxDEV(
                   TextTooltipTemplate,
                   {
-                    text: element.delimiter ? /* @__PURE__ */ jsxDevRuntimeExports.jsxDEV("span", { className: "chip__content", children: [
+                    text: element.delimiter ? /* @__PURE__ */ jsxDEV("span", { className: "chip__content", children: [
                       element.key,
-                      !element.isKeyOnly && /* @__PURE__ */ jsxDevRuntimeExports.jsxDEV(jsxDevRuntimeExports.Fragment, { children: [
-                        /* @__PURE__ */ jsxDevRuntimeExports.jsxDEV("span", { className: "chip__delimiter", children: element.delimiter }, void 0, false, {
+                      !element.isKeyOnly && /* @__PURE__ */ jsxDEV(Fragment, { children: [
+                        /* @__PURE__ */ jsxDEV("span", { className: "chip__delimiter", children: element.delimiter }, void 0, false, {
                           fileName: "/Users/Ilan_Kader/Development/dashboard-react-controls/src/lib/components/FormChipCell/HiddenChipsBlock/HiddenChipsBlock.jsx",
                           lineNumber: 76,
                           columnNumber: 31
@@ -71,19 +71,19 @@ const HiddenChipsBlock = React__default.forwardRef(
                   },
                   void 0
                 ),
-                children: /* @__PURE__ */ jsxDevRuntimeExports.jsxDEV("div", { className: chipClassNames, children: [
-                  element.key && /* @__PURE__ */ jsxDevRuntimeExports.jsxDEV("div", { className: chipLabelClassNames, children: element.key }, void 0, false, {
+                children: /* @__PURE__ */ jsxDEV("div", { className: chipClassNames, children: [
+                  element.key && /* @__PURE__ */ jsxDEV("div", { className: chipLabelClassNames, children: element.key }, void 0, false, {
                     fileName: "/Users/Ilan_Kader/Development/dashboard-react-controls/src/lib/components/FormChipCell/HiddenChipsBlock/HiddenChipsBlock.jsx",
                     lineNumber: 89,
                     columnNumber: 35
                   }, void 0),
-                  element.value && /* @__PURE__ */ jsxDevRuntimeExports.jsxDEV(jsxDevRuntimeExports.Fragment, { children: [
-                    /* @__PURE__ */ jsxDevRuntimeExports.jsxDEV("div", { className: "chip__delimiter", children: element.delimiter ?? ":" }, void 0, false, {
+                  element.value && /* @__PURE__ */ jsxDEV(Fragment, { children: [
+                    /* @__PURE__ */ jsxDEV("div", { className: "chip__delimiter", children: element.delimiter ?? ":" }, void 0, false, {
                       fileName: "/Users/Ilan_Kader/Development/dashboard-react-controls/src/lib/components/FormChipCell/HiddenChipsBlock/HiddenChipsBlock.jsx",
                       lineNumber: 92,
                       columnNumber: 23
                     }, void 0),
-                    /* @__PURE__ */ jsxDevRuntimeExports.jsxDEV("div", { className: chipValueClassNames, children: element.value }, void 0, false, {
+                    /* @__PURE__ */ jsxDEV("div", { className: chipValueClassNames, children: element.value }, void 0, false, {
                       fileName: "/Users/Ilan_Kader/Development/dashboard-react-controls/src/lib/components/FormChipCell/HiddenChipsBlock/HiddenChipsBlock.jsx",
                       lineNumber: 93,
                       columnNumber: 23

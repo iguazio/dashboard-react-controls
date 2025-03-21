@@ -1,4 +1,4 @@
-import { j as jsxDevRuntimeExports } from "../../../_virtual/jsx-dev-runtime.mjs";
+import { jsxDEV } from "react/jsx-dev-runtime";
 import React__default, { useEffect } from "react";
 import PropTypes from "prop-types";
 import NewChipForm from "../NewChipForm/NewChipForm.mjs";
@@ -39,7 +39,7 @@ const FormChip = React__default.forwardRef(
         }
       });
     }, [chipIndex, setChipsSizes]);
-    return /* @__PURE__ */ jsxDevRuntimeExports.jsxDEV("div", { onClick: (event) => handleToEditMode(event, chipIndex, keyName), ref: chipRef, children: /* @__PURE__ */ jsxDevRuntimeExports.jsxDEV(
+    return /* @__PURE__ */ jsxDEV("div", { onClick: (event) => handleToEditMode(event, chipIndex, keyName), ref: chipRef, children: /* @__PURE__ */ jsxDEV(
       NewChipForm,
       {
         chip,
