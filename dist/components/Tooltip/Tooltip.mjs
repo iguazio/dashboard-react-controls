@@ -1,4 +1,4 @@
-import { jsxDEV, Fragment } from "react/jsx-dev-runtime";
+import { jsxs, Fragment, jsx } from "react/jsx-runtime";
 import React__default, { useState, useRef, useCallback, useEffect } from "react";
 import { createPortal } from "react-dom";
 import PropTypes from "prop-types";
@@ -109,8 +109,8 @@ const Tooltip = ({
       window.removeEventListener("resize", clearStyles);
     };
   }, [clearStyles, style]);
-  return /* @__PURE__ */ jsxDEV(Fragment, { children: [
-    renderChildAsHtml ? /* @__PURE__ */ jsxDEV(
+  return /* @__PURE__ */ jsxs(Fragment, { children: [
+    renderChildAsHtml ? /* @__PURE__ */ jsx(
       "div",
       {
         "data-testid": id ? `${id}-tooltip-wrapper` : "tooltip-wrapper",
@@ -118,16 +118,8 @@ const Tooltip = ({
         className: tooltipClassNames,
         dangerouslySetInnerHTML: { __html: children },
         onClick: handleMouseLeave
-      },
-      void 0,
-      false,
-      {
-        fileName: "/Users/Ilan_Kader/Development/dashboard-react-controls/src/lib/components/Tooltip/Tooltip.jsx",
-        lineNumber: 174,
-        columnNumber: 9
-      },
-      void 0
-    ) : /* @__PURE__ */ jsxDEV(
+      }
+    ) : /* @__PURE__ */ jsx(
       "div",
       {
         "data-testid": id ? `${id}-tooltip-wrapper` : "tooltip-wrapper",
@@ -135,18 +127,10 @@ const Tooltip = ({
         className: tooltipClassNames,
         onClick: handleMouseLeave,
         children
-      },
-      void 0,
-      false,
-      {
-        fileName: "/Users/Ilan_Kader/Development/dashboard-react-controls/src/lib/components/Tooltip/Tooltip.jsx",
-        lineNumber: 182,
-        columnNumber: 9
-      },
-      void 0
+      }
     ),
     !hidden && createPortal(
-      /* @__PURE__ */ jsxDEV(
+      /* @__PURE__ */ jsx(
         CSSTransition,
         {
           classNames: "fade",
@@ -154,7 +138,7 @@ const Tooltip = ({
           timeout: duration,
           unmountOnExit: true,
           nodeRef: tooltipRef,
-          children: /* @__PURE__ */ jsxDEV(
+          children: /* @__PURE__ */ jsx(
             "div",
             {
               "data-testid": id ? `${id}-tooltip` : "tooltip",
@@ -164,33 +148,13 @@ const Tooltip = ({
               },
               className: "tooltip",
               children: template
-            },
-            void 0,
-            false,
-            {
-              fileName: "/Users/Ilan_Kader/Development/dashboard-react-controls/src/lib/components/Tooltip/Tooltip.jsx",
-              lineNumber: 200,
-              columnNumber: 13
-            },
-            void 0
+            }
           )
-        },
-        void 0,
-        false,
-        {
-          fileName: "/Users/Ilan_Kader/Development/dashboard-react-controls/src/lib/components/Tooltip/Tooltip.jsx",
-          lineNumber: 193,
-          columnNumber: 11
-        },
-        void 0
+        }
       ),
       document.getElementById("overlay_container")
     )
-  ] }, void 0, true, {
-    fileName: "/Users/Ilan_Kader/Development/dashboard-react-controls/src/lib/components/Tooltip/Tooltip.jsx",
-    lineNumber: 172,
-    columnNumber: 5
-  }, void 0);
+  ] });
 };
 Tooltip.propTypes = {
   children: PropTypes.any,

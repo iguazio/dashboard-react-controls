@@ -1,4 +1,4 @@
-import { jsxDEV, Fragment } from "react/jsx-dev-runtime";
+import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import React__default from "react";
 import PropTypes from "prop-types";
 import classnames from "classnames";
@@ -61,59 +61,31 @@ const FormChipCellView = React__default.forwardRef(
       isEditable && "editable",
       (showChips || isEditable) && "chip_visible"
     );
-    return /* @__PURE__ */ jsxDEV(FieldArray, { name, validate: validateFields, children: ({ fields, meta }) => {
+    return /* @__PURE__ */ jsx(FieldArray, { name, validate: validateFields, children: ({ fields, meta }) => {
       if (!isEmpty(validationRules) && validationRules.key.every((rule) => rule.name !== uniquenessError.name)) {
         validationRules.key.push(uniquenessError);
       }
-      return (isEditable || !isEveryObjectValueEmpty(fields)) && /* @__PURE__ */ jsxDEV("div", { className: "chips-cell", ref: chipsCellRef, children: /* @__PURE__ */ jsxDEV("div", { className: wrapperClassNames, ref: chipsWrapperRef, children: [
+      return (isEditable || !isEveryObjectValueEmpty(fields)) && /* @__PURE__ */ jsx("div", { className: "chips-cell", ref: chipsCellRef, children: /* @__PURE__ */ jsxs("div", { className: wrapperClassNames, ref: chipsWrapperRef, children: [
         fields.map((contentItem, index) => {
           var _a;
           const chipData = fields.value[index];
-          return index < ((_a = chips.visibleChips) == null ? void 0 : _a.length) && /* @__PURE__ */ jsxDEV("div", { className: "chip-block", children: /* @__PURE__ */ jsxDEV(
+          return index < ((_a = chips.visibleChips) == null ? void 0 : _a.length) && /* @__PURE__ */ jsx("div", { className: "chip-block", children: /* @__PURE__ */ jsx(
             Tooltip,
             {
               hidden: editConfig.isEdit && !chipData.tooltip,
-              template: /* @__PURE__ */ jsxDEV(
+              template: /* @__PURE__ */ jsx(
                 TextTooltipTemplate,
                 {
-                  text: chipData.tooltip || /* @__PURE__ */ jsxDEV("span", { className: "chip__content", children: [
-                    /* @__PURE__ */ jsxDEV("span", { className: "chip__content-item", children: chipData.key }, void 0, false, {
-                      fileName: "/Users/Ilan_Kader/Development/dashboard-react-controls/src/lib/components/FormChipCell/FormChipCellView.jsx",
-                      lineNumber: 115,
-                      columnNumber: 39
-                    }, void 0),
-                    !chipData.isKeyOnly && /* @__PURE__ */ jsxDEV(Fragment, { children: [
-                      /* @__PURE__ */ jsxDEV("span", { className: "chip__delimiter", children: chipData.delimiter ? chipData.delimiter : ":" }, void 0, false, {
-                        fileName: "/Users/Ilan_Kader/Development/dashboard-react-controls/src/lib/components/FormChipCell/FormChipCellView.jsx",
-                        lineNumber: 118,
-                        columnNumber: 43
-                      }, void 0),
-                      /* @__PURE__ */ jsxDEV("span", { className: "chip__content-item", children: chipData.value }, void 0, false, {
-                        fileName: "/Users/Ilan_Kader/Development/dashboard-react-controls/src/lib/components/FormChipCell/FormChipCellView.jsx",
-                        lineNumber: 121,
-                        columnNumber: 43
-                      }, void 0)
-                    ] }, void 0, true, {
-                      fileName: "/Users/Ilan_Kader/Development/dashboard-react-controls/src/lib/components/FormChipCell/FormChipCellView.jsx",
-                      lineNumber: 117,
-                      columnNumber: 41
-                    }, void 0)
-                  ] }, void 0, true, {
-                    fileName: "/Users/Ilan_Kader/Development/dashboard-react-controls/src/lib/components/FormChipCell/FormChipCellView.jsx",
-                    lineNumber: 114,
-                    columnNumber: 37
-                  }, void 0)
-                },
-                void 0,
-                false,
-                {
-                  fileName: "/Users/Ilan_Kader/Development/dashboard-react-controls/src/lib/components/FormChipCell/FormChipCellView.jsx",
-                  lineNumber: 111,
-                  columnNumber: 31
-                },
-                void 0
+                  text: chipData.tooltip || /* @__PURE__ */ jsxs("span", { className: "chip__content", children: [
+                    /* @__PURE__ */ jsx("span", { className: "chip__content-item", children: chipData.key }),
+                    !chipData.isKeyOnly && /* @__PURE__ */ jsxs(Fragment, { children: [
+                      /* @__PURE__ */ jsx("span", { className: "chip__delimiter", children: chipData.delimiter ? chipData.delimiter : ":" }),
+                      /* @__PURE__ */ jsx("span", { className: "chip__content-item", children: chipData.value })
+                    ] })
+                  ] })
+                }
               ),
-              children: /* @__PURE__ */ jsxDEV(
+              children: /* @__PURE__ */ jsx(
                 FormChip,
                 {
                   chip: chipData,
@@ -131,33 +103,14 @@ const FormChipCellView = React__default.forwardRef(
                   setEditConfig,
                   validationRules,
                   valueName: `${contentItem}.value`
-                },
-                void 0,
-                false,
-                {
-                  fileName: "/Users/Ilan_Kader/Development/dashboard-react-controls/src/lib/components/FormChipCell/FormChipCellView.jsx",
-                  lineNumber: 132,
-                  columnNumber: 29
-                },
-                void 0
+                }
               )
             },
-            chipData.id,
-            false,
-            {
-              fileName: "/Users/Ilan_Kader/Development/dashboard-react-controls/src/lib/components/FormChipCell/FormChipCellView.jsx",
-              lineNumber: 107,
-              columnNumber: 27
-            },
-            void 0
-          ) }, chipData.id, false, {
-            fileName: "/Users/Ilan_Kader/Development/dashboard-react-controls/src/lib/components/FormChipCell/FormChipCellView.jsx",
-            lineNumber: 106,
-            columnNumber: 25
-          }, void 0);
+            chipData.id
+          ) }, chipData.id);
         }),
-        /* @__PURE__ */ jsxDEV("div", { className: "chip-block", children: [
-          chips.hiddenChips.length > 0 && showHiddenChips && /* @__PURE__ */ jsxDEV(
+        /* @__PURE__ */ jsxs("div", { className: "chip-block", children: [
+          chips.hiddenChips.length > 0 && showHiddenChips && /* @__PURE__ */ jsx(
             HiddenChipsBlock,
             {
               chipClassNames,
@@ -166,73 +119,29 @@ const FormChipCellView = React__default.forwardRef(
               handleShowElements,
               ref: { hiddenChipsCounterRef, hiddenChipsPopUpRef },
               textOverflowEllipsis: true
-            },
-            void 0,
-            false,
-            {
-              fileName: "/Users/Ilan_Kader/Development/dashboard-react-controls/src/lib/components/FormChipCell/FormChipCellView.jsx",
-              lineNumber: 161,
-              columnNumber: 23
-            },
-            void 0
+            }
           ),
-          chips.hiddenChipsNumber && /* @__PURE__ */ jsxDEV(
+          chips.hiddenChipsNumber && /* @__PURE__ */ jsx(
             "span",
             {
               ref: hiddenChipsCounterRef,
               className: `${chipClassNames} chips_button`,
               onClick: handleShowElements,
               children: chips.hiddenChipsNumber
-            },
-            void 0,
-            false,
-            {
-              fileName: "/Users/Ilan_Kader/Development/dashboard-react-controls/src/lib/components/FormChipCell/FormChipCellView.jsx",
-              lineNumber: 171,
-              columnNumber: 23
-            },
-            void 0
+            }
           )
-        ] }, void 0, true, {
-          fileName: "/Users/Ilan_Kader/Development/dashboard-react-controls/src/lib/components/FormChipCell/FormChipCellView.jsx",
-          lineNumber: 159,
-          columnNumber: 19
-        }, void 0),
-        isEditable && /* @__PURE__ */ jsxDEV(
+        ] }),
+        isEditable && /* @__PURE__ */ jsx(
           "button",
           {
             "data-testid": `${name}-add-chip`,
             className: buttonAddClassNames,
             onClick: (e) => handleAddNewChip(e, fields),
-            children: /* @__PURE__ */ jsxDEV(SvgAdd, {}, void 0, false, {
-              fileName: "/Users/Ilan_Kader/Development/dashboard-react-controls/src/lib/components/FormChipCell/FormChipCellView.jsx",
-              lineNumber: 187,
-              columnNumber: 23
-            }, void 0)
-          },
-          void 0,
-          false,
-          {
-            fileName: "/Users/Ilan_Kader/Development/dashboard-react-controls/src/lib/components/FormChipCell/FormChipCellView.jsx",
-            lineNumber: 182,
-            columnNumber: 21
-          },
-          void 0
+            children: /* @__PURE__ */ jsx(SvgAdd, {})
+          }
         )
-      ] }, void 0, true, {
-        fileName: "/Users/Ilan_Kader/Development/dashboard-react-controls/src/lib/components/FormChipCell/FormChipCellView.jsx",
-        lineNumber: 100,
-        columnNumber: 17
-      }, void 0) }, void 0, false, {
-        fileName: "/Users/Ilan_Kader/Development/dashboard-react-controls/src/lib/components/FormChipCell/FormChipCellView.jsx",
-        lineNumber: 99,
-        columnNumber: 15
-      }, void 0);
-    } }, void 0, false, {
-      fileName: "/Users/Ilan_Kader/Development/dashboard-react-controls/src/lib/components/FormChipCell/FormChipCellView.jsx",
-      lineNumber: 88,
-      columnNumber: 7
-    }, void 0);
+      ] }) });
+    } });
   }
 );
 FormChipCellView.displayName = "FormChipCellView";

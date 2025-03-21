@@ -1,4 +1,4 @@
-import { jsxDEV } from "react/jsx-dev-runtime";
+import { jsx } from "react/jsx-runtime";
 import React__default from "react";
 import PropTypes from "prop-types";
 import { CSSTransition } from "react-transition-group";
@@ -6,7 +6,7 @@ import PopUpDialog from "../../components/PopUpDialog/PopUpDialog.mjs";
 /* empty css                  */
 const OptionsMenu = React__default.forwardRef(({ children = [], show = false, timeout = 300 }, ref) => {
   const { width: dropdownWidth } = ref.current ? ref.current.getBoundingClientRect() : {};
-  return /* @__PURE__ */ jsxDEV(CSSTransition, { in: show, timeout, classNames: "options-menu-transition", unmountOnExit: true, children: /* @__PURE__ */ jsxDEV(
+  return /* @__PURE__ */ jsx(CSSTransition, { in: show, timeout, classNames: "options-menu-transition", unmountOnExit: true, children: /* @__PURE__ */ jsx(
     PopUpDialog,
     {
       headerIsHidden: true,
@@ -18,25 +18,9 @@ const OptionsMenu = React__default.forwardRef(({ children = [], show = false, ti
         autoHorizontalPosition: true
       },
       style: { minWidth: `${dropdownWidth}px` },
-      children: /* @__PURE__ */ jsxDEV("ul", { className: "options-menu__body", children }, void 0, false, {
-        fileName: "/Users/Ilan_Kader/Development/dashboard-react-controls/src/lib/elements/OptionsMenu/OptionsMenu.jsx",
-        lineNumber: 40,
-        columnNumber: 9
-      }, void 0)
-    },
-    void 0,
-    false,
-    {
-      fileName: "/Users/Ilan_Kader/Development/dashboard-react-controls/src/lib/elements/OptionsMenu/OptionsMenu.jsx",
-      lineNumber: 29,
-      columnNumber: 7
-    },
-    void 0
-  ) }, void 0, false, {
-    fileName: "/Users/Ilan_Kader/Development/dashboard-react-controls/src/lib/elements/OptionsMenu/OptionsMenu.jsx",
-    lineNumber: 28,
-    columnNumber: 5
-  }, void 0);
+      children: /* @__PURE__ */ jsx("ul", { className: "options-menu__body", children })
+    }
+  ) });
 });
 OptionsMenu.displayName = "OptionsMenu";
 OptionsMenu.propTypes = {

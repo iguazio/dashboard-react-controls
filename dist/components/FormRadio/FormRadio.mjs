@@ -1,4 +1,4 @@
-import { jsxDEV } from "react/jsx-dev-runtime";
+import { jsx, jsxs } from "react/jsx-runtime";
 import React__default from "react";
 import PropTypes from "prop-types";
 import { Field } from "react-final-form";
@@ -19,13 +19,13 @@ const FormRadio = ({
     readOnly && "form-field-radio_readonly",
     className
   );
-  return /* @__PURE__ */ jsxDEV(Field, { name, value: inputProps.value, type: "radio", children: ({ input }) => /* @__PURE__ */ jsxDEV(
+  return /* @__PURE__ */ jsx(Field, { name, value: inputProps.value, type: "radio", children: ({ input }) => /* @__PURE__ */ jsxs(
     "div",
     {
       className: formFieldClassNames,
       "data-testid": name ? `${name}-${inputProps.value}-form-radio` : "form-field-radio",
       children: [
-        /* @__PURE__ */ jsxDEV(
+        /* @__PURE__ */ jsx(
           "input",
           {
             className: classnames(input.checked ? "checked" : "unchecked"),
@@ -37,48 +37,12 @@ const FormRadio = ({
             },
             checked: input.checked,
             id: name + inputProps.value
-          },
-          void 0,
-          false,
-          {
-            fileName: "/Users/Ilan_Kader/Development/dashboard-react-controls/src/lib/components/FormRadio/FormRadio.jsx",
-            lineNumber: 48,
-            columnNumber: 11
-          },
-          void 0
+          }
         ),
-        tooltip ? /* @__PURE__ */ jsxDEV(Tooltip, { className: "label", template: /* @__PURE__ */ jsxDEV(TextTooltipTemplate, { text: tooltip }, void 0, false, {
-          fileName: "/Users/Ilan_Kader/Development/dashboard-react-controls/src/lib/components/FormRadio/FormRadio.jsx",
-          lineNumber: 60,
-          columnNumber: 50
-        }, void 0), children: /* @__PURE__ */ jsxDEV("label", { htmlFor: name + inputProps.value, children: label }, void 0, false, {
-          fileName: "/Users/Ilan_Kader/Development/dashboard-react-controls/src/lib/components/FormRadio/FormRadio.jsx",
-          lineNumber: 61,
-          columnNumber: 15
-        }, void 0) }, void 0, false, {
-          fileName: "/Users/Ilan_Kader/Development/dashboard-react-controls/src/lib/components/FormRadio/FormRadio.jsx",
-          lineNumber: 60,
-          columnNumber: 13
-        }, void 0) : /* @__PURE__ */ jsxDEV("label", { htmlFor: name + inputProps.value, children: label }, void 0, false, {
-          fileName: "/Users/Ilan_Kader/Development/dashboard-react-controls/src/lib/components/FormRadio/FormRadio.jsx",
-          lineNumber: 64,
-          columnNumber: 13
-        }, void 0)
+        tooltip ? /* @__PURE__ */ jsx(Tooltip, { className: "label", template: /* @__PURE__ */ jsx(TextTooltipTemplate, { text: tooltip }), children: /* @__PURE__ */ jsx("label", { htmlFor: name + inputProps.value, children: label }) }) : /* @__PURE__ */ jsx("label", { htmlFor: name + inputProps.value, children: label })
       ]
-    },
-    void 0,
-    true,
-    {
-      fileName: "/Users/Ilan_Kader/Development/dashboard-react-controls/src/lib/components/FormRadio/FormRadio.jsx",
-      lineNumber: 44,
-      columnNumber: 9
-    },
-    void 0
-  ) }, void 0, false, {
-    fileName: "/Users/Ilan_Kader/Development/dashboard-react-controls/src/lib/components/FormRadio/FormRadio.jsx",
-    lineNumber: 42,
-    columnNumber: 5
-  }, void 0);
+    }
+  ) });
 };
 FormRadio.propTypes = {
   className: PropTypes.string,

@@ -1,4 +1,4 @@
-import { jsxDEV } from "react/jsx-dev-runtime";
+import { jsx } from "react/jsx-runtime";
 import React__default, { useEffect } from "react";
 import PropTypes from "prop-types";
 import NewChipForm from "../NewChipForm/NewChipForm.mjs";
@@ -39,7 +39,7 @@ const FormChip = React__default.forwardRef(
         }
       });
     }, [chipIndex, setChipsSizes]);
-    return /* @__PURE__ */ jsxDEV("div", { onClick: (event) => handleToEditMode(event, chipIndex, keyName), ref: chipRef, children: /* @__PURE__ */ jsxDEV(
+    return /* @__PURE__ */ jsx("div", { onClick: (event) => handleToEditMode(event, chipIndex, keyName), ref: chipRef, children: /* @__PURE__ */ jsx(
       NewChipForm,
       {
         chip,
@@ -56,20 +56,8 @@ const FormChip = React__default.forwardRef(
         setEditConfig,
         validationRules,
         valueName
-      },
-      void 0,
-      false,
-      {
-        fileName: "/Users/Ilan_Kader/Development/dashboard-react-controls/src/lib/components/FormChipCell/FormChip/FormChip.jsx",
-        lineNumber: 68,
-        columnNumber: 9
-      },
-      void 0
-    ) }, void 0, false, {
-      fileName: "/Users/Ilan_Kader/Development/dashboard-react-controls/src/lib/components/FormChipCell/FormChip/FormChip.jsx",
-      lineNumber: 67,
-      columnNumber: 7
-    }, void 0);
+      }
+    ) });
   }
 );
 FormChip.displayName = "FormChip";

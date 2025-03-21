@@ -1,4 +1,4 @@
-import { jsxDEV } from "react/jsx-dev-runtime";
+import { jsxs, jsx } from "react/jsx-runtime";
 import React__default, { useState, useMemo, useCallback } from "react";
 import lodash, { get, set, isEmpty, isNil } from "lodash";
 import classnames from "classnames";
@@ -273,13 +273,9 @@ const FormChipCell = ({
     };
     return disabled ? [null, null] : [validateField(key, "key"), validateField(value, "value")];
   };
-  return /* @__PURE__ */ jsxDEV("div", { className: chipsClassName, "data-testid": `${name}-chips`, children: [
-    label && /* @__PURE__ */ jsxDEV("div", { className: "chips__label", children: label }, void 0, false, {
-      fileName: "/Users/Ilan_Kader/Development/dashboard-react-controls/src/lib/components/FormChipCell/FormChipCell.jsx",
-      lineNumber: 359,
-      columnNumber: 17
-    }, void 0),
-    /* @__PURE__ */ jsxDEV("div", { className: label ? "chips__wrapper" : "", children: /* @__PURE__ */ jsxDEV(
+  return /* @__PURE__ */ jsxs("div", { className: chipsClassName, "data-testid": `${name}-chips`, children: [
+    label && /* @__PURE__ */ jsx("div", { className: "chips__label", children: label }),
+    /* @__PURE__ */ jsx("div", { className: label ? "chips__wrapper" : "", children: /* @__PURE__ */ jsx(
       FormChipCellView,
       {
         chipOptions,
@@ -300,25 +296,9 @@ const FormChipCell = ({
         showHiddenChips,
         validateFields,
         validationRules
-      },
-      void 0,
-      false,
-      {
-        fileName: "/Users/Ilan_Kader/Development/dashboard-react-controls/src/lib/components/FormChipCell/FormChipCell.jsx",
-        lineNumber: 361,
-        columnNumber: 9
-      },
-      void 0
-    ) }, void 0, false, {
-      fileName: "/Users/Ilan_Kader/Development/dashboard-react-controls/src/lib/components/FormChipCell/FormChipCell.jsx",
-      lineNumber: 360,
-      columnNumber: 7
-    }, void 0)
-  ] }, void 0, true, {
-    fileName: "/Users/Ilan_Kader/Development/dashboard-react-controls/src/lib/components/FormChipCell/FormChipCell.jsx",
-    lineNumber: 358,
-    columnNumber: 5
-  }, void 0);
+      }
+    ) })
+  ] });
 };
 FormChipCell.propTypes = {
   chipOptions: CHIP_OPTIONS,

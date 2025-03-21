@@ -1,4 +1,4 @@
-import { jsxDEV } from "react/jsx-dev-runtime";
+import { jsx, jsxs } from "react/jsx-runtime";
 import React__default, { useState, useRef, useCallback, useLayoutEffect, useEffect } from "react";
 import PropTypes from "prop-types";
 import classnames from "classnames";
@@ -108,62 +108,22 @@ const PopUpDialog = React__default.forwardRef(
       }
     }, [calculateCustomPopUpPosition, ref, showPopUp]);
     return showPopUp ? createPortal(
-      /* @__PURE__ */ jsxDEV("div", { ref, className: popUpClassNames, style, children: /* @__PURE__ */ jsxDEV("div", { "data-testid": "pop-up-dialog", className: "pop-up-dialog", children: [
-        !headerIsHidden && /* @__PURE__ */ jsxDEV("div", { className: "pop-up-dialog__header", children: [
-          headerText && /* @__PURE__ */ jsxDEV("div", { "data-testid": "pop-up-dialog-header", className: "pop-up-dialog__header-text", children: /* @__PURE__ */ jsxDEV(Tooltip, { template: /* @__PURE__ */ jsxDEV(TextTooltipTemplate, { text: tooltipText || headerText }, void 0, false, {
-            fileName: "/Users/Ilan_Kader/Development/dashboard-react-controls/src/lib/components/PopUpDialog/PopUpDialog.jsx",
-            lineNumber: 159,
-            columnNumber: 42
-          }, void 0), children: /* @__PURE__ */ jsxDEV("span", { children: headerText }, void 0, false, {
-            fileName: "/Users/Ilan_Kader/Development/dashboard-react-controls/src/lib/components/PopUpDialog/PopUpDialog.jsx",
-            lineNumber: 160,
-            columnNumber: 25
-          }, void 0) }, void 0, false, {
-            fileName: "/Users/Ilan_Kader/Development/dashboard-react-controls/src/lib/components/PopUpDialog/PopUpDialog.jsx",
-            lineNumber: 159,
-            columnNumber: 23
-          }, void 0) }, void 0, false, {
-            fileName: "/Users/Ilan_Kader/Development/dashboard-react-controls/src/lib/components/PopUpDialog/PopUpDialog.jsx",
-            lineNumber: 158,
-            columnNumber: 21
-          }, void 0),
-          /* @__PURE__ */ jsxDEV(
+      /* @__PURE__ */ jsx("div", { ref, className: popUpClassNames, style, children: /* @__PURE__ */ jsxs("div", { "data-testid": "pop-up-dialog", className: "pop-up-dialog", children: [
+        !headerIsHidden && /* @__PURE__ */ jsxs("div", { className: "pop-up-dialog__header", children: [
+          headerText && /* @__PURE__ */ jsx("div", { "data-testid": "pop-up-dialog-header", className: "pop-up-dialog__header-text", children: /* @__PURE__ */ jsx(Tooltip, { template: /* @__PURE__ */ jsx(TextTooltipTemplate, { text: tooltipText || headerText }), children: /* @__PURE__ */ jsx("span", { children: headerText }) }) }),
+          /* @__PURE__ */ jsx(
             RoundedIcon,
             {
               className: "pop-up-dialog__btn_close",
               onClick: handleClosePopUp,
               tooltipText: "Close",
               "data-testid": "pop-up-close-btn",
-              children: /* @__PURE__ */ jsxDEV(SvgClose, {}, void 0, false, {
-                fileName: "/Users/Ilan_Kader/Development/dashboard-react-controls/src/lib/components/PopUpDialog/PopUpDialog.jsx",
-                lineNumber: 170,
-                columnNumber: 21
-              }, void 0)
-            },
-            void 0,
-            false,
-            {
-              fileName: "/Users/Ilan_Kader/Development/dashboard-react-controls/src/lib/components/PopUpDialog/PopUpDialog.jsx",
-              lineNumber: 164,
-              columnNumber: 19
-            },
-            void 0
+              children: /* @__PURE__ */ jsx(SvgClose, {})
+            }
           )
-        ] }, void 0, true, {
-          fileName: "/Users/Ilan_Kader/Development/dashboard-react-controls/src/lib/components/PopUpDialog/PopUpDialog.jsx",
-          lineNumber: 156,
-          columnNumber: 17
-        }, void 0),
+        ] }),
         children
-      ] }, void 0, true, {
-        fileName: "/Users/Ilan_Kader/Development/dashboard-react-controls/src/lib/components/PopUpDialog/PopUpDialog.jsx",
-        lineNumber: 154,
-        columnNumber: 13
-      }, void 0) }, void 0, false, {
-        fileName: "/Users/Ilan_Kader/Development/dashboard-react-controls/src/lib/components/PopUpDialog/PopUpDialog.jsx",
-        lineNumber: 153,
-        columnNumber: 11
-      }, void 0),
+      ] }) }),
       document.getElementById("overlay_container")
     ) : null;
   }

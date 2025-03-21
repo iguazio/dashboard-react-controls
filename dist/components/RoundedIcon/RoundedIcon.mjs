@@ -1,4 +1,4 @@
-import { jsxDEV } from "react/jsx-dev-runtime";
+import { jsx } from "react/jsx-runtime";
 import React__default from "react";
 import PropTypes from "prop-types";
 import classnames from "classnames";
@@ -22,35 +22,15 @@ const RoundedIcon = React__default.forwardRef(
       isActive && "round-icon-cp__circle-active",
       disabled && "round-icon-cp__circle-disabled"
     );
-    return /* @__PURE__ */ jsxDEV("div", { className: wrapperClassNames, ref, "data-testid": id, children: /* @__PURE__ */ jsxDEV(
+    return /* @__PURE__ */ jsx("div", { className: wrapperClassNames, ref, "data-testid": id, children: /* @__PURE__ */ jsx(
       Tooltip,
       {
         hidden: !tooltipText,
         id,
-        template: /* @__PURE__ */ jsxDEV(TextTooltipTemplate, { text: tooltipText }, void 0, false, {
-          fileName: "/Users/Ilan_Kader/Development/dashboard-react-controls/src/lib/components/RoundedIcon/RoundedIcon.jsx",
-          lineNumber: 51,
-          columnNumber: 21
-        }, void 0),
-        children: /* @__PURE__ */ jsxDEV("button", { onClick, disabled, className: IconClassNames, children }, void 0, false, {
-          fileName: "/Users/Ilan_Kader/Development/dashboard-react-controls/src/lib/components/RoundedIcon/RoundedIcon.jsx",
-          lineNumber: 53,
-          columnNumber: 11
-        }, void 0)
-      },
-      void 0,
-      false,
-      {
-        fileName: "/Users/Ilan_Kader/Development/dashboard-react-controls/src/lib/components/RoundedIcon/RoundedIcon.jsx",
-        lineNumber: 48,
-        columnNumber: 9
-      },
-      void 0
-    ) }, void 0, false, {
-      fileName: "/Users/Ilan_Kader/Development/dashboard-react-controls/src/lib/components/RoundedIcon/RoundedIcon.jsx",
-      lineNumber: 47,
-      columnNumber: 7
-    }, void 0);
+        template: /* @__PURE__ */ jsx(TextTooltipTemplate, { text: tooltipText }),
+        children: /* @__PURE__ */ jsx("button", { onClick, disabled, className: IconClassNames, children })
+      }
+    ) });
   }
 );
 RoundedIcon.displayName = "RoundedIcon";
