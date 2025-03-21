@@ -1,4 +1,4 @@
-import { jsxDEV } from "react/jsx-dev-runtime";
+import { jsx, jsxs } from "react/jsx-runtime";
 import React__default, { useState, useRef, useLayoutEffect, useEffect } from "react";
 import classnames from "classnames";
 import PropTypes from "prop-types";
@@ -78,27 +78,15 @@ const FormTextarea = React__default.forwardRef(
       }
       return validationError;
     };
-    return /* @__PURE__ */ jsxDEV(Field, { validate: validateField, name, children: ({ input: input2, meta: meta2 }) => {
+    return /* @__PURE__ */ jsx(Field, { validate: validateField, name, children: ({ input: input2, meta: meta2 }) => {
       var _a;
-      return /* @__PURE__ */ jsxDEV("div", { ref, className: formFieldClassNames, children: [
-        /* @__PURE__ */ jsxDEV("div", { className: labelClassNames, children: label && /* @__PURE__ */ jsxDEV("label", { "data-testid": "label", htmlFor: input2.name, children: [
+      return /* @__PURE__ */ jsxs("div", { ref, className: formFieldClassNames, children: [
+        /* @__PURE__ */ jsx("div", { className: labelClassNames, children: label && /* @__PURE__ */ jsxs("label", { "data-testid": "label", htmlFor: input2.name, children: [
           label,
-          required && /* @__PURE__ */ jsxDEV("span", { className: "form-field__label-mandatory", children: " *" }, void 0, false, {
-            fileName: "/Users/Ilan_Kader/Development/dashboard-react-controls/src/lib/components/FormTextarea/FormTextarea.jsx",
-            lineNumber: 120,
-            columnNumber: 32
-          }, void 0)
-        ] }, void 0, true, {
-          fileName: "/Users/Ilan_Kader/Development/dashboard-react-controls/src/lib/components/FormTextarea/FormTextarea.jsx",
-          lineNumber: 118,
-          columnNumber: 17
-        }, void 0) }, void 0, false, {
-          fileName: "/Users/Ilan_Kader/Development/dashboard-react-controls/src/lib/components/FormTextarea/FormTextarea.jsx",
-          lineNumber: 116,
-          columnNumber: 13
-        }, void 0),
-        /* @__PURE__ */ jsxDEV("div", { className: textAreaClassNames, children: [
-          /* @__PURE__ */ jsxDEV("div", { className: "form-field__control", children: /* @__PURE__ */ jsxDEV(
+          required && /* @__PURE__ */ jsx("span", { className: "form-field__label-mandatory", children: " *" })
+        ] }) }),
+        /* @__PURE__ */ jsxs("div", { className: textAreaClassNames, children: [
+          /* @__PURE__ */ jsx("div", { className: "form-field__control", children: /* @__PURE__ */ jsx(
             "textarea",
             {
               "data-testid": "textarea",
@@ -115,80 +103,24 @@ const FormTextarea = React__default.forwardRef(
               onBlur: handleInputBlur,
               onChange: handleInputChange,
               onFocus: handleInputFocus
-            },
-            void 0,
-            false,
-            {
-              fileName: "/Users/Ilan_Kader/Development/dashboard-react-controls/src/lib/components/FormTextarea/FormTextarea.jsx",
-              lineNumber: 126,
-              columnNumber: 17
-            },
-            void 0
-          ) }, void 0, false, {
-            fileName: "/Users/Ilan_Kader/Development/dashboard-react-controls/src/lib/components/FormTextarea/FormTextarea.jsx",
-            lineNumber: 125,
-            columnNumber: 15
-          }, void 0),
-          /* @__PURE__ */ jsxDEV("div", { className: "form-field__icons", children: [
-            isInvalid && /* @__PURE__ */ jsxDEV(
+            }
+          ) }),
+          /* @__PURE__ */ jsxs("div", { className: "form-field__icons", children: [
+            isInvalid && /* @__PURE__ */ jsx(
               Tooltip,
               {
                 className: "form-field__warning",
-                template: /* @__PURE__ */ jsxDEV(TextTooltipTemplate, { text: ((_a = meta2.error) == null ? void 0 : _a.label) ?? invalidText, warning: true }, void 0, false, {
-                  fileName: "/Users/Ilan_Kader/Development/dashboard-react-controls/src/lib/components/FormTextarea/FormTextarea.jsx",
-                  lineNumber: 148,
-                  columnNumber: 23
-                }, void 0),
-                children: /* @__PURE__ */ jsxDEV(SvgExclamationMark, {}, void 0, false, {
-                  fileName: "/Users/Ilan_Kader/Development/dashboard-react-controls/src/lib/components/FormTextarea/FormTextarea.jsx",
-                  lineNumber: 151,
-                  columnNumber: 21
-                }, void 0)
-              },
-              void 0,
-              false,
-              {
-                fileName: "/Users/Ilan_Kader/Development/dashboard-react-controls/src/lib/components/FormTextarea/FormTextarea.jsx",
-                lineNumber: 145,
-                columnNumber: 19
-              },
-              void 0
+                template: /* @__PURE__ */ jsx(TextTooltipTemplate, { text: ((_a = meta2.error) == null ? void 0 : _a.label) ?? invalidText, warning: true }),
+                children: /* @__PURE__ */ jsx(SvgExclamationMark, {})
+              }
             ),
-            tip && !required && /* @__PURE__ */ jsxDEV(Tip, { text: tip, className: "form-field__tip" }, void 0, false, {
-              fileName: "/Users/Ilan_Kader/Development/dashboard-react-controls/src/lib/components/FormTextarea/FormTextarea.jsx",
-              lineNumber: 154,
-              columnNumber: 38
-            }, void 0),
-            textAreaIcon && /* @__PURE__ */ jsxDEV("span", { "data-testid": "textarea__icon", className: iconClass, children: textAreaIcon }, void 0, false, {
-              fileName: "/Users/Ilan_Kader/Development/dashboard-react-controls/src/lib/components/FormTextarea/FormTextarea.jsx",
-              lineNumber: 156,
-              columnNumber: 19
-            }, void 0)
-          ] }, void 0, true, {
-            fileName: "/Users/Ilan_Kader/Development/dashboard-react-controls/src/lib/components/FormTextarea/FormTextarea.jsx",
-            lineNumber: 143,
-            columnNumber: 15
-          }, void 0)
-        ] }, void 0, true, {
-          fileName: "/Users/Ilan_Kader/Development/dashboard-react-controls/src/lib/components/FormTextarea/FormTextarea.jsx",
-          lineNumber: 124,
-          columnNumber: 13
-        }, void 0),
-        maxLength && /* @__PURE__ */ jsxDEV("div", { className: "form-field__counter", children: `${maxLength - textAreaCount} ${maxLength - textAreaCount !== 1 ? "characters" : "character"} left` }, void 0, false, {
-          fileName: "/Users/Ilan_Kader/Development/dashboard-react-controls/src/lib/components/FormTextarea/FormTextarea.jsx",
-          lineNumber: 163,
-          columnNumber: 15
-        }, void 0)
-      ] }, void 0, true, {
-        fileName: "/Users/Ilan_Kader/Development/dashboard-react-controls/src/lib/components/FormTextarea/FormTextarea.jsx",
-        lineNumber: 115,
-        columnNumber: 11
-      }, void 0);
-    } }, void 0, false, {
-      fileName: "/Users/Ilan_Kader/Development/dashboard-react-controls/src/lib/components/FormTextarea/FormTextarea.jsx",
-      lineNumber: 113,
-      columnNumber: 7
-    }, void 0);
+            tip && !required && /* @__PURE__ */ jsx(Tip, { text: tip, className: "form-field__tip" }),
+            textAreaIcon && /* @__PURE__ */ jsx("span", { "data-testid": "textarea__icon", className: iconClass, children: textAreaIcon })
+          ] })
+        ] }),
+        maxLength && /* @__PURE__ */ jsx("div", { className: "form-field__counter", children: `${maxLength - textAreaCount} ${maxLength - textAreaCount !== 1 ? "characters" : "character"} left` })
+      ] });
+    } });
   }
 );
 FormTextarea.displayName = "FormTextarea";

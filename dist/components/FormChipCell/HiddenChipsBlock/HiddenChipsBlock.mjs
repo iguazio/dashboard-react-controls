@@ -1,4 +1,4 @@
-import { jsxDEV, Fragment } from "react/jsx-dev-runtime";
+import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import React__default, { useEffect } from "react";
 import { createPortal } from "react-dom";
 import PropTypes from "prop-types";
@@ -29,99 +29,40 @@ const HiddenChipsBlock = React__default.forwardRef(
       }
     });
     return createPortal(
-      /* @__PURE__ */ jsxDEV(
+      /* @__PURE__ */ jsx(
         "div",
         {
           ref: hiddenChipsPopUpRef,
           className: hiddenChipsBlockClassNames,
           onClick: (event) => event.stopPropagation(),
-          children: /* @__PURE__ */ jsxDEV("div", { className: "chip-block-hidden__scrollable-container", children: chips == null ? void 0 : chips.map((element) => {
-            return /* @__PURE__ */ jsxDEV(
+          children: /* @__PURE__ */ jsx("div", { className: "chip-block-hidden__scrollable-container", children: chips == null ? void 0 : chips.map((element) => {
+            return /* @__PURE__ */ jsx(
               Tooltip,
               {
-                template: /* @__PURE__ */ jsxDEV(
+                template: /* @__PURE__ */ jsx(
                   TextTooltipTemplate,
                   {
-                    text: element.delimiter ? /* @__PURE__ */ jsxDEV("span", { className: "chip__content", children: [
+                    text: element.delimiter ? /* @__PURE__ */ jsxs("span", { className: "chip__content", children: [
                       element.key,
-                      !element.isKeyOnly && /* @__PURE__ */ jsxDEV(Fragment, { children: [
-                        /* @__PURE__ */ jsxDEV("span", { className: "chip__delimiter", children: element.delimiter }, void 0, false, {
-                          fileName: "/Users/Ilan_Kader/Development/dashboard-react-controls/src/lib/components/FormChipCell/HiddenChipsBlock/HiddenChipsBlock.jsx",
-                          lineNumber: 76,
-                          columnNumber: 31
-                        }, void 0),
+                      !element.isKeyOnly && /* @__PURE__ */ jsxs(Fragment, { children: [
+                        /* @__PURE__ */ jsx("span", { className: "chip__delimiter", children: element.delimiter }),
                         element.value
-                      ] }, void 0, true, {
-                        fileName: "/Users/Ilan_Kader/Development/dashboard-react-controls/src/lib/components/FormChipCell/HiddenChipsBlock/HiddenChipsBlock.jsx",
-                        lineNumber: 75,
-                        columnNumber: 29
-                      }, void 0)
-                    ] }, void 0, true, {
-                      fileName: "/Users/Ilan_Kader/Development/dashboard-react-controls/src/lib/components/FormChipCell/HiddenChipsBlock/HiddenChipsBlock.jsx",
-                      lineNumber: 72,
-                      columnNumber: 25
-                    }, void 0) : generateChipData(element)
-                  },
-                  void 0,
-                  false,
-                  {
-                    fileName: "/Users/Ilan_Kader/Development/dashboard-react-controls/src/lib/components/FormChipCell/HiddenChipsBlock/HiddenChipsBlock.jsx",
-                    lineNumber: 69,
-                    columnNumber: 19
-                  },
-                  void 0
+                      ] })
+                    ] }) : generateChipData(element)
+                  }
                 ),
-                children: /* @__PURE__ */ jsxDEV("div", { className: chipClassNames, children: [
-                  element.key && /* @__PURE__ */ jsxDEV("div", { className: chipLabelClassNames, children: element.key }, void 0, false, {
-                    fileName: "/Users/Ilan_Kader/Development/dashboard-react-controls/src/lib/components/FormChipCell/HiddenChipsBlock/HiddenChipsBlock.jsx",
-                    lineNumber: 89,
-                    columnNumber: 35
-                  }, void 0),
-                  element.value && /* @__PURE__ */ jsxDEV(Fragment, { children: [
-                    /* @__PURE__ */ jsxDEV("div", { className: "chip__delimiter", children: element.delimiter ?? ":" }, void 0, false, {
-                      fileName: "/Users/Ilan_Kader/Development/dashboard-react-controls/src/lib/components/FormChipCell/HiddenChipsBlock/HiddenChipsBlock.jsx",
-                      lineNumber: 92,
-                      columnNumber: 23
-                    }, void 0),
-                    /* @__PURE__ */ jsxDEV("div", { className: chipValueClassNames, children: element.value }, void 0, false, {
-                      fileName: "/Users/Ilan_Kader/Development/dashboard-react-controls/src/lib/components/FormChipCell/HiddenChipsBlock/HiddenChipsBlock.jsx",
-                      lineNumber: 93,
-                      columnNumber: 23
-                    }, void 0)
-                  ] }, void 0, true, {
-                    fileName: "/Users/Ilan_Kader/Development/dashboard-react-controls/src/lib/components/FormChipCell/HiddenChipsBlock/HiddenChipsBlock.jsx",
-                    lineNumber: 91,
-                    columnNumber: 21
-                  }, void 0)
-                ] }, void 0, true, {
-                  fileName: "/Users/Ilan_Kader/Development/dashboard-react-controls/src/lib/components/FormChipCell/HiddenChipsBlock/HiddenChipsBlock.jsx",
-                  lineNumber: 88,
-                  columnNumber: 17
-                }, void 0)
+                children: /* @__PURE__ */ jsxs("div", { className: chipClassNames, children: [
+                  element.key && /* @__PURE__ */ jsx("div", { className: chipLabelClassNames, children: element.key }),
+                  element.value && /* @__PURE__ */ jsxs(Fragment, { children: [
+                    /* @__PURE__ */ jsx("div", { className: "chip__delimiter", children: element.delimiter ?? ":" }),
+                    /* @__PURE__ */ jsx("div", { className: chipValueClassNames, children: element.value })
+                  ] })
+                ] })
               },
-              element.id,
-              false,
-              {
-                fileName: "/Users/Ilan_Kader/Development/dashboard-react-controls/src/lib/components/FormChipCell/HiddenChipsBlock/HiddenChipsBlock.jsx",
-                lineNumber: 66,
-                columnNumber: 15
-              },
-              void 0
+              element.id
             );
-          }) }, void 0, false, {
-            fileName: "/Users/Ilan_Kader/Development/dashboard-react-controls/src/lib/components/FormChipCell/HiddenChipsBlock/HiddenChipsBlock.jsx",
-            lineNumber: 63,
-            columnNumber: 9
-          }, void 0)
-        },
-        void 0,
-        false,
-        {
-          fileName: "/Users/Ilan_Kader/Development/dashboard-react-controls/src/lib/components/FormChipCell/HiddenChipsBlock/HiddenChipsBlock.jsx",
-          lineNumber: 58,
-          columnNumber: 7
-        },
-        void 0
+          }) })
+        }
       ),
       document.getElementById("overlay_container")
     );

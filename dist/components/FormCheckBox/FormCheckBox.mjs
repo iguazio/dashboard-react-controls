@@ -1,4 +1,4 @@
-import { jsxDEV } from "react/jsx-dev-runtime";
+import { jsx, jsxs } from "react/jsx-runtime";
 import React__default, { useRef } from "react";
 import PropTypes from "prop-types";
 import { Field } from "react-final-form";
@@ -20,9 +20,9 @@ const FormCheckBox = ({
   );
   const labelClassNames = classnames(highlightLabel && "highlighted");
   const inputRef = useRef(null);
-  return /* @__PURE__ */ jsxDEV(Field, { name, value: inputProps.value, type: "checkbox", children: ({ input }) => {
-    return /* @__PURE__ */ jsxDEV("div", { className: formFieldClassNames, "data-testid": "form-field-checkbox", children: [
-      /* @__PURE__ */ jsxDEV(
+  return /* @__PURE__ */ jsx(Field, { name, value: inputProps.value, type: "checkbox", children: ({ input }) => {
+    return /* @__PURE__ */ jsxs("div", { className: formFieldClassNames, "data-testid": "form-field-checkbox", children: [
+      /* @__PURE__ */ jsx(
         "input",
         {
           ref: inputRef,
@@ -32,34 +32,14 @@ const FormCheckBox = ({
           id: inputProps.value ?? name,
           ...{ ...input, ...inputProps },
           value: String(input.checked)
-        },
-        void 0,
-        false,
-        {
-          fileName: "/Users/Ilan_Kader/Development/dashboard-react-controls/src/lib/components/FormCheckBox/FormCheckBox.jsx",
-          lineNumber: 46,
-          columnNumber: 13
-        },
-        void 0
+        }
       ),
-      /* @__PURE__ */ jsxDEV("label", { htmlFor: inputProps.value ?? name, className: labelClassNames, children: [
+      /* @__PURE__ */ jsxs("label", { htmlFor: inputProps.value ?? name, className: labelClassNames, children: [
         label ? label : "",
         children
-      ] }, void 0, true, {
-        fileName: "/Users/Ilan_Kader/Development/dashboard-react-controls/src/lib/components/FormCheckBox/FormCheckBox.jsx",
-        lineNumber: 55,
-        columnNumber: 13
-      }, void 0)
-    ] }, void 0, true, {
-      fileName: "/Users/Ilan_Kader/Development/dashboard-react-controls/src/lib/components/FormCheckBox/FormCheckBox.jsx",
-      lineNumber: 45,
-      columnNumber: 11
-    }, void 0);
-  } }, void 0, false, {
-    fileName: "/Users/Ilan_Kader/Development/dashboard-react-controls/src/lib/components/FormCheckBox/FormCheckBox.jsx",
-    lineNumber: 42,
-    columnNumber: 5
-  }, void 0);
+      ] })
+    ] });
+  } });
 };
 FormCheckBox.propTypes = {
   children: PropTypes.node,

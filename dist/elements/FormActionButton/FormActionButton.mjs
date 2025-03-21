@@ -1,4 +1,4 @@
-import { jsxDEV, Fragment } from "react/jsx-dev-runtime";
+import { jsxs, Fragment, jsx } from "react/jsx-runtime";
 import React__default from "react";
 import PropTypes from "prop-types";
 import SvgPlus from "../../images/plus.svg.mjs";
@@ -12,45 +12,21 @@ const FormActionButton = React__default.forwardRef(
     label = "Add new item",
     onClick
   }, ref) => {
-    return /* @__PURE__ */ jsxDEV(Fragment, { children: [
-      !hidden && /* @__PURE__ */ jsxDEV("div", { className: "form-table__row form-table__action-row no-hover", children: /* @__PURE__ */ jsxDEV(
+    return /* @__PURE__ */ jsxs(Fragment, { children: [
+      !hidden && /* @__PURE__ */ jsx("div", { className: "form-table__row form-table__action-row no-hover", children: /* @__PURE__ */ jsxs(
         "button",
         {
           "data-testid": id ? id : `${fieldsPath}-add-btn`,
           onClick: (event) => onClick(event, fields, fieldsPath),
           disabled,
           children: [
-            /* @__PURE__ */ jsxDEV(SvgPlus, {}, void 0, false, {
-              fileName: "/Users/Ilan_Kader/Development/dashboard-react-controls/src/lib/elements/FormActionButton/FormActionButton.jsx",
-              lineNumber: 47,
-              columnNumber: 15
-            }, void 0),
+            /* @__PURE__ */ jsx(SvgPlus, {}),
             label
           ]
-        },
-        void 0,
-        true,
-        {
-          fileName: "/Users/Ilan_Kader/Development/dashboard-react-controls/src/lib/elements/FormActionButton/FormActionButton.jsx",
-          lineNumber: 42,
-          columnNumber: 13
-        },
-        void 0
-      ) }, void 0, false, {
-        fileName: "/Users/Ilan_Kader/Development/dashboard-react-controls/src/lib/elements/FormActionButton/FormActionButton.jsx",
-        lineNumber: 41,
-        columnNumber: 11
-      }, void 0),
-      /* @__PURE__ */ jsxDEV("span", { ref }, void 0, false, {
-        fileName: "/Users/Ilan_Kader/Development/dashboard-react-controls/src/lib/elements/FormActionButton/FormActionButton.jsx",
-        lineNumber: 53,
-        columnNumber: 9
-      }, void 0)
-    ] }, void 0, true, {
-      fileName: "/Users/Ilan_Kader/Development/dashboard-react-controls/src/lib/elements/FormActionButton/FormActionButton.jsx",
-      lineNumber: 39,
-      columnNumber: 7
-    }, void 0);
+        }
+      ) }),
+      /* @__PURE__ */ jsx("span", { ref })
+    ] });
   }
 );
 FormActionButton.displayName = "FormActionButton";

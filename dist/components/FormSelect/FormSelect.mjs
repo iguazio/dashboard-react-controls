@@ -1,4 +1,4 @@
-import { jsxDEV, Fragment } from "react/jsx-dev-runtime";
+import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import React__default, { useState, useRef, useCallback, useMemo, useEffect } from "react";
 import PropTypes from "prop-types";
 import classnames from "classnames";
@@ -185,17 +185,13 @@ const FormSelect = ({
       return value ? void 0 : "Required";
     }
   };
-  return /* @__PURE__ */ jsxDEV(Field, { name, validate: validateField, children: ({ input: input2, meta: meta2 }) => /* @__PURE__ */ jsxDEV(
+  return /* @__PURE__ */ jsx(Field, { name, validate: validateField, children: ({ input: input2, meta: meta2 }) => /* @__PURE__ */ jsx(
     Tooltip,
     {
       className: "select-tooltip",
-      template: /* @__PURE__ */ jsxDEV(TextTooltipTemplate, { text: tooltip }, void 0, false, {
-        fileName: "/Users/Ilan_Kader/Development/dashboard-react-controls/src/lib/components/FormSelect/FormSelect.jsx",
-        lineNumber: 263,
-        columnNumber: 21
-      }, void 0),
+      template: /* @__PURE__ */ jsx(TextTooltipTemplate, { text: tooltip }),
       hidden: !tooltip,
-      children: /* @__PURE__ */ jsxDEV(
+      children: /* @__PURE__ */ jsxs(
         "div",
         {
           "data-testid": name ? `${name}-form-field-select` : "form-field-select",
@@ -203,42 +199,14 @@ const FormSelect = ({
           className: `form-field-select ${className}`,
           onClick: toggleOpen,
           children: [
-            label && /* @__PURE__ */ jsxDEV("div", { className: selectLabelClassName, children: /* @__PURE__ */ jsxDEV("label", { "data-testid": name ? `${name}-form-select-label` : "form-select-label", children: [
+            label && /* @__PURE__ */ jsx("div", { className: selectLabelClassName, children: /* @__PURE__ */ jsxs("label", { "data-testid": name ? `${name}-form-select-label` : "form-select-label", children: [
               label,
-              meta2.error && /* @__PURE__ */ jsxDEV("span", { className: "form-field__label-mandatory", children: " *" }, void 0, false, {
-                fileName: "/Users/Ilan_Kader/Development/dashboard-react-controls/src/lib/components/FormSelect/FormSelect.jsx",
-                lineNumber: 276,
-                columnNumber: 34
-              }, void 0)
-            ] }, void 0, true, {
-              fileName: "/Users/Ilan_Kader/Development/dashboard-react-controls/src/lib/components/FormSelect/FormSelect.jsx",
-              lineNumber: 274,
-              columnNumber: 17
-            }, void 0) }, void 0, false, {
-              fileName: "/Users/Ilan_Kader/Development/dashboard-react-controls/src/lib/components/FormSelect/FormSelect.jsx",
-              lineNumber: 273,
-              columnNumber: 15
-            }, void 0),
-            /* @__PURE__ */ jsxDEV("div", { "data-testid": "select-header", className: selectWrapperClassNames, children: [
-              /* @__PURE__ */ jsxDEV("div", { className: "form-field__control", children: !hideSelectedOption && /* @__PURE__ */ jsxDEV("div", { "data-testid": "selected-option", className: "form-field__select", children: /* @__PURE__ */ jsxDEV("span", { className: selectValueClassName, children: getSelectValue() }, void 0, false, {
-                fileName: "/Users/Ilan_Kader/Development/dashboard-react-controls/src/lib/components/FormSelect/FormSelect.jsx",
-                lineNumber: 284,
-                columnNumber: 21
-              }, void 0) }, void 0, false, {
-                fileName: "/Users/Ilan_Kader/Development/dashboard-react-controls/src/lib/components/FormSelect/FormSelect.jsx",
-                lineNumber: 283,
-                columnNumber: 19
-              }, void 0) }, void 0, false, {
-                fileName: "/Users/Ilan_Kader/Development/dashboard-react-controls/src/lib/components/FormSelect/FormSelect.jsx",
-                lineNumber: 281,
-                columnNumber: 15
-              }, void 0),
-              /* @__PURE__ */ jsxDEV("div", { className: "form-field__icons", children: [
-                input2.value && selectedItemAction && /* @__PURE__ */ jsxDEV(Fragment, { children: selectedItemAction.handler ? /* @__PURE__ */ jsxDEV(Tooltip, { template: /* @__PURE__ */ jsxDEV(TextTooltipTemplate, { text: selectedItemAction.tooltip }, void 0, false, {
-                  fileName: "/Users/Ilan_Kader/Development/dashboard-react-controls/src/lib/components/FormSelect/FormSelect.jsx",
-                  lineNumber: 292,
-                  columnNumber: 42
-                }, void 0), children: /* @__PURE__ */ jsxDEV(
+              meta2.error && /* @__PURE__ */ jsx("span", { className: "form-field__label-mandatory", children: " *" })
+            ] }) }),
+            /* @__PURE__ */ jsxs("div", { "data-testid": "select-header", className: selectWrapperClassNames, children: [
+              /* @__PURE__ */ jsx("div", { className: "form-field__control", children: !hideSelectedOption && /* @__PURE__ */ jsx("div", { "data-testid": "selected-option", className: "form-field__select", children: /* @__PURE__ */ jsx("span", { className: selectValueClassName, children: getSelectValue() }) }) }),
+              /* @__PURE__ */ jsxs("div", { className: "form-field__icons", children: [
+                input2.value && selectedItemAction && /* @__PURE__ */ jsx(Fragment, { children: selectedItemAction.handler ? /* @__PURE__ */ jsx(Tooltip, { template: /* @__PURE__ */ jsx(TextTooltipTemplate, { text: selectedItemAction.tooltip }), children: /* @__PURE__ */ jsx(
                   "button",
                   {
                     onClick: (event) => {
@@ -250,48 +218,12 @@ const FormSelect = ({
                       event.stopPropagation();
                     },
                     children: selectedItemAction.icon
-                  },
-                  void 0,
-                  false,
-                  {
-                    fileName: "/Users/Ilan_Kader/Development/dashboard-react-controls/src/lib/components/FormSelect/FormSelect.jsx",
-                    lineNumber: 293,
-                    columnNumber: 25
-                  },
-                  void 0
-                ) }, void 0, false, {
-                  fileName: "/Users/Ilan_Kader/Development/dashboard-react-controls/src/lib/components/FormSelect/FormSelect.jsx",
-                  lineNumber: 292,
-                  columnNumber: 23
-                }, void 0) : /* @__PURE__ */ jsxDEV("span", { children: selectedItemAction.icon }, void 0, false, {
-                  fileName: "/Users/Ilan_Kader/Development/dashboard-react-controls/src/lib/components/FormSelect/FormSelect.jsx",
-                  lineNumber: 308,
-                  columnNumber: 23
-                }, void 0) }, void 0, false, {
-                  fileName: "/Users/Ilan_Kader/Development/dashboard-react-controls/src/lib/components/FormSelect/FormSelect.jsx",
-                  lineNumber: 290,
-                  columnNumber: 19
-                }, void 0),
-                /* @__PURE__ */ jsxDEV("span", { children: /* @__PURE__ */ jsxDEV(SvgDropdown, { className: "form-field__caret" }, void 0, false, {
-                  fileName: "/Users/Ilan_Kader/Development/dashboard-react-controls/src/lib/components/FormSelect/FormSelect.jsx",
-                  lineNumber: 313,
-                  columnNumber: 19
-                }, void 0) }, void 0, false, {
-                  fileName: "/Users/Ilan_Kader/Development/dashboard-react-controls/src/lib/components/FormSelect/FormSelect.jsx",
-                  lineNumber: 312,
-                  columnNumber: 17
-                }, void 0)
-              ] }, void 0, true, {
-                fileName: "/Users/Ilan_Kader/Development/dashboard-react-controls/src/lib/components/FormSelect/FormSelect.jsx",
-                lineNumber: 288,
-                columnNumber: 15
-              }, void 0)
-            ] }, void 0, true, {
-              fileName: "/Users/Ilan_Kader/Development/dashboard-react-controls/src/lib/components/FormSelect/FormSelect.jsx",
-              lineNumber: 280,
-              columnNumber: 13
-            }, void 0),
-            isConfirmDialogOpen && /* @__PURE__ */ jsxDEV(
+                  }
+                ) }) : /* @__PURE__ */ jsx("span", { children: selectedItemAction.icon }) }),
+                /* @__PURE__ */ jsx("span", { children: /* @__PURE__ */ jsx(SvgDropdown, { className: "form-field__caret" }) })
+              ] })
+            ] }),
+            isConfirmDialogOpen && /* @__PURE__ */ jsx(
               ConfirmDialog,
               {
                 cancelButton: {
@@ -315,17 +247,9 @@ const FormSelect = ({
                 header: selectedItemAction.confirm.title,
                 isOpen: isConfirmDialogOpen,
                 message: selectedItemAction.confirm.message
-              },
-              void 0,
-              false,
-              {
-                fileName: "/Users/Ilan_Kader/Development/dashboard-react-controls/src/lib/components/FormSelect/FormSelect.jsx",
-                lineNumber: 318,
-                columnNumber: 15
-              },
-              void 0
+              }
             ),
-            isOpen && /* @__PURE__ */ jsxDEV(
+            isOpen && /* @__PURE__ */ jsx(
               PopUpDialog,
               {
                 className: "form-field form-field-select__options-list",
@@ -340,14 +264,14 @@ const FormSelect = ({
                   maxWidth: `${selectWidth < 500 && !preventWidthOverflow ? 500 : selectWidth}px`,
                   minWidth: `${selectWidth}px`
                 },
-                children: /* @__PURE__ */ jsxDEV(
+                children: /* @__PURE__ */ jsxs(
                   "div",
                   {
                     "data-testid": "select-body",
                     className: "options-list__body",
                     onClick: handleCloseSelectBody,
                     children: [
-                      search && /* @__PURE__ */ jsxDEV("div", { className: "options-list__search", children: /* @__PURE__ */ jsxDEV(
+                      search && /* @__PURE__ */ jsx("div", { className: "options-list__search", children: /* @__PURE__ */ jsx(
                         "input",
                         {
                           type: "text",
@@ -356,22 +280,10 @@ const FormSelect = ({
                           onChange: (event) => setSearchValue(event.target.value),
                           ref: searchRef,
                           autoFocus: true
-                        },
-                        void 0,
-                        false,
-                        {
-                          fileName: "/Users/Ilan_Kader/Development/dashboard-react-controls/src/lib/components/FormSelect/FormSelect.jsx",
-                          lineNumber: 364,
-                          columnNumber: 23
-                        },
-                        void 0
-                      ) }, void 0, false, {
-                        fileName: "/Users/Ilan_Kader/Development/dashboard-react-controls/src/lib/components/FormSelect/FormSelect.jsx",
-                        lineNumber: 363,
-                        columnNumber: 21
-                      }, void 0),
-                      /* @__PURE__ */ jsxDEV("ul", { className: "options-list", ref: optionsListRef, children: sortedOptionsList.map((option) => {
-                        return /* @__PURE__ */ jsxDEV(
+                        }
+                      ) }),
+                      /* @__PURE__ */ jsx("ul", { className: "options-list", ref: optionsListRef, children: sortedOptionsList.map((option) => {
+                        return /* @__PURE__ */ jsx(
                           SelectOption,
                           {
                             item: option,
@@ -383,71 +295,20 @@ const FormSelect = ({
                             selectedId: !multiple ? input2.value : "",
                             withSelectedIcon
                           },
-                          option.id,
-                          false,
-                          {
-                            fileName: "/Users/Ilan_Kader/Development/dashboard-react-controls/src/lib/components/FormSelect/FormSelect.jsx",
-                            lineNumber: 377,
-                            columnNumber: 25
-                          },
-                          void 0
+                          option.id
                         );
-                      }) }, void 0, false, {
-                        fileName: "/Users/Ilan_Kader/Development/dashboard-react-controls/src/lib/components/FormSelect/FormSelect.jsx",
-                        lineNumber: 374,
-                        columnNumber: 19
-                      }, void 0)
+                      }) })
                     ]
-                  },
-                  void 0,
-                  true,
-                  {
-                    fileName: "/Users/Ilan_Kader/Development/dashboard-react-controls/src/lib/components/FormSelect/FormSelect.jsx",
-                    lineNumber: 357,
-                    columnNumber: 17
-                  },
-                  void 0
+                  }
                 )
-              },
-              void 0,
-              false,
-              {
-                fileName: "/Users/Ilan_Kader/Development/dashboard-react-controls/src/lib/components/FormSelect/FormSelect.jsx",
-                lineNumber: 343,
-                columnNumber: 15
-              },
-              void 0
+              }
             ),
-            /* @__PURE__ */ jsxDEV("input", { ...input2, type: "hidden" }, void 0, false, {
-              fileName: "/Users/Ilan_Kader/Development/dashboard-react-controls/src/lib/components/FormSelect/FormSelect.jsx",
-              lineNumber: 394,
-              columnNumber: 13
-            }, void 0)
+            /* @__PURE__ */ jsx("input", { ...input2, type: "hidden" })
           ]
-        },
-        void 0,
-        true,
-        {
-          fileName: "/Users/Ilan_Kader/Development/dashboard-react-controls/src/lib/components/FormSelect/FormSelect.jsx",
-          lineNumber: 266,
-          columnNumber: 11
-        },
-        void 0
+        }
       )
-    },
-    void 0,
-    false,
-    {
-      fileName: "/Users/Ilan_Kader/Development/dashboard-react-controls/src/lib/components/FormSelect/FormSelect.jsx",
-      lineNumber: 261,
-      columnNumber: 9
-    },
-    void 0
-  ) }, void 0, false, {
-    fileName: "/Users/Ilan_Kader/Development/dashboard-react-controls/src/lib/components/FormSelect/FormSelect.jsx",
-    lineNumber: 259,
-    columnNumber: 5
-  }, void 0);
+    }
+  ) });
 };
 FormSelect.propTypes = {
   className: PropTypes.string,

@@ -1,4 +1,4 @@
-import { jsxDEV } from "react/jsx-dev-runtime";
+import { jsx, jsxs } from "react/jsx-runtime";
 import "react";
 import classnames from "classnames";
 import PropTypes from "prop-types";
@@ -10,19 +10,15 @@ const FormToggle = ({ density, label = "", name, onChange = () => {
     "form-field__wrapper",
     density && `form-field__wrapper-${density}`
   );
-  return /* @__PURE__ */ jsxDEV(Field, { name, value: inputProps.value, type: "checkbox", children: ({ input }) => {
-    return /* @__PURE__ */ jsxDEV(
+  return /* @__PURE__ */ jsx(Field, { name, value: inputProps.value, type: "checkbox", children: ({ input }) => {
+    return /* @__PURE__ */ jsxs(
       "label",
       {
         className: "form-field-toggle",
         "data-testid": name ? `${name}-form-field-toggle` : "form-field-toggle",
         children: [
-          label && /* @__PURE__ */ jsxDEV("div", { className: "form-field__label", children: label }, void 0, false, {
-            fileName: "/Users/Ilan_Kader/Development/dashboard-react-controls/src/lib/components/FormToggle/FormToggle.jsx",
-            lineNumber: 38,
-            columnNumber: 23
-          }, void 0),
-          /* @__PURE__ */ jsxDEV(
+          label && /* @__PURE__ */ jsx("div", { className: "form-field__label", children: label }),
+          /* @__PURE__ */ jsx(
             "input",
             {
               "data-testid": name ? `${name}-form-toggle` : "form-toggle",
@@ -33,41 +29,13 @@ const FormToggle = ({ density, label = "", name, onChange = () => {
                 input.onChange(event);
               },
               type: "checkbox"
-            },
-            void 0,
-            false,
-            {
-              fileName: "/Users/Ilan_Kader/Development/dashboard-react-controls/src/lib/components/FormToggle/FormToggle.jsx",
-              lineNumber: 39,
-              columnNumber: 13
-            },
-            void 0
+            }
           ),
-          /* @__PURE__ */ jsxDEV("div", { className: toggleWrapperClassNames, children: /* @__PURE__ */ jsxDEV("span", { className: "form-field-toggle__switch" }, void 0, false, {
-            fileName: "/Users/Ilan_Kader/Development/dashboard-react-controls/src/lib/components/FormToggle/FormToggle.jsx",
-            lineNumber: 50,
-            columnNumber: 15
-          }, void 0) }, void 0, false, {
-            fileName: "/Users/Ilan_Kader/Development/dashboard-react-controls/src/lib/components/FormToggle/FormToggle.jsx",
-            lineNumber: 49,
-            columnNumber: 13
-          }, void 0)
+          /* @__PURE__ */ jsx("div", { className: toggleWrapperClassNames, children: /* @__PURE__ */ jsx("span", { className: "form-field-toggle__switch" }) })
         ]
-      },
-      void 0,
-      true,
-      {
-        fileName: "/Users/Ilan_Kader/Development/dashboard-react-controls/src/lib/components/FormToggle/FormToggle.jsx",
-        lineNumber: 34,
-        columnNumber: 11
-      },
-      void 0
+      }
     );
-  } }, void 0, false, {
-    fileName: "/Users/Ilan_Kader/Development/dashboard-react-controls/src/lib/components/FormToggle/FormToggle.jsx",
-    lineNumber: 31,
-    columnNumber: 5
-  }, void 0);
+  } });
 };
 FormToggle.propTypes = {
   density: PropTypes.string,

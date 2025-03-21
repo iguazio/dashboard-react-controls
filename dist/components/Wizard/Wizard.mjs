@@ -1,4 +1,4 @@
-import { jsxDEV } from "react/jsx-dev-runtime";
+import { jsx, jsxs } from "react/jsx-runtime";
 import React__default, { useState, useMemo, useLayoutEffect, useEffect, createElement } from "react";
 import PropTypes from "prop-types";
 import classnames from "classnames";
@@ -52,20 +52,13 @@ const Wizard = ({
     return React__default.Children.toArray(children).filter((child, idx) => !isEmpty(stepsConfig) && !stepsConfig[idx].hidden).map((child, idx) => {
       const stepIsActive = idx === activeStepNumber;
       const newChild = !isNumber(firstDisabledStepIdx) || idx < firstDisabledStepIdx ? React__default.cloneElement(child, { stepIsActive }) : null;
-      return /* @__PURE__ */ jsxDEV(
+      return /* @__PURE__ */ jsx(
         "div",
         {
           className: !stepIsActive ? "wizard-form__hidden-content-item" : "wizard-form__visible-content-item",
           children: newChild
         },
-        idx,
-        false,
-        {
-          fileName: "/Users/Ilan_Kader/Development/dashboard-react-controls/src/lib/components/Wizard/Wizard.jsx",
-          lineNumber: 89,
-          columnNumber: 11
-        },
-        void 0
+        idx
       );
     });
   }, [activeStepNumber, children, firstDisabledStepIdx, stepsConfig]);
@@ -89,43 +82,27 @@ const Wizard = ({
     const defaultActions = [];
     if (activeStepNumber !== 0) {
       defaultActions.push(
-        /* @__PURE__ */ jsxDEV(
+        /* @__PURE__ */ jsx(
           Button,
           {
             id: "wizard-btn-back",
-            icon: /* @__PURE__ */ jsxDEV(SvgBackArrow, {}, void 0, false, {
-              fileName: "/Users/Ilan_Kader/Development/dashboard-react-controls/src/lib/components/Wizard/Wizard.jsx",
-              lineNumber: 132,
-              columnNumber: 17
-            }, void 0),
+            icon: /* @__PURE__ */ jsx(SvgBackArrow, {}),
             className: "wizard-form__back-button",
             onClick: goToPreviousStep,
             disabled: activeStepNumber === 0,
             label: "Back",
             type: "button",
             variant: TERTIARY_BUTTON
-          },
-          void 0,
-          false,
-          {
-            fileName: "/Users/Ilan_Kader/Development/dashboard-react-controls/src/lib/components/Wizard/Wizard.jsx",
-            lineNumber: 130,
-            columnNumber: 9
-          },
-          void 0
+          }
         )
       );
     }
     defaultActions.push(
-      /* @__PURE__ */ jsxDEV(
+      /* @__PURE__ */ jsx(
         Button,
         {
           id: "wizard-btn-next",
-          icon: /* @__PURE__ */ jsxDEV(SvgBackArrow, {}, void 0, false, {
-            fileName: "/Users/Ilan_Kader/Development/dashboard-react-controls/src/lib/components/Wizard/Wizard.jsx",
-            lineNumber: 146,
-            columnNumber: 15
-          }, void 0),
+          icon: /* @__PURE__ */ jsx(SvgBackArrow, {}),
           iconPosition: "right",
           className: "wizard-form__next-button",
           disabled: (stepConfig == null ? void 0 : stepConfig.nextIsDisabled) || isLastStep,
@@ -133,15 +110,7 @@ const Wizard = ({
           label: "Next",
           type: "button",
           variant: TERTIARY_BUTTON
-        },
-        void 0,
-        false,
-        {
-          fileName: "/Users/Ilan_Kader/Development/dashboard-react-controls/src/lib/components/Wizard/Wizard.jsx",
-          lineNumber: 144,
-          columnNumber: 7
-        },
-        void 0
+        }
       )
     );
     return defaultActions;
@@ -157,7 +126,7 @@ const Wizard = ({
     }
     return actionsList;
   };
-  return /* @__PURE__ */ jsxDEV(
+  return /* @__PURE__ */ jsxs(
     Modal,
     {
       actions: renderModalActions(),
@@ -170,42 +139,18 @@ const Wizard = ({
       subTitle,
       title,
       children: [
-        /* @__PURE__ */ jsxDEV(
+        /* @__PURE__ */ jsx(
           WizardSteps,
           {
             activeStepNumber,
             firstDisabledStepIdx,
             jumpToStep,
             steps: visibleSteps
-          },
-          void 0,
-          false,
-          {
-            fileName: "/Users/Ilan_Kader/Development/dashboard-react-controls/src/lib/components/Wizard/Wizard.jsx",
-            lineNumber: 187,
-            columnNumber: 7
-          },
-          void 0
+          }
         ),
-        /* @__PURE__ */ jsxDEV("div", { className: "wizard-form__content-container", children: /* @__PURE__ */ jsxDEV("div", { className: "wizard-form__content", children: stepsTemplate }, void 0, false, {
-          fileName: "/Users/Ilan_Kader/Development/dashboard-react-controls/src/lib/components/Wizard/Wizard.jsx",
-          lineNumber: 194,
-          columnNumber: 9
-        }, void 0) }, void 0, false, {
-          fileName: "/Users/Ilan_Kader/Development/dashboard-react-controls/src/lib/components/Wizard/Wizard.jsx",
-          lineNumber: 193,
-          columnNumber: 7
-        }, void 0)
+        /* @__PURE__ */ jsx("div", { className: "wizard-form__content-container", children: /* @__PURE__ */ jsx("div", { className: "wizard-form__content", children: stepsTemplate }) })
       ]
-    },
-    void 0,
-    true,
-    {
-      fileName: "/Users/Ilan_Kader/Development/dashboard-react-controls/src/lib/components/Wizard/Wizard.jsx",
-      lineNumber: 176,
-      columnNumber: 5
-    },
-    void 0
+    }
   );
 };
 Wizard.propTypes = {

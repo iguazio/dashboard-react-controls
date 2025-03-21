@@ -1,4 +1,4 @@
-import { jsxDEV } from "react/jsx-dev-runtime";
+import { jsxs, jsx } from "react/jsx-runtime";
 import "react";
 import PropTypes from "prop-types";
 import classnames from "classnames";
@@ -7,30 +7,10 @@ import SvgClose from "../../images/close.svg.mjs";
 /* empty css                         */
 const ValidationTemplate = ({ valid, validationMessage }) => {
   const validationClasses = classnames("validation-option", valid && "text-muted");
-  return /* @__PURE__ */ jsxDEV("li", { className: validationClasses, children: [
-    /* @__PURE__ */ jsxDEV("i", { className: "validation-option__icon", children: valid ? /* @__PURE__ */ jsxDEV(SvgSuccessDone, { className: "validation-option__icon_valid" }, void 0, false, {
-      fileName: "/Users/Ilan_Kader/Development/dashboard-react-controls/src/lib/elements/ValidationTemplate/ValidationTemplate.jsx",
-      lineNumber: 33,
-      columnNumber: 11
-    }, void 0) : /* @__PURE__ */ jsxDEV(SvgClose, { className: "validation-option__icon_invalid" }, void 0, false, {
-      fileName: "/Users/Ilan_Kader/Development/dashboard-react-controls/src/lib/elements/ValidationTemplate/ValidationTemplate.jsx",
-      lineNumber: 35,
-      columnNumber: 11
-    }, void 0) }, void 0, false, {
-      fileName: "/Users/Ilan_Kader/Development/dashboard-react-controls/src/lib/elements/ValidationTemplate/ValidationTemplate.jsx",
-      lineNumber: 31,
-      columnNumber: 7
-    }, void 0),
-    /* @__PURE__ */ jsxDEV("span", { children: validationMessage }, void 0, false, {
-      fileName: "/Users/Ilan_Kader/Development/dashboard-react-controls/src/lib/elements/ValidationTemplate/ValidationTemplate.jsx",
-      lineNumber: 38,
-      columnNumber: 7
-    }, void 0)
-  ] }, void 0, true, {
-    fileName: "/Users/Ilan_Kader/Development/dashboard-react-controls/src/lib/elements/ValidationTemplate/ValidationTemplate.jsx",
-    lineNumber: 30,
-    columnNumber: 5
-  }, void 0);
+  return /* @__PURE__ */ jsxs("li", { className: validationClasses, children: [
+    /* @__PURE__ */ jsx("i", { className: "validation-option__icon", children: valid ? /* @__PURE__ */ jsx(SvgSuccessDone, { className: "validation-option__icon_valid" }) : /* @__PURE__ */ jsx(SvgClose, { className: "validation-option__icon_invalid" }) }),
+    /* @__PURE__ */ jsx("span", { children: validationMessage })
+  ] });
 };
 ValidationTemplate.propTypes = {
   valid: PropTypes.bool.isRequired,

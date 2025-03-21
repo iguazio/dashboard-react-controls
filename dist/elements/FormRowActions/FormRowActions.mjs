@@ -1,4 +1,4 @@
-import { jsxDEV, Fragment } from "react/jsx-dev-runtime";
+import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import "react";
 import PropTypes from "prop-types";
 import RoundedIcon from "../../components/RoundedIcon/RoundedIcon.mjs";
@@ -19,67 +19,31 @@ const FormRowActions = ({
   index
 }) => {
   var _a, _b, _c, _d;
-  return hidden ? /* @__PURE__ */ jsxDEV("div", { className: "form-table__cell form-table__actions-cell" }, void 0, false, {
-    fileName: "/Users/Ilan_Kader/Development/dashboard-react-controls/src/lib/elements/FormRowActions/FormRowActions.jsx",
-    lineNumber: 44,
-    columnNumber: 5
-  }, void 0) : /* @__PURE__ */ jsxDEV("div", { className: "form-table__cell form-table__actions-cell", children: [
-    ((_a = editingItem == null ? void 0 : editingItem.ui) == null ? void 0 : _a.index) === index && /* @__PURE__ */ jsxDEV(Fragment, { children: [
-      /* @__PURE__ */ jsxDEV(
+  return hidden ? /* @__PURE__ */ jsx("div", { className: "form-table__cell form-table__actions-cell" }) : /* @__PURE__ */ jsxs("div", { className: "form-table__cell form-table__actions-cell", children: [
+    ((_a = editingItem == null ? void 0 : editingItem.ui) == null ? void 0 : _a.index) === index && /* @__PURE__ */ jsxs(Fragment, { children: [
+      /* @__PURE__ */ jsx(
         RoundedIcon,
         {
           id: "apply-btn",
           onClick: (event) => applyChanges(event, index),
           tooltipText: "Apply",
           disabled,
-          children: /* @__PURE__ */ jsxDEV(SvgCheckmark2, {}, void 0, false, {
-            fileName: "/Users/Ilan_Kader/Development/dashboard-react-controls/src/lib/elements/FormRowActions/FormRowActions.jsx",
-            lineNumber: 55,
-            columnNumber: 13
-          }, void 0)
-        },
-        void 0,
-        false,
-        {
-          fileName: "/Users/Ilan_Kader/Development/dashboard-react-controls/src/lib/elements/FormRowActions/FormRowActions.jsx",
-          lineNumber: 49,
-          columnNumber: 11
-        },
-        void 0
+          children: /* @__PURE__ */ jsx(SvgCheckmark2, {})
+        }
       ),
-      /* @__PURE__ */ jsxDEV(
+      /* @__PURE__ */ jsx(
         RoundedIcon,
         {
           id: "delete-discard-btn",
           onClick: (event) => discardOrDelete(event, fieldsPath, index),
           tooltipText: ((_b = editingItem.ui) == null ? void 0 : _b.isNew) ? "Delete" : "Discard changes",
           disabled,
-          children: ((_c = editingItem.ui) == null ? void 0 : _c.isNew) ? /* @__PURE__ */ jsxDEV(SvgDelete, {}, void 0, false, {
-            fileName: "/Users/Ilan_Kader/Development/dashboard-react-controls/src/lib/elements/FormRowActions/FormRowActions.jsx",
-            lineNumber: 63,
-            columnNumber: 38
-          }, void 0) : /* @__PURE__ */ jsxDEV(SvgClose, {}, void 0, false, {
-            fileName: "/Users/Ilan_Kader/Development/dashboard-react-controls/src/lib/elements/FormRowActions/FormRowActions.jsx",
-            lineNumber: 63,
-            columnNumber: 51
-          }, void 0)
-        },
-        void 0,
-        false,
-        {
-          fileName: "/Users/Ilan_Kader/Development/dashboard-react-controls/src/lib/elements/FormRowActions/FormRowActions.jsx",
-          lineNumber: 57,
-          columnNumber: 11
-        },
-        void 0
+          children: ((_c = editingItem.ui) == null ? void 0 : _c.isNew) ? /* @__PURE__ */ jsx(SvgDelete, {}) : /* @__PURE__ */ jsx(SvgClose, {})
+        }
       )
-    ] }, void 0, true, {
-      fileName: "/Users/Ilan_Kader/Development/dashboard-react-controls/src/lib/elements/FormRowActions/FormRowActions.jsx",
-      lineNumber: 48,
-      columnNumber: 9
-    }, void 0),
-    (!editingItem || ((_d = editingItem == null ? void 0 : editingItem.ui) == null ? void 0 : _d.index) !== index) && /* @__PURE__ */ jsxDEV(Fragment, { children: [
-      /* @__PURE__ */ jsxDEV(
+    ] }),
+    (!editingItem || ((_d = editingItem == null ? void 0 : editingItem.ui) == null ? void 0 : _d.index) !== index) && /* @__PURE__ */ jsxs(Fragment, { children: [
+      /* @__PURE__ */ jsx(
         RoundedIcon,
         {
           id: "edit-btn",
@@ -88,22 +52,10 @@ const FormRowActions = ({
           },
           tooltipText: "Edit",
           disabled,
-          children: /* @__PURE__ */ jsxDEV(SvgEdit, {}, void 0, false, {
-            fileName: "/Users/Ilan_Kader/Development/dashboard-react-controls/src/lib/elements/FormRowActions/FormRowActions.jsx",
-            lineNumber: 77,
-            columnNumber: 13
-          }, void 0)
-        },
-        void 0,
-        false,
-        {
-          fileName: "/Users/Ilan_Kader/Development/dashboard-react-controls/src/lib/elements/FormRowActions/FormRowActions.jsx",
-          lineNumber: 69,
-          columnNumber: 11
-        },
-        void 0
+          children: /* @__PURE__ */ jsx(SvgEdit, {})
+        }
       ),
-      !deleteButtonIsHidden && /* @__PURE__ */ jsxDEV(
+      !deleteButtonIsHidden && /* @__PURE__ */ jsx(
         RoundedIcon,
         {
           id: "delete-btn",
@@ -112,31 +64,11 @@ const FormRowActions = ({
           },
           tooltipText: "Delete",
           disabled,
-          children: /* @__PURE__ */ jsxDEV(SvgDelete, {}, void 0, false, {
-            fileName: "/Users/Ilan_Kader/Development/dashboard-react-controls/src/lib/elements/FormRowActions/FormRowActions.jsx",
-            lineNumber: 89,
-            columnNumber: 15
-          }, void 0)
-        },
-        void 0,
-        false,
-        {
-          fileName: "/Users/Ilan_Kader/Development/dashboard-react-controls/src/lib/elements/FormRowActions/FormRowActions.jsx",
-          lineNumber: 81,
-          columnNumber: 13
-        },
-        void 0
+          children: /* @__PURE__ */ jsx(SvgDelete, {})
+        }
       )
-    ] }, void 0, true, {
-      fileName: "/Users/Ilan_Kader/Development/dashboard-react-controls/src/lib/elements/FormRowActions/FormRowActions.jsx",
-      lineNumber: 68,
-      columnNumber: 9
-    }, void 0)
-  ] }, void 0, true, {
-    fileName: "/Users/Ilan_Kader/Development/dashboard-react-controls/src/lib/elements/FormRowActions/FormRowActions.jsx",
-    lineNumber: 46,
-    columnNumber: 5
-  }, void 0);
+    ] })
+  ] });
 };
 FormRowActions.propTypes = {
   applyChanges: PropTypes.func.isRequired,

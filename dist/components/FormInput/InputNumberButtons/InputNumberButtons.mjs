@@ -1,4 +1,4 @@
-import { jsxDEV } from "react/jsx-dev-runtime";
+import { jsx, jsxs } from "react/jsx-runtime";
 import React__default from "react";
 import PropTypes from "prop-types";
 import { isNil } from "lodash";
@@ -30,60 +30,28 @@ const InputNumberButtons = ({
   const isCurrentValueEmpty = () => {
     return isNil(value) || value === "";
   };
-  return /* @__PURE__ */ jsxDEV("div", { "data-testid": "range-input-container", className: "form-field-range", children: /* @__PURE__ */ jsxDEV("div", { className: "range__buttons", children: [
-    /* @__PURE__ */ jsxDEV(
+  return /* @__PURE__ */ jsx("div", { "data-testid": "range-input-container", className: "form-field-range", children: /* @__PURE__ */ jsxs("div", { className: "range__buttons", children: [
+    /* @__PURE__ */ jsx(
       "button",
       {
         "data-testid": "btn-increase",
         className: "range__button range__button-increase",
         disabled,
         onClick: handleIncrease,
-        children: /* @__PURE__ */ jsxDEV(SvgRangeArrowSmall, { className: "increase" }, void 0, false, {
-          fileName: "/Users/Ilan_Kader/Development/dashboard-react-controls/src/lib/components/FormInput/InputNumberButtons/InputNumberButtons.jsx",
-          lineNumber: 69,
-          columnNumber: 11
-        }, void 0)
-      },
-      void 0,
-      false,
-      {
-        fileName: "/Users/Ilan_Kader/Development/dashboard-react-controls/src/lib/components/FormInput/InputNumberButtons/InputNumberButtons.jsx",
-        lineNumber: 63,
-        columnNumber: 9
-      },
-      void 0
+        children: /* @__PURE__ */ jsx(SvgRangeArrowSmall, { className: "increase" })
+      }
     ),
-    /* @__PURE__ */ jsxDEV(
+    /* @__PURE__ */ jsx(
       "button",
       {
         "data-testid": "btn-decrease",
         className: "range__button range__button-decrease",
         disabled,
         onClick: handleDecrease,
-        children: /* @__PURE__ */ jsxDEV(SvgRangeArrowSmall, { className: "decrease" }, void 0, false, {
-          fileName: "/Users/Ilan_Kader/Development/dashboard-react-controls/src/lib/components/FormInput/InputNumberButtons/InputNumberButtons.jsx",
-          lineNumber: 77,
-          columnNumber: 11
-        }, void 0)
-      },
-      void 0,
-      false,
-      {
-        fileName: "/Users/Ilan_Kader/Development/dashboard-react-controls/src/lib/components/FormInput/InputNumberButtons/InputNumberButtons.jsx",
-        lineNumber: 71,
-        columnNumber: 9
-      },
-      void 0
+        children: /* @__PURE__ */ jsx(SvgRangeArrowSmall, { className: "decrease" })
+      }
     )
-  ] }, void 0, true, {
-    fileName: "/Users/Ilan_Kader/Development/dashboard-react-controls/src/lib/components/FormInput/InputNumberButtons/InputNumberButtons.jsx",
-    lineNumber: 62,
-    columnNumber: 7
-  }, void 0) }, void 0, false, {
-    fileName: "/Users/Ilan_Kader/Development/dashboard-react-controls/src/lib/components/FormInput/InputNumberButtons/InputNumberButtons.jsx",
-    lineNumber: 61,
-    columnNumber: 5
-  }, void 0);
+  ] }) });
 };
 InputNumberButtons.propTypes = {
   disabled: PropTypes.bool,

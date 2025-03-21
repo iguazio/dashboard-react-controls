@@ -1,4 +1,4 @@
-import { jsxDEV } from "react/jsx-dev-runtime";
+import { jsx, jsxs } from "react/jsx-runtime";
 import "react";
 import PropTypes from "prop-types";
 import classnames from "classnames";
@@ -35,26 +35,18 @@ const ConfirmDialog = ({
     onResolve && onResolve();
     confirmButton.handler && confirmButton.handler(event);
   };
-  return isOpen && /* @__PURE__ */ jsxDEV(
+  return isOpen && /* @__PURE__ */ jsx(
     PopUpDialog,
     {
       className,
       closePopUp: handleCloseDialog,
       customPosition,
       headerText: header,
-      children: /* @__PURE__ */ jsxDEV("div", { className: "confirm-dialog", children: [
-        message && /* @__PURE__ */ jsxDEV("div", { className: messageClassNames, children: message }, void 0, false, {
-          fileName: "/Users/Ilan_Kader/Development/dashboard-react-controls/src/lib/components/ConfirmDialog/ConfirmDialog.jsx",
-          lineNumber: 74,
-          columnNumber: 23
-        }, void 0),
-        children && /* @__PURE__ */ jsxDEV("div", { className: "confirm-dialog__body", children }, void 0, false, {
-          fileName: "/Users/Ilan_Kader/Development/dashboard-react-controls/src/lib/components/ConfirmDialog/ConfirmDialog.jsx",
-          lineNumber: 75,
-          columnNumber: 24
-        }, void 0),
-        /* @__PURE__ */ jsxDEV("div", { className: "confirm-dialog__btn-container", children: [
-          cancelButton && /* @__PURE__ */ jsxDEV(
+      children: /* @__PURE__ */ jsxs("div", { className: "confirm-dialog", children: [
+        message && /* @__PURE__ */ jsx("div", { className: messageClassNames, children: message }),
+        children && /* @__PURE__ */ jsx("div", { className: "confirm-dialog__body", children }),
+        /* @__PURE__ */ jsxs("div", { className: "confirm-dialog__btn-container", children: [
+          cancelButton && /* @__PURE__ */ jsx(
             Button,
             {
               className: "pop-up-dialog__btn_cancel",
@@ -62,52 +54,20 @@ const ConfirmDialog = ({
               onClick: handleCancelDialog,
               variant: cancelButton.variant,
               disabled: cancelButton.disabled
-            },
-            void 0,
-            false,
-            {
-              fileName: "/Users/Ilan_Kader/Development/dashboard-react-controls/src/lib/components/ConfirmDialog/ConfirmDialog.jsx",
-              lineNumber: 78,
-              columnNumber: 15
-            },
-            void 0
+            }
           ),
-          confirmButton && /* @__PURE__ */ jsxDEV(
+          confirmButton && /* @__PURE__ */ jsx(
             Button,
             {
               label: confirmButton.label,
               onClick: handleConfirmDialog,
               variant: confirmButton.variant,
               disabled: confirmButton.disabled
-            },
-            void 0,
-            false,
-            {
-              fileName: "/Users/Ilan_Kader/Development/dashboard-react-controls/src/lib/components/ConfirmDialog/ConfirmDialog.jsx",
-              lineNumber: 87,
-              columnNumber: 15
-            },
-            void 0
+            }
           )
-        ] }, void 0, true, {
-          fileName: "/Users/Ilan_Kader/Development/dashboard-react-controls/src/lib/components/ConfirmDialog/ConfirmDialog.jsx",
-          lineNumber: 76,
-          columnNumber: 11
-        }, void 0)
-      ] }, void 0, true, {
-        fileName: "/Users/Ilan_Kader/Development/dashboard-react-controls/src/lib/components/ConfirmDialog/ConfirmDialog.jsx",
-        lineNumber: 73,
-        columnNumber: 9
-      }, void 0)
-    },
-    void 0,
-    false,
-    {
-      fileName: "/Users/Ilan_Kader/Development/dashboard-react-controls/src/lib/components/ConfirmDialog/ConfirmDialog.jsx",
-      lineNumber: 67,
-      columnNumber: 7
-    },
-    void 0
+        ] })
+      ] })
+    }
   );
 };
 ConfirmDialog.propTypes = {
