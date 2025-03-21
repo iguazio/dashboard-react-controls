@@ -26,7 +26,7 @@ import { isEveryObjectValueEmpty } from '../../utils/common.util'
 import './tooltip.scss'
 
 const Tooltip = ({
-  children,
+  children = '',
   className = '',
   hidden = false,
   id = '',
@@ -215,7 +215,7 @@ const Tooltip = ({
 }
 
 Tooltip.propTypes = {
-  children: PropTypes.node.isRequired,
+  children: PropTypes.any,
   className: PropTypes.string,
   hidden: PropTypes.bool,
   id: PropTypes.string,

@@ -20,7 +20,7 @@ import classnames from 'classnames'
 
 import './textTooltipTemplate.scss'
 
-const TextTooltipTemplate = ({ text, warning = false }) => {
+const TextTooltipTemplate = ({ text = '', warning = false }) => {
   const textRef = useRef()
 
   const tooltipClassNames = classnames(
@@ -37,11 +37,7 @@ const TextTooltipTemplate = ({ text, warning = false }) => {
 }
 
 TextTooltipTemplate.propTypes = {
-  text: ''
-}
-
-TextTooltipTemplate.propTypes = {
-  text: PropTypes.oneOfType([PropTypes.string, PropTypes.element, PropTypes.number]).isRequired,
+  text: PropTypes.oneOfType([PropTypes.string, PropTypes.element, PropTypes.number]),
   warning: PropTypes.bool
 }
 

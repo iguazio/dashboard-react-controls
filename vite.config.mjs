@@ -58,16 +58,13 @@ export default defineConfig({
         'react-final-form',
         'react-final-form-arrays',
         'react-modal-promise',
-        'react-transition-group'
+        'react-transition-group',
+        'react/jsx-runtime',
+        'react/jsx-dev-runtime'
       ],
       output: {
         preserveModules: true,
-        preserveModulesRoot: 'src/lib',
-        globals: {
-          react: 'React',
-          'react-dom': 'ReactDOM',
-          'final-form': 'FinalForm'
-        }
+        preserveModulesRoot: 'src/lib'
       }
     }
   }

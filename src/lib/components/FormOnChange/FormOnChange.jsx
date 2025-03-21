@@ -35,7 +35,7 @@ const OnChangeState = ({ inputValue, handler }) => {
 }
 
 OnChangeState.propTypes = {
-  inputValue: PropTypes.string.isRequired,
+  inputValue: PropTypes.any.isRequired,
   handler: PropTypes.func.isRequired
 }
 
