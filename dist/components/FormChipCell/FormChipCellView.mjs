@@ -1,4 +1,4 @@
-import { j as jsxDevRuntimeExports } from "../../_virtual/jsx-dev-runtime.mjs";
+import { jsxDEV, Fragment } from "react/jsx-dev-runtime";
 import React__default from "react";
 import PropTypes from "prop-types";
 import classnames from "classnames";
@@ -61,34 +61,34 @@ const FormChipCellView = React__default.forwardRef(
       isEditable && "editable",
       (showChips || isEditable) && "chip_visible"
     );
-    return /* @__PURE__ */ jsxDevRuntimeExports.jsxDEV(FieldArray, { name, validate: validateFields, children: ({ fields, meta }) => {
+    return /* @__PURE__ */ jsxDEV(FieldArray, { name, validate: validateFields, children: ({ fields, meta }) => {
       if (!isEmpty(validationRules) && validationRules.key.every((rule) => rule.name !== uniquenessError.name)) {
         validationRules.key.push(uniquenessError);
       }
-      return (isEditable || !isEveryObjectValueEmpty(fields)) && /* @__PURE__ */ jsxDevRuntimeExports.jsxDEV("div", { className: "chips-cell", ref: chipsCellRef, children: /* @__PURE__ */ jsxDevRuntimeExports.jsxDEV("div", { className: wrapperClassNames, ref: chipsWrapperRef, children: [
+      return (isEditable || !isEveryObjectValueEmpty(fields)) && /* @__PURE__ */ jsxDEV("div", { className: "chips-cell", ref: chipsCellRef, children: /* @__PURE__ */ jsxDEV("div", { className: wrapperClassNames, ref: chipsWrapperRef, children: [
         fields.map((contentItem, index) => {
           var _a;
           const chipData = fields.value[index];
-          return index < ((_a = chips.visibleChips) == null ? void 0 : _a.length) && /* @__PURE__ */ jsxDevRuntimeExports.jsxDEV("div", { className: "chip-block", children: /* @__PURE__ */ jsxDevRuntimeExports.jsxDEV(
+          return index < ((_a = chips.visibleChips) == null ? void 0 : _a.length) && /* @__PURE__ */ jsxDEV("div", { className: "chip-block", children: /* @__PURE__ */ jsxDEV(
             Tooltip,
             {
               hidden: editConfig.isEdit && !chipData.tooltip,
-              template: /* @__PURE__ */ jsxDevRuntimeExports.jsxDEV(
+              template: /* @__PURE__ */ jsxDEV(
                 TextTooltipTemplate,
                 {
-                  text: chipData.tooltip || /* @__PURE__ */ jsxDevRuntimeExports.jsxDEV("span", { className: "chip__content", children: [
-                    /* @__PURE__ */ jsxDevRuntimeExports.jsxDEV("span", { className: "chip__content-item", children: chipData.key }, void 0, false, {
+                  text: chipData.tooltip || /* @__PURE__ */ jsxDEV("span", { className: "chip__content", children: [
+                    /* @__PURE__ */ jsxDEV("span", { className: "chip__content-item", children: chipData.key }, void 0, false, {
                       fileName: "/Users/Ilan_Kader/Development/dashboard-react-controls/src/lib/components/FormChipCell/FormChipCellView.jsx",
                       lineNumber: 115,
                       columnNumber: 39
                     }, void 0),
-                    !chipData.isKeyOnly && /* @__PURE__ */ jsxDevRuntimeExports.jsxDEV(jsxDevRuntimeExports.Fragment, { children: [
-                      /* @__PURE__ */ jsxDevRuntimeExports.jsxDEV("span", { className: "chip__delimiter", children: chipData.delimiter ? chipData.delimiter : ":" }, void 0, false, {
+                    !chipData.isKeyOnly && /* @__PURE__ */ jsxDEV(Fragment, { children: [
+                      /* @__PURE__ */ jsxDEV("span", { className: "chip__delimiter", children: chipData.delimiter ? chipData.delimiter : ":" }, void 0, false, {
                         fileName: "/Users/Ilan_Kader/Development/dashboard-react-controls/src/lib/components/FormChipCell/FormChipCellView.jsx",
                         lineNumber: 118,
                         columnNumber: 43
                       }, void 0),
-                      /* @__PURE__ */ jsxDevRuntimeExports.jsxDEV("span", { className: "chip__content-item", children: chipData.value }, void 0, false, {
+                      /* @__PURE__ */ jsxDEV("span", { className: "chip__content-item", children: chipData.value }, void 0, false, {
                         fileName: "/Users/Ilan_Kader/Development/dashboard-react-controls/src/lib/components/FormChipCell/FormChipCellView.jsx",
                         lineNumber: 121,
                         columnNumber: 43
@@ -113,7 +113,7 @@ const FormChipCellView = React__default.forwardRef(
                 },
                 void 0
               ),
-              children: /* @__PURE__ */ jsxDevRuntimeExports.jsxDEV(
+              children: /* @__PURE__ */ jsxDEV(
                 FormChip,
                 {
                   chip: chipData,
@@ -156,8 +156,8 @@ const FormChipCellView = React__default.forwardRef(
             columnNumber: 25
           }, void 0);
         }),
-        /* @__PURE__ */ jsxDevRuntimeExports.jsxDEV("div", { className: "chip-block", children: [
-          chips.hiddenChips.length > 0 && showHiddenChips && /* @__PURE__ */ jsxDevRuntimeExports.jsxDEV(
+        /* @__PURE__ */ jsxDEV("div", { className: "chip-block", children: [
+          chips.hiddenChips.length > 0 && showHiddenChips && /* @__PURE__ */ jsxDEV(
             HiddenChipsBlock,
             {
               chipClassNames,
@@ -176,7 +176,7 @@ const FormChipCellView = React__default.forwardRef(
             },
             void 0
           ),
-          chips.hiddenChipsNumber && /* @__PURE__ */ jsxDevRuntimeExports.jsxDEV(
+          chips.hiddenChipsNumber && /* @__PURE__ */ jsxDEV(
             "span",
             {
               ref: hiddenChipsCounterRef,
@@ -198,13 +198,13 @@ const FormChipCellView = React__default.forwardRef(
           lineNumber: 159,
           columnNumber: 19
         }, void 0),
-        isEditable && /* @__PURE__ */ jsxDevRuntimeExports.jsxDEV(
+        isEditable && /* @__PURE__ */ jsxDEV(
           "button",
           {
             "data-testid": `${name}-add-chip`,
             className: buttonAddClassNames,
             onClick: (e) => handleAddNewChip(e, fields),
-            children: /* @__PURE__ */ jsxDevRuntimeExports.jsxDEV(SvgAdd, {}, void 0, false, {
+            children: /* @__PURE__ */ jsxDEV(SvgAdd, {}, void 0, false, {
               fileName: "/Users/Ilan_Kader/Development/dashboard-react-controls/src/lib/components/FormChipCell/FormChipCellView.jsx",
               lineNumber: 187,
               columnNumber: 23

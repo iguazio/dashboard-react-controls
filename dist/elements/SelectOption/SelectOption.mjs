@@ -1,4 +1,4 @@
-import { j as jsxDevRuntimeExports } from "../../_virtual/jsx-dev-runtime.mjs";
+import { jsxDEV } from "react/jsx-dev-runtime";
 import "react";
 import PropTypes from "prop-types";
 import classnames from "classnames";
@@ -25,14 +25,14 @@ const SelectOption = ({
     item.disabled && "disabled"
   );
   if (multiple) {
-    return /* @__PURE__ */ jsxDevRuntimeExports.jsxDEV("div", { "data-testid": "select-checkbox", className: selectClassName, children: /* @__PURE__ */ jsxDevRuntimeExports.jsxDEV(
+    return /* @__PURE__ */ jsxDEV("div", { "data-testid": "select-checkbox", className: selectClassName, children: /* @__PURE__ */ jsxDEV(
       FormCheckBox,
       {
         name,
         value: item.id,
         label: item.label,
         disabled: item.disabled || false,
-        children: item.status && /* @__PURE__ */ jsxDevRuntimeExports.jsxDEV("span", { className: `state-${item.status}-job status` }, void 0, false, {
+        children: item.status && /* @__PURE__ */ jsxDEV("span", { className: `state-${item.status}-job status` }, void 0, false, {
           fileName: "/Users/Ilan_Kader/Development/dashboard-react-controls/src/lib/elements/SelectOption/SelectOption.jsx",
           lineNumber: 55,
           columnNumber: 27
@@ -52,7 +52,7 @@ const SelectOption = ({
       columnNumber: 7
     }, void 0);
   }
-  return /* @__PURE__ */ jsxDevRuntimeExports.jsxDEV(
+  return /* @__PURE__ */ jsxDEV(
     "li",
     {
       "data-testid": "select-option",
@@ -61,24 +61,24 @@ const SelectOption = ({
         !item.disabled && onClick(item.id);
       },
       "data-custom-id": item.id,
-      children: /* @__PURE__ */ jsxDevRuntimeExports.jsxDEV("div", { className: "label-row", children: [
-        /* @__PURE__ */ jsxDevRuntimeExports.jsxDEV("div", { className: "data-ellipsis select__item-label", children: [
-          /* @__PURE__ */ jsxDevRuntimeExports.jsxDEV("div", { className: "select__item-main-label", children: [
-            item.icon && /* @__PURE__ */ jsxDevRuntimeExports.jsxDEV("span", { "data-testid": "select-icon", className: "select__item-icon", children: item.icon }, void 0, false, {
+      children: /* @__PURE__ */ jsxDEV("div", { className: "label-row", children: [
+        /* @__PURE__ */ jsxDEV("div", { className: "data-ellipsis select__item-label", children: [
+          /* @__PURE__ */ jsxDEV("div", { className: "select__item-main-label", children: [
+            item.icon && /* @__PURE__ */ jsxDEV("span", { "data-testid": "select-icon", className: "select__item-icon", children: item.icon }, void 0, false, {
               fileName: "/Users/Ilan_Kader/Development/dashboard-react-controls/src/lib/elements/SelectOption/SelectOption.jsx",
               lineNumber: 74,
               columnNumber: 15
             }, void 0),
-            item.status && /* @__PURE__ */ jsxDevRuntimeExports.jsxDEV("span", { className: `state-${item.status}-job status` }, void 0, false, {
+            item.status && /* @__PURE__ */ jsxDEV("span", { className: `state-${item.status}-job status` }, void 0, false, {
               fileName: "/Users/Ilan_Kader/Development/dashboard-react-controls/src/lib/elements/SelectOption/SelectOption.jsx",
               lineNumber: 78,
               columnNumber: 29
             }, void 0),
-            /* @__PURE__ */ jsxDevRuntimeExports.jsxDEV(
+            /* @__PURE__ */ jsxDEV(
               Tooltip,
               {
                 renderChildAsHtml: ((_a = item.labelHtml) == null ? void 0 : _a.length) > 0,
-                template: /* @__PURE__ */ jsxDevRuntimeExports.jsxDEV(TextTooltipTemplate, { text: item.label }, void 0, false, {
+                template: /* @__PURE__ */ jsxDEV(TextTooltipTemplate, { text: item.label }, void 0, false, {
                   fileName: "/Users/Ilan_Kader/Development/dashboard-react-controls/src/lib/elements/SelectOption/SelectOption.jsx",
                   lineNumber: 81,
                   columnNumber: 25
@@ -99,16 +99,16 @@ const SelectOption = ({
             lineNumber: 72,
             columnNumber: 11
           }, void 0),
-          item.subLabel && /* @__PURE__ */ jsxDevRuntimeExports.jsxDEV(
+          item.subLabel && /* @__PURE__ */ jsxDEV(
             Tooltip,
             {
               className: "select__item-sub-label",
-              template: /* @__PURE__ */ jsxDevRuntimeExports.jsxDEV(TextTooltipTemplate, { text: item.subLabel }, void 0, false, {
+              template: /* @__PURE__ */ jsxDEV(TextTooltipTemplate, { text: item.subLabel }, void 0, false, {
                 fileName: "/Users/Ilan_Kader/Development/dashboard-react-controls/src/lib/elements/SelectOption/SelectOption.jsx",
                 lineNumber: 89,
                 columnNumber: 25
               }, void 0),
-              children: /* @__PURE__ */ jsxDevRuntimeExports.jsxDEV("span", { children: item.subLabel }, void 0, false, {
+              children: /* @__PURE__ */ jsxDEV("span", { children: item.subLabel }, void 0, false, {
                 fileName: "/Users/Ilan_Kader/Development/dashboard-react-controls/src/lib/elements/SelectOption/SelectOption.jsx",
                 lineNumber: 91,
                 columnNumber: 15
@@ -128,7 +128,7 @@ const SelectOption = ({
           lineNumber: 71,
           columnNumber: 9
         }, void 0),
-        withSelectedIcon && item.id === selectedId && /* @__PURE__ */ jsxDevRuntimeExports.jsxDEV(SvgCheckmark, { className: "checkmark" }, void 0, false, {
+        withSelectedIcon && item.id === selectedId && /* @__PURE__ */ jsxDEV(SvgCheckmark, { className: "checkmark" }, void 0, false, {
           fileName: "/Users/Ilan_Kader/Development/dashboard-react-controls/src/lib/elements/SelectOption/SelectOption.jsx",
           lineNumber: 95,
           columnNumber: 56

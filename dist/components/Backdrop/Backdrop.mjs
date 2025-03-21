@@ -1,10 +1,10 @@
-import { j as jsxDevRuntimeExports } from "../../_virtual/jsx-dev-runtime.mjs";
+import { jsxDEV } from "react/jsx-dev-runtime";
 import "react";
 import PropTypes from "prop-types";
 import { CSSTransition } from "react-transition-group";
 /* empty css               */
 const Backdrop = ({ duration = 300, show = false, onClose = null }) => {
-  return /* @__PURE__ */ jsxDevRuntimeExports.jsxDEV(
+  return /* @__PURE__ */ jsxDEV(
     CSSTransition,
     {
       in: show,
@@ -12,7 +12,7 @@ const Backdrop = ({ duration = 300, show = false, onClose = null }) => {
       classNames: "backdrop-transition",
       mountOnEnter: true,
       unmountOnExit: true,
-      children: /* @__PURE__ */ jsxDevRuntimeExports.jsxDEV("div", { className: "backdrop", onClick: onClose }, void 0, false, {
+      children: /* @__PURE__ */ jsxDEV("div", { className: "backdrop", onClick: onClose }, void 0, false, {
         fileName: "/Users/Ilan_Kader/Development/dashboard-react-controls/src/lib/components/Backdrop/Backdrop.jsx",
         lineNumber: 32,
         columnNumber: 7

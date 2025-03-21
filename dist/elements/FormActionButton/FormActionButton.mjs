@@ -1,4 +1,4 @@
-import { j as jsxDevRuntimeExports } from "../../_virtual/jsx-dev-runtime.mjs";
+import { jsxDEV, Fragment } from "react/jsx-dev-runtime";
 import React__default from "react";
 import PropTypes from "prop-types";
 import SvgPlus from "../../images/plus.svg.mjs";
@@ -12,15 +12,15 @@ const FormActionButton = React__default.forwardRef(
     label = "Add new item",
     onClick
   }, ref) => {
-    return /* @__PURE__ */ jsxDevRuntimeExports.jsxDEV(jsxDevRuntimeExports.Fragment, { children: [
-      !hidden && /* @__PURE__ */ jsxDevRuntimeExports.jsxDEV("div", { className: "form-table__row form-table__action-row no-hover", children: /* @__PURE__ */ jsxDevRuntimeExports.jsxDEV(
+    return /* @__PURE__ */ jsxDEV(Fragment, { children: [
+      !hidden && /* @__PURE__ */ jsxDEV("div", { className: "form-table__row form-table__action-row no-hover", children: /* @__PURE__ */ jsxDEV(
         "button",
         {
           "data-testid": id ? id : `${fieldsPath}-add-btn`,
           onClick: (event) => onClick(event, fields, fieldsPath),
           disabled,
           children: [
-            /* @__PURE__ */ jsxDevRuntimeExports.jsxDEV(SvgPlus, {}, void 0, false, {
+            /* @__PURE__ */ jsxDEV(SvgPlus, {}, void 0, false, {
               fileName: "/Users/Ilan_Kader/Development/dashboard-react-controls/src/lib/elements/FormActionButton/FormActionButton.jsx",
               lineNumber: 47,
               columnNumber: 15
@@ -41,7 +41,7 @@ const FormActionButton = React__default.forwardRef(
         lineNumber: 41,
         columnNumber: 11
       }, void 0),
-      /* @__PURE__ */ jsxDevRuntimeExports.jsxDEV("span", { ref }, void 0, false, {
+      /* @__PURE__ */ jsxDEV("span", { ref }, void 0, false, {
         fileName: "/Users/Ilan_Kader/Development/dashboard-react-controls/src/lib/elements/FormActionButton/FormActionButton.jsx",
         lineNumber: 53,
         columnNumber: 9

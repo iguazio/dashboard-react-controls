@@ -1,4 +1,4 @@
-import { j as jsxDevRuntimeExports } from "../../_virtual/jsx-dev-runtime.mjs";
+import { jsxDEV } from "react/jsx-dev-runtime";
 import { useState, useEffect } from "react";
 import { Field } from "react-final-form";
 import PropTypes from "prop-types";
@@ -13,11 +13,11 @@ const OnChangeState = ({ inputValue, handler }) => {
   return null;
 };
 OnChangeState.propTypes = {
-  inputValue: PropTypes.string.isRequired,
+  inputValue: PropTypes.any.isRequired,
   handler: PropTypes.func.isRequired
 };
 const FormOnChange = ({ handler, name }) => {
-  return /* @__PURE__ */ jsxDevRuntimeExports.jsxDEV(
+  return /* @__PURE__ */ jsxDEV(
     Field,
     {
       name,
@@ -25,7 +25,7 @@ const FormOnChange = ({ handler, name }) => {
         value: true
       },
       allowNull: true,
-      render: ({ input }) => /* @__PURE__ */ jsxDevRuntimeExports.jsxDEV(OnChangeState, { inputValue: input.value, handler }, void 0, false, {
+      render: ({ input }) => /* @__PURE__ */ jsxDEV(OnChangeState, { inputValue: input.value, handler }, void 0, false, {
         fileName: "/Users/Ilan_Kader/Development/dashboard-react-controls/src/lib/components/FormOnChange/FormOnChange.jsx",
         lineNumber: 50,
         columnNumber: 30

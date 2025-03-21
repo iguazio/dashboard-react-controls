@@ -8,15 +8,15 @@
   --tipArrowLength: 10px;
   --tipIconLength: 16px;
   --tipArrowOffset: 20px;
-  --amethystColor: colors.$amethyst;
-  --brightTurquoiseColor: colors.$brightTurquoise;
-  --ceriseRedColor: colors.$ceriseRed;
-  --cornflowerBlueTwoColor: colors.$cornflowerBlueTwo;
-  --doveGrayColor: colors.$doveGray;
-  --grandisColor: colors.$grandis;
-  --javaColor: colors.$java;
-  --mulledWineColor: colors.$mulledWine;
-  --mischkaColor: colors.$mischka
+  --amethystColor: #{colors.$amethyst};
+  --brightTurquoiseColor: #{colors.$brightTurquoise};
+  --ceriseRedColor: #{colors.$ceriseRed};
+  --cornflowerBlueTwoColor: #{colors.$cornflowerBlueTwo};
+  --doveGrayColor: #{colors.$doveGray};
+  --grandisColor: #{colors.$grandis};
+  --javaColor: #{colors.$java};
+  --mulledWineColor: #{colors.$mulledWine};
+  --mischkaColor: #{colors.$mischka}
 }
 
 #root {

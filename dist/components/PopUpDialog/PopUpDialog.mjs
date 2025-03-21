@@ -1,4 +1,4 @@
-import { j as jsxDevRuntimeExports } from "../../_virtual/jsx-dev-runtime.mjs";
+import { jsxDEV } from "react/jsx-dev-runtime";
 import React__default, { useState, useRef, useCallback, useLayoutEffect, useEffect } from "react";
 import PropTypes from "prop-types";
 import classnames from "classnames";
@@ -108,13 +108,13 @@ const PopUpDialog = React__default.forwardRef(
       }
     }, [calculateCustomPopUpPosition, ref, showPopUp]);
     return showPopUp ? createPortal(
-      /* @__PURE__ */ jsxDevRuntimeExports.jsxDEV("div", { ref, className: popUpClassNames, style, children: /* @__PURE__ */ jsxDevRuntimeExports.jsxDEV("div", { "data-testid": "pop-up-dialog", className: "pop-up-dialog", children: [
-        !headerIsHidden && /* @__PURE__ */ jsxDevRuntimeExports.jsxDEV("div", { className: "pop-up-dialog__header", children: [
-          headerText && /* @__PURE__ */ jsxDevRuntimeExports.jsxDEV("div", { "data-testid": "pop-up-dialog-header", className: "pop-up-dialog__header-text", children: /* @__PURE__ */ jsxDevRuntimeExports.jsxDEV(Tooltip, { template: /* @__PURE__ */ jsxDevRuntimeExports.jsxDEV(TextTooltipTemplate, { text: tooltipText || headerText }, void 0, false, {
+      /* @__PURE__ */ jsxDEV("div", { ref, className: popUpClassNames, style, children: /* @__PURE__ */ jsxDEV("div", { "data-testid": "pop-up-dialog", className: "pop-up-dialog", children: [
+        !headerIsHidden && /* @__PURE__ */ jsxDEV("div", { className: "pop-up-dialog__header", children: [
+          headerText && /* @__PURE__ */ jsxDEV("div", { "data-testid": "pop-up-dialog-header", className: "pop-up-dialog__header-text", children: /* @__PURE__ */ jsxDEV(Tooltip, { template: /* @__PURE__ */ jsxDEV(TextTooltipTemplate, { text: tooltipText || headerText }, void 0, false, {
             fileName: "/Users/Ilan_Kader/Development/dashboard-react-controls/src/lib/components/PopUpDialog/PopUpDialog.jsx",
             lineNumber: 159,
             columnNumber: 42
-          }, void 0), children: /* @__PURE__ */ jsxDevRuntimeExports.jsxDEV("span", { children: headerText }, void 0, false, {
+          }, void 0), children: /* @__PURE__ */ jsxDEV("span", { children: headerText }, void 0, false, {
             fileName: "/Users/Ilan_Kader/Development/dashboard-react-controls/src/lib/components/PopUpDialog/PopUpDialog.jsx",
             lineNumber: 160,
             columnNumber: 25
@@ -127,14 +127,14 @@ const PopUpDialog = React__default.forwardRef(
             lineNumber: 158,
             columnNumber: 21
           }, void 0),
-          /* @__PURE__ */ jsxDevRuntimeExports.jsxDEV(
+          /* @__PURE__ */ jsxDEV(
             RoundedIcon,
             {
               className: "pop-up-dialog__btn_close",
               onClick: handleClosePopUp,
               tooltipText: "Close",
               "data-testid": "pop-up-close-btn",
-              children: /* @__PURE__ */ jsxDevRuntimeExports.jsxDEV(SvgClose, {}, void 0, false, {
+              children: /* @__PURE__ */ jsxDEV(SvgClose, {}, void 0, false, {
                 fileName: "/Users/Ilan_Kader/Development/dashboard-react-controls/src/lib/components/PopUpDialog/PopUpDialog.jsx",
                 lineNumber: 170,
                 columnNumber: 21

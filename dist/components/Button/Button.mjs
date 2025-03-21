@@ -1,4 +1,4 @@
-import { j as jsxDevRuntimeExports } from "../../_virtual/jsx-dev-runtime.mjs";
+import { jsxDEV } from "react/jsx-dev-runtime";
 import { forwardRef } from "react";
 import PropTypes from "prop-types";
 import classnames from "classnames";
@@ -20,13 +20,13 @@ const Button = forwardRef(
     ...restProps
   }, ref) => {
     const buttonClassName = classnames("btn", `btn-${variant}`, `btn-${density}`, className);
-    return /* @__PURE__ */ jsxDevRuntimeExports.jsxDEV("button", { ...restProps, className: buttonClassName, ref, "data-testid": id, children: [
+    return /* @__PURE__ */ jsxDEV("button", { ...restProps, className: buttonClassName, ref, "data-testid": id, children: [
       icon && iconPosition === "left" && icon,
-      tooltip ? /* @__PURE__ */ jsxDevRuntimeExports.jsxDEV(Tooltip, { template: /* @__PURE__ */ jsxDevRuntimeExports.jsxDEV(TextTooltipTemplate, { text: tooltip }, void 0, false, {
+      tooltip ? /* @__PURE__ */ jsxDEV(Tooltip, { template: /* @__PURE__ */ jsxDEV(TextTooltipTemplate, { text: tooltip }, void 0, false, {
         fileName: "/Users/Ilan_Kader/Development/dashboard-react-controls/src/lib/components/Button/Button.jsx",
         lineNumber: 50,
         columnNumber: 30
-      }, void 0), children: label && /* @__PURE__ */ jsxDevRuntimeExports.jsxDEV("span", { children: label }, void 0, false, {
+      }, void 0), children: label && /* @__PURE__ */ jsxDEV("span", { children: label }, void 0, false, {
         fileName: "/Users/Ilan_Kader/Development/dashboard-react-controls/src/lib/components/Button/Button.jsx",
         lineNumber: 51,
         columnNumber: 23
@@ -34,7 +34,7 @@ const Button = forwardRef(
         fileName: "/Users/Ilan_Kader/Development/dashboard-react-controls/src/lib/components/Button/Button.jsx",
         lineNumber: 50,
         columnNumber: 11
-      }, void 0) : label && /* @__PURE__ */ jsxDevRuntimeExports.jsxDEV("span", { children: label }, void 0, false, {
+      }, void 0) : label && /* @__PURE__ */ jsxDEV("span", { children: label }, void 0, false, {
         fileName: "/Users/Ilan_Kader/Development/dashboard-react-controls/src/lib/components/Button/Button.jsx",
         lineNumber: 54,
         columnNumber: 20

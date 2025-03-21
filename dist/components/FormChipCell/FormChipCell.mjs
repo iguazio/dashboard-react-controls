@@ -1,4 +1,4 @@
-import { j as jsxDevRuntimeExports } from "../../_virtual/jsx-dev-runtime.mjs";
+import { jsxDEV } from "react/jsx-dev-runtime";
 import React__default, { useState, useMemo, useCallback } from "react";
 import lodash, { get, set, isEmpty, isNil } from "lodash";
 import classnames from "classnames";
@@ -273,13 +273,13 @@ const FormChipCell = ({
     };
     return disabled ? [null, null] : [validateField(key, "key"), validateField(value, "value")];
   };
-  return /* @__PURE__ */ jsxDevRuntimeExports.jsxDEV("div", { className: chipsClassName, "data-testid": `${name}-chips`, children: [
-    label && /* @__PURE__ */ jsxDevRuntimeExports.jsxDEV("div", { className: "chips__label", children: label }, void 0, false, {
+  return /* @__PURE__ */ jsxDEV("div", { className: chipsClassName, "data-testid": `${name}-chips`, children: [
+    label && /* @__PURE__ */ jsxDEV("div", { className: "chips__label", children: label }, void 0, false, {
       fileName: "/Users/Ilan_Kader/Development/dashboard-react-controls/src/lib/components/FormChipCell/FormChipCell.jsx",
       lineNumber: 359,
       columnNumber: 17
     }, void 0),
-    /* @__PURE__ */ jsxDevRuntimeExports.jsxDEV("div", { className: label ? "chips__wrapper" : "", children: /* @__PURE__ */ jsxDevRuntimeExports.jsxDEV(
+    /* @__PURE__ */ jsxDEV("div", { className: label ? "chips__wrapper" : "", children: /* @__PURE__ */ jsxDEV(
       FormChipCellView,
       {
         chipOptions,

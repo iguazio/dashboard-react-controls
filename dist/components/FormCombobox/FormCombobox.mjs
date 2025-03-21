@@ -1,4 +1,4 @@
-import { j as jsxDevRuntimeExports } from "../../_virtual/jsx-dev-runtime.mjs";
+import { jsxDEV } from "react/jsx-dev-runtime";
 import { useState, useRef, useEffect, useCallback } from "react";
 import { useField, Field } from "react-final-form";
 import { isEmpty } from "lodash";
@@ -125,7 +125,7 @@ const FormCombobox = ({
   }, [showSelectDropdown, showSuggestionList, showValidationRules]);
   const getValidationRules = () => {
     return validationRules.map(({ isValid = false, label: label2, name: name2 }) => {
-      return /* @__PURE__ */ jsxDevRuntimeExports.jsxDEV(ValidationTemplate, { valid: isValid, validationMessage: label2 }, name2, false, {
+      return /* @__PURE__ */ jsxDEV(ValidationTemplate, { valid: isValid, validationMessage: label2 }, name2, false, {
         fileName: "/Users/Ilan_Kader/Development/dashboard-react-controls/src/lib/components/FormCombobox/FormCombobox.jsx",
         lineNumber: 169,
         columnNumber: 14
@@ -254,18 +254,18 @@ const FormCombobox = ({
     isInvalid && "form-field__wrapper-invalid",
     withoutBorder && "without-border"
   );
-  return /* @__PURE__ */ jsxDevRuntimeExports.jsxDEV(Field, { name, validate: validateField, children: ({ input: input2, meta: meta2 }) => {
+  return /* @__PURE__ */ jsxDEV(Field, { name, validate: validateField, children: ({ input: input2, meta: meta2 }) => {
     var _a;
-    return /* @__PURE__ */ jsxDevRuntimeExports.jsxDEV(
+    return /* @__PURE__ */ jsxDEV(
       "div",
       {
         className: comboboxClassNames,
         ref: comboboxRef,
         "data-testid": name ? `${name}-form-combobox` : "form-combobox",
         children: [
-          label && /* @__PURE__ */ jsxDevRuntimeExports.jsxDEV("div", { className: labelClassNames, children: /* @__PURE__ */ jsxDevRuntimeExports.jsxDEV("label", { "data-testid": "label", htmlFor: input2.name, children: [
+          label && /* @__PURE__ */ jsxDEV("div", { className: labelClassNames, children: /* @__PURE__ */ jsxDEV("label", { "data-testid": "label", htmlFor: input2.name, children: [
             label,
-            (required || validationRules.find((rule) => rule.name === "required")) && /* @__PURE__ */ jsxDevRuntimeExports.jsxDEV("span", { className: "form-field__label-mandatory", children: " *" }, void 0, false, {
+            (required || validationRules.find((rule) => rule.name === "required")) && /* @__PURE__ */ jsxDEV("span", { className: "form-field__label-mandatory", children: " *" }, void 0, false, {
               fileName: "/Users/Ilan_Kader/Development/dashboard-react-controls/src/lib/components/FormCombobox/FormCombobox.jsx",
               lineNumber: 339,
               columnNumber: 19
@@ -279,8 +279,8 @@ const FormCombobox = ({
             lineNumber: 335,
             columnNumber: 13
           }, void 0),
-          /* @__PURE__ */ jsxDevRuntimeExports.jsxDEV("div", { className: wrapperClassNames, children: [
-            /* @__PURE__ */ jsxDevRuntimeExports.jsxDEV("div", { className: "form-field__icons", children: /* @__PURE__ */ jsxDevRuntimeExports.jsxDEV(SvgArrow, { className: iconClassNames, onClick: toggleSelect }, void 0, false, {
+          /* @__PURE__ */ jsxDEV("div", { className: wrapperClassNames, children: [
+            /* @__PURE__ */ jsxDEV("div", { className: "form-field__icons", children: /* @__PURE__ */ jsxDEV(SvgArrow, { className: iconClassNames, onClick: toggleSelect }, void 0, false, {
               fileName: "/Users/Ilan_Kader/Development/dashboard-react-controls/src/lib/components/FormCombobox/FormCombobox.jsx",
               lineNumber: 346,
               columnNumber: 15
@@ -289,14 +289,14 @@ const FormCombobox = ({
               lineNumber: 345,
               columnNumber: 13
             }, void 0),
-            /* @__PURE__ */ jsxDevRuntimeExports.jsxDEV("div", { className: "form-field-combobox__select form-field__control", ref: selectRef, children: [
-              /* @__PURE__ */ jsxDevRuntimeExports.jsxDEV("div", { className: "form-field-combobox__select-header", onClick: toggleSelect, children: [
-                /* @__PURE__ */ jsxDevRuntimeExports.jsxDEV("span", { className: selectValueClassNames, children: selectValue.id }, void 0, false, {
+            /* @__PURE__ */ jsxDEV("div", { className: "form-field-combobox__select form-field__control", ref: selectRef, children: [
+              /* @__PURE__ */ jsxDEV("div", { className: "form-field-combobox__select-header", onClick: toggleSelect, children: [
+                /* @__PURE__ */ jsxDEV("span", { className: selectValueClassNames, children: selectValue.id }, void 0, false, {
                   fileName: "/Users/Ilan_Kader/Development/dashboard-react-controls/src/lib/components/FormCombobox/FormCombobox.jsx",
                   lineNumber: 350,
                   columnNumber: 17
                 }, void 0),
-                selectValue.id.length === 0 && selectPlaceholder && /* @__PURE__ */ jsxDevRuntimeExports.jsxDEV("div", { className: "form-field-combobox__placeholder", children: /* @__PURE__ */ jsxDevRuntimeExports.jsxDEV("label", { children: selectPlaceholder }, void 0, false, {
+                selectValue.id.length === 0 && selectPlaceholder && /* @__PURE__ */ jsxDEV("div", { className: "form-field-combobox__placeholder", children: /* @__PURE__ */ jsxDEV("label", { children: selectPlaceholder }, void 0, false, {
                   fileName: "/Users/Ilan_Kader/Development/dashboard-react-controls/src/lib/components/FormCombobox/FormCombobox.jsx",
                   lineNumber: 353,
                   columnNumber: 21
@@ -310,7 +310,7 @@ const FormCombobox = ({
                 lineNumber: 349,
                 columnNumber: 15
               }, void 0),
-              showSelectDropdown && /* @__PURE__ */ jsxDevRuntimeExports.jsxDEV(
+              showSelectDropdown && /* @__PURE__ */ jsxDEV(
                 PopUpDialog,
                 {
                   headerIsHidden: true,
@@ -319,13 +319,13 @@ const FormCombobox = ({
                     position: "bottom-right"
                   },
                   className: "form-field-combobox__dropdown form-field-combobox__dropdown-select",
-                  children: /* @__PURE__ */ jsxDevRuntimeExports.jsxDEV("ul", { className: "form-field-combobox__dropdown-list", children: selectOptions.map((option) => {
+                  children: /* @__PURE__ */ jsxDEV("ul", { className: "form-field-combobox__dropdown-list", children: selectOptions.map((option) => {
                     if (!option.hidden) {
                       const selectOptionClassNames = classnames(
                         "form-field-combobox__dropdown-list-option",
                         option.className
                       );
-                      return /* @__PURE__ */ jsxDevRuntimeExports.jsxDEV(
+                      return /* @__PURE__ */ jsxDEV(
                         "li",
                         {
                           className: selectOptionClassNames,
@@ -362,7 +362,7 @@ const FormCombobox = ({
               lineNumber: 348,
               columnNumber: 13
             }, void 0),
-            /* @__PURE__ */ jsxDevRuntimeExports.jsxDEV(
+            /* @__PURE__ */ jsxDEV(
               "input",
               {
                 className: inputClassNames,
@@ -385,7 +385,7 @@ const FormCombobox = ({
               },
               void 0
             ),
-            showSuggestionList && (dropdownList.length > 0 || searchIsFocused) && /* @__PURE__ */ jsxDevRuntimeExports.jsxDEV(
+            showSuggestionList && (dropdownList.length > 0 || searchIsFocused) && /* @__PURE__ */ jsxDEV(
               PopUpDialog,
               {
                 headerIsHidden: true,
@@ -397,9 +397,9 @@ const FormCombobox = ({
                 style: {
                   ...dropdownStyle
                 },
-                children: /* @__PURE__ */ jsxDevRuntimeExports.jsxDEV("div", { ref: suggestionListRef, children: [
-                  !hideSearchInput && /* @__PURE__ */ jsxDevRuntimeExports.jsxDEV("div", { className: "form-field-combobox__search-wrapper", children: [
-                    /* @__PURE__ */ jsxDevRuntimeExports.jsxDEV(
+                children: /* @__PURE__ */ jsxDEV("div", { ref: suggestionListRef, children: [
+                  !hideSearchInput && /* @__PURE__ */ jsxDEV("div", { className: "form-field-combobox__search-wrapper", children: [
+                    /* @__PURE__ */ jsxDEV(
                       "input",
                       {
                         "data-testid": name ? `${name}-form-combobox-search` : "form-combobox-search",
@@ -418,7 +418,7 @@ const FormCombobox = ({
                       },
                       void 0
                     ),
-                    /* @__PURE__ */ jsxDevRuntimeExports.jsxDEV(SvgSearch, {}, void 0, false, {
+                    /* @__PURE__ */ jsxDEV(SvgSearch, {}, void 0, false, {
                       fileName: "/Users/Ilan_Kader/Development/dashboard-react-controls/src/lib/components/FormCombobox/FormCombobox.jsx",
                       lineNumber: 424,
                       columnNumber: 23
@@ -428,11 +428,11 @@ const FormCombobox = ({
                     lineNumber: 415,
                     columnNumber: 21
                   }, void 0),
-                  /* @__PURE__ */ jsxDevRuntimeExports.jsxDEV("ul", { className: "form-field-combobox__dropdown-list", children: searchIsFocused && dropdownList.length === 0 ? /* @__PURE__ */ jsxDevRuntimeExports.jsxDEV("li", { className: "form-field-combobox__dropdown-list-option", children: "No data" }, "no data", false, {
+                  /* @__PURE__ */ jsxDEV("ul", { className: "form-field-combobox__dropdown-list", children: searchIsFocused && dropdownList.length === 0 ? /* @__PURE__ */ jsxDEV("li", { className: "form-field-combobox__dropdown-list-option", children: "No data" }, "no data", false, {
                     fileName: "/Users/Ilan_Kader/Development/dashboard-react-controls/src/lib/components/FormCombobox/FormCombobox.jsx",
                     lineNumber: 429,
                     columnNumber: 23
-                  }, void 0) : dropdownList.map((value) => /* @__PURE__ */ jsxDevRuntimeExports.jsxDEV(
+                  }, void 0) : dropdownList.map((value) => /* @__PURE__ */ jsxDEV(
                     "li",
                     {
                       className: "form-field-combobox__dropdown-list-option",
@@ -467,17 +467,17 @@ const FormCombobox = ({
               },
               void 0
             ),
-            /* @__PURE__ */ jsxDevRuntimeExports.jsxDEV("div", { className: "form-field__icons", children: [
-              isInvalid && !Array.isArray(meta2.error) && /* @__PURE__ */ jsxDevRuntimeExports.jsxDEV(
+            /* @__PURE__ */ jsxDEV("div", { className: "form-field__icons", children: [
+              isInvalid && !Array.isArray(meta2.error) && /* @__PURE__ */ jsxDEV(
                 Tooltip,
                 {
                   className: "form-field__warning",
-                  template: /* @__PURE__ */ jsxDevRuntimeExports.jsxDEV(TextTooltipTemplate, { text: ((_a = meta2.error) == null ? void 0 : _a.label) ?? invalidText, warning: true }, void 0, false, {
+                  template: /* @__PURE__ */ jsxDEV(TextTooltipTemplate, { text: ((_a = meta2.error) == null ? void 0 : _a.label) ?? invalidText, warning: true }, void 0, false, {
                     fileName: "/Users/Ilan_Kader/Development/dashboard-react-controls/src/lib/components/FormCombobox/FormCombobox.jsx",
                     lineNumber: 451,
                     columnNumber: 29
                   }, void 0),
-                  children: /* @__PURE__ */ jsxDevRuntimeExports.jsxDEV(SvgExclamationMark, {}, void 0, false, {
+                  children: /* @__PURE__ */ jsxDEV(SvgExclamationMark, {}, void 0, false, {
                     fileName: "/Users/Ilan_Kader/Development/dashboard-react-controls/src/lib/components/FormCombobox/FormCombobox.jsx",
                     lineNumber: 453,
                     columnNumber: 19
@@ -492,7 +492,7 @@ const FormCombobox = ({
                 },
                 void 0
               ),
-              isInvalid && Array.isArray(meta2.error) && /* @__PURE__ */ jsxDevRuntimeExports.jsxDEV("button", { className: "form-field__warning", onClick: warningIconClick, children: /* @__PURE__ */ jsxDevRuntimeExports.jsxDEV(SvgWarning, {}, void 0, false, {
+              isInvalid && Array.isArray(meta2.error) && /* @__PURE__ */ jsxDEV("button", { className: "form-field__warning", onClick: warningIconClick, children: /* @__PURE__ */ jsxDEV(SvgWarning, {}, void 0, false, {
                 fileName: "/Users/Ilan_Kader/Development/dashboard-react-controls/src/lib/components/FormCombobox/FormCombobox.jsx",
                 lineNumber: 458,
                 columnNumber: 19
@@ -506,7 +506,7 @@ const FormCombobox = ({
               lineNumber: 447,
               columnNumber: 13
             }, void 0),
-            !isEmpty(validationRules) && /* @__PURE__ */ jsxDevRuntimeExports.jsxDEV(OptionsMenu, { show: showValidationRules, ref: comboboxRef, children: getValidationRules() }, void 0, false, {
+            !isEmpty(validationRules) && /* @__PURE__ */ jsxDEV(OptionsMenu, { show: showValidationRules, ref: comboboxRef, children: getValidationRules() }, void 0, false, {
               fileName: "/Users/Ilan_Kader/Development/dashboard-react-controls/src/lib/components/FormCombobox/FormCombobox.jsx",
               lineNumber: 463,
               columnNumber: 15

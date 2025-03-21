@@ -1,4 +1,4 @@
-import { j as jsxDevRuntimeExports } from "../../_virtual/jsx-dev-runtime.mjs";
+import { jsxDEV } from "react/jsx-dev-runtime";
 import { useState, useMemo, useRef, useCallback, useEffect } from "react";
 import PropTypes from "prop-types";
 import { CSSTransition } from "react-transition-group";
@@ -57,12 +57,12 @@ const Tip = ({ className = "", text, withExclamationMark = false }) => {
       };
     }
   }, [handleMouseEnter, isShow]);
-  return /* @__PURE__ */ jsxDevRuntimeExports.jsxDEV("div", { "data-testid": "tip", className: tipContainerClassNames, children: [
-    /* @__PURE__ */ jsxDevRuntimeExports.jsxDEV("div", { ref: iconRef, className: "tip-wrapper", children: withExclamationMark ? /* @__PURE__ */ jsxDevRuntimeExports.jsxDEV(SvgExclamationMark, { "data-testid": "tip-icon" }, void 0, false, {
+  return /* @__PURE__ */ jsxDEV("div", { "data-testid": "tip", className: tipContainerClassNames, children: [
+    /* @__PURE__ */ jsxDEV("div", { ref: iconRef, className: "tip-wrapper", children: withExclamationMark ? /* @__PURE__ */ jsxDEV(SvgExclamationMark, { "data-testid": "tip-icon" }, void 0, false, {
       fileName: "/Users/Ilan_Kader/Development/dashboard-react-controls/src/lib/components/Tip/Tip.jsx",
       lineNumber: 100,
       columnNumber: 11
-    }, void 0) : /* @__PURE__ */ jsxDevRuntimeExports.jsxDEV(SvgQuestionMark, { "data-testid": "tip-icon" }, void 0, false, {
+    }, void 0) : /* @__PURE__ */ jsxDEV(SvgQuestionMark, { "data-testid": "tip-icon" }, void 0, false, {
       fileName: "/Users/Ilan_Kader/Development/dashboard-react-controls/src/lib/components/Tip/Tip.jsx",
       lineNumber: 102,
       columnNumber: 11
@@ -72,7 +72,7 @@ const Tip = ({ className = "", text, withExclamationMark = false }) => {
       columnNumber: 7
     }, void 0),
     createPortal(
-      /* @__PURE__ */ jsxDevRuntimeExports.jsxDEV(CSSTransition, { in: isShow, timeout: 200, classNames: "fade", unmountOnExit: true, children: /* @__PURE__ */ jsxDevRuntimeExports.jsxDEV("div", { ref: tipBodyRef, "data-testid": "tip-text", className: tipClassNames, children: text }, void 0, false, {
+      /* @__PURE__ */ jsxDEV(CSSTransition, { in: isShow, timeout: 200, classNames: "fade", unmountOnExit: true, children: /* @__PURE__ */ jsxDEV("div", { ref: tipBodyRef, "data-testid": "tip-text", className: tipClassNames, children: text }, void 0, false, {
         fileName: "/Users/Ilan_Kader/Development/dashboard-react-controls/src/lib/components/Tip/Tip.jsx",
         lineNumber: 107,
         columnNumber: 11

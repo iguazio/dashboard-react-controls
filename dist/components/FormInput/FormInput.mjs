@@ -1,4 +1,4 @@
-import { j as jsxDevRuntimeExports } from "../../_virtual/jsx-dev-runtime.mjs";
+import { jsxDEV } from "react/jsx-dev-runtime";
 import React__default, { useState, useRef, useEffect } from "react";
 import PropTypes from "prop-types";
 import classnames from "classnames";
@@ -133,7 +133,7 @@ const FormInput = React__default.forwardRef(
     }, [rules]);
     const getValidationRules = () => {
       return validationRules.map(({ isValid = false, label: label2, name: name2 }) => {
-        return /* @__PURE__ */ jsxDevRuntimeExports.jsxDEV(ValidationTemplate, { valid: isValid, validationMessage: label2 }, name2, false, {
+        return /* @__PURE__ */ jsxDEV(ValidationTemplate, { valid: isValid, validationMessage: label2 }, name2, false, {
           fileName: "/Users/Ilan_Kader/Development/dashboard-react-controls/src/lib/components/FormInput/FormInput.jsx",
           lineNumber: 169,
           columnNumber: 16
@@ -235,24 +235,24 @@ const FormInput = React__default.forwardRef(
     const parseField = (val) => {
       return type === "number" && val ? parseFloat(val) || val : val;
     };
-    return /* @__PURE__ */ jsxDevRuntimeExports.jsxDEV(Field, { validate: async ? validateFieldAsync : validateField, name, parse: parseField, children: ({ input: input2 }) => {
+    return /* @__PURE__ */ jsxDEV(Field, { validate: async ? validateFieldAsync : validateField, name, parse: parseField, children: ({ input: input2 }) => {
       var _a;
-      return /* @__PURE__ */ jsxDevRuntimeExports.jsxDEV(
+      return /* @__PURE__ */ jsxDEV(
         "div",
         {
           ref,
           className: formFieldClassNames,
           "data-testid": name ? `${name}-form-field-input` : "form-field-input",
           children: [
-            label && /* @__PURE__ */ jsxDevRuntimeExports.jsxDEV("div", { className: labelClassNames, children: [
-              /* @__PURE__ */ jsxDevRuntimeExports.jsxDEV(
+            label && /* @__PURE__ */ jsxDEV("div", { className: labelClassNames, children: [
+              /* @__PURE__ */ jsxDEV(
                 "label",
                 {
                   "data-testid": name ? `${name}-form-label` : "form-label",
                   htmlFor: input2.name,
                   children: [
                     label,
-                    (required || validationRules.find((rule) => rule.name === "required")) && /* @__PURE__ */ jsxDevRuntimeExports.jsxDEV("span", { className: "form-field__label-mandatory", children: " *" }, void 0, false, {
+                    (required || validationRules.find((rule) => rule.name === "required")) && /* @__PURE__ */ jsxDEV("span", { className: "form-field__label-mandatory", children: " *" }, void 0, false, {
                       fileName: "/Users/Ilan_Kader/Development/dashboard-react-controls/src/lib/components/FormInput/FormInput.jsx",
                       lineNumber: 314,
                       columnNumber: 23
@@ -268,18 +268,18 @@ const FormInput = React__default.forwardRef(
                 },
                 void 0
               ),
-              link && link.show && typedValue.trim() && /* @__PURE__ */ jsxDevRuntimeExports.jsxDEV("div", { className: "form-field__label-icon", children: /* @__PURE__ */ jsxDevRuntimeExports.jsxDEV(Tooltip, { template: /* @__PURE__ */ jsxDevRuntimeExports.jsxDEV(TextTooltipTemplate, { text: link.url || typedValue }, void 0, false, {
+              link && link.show && typedValue.trim() && /* @__PURE__ */ jsxDEV("div", { className: "form-field__label-icon", children: /* @__PURE__ */ jsxDEV(Tooltip, { template: /* @__PURE__ */ jsxDEV(TextTooltipTemplate, { text: link.url || typedValue }, void 0, false, {
                 fileName: "/Users/Ilan_Kader/Development/dashboard-react-controls/src/lib/components/FormInput/FormInput.jsx",
                 lineNumber: 319,
                 columnNumber: 42
-              }, void 0), children: /* @__PURE__ */ jsxDevRuntimeExports.jsxDEV(
+              }, void 0), children: /* @__PURE__ */ jsxDEV(
                 "a",
                 {
                   href: link.url || typedValue,
                   onClick: (event) => event.stopPropagation(),
                   target: "_blank",
                   rel: "noreferrer",
-                  children: /* @__PURE__ */ jsxDevRuntimeExports.jsxDEV(SvgPopout, {}, void 0, false, {
+                  children: /* @__PURE__ */ jsxDEV(SvgPopout, {}, void 0, false, {
                     fileName: "/Users/Ilan_Kader/Development/dashboard-react-controls/src/lib/components/FormInput/FormInput.jsx",
                     lineNumber: 326,
                     columnNumber: 27
@@ -307,8 +307,8 @@ const FormInput = React__default.forwardRef(
               lineNumber: 307,
               columnNumber: 17
             }, void 0),
-            /* @__PURE__ */ jsxDevRuntimeExports.jsxDEV("div", { className: inputWrapperClassNames, children: [
-              /* @__PURE__ */ jsxDevRuntimeExports.jsxDEV("div", { className: "form-field__control", children: /* @__PURE__ */ jsxDevRuntimeExports.jsxDEV(
+            /* @__PURE__ */ jsxDEV("div", { className: inputWrapperClassNames, children: [
+              /* @__PURE__ */ jsxDEV("div", { className: "form-field__control", children: /* @__PURE__ */ jsxDEV(
                 "input",
                 {
                   "data-testid": name ? `${name}-form-input` : "form-input",
@@ -340,12 +340,12 @@ const FormInput = React__default.forwardRef(
                 lineNumber: 334,
                 columnNumber: 17
               }, void 0),
-              /* @__PURE__ */ jsxDevRuntimeExports.jsxDEV("div", { className: "form-field__icons", children: [
-                isInvalid && !Array.isArray(errorsRef.current) && /* @__PURE__ */ jsxDevRuntimeExports.jsxDEV(
+              /* @__PURE__ */ jsxDEV("div", { className: "form-field__icons", children: [
+                isInvalid && !Array.isArray(errorsRef.current) && /* @__PURE__ */ jsxDEV(
                   Tooltip,
                   {
                     className: "form-field__warning",
-                    template: /* @__PURE__ */ jsxDevRuntimeExports.jsxDEV(
+                    template: /* @__PURE__ */ jsxDEV(
                       TextTooltipTemplate,
                       {
                         text: ((_a = errorsRef.current) == null ? void 0 : _a.label) ?? invalidText,
@@ -360,7 +360,7 @@ const FormInput = React__default.forwardRef(
                       },
                       void 0
                     ),
-                    children: /* @__PURE__ */ jsxDevRuntimeExports.jsxDEV(SvgExclamationMark, {}, void 0, false, {
+                    children: /* @__PURE__ */ jsxDEV(SvgExclamationMark, {}, void 0, false, {
                       fileName: "/Users/Ilan_Kader/Development/dashboard-react-controls/src/lib/components/FormInput/FormInput.jsx",
                       lineNumber: 364,
                       columnNumber: 23
@@ -375,7 +375,7 @@ const FormInput = React__default.forwardRef(
                   },
                   void 0
                 ),
-                isInvalid && Array.isArray(errorsRef.current) && /* @__PURE__ */ jsxDevRuntimeExports.jsxDEV("button", { className: "form-field__warning", onClick: toggleValidationRulesMenu, children: /* @__PURE__ */ jsxDevRuntimeExports.jsxDEV(SvgWarning, {}, void 0, false, {
+                isInvalid && Array.isArray(errorsRef.current) && /* @__PURE__ */ jsxDEV("button", { className: "form-field__warning", onClick: toggleValidationRulesMenu, children: /* @__PURE__ */ jsxDEV(SvgWarning, {}, void 0, false, {
                   fileName: "/Users/Ilan_Kader/Development/dashboard-react-controls/src/lib/components/FormInput/FormInput.jsx",
                   lineNumber: 369,
                   columnNumber: 23
@@ -384,12 +384,12 @@ const FormInput = React__default.forwardRef(
                   lineNumber: 368,
                   columnNumber: 21
                 }, void 0),
-                tip && /* @__PURE__ */ jsxDevRuntimeExports.jsxDEV(Tip, { text: tip, className: "form-field__tip" }, void 0, false, {
+                tip && /* @__PURE__ */ jsxDEV(Tip, { text: tip, className: "form-field__tip" }, void 0, false, {
                   fileName: "/Users/Ilan_Kader/Development/dashboard-react-controls/src/lib/components/FormInput/FormInput.jsx",
                   lineNumber: 372,
                   columnNumber: 27
                 }, void 0),
-                inputIcon && /* @__PURE__ */ jsxDevRuntimeExports.jsxDEV("span", { "data-testid": "input-icon", className: iconClass, onClick: iconClick, children: inputIcon }, void 0, false, {
+                inputIcon && /* @__PURE__ */ jsxDEV("span", { "data-testid": "input-icon", className: iconClass, onClick: iconClick, children: inputIcon }, void 0, false, {
                   fileName: "/Users/Ilan_Kader/Development/dashboard-react-controls/src/lib/components/FormInput/FormInput.jsx",
                   lineNumber: 374,
                   columnNumber: 21
@@ -399,7 +399,7 @@ const FormInput = React__default.forwardRef(
                 lineNumber: 353,
                 columnNumber: 17
               }, void 0),
-              type === "number" && /* @__PURE__ */ jsxDevRuntimeExports.jsxDEV(InputNumberButtons, { ...{ ...inputProps, step: +step, ...input2, disabled } }, void 0, false, {
+              type === "number" && /* @__PURE__ */ jsxDEV(InputNumberButtons, { ...{ ...inputProps, step: +step, ...input2, disabled } }, void 0, false, {
                 fileName: "/Users/Ilan_Kader/Development/dashboard-react-controls/src/lib/components/FormInput/FormInput.jsx",
                 lineNumber: 380,
                 columnNumber: 19
@@ -409,8 +409,8 @@ const FormInput = React__default.forwardRef(
               lineNumber: 333,
               columnNumber: 15
             }, void 0),
-            (suggestionList == null ? void 0 : suggestionList.length) > 0 && isFocused && /* @__PURE__ */ jsxDevRuntimeExports.jsxDEV("ul", { className: "form-field__suggestion-list", children: suggestionList.map((item, index) => {
-              return /* @__PURE__ */ jsxDevRuntimeExports.jsxDEV(
+            (suggestionList == null ? void 0 : suggestionList.length) > 0 && isFocused && /* @__PURE__ */ jsxDEV("ul", { className: "form-field__suggestion-list", children: suggestionList.map((item, index) => {
+              return /* @__PURE__ */ jsxDEV(
                 "li",
                 {
                   className: "suggestion-item",
@@ -439,7 +439,7 @@ const FormInput = React__default.forwardRef(
               lineNumber: 384,
               columnNumber: 17
             }, void 0),
-            !isEmpty(validationRules) && isInvalid && Array.isArray(errorsRef.current) && /* @__PURE__ */ jsxDevRuntimeExports.jsxDEV(OptionsMenu, { show: showValidationRules, ref, children: getValidationRules() }, void 0, false, {
+            !isEmpty(validationRules) && isInvalid && Array.isArray(errorsRef.current) && /* @__PURE__ */ jsxDEV(OptionsMenu, { show: showValidationRules, ref, children: getValidationRules() }, void 0, false, {
               fileName: "/Users/Ilan_Kader/Development/dashboard-react-controls/src/lib/components/FormInput/FormInput.jsx",
               lineNumber: 405,
               columnNumber: 17

@@ -1,4 +1,4 @@
-import { j as jsxDevRuntimeExports } from "../../../_virtual/jsx-dev-runtime.mjs";
+import { jsxDEV } from "react/jsx-dev-runtime";
 import React__default, { useState, useMemo, useLayoutEffect, useEffect, useCallback } from "react";
 import PropTypes from "prop-types";
 import classnames from "classnames";
@@ -259,21 +259,21 @@ const NewChipForm = React__default.forwardRef(
     const getValidationRules = useCallback(() => {
       var _a;
       return (_a = validationRules[selectedInput]) == null ? void 0 : _a.map(({ isValid = false, label, name }) => {
-        return /* @__PURE__ */ jsxDevRuntimeExports.jsxDEV(ValidationTemplate, { valid: isValid, validationMessage: label }, name, false, {
+        return /* @__PURE__ */ jsxDEV(ValidationTemplate, { valid: isValid, validationMessage: label }, name, false, {
           fileName: "/Users/Ilan_Kader/Development/dashboard-react-controls/src/lib/components/FormChipCell/NewChipForm/NewChipForm.jsx",
           lineNumber: 341,
           columnNumber: 16
         }, void 0);
       });
     }, [selectedInput, validationRules]);
-    return /* @__PURE__ */ jsxDevRuntimeExports.jsxDEV(
+    return /* @__PURE__ */ jsxDEV(
       "div",
       {
         className: labelContainerClassName,
         onKeyDown: (event) => !chip.disabled && editConfig.isEdit && focusChip(event),
         ref: refInputContainer,
         children: [
-          /* @__PURE__ */ jsxDevRuntimeExports.jsxDEV(
+          /* @__PURE__ */ jsxDEV(
             NewChipInput,
             {
               className: labelKeyClassName,
@@ -294,12 +294,12 @@ const NewChipForm = React__default.forwardRef(
             },
             void 0
           ),
-          !chipData.isKeyOnly && /* @__PURE__ */ jsxDevRuntimeExports.jsxDEV("div", { className: "edit-chip-separator", children: ":" }, void 0, false, {
+          !chipData.isKeyOnly && /* @__PURE__ */ jsxDEV("div", { className: "edit-chip-separator", children: ":" }, void 0, false, {
             fileName: "/Users/Ilan_Kader/Development/dashboard-react-controls/src/lib/components/FormChipCell/NewChipForm/NewChipForm.jsx",
             lineNumber: 365,
             columnNumber: 33
           }, void 0),
-          !chipData.isKeyOnly && /* @__PURE__ */ jsxDevRuntimeExports.jsxDEV(
+          !chipData.isKeyOnly && /* @__PURE__ */ jsxDEV(
             NewChipInput,
             {
               className: labelValueClassName,
@@ -320,13 +320,13 @@ const NewChipForm = React__default.forwardRef(
             },
             void 0
           ),
-          /* @__PURE__ */ jsxDevRuntimeExports.jsxDEV(
+          /* @__PURE__ */ jsxDEV(
             "button",
             {
               disabled: chip.disabled,
               className: closeButtonClass,
               onClick: (event) => !chip.disabled && handleRemoveChip(event, chipIndex),
-              children: /* @__PURE__ */ jsxDevRuntimeExports.jsxDEV(SvgClose, {}, void 0, false, {
+              children: /* @__PURE__ */ jsxDEV(SvgClose, {}, void 0, false, {
                 fileName: "/Users/Ilan_Kader/Development/dashboard-react-controls/src/lib/components/FormChipCell/NewChipForm/NewChipForm.jsx",
                 lineNumber: 388,
                 columnNumber: 11
@@ -341,7 +341,7 @@ const NewChipForm = React__default.forwardRef(
             },
             void 0
           ),
-          !chip.disabled && (editConfig.isKeyFocused ? !isEmpty(chipData.key) : !isEmpty(chipData.value)) && editConfig.chipIndex === chipIndex && !isEmpty(get(meta, ["error", editConfig.chipIndex, selectedInput], [])) && /* @__PURE__ */ jsxDevRuntimeExports.jsxDEV(OptionsMenu, { show: showValidationRules, ref: refInputContainer, children: getValidationRules() }, void 0, false, {
+          !chip.disabled && (editConfig.isKeyFocused ? !isEmpty(chipData.key) : !isEmpty(chipData.value)) && editConfig.chipIndex === chipIndex && !isEmpty(get(meta, ["error", editConfig.chipIndex, selectedInput], [])) && /* @__PURE__ */ jsxDEV(OptionsMenu, { show: showValidationRules, ref: refInputContainer, children: getValidationRules() }, void 0, false, {
             fileName: "/Users/Ilan_Kader/Development/dashboard-react-controls/src/lib/components/FormChipCell/NewChipForm/NewChipForm.jsx",
             lineNumber: 395,
             columnNumber: 13

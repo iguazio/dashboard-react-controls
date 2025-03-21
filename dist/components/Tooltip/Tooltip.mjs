@@ -1,4 +1,4 @@
-import { j as jsxDevRuntimeExports } from "../../_virtual/jsx-dev-runtime.mjs";
+import { jsxDEV, Fragment } from "react/jsx-dev-runtime";
 import React__default, { useState, useRef, useCallback, useEffect } from "react";
 import { createPortal } from "react-dom";
 import PropTypes from "prop-types";
@@ -8,7 +8,7 @@ import { debounce } from "lodash";
 import { isEveryObjectValueEmpty } from "../../utils/common.util.mjs";
 /* empty css              */
 const Tooltip = ({
-  children,
+  children = "",
   className = "",
   hidden = false,
   id = "",
@@ -109,8 +109,8 @@ const Tooltip = ({
       window.removeEventListener("resize", clearStyles);
     };
   }, [clearStyles, style]);
-  return /* @__PURE__ */ jsxDevRuntimeExports.jsxDEV(jsxDevRuntimeExports.Fragment, { children: [
-    renderChildAsHtml ? /* @__PURE__ */ jsxDevRuntimeExports.jsxDEV(
+  return /* @__PURE__ */ jsxDEV(Fragment, { children: [
+    renderChildAsHtml ? /* @__PURE__ */ jsxDEV(
       "div",
       {
         "data-testid": id ? `${id}-tooltip-wrapper` : "tooltip-wrapper",
@@ -127,7 +127,7 @@ const Tooltip = ({
         columnNumber: 9
       },
       void 0
-    ) : /* @__PURE__ */ jsxDevRuntimeExports.jsxDEV(
+    ) : /* @__PURE__ */ jsxDEV(
       "div",
       {
         "data-testid": id ? `${id}-tooltip-wrapper` : "tooltip-wrapper",
@@ -146,7 +146,7 @@ const Tooltip = ({
       void 0
     ),
     !hidden && createPortal(
-      /* @__PURE__ */ jsxDevRuntimeExports.jsxDEV(
+      /* @__PURE__ */ jsxDEV(
         CSSTransition,
         {
           classNames: "fade",
@@ -154,7 +154,7 @@ const Tooltip = ({
           timeout: duration,
           unmountOnExit: true,
           nodeRef: tooltipRef,
-          children: /* @__PURE__ */ jsxDevRuntimeExports.jsxDEV(
+          children: /* @__PURE__ */ jsxDEV(
             "div",
             {
               "data-testid": id ? `${id}-tooltip` : "tooltip",
@@ -193,7 +193,7 @@ const Tooltip = ({
   }, void 0);
 };
 Tooltip.propTypes = {
-  children: PropTypes.node.isRequired,
+  children: PropTypes.any,
   className: PropTypes.string,
   hidden: PropTypes.bool,
   id: PropTypes.string,
