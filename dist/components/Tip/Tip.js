@@ -95,6 +95,7 @@ const Tip = _ref => {
         "data-testid": "tip-icon"
       })
     }), /*#__PURE__*/(0, _reactDom.createPortal)(/*#__PURE__*/(0, _jsxRuntime.jsx)(_reactTransitionGroup.CSSTransition, {
+      nodeRef: tipBodyRef,
       in: isShow,
       timeout: 200,
       classNames: "fade",

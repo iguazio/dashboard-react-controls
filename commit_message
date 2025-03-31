@@ -1,6 +1,6 @@
 
 
-Create a new dist version 2.2.21
+Create a new dist version 2.2.22
 
 Collecting:
-- Fix [Wizard] Steps in small resolution (#373)
+- Fix [UI] fix "findDOMNode is deprecated" error across the app (#370)

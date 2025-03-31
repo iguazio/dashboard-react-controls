@@ -63,8 +63,8 @@ const Tooltip = _ref => {
       const [child] = parentRef.current.childNodes;
       let show = !hidden && (textShow ? true : !child ? false : child.nodeType !== Node.TEXT_NODE && child.childNodes?.[0]?.nodeType !== Node.TEXT_NODE || (
       /*
-      If the child node is a text node and the text of the child node inside the container is greater than the width of the container, then show tooltip.
-      */
+                          If the child node is a text node and the text of the child node inside the container is greater than the width of the container, then show tooltip.
+                        */
       (child.nodeType === Node.TEXT_NODE || child.childNodes?.[0]?.nodeType === Node.TEXT_NODE) && parentRef.current.scrollWidth > parentRef.current.offsetWidth));
       setShow(show);
       setTimeout(() => {
@@ -152,11 +152,11 @@ const Tooltip = _ref => {
       onClick: handleMouseLeave,
       children: children
     }), !hidden && /*#__PURE__*/(0, _reactDom.createPortal)(/*#__PURE__*/(0, _jsxRuntime.jsx)(_reactTransitionGroup.CSSTransition, {
+      nodeRef: tooltipRef,
       classNames: "fade",
       in: show,
       timeout: duration,
       unmountOnExit: true,
-      nodeRef: tooltipRef,
       children: /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
         "data-testid": id ? `${id}-tooltip` : 'tooltip',
         ref: tooltipRef,
