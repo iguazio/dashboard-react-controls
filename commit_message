@@ -1,6 +1,6 @@
 
 
-Create a new dist version 2.2.22
+Create a new dist version 2.2.23
 
 Collecting:
-- Fix [UI] fix "findDOMNode is deprecated" error across the app (#370)
+- Impl [Details] Move Redux to RTK (#380)

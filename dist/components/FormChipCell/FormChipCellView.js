@@ -81,8 +81,14 @@ const FormChipCellView = /*#__PURE__*/_react.default.forwardRef((_ref, _ref2) =>
         fields,
         meta
       } = _ref3;
+      let newValidationRules = {
+        ...validationRules
+      };
       if (!(0, _lodash.isEmpty)(validationRules) && validationRules.key.every(rule => rule.name !== _formChipCell.uniquenessError.name)) {
-        validationRules.key.push(_formChipCell.uniquenessError);
+        newValidationRules = {
+          ...validationRules,
+          key: [...validationRules.key, _formChipCell.uniquenessError]
+        };
       }
       return (isEditable || !(0, _common.isEveryObjectValueEmpty)(fields)) && /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
         className: "chips-cell",
@@ -127,7 +133,7 @@ const FormChipCellView = /*#__PURE__*/_react.default.forwardRef((_ref, _ref2) =>
                   ref: chipsCellRef,
                   setChipsSizes: setChipsSizes,
                   setEditConfig: setEditConfig,
-                  validationRules: validationRules,
+                  validationRules: newValidationRules,
                   valueName: `${contentItem}.value`
                 })
               }, chipData.id)
