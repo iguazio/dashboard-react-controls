@@ -14,7 +14,7 @@ illegal under applicable law, and the grant of the foregoing license
 under the Apache 2.0 license is conditioned upon your compliance with
 such restriction.
 */
-import React, { useRef } from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
 import { CSSTransition } from 'react-transition-group'
 
@@ -22,35 +22,38 @@ import { PopUpDialog } from '../../components'
 
 import './optionsMenu.scss'
 
-const OptionsMenu = React.forwardRef(({ children = [], show = false, timeout = 300 }, ref) => {
-  const nodeRef = useRef(null)
-  const { width: dropdownWidth } = ref.current ? ref.current.getBoundingClientRect() : {}
+const OptionsMenu = React.forwardRef(
+  ({ children = [], show = false, timeout = 300 }, { refInputContainer, validationRulesRef }) => {
+    const { width: dropdownWidth } = refInputContainer?.current
+      ? refInputContainer.current.getBoundingClientRect()
+      : {}
 
-  return (
-    <CSSTransition
-      nodeRef={nodeRef}
-      in={show}
-      timeout={timeout}
-      classNames="options-menu-transition"
-      unmountOnExit
-    >
-      <PopUpDialog
-        ref={nodeRef}
-        headerIsHidden
-        className="options-menu"
-        customPosition={{
-          element: ref,
-          position: 'bottom-right',
-          autoVerticalPosition: true,
-          autoHorizontalPosition: true
-        }}
-        style={{ minWidth: `${dropdownWidth}px` }}
+    return (
+      <CSSTransition
+        nodeRef={validationRulesRef}
+        in={show}
+        timeout={timeout}
+        classNames="options-menu-transition"
+        unmountOnExit
       >
-        <ul className="options-menu__body">{children}</ul>
-      </PopUpDialog>
-    </CSSTransition>
-  )
-})
+        <PopUpDialog
+          ref={validationRulesRef}
+          headerIsHidden
+          className="options-menu"
+          customPosition={{
+            element: refInputContainer,
+            position: 'bottom-right',
+            autoVerticalPosition: true,
+            autoHorizontalPosition: true
+          }}
+          style={{ minWidth: `${dropdownWidth}px` }}
+        >
+          <ul className="options-menu__body">{children}</ul>
+        </PopUpDialog>
+      </CSSTransition>
+    )
+  }
+)
 
 OptionsMenu.propTypes = {
   children: PropTypes.arrayOf(PropTypes.element),
