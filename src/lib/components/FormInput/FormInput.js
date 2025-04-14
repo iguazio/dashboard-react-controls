@@ -42,6 +42,7 @@ const defaultProps = {
   onBlur: () => {},
   onChange: () => {},
   onKeyDown: () => {},
+  onValidationError: () => {},
   validator: () => {},
   rules: []
 }
@@ -68,6 +69,7 @@ const FormInput = React.forwardRef(
       onKeyDown = defaultProps.onKeyDown,
       pattern = null,
       required = false,
+      onValidationError = defaultProps.onValidationError,
       suggestionList = [],
       step = '1',
       tip = '',
@@ -113,12 +115,20 @@ const FormInput = React.forwardRef(
     }, [input.value])
 
     useEffect(() => {
-      setIsInvalid(
+      const isInputInvalid =
         errorsRef.current &&
-          meta.invalid &&
-          (meta.validating || meta.modified || (meta.submitFailed && meta.touched))
-      )
-    }, [meta.invalid, meta.modified, meta.submitFailed, meta.touched, meta.validating])
+        meta.invalid &&
+        (meta.validating || meta.modified || (meta.submitFailed && meta.touched))
+      setIsInvalid(isInputInvalid)
+      onValidationError(isInputInvalid)
+    }, [
+      meta.invalid,
+      meta.modified,
+      meta.submitFailed,
+      meta.touched,
+      meta.validating,
+      onValidationError
+    ])
 
     useEffect(() => {
       if (!errorsRef.current) {
