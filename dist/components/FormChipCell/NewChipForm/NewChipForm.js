@@ -14,6 +14,7 @@ var _ValidationTemplate = _interopRequireDefault(require("../../../elements/Vali
 var _types = require("../../../types");
 var _constants = require("../../../constants");
 var _formChipCell = require("../formChipCell.util");
+var _common = require("../../../utils/common.util");
 var _close = require("../../../images/close.svg");
 require("./newChipForm.scss");
 var _jsxRuntime = require("react/jsx-runtime");
@@ -66,9 +67,6 @@ const NewChipForm = /*#__PURE__*/_react.default.forwardRef((_ref, ref) => {
   const [selectedInput, setSelectedInput] = (0, _react.useState)('key');
   const [validationRules, setValidationRules] = (0, _react.useState)(rules);
   const [showValidationRules, setShowValidationRules] = (0, _react.useState)(false);
-  const maxWidthInput = (0, _react.useMemo)(() => {
-    return ref.current?.clientWidth - 50;
-  }, [ref]);
   const {
     background,
     borderColor,
@@ -82,29 +80,65 @@ const NewChipForm = /*#__PURE__*/_react.default.forwardRef((_ref, ref) => {
   const minWidthValueInput = (0, _react.useMemo)(() => {
     return isEditable ? 35 : 20;
   }, [isEditable]);
+  const transitionEndEventName = (0, _react.useMemo)(() => (0, _common.getTransitionEndEventName)(), []);
   const refInputKey = _react.default.useRef({});
   const refInputValue = _react.default.useRef({});
   const refInputContainer = _react.default.useRef();
+  const validationRulesRef = _react.default.useRef();
   const labelKeyClassName = (0, _classnames.default)(className, !editConfig.isKeyFocused && 'item_edited', !(0, _lodash.isEmpty)((0, _lodash.get)(meta, ['error', chipIndex, 'key'], [])) && !(0, _lodash.isEmpty)(chipData.key) && !chip.disabled && 'item_edited_invalid');
   const labelContainerClassName = (0, _classnames.default)('edit-chip-container', background && `edit-chip-container-background_${background}`, borderColor && `edit-chip-container-border_${borderColor}`, font && `edit-chip-container-font_${font}`, density && `edit-chip-container-density_${density}`, borderRadius && `edit-chip-container-border_${borderRadius}`, (editConfig.isEdit || editConfig.isNewChip) && 'edit-chip-container_edited', chip.disabled && 'edit-chip-container_disabled edit-chip-container-font_disabled');
   const labelValueClassName = (0, _classnames.default)('input-label-value', !editConfig.isValueFocused && 'item_edited', !(0, _lodash.isEmpty)((0, _lodash.get)(meta, ['error', chipIndex, 'value'], [])) && !(0, _lodash.isEmpty)(chipData.value) && 'item_edited_invalid');
   const closeButtonClass = (0, _classnames.default)('item-icon-close', !chip.disabled && editConfig.chipIndex === chipIndex && isEditable && 'item-icon-close_invisible', !isEditable && 'item-icon-close_hidden');
-  (0, _react.useLayoutEffect)(() => {
-    if (!chipData.keyFieldWidth && !chipData.valueFieldWidth) {
-      const currentWidthKeyInput = refInputKey.current.scrollWidth + 1;
-      const currentWidthValueInput = refInputValue.current.scrollWidth + 1;
-      const keyFieldWidth = !chipData.key || currentWidthKeyInput <= minWidthInput ? minWidthInput : currentWidthKeyInput >= maxWidthInput ? maxWidthInput : currentWidthKeyInput;
-      const valueFieldWidth = !chipData.value || currentWidthValueInput <= minWidthValueInput ? minWidthValueInput : currentWidthValueInput >= maxWidthInput ? maxWidthInput : currentWidthValueInput;
+  const resizeChip = (0, _react.useCallback)(() => {
+    if (refInputKey.current) {
+      const currentWidthKeyInput = (0, _formChipCell.getTextWidth)(refInputKey.current) + 1;
+      const currentWidthValueInput = (0, _formChipCell.getTextWidth)(refInputValue.current) + 1;
+      const maxWidthInput = ref.current?.clientWidth - 50;
+      const keyEllipsis = currentWidthKeyInput >= maxWidthInput / 2;
+      const valueEllipsis = currentWidthValueInput >= maxWidthInput / 2;
+      let keyFieldWidth = null;
+      let valueFieldWidth = null;
+      if (keyEllipsis && valueEllipsis) {
+        keyFieldWidth = valueFieldWidth = maxWidthInput / 2;
+      } else if (keyEllipsis) {
+        valueFieldWidth = !chipData.value ? minWidthValueInput : currentWidthValueInput;
+        const remainingPlace = maxWidthInput - valueFieldWidth;
+        keyFieldWidth = remainingPlace > currentWidthKeyInput ? currentWidthKeyInput : remainingPlace;
+      } else if (valueEllipsis) {
+        keyFieldWidth = !chipData.key ? minWidthInput : currentWidthKeyInput;
+        const remainingPlace = maxWidthInput - keyFieldWidth;
+        valueFieldWidth = remainingPlace > currentWidthValueInput ? currentWidthValueInput : remainingPlace;
+      } else {
+        keyFieldWidth = !chipData.key || currentWidthKeyInput <= minWidthInput ? minWidthInput : currentWidthKeyInput;
+        valueFieldWidth = !chipData.value || currentWidthValueInput <= minWidthValueInput ? minWidthValueInput : currentWidthValueInput;
+      }
+      refInputKey.current.style.width = `${keyFieldWidth}px`;
+      if (!(0, _lodash.isEmpty)(refInputValue.current)) {
+        refInputValue.current.style.width = `${valueFieldWidth}px`;
+      }
       setChipData(prevState => ({
         ...prevState,
         keyFieldWidth,
         valueFieldWidth
       }));
     }
-  }, [minWidthInput, minWidthValueInput, chipData.key, chipData.value, chipData.keyFieldWidth, chipData.valueFieldWidth, maxWidthInput, refInputKey, refInputValue]);
-  const handleScroll = () => {
-    setShowValidationRules(false);
-  };
+  }, [chipData.key, chipData.value, minWidthInput, minWidthValueInput, ref]);
+  (0, _react.useEffect)(() => {
+    const resizeChipDebounced = (0, _lodash.throttle)(resizeChip, 500);
+    if (isEditable) {
+      window.addEventListener('resize', resizeChipDebounced);
+      window.addEventListener(transitionEndEventName, resizeChipDebounced);
+      return () => {
+        window.removeEventListener('resize', resizeChipDebounced);
+        window.removeEventListener(transitionEndEventName, resizeChipDebounced);
+      };
+    }
+  }, [isEditable, resizeChip, transitionEndEventName]);
+  (0, _react.useEffect)(() => {
+    if (!chipData.keyFieldWidth && !chipData.valueFieldWidth) {
+      resizeChip();
+    }
+  }, [chipData.keyFieldWidth, chipData.valueFieldWidth, resizeChip]);
   (0, _react.useEffect)(() => {
     if (showValidationRules) {
       window.addEventListener('scroll', handleScroll, true);
@@ -122,17 +156,32 @@ const NewChipForm = /*#__PURE__*/_react.default.forwardRef((_ref, ref) => {
       }
     }
   }, [editConfig.isKeyFocused, editConfig.isValueFocused, refInputKey, refInputValue, chipIndex, editConfig.chipIndex]);
-  const outsideClick = (0, _react.useCallback)(event => {
+  const outsideClick = (0, _react.useCallback)((event, forceOutsideClick) => {
     if (editConfig.chipIndex === chipIndex) {
       const elementPath = event.path ?? event.composedPath?.();
-      if (!elementPath.includes(refInputContainer.current)) {
+      if (!elementPath.includes(refInputContainer.current) || forceOutsideClick) {
         onChange(event, _constants.CLICK, true);
         window.getSelection().removeAllRanges();
+        document.activeElement.blur();
       } else {
         event.stopPropagation();
       }
     }
   }, [onChange, refInputContainer, chipIndex, editConfig.chipIndex]);
+  const handleScroll = (0, _react.useCallback)(event => {
+    if (validationRulesRef?.current && !validationRulesRef.current.contains(event.target)) {
+      setShowValidationRules(false);
+      outsideClick(event, true);
+    }
+  }, [outsideClick]);
+  (0, _react.useEffect)(() => {
+    if (showValidationRules) {
+      window.addEventListener('scroll', handleScroll, true);
+    }
+    return () => {
+      window.removeEventListener('scroll', handleScroll, true);
+    };
+  }, [handleScroll, showValidationRules]);
   (0, _react.useEffect)(() => {
     if (editConfig.isEdit) {
       document.addEventListener('click', outsideClick, true);
@@ -185,6 +234,7 @@ const NewChipForm = /*#__PURE__*/_react.default.forwardRef((_ref, ref) => {
     }
   }, [keyName, refInputKey, refInputValue, setEditConfig, editConfig.chipIndex, chipIndex]);
   const handleOnChange = (0, _react.useCallback)(event => {
+    const maxWidthInput = ref.current?.clientWidth - 50;
     event.preventDefault();
     if (event.target.name === keyName) {
       const currentWidthKeyInput = (0, _formChipCell.getTextWidth)(refInputKey.current);
@@ -201,7 +251,7 @@ const NewChipForm = /*#__PURE__*/_react.default.forwardRef((_ref, ref) => {
         valueFieldWidth: refInputValue.current.value?.length <= 1 ? minWidthValueInput : currentWidthValueInput >= maxWidthInput ? maxWidthInput : currentWidthValueInput > minWidthValueInput ? currentWidthValueInput + 2 : minWidthValueInput
       }));
     }
-  }, [keyName, minWidthInput, maxWidthInput, minWidthValueInput]);
+  }, [keyName, minWidthInput, ref, minWidthValueInput]);
   (0, _react.useLayoutEffect)(() => {
     if (editConfig.chipIndex === chipIndex) {
       setSelectedInput(editConfig.isKeyFocused ? 'key' : editConfig.isValueFocused ? 'value' : null);
@@ -277,7 +327,10 @@ const NewChipForm = /*#__PURE__*/_react.default.forwardRef((_ref, ref) => {
       children: /*#__PURE__*/(0, _jsxRuntime.jsx)(_close.ReactComponent, {})
     }), !chip.disabled && (editConfig.isKeyFocused ? !(0, _lodash.isEmpty)(chipData.key) : !(0, _lodash.isEmpty)(chipData.value)) && editConfig.chipIndex === chipIndex && !(0, _lodash.isEmpty)((0, _lodash.get)(meta, ['error', editConfig.chipIndex, selectedInput], [])) && /*#__PURE__*/(0, _jsxRuntime.jsx)(_OptionsMenu.default, {
       show: showValidationRules,
-      ref: refInputContainer,
+      ref: {
+        refInputContainer,
+        validationRulesRef
+      },
       children: getValidationRules()
     })]
   });

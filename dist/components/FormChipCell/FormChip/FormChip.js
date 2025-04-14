@@ -55,15 +55,13 @@ const FormChip = /*#__PURE__*/_react.default.forwardRef((_ref, ref) => {
     valueName = ''
   } = _ref;
   const chipRef = _react.default.useRef();
-  (0, _react.useEffect)(() => {
-    queueMicrotask(() => {
-      if (chipRef.current && setChipsSizes) {
-        setChipsSizes(state => ({
-          ...state,
-          [chipIndex]: chipRef.current.getBoundingClientRect().width
-        }));
-      }
-    });
+  (0, _react.useLayoutEffect)(() => {
+    if (chipRef.current && setChipsSizes) {
+      setChipsSizes(state => ({
+        ...state,
+        [chipIndex]: chipRef.current.getBoundingClientRect().width
+      }));
+    }
   }, [chipIndex, setChipsSizes]);
   return /*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
     onClick: event => handleToEditMode(event, chipIndex, keyName),

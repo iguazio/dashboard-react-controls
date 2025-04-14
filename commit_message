@@ -1,6 +1,9 @@
 
 
-Create a new dist version 2.2.23
+Create a new dist version 2.2.24
 
 Collecting:
-- Impl [Details] Move Redux to RTK (#380)
+- Impl [LLM Prompt Artifact] Add navigation to LLM Prompt Artifacts screen (#385)
+- Fix [Labels] Label size is badly calculated (#382)
+- Fix [Action bar] request is sent despite "name' filter is invalid (#384)
+- Fix [UI] validation rules block flashes when scrolling (#383)

@@ -51,6 +51,7 @@ const defaultProps = {
   onBlur: () => {},
   onChange: () => {},
   onKeyDown: () => {},
+  onValidationError: () => {},
   validator: () => {},
   rules: []
 };
@@ -75,6 +76,7 @@ const FormInput = /*#__PURE__*/_react.default.forwardRef((_ref, ref) => {
     onKeyDown = defaultProps.onKeyDown,
     pattern = null,
     required = false,
+    onValidationError = defaultProps.onValidationError,
     suggestionList = [],
     step = '1',
     tip = '',
@@ -108,8 +110,10 @@ const FormInput = /*#__PURE__*/_react.default.forwardRef((_ref, ref) => {
     setTypedValue(String(input.value)); // convert from number to string
   }, [input.value]);
   (0, _react.useEffect)(() => {
-    setIsInvalid(errorsRef.current && meta.invalid && (meta.validating || meta.modified || meta.submitFailed && meta.touched));
-  }, [meta.invalid, meta.modified, meta.submitFailed, meta.touched, meta.validating]);
+    const isInputInvalid = errorsRef.current && meta.invalid && (meta.validating || meta.modified || meta.submitFailed && meta.touched);
+    setIsInvalid(isInputInvalid);
+    onValidationError(isInputInvalid);
+  }, [meta.invalid, meta.modified, meta.submitFailed, meta.touched, meta.validating, onValidationError]);
   (0, _react.useEffect)(() => {
     if (!errorsRef.current) {
       if (meta.valid && showValidationRules) {
