@@ -1,6 +1,6 @@
-@import './colors';
-@import './borders';
-@import './variables.scss';
+@use './colors';
+@use './borders';
+@use './variables';
 
 @mixin fixed {
   position: fixed;
@@ -37,10 +37,10 @@
       display: flex;
       min-width: 100%;
       padding: 15px 10px;
-      color: $topaz;
+      color: colors.$topaz;
       font-weight: bold;
-      background-color: $white;
-      border-bottom: $secondaryBorder;
+      background-color: colors.$white;
+      border-bottom: borders.$secondaryBorder;
 
       .header-item {
         text-transform: capitalize;
@@ -59,13 +59,13 @@
       flex-direction: row;
       min-width: 100%;
       height: 45px;
-      border-bottom: $secondaryBorder;
+      border-bottom: borders.$secondaryBorder;
     }
   }
 }
 
 @mixin detailsItem {
-  color: $topaz;
+  color: colors.$topaz;
   font-weight: bold;
   font-size: 14px;
   line-height: 24px;
@@ -79,7 +79,7 @@
     position: absolute;
     top: 11px;
     left: $left;
-    color: $topaz;
+    color: colors.$topaz;
     content: $item;
   }
 
@@ -154,7 +154,7 @@
     svg {
       rect,
       path {
-        fill: $white;
+        fill: colors.$white;
       }
     }
   }
@@ -176,19 +176,19 @@
 @mixin chipBackground($isChipButtonAdd) {
   @if $isChipButtonAdd == true {
     &_orange {
-      @include chipButtonAddBackground($grandisTwo, $sorbus);
+      @include chipButtonAddBackground(colors.$grandisTwo, colors.$sorbus);
     }
 
     &_purple {
-      @include chipButtonAddBackground($amethystTwo, $amethyst);
+      @include chipButtonAddBackground(colors.$amethystTwo, colors.$amethyst);
     }
 
     &_green {
-      @include chipButtonAddBackground($javaTwo, $java);
+      @include chipButtonAddBackground(colors.$javaTwo, colors.$java);
     }
 
     &_grey {
-      @include chipButtonAddBackground($mulledWineThree, $topaz);
+      @include chipButtonAddBackground(colors.$mulledWineThree, colors.$topaz);
     }
   } @else {
     &_none {
@@ -196,54 +196,54 @@
     }
 
     &_green {
-      background-color: $javaTwo;
+      background-color: colors.$javaTwo;
     }
 
     &_grey {
-      background-color: $mulledWineThree;
+      background-color: colors.$mulledWineThree;
     }
 
     &_orange {
-      background-color: $grandisTwo;
+      background-color: colors.$grandisTwo;
     }
 
     &_purple {
-      background-color: $amethystTwo;
+      background-color: colors.$amethystTwo;
     }
 
     &_amethyst {
-      background-color: $amethyst;
+      background-color: colors.$amethyst;
     }
 
     &_sorbus {
-      background-color: $sorbus;
+      background-color: colors.$sorbus;
     }
 
     &_java {
-      background-color: $java;
+      background-color: colors.$java;
     }
   }
 }
 
 @mixin chipBorder() {
   &_transparent {
-    border: $transparentBorder;
+    border: borders.$transparentBorder;
   }
 
   &_green {
-    border: $resultsBorder;
+    border: borders.$resultsBorder;
   }
 
   &_grey {
-    border: $primaryBorder;
+    border: borders.$primaryBorder;
   }
 
   &_orange {
-    border: $parametersBorder;
+    border: borders.$parametersBorder;
   }
 
   &_purple {
-    border: $labelBorder;
+    border: borders.$labelBorder;
   }
 
   &_primary {
@@ -295,63 +295,63 @@
 @mixin chipsFont($component) {
   @if $component == EditableChip {
     &_primary {
-      @include editableChipFont($primary);
+      @include editableChipFont(colors.$primary);
     }
 
     &_green {
-      @include editableChipFont($chateauGreen);
+      @include editableChipFont(colors.$chateauGreen);
     }
 
     &_white {
-      @include editableChipFont($white);
+      @include editableChipFont(colors.$white);
     }
 
     &_orange {
-      @include editableChipFont($sorbus);
+      @include editableChipFont(colors.$sorbus);
     }
 
     &_purple {
-      @include editableChipFont($amethyst);
+      @include editableChipFont(colors.$amethyst);
     }
 
     &_disabled {
-      @include editableChipFont($spunPearl);
+      @include editableChipFont(colors.$spunPearl);
     }
   } @else if $component == Chip {
     &_white {
-      @include chipFont($white);
+      @include chipFont(colors.$white);
     }
 
     &_green {
-      @include chipFont($chateauGreen);
+      @include chipFont(colors.$chateauGreen);
     }
 
     &_purple {
-      @include chipFont($amethyst);
+      @include chipFont(colors.$amethyst);
     }
 
     &_primary {
-      @include chipFont($primary);
+      @include chipFont(colors.$primary);
     }
 
     &_orange {
-      @include chipFont($sorbus);
+      @include chipFont(colors.$sorbus);
     }
   } @else if $component == ButtonAddChip {
     &_primary {
-      @include chipButtonAddColor($topaz);
+      @include chipButtonAddColor(colors.$topaz);
     }
 
     &_green {
-      @include chipButtonAddColor($chateauGreen);
+      @include chipButtonAddColor(colors.$chateauGreen);
     }
 
     &_orange {
-      @include chipButtonAddColor($sorbus);
+      @include chipButtonAddColor(colors.$sorbus);
     }
 
     &_purple {
-      @include chipButtonAddColor($amethyst);
+      @include chipButtonAddColor(colors.$amethyst);
     }
   }
 }
@@ -362,7 +362,7 @@
   display: block;
   width: 12px;
   height: 12px;
-  background-color: $white;
+  background-color: colors.$white;
   transform: rotate(-45deg);
   content: '';
 }
@@ -394,7 +394,7 @@
 }
 
 @mixin tableHeader {
-  background-color: $magnoliaWhite;
+  background-color: colors.$magnoliaWhite;
   font-weight: bold;
   font-size: 14px;
 }
@@ -412,11 +412,11 @@
 @mixin newItemSidePanelTable {
   position: relative;
   width: 100%;
-  border-bottom: $primaryBorder;
+  border-bottom: borders.$primaryBorder;
 
   .table {
     &__header {
-      color: $topaz;
+      color: colors.$topaz;
       font-weight: bold;
       font-size: 18px;
       line-height: 24px;
@@ -453,10 +453,10 @@
       align-items: center;
       min-width: 5px;
       padding: 10px;
-      color: $primary;
+      color: colors.$primary;
 
       &_disabled {
-        color: $spunPearl;
+        color: colors.$spunPearl;
       }
 
       &-checkbox {
@@ -481,14 +481,14 @@
       flex-direction: row;
       align-items: center;
       height: 55px;
-      border-top: $primaryBorder;
+      border-top: borders.$primaryBorder;
 
       .tip-container {
         display: none;
       }
 
       &:hover {
-        background-color: $alabaster;
+        background-color: colors.$alabaster;
 
         .table__cell {
           &-actions {
@@ -535,7 +535,7 @@
       display: flex;
       width: 100%;
       margin: 0 -1px 0 -1px;
-      border: $primaryBorder;
+      border: borders.$primaryBorder;
 
       .select {
         flex: 1;
@@ -560,17 +560,17 @@
   }
 
   .edit-row {
-    background-color: $alabaster;
+    background-color: colors.$alabaster;
 
     .input {
       width: 100%;
       margin: -1px;
       padding: 10px;
-      border: $primaryBorder;
+      border: borders.$primaryBorder;
       border-radius: 2px;
 
       &_invalid {
-        border: 1px solid $amaranth;
+        border: 1px solid colors.$amaranth;
       }
     }
 
@@ -620,7 +620,7 @@
     width: 900px;
     height: 100%;
     overflow-y: scroll;
-    background-color: $wildSand;
+    background-color: colors.$wildSand;
 
     &-container {
       position: fixed;
@@ -628,7 +628,7 @@
       left: 0;
       width: 100%;
       height: 100%;
-      background: rgba($mineshaft, 0.75);
+      background: rgba(colors.$mineshaft, 0.75);
     }
 
     &__body {
@@ -639,8 +639,8 @@
 
     &__accordion {
       margin: 16px 40px 0;
-      background-color: $white;
-      border: $primaryBorder;
+      background-color: colors.$white;
+      border: borders.$primaryBorder;
       border-radius: 4px;
 
       &.accordion__container.open {
@@ -671,16 +671,16 @@
       width: 32px;
       height: 32px;
       margin: 0;
-      background: $malibu;
+      background: colors.$malibu;
       border-radius: 50%;
 
       &:hover {
-        background-color: $cornflowerBlue;
+        background-color: colors.$cornflowerBlue;
       }
 
       svg {
         path {
-          fill: $white;
+          fill: colors.$white;
         }
       }
     }
@@ -712,7 +712,7 @@
       justify-content: space-between;
       min-width: 44px;
       padding: 10px;
-      color: $cornflowerBlue;
+      color: colors.$cornflowerBlue;
       font-size: 15px;
       line-height: 18px;
 
@@ -722,12 +722,12 @@
       }
 
       rect {
-        fill: $cornflowerBlue;
+        fill: colors.$cornflowerBlue;
       }
     }
 
     .disabled {
-      color: $doveGray;
+      color: colors.$doveGray;
       cursor: not-allowed;
     }
 
@@ -743,7 +743,7 @@
       &-add {
         rect {
           min-width: 44px;
-          fill: $cornflowerBlue;
+          fill: colors.$cornflowerBlue;
         }
       }
 
@@ -806,13 +806,13 @@
         align-items: center;
         margin-bottom: 15px;
         padding: 0 15px;
-        border: $primaryBorder;
+        border: borders.$primaryBorder;
         border-radius: 4px;
       }
 
       &-text {
         margin-right: 10px;
-        color: $primary;
+        color: colors.$primary;
         font-size: 15px;
         line-height: 18px;
       }
@@ -863,7 +863,7 @@
         display: flex;
         align-items: center;
         margin: 0;
-        color: $primary;
+        color: colors.$primary;
         font-weight: bold;
         font-size: 17px;
         line-height: 20px;
@@ -897,13 +897,13 @@
 
       &__item {
         padding: 10px 24px;
-        color: $topaz;
+        color: colors.$topaz;
         font-weight: bold;
         cursor: pointer;
 
         &_active {
-          color: $cornflowerBlue;
-          border-bottom: 3px solid $cornflowerBlue;
+          color: colors.$cornflowerBlue;
+          border-bottom: 3px solid colors.$cornflowerBlue;
         }
       }
     }
@@ -911,12 +911,12 @@
     &-content {
       position: relative;
       padding: 24px;
-      background-color: $white;
-      border: $primaryBorder;
+      background-color: colors.$white;
+      border: borders.$primaryBorder;
       border-radius: 4px;
 
       h3 {
-        color: $primary;
+        color: colors.$primary;
         text-transform: uppercase;
       }
 
@@ -951,8 +951,8 @@
           display: none;
           padding: 13px 48px;
           color: #e54158;
-          background: rgba($amaranth, 0.1);
-          border: 1px solid $amaranth;
+          background: rgba(colors.$amaranth, 0.1);
+          border: 1px solid colors.$amaranth;
           border-radius: 2px;
 
           &.show-error {
@@ -966,14 +966,14 @@
             width: 24px;
             height: 24px;
             padding: 6px;
-            background: $amaranth;
+            background: colors.$amaranth;
             border-radius: 15px;
           }
         }
 
         &-string {
           min-width: 100%;
-          border: $primaryBorder;
+          border: borders.$primaryBorder;
           border-radius: 4px;
         }
 
@@ -1002,25 +1002,25 @@
 
 @mixin stats() {
   &_total {
-    @include statsAddBorderAndTextColor($totalBorder, $black);
+    @include statsAddBorderAndTextColor(borders.$totalBorder, colors.$black);
   }
 
   &_running {
-    @include statsAddBorderAndTextColor($runningBorder, $pictonBlue);
+    @include statsAddBorderAndTextColor(borders.$runningBorder, colors.$pictonBlue);
   }
 
   &_failed {
-    @include statsAddBorderAndTextColor($failedBorder, $amaranth);
+    @include statsAddBorderAndTextColor(borders.$failedBorder, colors.$amaranth);
   }
 
   &_completed {
-    @include statsAddBorderAndTextColor($completedBorder, $brightTurquoise);
+    @include statsAddBorderAndTextColor(borders.$completedBorder, colors.$brightTurquoise);
   }
 }
 
 @mixin gradient($type) {
   @if $type == 'card' {
-    background: linear-gradient(180deg, $brightTurquoise 4px, $white 4px);
+    background: linear-gradient(180deg, colors.$brightTurquoise 4px, colors.$white 4px);
   } @else {
     background: linear-gradient(88.84deg, #d873e1 5.49%, #fc658f 57.67%, #ffb971 107.73%);
   }
@@ -1032,9 +1032,9 @@
   flex-flow: row nowrap;
   position: relative;
   width: 100%;
-  color: $primary;
+  color: colors.$primary;
   background-color: transparent;
-  border: $primaryBorder;
+  border: borders.$primaryBorder;
   border-radius: 4px;
 }
 
@@ -1049,7 +1049,7 @@
     display: flex;
     align-items: center;
     margin-bottom: 5px;
-    color: $topaz;
+    color: colors.$topaz;
     font-size: 12px;
     text-align: left;
     background-color: transparent;
@@ -1059,14 +1059,14 @@
     }
 
     &-mandatory {
-      color: $amaranth;
+      color: colors.$amaranth;
     }
 
     &-disabled {
-      color: $spunPearl;
+      color: colors.$spunPearl;
 
       .form-field__label-mandatory {
-        color: $spunPearl;
+        color: colors.$spunPearl;
       }
     }
   }
@@ -1075,13 +1075,13 @@
     @include fieldWrapper;
 
     &-disabled {
-      border: $disabledBorder;
-      color: $spunPearl;
+      border: borders.$disabledBorder;
+      color: colors.$spunPearl;
       cursor: not-allowed;
     }
 
     &-invalid {
-      border: $errorBorder;
+      border: borders.$errorBorder;
     }
 
     &.without-border {
@@ -1089,19 +1089,19 @@
     }
 
     &-dense {
-      height: $fieldDense;
+      height: variables.$fieldDense;
     }
 
     &-normal {
-      height: $fieldNormal;
+      height: variables.$fieldNormal;
     }
 
     &-medium {
-      height: $fieldMedium;
+      height: variables.$fieldMedium;
     }
 
     &-chunky {
-      height: $fieldChunky;
+      height: variables.$fieldChunky;
     }
   }
 
@@ -1146,9 +1146,9 @@
 
 @mixin radioCheckField {
   position: relative;
-  background: $white;
-  border: 1px solid $malibu;
-  color: $malibu;
+  background: colors.$white;
+  border: 1px solid colors.$malibu;
+  color: colors.$malibu;
   appearance: none;
   margin: 0;
   outline: 0;
@@ -1156,39 +1156,39 @@
 
   &:checked {
     &:hover {
-      color: $cornflowerBlue;
+      color: colors.$cornflowerBlue;
 
       &:disabled {
-        color: $spunPearl;
+        color: colors.$spunPearl;
         border-color: currentColor;
       }
     }
   }
 
   &:disabled {
-    color: $spunPearl;
+    color: colors.$spunPearl;
     border-color: currentColor;
     cursor: not-allowed;
     pointer-events: none;
 
     &:hover {
-      color: $spunPearl;
+      color: colors.$spunPearl;
       border-color: currentColor;
     }
 
     ~ label,
     ~ .label {
-      color: $spunPearl;
+      color: colors.$spunPearl;
       cursor: not-allowed;
     }
   }
 
   @keyframes pulse-animation {
     20% {
-      box-shadow: 0 0 0 0 rgba($cornflowerBlue, 0.5);
+      box-shadow: 0 0 0 0 rgba(colors.$cornflowerBlue, 0.5);
     }
     100% {
-      box-shadow: 0 0 0 6px rgba($cornflowerBlue, 0);
+      box-shadow: 0 0 0 6px rgba(colors.$cornflowerBlue, 0);
     }
   }
 
@@ -1199,7 +1199,7 @@
     }
 
     &:hover {
-      color: $cornflowerBlue;
+      color: colors.$cornflowerBlue;
       border-color: currentColor;
     }
   }
@@ -1217,4 +1217,15 @@
     user-select: none;
     white-space: nowrap;
   }
+}
+
+//TODO: Delete after removing Textarea and Input and using DRC components
+@mixin fieldWrapperOld {
+  position: relative;
+  width: 100%;
+  padding: 18px 16px;
+  color: #4b4760;
+  background-color: transparent;
+  border: borders.$primaryBorder;
+  border-radius: 4px;
 }
