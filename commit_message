@@ -1,9 +1,6 @@
 
 
-Create a new dist version 2.2.24
+Create a new dist version 2.2.25
 
 Collecting:
-- Impl [LLM Prompt Artifact] Add navigation to LLM Prompt Artifacts screen (#385)
-- Fix [Labels] Label size is badly calculated (#382)
-- Fix [Action bar] request is sent despite "name' filter is invalid (#384)
-- Fix [UI] validation rules block flashes when scrolling (#383)
+- Impl [Monitoring application] Add Monitoring application page (#387)
