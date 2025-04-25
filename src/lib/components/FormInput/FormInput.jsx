@@ -402,7 +402,7 @@ let FormInput = (
               </ul>
             )}
             {!isEmpty(validationRules) && isInvalid && Array.isArray(errorsRef.current) && (
-              <OptionsMenu show={showValidationRules} ref={ref}>
+              <OptionsMenu show={showValidationRules} ref={{ refInputContainer: ref }}>
                 {getValidationRules()}
               </OptionsMenu>
             )}

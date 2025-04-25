@@ -14,7 +14,7 @@ illegal under applicable law, and the grant of the foregoing license
 under the Apache 2.0 license is conditioned upon your compliance with
 such restriction.
 */
-import React, { forwardRef } from 'react'
+import React, { forwardRef, useRef } from 'react'
 import PropTypes from 'prop-types'
 import { CSSTransition } from 'react-transition-group'
 
@@ -29,6 +29,8 @@ let OptionsMenu = (
   const { width: dropdownWidth } = refInputContainer?.current
     ? refInputContainer.current.getBoundingClientRect()
     : {}
+  const internalValidationRulesRef = useRef(null)
+  validationRulesRef ??= internalValidationRulesRef
 
   return (
     <CSSTransition
