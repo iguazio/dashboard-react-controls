@@ -325,6 +325,7 @@ const FormCombobox = _ref => {
               className: "form-field-combobox__dropdown form-field-combobox__dropdown-select",
               children: /*#__PURE__*/(0, _jsxRuntime.jsx)("ul", {
                 className: "form-field-combobox__dropdown-list",
+                ref: suggestionListRef,
                 children: selectOptions.map(option => {
                   if (!option.hidden) {
                     const selectOptionClassNames = (0, _classnames.default)('form-field-combobox__dropdown-list-option', option.className);
