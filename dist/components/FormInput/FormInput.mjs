@@ -1,10 +1,10 @@
 import { jsx as t, jsxs as w } from "react/jsx-runtime";
-import ie, { useState as g, useRef as C, useEffect as b, forwardRef as Ie } from "react";
+import ie, { useState as g, useRef as x, useEffect as b, forwardRef as Fe } from "react";
 import r from "prop-types";
 import q from "classnames";
 import { isNil as Z, isEmpty as A } from "lodash";
-import { useField as Ee, Field as xe } from "react-final-form";
-import Ce from "./InputNumberButtons/InputNumberButtons.mjs";
+import { useField as Ce, Field as Ee } from "react-final-form";
+import xe from "./InputNumberButtons/InputNumberButtons.mjs";
 import Ae from "../../elements/OptionsMenu/OptionsMenu.mjs";
 import ke from "../../elements/ValidationTemplate/ValidationTemplate.mjs";
 import "../index.mjs";
@@ -38,8 +38,8 @@ const p = {
 let R = ({
   async: L = !1,
   className: te = "",
-  customRequiredLabel: le = "",
-  density: ne = "normal",
+  customRequiredLabel: ne = "",
+  density: le = "normal",
   disabled: h = !1,
   focused: U = !1,
   iconClass: ae = "",
@@ -58,19 +58,19 @@ let R = ({
   suggestionList: V = [],
   step: se = "1",
   tip: Y = "",
-  type: F = "text",
+  type: I = "text",
   validationRules: f = p.rules,
   validator: z = p.validator,
   withoutBorder: me = !1,
   ...m
-}, I) => {
-  const { input: s, meta: a } = Ee(c), [_, de] = g(!1), [ce, $] = g(!1), [E, fe] = g(""), [ue] = g(RegExp(D)), [O, pe] = g(f), [y, x] = g(!1), ge = C();
-  I ?? (I = ge);
-  const v = C(), o = C(), B = C(!1);
-  Ue(I, () => x(!1));
+}, F) => {
+  const { input: s, meta: a } = Ce(c), [_, de] = g(!1), [ce, $] = g(!1), [C, fe] = g(""), [ue] = g(RegExp(D)), [O, pe] = g(f), [y, E] = g(!1), ge = x();
+  F ?? (F = ge);
+  const v = x(), o = x(), B = x(!1);
+  Ue(F, () => E(!1));
   const be = We(), he = q("form-field-input", te), _e = q(
     "form-field__wrapper",
-    `form-field__wrapper-${ne}`,
+    `form-field__wrapper-${le}`,
     h && "form-field__wrapper-disabled",
     _ && "form-field__wrapper-invalid",
     me && "without-border"
@@ -88,7 +88,7 @@ let R = ({
     a.validating,
     Q
   ]), b(() => {
-    o.current || a.valid && y && x(!1);
+    o.current || a.valid && y && E(!1);
   }, [a.valid, y]), b(() => (y && window.addEventListener("scroll", J, !0), () => {
     window.removeEventListener("scroll", J, !0);
   }), [y]), b(() => {
@@ -96,58 +96,58 @@ let R = ({
   }, [U]), b(() => {
     pe(() => (B.current = !1, f.map((e) => (e.name === Ke.REQUIRED.NAME && (B.current = !0), {
       ...e,
-      isValid: !o.current || !Array.isArray(o.current) ? !0 : !o.current.some((n) => n.name === e.name)
+      isValid: !o.current || !Array.isArray(o.current) ? !0 : !o.current.some((l) => l.name === e.name)
     }))));
   }, [f]);
-  const ve = () => O.map(({ isValid: e = !1, label: n, name: i }) => /* @__PURE__ */ t(ke, { valid: e, validationMessage: n }, i)), G = (e) => !e && !T || h, we = (e) => {
-    var n;
-    s.onBlur && s.onBlur(e), (!e.relatedTarget || !((n = e.relatedTarget) != null && n.closest(".form-field__suggestion-list"))) && ($(!1), S && S(e));
+  const ve = () => O.map(({ isValid: e = !1, label: l, name: i }) => /* @__PURE__ */ t(ke, { valid: e, validationMessage: l }, i)), G = (e) => !e && !T || h, we = (e) => {
+    var l;
+    s.onBlur && s.onBlur(e), (!e.relatedTarget || !((l = e.relatedTarget) != null && l.closest(".form-field__suggestion-list"))) && ($(!1), S && S(e));
   }, Re = (e) => {
     s.onFocus && s.onFocus(e), P && P(e), $(!0);
   }, Ne = (e) => {
     s.onKeyDown && s.onKeyDown(e), H && H(e);
   }, J = (e) => {
-    v.current && v.current.contains(e.target) || !e.target.closest(".options-menu") && !e.target.classList.contains("form-field-input") && x(!1);
+    v.current && v.current.contains(e.target) || !e.target.closest(".options-menu") && !e.target.classList.contains("form-field-input") && E(!1);
   }, Te = (e) => {
     s.onChange && s.onChange(e), $(!1), S();
   }, Ve = () => {
-    v.current.focus(), x((e) => !e);
-  }, X = (e, n) => {
+    v.current.focus(), E((e) => !e);
+  }, X = (e, l) => {
     let i = Z(e) ? "" : String(e);
     if (G(i)) return;
-    let l = null;
+    let n = null;
     if (T && i.trim().length === 0 && !B.current)
-      l = {
+      n = {
         name: "required",
-        label: le || "This field is required"
+        label: ne || "This field is required"
       };
     else if (!A(f) && !L) {
       const [u, K] = Oe(f, i), M = u.filter((d) => !d.isValid);
-      K || (l = M.map((d) => ({ name: d.name, label: d.label })));
+      K || (n = M.map((d) => ({ name: d.name, label: d.label })));
     }
-    return A(l) && (F === "number" && (m.max && +i > +m.max && (l = {
+    return A(n) && (I === "number" && (m.max && +i > +m.max && (n = {
       name: "maxValue",
       label: `The maximum value must be ${m.max}`
-    }), m.min && +i < +m.min && (l = {
+    }), m.min && +i < +m.min && (n = {
       name: "minValue",
       label: `The minimum value must be ${m.min}`
-    })), D && !ue.test(i) ? l = { name: "pattern", label: k } : i.startsWith(" ") && (l = { name: "empty", label: k })), !l && z && (l = z(e, n)), o.current = l, l;
-  }, Fe = be(async (e, n) => {
+    })), D && !ue.test(i) ? n = { name: "pattern", label: k } : i.startsWith(" ") && (n = { name: "empty", label: k })), !n && z && (n = z(e, l)), o.current = n, n;
+  }, Ie = be(async (e, l) => {
     let i = Z(e) ? "" : String(e);
     if (G(i)) return;
-    let l = X(i, n);
+    let n = X(i, l);
     if (!A(f)) {
       const [u, K] = await Be(f, i), M = u.filter((d) => !d.isValid);
-      K || (l = M.map((d) => ({ name: d.name, label: d.label })));
+      K || (n = M.map((d) => ({ name: d.name, label: d.label })));
     }
-    return o.current = l, l;
+    return o.current = n, n;
   }, 400);
-  return /* @__PURE__ */ t(xe, { validate: L ? Fe : X, name: c, parse: (e) => F === "number" && e && parseFloat(e) || e, children: ({ input: e }) => {
-    var n;
+  return /* @__PURE__ */ t(Ee, { validate: L ? Ie : X, name: c, parse: (e) => I === "number" && e && parseFloat(e) || e, children: ({ input: e }) => {
+    var l;
     return /* @__PURE__ */ w(
       "div",
       {
-        ref: I,
+        ref: F,
         className: he,
         "data-testid": c ? `${c}-form-field-input` : "form-field-input",
         children: [
@@ -163,10 +163,10 @@ let R = ({
                 ]
               }
             ),
-            N && N.show && E.trim() && /* @__PURE__ */ t("div", { className: "form-field__label-icon", children: /* @__PURE__ */ t(ee, { template: /* @__PURE__ */ t(re, { text: N.url || E }), children: /* @__PURE__ */ t(
+            N && N.show && C.trim() && /* @__PURE__ */ t("div", { className: "form-field__label-icon", children: /* @__PURE__ */ t(ee, { template: /* @__PURE__ */ t(re, { text: N.url || C }), children: /* @__PURE__ */ t(
               "a",
               {
-                href: N.url || E,
+                href: N.url || C,
                 onClick: (i) => i.stopPropagation(),
                 target: "_blank",
                 rel: "noreferrer",
@@ -184,7 +184,7 @@ let R = ({
                 required: _ || T,
                 disabled: h,
                 pattern: D,
-                type: F,
+                type: I,
                 ...m,
                 ...e,
                 autoComplete: m.autocomplete ?? "off",
@@ -198,7 +198,7 @@ let R = ({
                 ee,
                 {
                   className: "form-field__warning",
-                  template: /* @__PURE__ */ t(re, { text: ((n = o.current) == null ? void 0 : n.label) ?? k, warning: !0 }),
+                  template: /* @__PURE__ */ t(re, { text: ((l = o.current) == null ? void 0 : l.label) ?? k, warning: !0 }),
                   children: /* @__PURE__ */ t(Me, {})
                 }
               ),
@@ -206,32 +206,32 @@ let R = ({
               Y && /* @__PURE__ */ t(je, { text: Y, className: "form-field__tip" }),
               W && /* @__PURE__ */ t("span", { "data-testid": "input-icon", className: ae, onClick: oe, children: W })
             ] }),
-            F === "number" && /* @__PURE__ */ t(Ce, { ...m, step: +se, ...e, disabled: h })
+            I === "number" && /* @__PURE__ */ t(xe, { ...m, step: +se, ...e, disabled: h })
           ] }),
-          (V == null ? void 0 : V.length) > 0 && ce && /* @__PURE__ */ t("ul", { className: "form-field__suggestion-list", children: V.map((i, l) => /* @__PURE__ */ t(
+          (V == null ? void 0 : V.length) > 0 && ce && /* @__PURE__ */ t("ul", { className: "form-field__suggestion-list", children: V.map((i, n) => /* @__PURE__ */ t(
             "li",
             {
               className: "suggestion-item",
               onClick: () => {
                 Te(i);
               },
-              tabIndex: l,
+              tabIndex: n,
               dangerouslySetInnerHTML: {
                 __html: i.replace(
-                  new RegExp(E, "gi"),
+                  new RegExp(C, "gi"),
                   (u) => u && `<b>${u}</b>`
                 )
               }
             },
-            `${i}${l}`
+            `${i}${n}`
           )) }),
-          !A(O) && _ && Array.isArray(o.current) && /* @__PURE__ */ t(Ae, { show: y, ref: I, children: ve() })
+          !A(O) && _ && Array.isArray(o.current) && /* @__PURE__ */ t(Ae, { show: y, ref: { refInputContainer: F }, children: ve() })
         ]
       }
     );
   } });
 };
-R = ie.memo(Ie(R));
+R = ie.memo(Fe(R));
 R.displayName = "FormInput";
 R.propTypes = {
   async: r.bool,

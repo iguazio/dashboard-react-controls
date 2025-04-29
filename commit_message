@@ -1,6 +1,6 @@
 
 
-Create a new dist version 3.0.0
+Create a new dist version 3.0.1
 
 Collecting:
-- Impl [IG4] Infrastructure Readiness for DRC and MLRun (#388)
+- Fix [Artifacts] Path dropdown doesn't close when clicking outside the field (#392)
