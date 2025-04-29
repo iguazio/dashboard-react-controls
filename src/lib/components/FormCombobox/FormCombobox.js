@@ -362,7 +362,7 @@ const FormCombobox = ({
                   }}
                   className="form-field-combobox__dropdown form-field-combobox__dropdown-select"
                 >
-                  <ul className="form-field-combobox__dropdown-list">
+                  <ul className="form-field-combobox__dropdown-list" ref={suggestionListRef}>
                     {selectOptions.map(option => {
                       if (!option.hidden) {
                         const selectOptionClassNames = classnames(
