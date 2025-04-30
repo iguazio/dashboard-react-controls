@@ -14,7 +14,7 @@ illegal under applicable law, and the grant of the foregoing license
 under the Apache 2.0 license is conditioned upon your compliance with
 such restriction.
 */
-import React, { forwardRef, useCallback, useEffect, useLayoutEffect, useRef, useState } from 'react'
+import React, { forwardRef, useCallback, useEffect, useLayoutEffect, useRef } from 'react'
 import PropTypes from 'prop-types'
 import classnames from 'classnames'
 import { createPortal } from 'react-dom'
@@ -33,17 +33,17 @@ let PopUpDialog = (
   {
     children,
     className = '',
-    closePopUp = () => {},
+    closePopUp = null,
     customPosition = {},
     headerIsHidden = false,
     headerText = '',
-    showPopUpDialog = true,
+    isOpen = true,
+    onResolve = null,
     style = {},
     tooltipText = ''
   },
   ref
 ) => {
-  const [showPopUp, setShowPopUp] = useState(showPopUpDialog ?? true)
   const popUpOverlayRef = useRef(null)
   ref ??= popUpOverlayRef
   const popUpClassNames = classnames(
@@ -54,8 +54,8 @@ let PopUpDialog = (
 
   const handleClosePopUp = useCallback(() => {
     closePopUp && closePopUp()
-    setShowPopUp(false)
-  }, [closePopUp])
+    onResolve && onResolve()
+  }, [closePopUp, onResolve])
 
   const calculateCustomPopUpPosition = useCallback(() => {
     if (customPosition?.element?.current && ref?.current) {
@@ -128,7 +128,7 @@ let PopUpDialog = (
   }, [calculateCustomPopUpPosition])
 
   useEffect(() => {
-    if (showPopUp) {
+    if (isOpen) {
       const throttledCalculatedCustomPopUpPosition = throttle(calculateCustomPopUpPosition, 100, {
         trailing: true,
         leading: true
@@ -144,9 +144,9 @@ let PopUpDialog = (
         window.removeEventListener('resize', throttledCalculatedCustomPopUpPosition)
       }
     }
-  }, [calculateCustomPopUpPosition, ref, showPopUp])
+  }, [calculateCustomPopUpPosition, ref, isOpen])
 
-  return showPopUp
+  return isOpen
     ? createPortal(
         <div ref={ref} className={popUpClassNames} style={style}>
           <div data-testid="pop-up-dialog" className="pop-up-dialog">
@@ -186,8 +186,10 @@ PopUpDialog.propTypes = {
   className: PropTypes.string,
   closePopUp: PropTypes.func,
   customPosition: POP_UP_CUSTOM_POSITION,
+  isOpen: PropTypes.bool,
   headerIsHidden: PropTypes.bool,
   headerText: PropTypes.string,
+  onResolve: PropTypes.func,
   showPopUpDialog: PropTypes.bool,
   style: PropTypes.object,
   tooltipText: PropTypes.string
