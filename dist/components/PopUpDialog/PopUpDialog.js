@@ -17,8 +17,7 @@ var _close = require("../../images/close.svg");
 require("./popUpDialog.scss");
 var _jsxRuntime = require("react/jsx-runtime");
 function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
-function _getRequireWildcardCache(e) { if ("function" != typeof WeakMap) return null; var r = new WeakMap(), t = new WeakMap(); return (_getRequireWildcardCache = function (e) { return e ? t : r; })(e); }
-function _interopRequireWildcard(e, r) { if (!r && e && e.__esModule) return e; if (null === e || "object" != typeof e && "function" != typeof e) return { default: e }; var t = _getRequireWildcardCache(r); if (t && t.has(e)) return t.get(e); var n = { __proto__: null }, a = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var u in e) if ("default" !== u && {}.hasOwnProperty.call(e, u)) { var i = a ? Object.getOwnPropertyDescriptor(e, u) : null; i && (i.get || i.set) ? Object.defineProperty(n, u, i) : n[u] = e[u]; } return n.default = e, t && t.set(e, n), n; }
+function _interopRequireWildcard(e, t) { if ("function" == typeof WeakMap) var r = new WeakMap(), n = new WeakMap(); return (_interopRequireWildcard = function (e, t) { if (!t && e && e.__esModule) return e; var o, i, f = { __proto__: null, default: e }; if (null === e || "object" != typeof e && "function" != typeof e) return f; if (o = t ? n : r) { if (o.has(e)) return o.get(e); o.set(e, f); } for (const t in e) "default" !== t && {}.hasOwnProperty.call(e, t) && ((i = (o = Object.defineProperty) && Object.getOwnPropertyDescriptor(e, t)) && (i.get || i.set) ? o(f, t, i) : f[t] = e[t]); return f; })(e, t); }
 /*
 Copyright 2022 Iguazio Systems Ltd.
 Licensed under the Apache License, Version 2.0 (the "License") with
@@ -40,22 +39,22 @@ const PopUpDialog = /*#__PURE__*/_react.default.forwardRef((_ref, ref) => {
   let {
     children,
     className = '',
-    closePopUp = () => {},
+    closePopUp = null,
     customPosition = {},
     headerIsHidden = false,
     headerText = '',
-    showPopUpDialog = true,
+    isOpen = true,
+    onResolve = null,
     style = {},
     tooltipText = ''
   } = _ref;
-  const [showPopUp, setShowPopUp] = (0, _react.useState)(showPopUpDialog ?? true);
   const popUpOverlayRef = (0, _react.useRef)(null);
   ref ??= popUpOverlayRef;
   const popUpClassNames = (0, _classnames.default)(className, 'pop-up-dialog__overlay', customPosition.element && 'custom-position');
   const handleClosePopUp = (0, _react.useCallback)(() => {
     closePopUp && closePopUp();
-    setShowPopUp(false);
-  }, [closePopUp]);
+    onResolve && onResolve();
+  }, [closePopUp, onResolve]);
   const calculateCustomPopUpPosition = (0, _react.useCallback)(() => {
     if (customPosition?.element?.current && ref?.current) {
       const elementRect = customPosition.element.current.getBoundingClientRect();
@@ -112,7 +111,7 @@ const PopUpDialog = /*#__PURE__*/_react.default.forwardRef((_ref, ref) => {
     calculateCustomPopUpPosition();
   }, [calculateCustomPopUpPosition]);
   (0, _react.useEffect)(() => {
-    if (showPopUp) {
+    if (isOpen) {
       const throttledCalculatedCustomPopUpPosition = (0, _lodash.throttle)(calculateCustomPopUpPosition, 100, {
         trailing: true,
         leading: true
@@ -126,8 +125,8 @@ const PopUpDialog = /*#__PURE__*/_react.default.forwardRef((_ref, ref) => {
         window.removeEventListener('resize', throttledCalculatedCustomPopUpPosition);
       };
     }
-  }, [calculateCustomPopUpPosition, ref, showPopUp]);
-  return showPopUp ? /*#__PURE__*/(0, _reactDom.createPortal)(/*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
+  }, [calculateCustomPopUpPosition, ref, isOpen]);
+  return isOpen ? /*#__PURE__*/(0, _reactDom.createPortal)(/*#__PURE__*/(0, _jsxRuntime.jsx)("div", {
     ref: ref,
     className: popUpClassNames,
     style: style,
@@ -162,8 +161,10 @@ PopUpDialog.propTypes = {
   className: _propTypes.default.string,
   closePopUp: _propTypes.default.func,
   customPosition: _types.POP_UP_CUSTOM_POSITION,
+  isOpen: _propTypes.default.bool,
   headerIsHidden: _propTypes.default.bool,
   headerText: _propTypes.default.string,
+  onResolve: _propTypes.default.func,
   showPopUpDialog: _propTypes.default.bool,
   style: _propTypes.default.object,
   tooltipText: _propTypes.default.string
