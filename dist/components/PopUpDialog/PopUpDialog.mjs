@@ -1,48 +1,48 @@
-import { jsx as n, jsxs as _ } from "react/jsx-runtime";
-import { useState as I, useRef as $, useCallback as C, useLayoutEffect as B, useEffect as D, forwardRef as F } from "react";
+import { jsx as p, jsxs as U } from "react/jsx-runtime";
+import { useRef as H, useCallback as x, useLayoutEffect as I, useEffect as $, forwardRef as B } from "react";
 import l from "prop-types";
-import L from "classnames";
-import { createPortal as j } from "react-dom";
-import { throttle as M } from "lodash";
-import k from "../RoundedIcon/RoundedIcon.mjs";
-import W from "../Tooltip/Tooltip.mjs";
-import q from "../TooltipTemplate/TextTooltipTemplate.mjs";
-import { POP_UP_CUSTOM_POSITION as V } from "../../types.mjs";
-import A from "../../images/close.svg.mjs";
+import D from "classnames";
+import { createPortal as F } from "react-dom";
+import { throttle as L } from "lodash";
+import j from "../RoundedIcon/RoundedIcon.mjs";
+import M from "../Tooltip/Tooltip.mjs";
+import k from "../TooltipTemplate/TextTooltipTemplate.mjs";
+import { POP_UP_CUSTOM_POSITION as W } from "../../types.mjs";
+import q from "../../images/close.svg.mjs";
 /* empty css                  */
-let h = ({
-  children: R,
-  className: x = "",
-  closePopUp: f = () => {
-  },
+let m = ({
+  children: E,
+  className: R = "",
+  closePopUp: f = null,
   customPosition: i = {},
-  headerIsHidden: E = !1,
+  headerIsHidden: T = !1,
   headerText: w = "",
-  showPopUpDialog: T = !0,
-  style: m = {},
+  isOpen: v = !0,
+  onResolve: b = null,
+  style: u = {},
   tooltipText: y = ""
 }, o) => {
-  const [v, N] = I(T ?? !0), S = $(null);
-  o ?? (o = S);
-  const O = L(
-    x,
+  const N = H(null);
+  o ?? (o = N);
+  const S = D(
+    R,
     "pop-up-dialog__overlay",
     i.element && "custom-position"
-  ), z = C(() => {
-    f && f(), N(!1);
-  }, [f]), u = C(() => {
+  ), z = x(() => {
+    f && f(), b && b();
+  }, [f, b]), h = x(() => {
     var r;
     if ((r = i == null ? void 0 : i.element) != null && r.current && (o != null && o.current)) {
-      const e = i.element.current.getBoundingClientRect(), t = o.current.getBoundingClientRect(), [b, H] = i.position.split("-"), p = 15, s = 5, g = e.right >= t.width + p, d = window.innerWidth - e.left >= t.width + p, P = e.top > t.height + p + s, U = e.bottom + t.height + p + s <= window.innerHeight;
-      let a = H === "left" ? e.right - t.width : e.left, c;
-      b === "top" ? c = P ? e.top - t.height - s : p : c = U ? e.bottom + s : window.innerHeight - t.height - p, i.autoVerticalPosition && (b === "top" ? !P && U && (c = e.bottom + s) : P && !U && (c = e.top - t.height - s)), i.autoHorizontalPosition && (b === "left" ? !g && d ? a = e.left : !g && !d && (a = p) : g && !d ? a = e.right - t.width : !g && !d && (a = window.innerWidth - t.width - p)), o.current.style.top = `${c}px`, m.left && !(i.autoHorizontalPosition && d) ? o.current.style.left = `calc(${a}px + ${m.left})` : o.current.style.left = `${a}px`;
+      const e = i.element.current.getBoundingClientRect(), t = o.current.getBoundingClientRect(), [_, O] = i.position.split("-"), n = 15, a = 5, g = e.right >= t.width + n, d = window.innerWidth - e.left >= t.width + n, C = e.top > t.height + n + a, P = e.bottom + t.height + n + a <= window.innerHeight;
+      let s = O === "left" ? e.right - t.width : e.left, c;
+      _ === "top" ? c = C ? e.top - t.height - a : n : c = P ? e.bottom + a : window.innerHeight - t.height - n, i.autoVerticalPosition && (_ === "top" ? !C && P && (c = e.bottom + a) : C && !P && (c = e.top - t.height - a)), i.autoHorizontalPosition && (_ === "left" ? !g && d ? s = e.left : !g && !d && (s = n) : g && !d ? s = e.right - t.width : !g && !d && (s = window.innerWidth - t.width - n)), o.current.style.top = `${c}px`, u.left && !(i.autoHorizontalPosition && d) ? o.current.style.left = `calc(${s}px + ${u.left})` : o.current.style.left = `${s}px`;
     }
-  }, [i, m.left, o]);
-  return B(() => {
-    u();
-  }, [u]), D(() => {
+  }, [i, u.left, o]);
+  return I(() => {
+    h();
+  }, [h]), $(() => {
     if (v) {
-      const r = M(u, 100, {
+      const r = L(h, 100, {
         trailing: !0,
         leading: !0
       }), e = new ResizeObserver(r), t = o.current;
@@ -50,41 +50,43 @@ let h = ({
         e.unobserve(t), window.removeEventListener("resize", r);
       };
     }
-  }, [u, o, v]), v ? j(
-    /* @__PURE__ */ n("div", { ref: o, className: O, style: m, children: /* @__PURE__ */ _("div", { "data-testid": "pop-up-dialog", className: "pop-up-dialog", children: [
-      !E && /* @__PURE__ */ _("div", { className: "pop-up-dialog__header", children: [
-        w && /* @__PURE__ */ n("div", { "data-testid": "pop-up-dialog-header", className: "pop-up-dialog__header-text", children: /* @__PURE__ */ n(W, { template: /* @__PURE__ */ n(q, { text: y || w }), children: /* @__PURE__ */ n("span", { children: w }) }) }),
-        /* @__PURE__ */ n(
-          k,
+  }, [h, o, v]), v ? F(
+    /* @__PURE__ */ p("div", { ref: o, className: S, style: u, children: /* @__PURE__ */ U("div", { "data-testid": "pop-up-dialog", className: "pop-up-dialog", children: [
+      !T && /* @__PURE__ */ U("div", { className: "pop-up-dialog__header", children: [
+        w && /* @__PURE__ */ p("div", { "data-testid": "pop-up-dialog-header", className: "pop-up-dialog__header-text", children: /* @__PURE__ */ p(M, { template: /* @__PURE__ */ p(k, { text: y || w }), children: /* @__PURE__ */ p("span", { children: w }) }) }),
+        /* @__PURE__ */ p(
+          j,
           {
             className: "pop-up-dialog__btn_close",
             onClick: z,
             tooltipText: "Close",
             "data-testid": "pop-up-close-btn",
-            children: /* @__PURE__ */ n(A, {})
+            children: /* @__PURE__ */ p(q, {})
           }
         )
       ] }),
-      R
+      E
     ] }) }),
     document.getElementById("overlay_container")
   ) : null;
 };
-h = F(h);
-h.displayName = "PopUpDialog";
-h.propTypes = {
+m = B(m);
+m.displayName = "PopUpDialog";
+m.propTypes = {
   children: l.node.isRequired,
   className: l.string,
   closePopUp: l.func,
-  customPosition: V,
+  customPosition: W,
+  isOpen: l.bool,
   headerIsHidden: l.bool,
   headerText: l.string,
+  onResolve: l.func,
   showPopUpDialog: l.bool,
   style: l.object,
   tooltipText: l.string
 };
-const le = h;
+const ie = m;
 export {
-  le as default
+  ie as default
 };
 //# sourceMappingURL=PopUpDialog.mjs.map

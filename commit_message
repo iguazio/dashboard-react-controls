@@ -1,6 +1,6 @@
 
 
-Create a new dist version 3.0.1
+Create a new dist version 3.0.2
 
 Collecting:
-- Fix [Artifacts] Path dropdown doesn't close when clicking outside the field (#392)
+- Fix [Projects] 'Are you sure?' pop-up is missing (#397)
