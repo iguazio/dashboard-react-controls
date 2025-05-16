@@ -199,6 +199,10 @@ const FormCombobox = ({
       setShowSelectDropdown(false)
       inputRef.current.disabled = false
       inputRef.current.focus()
+    } else {
+      setShowSelectDropdown(false)
+      inputRef.current.disabled = false
+      inputRef.current.focus()
     }
   }
 
