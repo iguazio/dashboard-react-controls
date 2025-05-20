@@ -1,5 +1,5 @@
 export default FormChipCellView;
-declare function FormChipCellView({ chipOptions, chips, editConfig, handleAddNewChip, handleEditChip, handleRemoveChip, handleShowElements, handleToEditMode, isEditable, name, setChipsSizes, setEditConfig, shortChips, showChips, showHiddenChips, validateFields, validationRules }: {
+declare function FormChipCellView({ chipOptions, chipSizeIsRecalculated, setChipSizeIsRecalculated, chips, editConfig, handleAddNewChip, handleEditChip, handleRemoveChip, handleShowElements, handleToEditMode, isEditable, name, setChipsSizes, setEditConfig, shortChips, showChips, showHiddenChips, validateFields, validationRules }: {
     chipOptions?: {
         background: string;
         boldValue: boolean;
@@ -8,6 +8,8 @@ declare function FormChipCellView({ chipOptions, chips, editConfig, handleAddNew
         density: string;
         font: string;
     };
+    chipSizeIsRecalculated: any;
+    setChipSizeIsRecalculated: any;
     chips: any;
     editConfig: any;
     handleAddNewChip: any;
@@ -34,8 +36,11 @@ declare namespace FormChipCellView {
     let displayName: string;
     namespace propTypes {
         export { CHIP_OPTIONS as chipOptions };
+        export let chipSizeIsRecalculated: any;
+        export let setChipSizeIsRecalculated: any;
         export let chips: any;
         export let editConfig: any;
+        export let formState: any;
         export let handleAddNewChip: any;
         export let handleEditChip: any;
         export let handleRemoveChip: any;

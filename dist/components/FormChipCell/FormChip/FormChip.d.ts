@@ -1,7 +1,9 @@
 export default FormChip;
-declare function FormChip({ chip, chipIndex, chipOptions, editConfig, handleEditChip, handleRemoveChip, handleToEditMode, isEditable, keyName, meta, setChipsSizes, setEditConfig, validationRules, valueName }: {
+declare function FormChip({ chip, chipIndex, chipSizeIsRecalculated, setChipSizeIsRecalculated, chipOptions, editConfig, handleEditChip, handleRemoveChip, handleToEditMode, isEditable, keyName, meta, setChipsSizes, setEditConfig, validationRules, valueName }: {
     chip: any;
     chipIndex: any;
+    chipSizeIsRecalculated: any;
+    setChipSizeIsRecalculated: any;
     chipOptions?: {
         background: string;
         boldValue: boolean;
@@ -26,6 +28,8 @@ declare namespace FormChip {
     let displayName: string;
     namespace propTypes {
         export let chip: any;
+        export let chipSizeIsRecalculated: any;
+        export let setChipSizeIsRecalculated: any;
         export let chipIndex: any;
         export { CHIP_OPTIONS as chipOptions };
         export let editConfig: any;

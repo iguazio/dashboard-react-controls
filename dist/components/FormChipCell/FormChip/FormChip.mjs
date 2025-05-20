@@ -1,13 +1,15 @@
-import { jsx as u } from "react/jsx-runtime";
-import g, { useLayoutEffect as y, forwardRef as j } from "react";
+import { jsx as s } from "react/jsx-runtime";
+import j, { useLayoutEffect as E, forwardRef as N } from "react";
 import e from "prop-types";
-import E from "../NewChipForm/NewChipForm.mjs";
-import { CHIP_OPTIONS as N } from "../../../types.mjs";
+import v from "../NewChipForm/NewChipForm.mjs";
+import { CHIP_OPTIONS as F } from "../../../types.mjs";
 /* empty css               */
 let i = ({
   chip: a,
   chipIndex: r,
-  chipOptions: s = {
+  chipSizeIsRecalculated: d,
+  setChipSizeIsRecalculated: l,
+  chipOptions: p = {
     background: "purple",
     boldValue: !1,
     borderRadius: "primary",
@@ -15,50 +17,53 @@ let i = ({
     density: "dense",
     font: "purple"
   },
-  editConfig: p,
-  handleEditChip: f,
-  handleRemoveChip: l,
-  handleToEditMode: m,
-  isEditable: c = !1,
+  editConfig: f,
+  handleEditChip: c,
+  handleRemoveChip: m,
+  handleToEditMode: R,
+  isEditable: b = !1,
   keyName: n = "",
-  meta: R,
+  meta: h,
   setChipsSizes: o,
-  setEditConfig: b,
-  validationRules: h = {},
-  valueName: C = ""
-}, q) => {
-  const t = g.useRef();
-  return y(() => {
-    t.current && o && o((d) => ({
-      ...d,
+  setEditConfig: C,
+  validationRules: q = {},
+  valueName: g = ""
+}, y) => {
+  const t = j.useRef();
+  return E(() => {
+    t.current && o && d && o((u) => ({
+      ...u,
       [r]: t.current.getBoundingClientRect().width
     }));
-  }, [r, o]), /* @__PURE__ */ u("div", { onClick: (d) => m(d, r, n), ref: t, children: /* @__PURE__ */ u(
-    E,
+  }, [r, d, o]), /* @__PURE__ */ s("div", { onClick: (u) => R(u, r, n), ref: t, children: /* @__PURE__ */ s(
+    v,
     {
       chip: a,
       chipIndex: r,
-      chipOptions: s,
+      chipOptions: p,
       className: "input-label-key",
-      editConfig: p,
-      handleRemoveChip: l,
-      isEditable: c,
+      editConfig: f,
+      handleRemoveChip: m,
+      isEditable: b,
       keyName: n,
-      meta: R,
-      onChange: f,
-      ref: q,
-      setEditConfig: b,
-      validationRules: h,
-      valueName: C
+      meta: h,
+      onChange: c,
+      ref: y,
+      setChipSizeIsRecalculated: l,
+      setEditConfig: C,
+      validationRules: q,
+      valueName: g
     }
   ) });
 };
-i = j(i);
+i = N(i);
 i.displayName = "FormChip";
 i.propTypes = {
   chip: e.object.isRequired,
+  chipSizeIsRecalculated: e.bool.isRequired,
+  setChipSizeIsRecalculated: e.func.isRequired,
   chipIndex: e.number.isRequired,
-  chipOptions: N,
+  chipOptions: F,
   editConfig: e.object.isRequired,
   handleEditChip: e.func.isRequired,
   handleRemoveChip: e.func.isRequired,
@@ -71,8 +76,8 @@ i.propTypes = {
   validationRules: e.object,
   valueName: e.string
 };
-const P = i;
+const B = i;
 export {
-  P as default
+  B as default
 };
 //# sourceMappingURL=FormChip.mjs.map
