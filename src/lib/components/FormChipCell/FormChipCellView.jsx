@@ -72,7 +72,7 @@ let FormChipCellView = (
   const wrapperClassNames = classnames(
     'chips-wrapper',
     isEditable && 'fixed-max-width',
-    !chipSizeIsRecalculated && 'chip_invisible'
+    chips.visibleChips?.length > 0 && !chipSizeIsRecalculated && 'chip_invisible'
   )
   const chipClassNames = classnames(
     'chip',
