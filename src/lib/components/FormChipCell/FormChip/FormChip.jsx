@@ -56,7 +56,7 @@ let FormChip = (
     if (chipRef.current && setChipsSizes && chipSizeIsRecalculated) {
       setChipsSizes(state => ({
         ...state,
-        [chipIndex]: chipRef.current.getBoundingClientRect().width
+        [chipIndex]: chipRef.current?.getBoundingClientRect?.()?.width ?? 50
       }))
     }
   }, [chipIndex, chipSizeIsRecalculated, setChipsSizes])
