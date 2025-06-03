@@ -1,17 +1,17 @@
-import { jsx as i, jsxs as m, Fragment as K } from "react/jsx-runtime";
-import { forwardRef as M } from "react";
+import { jsx as i, jsxs as m, Fragment as M } from "react/jsx-runtime";
+import { forwardRef as G } from "react";
 import r from "prop-types";
 import p from "classnames";
-import { FieldArray as G } from "react-final-form-arrays";
-import { isEmpty as J } from "lodash";
-import L from "./FormChip/FormChip.mjs";
-import Q from "./HiddenChipsBlock/HiddenChipsBlock.mjs";
-import U from "../TooltipTemplate/TextTooltipTemplate.mjs";
-import W from "../Tooltip/Tooltip.mjs";
-import { CHIP_OPTIONS as X } from "../../types.mjs";
-import { isEveryObjectValueEmpty as Y } from "../../utils/common.util.mjs";
-import { uniquenessError as v } from "./formChipCell.util.mjs";
-import Z from "../../images/add.svg.mjs";
+import { FieldArray as J } from "react-final-form-arrays";
+import { isEmpty as L } from "lodash";
+import Q from "./FormChip/FormChip.mjs";
+import U from "./HiddenChipsBlock/HiddenChipsBlock.mjs";
+import W from "../TooltipTemplate/TextTooltipTemplate.mjs";
+import X from "../Tooltip/Tooltip.mjs";
+import { CHIP_OPTIONS as Y } from "../../types.mjs";
+import { isEveryObjectValueEmpty as Z } from "../../utils/common.util.mjs";
+import { uniquenessError as g } from "./formChipCell.util.mjs";
+import O from "../../images/add.svg.mjs";
 let n = ({
   chipOptions: e = {
     background: "purple",
@@ -23,66 +23,67 @@ let n = ({
   },
   chipSizeIsRecalculated: b,
   setChipSizeIsRecalculated: $,
-  chips: a,
+  chips: o,
   editConfig: f,
-  handleAddNewChip: g,
-  handleEditChip: w,
-  handleRemoveChip: T,
+  handleAddNewChip: w,
+  handleEditChip: T,
+  handleRemoveChip: j,
   handleShowElements: C,
-  handleToEditMode: j,
-  isEditable: o = !1,
+  handleToEditMode: x,
+  isEditable: t = !1,
   name: _,
-  setChipsSizes: x,
-  setEditConfig: F,
-  shortChips: V = !1,
-  showChips: E,
-  showHiddenChips: S,
-  validateFields: A,
+  setChipsSizes: F,
+  setEditConfig: V,
+  shortChips: E = !1,
+  showChips: S,
+  showHiddenChips: A,
+  validateFields: H,
   validationRules: s = {}
-}, { chipsCellRef: y, chipsWrapperRef: H, hiddenChipsCounterRef: N, hiddenChipsPopUpRef: I }) => {
-  const P = p(
+}, { chipsCellRef: y, chipsWrapperRef: I, hiddenChipsCounterRef: N, hiddenChipsPopUpRef: P }) => {
+  var k;
+  const z = p(
     "button-add",
     e.background && `button-add-background_${e.background}`,
     e.borderColor && `button-add-border_${e.borderColor}`,
     e.font && `button-add-font_${e.font}`,
     e.density && `button-add-density_${e.density}`
-  ), z = p(
+  ), B = p(
     "chips-wrapper",
-    o && "fixed-max-width",
-    !b && "chip_invisible"
+    t && "fixed-max-width",
+    ((k = o.visibleChips) == null ? void 0 : k.length) > 0 && !b && "chip_invisible"
   ), R = p(
     "chip",
     "chip__content",
-    o && "data-ellipsis",
-    V && "chip_short",
-    a.hiddenChips && "chip_hidden",
+    t && "data-ellipsis",
+    E && "chip_short",
+    o.hiddenChips && "chip_hidden",
     e.density && `chip-density_${e.density}`,
     e.borderRadius && `chip-border_${e.borderRadius}`,
     e.background && `chip-background_${e.background}`,
     e.borderColor && `chip-border_${e.borderColor}`,
     e.font && `chip-font_${e.font}`,
-    o && "editable",
-    (E || o) && "chip_visible"
+    t && "editable",
+    (S || t) && "chip_visible"
   );
-  return /* @__PURE__ */ i(G, { name: _, validate: A, children: ({ fields: t, meta: B }) => {
-    let k = { ...s };
-    return !J(s) && s.key.every((l) => l.name !== v.name) && (k = {
+  return /* @__PURE__ */ i(J, { name: _, validate: H, children: ({ fields: a, meta: D }) => {
+    let v = { ...s };
+    return !L(s) && s.key.every((l) => l.name !== g.name) && (v = {
       ...s,
-      key: [...s.key, v]
-    }), (o || !Y(t)) && /* @__PURE__ */ i("div", { className: "chips-cell", ref: y, children: /* @__PURE__ */ m("div", { className: z, ref: H, children: [
-      t.map((l, c) => {
+      key: [...s.key, g]
+    }), (t || !Z(a)) && /* @__PURE__ */ i("div", { className: "chips-cell", ref: y, children: /* @__PURE__ */ m("div", { className: B, ref: I, children: [
+      a.map((l, c) => {
         var q;
-        const d = t.value[c];
-        return c < ((q = a.visibleChips) == null ? void 0 : q.length) && /* @__PURE__ */ i("div", { className: "chip-block", children: /* @__PURE__ */ i(
-          W,
+        const d = a.value[c];
+        return c < ((q = o.visibleChips) == null ? void 0 : q.length) && /* @__PURE__ */ i("div", { className: "chip-block", children: /* @__PURE__ */ i(
+          X,
           {
             hidden: f.isEdit && !d.tooltip,
             template: /* @__PURE__ */ i(
-              U,
+              W,
               {
                 text: d.tooltip || /* @__PURE__ */ m("span", { className: "chip__content", children: [
                   /* @__PURE__ */ i("span", { className: "chip__content-item", children: d.key }),
-                  !d.isKeyOnly && /* @__PURE__ */ m(K, { children: [
+                  !d.isKeyOnly && /* @__PURE__ */ m(M, { children: [
                     /* @__PURE__ */ i("span", { className: "chip__delimiter", children: d.delimiter ? d.delimiter : ":" }),
                     /* @__PURE__ */ i("span", { className: "chip__content-item", children: d.value })
                   ] })
@@ -90,7 +91,7 @@ let n = ({
               }
             ),
             children: /* @__PURE__ */ i(
-              L,
+              Q,
               {
                 chip: d,
                 chipSizeIsRecalculated: b,
@@ -98,16 +99,16 @@ let n = ({
                 chipIndex: c,
                 chipOptions: e,
                 editConfig: f,
-                handleEditChip: (u, h, D) => w(u, t, h, D),
-                handleRemoveChip: (u, h) => T(u, t, h),
-                handleToEditMode: j,
-                isEditable: o,
+                handleEditChip: (u, h, K) => T(u, a, h, K),
+                handleRemoveChip: (u, h) => j(u, a, h),
+                handleToEditMode: x,
+                isEditable: t,
                 keyName: `${l}.key`,
-                meta: B,
+                meta: D,
                 ref: y,
-                setChipsSizes: x,
-                setEditConfig: F,
-                validationRules: k,
+                setChipsSizes: F,
+                setEditConfig: V,
+                validationRules: v,
                 valueName: `${l}.value`
               }
             )
@@ -116,43 +117,43 @@ let n = ({
         ) }, d.id);
       }),
       /* @__PURE__ */ m("div", { className: "chip-block", children: [
-        a.hiddenChips.length > 0 && S && /* @__PURE__ */ i(
-          Q,
+        o.hiddenChips.length > 0 && A && /* @__PURE__ */ i(
+          U,
           {
             chipClassNames: R,
             chipOptions: e,
-            chips: a.hiddenChips,
+            chips: o.hiddenChips,
             handleShowElements: C,
-            ref: { hiddenChipsCounterRef: N, hiddenChipsPopUpRef: I },
+            ref: { hiddenChipsCounterRef: N, hiddenChipsPopUpRef: P },
             textOverflowEllipsis: !0
           }
         ),
-        a.hiddenChipsNumber && /* @__PURE__ */ i(
+        o.hiddenChipsNumber && /* @__PURE__ */ i(
           "span",
           {
             ref: N,
             className: `${R} chips_button`,
             onClick: C,
-            children: a.hiddenChipsNumber
+            children: o.hiddenChipsNumber
           }
         )
       ] }),
-      o && /* @__PURE__ */ i(
+      t && /* @__PURE__ */ i(
         "button",
         {
           "data-testid": `${_}-add-chip`,
-          className: P,
-          onClick: (l) => g(l, t),
-          children: /* @__PURE__ */ i(Z, {})
+          className: z,
+          onClick: (l) => w(l, a),
+          children: /* @__PURE__ */ i(O, {})
         }
       )
     ] }) });
   } });
 };
-n = M(n);
+n = G(n);
 n.displayName = "FormChipCellView";
 n.propTypes = {
-  chipOptions: X,
+  chipOptions: Y,
   chipSizeIsRecalculated: r.bool.isRequired,
   setChipSizeIsRecalculated: r.func.isRequired,
   chips: r.object.isRequired,
@@ -173,8 +174,8 @@ n.propTypes = {
   validateFields: r.func.isRequired,
   validationRules: r.object
 };
-const he = n;
+const pe = n;
 export {
-  he as default
+  pe as default
 };
 //# sourceMappingURL=FormChipCellView.mjs.map

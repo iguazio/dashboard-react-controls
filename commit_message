@@ -1,6 +1,8 @@
 
 
-Create a new dist version 3.0.3
+Create a new dist version 3.0.4
 
 Collecting:
-- Impl [Monitoring application] Add Applications table (#403)
+- Fix [Artifacts] Cannot reselect the same option in Path Scheme dropdown (#405)
+- Fix [UI] Input Label fields not interactable (#406)
+- Fix [Scheduled] Unexpected application error when editing a scheduled job (#407)
