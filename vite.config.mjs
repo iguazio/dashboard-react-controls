@@ -48,19 +48,23 @@ export default defineConfig({
     rollupOptions: {
       treeshake: false,
       external: [
-        'react',
-        'react-dom',
+        "@reduxjs/toolkit",
         'classnames',
         'final-form',
         'final-form-arrays',
         'lodash',
+        'moment',
         'prop-types',
+        'react',
+        'react-dom',
         'react-final-form',
         'react-final-form-arrays',
         'react-modal-promise',
+        'react-redux',
+        'react-router-dom',
         'react-transition-group',
-        'react/jsx-runtime',
-        'react/jsx-dev-runtime'
+        'react/jsx-dev-runtime',
+        'react/jsx-runtime'
       ],
       output: {
         preserveModules: true,

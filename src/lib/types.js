@@ -18,6 +18,10 @@ import PropTypes from 'prop-types'
 
 import {
   DANGER_BUTTON,
+  DENSITY_CHUNKY,
+  DENSITY_DENSE,
+  DENSITY_MEDIUM,
+  DENSITY_NORMAL,
   LABEL_BUTTON,
   MODAL_LG,
   MODAL_MAX,
@@ -54,6 +58,13 @@ export const CHIP_INPUT_LIST = PropTypes.arrayOf(
   })
 )
 
+export const DENSITY_OPTIONS = PropTypes.oneOf([
+  DENSITY_DENSE,
+  DENSITY_NORMAL,
+  DENSITY_MEDIUM,
+  DENSITY_CHUNKY
+])
+
 export const CHIP_OPTIONS = PropTypes.shape({
   background: PropTypes.oneOf([
     'amethyst',
@@ -67,7 +78,7 @@ export const CHIP_OPTIONS = PropTypes.shape({
   ]),
   boldValue: PropTypes.bool,
   borderColor: PropTypes.oneOf(['transparent', 'orange', 'green', 'purple', 'grey']),
-  density: PropTypes.oneOf(['dense', 'normal', 'medium']),
+  density: DENSITY_OPTIONS,
   font: PropTypes.oneOf(['primary', 'white', 'green', 'purple', 'orange']),
   borderRadius: PropTypes.oneOf(['primary', 'secondary'])
 })
@@ -187,3 +198,48 @@ export const EXCLUDE_SORT_BY = PropTypes.oneOfType([
 ])
 
 export const DENSITY = PropTypes.oneOf(['dense', 'normal', 'medium', 'chunky'])
+
+export const VIRTUALIZATION_CONFIG = PropTypes.shape({
+  startIndex: PropTypes.number.isRequired,
+  endIndex: PropTypes.number.isRequired,
+  tableBodyPaddingTop: PropTypes.number.isRequired
+})
+
+export const SLIDER_TABS = PropTypes.arrayOf(
+  PropTypes.shape({
+    id: PropTypes.string.isRequired,
+    label: PropTypes.string.isRequired,
+    tip: PropTypes.string,
+    hidden: PropTypes.bool
+  })
+)
+
+export const DETAILS_MENU = PropTypes.arrayOf(
+  PropTypes.shape({
+    id: PropTypes.string.isRequired,
+    label: PropTypes.string.isRequired,
+    hidden: PropTypes.bool
+  })
+)
+
+export const ACTION_BUTTON = PropTypes.shape({
+  disabled: PropTypes.bool,
+  hidden: PropTypes.bool,
+  label: PropTypes.string.isRequired,
+  onClick: PropTypes.func.isRequired,
+  tooltip: PropTypes.string,
+  variant: PropTypes.string
+})
+
+const ACTIONS_MENU_ITEM = PropTypes.shape({
+  label: PropTypes.string.isRequired,
+  icon: PropTypes.object,
+  onClick: PropTypes.func.isRequired,
+  disabled: PropTypes.bool,
+  className: PropTypes.string
+})
+
+export const ACTIONS_MENU = PropTypes.oneOfType([
+  PropTypes.arrayOf(PropTypes.arrayOf(ACTIONS_MENU_ITEM.isRequired)),
+  PropTypes.func
+])

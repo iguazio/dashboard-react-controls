@@ -14,6 +14,17 @@ illegal under applicable law, and the grant of the foregoing license
 under the Apache 2.0 license is conditioned upon your compliance with
 such restriction.
 */
+
+/*=========== GENERAL =============*/
+
+export const VIEW_SEARCH_PARAMETER = 'view'
+export const FULL_VIEW_MODE = 'full'
+
+export const DENSITY_DENSE = 'dense'
+export const DENSITY_NORMAL = 'normal'
+export const DENSITY_MEDIUM = 'medium'
+export const DENSITY_CHUNKY = 'chunky'
+
 /*=========== EVENT KEYS =============*/
 export const BACKSPACE = 'Backspace'
 export const CLICK = 'Click'
@@ -67,3 +78,9 @@ export const MODAL_MD = 'md'
 export const MODAL_LG = 'lg'
 export const MODAL_MIN = 'min'
 export const MODAL_MAX = 'max'
+
+/*=========== TABLE =============*/
+
+export const MAIN_TABLE_ID = 'main-table'
+export const MAIN_TABLE_BODY_ID = 'main-table-body'
+export const BUTTON_COPY_URI_CELL_TYPE = 'buttonCopyURI'

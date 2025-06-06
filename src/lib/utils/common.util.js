@@ -15,9 +15,14 @@ under the Apache 2.0 license is conditioned upon your compliance with
 such restriction.
 */
 import { create } from 'react-modal-promise'
-import { differenceWith, isEqual, get, omit, isEmpty } from 'lodash'
+import { differenceWith, isEqual, get, omit, isEmpty, isNumber } from 'lodash'
+
 import ConfirmDialog from '../components/ConfirmDialog/ConfirmDialog'
-import { DANGER_BUTTON, PRIMARY_BUTTON, TERTIARY_BUTTON } from '../constants'
+
+import { DANGER_BUTTON, PRIMARY_BUTTON, TERTIARY_BUTTON, VIEW_SEARCH_PARAMETER } from '../constants'
+import { setFiltersWasHandled, showWarning } from '../reducers/commonDetailsReducer'
+import { setNotification } from '../reducers/notificationReducer'
+import { showErrorNotification } from './notification.util'
 
 export const openPopUp = (element, props) => {
   return create(element)(props)
@@ -56,7 +61,9 @@ export const openDeleteConfirmPopUp = (header, message, confirmHandler) => {
 }
 
 export const isEveryObjectValueEmpty = obj =>
-  Object.values(obj).every(item => !item || item.length === 0)
+  Object.values(obj).every(
+    item => !item || item?.length === 0 || (!isNumber(item) && isEmpty(item))
+  )
 
 // Checks, whether two arrays of objects are equal, can omit some keys if their comparison is not necessary
 export const areArraysEqual = (firstArray, secondArray, omitBy = []) => {
@@ -132,4 +139,74 @@ export const getTransitionEndEventName = () => {
 
 export const getScssVariableValue = variableName => {
   return getComputedStyle(document.documentElement).getPropertyValue(variableName).trim()
+}
+
+export const getViewMode = search => {
+  return new URLSearchParams(search).get(VIEW_SEARCH_PARAMETER)?.toLowerCase()
+}
+
+export const performDetailsActionHelper = async (changes, dispatch, filtersWasHandled = false) => {
+  let actionCanBePerformed = Promise.resolve(true)
+
+  if (changes.counter > 0) {
+    actionCanBePerformed = await new Promise(resolve => {
+      const resolver = isSuccess => {
+        window.removeEventListener('discardChanges', resolver)
+        window.removeEventListener('cancelLeave', resolver)
+
+        resolve(isSuccess)
+      }
+
+      window.addEventListener('discardChanges', () => resolver(true))
+      window.addEventListener('cancelLeave', () => resolver(false))
+
+      dispatch(setFiltersWasHandled(filtersWasHandled))
+      dispatch(showWarning(true))
+    })
+  }
+
+  return actionCanBePerformed
+}
+
+export const copyToClipboard = (textToCopy, dispatch) => {
+  if (!navigator.clipboard?.writeText) {
+    return showErrorNotification(
+      dispatch,
+      null,
+      '',
+      'Copy to clipboard failed due to unsecured connection'
+    )
+  }
+
+  navigator.clipboard
+    .writeText(textToCopy)
+    .then(() => {
+      dispatch(
+        setNotification({
+          status: 200,
+          id: Math.random(),
+          message: 'Copied to clipboard successfully'
+        })
+      )
+    })
+    .catch(error => {
+      showErrorNotification(dispatch, error, '', 'Copy to clipboard failed')
+    })
+}
+
+export const roundFloats = (value, precision) => {
+  if (
+    ((typeof value === 'string' && value.trim() !== '') || typeof value === 'number') &&
+    !isNaN(value)
+  ) {
+    const parsedNum = parseFloat(value)
+
+    return parsedNum % 1 === 0 ? parsedNum : +parsedNum.toFixed(precision ?? 2)
+  }
+
+  return value
+}
+
+export const generateUrlFromRouterPath = link => {
+  return new URL(link, window.location.origin).toString()
 }

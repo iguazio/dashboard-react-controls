@@ -14,25 +14,5 @@ illegal under applicable law, and the grant of the foregoing license
 under the Apache 2.0 license is conditioned upon your compliance with
 such restriction.
 */
-
-import ActionsMenuItem from './ActionsMenuItem/ActionsMenuItem'
-import FormActionButton from './FormActionButton/FormActionButton'
-import FormRowActions from './FormRowActions/FormRowActions'
-import OptionsMenu from './OptionsMenu/OptionsMenu'
-import SelectOption from './SelectOption/SelectOption'
-import TableHead from './TableHead/TableHead'
-import TableLinkCell from './TableLinkCell/TableLinkCell'
-import TableTypeCell from './TableTypeCell/TableTypeCell'
-import ValidationTemplate from './ValidationTemplate/ValidationTemplate'
-
-export {
-  ActionsMenuItem,
-  FormActionButton,
-  FormRowActions,
-  OptionsMenu,
-  SelectOption,
-  TableHead,
-  TableLinkCell,
-  TableTypeCell,
-  ValidationTemplate
-}
+export * as commonDetailsReducer from './commonDetailsReducer'
+export * as notificationReducer from './notificationReducer'
