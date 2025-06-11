@@ -1,6 +1,7 @@
 export const BUTTON_VARIANTS: any;
 export const CHIP: any;
 export const CHIP_INPUT_LIST: any;
+export const DENSITY_OPTIONS: any;
 export const CHIP_OPTIONS: any;
 export const CHIPS: any;
 export const POP_UP_CUSTOM_POSITION: any;
@@ -22,4 +23,9 @@ export const ALLOW_SORT_BY: any;
 export const DEFAULT_SORT_BY: any;
 export const EXCLUDE_SORT_BY: any;
 export const DENSITY: any;
+export const VIRTUALIZATION_CONFIG: any;
+export const SLIDER_TABS: any;
+export const DETAILS_MENU: any;
+export const ACTION_BUTTON: any;
+export const ACTIONS_MENU: any;
 //# sourceMappingURL=types.d.ts.map

@@ -1,8 +1,7 @@
 
 
-Create a new dist version 3.0.4
+Create a new dist version 3.1.0
 
 Collecting:
-- Fix [Artifacts] Cannot reselect the same option in Path Scheme dropdown (#405)
-- Fix [UI] Input Label fields not interactable (#406)
-- Fix [Scheduled] Unexpected application error when editing a scheduled job (#407)
+- Impl [UI] Move Table components to DRC (#409)
+- Impl [Workflows] Add "Terminate" Button to Monitor Workflow – Main and Details (#410)

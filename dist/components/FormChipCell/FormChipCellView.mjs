@@ -11,7 +11,7 @@ import X from "../Tooltip/Tooltip.mjs";
 import { CHIP_OPTIONS as Y } from "../../types.mjs";
 import { isEveryObjectValueEmpty as Z } from "../../utils/common.util.mjs";
 import { uniquenessError as g } from "./formChipCell.util.mjs";
-import O from "../../images/add.svg.mjs";
+import O from "../../images/add.svg2.mjs";
 let n = ({
   chipOptions: e = {
     background: "purple",
