@@ -39,7 +39,7 @@ const ActionsMenu = ({
   time = 100,
   withQuickActions = false
 }) => {
-  const [actionMenu, setActionMenu] = useState(menu)
+  const [[actionMenu, quickActions], setActionMenuContent] = useState(menu)
   const [isIconDisplayed, setIsIconDisplayed] = useState(false)
   const [isShowMenu, setIsShowMenu] = useState(false)
   const actionMenuRef = useRef()
@@ -51,7 +51,9 @@ const ActionsMenu = ({
 
   const actionMenuClassNames = classnames(
     'actions-menu__container',
-    withQuickActions && 'actions-menu__container_extended',
+    withQuickActions &&
+      (actionMenu.length > 0 || quickActions.length > 1) &&
+      'actions-menu__container_extended',
     isShowMenu && 'actions-menu__container-active'
   )
 
@@ -91,12 +93,12 @@ const ActionsMenu = ({
 
   useEffect(() => {
     if (!isEmpty(dataItem)) {
-      setActionMenu(typeof menu === 'function' ? menu(dataItem, menuPosition) : menu)
+      setActionMenuContent(typeof menu === 'function' ? menu(dataItem, menuPosition) : menu)
     }
   }, [dataItem, menu, menuPosition])
 
   useEffect(() => {
-    setIsIconDisplayed(actionMenu[0]?.some(menuItem => menuItem.icon))
+    setIsIconDisplayed(actionMenu?.some(menuItem => menuItem.icon))
   }, [actionMenu])
 
   useEffect(() => {
@@ -118,7 +120,7 @@ const ActionsMenu = ({
     >
       {withQuickActions && (
         <div className="actions-menu__main-actions-wrapper" ref={mainActionsWrapperRef}>
-          {actionMenu[1].map(
+          {quickActions.map(
             mainAction =>
               !mainAction.hidden && (
                 <RoundedIcon
@@ -134,7 +136,7 @@ const ActionsMenu = ({
           )}
         </div>
       )}
-      {actionMenu[0].length > 0 && (
+      {actionMenu.length > 0 && (
         <div className="actions-menu" data-testid="actions-menu">
           <RoundedIcon
             className="actions-menu-button"
@@ -160,7 +162,7 @@ const ActionsMenu = ({
               ref={dropDownMenuRef}
             >
               <ul data-testid="actions-drop-down-menu" className="actions-menu__list">
-                {actionMenu[0].map(
+                {actionMenu.map(
                   (menuItem, idx) =>
                     !menuItem.hidden && (
                       <ActionsMenuItem
