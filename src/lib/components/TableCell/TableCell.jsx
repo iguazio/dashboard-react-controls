@@ -22,13 +22,11 @@ import PropTypes from 'prop-types'
 import classnames from 'classnames'
 
 import ChipCell from '../ChipCell/ChipCell'
-import CopyToClipboard from '../CopyToClipboard/CopyToClipboard'
 import TableLinkCell from '../../elements/TableLinkCell/TableLinkCell'
 import TableTypeCell from '../../elements/TableTypeCell/TableTypeCell'
 import TextTooltipTemplate from '../TooltipTemplate/TextTooltipTemplate'
 import Tooltip from '../Tooltip/Tooltip'
 
-import { BUTTON_COPY_URI_CELL_TYPE } from '../../constants'
 import { getChipOptions } from '../../utils/chips.util'
 import { truncateUid } from '../../utils/string.util'
 
@@ -121,16 +119,6 @@ const TableCell = ({
     return (
       <td data-testid={cellData.headerId} className={cellClassNames}>
         <ChipCell chipOptions={getChipOptions(cellData.type)} elements={cellData.value} tooltip />
-      </td>
-    )
-  } else if (cellData.type === BUTTON_COPY_URI_CELL_TYPE) {
-    return (
-      <td data-testid={cellData.headerId} className={cellClassNames}>
-        <CopyToClipboard
-          tooltipText="Copy URI"
-          textToCopy={cellData.actionHandler(item)}
-          disabled={cellData.disabled}
-        />
       </td>
     )
   } else if (cellData.type === 'hash') {
