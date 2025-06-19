@@ -50,12 +50,12 @@ import { setFieldState } from '../utils/form.util'
 
 const DetailsContainer = ({
   blocker,
+  commonDetailsStore,
   detailsMenu,
   detailsPanelClassNames,
   detailsPopUpSelectedTab = '',
   detailsRef,
   detailsStore,
-  commonDetailsStore,
   doNotLeavePage,
   formRef,
   isDetailsPopUp = null,
@@ -283,9 +283,9 @@ export const useDetails = ({
 
     if (commonDetailsStore.filtersWasHandled) {
       dispatch(setFiltersWasHandled(false))
-    } else {
-      blocker.proceed?.()
     }
+
+    blocker.proceed?.()
 
     window.dispatchEvent(new CustomEvent('discardChanges'))
   }, [blocker, cancelChanges, commonDetailsStore.filtersWasHandled, dispatch, handleShowWarning])

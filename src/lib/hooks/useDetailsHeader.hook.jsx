@@ -20,7 +20,7 @@ such restriction.
 
 import React, { useCallback, useRef } from 'react'
 import PropTypes from 'prop-types'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { Link, useLocation, useNavigate, useParams } from 'react-router-dom'
 
 import ActionsMenu from '../components/ActionsMenu/ActionsMenu'
@@ -33,7 +33,7 @@ import Tooltip from '../components/Tooltip/Tooltip'
 import { ACTION_BUTTON, ACTIONS_MENU } from '../types'
 import { TERTIARY_BUTTON, VIEW_SEARCH_PARAMETER, FULL_VIEW_MODE } from '../constants'
 import { getFilteredSearchParams } from '../utils/filter.util'
-import { getViewMode } from '../utils/common.util'
+import { getViewMode, performDetailsActionHelper } from '../utils/common.util'
 
 import Close from '../images/close.svg?react'
 import EnlargeIcon from '../images/ml-enlarge.svg?react'
@@ -50,6 +50,7 @@ const DetailsHeaderContainer = ({
   commonDetailsStore,
   getCloseDetailsLink = null,
   getDefaultCloseDetailsLink,
+  handleActionClick,
   handleCancelClick,
   handleRefresh = null,
   headerRef,
@@ -111,7 +112,9 @@ const DetailsHeaderContainer = ({
           <Button
             disabled={actionButton.disabled}
             label={actionButton.label}
-            onClick={actionButton.onClick}
+            onClick={event => {
+              handleActionClick(event, actionButton.onClick)
+            }}
             tooltip={actionButton.tooltip}
             variant={actionButton.variant}
           />
@@ -208,6 +211,7 @@ DetailsHeaderContainer.propTypes = {
   commonDetailsStore: PropTypes.object.isRequired,
   getCloseDetailsLink: PropTypes.func,
   getDefaultCloseDetailsLink: PropTypes.func.isRequired,
+  handleActionClick: PropTypes.func.isRequired,
   handleCancelClick: PropTypes.func.isRequired,
   handleRefresh: PropTypes.func,
   headerRef: PropTypes.object.isRequired,
@@ -230,12 +234,24 @@ DetailsHeaderContainer.propTypes = {
 
 export const useDetailsHeader = ({ handleCancel, handleShowWarning, isDetailsPopUp, pageData }) => {
   const commonDetailsStore = useSelector(store => store.commonDetailsStore)
+  const dispatch = useDispatch()
   const params = useParams()
   const navigate = useNavigate()
   const viewMode = getViewMode(window.location.search)
   const { actionButton, withToggleViewBtn, showAllVersions } = pageData.details
   const headerRef = useRef()
   const location = useLocation()
+
+  const handleActionClick = async (event, handler) => {
+    const actionCanBePerformed = await performDetailsActionHelper(
+      commonDetailsStore.changes,
+      dispatch
+    )
+
+    if (actionCanBePerformed) {
+      handler(event)
+    }
+  }
 
   const handleBackClick = useCallback(() => {
     if (commonDetailsStore.changes.counter > 0) {
@@ -255,6 +271,7 @@ export const useDetailsHeader = ({ handleCancel, handleShowWarning, isDetailsPop
     DetailsHeaderContainer,
     actionButton,
     commonDetailsStore,
+    handleActionClick,
     handleBackClick,
     handleCancelClick,
     headerRef,
