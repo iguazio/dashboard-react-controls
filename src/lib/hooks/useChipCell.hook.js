@@ -20,7 +20,11 @@ such restriction.
 import { useCallback, useEffect, useMemo, useRef, useState, useLayoutEffect } from 'react'
 import { throttle } from 'lodash'
 
-import { getTransitionEndEventName, isEveryObjectValueEmpty } from '../utils/common.util'
+import {
+  getScssVariableValue,
+  getTransitionEndEventName,
+  isEveryObjectValueEmpty
+} from '../utils/common.util'
 import { getFirstScrollableParent } from '../utils/getFirstScrollableParent.util'
 
 export const useChipCell = (isEditMode, visibleChipsMaxLength) => {
@@ -29,6 +33,10 @@ export const useChipCell = (isEditMode, visibleChipsMaxLength) => {
   const [showChips, setShowChips] = useState(false)
   const [visibleChipsCount, setVisibleChipsCount] = useState(8)
 
+  const chipBlockMarginRight = useMemo(
+    () => parseInt(getScssVariableValue('--chipBlockMarginRight')),
+    []
+  )
   const transitionEndEventName = useMemo(() => getTransitionEndEventName(), [])
 
   const chipsCellRef = useRef()
@@ -107,7 +115,8 @@ export const useChipCell = (isEditMode, visibleChipsMaxLength) => {
         // or if adding chipSize and padding exceeds parentSize when there are multiple chips
         if (
           maxLength + chipSize > parentSize ||
-          (Object.values(chipsSizes).length > 1 && maxLength + chipSize + padding > parentSize)
+          (Object.values(chipsSizes).length > 1 &&
+            maxLength + chipSize + chipBlockMarginRight + padding > parentSize)
         ) {
           chipIndex = index
 
@@ -126,7 +135,7 @@ export const useChipCell = (isEditMode, visibleChipsMaxLength) => {
       setVisibleChipsCount(chipIndex)
       setShowChips(true)
     }
-  }, [chipsSizes, isEditMode])
+  }, [chipBlockMarginRight, chipsSizes, isEditMode])
 
   useLayoutEffect(() => {
     resizeChipCell()
