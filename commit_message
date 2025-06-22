@@ -1,7 +1,7 @@
 
 
-Create a new dist version 3.1.0
+Create a new dist version 3.1.1
 
 Collecting:
-- Impl [UI] Move Table components to DRC (#409)
-- Impl [Workflows] Add "Terminate" Button to Monitor Workflow – Main and Details (#410)
+- Impl [LLM Prompt artifact] Align UI with BE (#414)
+- Impl [Feature Store] align the quick actions menu according to other pages (#413)

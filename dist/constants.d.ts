@@ -119,5 +119,4 @@ export const MODAL_MIN: "min";
 export const MODAL_MAX: "max";
 export const MAIN_TABLE_ID: "main-table";
 export const MAIN_TABLE_BODY_ID: "main-table-body";
-export const BUTTON_COPY_URI_CELL_TYPE: "buttonCopyURI";
 //# sourceMappingURL=constants.d.ts.map

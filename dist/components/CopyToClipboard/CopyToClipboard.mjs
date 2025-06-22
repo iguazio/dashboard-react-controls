@@ -1,6 +1,6 @@
-import { jsx as r } from "react/jsx-runtime";
+import { jsx as t } from "react/jsx-runtime";
 import o from "prop-types";
-import { useMemo as n } from "react";
+import { useMemo as d } from "react";
 import { useDispatch as f } from "react-redux";
 import u from "../RoundedIcon/RoundedIcon.mjs";
 import b from "../TooltipTemplate/TextTooltipTemplate.mjs";
@@ -10,12 +10,12 @@ import { showErrorNotification as T } from "../../utils/notification.util.mjs";
 import g from "../../images/copy-to-clipboard-icon.svg.mjs";
 const C = ({
   children: i = null,
-  className: c = "",
+  className: l = "",
   disabled: e = !1,
-  textToCopy: t = "",
+  textToCopy: r = "",
   tooltipText: p
 }) => {
-  const s = f(), l = n(() => e || !t, [e, t]), a = (m) => {
+  const s = f(), c = d(() => e || !r, [e, r]), a = (m) => {
     navigator.clipboard.writeText(m).then(() => {
       s(
         y({
@@ -24,22 +24,22 @@ const C = ({
           message: "Copied to clipboard successfully"
         })
       );
-    }).catch((d) => {
-      T(s, d, "", "Copy to clipboard failed");
+    }).catch((n) => {
+      T(s, n, "", "Copy to clipboard failed");
     });
   };
-  return /* @__PURE__ */ r("div", { className: c, "data-testid": "copy-to-clipboard", children: i ? /* @__PURE__ */ r(h, { template: /* @__PURE__ */ r(b, { text: p }), textShow: !0, children: /* @__PURE__ */ r("span", { onClick: () => a(t), children: i }) }) : /* @__PURE__ */ r(
+  return /* @__PURE__ */ t("div", { className: l, "data-testid": "copy-to-clipboard", children: i ? /* @__PURE__ */ t(h, { template: /* @__PURE__ */ t(b, { text: p }), textShow: !0, children: /* @__PURE__ */ t("span", { onClick: () => a(r), children: i }) }) : /* @__PURE__ */ t(
     u,
     {
       tooltipText: p,
-      onClick: () => a(t),
-      disabled: l,
-      children: /* @__PURE__ */ r(g, {})
+      onClick: () => a(r),
+      disabled: c,
+      children: /* @__PURE__ */ t(g, {})
     }
   ) });
 };
 C.propTypes = {
-  children: o.oneOfType([o.string, o.array]),
+  children: o.oneOfType([o.string, o.array, o.element]),
   className: o.string,
   disabled: o.bool,
   textToCopy: o.string,
