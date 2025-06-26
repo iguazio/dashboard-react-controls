@@ -7,14 +7,14 @@ export function useDetails({ applyDetailsChanges, applyDetailsChangesCallback, f
     selectedItem: any;
 }): {
     DetailsContainer: {
-        ({ blocker, detailsMenu, detailsPanelClassNames, detailsPopUpSelectedTab, detailsRef, detailsStore, commonDetailsStore, doNotLeavePage, formRef, isDetailsPopUp, leavePage, params, renderHeader, renderTabsContent, setBlocker, setDetailsPopUpSelectedTab, shouldDetailsBlock, withActionMenu }: {
+        ({ blocker, commonDetailsStore, detailsMenu, detailsPanelClassNames, detailsPopUpSelectedTab, detailsRef, detailsStore, doNotLeavePage, formRef, isDetailsPopUp, leavePage, params, renderHeader, renderTabsContent, setBlocker, setDetailsPopUpSelectedTab, shouldDetailsBlock, withActionMenu }: {
             blocker: any;
+            commonDetailsStore: any;
             detailsMenu: any;
             detailsPanelClassNames: any;
             detailsPopUpSelectedTab?: string;
             detailsRef: any;
             detailsStore: any;
-            commonDetailsStore: any;
             doNotLeavePage: any;
             formRef: any;
             isDetailsPopUp?: any;

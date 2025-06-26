@@ -1,62 +1,61 @@
-import { jsxs as v, jsx as t } from "react/jsx-runtime";
-import { useState as f, useRef as l, useCallback as w, useEffect as p } from "react";
+import { jsxs as M, jsx as n } from "react/jsx-runtime";
+import { useState as f, useRef as a, useCallback as g, useEffect as p } from "react";
 import s from "prop-types";
-import { isEmpty as S } from "lodash";
-import D from "classnames";
-import L from "../../elements/ActionsMenuItem/ActionsMenuItem.mjs";
-import P from "../PopUpDialog/PopUpDialog.mjs";
+import { isEmpty as D } from "lodash";
+import L from "classnames";
+import P from "../../elements/ActionsMenuItem/ActionsMenuItem.mjs";
+import j from "../PopUpDialog/PopUpDialog.mjs";
 import k from "../RoundedIcon/RoundedIcon.mjs";
-import { ACTIONS_MENU as j } from "../../types.mjs";
+import { ACTIONS_MENU as q } from "../../types.mjs";
 import H from "../../images/elipsis.svg.mjs";
 /* empty css                  */
 const I = ({
   dataItem: i = {},
   menu: c,
-  menuPosition: _ = "",
+  menuPosition: h = "",
   time: y = 100,
-  withQuickActions: b = !1
+  withQuickActions: _ = !1
 }) => {
-  const [r, N] = f(c), [T, g] = f(!1), [a, o] = f(!1), E = l(), M = l(), x = l(), h = l();
+  const [[o, b], N] = f(c), [T, E] = f(!1), [r, t] = f(!1), x = a(), v = a(), C = a(), w = a();
   let d = null;
-  const R = D(
+  const R = L(
     "actions-menu__container",
-    b && "actions-menu__container_extended",
-    a && "actions-menu__container-active"
-  ), u = w(
+    _ && (o.length > 0 || b.length > 1) && "actions-menu__container_extended",
+    r && "actions-menu__container-active"
+  ), u = g(
     (e) => {
-      e.target.closest(".actions-menu-button") || o(!1);
+      e.target.closest(".actions-menu-button") || t(!1);
     },
-    [o]
-  ), m = w(
+    [t]
+  ), m = g(
     (e) => {
-      e.target.closest(".actions-menu__body") || o(!1);
+      e.target.closest(".actions-menu__body") || t(!1);
     },
-    [o]
-  ), C = () => {
-    a && (d = setTimeout(() => {
-      o(!1);
+    [t]
+  ), O = () => {
+    r && (d = setTimeout(() => {
+      t(!1);
     }, y));
-  }, O = (e) => {
-    var n;
-    (n = h.current) != null && n.contains(e.target) && o(!1), d && clearTimeout(d);
+  }, S = (e) => {
+    var l;
+    (l = w.current) != null && l.contains(e.target) && t(!1), d && clearTimeout(d);
   };
   return p(() => {
-    S(i) || N(typeof c == "function" ? c(i, _) : c);
-  }, [i, c, _]), p(() => {
-    var e;
-    g((e = r[0]) == null ? void 0 : e.some((n) => n.icon));
-  }, [r]), p(() => (window.addEventListener("click", u), window.addEventListener("scroll", m, !0), () => {
+    D(i) || N(typeof c == "function" ? c(i, h) : c);
+  }, [i, c, h]), p(() => {
+    E(o == null ? void 0 : o.some((e) => e.icon));
+  }, [o]), p(() => (window.addEventListener("click", u), window.addEventListener("scroll", m, !0), () => {
     window.removeEventListener("click", u), window.removeEventListener("scroll", m, !0);
-  }), [u, m]), /* @__PURE__ */ v(
+  }), [u, m]), /* @__PURE__ */ M(
     "div",
     {
       className: R,
-      onMouseOut: C,
-      onMouseOver: O,
-      ref: E,
+      onMouseOut: O,
+      onMouseOver: S,
+      ref: x,
       children: [
-        b && /* @__PURE__ */ t("div", { className: "actions-menu__main-actions-wrapper", ref: h, children: r[1].map(
-          (e) => !e.hidden && /* @__PURE__ */ t(
+        _ && /* @__PURE__ */ n("div", { className: "actions-menu__main-actions-wrapper", ref: w, children: b.map(
+          (e) => !e.hidden && /* @__PURE__ */ n(
             k,
             {
               disabled: e.disabled,
@@ -68,38 +67,38 @@ const I = ({
             e.label
           )
         ) }),
-        r[0].length > 0 && /* @__PURE__ */ v("div", { className: "actions-menu", "data-testid": "actions-menu", children: [
-          /* @__PURE__ */ t(
+        o.length > 0 && /* @__PURE__ */ M("div", { className: "actions-menu", "data-testid": "actions-menu", children: [
+          /* @__PURE__ */ n(
             k,
             {
               className: "actions-menu-button",
-              isActive: a,
+              isActive: r,
               id: "actions-menu-button",
               onClick: () => {
-                o((e) => !e);
+                t((e) => !e);
               },
-              ref: M,
+              ref: v,
               tooltipText: "More actions",
-              children: /* @__PURE__ */ t(H, {})
+              children: /* @__PURE__ */ n(H, {})
             }
           ),
-          a && /* @__PURE__ */ t(
-            P,
+          r && /* @__PURE__ */ n(
+            j,
             {
               className: "actions-menu__body",
               customPosition: {
-                element: M,
+                element: v,
                 position: "bottom-left",
                 autoVerticalPosition: !0
               },
               headerIsHidden: !0,
-              ref: x,
-              children: /* @__PURE__ */ t("ul", { "data-testid": "actions-drop-down-menu", className: "actions-menu__list", children: r[0].map(
-                (e, n) => !e.hidden && /* @__PURE__ */ t(
-                  L,
+              ref: C,
+              children: /* @__PURE__ */ n("ul", { "data-testid": "actions-drop-down-menu", className: "actions-menu__list", children: o.map(
+                (e, l) => !e.hidden && /* @__PURE__ */ n(
+                  P,
                   {
                     dataItem: i,
-                    index: n,
+                    index: l,
                     isIconDisplayed: T,
                     menuItem: e
                   },
@@ -115,7 +114,7 @@ const I = ({
 };
 I.propTypes = {
   dataItem: s.oneOfType([s.object, s.string]),
-  menu: j.isRequired,
+  menu: q.isRequired,
   menuPosition: s.string,
   time: s.number,
   withQuickActions: s.bool

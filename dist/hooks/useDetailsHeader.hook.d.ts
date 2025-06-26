@@ -5,7 +5,7 @@ export function useDetailsHeader({ handleCancel, handleShowWarning, isDetailsPop
     pageData: any;
 }): {
     DetailsHeaderContainer: {
-        ({ actionButton, actionsMenu, applyChanges, applyChangesRef, cancelChanges, commonDetailsStore, getCloseDetailsLink, getDefaultCloseDetailsLink, handleCancelClick, handleRefresh, headerRef, isDetailsPopUp, isDetailsScreen, location, navigate, pageData, params, renderCustomElements, renderStatus, renderTitle, selectedItem, showAllVersions, tab, viewMode, withActionMenu, withToggleViewBtn }: {
+        ({ actionButton, actionsMenu, applyChanges, applyChangesRef, cancelChanges, commonDetailsStore, getCloseDetailsLink, getDefaultCloseDetailsLink, handleActionClick, handleCancelClick, handleRefresh, headerRef, isDetailsPopUp, isDetailsScreen, location, navigate, pageData, params, renderCustomElements, renderStatus, renderTitle, selectedItem, showAllVersions, tab, viewMode, withActionMenu, withToggleViewBtn }: {
             actionButton?: any;
             actionsMenu: any;
             applyChanges: any;
@@ -14,6 +14,7 @@ export function useDetailsHeader({ handleCancel, handleShowWarning, isDetailsPop
             commonDetailsStore: any;
             getCloseDetailsLink?: any;
             getDefaultCloseDetailsLink: any;
+            handleActionClick: any;
             handleCancelClick: any;
             handleRefresh?: any;
             headerRef: any;
@@ -42,6 +43,7 @@ export function useDetailsHeader({ handleCancel, handleShowWarning, isDetailsPop
             commonDetailsStore: any;
             getCloseDetailsLink: any;
             getDefaultCloseDetailsLink: any;
+            handleActionClick: any;
             handleCancelClick: any;
             handleRefresh: any;
             headerRef: any;
@@ -64,6 +66,7 @@ export function useDetailsHeader({ handleCancel, handleShowWarning, isDetailsPop
     };
     actionButton: any;
     commonDetailsStore: any;
+    handleActionClick: (event: any, handler: any) => Promise<void>;
     handleBackClick: () => void;
     handleCancelClick: () => void;
     headerRef: import("react").MutableRefObject<undefined>;

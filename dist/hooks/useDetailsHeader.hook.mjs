@@ -1,84 +1,85 @@
-import { jsxs as l, jsx as i, Fragment as q } from "react/jsx-runtime";
-import { useRef as L, useCallback as M } from "react";
+import { jsxs as r, jsx as i, Fragment as M } from "react/jsx-runtime";
+import { useRef as H, useCallback as x } from "react";
 import e from "prop-types";
-import { useSelector as B } from "react-redux";
-import { Link as O, useParams as F, useNavigate as H, useLocation as P } from "react-router-dom";
-import U from "../components/ActionsMenu/ActionsMenu.mjs";
-import x from "../components/Button/Button.mjs";
-import z from "../components/LoadButton/LoadButton.mjs";
+import { useSelector as O, useDispatch as F } from "react-redux";
+import { Link as P, useParams as D, useNavigate as U, useLocation as z } from "react-router-dom";
+import W from "../components/ActionsMenu/ActionsMenu.mjs";
+import j from "../components/Button/Button.mjs";
+import Y from "../components/LoadButton/LoadButton.mjs";
 import s from "../components/RoundedIcon/RoundedIcon.mjs";
-import D from "../components/TooltipTemplate/TextTooltipTemplate.mjs";
-import W from "../components/Tooltip/Tooltip.mjs";
-import { ACTIONS_MENU as Y, ACTION_BUTTON as G } from "../types.mjs";
-import { TERTIARY_BUTTON as J, FULL_VIEW_MODE as A, VIEW_SEARCH_PARAMETER as j } from "../constants.mjs";
-import { getFilteredSearchParams as K } from "../utils/filter.util.mjs";
-import { getViewMode as Q } from "../utils/common.util.mjs";
-import E from "../images/close.svg.mjs";
-import X from "../images/ml-enlarge.svg.mjs";
-import Z from "../images/history.svg.mjs";
-import ee from "../images/ml-minimize.svg.mjs";
-import ie from "../images/refresh.svg.mjs";
-const y = ({
+import G from "../components/TooltipTemplate/TextTooltipTemplate.mjs";
+import J from "../components/Tooltip/Tooltip.mjs";
+import { ACTIONS_MENU as K, ACTION_BUTTON as Q } from "../types.mjs";
+import { TERTIARY_BUTTON as X, FULL_VIEW_MODE as y, VIEW_SEARCH_PARAMETER as E } from "../constants.mjs";
+import { getFilteredSearchParams as Z } from "../utils/filter.util.mjs";
+import { getViewMode as ee, performDetailsActionHelper as ie } from "../utils/common.util.mjs";
+import $ from "../images/close.svg.mjs";
+import te from "../images/ml-enlarge.svg.mjs";
+import oe from "../images/history.svg.mjs";
+import ne from "../images/ml-minimize.svg.mjs";
+import re from "../images/refresh.svg.mjs";
+const B = ({
   actionButton: t = null,
-  actionsMenu: a,
-  applyChanges: c,
-  applyChangesRef: g,
-  cancelChanges: r,
+  actionsMenu: c,
+  applyChanges: d,
+  applyChangesRef: R,
+  cancelChanges: n,
   commonDetailsStore: o,
-  getCloseDetailsLink: d = null,
-  getDefaultCloseDetailsLink: b,
-  handleCancelClick: m,
-  handleRefresh: u = null,
-  headerRef: R,
-  isDetailsPopUp: n = !1,
-  isDetailsScreen: v,
-  location: h,
-  navigate: p,
-  pageData: f,
-  params: $,
-  renderCustomElements: C = null,
-  renderStatus: w = null,
-  renderTitle: _,
-  selectedItem: T,
-  showAllVersions: k = null,
+  getCloseDetailsLink: m = null,
+  getDefaultCloseDetailsLink: C,
+  handleActionClick: v,
+  handleCancelClick: u,
+  handleRefresh: h = null,
+  headerRef: T,
+  isDetailsPopUp: a = !1,
+  isDetailsScreen: w,
+  location: p,
+  navigate: f,
+  pageData: g,
+  params: l,
+  renderCustomElements: b = null,
+  renderStatus: _ = null,
+  renderTitle: q,
+  selectedItem: k,
+  showAllVersions: N = null,
   tab: S = "",
-  viewMode: N = "",
+  viewMode: A = "",
   withActionMenu: V = !0,
   withToggleViewBtn: I = !1
-}) => /* @__PURE__ */ l("div", { className: "item-header", ref: R, children: [
-  /* @__PURE__ */ l("div", { className: "item-header__data", children: [
-    /* @__PURE__ */ i("h3", { className: "item-header__title", children: _ && _() }),
-    /* @__PURE__ */ i("div", { className: "item-header__status", children: w && w() })
+}) => /* @__PURE__ */ r("div", { className: "item-header", ref: T, children: [
+  /* @__PURE__ */ r("div", { className: "item-header__data", children: [
+    /* @__PURE__ */ i("h3", { className: "item-header__title", children: q && q() }),
+    /* @__PURE__ */ i("div", { className: "item-header__status", children: _ && _() })
   ] }),
-  /* @__PURE__ */ i("div", { className: "item-header__custom-elements", children: C && C() }),
-  /* @__PURE__ */ l("div", { className: "item-header__buttons", children: [
-    o.changes.counter > 0 && !n && /* @__PURE__ */ l(q, { children: [
+  /* @__PURE__ */ i("div", { className: "item-header__custom-elements", children: b && b() }),
+  /* @__PURE__ */ r("div", { className: "item-header__buttons", children: [
+    o.changes.counter > 0 && !a && /* @__PURE__ */ r(M, { children: [
       /* @__PURE__ */ i(
-        x,
+        j,
         {
-          variant: J,
+          variant: X,
           label: "Cancel",
-          onClick: r,
+          onClick: n,
           disabled: o.changes.counter === 0 || o.editMode
         }
       ),
       /* @__PURE__ */ i(
-        W,
+        J,
         {
           template: /* @__PURE__ */ i(
-            D,
+            G,
             {
               text: `${o.changes.counter} ${o.changes.counter === 1 ? "change pending" : "changes pending"}`
             }
           ),
           children: /* @__PURE__ */ i(
-            z,
+            Y,
             {
-              ref: g,
+              ref: R,
               variant: "primary",
               label: "Apply Changes",
               className: "btn_apply-changes",
-              onClick: c,
+              onClick: d,
               disabled: o.changes.counter === 0 || o.editMode
             }
           )
@@ -86,93 +87,96 @@ const y = ({
       )
     ] }),
     t && !t.hidden && /* @__PURE__ */ i(
-      x,
+      j,
       {
         disabled: t.disabled,
         label: t.label,
-        onClick: t.onClick,
+        onClick: (L) => {
+          v(L, t.onClick);
+        },
         tooltip: t.tooltip,
         variant: t.variant
       }
     ),
-    k && /* @__PURE__ */ i(
+    N && /* @__PURE__ */ i(
       s,
       {
         id: "showAllVersions",
-        onClick: () => k(),
+        onClick: () => N(),
         tooltipText: "Show all versions",
-        children: /* @__PURE__ */ i(Z, {})
+        children: /* @__PURE__ */ i(oe, {})
       }
     ),
-    v && u && /* @__PURE__ */ i(
+    w && h && /* @__PURE__ */ i(
       s,
       {
         id: "refresh",
-        onClick: () => u(T),
+        onClick: () => h(k),
         tooltipText: "Refresh",
-        children: /* @__PURE__ */ i(ie, {})
+        children: /* @__PURE__ */ i(re, {})
       }
     ),
-    V && /* @__PURE__ */ i(U, { dataItem: T, menu: a, time: 500 }),
-    /* @__PURE__ */ l("div", { className: "item-header__navigation-buttons", children: [
-      I && !n && /* @__PURE__ */ l(q, { children: [
-        N !== A && /* @__PURE__ */ i(
+    V && /* @__PURE__ */ i(W, { dataItem: k, menu: c, time: 500 }),
+    /* @__PURE__ */ r("div", { className: "item-header__navigation-buttons", children: [
+      I && !a && /* @__PURE__ */ r(M, { children: [
+        A !== y && /* @__PURE__ */ i(
           s,
           {
             onClick: () => {
-              p(
-                `${h.pathname}${window.location.search}${window.location.search ? "&" : "?"}${j}=full`
+              f(
+                `${p.pathname}${window.location.search}${window.location.search ? "&" : "?"}${E}=full`
               );
             },
             id: "full-view",
             tooltipText: "Full view",
-            children: /* @__PURE__ */ i(X, {})
+            children: /* @__PURE__ */ i(te, {})
           }
         ),
-        N === A && /* @__PURE__ */ i(
+        A === y && /* @__PURE__ */ i(
           s,
           {
             onClick: () => {
-              p(
-                `${h.pathname}${K(window.location.search, [j])}`
+              f(
+                `${p.pathname}${Z(window.location.search, [E])}`
               );
             },
             id: "table-view",
             tooltipText: "Table view",
-            children: /* @__PURE__ */ i(ee, {})
+            children: /* @__PURE__ */ i(ne, {})
           }
         )
       ] }),
-      !f.details.hideBackBtn && (n ? /* @__PURE__ */ i(
+      !g.details.hideBackBtn && (a ? /* @__PURE__ */ i(
         "div",
         {
           className: "details-close-btn",
           "data-testid": "details-close-btn",
-          onClick: m,
-          children: /* @__PURE__ */ i(s, { tooltipText: "Close", id: "details-close", children: /* @__PURE__ */ i(E, {}) })
+          onClick: u,
+          children: /* @__PURE__ */ i(s, { tooltipText: "Close", id: "details-close", children: /* @__PURE__ */ i($, {}) })
         }
       ) : /* @__PURE__ */ i(
-        O,
+        P,
         {
           className: "details-close-btn",
           "data-testid": "details-close-btn",
-          to: d ? d(T.name) : b($, f.page, S),
-          onClick: m,
-          children: /* @__PURE__ */ i(s, { tooltipText: "Close", id: "details-close", children: /* @__PURE__ */ i(E, {}) })
+          to: m ? m(k.name) : C(l, g.page, S),
+          onClick: u,
+          children: /* @__PURE__ */ i(s, { tooltipText: "Close", id: "details-close", children: /* @__PURE__ */ i($, {}) })
         }
       ))
     ] })
   ] })
 ] });
-y.propTypes = {
-  actionButton: G,
-  actionsMenu: Y.isRequired,
+B.propTypes = {
+  actionButton: Q,
+  actionsMenu: K.isRequired,
   applyChanges: e.func.isRequired,
   applyChangesRef: e.object.isRequired,
   cancelChanges: e.func.isRequired,
   commonDetailsStore: e.object.isRequired,
   getCloseDetailsLink: e.func,
   getDefaultCloseDetailsLink: e.func.isRequired,
+  handleActionClick: e.func.isRequired,
   handleCancelClick: e.func.isRequired,
   handleRefresh: e.func,
   headerRef: e.object.isRequired,
@@ -192,28 +196,34 @@ y.propTypes = {
   withActionMenu: e.bool,
   withToggleViewBtn: e.bool
 };
-const we = ({ handleCancel: t, handleShowWarning: a, isDetailsPopUp: c, pageData: g }) => {
-  const r = B((f) => f.commonDetailsStore), o = F(), d = H(), b = Q(window.location.search), { actionButton: m, withToggleViewBtn: u, showAllVersions: R } = g.details, n = L(), v = P(), h = M(() => {
-    r.changes.counter > 0 ? a(!0) : t && t();
-  }, [r.changes.counter, t, a]), p = M(() => {
-    t && (r.changes.counter === 0 || c) && t();
-  }, [r.changes.counter, t, c]);
+const Ne = ({ handleCancel: t, handleShowWarning: c, isDetailsPopUp: d, pageData: R }) => {
+  const n = O((l) => l.commonDetailsStore), o = F(), m = D(), C = U(), v = ee(window.location.search), { actionButton: u, withToggleViewBtn: h, showAllVersions: T } = R.details, a = H(), w = z(), p = async (l, b) => {
+    await ie(
+      n.changes,
+      o
+    ) && b(l);
+  }, f = x(() => {
+    n.changes.counter > 0 ? c(!0) : t && t();
+  }, [n.changes.counter, t, c]), g = x(() => {
+    t && (n.changes.counter === 0 || d) && t();
+  }, [n.changes.counter, t, d]);
   return {
-    DetailsHeaderContainer: y,
-    actionButton: m,
-    commonDetailsStore: r,
-    handleBackClick: h,
-    handleCancelClick: p,
-    headerRef: n,
-    location: v,
-    navigate: d,
-    params: o,
-    showAllVersions: R,
-    viewMode: b,
-    withToggleViewBtn: u
+    DetailsHeaderContainer: B,
+    actionButton: u,
+    commonDetailsStore: n,
+    handleActionClick: p,
+    handleBackClick: f,
+    handleCancelClick: g,
+    headerRef: a,
+    location: w,
+    navigate: C,
+    params: m,
+    showAllVersions: T,
+    viewMode: v,
+    withToggleViewBtn: h
   };
 };
 export {
-  we as useDetailsHeader
+  Ne as useDetailsHeader
 };
 //# sourceMappingURL=useDetailsHeader.hook.mjs.map

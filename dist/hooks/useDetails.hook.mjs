@@ -18,18 +18,18 @@ import { PRIMARY_BUTTON as fe, TERTIARY_BUTTON as pe, VIEW_SEARCH_PARAMETER as x
 import { DETAILS_MENU as ge } from "../types.mjs";
 import { setFieldState as Re } from "../utils/form.util.mjs";
 const H = ({
-  blocker: p,
-  detailsMenu: g,
-  detailsPanelClassNames: o,
-  detailsPopUpSelectedTab: a = "",
-  detailsRef: E,
-  detailsStore: h,
-  commonDetailsStore: s,
+  blocker: f,
+  commonDetailsStore: p,
+  detailsMenu: o,
+  detailsPanelClassNames: a,
+  detailsPopUpSelectedTab: E = "",
+  detailsRef: g,
+  detailsStore: s,
   doNotLeavePage: R,
   formRef: q,
   isDetailsPopUp: t = null,
   leavePage: T,
-  params: f,
+  params: h,
   renderHeader: n,
   renderTabsContent: c,
   setBlocker: S,
@@ -37,24 +37,24 @@ const H = ({
   shouldDetailsBlock: v,
   withActionMenu: k = !0
 }) => /* @__PURE__ */ d(X, { form: q.current, onSubmit: () => {
-}, children: (i) => /* @__PURE__ */ W("div", { className: o, ref: E, "data-testid": "detailsPanel", children: [
-  h.loadingCounter > 0 && /* @__PURE__ */ d(ae, {}),
-  h.error && /* @__PURE__ */ d(oe, { message: h.error.message }),
+}, children: (i) => /* @__PURE__ */ W("div", { className: a, ref: g, "data-testid": "detailsPanel", children: [
+  s.loadingCounter > 0 && /* @__PURE__ */ d(ae, {}),
+  s.error && /* @__PURE__ */ d(oe, { message: s.error.message }),
   /* @__PURE__ */ W("div", { className: "item-header-wrapper", children: [
     n(),
     k && /* @__PURE__ */ d(
       ie,
       {
-        initialTab: t ? a : f.tab,
+        initialTab: t ? E : h.tab,
         isDetailsPopUp: t,
         onClick: (u) => b && b(u),
         skipLink: t,
-        tabsList: g
+        tabsList: o
       }
     )
   ] }),
   /* @__PURE__ */ d("div", { className: "item-info", children: c(i) }),
-  (p.state === "blocked" || s.showWarning) && /* @__PURE__ */ d(
+  (f.state === "blocked" || p.showWarning) && /* @__PURE__ */ d(
     ce,
     {
       cancelButton: {
@@ -69,7 +69,7 @@ const H = ({
         variant: fe
       },
       header: "You have unsaved changes.",
-      isOpen: p.state === "blocked" || s.showWarning,
+      isOpen: f.state === "blocked" || p.showWarning,
       message: "Do you want to discard the changes?"
     }
   ),
@@ -96,15 +96,15 @@ H.propTypes = {
   withActionMenu: r.bool
 };
 const De = ({
-  applyDetailsChanges: p,
-  applyDetailsChangesCallback: g,
+  applyDetailsChanges: f,
+  applyDetailsChangesCallback: p,
   formInitialValues: o,
   isDetailsPopUp: a,
   isDetailsScreen: E,
-  selectedItem: h
+  selectedItem: g
 }) => {
-  const [s, R] = G({}), q = w(), t = ee(), T = w(), f = ne(), n = te((e) => e.commonDetailsStore), c = re(), [S, b] = J(() => a ? [me, ue] : [de, le], [a]), v = w(
-    c.pathname.substring(0, c.pathname.lastIndexOf(f.tab))
+  const [s, R] = G({}), q = w(), t = ee(), T = w(), h = ne(), n = te((e) => e.commonDetailsStore), c = re(), [S, b] = J(() => a ? [me, ue] : [de, le], [a]), v = w(
+    c.pathname.substring(0, c.pathname.lastIndexOf(h.tab))
   ), k = Q(
     "table__item",
     n.showWarning && "pop-up-dialog-opened",
@@ -150,29 +150,29 @@ const De = ({
   }, [o, n.changes.counter]), C(() => {
     const e = c.pathname.substring(
       0,
-      c.pathname.lastIndexOf(f.tab)
+      c.pathname.lastIndexOf(h.tab)
     );
     v.current !== e && !a && (i.current.restart(o), t(he(!1)), v.current = e);
-  }, [t, o, a, c.pathname, f.tab]);
+  }, [t, o, a, c.pathname, h.tab]);
   const O = l(() => {
-    p(n.changes).then(() => {
+    f(n.changes).then(() => {
       t(j());
       const e = U(n.changes);
       setTimeout(() => {
-        g(e, h);
+        p(e, g);
       });
     });
   }, [
+    f,
     p,
-    g,
     n.changes,
     t,
-    h
+    g
   ]), _ = l(() => {
     n.changes.counter > 0 && (t(j()), i.current.reset(o));
   }, [n.changes.counter, t, o]), F = l(() => {
     var e;
-    _(), u(!1), n.filtersWasHandled ? t(D(!1)) : (e = s.proceed) == null || e.call(s), window.dispatchEvent(new CustomEvent("discardChanges"));
+    _(), u(!1), n.filtersWasHandled && t(D(!1)), (e = s.proceed) == null || e.call(s), window.dispatchEvent(new CustomEvent("discardChanges"));
   }, [s, _, n.filtersWasHandled, t, u]), Y = l(() => {
     var e;
     (e = s.reset) == null || e.call(s), t(A(!1)), window.dispatchEvent(new CustomEvent("cancelLeave"));
@@ -191,7 +191,7 @@ const De = ({
     handleShowWarning: u,
     leavePage: F,
     location: c,
-    params: f,
+    params: h,
     removeDetailsInfo: b,
     setBlocker: R,
     setDetailsInfo: S,

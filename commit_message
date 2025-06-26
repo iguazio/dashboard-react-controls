@@ -1,7 +1,7 @@
 
 
-Create a new dist version 3.1.1
+Create a new dist version 3.1.2
 
 Collecting:
-- Impl [LLM Prompt artifact] Align UI with BE (#414)
-- Impl [Feature Store] align the quick actions menu according to other pages (#413)
+- Fix [Monitoring app] UI alignment and text updates for Figma consistency (#416)
+- Fix [Artifacts] Add a confirmation pop-up (#417)
