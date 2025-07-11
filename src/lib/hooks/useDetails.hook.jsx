@@ -252,16 +252,18 @@ export const useDetails = ({
   }, [dispatch, formInitialValues, isDetailsPopUp, location.pathname, params.tab])
 
   const applyChanges = useCallback(() => {
-    applyDetailsChanges(commonDetailsStore.changes).then(() => {
-      dispatch(resetChanges())
+    applyDetailsChanges(commonDetailsStore.changes)
+      .then(() => {
+        dispatch(resetChanges())
 
-      const changes = cloneDeep(commonDetailsStore.changes)
+        const changes = cloneDeep(commonDetailsStore.changes)
 
-      // todo [redux-toolkit] rework it after redux-toolkit will be added to the details store. Need to remove setTimeout and use a Promise that resolves after the state is updated.
-      setTimeout(() => {
-        applyDetailsChangesCallback(changes, selectedItem)
+        // todo [redux-toolkit] rework it after redux-toolkit will be added to the details store. Need to remove setTimeout and use a Promise that resolves after the state is updated.
+        setTimeout(() => {
+          applyDetailsChangesCallback(changes, selectedItem)
+        })
       })
-    })
+      .catch(() => {})
   }, [
     applyDetailsChanges,
     applyDetailsChangesCallback,
