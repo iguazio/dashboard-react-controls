@@ -261,7 +261,7 @@ export const useDetails = ({
       setTimeout(() => {
         applyDetailsChangesCallback(changes, selectedItem)
       })
-    })
+    }).catch(() => {})
   }, [
     applyDetailsChanges,
     applyDetailsChangesCallback,
