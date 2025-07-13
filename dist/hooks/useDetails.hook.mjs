@@ -11,8 +11,8 @@ import { useParams as ne, useLocation as re } from "react-router-dom";
 import se from "../components/BlockerSpy/BlockerSpy.mjs";
 import oe from "../components/ErrorMessage/ErrorMessage.mjs";
 import ae from "../components/Loader/Loader.mjs";
-import ie from "../components/TabsSlider/TabsSlider.mjs";
-import ce from "../components/ConfirmDialog/ConfirmDialog.mjs";
+import ce from "../components/TabsSlider/TabsSlider.mjs";
+import ie from "../components/ConfirmDialog/ConfirmDialog.mjs";
 import { setDetailsPopUpInfoContent as me, removeDetailsPopUpInfoContent as ue, setInfoContent as de, removeInfoContent as le, resetChanges as j, showWarning as A, setFiltersWasHandled as D, setEditMode as he } from "../reducers/commonDetailsReducer.mjs";
 import { PRIMARY_BUTTON as fe, TERTIARY_BUTTON as pe, VIEW_SEARCH_PARAMETER as x } from "../constants.mjs";
 import { DETAILS_MENU as ge } from "../types.mjs";
@@ -31,19 +31,19 @@ const H = ({
   leavePage: T,
   params: h,
   renderHeader: n,
-  renderTabsContent: c,
+  renderTabsContent: i,
   setBlocker: S,
   setDetailsPopUpSelectedTab: b = null,
   shouldDetailsBlock: v,
   withActionMenu: k = !0
 }) => /* @__PURE__ */ d(X, { form: q.current, onSubmit: () => {
-}, children: (i) => /* @__PURE__ */ W("div", { className: a, ref: g, "data-testid": "detailsPanel", children: [
+}, children: (c) => /* @__PURE__ */ W("div", { className: a, ref: g, "data-testid": "detailsPanel", children: [
   s.loadingCounter > 0 && /* @__PURE__ */ d(ae, {}),
   s.error && /* @__PURE__ */ d(oe, { message: s.error.message }),
   /* @__PURE__ */ W("div", { className: "item-header-wrapper", children: [
     n(),
     k && /* @__PURE__ */ d(
-      ie,
+      ce,
       {
         initialTab: t ? E : h.tab,
         isDetailsPopUp: t,
@@ -53,9 +53,9 @@ const H = ({
       }
     )
   ] }),
-  /* @__PURE__ */ d("div", { className: "item-info", children: c(i) }),
+  /* @__PURE__ */ d("div", { className: "item-info", children: i(c) }),
   (f.state === "blocked" || p.showWarning) && /* @__PURE__ */ d(
-    ce,
+    ie,
     {
       cancelButton: {
         handler: R,
@@ -103,14 +103,14 @@ const De = ({
   isDetailsScreen: E,
   selectedItem: g
 }) => {
-  const [s, R] = G({}), q = w(), t = ee(), T = w(), h = ne(), n = te((e) => e.commonDetailsStore), c = re(), [S, b] = J(() => a ? [me, ue] : [de, le], [a]), v = w(
-    c.pathname.substring(0, c.pathname.lastIndexOf(h.tab))
+  const [s, R] = G({}), q = w(), t = ee(), T = w(), h = ne(), n = te((e) => e.commonDetailsStore), i = re(), [S, b] = J(() => a ? [me, ue] : [de, le], [a]), v = w(
+    i.pathname.substring(0, i.pathname.lastIndexOf(h.tab))
   ), k = Q(
     "table__item",
     n.showWarning && "pop-up-dialog-opened",
     E && "table__item_big",
     a && "table__item-popup"
-  ), i = w(
+  ), c = w(
     V({
       initialValues: o,
       mutators: { ...K, setFieldState: Re },
@@ -146,14 +146,14 @@ const De = ({
   );
   C(() => {
     var e, m;
-    i.current && n.changes.counter === 0 && !Z(y(o), y((e = i.current.getState()) == null ? void 0 : e.values)) && !((m = i.current.getState()) != null && m.active) && i.current.restart(o);
+    c.current && n.changes.counter === 0 && !Z(y(o), y((e = c.current.getState()) == null ? void 0 : e.values)) && !((m = c.current.getState()) != null && m.active) && c.current.restart(o);
   }, [o, n.changes.counter]), C(() => {
-    const e = c.pathname.substring(
+    const e = i.pathname.substring(
       0,
-      c.pathname.lastIndexOf(h.tab)
+      i.pathname.lastIndexOf(h.tab)
     );
-    v.current !== e && !a && (i.current.restart(o), t(he(!1)), v.current = e);
-  }, [t, o, a, c.pathname, h.tab]);
+    v.current !== e && !a && (c.current.restart(o), t(he(!1)), v.current = e);
+  }, [t, o, a, i.pathname, h.tab]);
   const O = l(() => {
     f(n.changes).then(() => {
       t(j());
@@ -161,6 +161,7 @@ const De = ({
       setTimeout(() => {
         p(e, g);
       });
+    }).catch(() => {
     });
   }, [
     f,
@@ -169,7 +170,7 @@ const De = ({
     t,
     g
   ]), _ = l(() => {
-    n.changes.counter > 0 && (t(j()), i.current.reset(o));
+    n.changes.counter > 0 && (t(j()), c.current.reset(o));
   }, [n.changes.counter, t, o]), F = l(() => {
     var e;
     _(), u(!1), n.filtersWasHandled && t(D(!1)), (e = s.proceed) == null || e.call(s), window.dispatchEvent(new CustomEvent("discardChanges"));
@@ -187,10 +188,10 @@ const De = ({
     detailsRef: T,
     commonDetailsStore: n,
     doNotLeavePage: Y,
-    formRef: i,
+    formRef: c,
     handleShowWarning: u,
     leavePage: F,
-    location: c,
+    location: i,
     params: h,
     removeDetailsInfo: b,
     setBlocker: R,
