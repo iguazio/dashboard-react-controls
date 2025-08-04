@@ -1,6 +1,8 @@
 
 
-Create a new dist version 3.1.4
+Create a new dist version 3.1.5
 
 Collecting:
-- Fix [UI] Incorrect behavior when adding a tag with a tag name that already exists in another object in the same project (#421)
+- Create SECURITY.md
+- Fix [Projects Setting] Redundant request for empty label data and invalid empty-key in Node Selector params (#423)
+- Fix [UI] No space between labels (#424)

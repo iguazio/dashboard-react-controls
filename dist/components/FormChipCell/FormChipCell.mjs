@@ -2,7 +2,7 @@ import { jsxs as ne, jsx as T } from "react/jsx-runtime";
 import pe, { useState as k, useMemo as ce, useCallback as y } from "react";
 import he, { get as F, set as O, isEmpty as D, isNil as ae } from "lodash";
 import de from "classnames";
-import u from "prop-types";
+import o from "prop-types";
 import fe from "./FormChipCellView.mjs";
 import { CHIP_OPTIONS as me } from "../../types.mjs";
 import { CLICK as Ce, TAB as H, TAB_SHIFT as U } from "../../constants.mjs";
@@ -28,7 +28,7 @@ let R = ({
   initialValues: q,
   isEditable: m = !1,
   label: V = null,
-  name: o,
+  name: r,
   onClick: w = () => {
   },
   shortChips: $ = !1,
@@ -56,28 +56,28 @@ let R = ({
     isNewChip: !1
   });
   let E = ce(() => m || I === "all" ? {
-    visibleChips: F(n.values, o),
+    visibleChips: F(n.values, r),
     hiddenChips: []
   } : ye(
-    F(n.values, o),
+    F(n.values, r),
     I || j
-  ), [I, m, j, n.values, o]);
+  ), [I, m, j, n.values, r]);
   const N = y(
     (e) => {
-      Ie(F(q, o), e, ["id"]) && O(n.initialValues, o, e), n.form.mutators.setFieldState(o, { modified: !0 }), n.form.mutators.setFieldState(o, { touched: !0 });
+      Ie(F(q, r), e, ["id"]) && O(n.initialValues, r, e), n.form.mutators.setFieldState(r, { modified: !0 }), n.form.mutators.setFieldState(r, { touched: !0 });
     },
-    [q, o, n]
+    [q, r, n]
   ), M = y(
     (e, i) => {
       var t;
-      const r = ((t = i.value) == null ? void 0 : t.length) || 0;
-      !p.isEdit && !p.chipIndex && n.form.mutators.push(o, {
-        id: r + /* @__PURE__ */ new Date(),
+      const u = ((t = i.value) == null ? void 0 : t.length) || 0;
+      !p.isEdit && !p.chipIndex && n.form.mutators.push(r, {
+        id: u + /* @__PURE__ */ new Date(),
         key: "",
         value: "",
         delimiter: _
       }), P && K(!1), C({
-        chipIndex: r,
+        chipIndex: u,
         isEdit: !0,
         isKeyFocused: !0,
         isValueFocused: !1,
@@ -89,27 +89,27 @@ let R = ({
       p.chipIndex,
       P,
       n.form.mutators,
-      o,
+      r,
       _,
       K
     ]
   ), g = y(
-    (e, i, r, t = !1) => {
+    (e, i, u, t = !1) => {
       N(
-        he.chain(n).get(["values", o]).filter((s, l) => l !== r).value()
-      ), i.remove(r), d && d(), e && !t && e.stopPropagation();
+        he.chain(n).get(["values", r]).filter((s, l) => l !== u).value()
+      ), i.length === 1 ? n.form.change(r, []) : i.remove(u), d && d(), e && !t && e.stopPropagation();
     },
-    [N, n, o, d]
+    [N, n, r, d]
   ), ee = y(
-    (e, i, r, t) => {
+    (e, i, u, t) => {
       const { key: s, value: l } = i.value[p.chipIndex], h = !!(s != null && s.trim() && (l != null && l.trim()));
-      r === Ce ? (h || g(e, i, p.chipIndex, t), C({
+      u === Ce ? (h || g(e, i, p.chipIndex, t), C({
         chipIndex: null,
         isEdit: !1,
         isKeyFocused: !1,
         isValueFocused: !1,
         isNewChip: !1
-      }), h && d && d()) : r === H ? (h || g(e, i, p.chipIndex), C((a) => {
+      }), h && d && d()) : u === H ? (h || g(e, i, p.chipIndex), C((a) => {
         const c = a.chipIndex + 1 > i.value.length - 1;
         return h && c && d && d(), {
           chipIndex: c ? null : a.chipIndex + 1,
@@ -118,7 +118,7 @@ let R = ({
           isValueFocused: !1,
           isNewChip: !1
         };
-      })) : r === U && (h || g(e, i, p.chipIndex), C((a) => {
+      })) : u === U && (h || g(e, i, p.chipIndex), C((a) => {
         const c = a.chipIndex === 0;
         return h && c && d && d(), {
           chipIndex: c ? null : a.chipIndex - 1,
@@ -127,18 +127,18 @@ let R = ({
           isValueFocused: !c,
           isNewChip: !1
         };
-      })), N(F(n.values, o)), (p.chipIndex > 0 && p.chipIndex < i.value.length - 1 || i.value.length > 1 && p.chipIndex === 0 && r !== U || i.value.length > 1 && p.chipIndex === i.value.length - 1 && r !== H) && e && e.preventDefault();
+      })), N(F(n.values, r)), (p.chipIndex > 0 && p.chipIndex < i.value.length - 1 || i.value.length > 1 && p.chipIndex === 0 && u !== U || i.value.length > 1 && p.chipIndex === i.value.length - 1 && u !== H) && e && e.preventDefault();
     },
     [
       p.chipIndex,
       N,
       n.values,
-      o,
+      r,
       d,
       g
     ]
   ), ie = y(
-    (e, i, r) => {
+    (e, i, u) => {
       if (m) {
         const { clientX: t, clientY: s } = e;
         let l = !1;
@@ -157,7 +157,7 @@ let R = ({
           t,
           s,
           e.target.firstElementChild
-        )) : l = e.target.name === r, C((a) => ({
+        )) : l = e.target.name === u, C((a) => ({
           ...a,
           chipIndex: i,
           isEdit: !0,
@@ -171,14 +171,14 @@ let R = ({
   ), se = (e) => {
     if (!e) return null;
     let i = [];
-    const r = (t, s) => !e.some(({ key: l }, h) => t === l && h !== s);
+    const u = (t, s) => !e.some(({ key: l }, h) => t === l && h !== s);
     return D(v) || (i = e.map((t) => {
       const [s, l] = le(t);
       return s && l ? { key: s, value: l } : s ? { key: s } : l ? { value: l } : null;
     })), e.forEach((t, s) => {
-      r(t.key, s) || (F(i, [s, "key"], !1) ? i.at(s).key.push(z) : O(i, [s, "key"], [z]));
+      u(t.key, s) || (F(i, [s, "key"], !1) ? i.at(s).key.push(z) : O(i, [s, "key"], [z]));
     }), D(i) && x && (i = x(e)), i.every((t) => ae(t)) ? null : i;
-  }, le = ({ key: e, value: i, disabled: r }) => {
+  }, le = ({ key: e, value: i, disabled: u }) => {
     const t = (s, l) => {
       const [h, a] = ge(
         v[l].filter((f) => f.pattern),
@@ -186,9 +186,9 @@ let R = ({
       );
       return a ? null : h.filter((f) => !f.isValid).map((f) => ({ name: f.name, label: f.label }));
     };
-    return r ? [null, null] : [t(e, "key"), t(i, "value")];
+    return u ? [null, null] : [t(e, "key"), t(i, "value")];
   };
-  return /* @__PURE__ */ ne("div", { className: W, "data-testid": `${o}-chips`, children: [
+  return /* @__PURE__ */ ne("div", { className: W, "data-testid": `${r}-chips`, children: [
     V && /* @__PURE__ */ T("div", { className: "chips__label", children: V }),
     /* @__PURE__ */ T("div", { className: V ? "chips__wrapper" : "", children: /* @__PURE__ */ T(
       fe,
@@ -204,7 +204,7 @@ let R = ({
         handleShowElements: J,
         handleToEditMode: ie,
         isEditable: m,
-        name: o,
+        name: r,
         ref: { chipsCellRef: A, chipsWrapperRef: G, hiddenChipsCounterRef: L, hiddenChipsPopUpRef: Q },
         setChipSizeIsRecalculated: Y,
         setChipsSizes: Z,
@@ -220,19 +220,19 @@ let R = ({
 };
 R.propTypes = {
   chipOptions: me,
-  className: u.string,
-  delimiter: u.oneOfType([u.string, u.element]),
-  formState: u.object.isRequired,
-  initialValues: u.object.isRequired,
-  isEditable: u.bool,
-  label: u.string,
-  name: u.string.isRequired,
-  onClick: u.func,
-  onExitEditModeCallback: u.func,
-  shortChips: u.bool,
-  validationRules: u.object,
-  validator: u.func,
-  visibleChipsMaxLength: u.oneOfType([u.string, u.number])
+  className: o.string,
+  delimiter: o.oneOfType([o.string, o.element]),
+  formState: o.object.isRequired,
+  initialValues: o.object.isRequired,
+  isEditable: o.bool,
+  label: o.string,
+  name: o.string.isRequired,
+  onClick: o.func,
+  onExitEditModeCallback: o.func,
+  shortChips: o.bool,
+  validationRules: o.object,
+  validator: o.func,
+  visibleChipsMaxLength: o.oneOfType([o.string, o.number])
 };
 R = pe.memo(R);
 const He = R;

@@ -1,26 +1,29 @@
-import { set as a, isEqual as u } from "lodash";
-const d = (e, r) => {
-  let t = e[0], n = e[1], i = r.fields[t];
-  if (i)
-    for (let s in n)
-      a(i, s, n[s]);
-}, o = (e, r) => {
-  const t = (n, i) => {
-    if (i !== "")
-      return i;
+import { set as u, isEqual as l, mapValues as d, some as m, get as c, isNil as o, isEmpty as f } from "lodash";
+const p = (e, t) => {
+  let r = e[0], i = e[1], n = t.fields[r];
+  if (n)
+    for (let s in i)
+      u(n, s, i[s]);
+}, b = (e, t) => {
+  const r = (i, n) => {
+    if (n !== "")
+      return n;
   };
-  return !u(JSON.stringify(e, t), JSON.stringify(r, t));
-}, c = (e = []) => e.reduce((r, t) => (r[t.data.key] = t.data.value, r), {}), f = (e = {}) => Object.entries(e).map(([r, t]) => ({
+  return !l(
+    JSON.stringify(a(e), r),
+    JSON.stringify(a(t), r)
+  );
+}, O = (e = []) => e.reduce((t, r) => (t[r.data.key] = r.data.value, t), {}), g = (e = {}) => Object.entries(e).map(([t, r]) => ({
   data: {
-    key: r,
-    value: t
+    key: t,
+    value: r
   }
-})), m = (e) => e.submitting || e.invalid && e.submitFailed;
+})), F = (e) => e.submitting || e.invalid && e.submitFailed, a = (e = {}) => d(e, (t) => Array.isArray(t) ? t.filter((r) => m(c(r, "data", r), (i) => !o(i) && !f(i))) : t);
 export {
-  o as areFormValuesChanged,
-  c as generateObjectFromKeyValue,
-  m as isSubmitDisabled,
-  f as parseObjectToKeyValue,
-  d as setFieldState
+  b as areFormValuesChanged,
+  O as generateObjectFromKeyValue,
+  F as isSubmitDisabled,
+  g as parseObjectToKeyValue,
+  p as setFieldState
 };
 //# sourceMappingURL=form.util.mjs.map
