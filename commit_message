@@ -1,8 +1,6 @@
 
 
-Create a new dist version 3.1.5
+Create a new dist version 3.1.6
 
 Collecting:
-- Create SECURITY.md
-- Fix [Projects Setting] Redundant request for empty label data and invalid empty-key in Node Selector params (#423)
-- Fix [UI] No space between labels (#424)
+- Fix [Alerts] '!' icon is missing on the Alerts tab (#426)
