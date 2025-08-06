@@ -391,6 +391,7 @@ const FormCombobox = ({
               )}
             </div>
             <input
+              autoComplete="off"
               className={inputClassNames}
               data-testid={name ? `${name}-form-combobox-input` : 'form-combobox-input'}
               id={input.name}
@@ -418,6 +419,7 @@ const FormCombobox = ({
                   {!hideSearchInput && (
                     <div className="form-field-combobox__search-wrapper">
                       <input
+                        autoComplete="off"
                         data-testid={name ? `${name}-form-combobox-search` : 'form-combobox-search'}
                         className="form-field-combobox__search form-field__control"
                         onChange={suggestionListSearchChange}
