@@ -29,9 +29,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - uses: denoland/setup-deno@v1
+      - uses: denoland/setup-deno@11b63cf76cfcafb4e43f97b6cad24d8e8438f62d
         with:
-          deno-version: v1.x
+          deno-version: v1.5.2
       - name: Check
         run: |
           deno run --allow-read https://deno.land/x/license_checker@v3.2.3/main.ts
