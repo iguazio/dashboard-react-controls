@@ -70,8 +70,12 @@ const clearObjectFromEmptyArrayElements = (obj = {}) => {
   return mapValues(obj, objValue => {
     if (!Array.isArray(objValue)) return objValue
 
-    return objValue.filter(arrayElement => {
-      return some(get(arrayElement, 'data', arrayElement), val => !isNil(val) && !isEmpty(val))
-    })
+    return clearArrayFromEmptyObjectElements(objValue)
+  })
+}
+
+export const clearArrayFromEmptyObjectElements = (arr = []) => {
+  return arr.filter(arrayElement => {
+    return some(get(arrayElement, 'data', arrayElement), val => !isNil(val) && !isEmpty(val))
   })
 }
