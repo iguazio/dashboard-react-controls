@@ -191,3 +191,62 @@ export const useTable = ({ ref, selectedItem, skipTableWrapper = false, tableCla
     tableWrapperClass
   }
 }
+
+export const useTableScroll = ({ content, selectedItem, tableId=MAIN_TABLE_ID }) => {
+  const lastSelectedItemDataRef = useRef(null)
+
+  const handleSelectItemChanges = useCallback((identifier, content, async = false) => {
+    const selectedItemIndex = content?.findIndex(item => item?.ui?.identifier === identifier)
+    const triggerScroll = () => {
+      const tableElement = document.getElementById(tableId)
+
+      if (selectedItemIndex && tableElement) {
+        const rows = tableElement.getElementsByTagName('tr')
+
+        if (selectedItemIndex <= rows.length) {
+          const theadHeight =
+            tableElement.querySelector('thead')?.getBoundingClientRect().height ?? 0
+          const rowRect = rows[selectedItemIndex].getBoundingClientRect()
+          const tableRect = tableElement.getBoundingClientRect()
+          const rowCenterY = rowRect.height / 2
+          const tableCenterY = (tableRect.height - theadHeight) / 2
+          const heightToRow = rowRect.height * (selectedItemIndex + 1)
+          const scrollY = heightToRow - rowCenterY - tableCenterY
+
+          tableElement.scrollTo({
+            top: scrollY
+          })
+        }
+      }
+    }
+
+    if (selectedItemIndex >= 0) {
+      if (async) {
+        requestAnimationFrame(() => {
+          triggerScroll()
+        })
+      } else {
+        triggerScroll()
+      }
+    }
+  }, [])
+
+  useEffect(() => {
+    try {
+      if (!isEmpty(selectedItem)) {
+        if (!lastSelectedItemDataRef.current) {
+          lastSelectedItemDataRef.current = selectedItem.ui
+          handleSelectItemChanges(selectedItem?.ui?.identifier, content, true)
+        } else {
+          lastSelectedItemDataRef.current = selectedItem.ui
+        }
+      } else if (lastSelectedItemDataRef.current) {
+        handleSelectItemChanges(lastSelectedItemDataRef.current?.identifier, content)
+
+        lastSelectedItemDataRef.current = null
+      }
+    } catch {
+      lastSelectedItemDataRef.current = null
+    }
+  }, [selectedItem.ui?.identifier, content, selectedItem, handleSelectItemChanges])
+}
