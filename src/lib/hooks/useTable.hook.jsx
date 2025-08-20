@@ -17,7 +17,7 @@ illegal under applicable law, and the grant of the foregoing license
 under the Apache 2.0 license is conditioned upon your compliance with
 such restriction.
 */
-import React, { useCallback, useEffect, useRef } from 'react'
+import React, { useCallback, useEffect, useMemo, useRef } from 'react'
 import PropTypes from 'prop-types'
 import classnames from 'classnames'
 import { useSelector } from 'react-redux'
@@ -192,11 +192,13 @@ export const useTable = ({ ref, selectedItem, skipTableWrapper = false, tableCla
   }
 }
 
-export const useTableScroll = ({ content, selectedItem, tableId=MAIN_TABLE_ID }) => {
+export const useTableScroll = ({ content, selectedItem, isAllVersions, tableId=MAIN_TABLE_ID }) => {
   const lastSelectedItemDataRef = useRef(null)
+  const itemIdentifierKey = useMemo( () => isAllVersions ? 'identifierUnique' : 'identifier', [isAllVersions])
 
   const handleSelectItemChanges = useCallback((identifier, content, async = false) => {
-    const selectedItemIndex = content?.findIndex(item => item?.ui?.identifier === identifier)
+    const selectedItemIndex = content?.findIndex(item => item?.ui?.[itemIdentifierKey] === identifier)
+
     const triggerScroll = () => {
       const tableElement = document.getElementById(tableId)
 
@@ -229,24 +231,30 @@ export const useTableScroll = ({ content, selectedItem, tableId=MAIN_TABLE_ID })
         triggerScroll()
       }
     }
-  }, [])
+  }, [itemIdentifierKey, tableId])
 
   useEffect(() => {
     try {
       if (!isEmpty(selectedItem)) {
         if (!lastSelectedItemDataRef.current) {
           lastSelectedItemDataRef.current = selectedItem.ui
-          handleSelectItemChanges(selectedItem?.ui?.identifier, content, true)
+          handleSelectItemChanges(selectedItem?.ui?.[itemIdentifierKey], content, true)
         } else {
           lastSelectedItemDataRef.current = selectedItem.ui
         }
       } else if (lastSelectedItemDataRef.current) {
-        handleSelectItemChanges(lastSelectedItemDataRef.current?.identifier, content)
+        handleSelectItemChanges(lastSelectedItemDataRef.current?.[itemIdentifierKey], content)
 
         lastSelectedItemDataRef.current = null
       }
     } catch {
       lastSelectedItemDataRef.current = null
     }
-  }, [selectedItem.ui?.identifier, content, selectedItem, handleSelectItemChanges])
+  }, [selectedItem, content, handleSelectItemChanges, itemIdentifierKey])
+
+  useEffect(() => {
+    return () => {
+      lastSelectedItemDataRef.current = null
+    }
+  }, [content])
 }
