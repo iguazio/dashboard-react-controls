@@ -192,46 +192,59 @@ export const useTable = ({ ref, selectedItem, skipTableWrapper = false, tableCla
   }
 }
 
-export const useTableScroll = ({ content, selectedItem, isAllVersions, tableId=MAIN_TABLE_ID }) => {
+export const useTableScroll = ({
+  content,
+  selectedItem,
+  isAllVersions,
+  tableId = MAIN_TABLE_ID
+}) => {
   const lastSelectedItemDataRef = useRef(null)
-  const itemIdentifierKey = useMemo( () => isAllVersions ? 'identifierUnique' : 'identifier', [isAllVersions])
+  const itemIdentifierKey = useMemo(
+    () => (isAllVersions ? 'identifierUnique' : 'identifier'),
+    [isAllVersions]
+  )
 
-  const handleSelectItemChanges = useCallback((identifier, content, async = false) => {
-    const selectedItemIndex = content?.findIndex(item => item?.ui?.[itemIdentifierKey] === identifier)
+  const handleSelectItemChanges = useCallback(
+    (identifier, content, async = false) => {
+      const selectedItemIndex = content?.findIndex(
+        item => item?.ui?.[itemIdentifierKey] === identifier
+      )
 
-    const triggerScroll = () => {
-      const tableElement = document.getElementById(tableId)
+      const triggerScroll = () => {
+        const tableElement = document.getElementById(tableId)
 
-      if (selectedItemIndex && tableElement) {
-        const rows = tableElement.getElementsByTagName('tr')
+        if (selectedItemIndex && tableElement) {
+          const rows = tableElement.getElementsByTagName('tr')
 
-        if (selectedItemIndex <= rows.length) {
-          const theadHeight =
-            tableElement.querySelector('thead')?.getBoundingClientRect().height ?? 0
-          const rowRect = rows[selectedItemIndex].getBoundingClientRect()
-          const tableRect = tableElement.getBoundingClientRect()
-          const rowCenterY = rowRect.height / 2
-          const tableCenterY = (tableRect.height - theadHeight) / 2
-          const heightToRow = rowRect.height * (selectedItemIndex + 1)
-          const scrollY = heightToRow - rowCenterY - tableCenterY
+          if (selectedItemIndex <= rows.length) {
+            const theadHeight =
+              tableElement.querySelector('thead')?.getBoundingClientRect().height ?? 0
+            const rowRect = rows[selectedItemIndex].getBoundingClientRect()
+            const tableRect = tableElement.getBoundingClientRect()
+            const rowCenterY = rowRect.height / 2
+            const tableCenterY = (tableRect.height - theadHeight) / 2
+            const heightToRow = rowRect.height * (selectedItemIndex + 1)
+            const scrollY = heightToRow - rowCenterY - tableCenterY
 
-          tableElement.scrollTo({
-            top: scrollY
-          })
+            tableElement.scrollTo({
+              top: scrollY
+            })
+          }
         }
       }
-    }
 
-    if (selectedItemIndex >= 0) {
-      if (async) {
-        requestAnimationFrame(() => {
+      if (selectedItemIndex >= 0) {
+        if (async) {
+          requestAnimationFrame(() => {
+            triggerScroll()
+          })
+        } else {
           triggerScroll()
-        })
-      } else {
-        triggerScroll()
+        }
       }
-    }
-  }, [itemIdentifierKey, tableId])
+    },
+    [itemIdentifierKey, tableId]
+  )
 
   useEffect(() => {
     try {
