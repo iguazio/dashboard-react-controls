@@ -8,4 +8,5 @@ export function parseObjectToKeyValue(object?: {}): {
     };
 }[];
 export function isSubmitDisabled(formState: any): any;
+export function clearArrayFromEmptyObjectElements(arr?: any[]): any[];
 //# sourceMappingURL=form.util.d.ts.map
