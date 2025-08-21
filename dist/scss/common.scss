@@ -221,6 +221,8 @@ a {
   min-width: 800px;
   padding: 15px 24px 10px;
   background-color: colors.$white;
+  overflow: auto;
+  min-height: 0;
 
   @include mixins.displayFlex;
 
@@ -263,12 +265,14 @@ a {
     flex: 1 1;
     flex-direction: column;
     min-width: 100%;
+    min-height: 0;
   }
 
   &__action-bar-wrapper {
     display: flex;
     flex-flow: row wrap;
     align-items: center;
+    background-color: colors.$white;
 
     &_hidden {
       display: none;
@@ -283,27 +287,6 @@ a {
         white-space: nowrap;
       }
     }
-
-    .action-bar {
-      display: flex;
-      flex: 1;
-      align-items: flex-start;
-      justify-content: flex-end;
-      width: 100%;
-      margin-bottom: 15px;
-
-      &_hidden {
-        display: none;
-      }
-
-      &__filters {
-        &-item {
-          &:not(:last-child) {
-            margin: 0 15px 0 0;
-          }
-        }
-      }
-    }
   }
 
   &__history-back-link-wrapper {
@@ -311,6 +294,27 @@ a {
 
     .history-back-link__title {
       max-width: 100%;
+    }
+  }
+
+  .action-bar {
+    display: flex;
+    flex: 1;
+    align-items: flex-start;
+    justify-content: flex-end;
+    width: 100%;
+    margin-bottom: 15px;
+
+    &_hidden {
+      display: none;
+    }
+
+    &__filters {
+      &-item {
+        &:not(:last-child) {
+          margin: 0 15px 0 0;
+        }
+      }
     }
   }
 }
