@@ -235,13 +235,20 @@ const FormCombobox = ({
     })
   }
 
-  const inputOnFocus = () => {
+  const inputOnFocus = event => {
     onFocus && onFocus()
     input.onFocus(new Event('focus'))
 
     if (showSelectDropdown) {
       setShowSelectDropdown(false)
     }
+
+    // browser need some time to calculate cursor position after onFocus fired
+    setTimeout(() => {
+      setDropdownStyle({
+        left: `${event.target.selectionStart < 30 ? event.target.selectionStart : 30}ch`
+      })
+    })
 
     setShowSuggestionList(true)
   }
