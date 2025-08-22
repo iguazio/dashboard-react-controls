@@ -244,13 +244,16 @@ const FormCombobox = ({
     }
 
     // browser need some time to calculate cursor position after onFocus fired
-    setTimeout(() => {
-      setDropdownStyle({
-        left: `${event.target.selectionStart < 30 ? event.target.selectionStart : 30}ch`
+    if (!inputRef.current.selectionStart) {
+      setTimeout(() => {
+        setDropdownStyle({
+          left: `${event.target.selectionStart < 30 ? event.target.selectionStart : 30}ch`
+        })
+        setShowSuggestionList(true)
       })
-    })
-
-    setShowSuggestionList(true)
+    } else {
+      setShowSuggestionList(true)
+    }
   }
 
   const suggestionListSearchChange = event => {
