@@ -57,4 +57,10 @@ export function useTable({ ref, selectedItem, skipTableWrapper, tableClassName }
     tableStore: any;
     tableWrapperClass: string;
 };
+export function useTableScroll({ content, selectedItem, isAllVersions, tableId }: {
+    content: any;
+    selectedItem: any;
+    isAllVersions: any;
+    tableId?: string;
+}): void;
 //# sourceMappingURL=useTable.hook.d.ts.map

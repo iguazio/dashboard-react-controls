@@ -1,9 +1,6 @@
 
 
-Create a new dist version 3.1.7
+Create a new dist version 3.1.8
 
 Collecting:
-- Fix [SecVul] Fix Workflow does not contain permissions (#429)
-- Fix [SecVul] [3.7.1] Fix Unpinned tag for a non-immutable Action in workflow (#430)
-- Fix [Projects Setting] Redundant request for empty label data and invalid empty-key in Node Selector params (#431)
-- Fix [General] Breadcrumbs are scrolled with the content (#432)
+- Fix [Artifacts] Selected artifact shifts out of view after opening detail pane (#434)
