@@ -17,7 +17,7 @@ illegal under applicable law, and the grant of the foregoing license
 under the Apache 2.0 license is conditioned upon your compliance with
 such restriction.
 */
-import React, { useCallback, useEffect, useRef } from 'react'
+import React, { useCallback, useEffect, useMemo, useRef } from 'react'
 import PropTypes from 'prop-types'
 import classnames from 'classnames'
 import { useSelector } from 'react-redux'
@@ -190,4 +190,84 @@ export const useTable = ({ ref, selectedItem, skipTableWrapper = false, tableCla
     tableStore,
     tableWrapperClass
   }
+}
+
+export const useTableScroll = ({
+  content,
+  selectedItem,
+  isAllVersions,
+  tableId = MAIN_TABLE_ID
+}) => {
+  const lastSelectedItemDataRef = useRef(null)
+  const itemIdentifierKey = useMemo(
+    () => (isAllVersions ? 'identifierUnique' : 'identifier'),
+    [isAllVersions]
+  )
+
+  const handleSelectItemChanges = useCallback(
+    (identifier, content, async = false) => {
+      const selectedItemIndex = content?.findIndex(
+        item => item?.ui?.[itemIdentifierKey] === identifier
+      )
+
+      const triggerScroll = () => {
+        const tableElement = document.getElementById(tableId)
+
+        if (selectedItemIndex && tableElement) {
+          const rows = tableElement.getElementsByTagName('tr')
+
+          if (selectedItemIndex <= rows.length) {
+            const theadHeight =
+              tableElement.querySelector('thead')?.getBoundingClientRect().height ?? 0
+            const rowRect = rows[selectedItemIndex].getBoundingClientRect()
+            const tableRect = tableElement.getBoundingClientRect()
+            const rowCenterY = rowRect.height / 2
+            const tableCenterY = (tableRect.height - theadHeight) / 2
+            const heightToRow = rowRect.height * (selectedItemIndex + 1)
+            const scrollY = heightToRow - rowCenterY - tableCenterY
+
+            tableElement.scrollTo({
+              top: scrollY
+            })
+          }
+        }
+      }
+
+      if (selectedItemIndex >= 0) {
+        if (async) {
+          requestAnimationFrame(() => {
+            triggerScroll()
+          })
+        } else {
+          triggerScroll()
+        }
+      }
+    },
+    [itemIdentifierKey, tableId]
+  )
+
+  useEffect(() => {
+    try {
+      if (!isEmpty(selectedItem)) {
+        if (!lastSelectedItemDataRef.current) {
+          lastSelectedItemDataRef.current = selectedItem.ui
+          handleSelectItemChanges(selectedItem?.ui?.[itemIdentifierKey], content, true)
+        } else {
+          lastSelectedItemDataRef.current = selectedItem.ui
+        }
+      } else if (lastSelectedItemDataRef.current) {
+        handleSelectItemChanges(lastSelectedItemDataRef.current?.[itemIdentifierKey], content)
+
+        lastSelectedItemDataRef.current = null
+      }
+    } catch {
+      lastSelectedItemDataRef.current = null
+    }
+  }, [selectedItem, content, handleSelectItemChanges, itemIdentifierKey])
+
+  useEffect(() => {
+    return () => {
+      lastSelectedItemDataRef.current = null
+    }
+  }, [content])
 }
