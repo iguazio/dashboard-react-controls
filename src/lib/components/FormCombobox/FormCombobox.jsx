@@ -235,7 +235,7 @@ const FormCombobox = ({
     })
   }
 
-  const inputOnFocus = () => {
+  const inputOnFocus = event => {
     onFocus && onFocus()
     input.onFocus(new Event('focus'))
 
@@ -243,7 +243,17 @@ const FormCombobox = ({
       setShowSelectDropdown(false)
     }
 
-    setShowSuggestionList(true)
+    // browser need some time to calculate cursor position after onFocus fired
+    if (!inputRef.current.selectionStart) {
+      setTimeout(() => {
+        setDropdownStyle({
+          left: `${event.target.selectionStart < 30 ? event.target.selectionStart : 30}ch`
+        })
+        setShowSuggestionList(true)
+      })
+    } else {
+      setShowSuggestionList(true)
+    }
   }
 
   const suggestionListSearchChange = event => {
@@ -391,6 +401,7 @@ const FormCombobox = ({
               )}
             </div>
             <input
+              autoComplete="off"
               className={inputClassNames}
               data-testid={name ? `${name}-form-combobox-input` : 'form-combobox-input'}
               id={input.name}
@@ -418,6 +429,7 @@ const FormCombobox = ({
                   {!hideSearchInput && (
                     <div className="form-field-combobox__search-wrapper">
                       <input
+                        autoComplete="off"
                         data-testid={name ? `${name}-form-combobox-search` : 'form-combobox-search'}
                         className="form-field-combobox__search form-field__control"
                         onChange={suggestionListSearchChange}
