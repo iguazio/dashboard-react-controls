@@ -1,6 +1,6 @@
 
 
-Create a new dist version 3.1.8
+Create a new dist version 3.1.9
 
 Collecting:
-- Fix [Artifacts] Selected artifact shifts out of view after opening detail pane (#434)
+- Fix [Batch run] small issues in the Data inputs "Path" field (#436)
