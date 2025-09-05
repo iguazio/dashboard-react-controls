@@ -113,7 +113,7 @@
     "scripts": {
         "lint": "eslint 'src/**/*.{js,jsx}' --quiet",
         "lint:fix": "eslint 'src/**/*.{js,jsx}' --fix",
-        "stylelint": "stylelint '**/*.{css,scss}'",
+        "stylelint": "stylelint 'src/**/*.{css,scss}'",
         "prettier": "prettier --check 'src/**/*.{js,jsx,scss}'",
         "prettier:fix": "prettier --write 'src/**/*.{js,jsx,scss}'",
         "build-storybook": "build-storybook",
