@@ -1,6 +1,6 @@
 
 
-Create a new dist version 3.1.9
+Create a new dist version 3.1.10
 
 Collecting:
-- Fix [Batch run] small issues in the Data inputs "Path" field (#436)
+- Fix [Jobs] Missing (current) project in batch run functions dropdown (#438)
