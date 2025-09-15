@@ -42,6 +42,7 @@ let FormSelect = ({
   name,
   onChange = null,
   options,
+  placeholder = '',
   preventWidthOverflow = false,
   required = false,
   scrollToView = true,
@@ -281,7 +282,7 @@ let FormSelect = ({
               <div className="form-field__control">
                 {!hideSelectedOption && (
                   <div data-testid="selected-option" className="form-field__select">
-                    <span className={selectValueClassName}>{getSelectValue()}</span>
+                    <span className={selectValueClassName}>{getSelectValue() || placeholder}</span>
                   </div>
                 )}
               </div>
@@ -409,6 +410,7 @@ FormSelect.propTypes = {
   name: PropTypes.string.isRequired,
   onChange: PropTypes.func,
   options: SELECT_OPTIONS.isRequired,
+  placeholder: PropTypes.string,
   preventWidthOverflow: PropTypes.bool,
   required: PropTypes.bool,
   scrollToView: PropTypes.bool,
