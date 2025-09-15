@@ -1,5 +1,5 @@
 export default FormSelect;
-declare function FormSelect({ className, density, disabled, hideSelectedOption, label, multiple, name, onChange, options, preventWidthOverflow, required, scrollToView, search, selectedItemAction, tooltip, withSelectedIcon, withoutBorder }: {
+declare function FormSelect({ className, density, disabled, hideSelectedOption, label, multiple, name, onChange, options, placeholder, preventWidthOverflow, required, scrollToView, search, selectedItemAction, tooltip, withSelectedIcon, withoutBorder }: {
     className?: string;
     density?: string;
     disabled?: boolean;
@@ -9,6 +9,7 @@ declare function FormSelect({ className, density, disabled, hideSelectedOption, 
     name: any;
     onChange?: any;
     options: any;
+    placeholder?: string;
     preventWidthOverflow?: boolean;
     required?: boolean;
     scrollToView?: boolean;
@@ -29,6 +30,7 @@ declare namespace FormSelect {
         export let name: any;
         export let onChange: any;
         export let options: any;
+        export let placeholder: any;
         export let preventWidthOverflow: any;
         export let required: any;
         export let scrollToView: any;
