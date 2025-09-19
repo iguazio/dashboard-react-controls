@@ -28,6 +28,7 @@ import './tooltip.scss'
 let Tooltip = ({
   children = '',
   className = '',
+  tooltipBodyClassName = '',
   hidden = false,
   id = '',
   renderChildAsHtml = false,
@@ -37,7 +38,8 @@ let Tooltip = ({
   const [show, setShow] = useState(false)
   const [style, setStyle] = useState({})
 
-  const tooltipClassNames = classnames('data-ellipsis', 'tooltip-wrapper', className)
+  const tooltipWrapperClassNames = classnames('data-ellipsis', 'tooltip-wrapper', className)
+  const tooltipBodyClassNames = classnames('tooltip', tooltipBodyClassName)
   const duration = 200
   const parentRef = useRef()
   const tooltipRef = useRef()
@@ -174,7 +176,7 @@ let Tooltip = ({
         <div
           data-testid={id ? `${id}-tooltip-wrapper` : 'tooltip-wrapper'}
           ref={parentRef}
-          className={tooltipClassNames}
+          className={tooltipWrapperClassNames}
           dangerouslySetInnerHTML={{ __html: children }}
           onClick={handleMouseLeave}
         />
@@ -182,7 +184,7 @@ let Tooltip = ({
         <div
           data-testid={id ? `${id}-tooltip-wrapper` : 'tooltip-wrapper'}
           ref={parentRef}
-          className={tooltipClassNames}
+          className={tooltipWrapperClassNames}
           onClick={handleMouseLeave}
         >
           {children}
@@ -203,7 +205,7 @@ let Tooltip = ({
               style={{
                 ...style
               }}
-              className="tooltip"
+              className={tooltipBodyClassNames}
             >
               {template}
             </div>
@@ -217,6 +219,7 @@ let Tooltip = ({
 Tooltip.propTypes = {
   children: PropTypes.any,
   className: PropTypes.string,
+  tooltipBodyClassName: PropTypes.string,
   hidden: PropTypes.bool,
   id: PropTypes.string,
   renderChildAsHtml: PropTypes.bool,
