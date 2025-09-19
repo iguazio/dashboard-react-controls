@@ -32,17 +32,20 @@ const NavbarLink = ({ externalLink = false, icon = null, index = null, label, li
 
   const parentLinkClasses = classNames(
     'nav-link__button btn nav-link__parent',
-    pathname.includes(props.id || link) && 'active',
+    (pathname.includes(props.id || link) || props?.screens && props.screens.some(screen => pathname.includes(screen))) && 'active',
     index === selectedIndex && 'expended'
   )
 
   const handleExpanded = () => {
-    if (index !== selectedIndex) {
-      setSelectedIndex && setSelectedIndex(index)
-    } else {
-      setSelectedIndex && setSelectedIndex(null)
+    if (setSelectedIndex) {
+      if (index !== selectedIndex) {
+       setSelectedIndex(index)
+      } else {
+        setSelectedIndex(null)
+      }
     }
 
+    return
   }
 
   return externalLink ? (
@@ -75,6 +78,7 @@ NavbarLink.propTypes = {
   label: PropTypes.string.isRequired,
   link: PropTypes.string,
   nestedLinks: PropTypes.array,
+  screens: PropTypes.array,
   selectedIndex: PropTypes.number,
   setSelectedIndex: PropTypes.func,
 }
