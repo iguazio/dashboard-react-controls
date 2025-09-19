@@ -53,6 +53,21 @@
         background-color: colors.$crystalBell;
         font-weight: bold;
         cursor: pointer;
+
+        &::before {
+          content: '';
+          border: 2px solid colors.$malibu;
+          height: 100%;
+          position: absolute;
+          left: 0;
+          transition: border-color 0.3s ease-in-out;
+
+          .navbar:hover &,
+          .navbar.navbar_hovered &,
+          .navbar.navbar_pinned & {
+            border-color: transparent;
+          }
+        }
       }
     }
 
