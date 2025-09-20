@@ -1,6 +1,6 @@
 
 
-Create a new dist version 3.1.10
+Create a new dist version 3.1.11
 
 Collecting:
-- Fix [Jobs] Missing (current) project in batch run functions dropdown (#438)
+- Fix [Artifacts] Download notification not interactable (#440)

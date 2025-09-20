@@ -70,9 +70,9 @@ export function useDetailsHeader({ handleCancel, handleShowWarning, isDetailsPop
     handleBackClick: () => void;
     handleCancelClick: () => void;
     headerRef: import("react").MutableRefObject<undefined>;
-    location: any;
-    navigate: any;
-    params: any;
+    location: import("react-router-dom").Location<any>;
+    navigate: import("react-router-dom").NavigateFunction;
+    params: Readonly<import("react-router-dom").Params<string>>;
     showAllVersions: any;
     viewMode: string;
     withToggleViewBtn: any;

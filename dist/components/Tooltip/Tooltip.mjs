@@ -1,63 +1,64 @@
-import { jsxs as A, Fragment as F, jsx as p } from "react/jsx-runtime";
-import V, { useState as j, useRef as k, useCallback as B, useEffect as m } from "react";
-import { createPortal as G } from "react-dom";
-import i from "prop-types";
-import { CSSTransition as J } from "react-transition-group";
-import K from "classnames";
-import { debounce as Q } from "lodash";
-import { isEveryObjectValueEmpty as U } from "../../utils/common.util.mjs";
+import { jsxs as G, Fragment as J, jsx as p } from "react/jsx-runtime";
+import K, { useState as X, useRef as j, useCallback as k, useEffect as m } from "react";
+import { createPortal as Q } from "react-dom";
+import s from "prop-types";
+import { CSSTransition as U } from "react-transition-group";
+import M from "classnames";
+import { debounce as Y } from "lodash";
+import { isEveryObjectValueEmpty as Z } from "../../utils/common.util.mjs";
 /* empty css              */
 let v = ({
-  children: T = "",
-  className: M = "",
+  children: N = "",
+  className: $ = "",
+  tooltipBodyClassName: z = "",
   hidden: a = !1,
   id: l = "",
-  renderChildAsHtml: $ = !1,
-  template: z,
-  textShow: N = !1
+  renderChildAsHtml: I = !1,
+  template: q,
+  textShow: T = !1
 }) => {
-  const [s, u] = j(!1), [f, h] = j({}), g = K("data-ellipsis", "tooltip-wrapper", M), I = 200, t = k(), r = k(), o = 10, y = () => {
+  const [i, u] = X(!1), [f, h] = X({}), y = M("data-ellipsis", "tooltip-wrapper", $), A = M("tooltip", z), F = 200, t = j(), r = j(), o = 10, g = () => {
     u(!1);
-  }, n = B(
+  }, n = k(
     (e) => {
       (!r.current || a || r.current && !r.current.contains(e.relatedTarget) && t.current && !t.current.contains(e.relatedTarget)) && u(!1);
     },
     [a]
-  ), c = B(
+  ), c = k(
     (e) => {
-      var L, _, x, C;
-      if (!s) {
+      var L, C, _, x;
+      if (!i) {
         const [d] = t.current.childNodes;
-        let S = !a && (N ? !0 : d ? d.nodeType !== Node.TEXT_NODE && ((_ = (L = d.childNodes) == null ? void 0 : L[0]) == null ? void 0 : _.nodeType) !== Node.TEXT_NODE || /*
+        let S = !a && (T ? !0 : d ? d.nodeType !== Node.TEXT_NODE && ((C = (L = d.childNodes) == null ? void 0 : L[0]) == null ? void 0 : C.nodeType) !== Node.TEXT_NODE || /*
           If the child node is a text node and the text of the child node inside the container is greater than the width of the container, then show tooltip.
         */
-        (d.nodeType === Node.TEXT_NODE || ((C = (x = d.childNodes) == null ? void 0 : x[0]) == null ? void 0 : C.nodeType) === Node.TEXT_NODE) && t.current.scrollWidth > t.current.offsetWidth : !1);
+        (d.nodeType === Node.TEXT_NODE || ((x = (_ = d.childNodes) == null ? void 0 : _[0]) == null ? void 0 : x.nodeType) === Node.TEXT_NODE) && t.current.scrollWidth > t.current.offsetWidth : !1);
         u(S), setTimeout(() => {
           var b, O;
           if (S) {
-            let { height: E, top: R, bottom: q } = ((b = t == null ? void 0 : t.current) == null ? void 0 : b.getBoundingClientRect()) ?? {};
-            const { height: W, width: D } = ((O = r.current) == null ? void 0 : O.getBoundingClientRect()) ?? {
+            let { height: E, top: R, bottom: V } = ((b = t == null ? void 0 : t.current) == null ? void 0 : b.getBoundingClientRect()) ?? {};
+            const { height: W, width: B } = ((O = r.current) == null ? void 0 : O.getBoundingClientRect()) ?? {
               height: 0,
               width: 0
-            }, H = e.x - (e.x + D - window.innerWidth + o), P = e.x + D + o > window.innerWidth ? H > o ? H : o : e.x + o;
+            }, D = e.x - (e.x + B - window.innerWidth + o), H = e.x + B + o > window.innerWidth ? D > o ? D : o : e.x + o;
             if (R + E + o + W >= window.innerHeight) {
-              const X = q - E - o - W;
+              const P = V - E - o - W;
               h({
-                top: X > 0 ? X : o,
-                left: P
+                top: P > 0 ? P : o,
+                left: H
               });
             } else
               h({
                 top: R + E + o,
-                left: P
+                left: H
               });
           }
         }, 0);
       }
     },
-    [a, N, s]
-  ), w = Q(() => {
-    U(f) || h({});
+    [a, T, i]
+  ), w = Y(() => {
+    Z(f) || h({});
   }, 100);
   return m(() => {
     const e = t.current;
@@ -67,20 +68,20 @@ let v = ({
       };
   }, [t, c, n]), m(() => {
     const e = r.current;
-    if (e && s)
+    if (e && i)
       return e.addEventListener("mouseleave", n), () => {
         e.removeEventListener("mouseleave", n);
       };
-  }, [r, c, n, s]), m(() => (s && window.addEventListener("scroll", y, !0), () => window.removeEventListener("scroll", y, !0)), [s]), m(() => (window.addEventListener("resize", w), () => {
+  }, [r, c, n, i]), m(() => (i && window.addEventListener("scroll", g, !0), () => window.removeEventListener("scroll", g, !0)), [i]), m(() => (window.addEventListener("resize", w), () => {
     window.removeEventListener("resize", w);
-  }), [w, f]), /* @__PURE__ */ A(F, { children: [
-    $ ? /* @__PURE__ */ p(
+  }), [w, f]), /* @__PURE__ */ G(J, { children: [
+    I ? /* @__PURE__ */ p(
       "div",
       {
         "data-testid": l ? `${l}-tooltip-wrapper` : "tooltip-wrapper",
         ref: t,
-        className: g,
-        dangerouslySetInnerHTML: { __html: T },
+        className: y,
+        dangerouslySetInnerHTML: { __html: N },
         onClick: n
       }
     ) : /* @__PURE__ */ p(
@@ -88,19 +89,19 @@ let v = ({
       {
         "data-testid": l ? `${l}-tooltip-wrapper` : "tooltip-wrapper",
         ref: t,
-        className: g,
+        className: y,
         onClick: n,
-        children: T
+        children: N
       }
     ),
-    !a && G(
+    !a && Q(
       /* @__PURE__ */ p(
-        J,
+        U,
         {
           nodeRef: r,
           classNames: "fade",
-          in: s,
-          timeout: I,
+          in: i,
+          timeout: F,
           unmountOnExit: !0,
           children: /* @__PURE__ */ p(
             "div",
@@ -110,8 +111,8 @@ let v = ({
               style: {
                 ...f
               },
-              className: "tooltip",
-              children: z
+              className: A,
+              children: q
             }
           )
         }
@@ -121,15 +122,16 @@ let v = ({
   ] });
 };
 v.propTypes = {
-  children: i.any,
-  className: i.string,
-  hidden: i.bool,
-  id: i.string,
-  renderChildAsHtml: i.bool,
-  template: i.element.isRequired,
-  textShow: i.bool
+  children: s.any,
+  className: s.string,
+  tooltipBodyClassName: s.string,
+  hidden: s.bool,
+  id: s.string,
+  renderChildAsHtml: s.bool,
+  template: s.element.isRequired,
+  textShow: s.bool
 };
-v = V.memo(v);
+v = K.memo(v);
 export {
   v as default
 };
