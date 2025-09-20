@@ -59,11 +59,11 @@ export function useDetails({ applyDetailsChanges, applyDetailsChangesCallback, f
     formRef: import("react").MutableRefObject<import("final-form").FormApi<any, Partial<any>>>;
     handleShowWarning: (show: any) => void;
     leavePage: () => void;
-    location: any;
-    params: any;
-    removeDetailsInfo: any;
+    location: import("react-router-dom").Location<any>;
+    params: Readonly<import("react-router-dom").Params<string>>;
+    removeDetailsInfo: import("@reduxjs/toolkit").ActionCreatorWithoutPayload<"commonDetailsStore/removeDetailsPopUpInfoContent"> | import("@reduxjs/toolkit").ActionCreatorWithoutPayload<"commonDetailsStore/removeInfoContent">;
     setBlocker: import("react").Dispatch<import("react").SetStateAction<{}>>;
-    setDetailsInfo: any;
+    setDetailsInfo: import("@reduxjs/toolkit").ActionCreatorWithPayload<any, "commonDetailsStore/setDetailsPopUpInfoContent"> | import("@reduxjs/toolkit").ActionCreatorWithPayload<any, "commonDetailsStore/setInfoContent">;
     shouldDetailsBlock: ({ currentLocation, nextLocation }: {
         currentLocation: any;
         nextLocation: any;
