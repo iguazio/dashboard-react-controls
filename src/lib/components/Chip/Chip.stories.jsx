@@ -34,8 +34,9 @@ const commonArgs = {
     borderRadius: 'primary',
     borderColor: 'transparent',
     density: 'dense',
-    font: 'purple'
-  }
+    font: 'purple',
+  },
+  ref: {}
 }
 
 const Template = args => <Chip {...args} />
