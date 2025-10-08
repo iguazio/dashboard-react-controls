@@ -63,7 +63,7 @@ const Navbar = ({ children, id = 'navbar', setIsNavbarPinned }) => {
     >
       <div className="navbar__pin-icon">
         <RoundedIcon
-          id="navabr-pin"
+          id="navbar-pin"
           onClick={handlePinClick}
           tooltipText={`${isPinned ? 'Unpin' : 'Pin'} Menu`}
         >
