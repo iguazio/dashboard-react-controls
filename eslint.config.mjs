@@ -3,6 +3,7 @@ import globals from 'globals'
 import js from '@eslint/js'
 import react from 'eslint-plugin-react'
 import reactHooks from 'eslint-plugin-react-hooks'
+import storybook from 'eslint-plugin-storybook'
 
 export default [
   { ignores: ['dist'] },
@@ -40,5 +41,6 @@ export default [
       quotes: ['error', 'single', { avoidEscape: true, allowTemplateLiterals: false }],
       semi: ['error', 'never']
     }
-  }
+  },
+  ...storybook.configs['flat/recommended']
 ]
