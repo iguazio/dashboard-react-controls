@@ -30,10 +30,11 @@ export const showErrorNotification = (
   retryCallback = null,
   showNotificationCallback = null
 ) => {
+  const errorMessage = customErrorMsg || getErrorMsg(error, defaultErrorMsg)
   const notificationData = {
     status: error?.response?.status || 400,
     id: Math.random(),
-    message: customErrorMsg || getErrorMsg(error, defaultErrorMsg),
+    message: errorMessage,
     error
   }
 
@@ -41,6 +42,6 @@ export const showErrorNotification = (
     notificationData.retry = retryCallback
   }
 
-  showNotificationCallback?.(defaultErrorMsg)
+  showNotificationCallback?.(errorMessage)
   dispatch(setNotification(notificationData))
 }
