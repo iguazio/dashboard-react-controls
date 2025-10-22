@@ -21,12 +21,14 @@ import React, { useState, useRef, useEffect } from 'react'
 import PropTypes from 'prop-types'
 import classNames from 'classnames'
 
-import { RoundedIcon } from '../../components'
+import Tooltip from '../Tooltip/Tooltip'
+import TextTooltipTemplate from '../TooltipTemplate/TextTooltipTemplate'
+
 import { NAVBAR_WIDTH_OPENED } from '../../constants'
 import  {localStorageService}  from '../../utils'
 
-import PinIcon from '../../images/pin-icon.svg?react'
-import UnPinIcon from '../../images/unpin-icon.svg?react'
+import NavbarClosedIcon from '../../images/navbar/navbar-closed-icon.svg?react'
+import NavbarOpenedIcon from '../../images/navbar/navbar-opened-icon.svg?react'
 
 import './Navbar.scss'
 
@@ -62,13 +64,14 @@ const Navbar = ({ children, id = 'navbar', setIsNavbarPinned }) => {
       ref={navbarRef}
     >
       <div className="navbar__pin-icon">
-        <RoundedIcon
+        <div
           id="navbar-pin"
           onClick={handlePinClick}
-          tooltipText={`${isPinned ? 'Unpin' : 'Pin'} Menu`}
         >
-          {isPinned ? <UnPinIcon /> : <PinIcon />}
-        </RoundedIcon>
+          <Tooltip template={<TextTooltipTemplate text={`${isPinned ? 'Unpin' : 'Pin'} Menu`} />}>
+            {isPinned ? <NavbarOpenedIcon /> : <NavbarClosedIcon />}
+          </Tooltip>
+        </div>
       </div>
       {React.cloneElement(children, { IsNavbarPinned: isPinned })}
     </nav>
