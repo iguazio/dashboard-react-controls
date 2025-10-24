@@ -27,10 +27,11 @@ import {
 } from '../utils/common.util'
 import { getFirstScrollableParent } from '../utils/getFirstScrollableParent.util'
 
-export const useChipCell = (isEditMode, visibleChipsMaxLength) => {
+export const useChipCell = (isEditMode, visibleChipsMaxLength, withInitialParentWidth) => {
   const [showHiddenChips, setShowHiddenChips] = useState(false)
   const [chipsSizes, setChipsSizes] = useState({})
   const [showChips, setShowChips] = useState(false)
+  const [chipCellInitialWidth, setChipCellInitialWidth] = useState(0)
   const [visibleChipsCount, setVisibleChipsCount] = useState(8)
 
   const chipBlockMarginRight = useMemo(
@@ -66,6 +67,16 @@ export const useChipCell = (isEditMode, visibleChipsMaxLength) => {
 
     return () => window.removeEventListener('click', handleShowElements, true)
   }, [showHiddenChips, handleShowElements])
+
+  useEffect(() => {
+    if (chipsCellRef.current?.getBoundingClientRect().width) {
+      setChipCellInitialWidth(state => {
+        if (!state) {
+          return chipsCellRef.current?.getBoundingClientRect().width
+        }
+      })
+    }
+  }, [])
 
   const handleScroll = useCallback(
     event => {
@@ -104,7 +115,9 @@ export const useChipCell = (isEditMode, visibleChipsMaxLength) => {
     }
 
     if (!isEditMode && !isEveryObjectValueEmpty(chipsSizes)) {
-      const parentSize = chipsCellRef.current?.getBoundingClientRect().width
+      const parentSize = withInitialParentWidth
+        ? chipCellInitialWidth
+        : chipsCellRef.current?.getBoundingClientRect().width
 
       let maxLength = 0
       let chipIndex = 0
@@ -135,7 +148,7 @@ export const useChipCell = (isEditMode, visibleChipsMaxLength) => {
       setVisibleChipsCount(chipIndex)
       setShowChips(true)
     }
-  }, [chipBlockMarginRight, chipsSizes, isEditMode])
+  }, [chipBlockMarginRight, chipCellInitialWidth, chipsSizes, isEditMode, withInitialParentWidth])
 
   useLayoutEffect(() => {
     resizeChipCell()

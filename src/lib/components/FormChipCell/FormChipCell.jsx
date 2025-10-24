@@ -48,11 +48,12 @@ let FormChipCell = ({
   label = null,
   name,
   onClick = () => {},
+  onExitEditModeCallback = null,
   shortChips = false,
   validationRules = {},
   validator = null,
-  onExitEditModeCallback = null,
-  visibleChipsMaxLength = null
+  visibleChipsMaxLength = null,
+  withInitialParentWidth = false
 }) => {
   const chipsClassName = classnames('chips', className)
   const [chipSizeIsRecalculated, setChipSizeIsRecalculated] = useState(false)
@@ -67,7 +68,7 @@ let FormChipCell = ({
     showChips,
     showHiddenChips,
     visibleChipsCount
-  } = useChipCell(isEditable, visibleChipsMaxLength)
+  } = useChipCell(isEditable, visibleChipsMaxLength, withInitialParentWidth)
 
   const [editConfig, setEditConfig] = useState({
     chipIndex: null,
@@ -407,7 +408,8 @@ FormChipCell.propTypes = {
   shortChips: PropTypes.bool,
   validationRules: PropTypes.object,
   validator: PropTypes.func,
-  visibleChipsMaxLength: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
+  visibleChipsMaxLength: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  withInitialParentWidth: PropTypes.bool
 }
 
 FormChipCell = React.memo(FormChipCell)
