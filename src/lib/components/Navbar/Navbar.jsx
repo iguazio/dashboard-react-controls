@@ -25,7 +25,7 @@ import Tooltip from '../Tooltip/Tooltip'
 import TextTooltipTemplate from '../TooltipTemplate/TextTooltipTemplate'
 
 import { NAVBAR_WIDTH_OPENED } from '../../constants'
-import  {localStorageService}  from '../../utils'
+import { localStorageService } from '../../utils'
 
 import NavbarClosedIcon from '../../images/navbar/navbar-closed-icon.svg?react'
 import NavbarOpenedIcon from '../../images/navbar/navbar-opened-icon.svg?react'
@@ -54,20 +54,10 @@ const Navbar = ({ children, id = 'navbar', setIsNavbarPinned }) => {
     setIsNavbarPinned(isPinned)
   }, [isPinned, setIsNavbarPinned])
 
-
-
   return (
-    <nav
-      className={navbarClasses}
-      data-testid={id}
-      style={navbarStyles}
-      ref={navbarRef}
-    >
+    <nav className={navbarClasses} data-testid={id} style={navbarStyles} ref={navbarRef}>
       <div className="navbar__pin-icon">
-        <div
-          id="navbar-pin"
-          onClick={handlePinClick}
-        >
+        <div id="navbar-pin" onClick={handlePinClick}>
           <Tooltip template={<TextTooltipTemplate text={`${isPinned ? 'Unpin' : 'Pin'} Menu`} />}>
             {isPinned ? <NavbarOpenedIcon /> : <NavbarClosedIcon />}
           </Tooltip>

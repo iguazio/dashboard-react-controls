@@ -26,20 +26,30 @@ import ArrowIcon from '../../images/arrow.svg?react'
 
 import './NavbarLink.scss'
 
-
-const NavbarLink = ({ externalLink = false, icon = null, index = null, label, link = '', selectedIndex = null, setSelectedIndex, ...props }) => {
+const NavbarLink = ({
+  externalLink = false,
+  icon = null,
+  index = null,
+  label,
+  link = '',
+  selectedIndex = null,
+  setSelectedIndex,
+  ...props
+}) => {
   const { pathname } = useLocation()
 
   const parentLinkClasses = classNames(
     'nav-link__button btn nav-link__parent',
-    (pathname.includes(props.id || link) || props?.screens && props.screens.some(screen => pathname.includes(screen))) && 'active',
+    (pathname.includes(props.id || link) ||
+      (props?.screens && props.screens.some(screen => pathname.includes(screen)))) &&
+      'active',
     index === selectedIndex && 'expended'
   )
 
   const handleExpanded = () => {
     if (setSelectedIndex) {
       if (index !== selectedIndex) {
-       setSelectedIndex(index)
+        setSelectedIndex(index)
       } else {
         setSelectedIndex(null)
       }
@@ -63,7 +73,12 @@ const NavbarLink = ({ externalLink = false, icon = null, index = null, label, li
       </span>
     </div>
   ) : (
-    <NavLink to={link} onClick={handleExpanded} className="nav-link__button btn" activeclassname="active">
+    <NavLink
+      to={link}
+      onClick={handleExpanded}
+      className="nav-link__button btn"
+      activeclassname="active"
+    >
       <span className="nav-link__icon">{icon}</span>
       <span className="nav-link__label">{label}</span>
     </NavLink>
@@ -80,7 +95,7 @@ NavbarLink.propTypes = {
   nestedLinks: PropTypes.array,
   screens: PropTypes.array,
   selectedIndex: PropTypes.number,
-  setSelectedIndex: PropTypes.func,
+  setSelectedIndex: PropTypes.func
 }
 
 export default React.memo(NavbarLink)
