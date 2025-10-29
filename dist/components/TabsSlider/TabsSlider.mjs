@@ -1,68 +1,80 @@
-import { jsxs as g, jsx as s } from "react/jsx-runtime";
-import { useState as S, useRef as y, useCallback as z, useEffect as w } from "react";
+import { jsxs as z, jsx as i } from "react/jsx-runtime";
+import { useState as S, useRef as H, useCallback as g, useEffect as w } from "react";
 import { useLocation as M, useParams as U, Link as X } from "react-router-dom";
 import W from "prop-types";
-import k from "classnames";
-import H from "../Tip/Tip.mjs";
-import { SLIDER_TABS as G } from "../../types.mjs";
-import { generateUrlFromRouterPath as J } from "../../utils/common.util.mjs";
-import T from "../../images/arrow.svg.mjs";
-const K = ({
+import C from "classnames";
+import G from "../Tip/Tip.mjs";
+import { SLIDER_TABS as J } from "../../types.mjs";
+import { generateUrlFromRouterPath as K } from "../../utils/common.util.mjs";
+import N from "../../images/arrow.svg.mjs";
+const Q = ({
   fontSize: P = "sm",
   initialTab: q = "",
-  isDetailsPopUp: C = !1,
+  isDetailsPopUp: k = !1,
   onClick: L = () => {
   },
   skipLink: D = !1,
-  tabsList: v
+  tabsList: b
 }) => {
-  const [d, $] = S(q), [x, O] = S(!0), [f, a] = S(0), [A, l] = S(!1), i = y(), n = y(), j = M(), b = U(), m = 2, I = 1.5, B = k(
+  const [d, $] = S(q), [R, O] = S(!0), [f, c] = S(0), [A, l] = S(!1), s = H(), n = H(), j = M(), v = U(), m = 2, I = 1.5, B = C(
     "tabs-slider__arrow",
     "tabs-slider__arrow_left",
-    x && "tabs-slider__arrow_hidden",
+    R && "tabs-slider__arrow_hidden",
     f === 0 && "tabs-slider__arrow_disabled"
-  ), F = k(
+  ), F = C(
     "tabs-slider__arrow",
     "tabs-slider__arrow_right",
-    x && "tabs-slider__arrow_hidden",
+    R && "tabs-slider__arrow_hidden",
     A && "tabs-slider__arrow_disabled"
-  ), R = (e) => {
-    var r, o, c, _, p, N;
+  ), x = (e) => {
+    var r, o, a, _, p, y;
     let t;
-    e ? ((r = n.current) == null ? void 0 : r.scrollWidth) < ((o = i.current) == null ? void 0 : o.offsetWidth) * I + f ? (t = ((c = n.current) == null ? void 0 : c.scrollWidth) - ((_ = i.current) == null ? void 0 : _.offsetWidth), l(!0)) : t = f + ((p = i.current) == null ? void 0 : p.offsetWidth) / m : (t = Math.max(
+    e ? ((r = n.current) == null ? void 0 : r.scrollWidth) < ((o = s.current) == null ? void 0 : o.offsetWidth) * I + f ? (t = ((a = n.current) == null ? void 0 : a.scrollWidth) - ((_ = s.current) == null ? void 0 : _.offsetWidth), l(!0)) : t = f + ((p = s.current) == null ? void 0 : p.offsetWidth) / m : (t = Math.max(
       0,
-      f - ((N = i.current) == null ? void 0 : N.offsetWidth) / m
-    ), l(!1)), a(t);
-  }, u = z(() => {
-    var t, r, o, c;
+      f - ((y = s.current) == null ? void 0 : y.offsetWidth) / m
+    ), l(!1)), c(t);
+  }, u = g(() => {
+    var t, r, o, a;
     const e = ((t = n.current) == null ? void 0 : t.offsetWidth) === ((r = n.current) == null ? void 0 : r.scrollWidth);
-    O(e), A && a(((o = n.current) == null ? void 0 : o.scrollWidth) - ((c = i.current) == null ? void 0 : c.offsetWidth)), e && (a(0), l(!1));
-  }, [A, n, i]), h = z(() => {
-    var r, o, c, _, p;
-    const e = document.querySelector(`[data-tab='${d}']`), t = (e == null ? void 0 : e.offsetLeft) - ((r = i.current) == null ? void 0 : r.offsetWidth) / m + (e == null ? void 0 : e.offsetWidth) / m;
-    t <= 0 ? (a(0), l(!1)) : ((o = n.current) == null ? void 0 : o.scrollWidth) < ((c = i.current) == null ? void 0 : c.offsetWidth) / m + (e == null ? void 0 : e.offsetLeft) + (e == null ? void 0 : e.offsetWidth) ? (a(((_ = n.current) == null ? void 0 : _.scrollWidth) - ((p = i.current) == null ? void 0 : p.offsetWidth)), l(!0)) : (a(t), l(!1));
+    O(e), A && c(((o = n.current) == null ? void 0 : o.scrollWidth) - ((a = s.current) == null ? void 0 : a.offsetWidth)), e && (c(0), l(!1));
+  }, [A, n, s]), h = g(() => {
+    var r, o, a, _, p;
+    const e = document.querySelector(`[data-tab='${d}']`), t = (e == null ? void 0 : e.offsetLeft) - ((r = s.current) == null ? void 0 : r.offsetWidth) / m + (e == null ? void 0 : e.offsetWidth) / m;
+    t <= 0 ? (c(0), l(!1)) : ((o = n.current) == null ? void 0 : o.scrollWidth) < ((a = s.current) == null ? void 0 : a.offsetWidth) / m + (e == null ? void 0 : e.offsetLeft) + (e == null ? void 0 : e.offsetWidth) ? (c(((_ = n.current) == null ? void 0 : _.scrollWidth) - ((p = s.current) == null ? void 0 : p.offsetWidth)), l(!0)) : (c(t), l(!1));
   }, [d]), E = (e) => {
     $(e), L && L(e);
   };
-  return w(() => (window.addEventListener("resize", u), () => window.removeEventListener("resize", u)), [u]), w(() => (window.addEventListener("resize", h), () => window.removeEventListener("resize", h)), [h]), w(() => {
+  w(() => (window.addEventListener("resize", u), () => window.removeEventListener("resize", u)), [u]), w(() => (window.addEventListener("resize", h), () => window.removeEventListener("resize", h)), [h]), w(() => {
     u();
-  }, [v, u]), w(() => {
+  }, [b, u]), w(() => {
     h();
   }, [h]), w(() => {
     var e;
-    b.tab && b.tab !== d && !C && $((e = v.find((t) => t.id === b.tab)) == null ? void 0 : e.id);
-  }, [C, b.tab, d, v]), /* @__PURE__ */ g("div", { className: "content-menu", children: [
-    /* @__PURE__ */ s(
+    v.tab && v.tab !== d && !k && $((e = b.find((t) => t.id === v.tab)) == null ? void 0 : e.id);
+  }, [k, v.tab, d, b]);
+  const T = g((e) => /* @__PURE__ */ z(
+    "span",
+    {
+      className: e.icon && "content-menu__tab-icon" || e.tip && "content-menu__tab-tip",
+      children: [
+        e.icon && /* @__PURE__ */ i("div", { children: e.icon }),
+        e.label,
+        e.tip && /* @__PURE__ */ i(G, { text: e.tip })
+      ]
+    }
+  ), []);
+  return /* @__PURE__ */ z("div", { className: "content-menu", children: [
+    /* @__PURE__ */ i(
       "div",
       {
         className: B,
         onClick: () => {
-          R(!1);
+          x(!1);
         },
-        children: /* @__PURE__ */ s(T, {})
+        children: /* @__PURE__ */ i(N, {})
       }
     ),
-    /* @__PURE__ */ s("div", { className: "content-menu__tabs-wrapper", ref: i, children: /* @__PURE__ */ s(
+    /* @__PURE__ */ i("div", { className: "content-menu__tabs-wrapper", ref: s, children: /* @__PURE__ */ i(
       "div",
       {
         ref: n,
@@ -70,64 +82,50 @@ const K = ({
         style: {
           transform: `translateX(${-f}px)`
         },
-        children: v.map((e) => {
+        children: b.map((e) => {
           var r;
-          const t = k(
+          const t = C(
             "content-menu__tab",
             `content-menu__tab-${P}`,
             d === e.id && "content-menu__tab_active"
           );
-          return !e.hidden && (D ? /* @__PURE__ */ g(
+          return !e.hidden && (D ? /* @__PURE__ */ i(
             "div",
             {
               className: t,
               "data-tab": e.id,
               onClick: () => E(e.id),
-              children: [
-                e.icon && /* @__PURE__ */ s("div", { className: "content-menu_tab-icon", children: e.icon }),
-                e.label,
-                e.tip && /* @__PURE__ */ s(H, { className: "content-menu__tab-tip", text: e.tip })
-              ]
+              children: T(e)
             },
             e.id
-          ) : /* @__PURE__ */ s(
+          ) : /* @__PURE__ */ i(
             X,
             {
-              to: J(
+              to: K(
                 `${(r = window.location.pathname) == null ? void 0 : r.replace(/^$|([^/]+$)/, e.id)}${j.search ?? ""}${e.query ?? ""}`
               ),
               className: t,
-              children: /* @__PURE__ */ g(
-                "span",
-                {
-                  className: e.icon && "content-menu__tab-icon" || e.tip && "content-menu__tab-tip",
-                  "data-tab": e.id,
-                  onClick: () => E(e),
-                  children: [
-                    e.icon && /* @__PURE__ */ s("div", { children: e.icon }),
-                    e.label,
-                    e.tip && /* @__PURE__ */ s(H, { text: e.tip })
-                  ]
-                }
-              )
+              "data-tab": e.id,
+              onClick: () => E(e.id),
+              children: T(e)
             },
             e.id
           ));
         })
       }
     ) }),
-    /* @__PURE__ */ s("div", { className: F, onClick: () => R(!0), children: /* @__PURE__ */ s(T, {}) })
+    /* @__PURE__ */ i("div", { className: F, onClick: () => x(!0), children: /* @__PURE__ */ i(N, {}) })
   ] });
 };
-K.propTypes = {
+Q.propTypes = {
   fontSize: W.oneOf(["sm", "md", "lg"]),
   initialTab: W.string,
   isDetailsPopUp: W.bool,
   onClick: W.func,
   skipLink: W.bool,
-  tabsList: G.isRequired
+  tabsList: J.isRequired
 };
 export {
-  K as default
+  Q as default
 };
 //# sourceMappingURL=TabsSlider.mjs.map

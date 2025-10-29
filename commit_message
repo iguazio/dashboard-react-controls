@@ -1,6 +1,8 @@
 
 
-Create a new dist version 3.1.11
+Create a new dist version 3.2.0
 
 Collecting:
-- Fix [Artifacts] Download notification not interactable (#440)
+- Impl [UI] Show error message provided by the BE (#442)
+- Impl [Real-time pipelines] Add model runner step (#443)
+- Fix [UI] optimize no-data-metric-icon image (#444)

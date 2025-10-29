@@ -1,61 +1,68 @@
-import { useState as w, useMemo as S, useRef as g, useCallback as C, useEffect as v, useLayoutEffect as H } from "react";
+import { useState as h, useMemo as k, useRef as d, useCallback as b, useEffect as C, useLayoutEffect as N } from "react";
 import { throttle as P } from "lodash";
-import { getScssVariableValue as I, getTransitionEndEventName as N, isEveryObjectValueEmpty as W } from "../utils/common.util.mjs";
-import { getFirstScrollableParent as x } from "../utils/getFirstScrollableParent.util.mjs";
-const A = (s, b) => {
-  const [o, l] = w(!1), [c, k] = w({}), [z, B] = w(!1), [j, y] = w(8), E = S(
-    () => parseInt(I("--chipBlockMarginRight")),
+import { getScssVariableValue as x, getTransitionEndEventName as D, isEveryObjectValueEmpty as F } from "../utils/common.util.mjs";
+import { getFirstScrollableParent as T } from "../utils/getFirstScrollableParent.util.mjs";
+const K = (s, E, R) => {
+  const [o, c] = h(!1), [a, z] = h({}), [j, y] = h(!1), [L, O] = h(0), [V, H] = h(8), S = k(
+    () => parseInt(x("--chipBlockMarginRight")),
     []
-  ), m = S(() => N(), []), L = g(), O = g(), a = g(), n = g(), f = C(
+  ), p = k(() => D(), []), f = d(), I = d(), u = d(), r = d(), g = b(
     (e) => {
-      var u, i;
-      (!s || s && b) && ((u = a.current) != null && u.contains(e.target) && !o ? l(!0) : l(!1)), e && ((i = a.current) != null && i.contains(e.target)) && e.stopPropagation();
+      var l, n;
+      (!s || s && E) && ((l = u.current) != null && l.contains(e.target) && !o ? c(!0) : c(!1)), e && ((n = u.current) != null && n.contains(e.target)) && e.stopPropagation();
     },
-    [s, o, b]
+    [s, o, E]
   );
-  v(() => (o && window.addEventListener("click", f, !0), () => window.removeEventListener("click", f, !0)), [o, f]);
-  const p = C(
+  C(() => (o && window.addEventListener("click", g, !0), () => window.removeEventListener("click", g, !0)), [o, g]), C(() => {
+    var e;
+    (e = f.current) != null && e.getBoundingClientRect().width && O((l) => {
+      var n;
+      if (!l)
+        return (n = f.current) == null ? void 0 : n.getBoundingClientRect().width;
+    });
+  }, []);
+  const m = b(
     (e) => {
-      e.target.parentElement !== (n == null ? void 0 : n.current) && l(!1);
+      e.target.parentElement !== (r == null ? void 0 : r.current) && c(!1);
     },
-    [n]
+    [r]
   );
-  v(() => (o && window.addEventListener("scroll", p, !0), () => window.removeEventListener("scroll", p, !0)), [p, o]);
-  const h = C(() => {
-    var e, u;
-    if (n != null && n.current) {
-      const r = x(a.current.offsetParent).getBoundingClientRect(), t = (e = a.current) == null ? void 0 : e.getBoundingClientRect();
-      (t.left < r.left || t.top < r.top || t.right > r.right || t.bottom > r.bottom || t.right > window.innerWidth || t.bottom > window.innerHeight) && l(!1);
+  C(() => (o && window.addEventListener("scroll", m, !0), () => window.removeEventListener("scroll", m, !0)), [m, o]);
+  const w = b(() => {
+    var e, l;
+    if (r != null && r.current) {
+      const i = T(u.current.offsetParent).getBoundingClientRect(), t = (e = u.current) == null ? void 0 : e.getBoundingClientRect();
+      (t.left < i.left || t.top < i.top || t.right > i.right || t.bottom > i.bottom || t.right > window.innerWidth || t.bottom > window.innerHeight) && c(!1);
     }
-    if (!s && !W(c)) {
-      const i = (u = L.current) == null ? void 0 : u.getBoundingClientRect().width;
-      let r = 0, t = 0;
-      const V = 65;
-      Object.values(c).every((d, R) => r + d > i || Object.values(c).length > 1 && r + d + E + V > i ? (t = R, !1) : (r += d, R === Object.values(c).length - 1 && (t = 8), !0)), y(t), B(!0);
+    if (!s && !F(a)) {
+      const n = R ? L : (l = f.current) == null ? void 0 : l.getBoundingClientRect().width;
+      let i = 0, t = 0;
+      const W = 65;
+      Object.values(a).every((v, B) => i + v > n || Object.values(a).length > 1 && i + v + S + W > n ? (t = B, !1) : (i += v, B === Object.values(a).length - 1 && (t = 8), !0)), H(t), y(!0);
     }
-  }, [E, c, s]);
-  return H(() => {
-    h();
-  }, [h]), v(() => {
-    const e = P(h, 500);
+  }, [S, L, a, s, R]);
+  return N(() => {
+    w();
+  }, [w]), C(() => {
+    const e = P(w, 500);
     if (!s)
-      return window.addEventListener("resize", e), window.addEventListener(m, e), () => {
-        window.removeEventListener("resize", e), window.removeEventListener(m, e);
+      return window.addEventListener("resize", e), window.addEventListener(p, e), () => {
+        window.removeEventListener("resize", e), window.removeEventListener(p, e);
       };
-  }, [h, s, m]), {
-    chipsCellRef: L,
-    chipsWrapperRef: O,
-    handleShowElements: f,
-    hiddenChipsCounterRef: a,
-    hiddenChipsPopUpRef: n,
-    setChipsSizes: k,
-    setShowHiddenChips: l,
-    showChips: z,
+  }, [w, s, p]), {
+    chipsCellRef: f,
+    chipsWrapperRef: I,
+    handleShowElements: g,
+    hiddenChipsCounterRef: u,
+    hiddenChipsPopUpRef: r,
+    setChipsSizes: z,
+    setShowHiddenChips: c,
+    showChips: j,
     showHiddenChips: o,
-    visibleChipsCount: j
+    visibleChipsCount: V
   };
 };
 export {
-  A as useChipCell
+  K as useChipCell
 };
 //# sourceMappingURL=useChipCell.hook.mjs.map
