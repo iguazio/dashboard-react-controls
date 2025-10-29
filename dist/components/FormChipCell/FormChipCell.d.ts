@@ -1,5 +1,5 @@
 export default FormChipCell;
-declare function FormChipCell({ chipOptions, className, delimiter, formState, initialValues, isEditable, label, name, onClick, shortChips, validationRules, validator, onExitEditModeCallback, visibleChipsMaxLength }: {
+declare function FormChipCell({ chipOptions, className, delimiter, formState, initialValues, isEditable, label, name, onClick, onExitEditModeCallback, shortChips, validationRules, validator, visibleChipsMaxLength, withInitialParentWidth }: {
     chipOptions?: {
         background: string;
         boldValue: boolean;
@@ -16,11 +16,12 @@ declare function FormChipCell({ chipOptions, className, delimiter, formState, in
     label?: any;
     name: any;
     onClick?: () => void;
+    onExitEditModeCallback?: any;
     shortChips?: boolean;
     validationRules?: {};
     validator?: any;
-    onExitEditModeCallback?: any;
     visibleChipsMaxLength?: any;
+    withInitialParentWidth?: boolean;
 }): JSX.Element;
 declare namespace FormChipCell {
     namespace propTypes {
@@ -38,6 +39,7 @@ declare namespace FormChipCell {
         export let validationRules: any;
         export let validator: any;
         export let visibleChipsMaxLength: any;
+        export let withInitialParentWidth: any;
     }
 }
 import { CHIP_OPTIONS } from '../../types';

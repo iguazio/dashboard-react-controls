@@ -1,17 +1,17 @@
-import { setNotification as O } from "../reducers/notificationReducer.mjs";
-import { getErrorMsg as _ } from "./common.util.mjs";
-import { FORBIDDEN_ERROR_STATUS_CODE as f } from "../constants.mjs";
-const T = (E, t, m, R, n = null, s = null) => {
-  var u, D;
-  const p = {
-    status: ((u = t == null ? void 0 : t.response) == null ? void 0 : u.status) || 400,
+import { setNotification as f } from "../reducers/notificationReducer.mjs";
+import { getErrorMsg as M } from "./common.util.mjs";
+import { FORBIDDEN_ERROR_STATUS_CODE as O } from "../constants.mjs";
+const S = (g, s, D, R, m = null, t = null) => {
+  var u, E;
+  const n = R || M(s, D), p = {
+    status: ((u = s == null ? void 0 : s.response) == null ? void 0 : u.status) || 400,
     id: Math.random(),
-    message: R || _(t, m),
-    error: t
+    message: n,
+    error: s
   };
-  n && ((D = t == null ? void 0 : t.response) == null ? void 0 : D.status) !== f && (p.retry = n), s == null || s(m), E(O(p));
+  m && ((E = s == null ? void 0 : s.response) == null ? void 0 : E.status) !== O && (p.retry = m), t == null || t(n), g(f(p));
 };
 export {
-  T as showErrorNotification
+  S as showErrorNotification
 };
 //# sourceMappingURL=notification.util.mjs.map
