@@ -19,7 +19,19 @@ such restriction.
 */
 import moment from 'moment'
 
-export const formatDatetime = (datetime, invalidDateMessage) => {
+export const formatDatetime = (
+  datetime,
+  invalidDateMessage,
+  options = {
+    year: 'numeric',
+    month: 'short',
+    day: 'numeric',
+    hour: '2-digit',
+    minute: '2-digit',
+    second: '2-digit',
+    hour12: true
+  }
+) => {
   if (!datetime) {
     return invalidDateMessage
   }
@@ -28,14 +40,7 @@ export const formatDatetime = (datetime, invalidDateMessage) => {
 
   return typeof date !== 'object' || !(date instanceof Date) || isNaN(date)
     ? invalidDateMessage
-    : new Intl.DateTimeFormat('en-US', {
-        year: 'numeric',
-        month: 'short',
-        day: 'numeric',
-        hour: '2-digit',
-        minute: '2-digit',
-        second: '2-digit'
-      }).format(date)
+    : new Intl.DateTimeFormat(navigator.language, options).format(date)
 }
 
 export const getFormatTime = time => {
