@@ -1,8 +1,6 @@
 
 
-Create a new dist version 3.2.0
+Create a new dist version 3.2.1
 
 Collecting:
-- Impl [UI] Show error message provided by the BE (#442)
-- Impl [Real-time pipelines] Add model runner step (#443)
-- Fix [UI] optimize no-data-metric-icon image (#444)
+- Impl [Infrastructure] Integrating IGZ-4 via Module Federation (#447)
