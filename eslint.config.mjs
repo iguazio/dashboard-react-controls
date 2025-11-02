@@ -1,8 +1,11 @@
+/* global process */
 import eslintConfigPrettier from 'eslint-config-prettier'
 import globals from 'globals'
 import js from '@eslint/js'
 import react from 'eslint-plugin-react'
 import reactHooks from 'eslint-plugin-react-hooks'
+
+import { viteGlobals } from './eslint.mlrun-globals.mjs'
 
 export default [
   { ignores: ['dist'] },
@@ -12,7 +15,7 @@ export default [
     files: ['**/*.{js,jsx,ts,tsx}'],
     languageOptions: {
       ecmaVersion: 2021,
-      globals: globals.browser,
+      globals: { ...globals.browser, ...viteGlobals },
       parserOptions: {
         ecmaFeatures: {
           jsx: true
