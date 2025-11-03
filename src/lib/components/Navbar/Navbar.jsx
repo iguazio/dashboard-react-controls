@@ -32,7 +32,7 @@ import NavbarOpenedIcon from '../../images/navbar/navbar-opened-icon.svg?react'
 
 import './Navbar.scss'
 
-const Navbar = ({ children, id = 'navbar', setIsNavbarPinned }) => {
+const Navbar = ({ children, id = 'navbar', setNavbarIsPinned }) => {
   const [isPinned, setIsPinned] = useState(
     localStorageService.getStorageValue('isNavbarStatic', false) === 'true'
   )
@@ -51,8 +51,8 @@ const Navbar = ({ children, id = 'navbar', setIsNavbarPinned }) => {
   }
 
   useEffect(() => {
-    setIsNavbarPinned(isPinned)
-  }, [isPinned, setIsNavbarPinned])
+    setNavbarIsPinned(isPinned)
+  }, [isPinned, setNavbarIsPinned])
 
   return (
     <nav className={navbarClasses} data-testid={id} style={navbarStyles} ref={navbarRef}>
@@ -92,7 +92,7 @@ Navbar.propTypes = {
     PropTypes.string
   ]).isRequired,
   id: PropTypes.string,
-  setIsNavbarPinned: PropTypes.func
+  setNavbarIsPinned: PropTypes.func
 }
 
 export default Navbar
