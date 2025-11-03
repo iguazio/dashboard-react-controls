@@ -63,7 +63,7 @@ const Navbar = ({ children, id = 'navbar', setNavbarIsPinned }) => {
           </Tooltip>
         </div>
       </div>
-      {React.cloneElement(children, { IsNavbarPinned: isPinned })}
+      {React.cloneElement(children, { navbarIsPinned: isPinned })}
     </nav>
   )
 }
