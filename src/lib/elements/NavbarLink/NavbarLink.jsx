@@ -36,13 +36,14 @@ const NavbarLink = ({
   setSelectedIndex,
   ...props
 }) => {
+
+
   const { pathname } = useLocation()
+  const [, , page] = pathname.split('/').slice(1, 4)
 
   const parentLinkClasses = classNames(
     'nav-link__button btn nav-link__parent',
-    (pathname.includes(props.id || link) ||
-      (props?.screens && props.screens.some(screen => pathname.includes(screen)))) &&
-      'active',
+    props.screens && props.screens.includes(page) && 'active',
     index === selectedIndex && 'expended'
   )
 
