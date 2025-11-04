@@ -26,7 +26,7 @@ const C = ({
     e.bodyCellClassName
   ), c = u("item-name"), { value: d, label: l, className: h } = t.state ?? {};
   return /* @__PURE__ */ o("td", { "data-testid": e.headerId, className: v, children: [
-    e.linkIsExternal ? /* @__PURE__ */ s("span", { className: "data-ellipsis", children: /* @__PURE__ */ o("a", { href: n, className: "link", target: "blank", children: [
+    e.linkIsExternal ? /* @__PURE__ */ s("span", { className: "data-ellipsis", children: /* @__PURE__ */ o("a", { href: n, className: "link", target: "_top", children: [
       /* @__PURE__ */ s(
         r,
         {

@@ -1,6 +1,6 @@
 
 
-Create a new dist version 3.2.1
+Create a new dist version 3.2.2
 
 Collecting:
-- Impl [Infrastructure] Integrating IGZ-4 via Module Federation (#447)
+- Fix [Monitoring app] Date picker selection not preserved between pages (#449)
