@@ -42,7 +42,7 @@ const NavbarLink = ({
   const parentLinkClasses = classNames(
     'nav-link__button btn nav-link__parent',
     props.screens && props.screens.includes(page) && 'active',
-    index === selectedIndex && 'expended'
+    index === selectedIndex && 'expanded'
   )
 
   const handleExpanded = () => {

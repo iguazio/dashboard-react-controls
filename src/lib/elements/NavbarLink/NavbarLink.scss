@@ -71,7 +71,7 @@
       }
     }
 
-    &.expended {
+    &.expanded {
       &:not(:disabled):not(.active) {
         background-color: inherit;
       }
@@ -90,7 +90,7 @@
 
     &:hover,
     &:focus-visible,
-    &.expended {
+    &.expanded {
       background-color: colors.$crystalBell;
       outline: none;
       transition: all 0.3s ease-in-out;
