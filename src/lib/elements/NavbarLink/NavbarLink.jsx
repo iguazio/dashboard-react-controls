@@ -36,8 +36,6 @@ const NavbarLink = ({
   setSelectedIndex,
   ...props
 }) => {
-
-
   const { pathname } = useLocation()
   const [, , page] = pathname.split('/').slice(1, 4)
 
