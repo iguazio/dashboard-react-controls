@@ -38,7 +38,7 @@
       padding: 0 8px 0 24px;
     }
 
-    .nav-link__button.expended {
+    .nav-link__button.expanded {
       & + .navbar-links_nested {
         max-height: 30rem;
         transition: max-height 0.3s ease-in-out;
