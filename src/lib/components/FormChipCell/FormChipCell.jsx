@@ -21,7 +21,7 @@ import PropTypes from 'prop-types'
 
 import FormChipCellView from './FormChipCellView'
 
-import { CHIP_OPTIONS } from '../../types'
+import { CHIP_OPTIONS, VISIBLE_CHIPS_MAX_LENGTH } from '../../types'
 import { CLICK, TAB, TAB_SHIFT } from '../../constants'
 import { areArraysEqual } from '../../utils/common.util'
 import { checkPatternsValidity } from '../../utils/validation.util'
@@ -388,6 +388,7 @@ let FormChipCell = ({
           showHiddenChips={showHiddenChips}
           validateFields={validateFields}
           validationRules={validationRules}
+          visibleChipsMaxLength={visibleChipsMaxLength}
         />
       </div>
     </div>
@@ -408,7 +409,7 @@ FormChipCell.propTypes = {
   shortChips: PropTypes.bool,
   validationRules: PropTypes.object,
   validator: PropTypes.func,
-  visibleChipsMaxLength: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  visibleChipsMaxLength: VISIBLE_CHIPS_MAX_LENGTH,
   withInitialParentWidth: PropTypes.bool
 }
 

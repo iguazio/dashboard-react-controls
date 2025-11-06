@@ -118,31 +118,42 @@ export const useChipCell = (isEditMode, visibleChipsMaxLength, withInitialParent
       const parentSize = withInitialParentWidth
         ? chipCellInitialWidth
         : chipsCellRef.current?.getBoundingClientRect().width
+      const hiddenChipsCounterWidth =
+        (hiddenChipsCounterRef.current?.getBoundingClientRect().width ?? 0) + chipBlockMarginRight
 
-      let maxLength = 0
+      let chipsLengthSum = 0
       let chipIndex = 0
-      const padding = 65
+      const chipsSizesList = Object.values(chipsSizes)
 
-      Object.values(chipsSizes).every((chipSize, index) => {
-        // Check if adding chipSize to maxLength exceeds parentSize
-        // or if adding chipSize and padding exceeds parentSize when there are multiple chips
-        if (
-          maxLength + chipSize > parentSize ||
-          (Object.values(chipsSizes).length > 1 &&
-            maxLength + chipSize + chipBlockMarginRight + padding > parentSize)
-        ) {
-          chipIndex = index
+      chipsSizesList.every((chipSize, index) => {
+        const chipSizeWithMargin = chipSize + chipBlockMarginRight
+        const isLastChip = index === chipsSizesList.length - 1
+        const newChipsLengthSum = chipsLengthSum + chipSizeWithMargin
+        const wouldExceedWithCounter = newChipsLengthSum + hiddenChipsCounterWidth > parentSize
+        const wouldExceedWithoutCounter = newChipsLengthSum > parentSize
 
-          return false
-        } else {
-          maxLength += chipSize
-
-          if (index === Object.values(chipsSizes).length - 1) {
-            chipIndex = 8
+        // If we've exceeded the limit
+        if (wouldExceedWithCounter) {
+          // Special case: last chip might fit without the counter
+          if (isLastChip && !wouldExceedWithoutCounter) {
+            chipsLengthSum = newChipsLengthSum
+            chipIndex = chipsSizesList.length
+            return true
           }
 
-          return true
+          // Stop here - this chip doesn't fit
+          chipIndex = index
+          return false
         }
+
+        // Chip fits, add it
+        chipsLengthSum = newChipsLengthSum
+
+        if (isLastChip) {
+          chipIndex = chipsSizesList.length
+        }
+
+        return true
       })
 
       setVisibleChipsCount(chipIndex)
