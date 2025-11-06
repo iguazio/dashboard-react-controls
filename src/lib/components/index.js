@@ -37,6 +37,7 @@ import LoadButton from './LoadButton/LoadButton'
 import Loader from './Loader/Loader'
 import LoaderForSuspenseFallback from './Loader/LoaderForSuspenseFallback'
 import Modal from './Modal/Modal'
+import Navbar from './Navbar/Navbar'
 import PopUpDialog from './PopUpDialog/PopUpDialog'
 import RoundedIcon from './RoundedIcon/RoundedIcon'
 import TableCell from './TableCell/TableCell'
@@ -69,6 +70,7 @@ export {
   Loader,
   LoaderForSuspenseFallback,
   Modal,
+  Navbar,
   PopUpDialog,
   RoundedIcon,
   TableCell,

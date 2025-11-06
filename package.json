@@ -40,6 +40,9 @@
         "MLRun",
         "mlrun"
     ],
+    "dependencies": {
+        "@reduxjs/toolkit": "^2.9.0"
+    },
     "peerDependencies": {
         "@reduxjs/toolkit": "*",
         "classnames": "*",
@@ -59,7 +62,6 @@
     },
     "devDependencies": {
         "@eslint/js": "^9.19.0",
-        "@reduxjs/toolkit": "^2.8.2",
         "@storybook/addon-actions": "^8.0.0",
         "@storybook/addon-essentials": "^8.0.0",
         "@storybook/addon-interactions": "^8.0.0",
