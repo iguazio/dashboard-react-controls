@@ -53,8 +53,6 @@ const NavbarLink = ({
         setSelectedIndex(null)
       }
     }
-
-    return
   }
 
   return externalLink ? (
