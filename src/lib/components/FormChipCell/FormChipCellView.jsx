@@ -25,7 +25,7 @@ import HiddenChipsBlock from './HiddenChipsBlock/HiddenChipsBlock'
 import TextTooltipTemplate from '../TooltipTemplate/TextTooltipTemplate'
 import Tooltip from '../Tooltip/Tooltip'
 
-import { CHIP_OPTIONS } from '../../types'
+import { CHIP_OPTIONS, VISIBLE_CHIPS_MAX_LENGTH } from '../../types'
 import { isEveryObjectValueEmpty } from '../../utils/common.util'
 import { uniquenessError } from './formChipCell.util'
 
@@ -58,7 +58,8 @@ let FormChipCellView = (
     showChips,
     showHiddenChips,
     validateFields,
-    validationRules = {}
+    validationRules = {},
+    visibleChipsMaxLength = null
   },
   { chipsCellRef, chipsWrapperRef, hiddenChipsCounterRef, hiddenChipsPopUpRef }
 ) => {
@@ -72,7 +73,8 @@ let FormChipCellView = (
   const wrapperClassNames = classnames(
     'chips-wrapper',
     isEditable && 'fixed-max-width',
-    chips.visibleChips?.length > 0 && !chipSizeIsRecalculated && 'chip_invisible'
+    chips.visibleChips?.length > 0 && !chipSizeIsRecalculated && 'chip_invisible',
+    visibleChipsMaxLength === 'all' && 'chips-wrapper_all-visible'
   )
   const chipClassNames = classnames(
     'chip',
@@ -230,7 +232,8 @@ FormChipCellView.propTypes = {
   showChips: PropTypes.bool.isRequired,
   showHiddenChips: PropTypes.bool.isRequired,
   validateFields: PropTypes.func.isRequired,
-  validationRules: PropTypes.object
+  validationRules: PropTypes.object,
+  visibleChipsMaxLength: VISIBLE_CHIPS_MAX_LENGTH
 }
 
 export default FormChipCellView

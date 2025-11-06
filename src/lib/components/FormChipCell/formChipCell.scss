@@ -5,6 +5,7 @@
 
   & {
     height: auto;
+    min-width: 0;
   }
 
   &__wrapper {
@@ -13,8 +14,14 @@
 
   &-wrapper {
     display: flex;
-    flex-flow: row wrap;
+    flex-flow: row;
     align-items: center;
+    overflow: hidden;
+
+    &.chips-wrapper_all-visible {
+      flex-wrap: wrap;
+      overflow: auto;
+    }
   }
 
   &-cell {

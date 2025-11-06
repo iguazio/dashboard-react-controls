@@ -85,6 +85,11 @@ export const CHIP_OPTIONS = PropTypes.shape({
 
 export const CHIPS = PropTypes.arrayOf(CHIP)
 
+export const VISIBLE_CHIPS_MAX_LENGTH = PropTypes.oneOfType([
+  PropTypes.number,
+  PropTypes.oneOf(['all'])
+])
+
 export const POP_UP_CUSTOM_POSITION = PropTypes.shape({
   element: PropTypes.shape({}),
   position: PropTypes.oneOf(['top-left', 'top-right', 'bottom-left', 'bottom-right']),
