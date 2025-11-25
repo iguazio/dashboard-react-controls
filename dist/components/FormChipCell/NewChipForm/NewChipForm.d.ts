@@ -1,11 +1,12 @@
 export default NewChipForm;
-declare function NewChipForm({ chip, chipIndex, chipOptions, className, editConfig, handleRemoveChip, isEditable, keyName, meta, onChange, setChipSizeIsRecalculated, setEditConfig, validationRules: rules, valueName }: {
+declare function NewChipForm({ chip, chipIndex, chipOptions, className, editConfig, handleRemoveChip, isDeletable, isEditable, keyName, meta, onChange, setChipSizeIsRecalculated, setEditConfig, validationRules: rules, valueName }: {
     chip: any;
     chipIndex: any;
     chipOptions: any;
     className?: string;
     editConfig: any;
     handleRemoveChip: any;
+    isDeletable: any;
     isEditable: any;
     keyName: any;
     meta: any;
@@ -24,6 +25,7 @@ declare namespace NewChipForm {
         let className: any;
         let editConfig: any;
         let handleRemoveChip: any;
+        let isDeletable: any;
         let isEditable: any;
         let keyName: any;
         let meta: any;
