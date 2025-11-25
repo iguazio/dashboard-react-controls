@@ -4,6 +4,7 @@ export const CHIP_INPUT_LIST: any;
 export const DENSITY_OPTIONS: any;
 export const CHIP_OPTIONS: any;
 export const CHIPS: any;
+export const VISIBLE_CHIPS_MAX_LENGTH: any;
 export const POP_UP_CUSTOM_POSITION: any;
 export const MODAL_SIZES: any;
 export const CONFIRM_DIALOG_CANCEL_BUTTON: any;

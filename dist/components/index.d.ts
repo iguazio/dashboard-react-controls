@@ -1,8 +1,6 @@
 import ActionsMenu from './ActionsMenu/ActionsMenu';
 import BlockerSpy from './BlockerSpy/BlockerSpy';
 import Button from './Button/Button';
-import Chip from './Chip/Chip';
-import ChipCell from './ChipCell/ChipCell';
 import ConfirmDialog from './ConfirmDialog/ConfirmDialog';
 import CopyToClipboard from './CopyToClipboard/CopyToClipboard';
 import ErrorMessage from './ErrorMessage/ErrorMessage';
@@ -21,6 +19,7 @@ import Loader from './Loader/Loader';
 import LoaderForSuspenseFallback from './Loader/LoaderForSuspenseFallback';
 import Modal from './Modal/Modal';
 import PopUpDialog from './PopUpDialog/PopUpDialog';
+import ReadOnlyChips from './ReadOnlyChips/ReadOnlyChips';
 import RoundedIcon from './RoundedIcon/RoundedIcon';
 import TableCell from './TableCell/TableCell';
 import TabsSlider from './TabsSlider/TabsSlider';
@@ -28,5 +27,5 @@ import TextTooltipTemplate from './TooltipTemplate/TextTooltipTemplate';
 import Tip from './Tip/Tip';
 import Tooltip from './Tooltip/Tooltip';
 import Wizard from './Wizard/Wizard';
-export { ActionsMenu, BlockerSpy, Button, Chip, ChipCell, ConfirmDialog, CopyToClipboard, ErrorMessage, FormCheckBox, FormChipCell, FormCombobox, FormInput, FormKeyValueTable, FormOnChange, FormRadio, FormSelect, FormTextarea, FormToggle, LoadButton, Loader, LoaderForSuspenseFallback, Modal, PopUpDialog, RoundedIcon, TableCell, TabsSlider, TextTooltipTemplate, Tip, Tooltip, Wizard };
+export { ActionsMenu, BlockerSpy, Button, ConfirmDialog, CopyToClipboard, ErrorMessage, FormCheckBox, FormChipCell, FormCombobox, FormInput, FormKeyValueTable, FormOnChange, FormRadio, FormSelect, FormTextarea, FormToggle, LoadButton, Loader, LoaderForSuspenseFallback, Modal, PopUpDialog, ReadOnlyChips, RoundedIcon, TableCell, TabsSlider, TextTooltipTemplate, Tip, Tooltip, Wizard };
 //# sourceMappingURL=index.d.ts.map

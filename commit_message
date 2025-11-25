@@ -1,6 +1,7 @@
 
 
-Create a new dist version 3.2.2
+Create a new dist version 3.2.3
 
 Collecting:
-- Fix [Monitoring app] Date picker selection not preserved between pages (#449)
+- Fix [General] Wrong calculation of visible chips (#453)
+- Cleanup [UI] use FormChipCell component (#454)

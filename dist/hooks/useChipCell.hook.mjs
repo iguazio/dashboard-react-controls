@@ -1,68 +1,71 @@
-import { useState as h, useMemo as k, useRef as d, useCallback as b, useEffect as C, useLayoutEffect as N } from "react";
-import { throttle as P } from "lodash";
-import { getScssVariableValue as x, getTransitionEndEventName as D, isEveryObjectValueEmpty as F } from "../utils/common.util.mjs";
-import { getFirstScrollableParent as T } from "../utils/getFirstScrollableParent.util.mjs";
-const K = (s, E, R) => {
-  const [o, c] = h(!1), [a, z] = h({}), [j, y] = h(!1), [L, O] = h(0), [V, H] = h(8), S = k(
-    () => parseInt(x("--chipBlockMarginRight")),
+import { useState as h, useMemo as V, useRef as w, useCallback as R, useEffect as m, useLayoutEffect as A } from "react";
+import { throttle as G } from "lodash";
+import { getScssVariableValue as J, getTransitionEndEventName as K, isEveryObjectValueEmpty as Q } from "../utils/common.util.mjs";
+import { getFirstScrollableParent as X } from "../utils/getFirstScrollableParent.util.mjs";
+const M = (i, z, B) => {
+  const [o, u] = h(!1), [v, H] = h({}), [I, j] = h(!1), [W, x] = h(0), [N, O] = h(8), E = V(
+    () => parseInt(J("--chipBlockMarginRight")),
     []
-  ), p = k(() => D(), []), f = d(), I = d(), u = d(), r = d(), g = b(
+  ), S = V(() => K(), []), a = w(), P = w(), c = w(), n = w(), f = R(
     (e) => {
-      var l, n;
-      (!s || s && E) && ((l = u.current) != null && l.contains(e.target) && !o ? c(!0) : c(!1)), e && ((n = u.current) != null && n.contains(e.target)) && e.stopPropagation();
+      var s, r;
+      (!i || i && z) && ((s = c.current) != null && s.contains(e.target) && !o ? u(!0) : u(!1)), e && ((r = c.current) != null && r.contains(e.target)) && e.stopPropagation();
     },
-    [s, o, E]
+    [i, o, z]
   );
-  C(() => (o && window.addEventListener("click", g, !0), () => window.removeEventListener("click", g, !0)), [o, g]), C(() => {
+  m(() => (o && window.addEventListener("click", f, !0), () => window.removeEventListener("click", f, !0)), [o, f]), m(() => {
     var e;
-    (e = f.current) != null && e.getBoundingClientRect().width && O((l) => {
-      var n;
-      if (!l)
-        return (n = f.current) == null ? void 0 : n.getBoundingClientRect().width;
+    (e = a.current) != null && e.getBoundingClientRect().width && x((s) => {
+      var r;
+      if (!s)
+        return (r = a.current) == null ? void 0 : r.getBoundingClientRect().width;
     });
   }, []);
-  const m = b(
+  const b = R(
     (e) => {
-      e.target.parentElement !== (r == null ? void 0 : r.current) && c(!1);
+      e.target.parentElement !== (n == null ? void 0 : n.current) && u(!1);
     },
-    [r]
+    [n]
   );
-  C(() => (o && window.addEventListener("scroll", m, !0), () => window.removeEventListener("scroll", m, !0)), [m, o]);
-  const w = b(() => {
-    var e, l;
-    if (r != null && r.current) {
-      const i = T(u.current.offsetParent).getBoundingClientRect(), t = (e = u.current) == null ? void 0 : e.getBoundingClientRect();
-      (t.left < i.left || t.top < i.top || t.right > i.right || t.bottom > i.bottom || t.right > window.innerWidth || t.bottom > window.innerHeight) && c(!1);
+  m(() => (o && window.addEventListener("scroll", b, !0), () => window.removeEventListener("scroll", b, !0)), [b, o]);
+  const d = R(() => {
+    var e, s, r;
+    if (n != null && n.current) {
+      const l = X(c.current.offsetParent).getBoundingClientRect(), t = (e = c.current) == null ? void 0 : e.getBoundingClientRect();
+      (t.left < l.left || t.top < l.top || t.right > l.right || t.bottom > l.bottom || t.right > window.innerWidth || t.bottom > window.innerHeight) && u(!1);
     }
-    if (!s && !F(a)) {
-      const n = R ? L : (l = f.current) == null ? void 0 : l.getBoundingClientRect().width;
-      let i = 0, t = 0;
-      const W = 65;
-      Object.values(a).every((v, B) => i + v > n || Object.values(a).length > 1 && i + v + S + W > n ? (t = B, !1) : (i += v, B === Object.values(a).length - 1 && (t = 8), !0)), H(t), y(!0);
+    if (!i && !Q(v)) {
+      const L = B ? W : (s = a.current) == null ? void 0 : s.getBoundingClientRect().width, l = (((r = c.current) == null ? void 0 : r.getBoundingClientRect().width) ?? 0) + E;
+      let t = 0, g = 0;
+      const C = Object.values(v);
+      C.every((D, k) => {
+        const F = D + E, y = k === C.length - 1, p = t + F, T = p + l > L, q = p > L;
+        return T ? y && !q ? (t = p, g = C.length, !0) : (g = k, !1) : (t = p, y && (g = C.length), !0);
+      }), O(g), j(!0);
     }
-  }, [S, L, a, s, R]);
-  return N(() => {
-    w();
-  }, [w]), C(() => {
-    const e = P(w, 500);
-    if (!s)
-      return window.addEventListener("resize", e), window.addEventListener(p, e), () => {
-        window.removeEventListener("resize", e), window.removeEventListener(p, e);
+  }, [E, W, v, i, B]);
+  return A(() => {
+    d();
+  }, [d]), m(() => {
+    const e = G(d, 500);
+    if (!i)
+      return window.addEventListener("resize", e), window.addEventListener(S, e), () => {
+        window.removeEventListener("resize", e), window.removeEventListener(S, e);
       };
-  }, [w, s, p]), {
-    chipsCellRef: f,
-    chipsWrapperRef: I,
-    handleShowElements: g,
-    hiddenChipsCounterRef: u,
-    hiddenChipsPopUpRef: r,
-    setChipsSizes: z,
-    setShowHiddenChips: c,
-    showChips: j,
+  }, [d, i, S]), {
+    chipsCellRef: a,
+    chipsWrapperRef: P,
+    handleShowElements: f,
+    hiddenChipsCounterRef: c,
+    hiddenChipsPopUpRef: n,
+    setChipsSizes: H,
+    setShowHiddenChips: u,
+    showChips: I,
     showHiddenChips: o,
-    visibleChipsCount: V
+    visibleChipsCount: N
   };
 };
 export {
-  K as useChipCell
+  M as useChipCell
 };
 //# sourceMappingURL=useChipCell.hook.mjs.map

@@ -1,5 +1,5 @@
 export default FormChip;
-declare function FormChip({ chip, chipIndex, chipSizeIsRecalculated, setChipSizeIsRecalculated, chipOptions, editConfig, handleEditChip, handleRemoveChip, handleToEditMode, isEditable, keyName, meta, setChipsSizes, setEditConfig, validationRules, valueName }: {
+declare function FormChip({ chip, chipIndex, chipSizeIsRecalculated, setChipSizeIsRecalculated, chipOptions, editConfig, handleEditChip, handleRemoveChip, handleToEditMode, isDeletable, isEditable, keyName, meta, setChipsSizes, setEditConfig, validationRules, valueName }: {
     chip: any;
     chipIndex: any;
     chipSizeIsRecalculated: any;
@@ -16,6 +16,7 @@ declare function FormChip({ chip, chipIndex, chipSizeIsRecalculated, setChipSize
     handleEditChip: any;
     handleRemoveChip: any;
     handleToEditMode: any;
+    isDeletable?: boolean;
     isEditable?: boolean;
     keyName?: string;
     meta: any;
@@ -36,6 +37,7 @@ declare namespace FormChip {
         export let handleEditChip: any;
         export let handleRemoveChip: any;
         export let handleToEditMode: any;
+        export let isDeletable: any;
         export let isEditable: any;
         export let keyName: any;
         export let meta: any;
