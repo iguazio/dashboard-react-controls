@@ -27,22 +27,21 @@ import ChipTooltip from '../ChipTooltip/ChipTooltip'
 import { CHIP_OPTIONS, CHIPS } from '../../../types'
 import { useHiddenChipsBlock } from '../../../hooks'
 
-let HiddenChipsBlock = (
-  {
-    chips = [],
-    chipIndex = 0,
-    chipOptions,
-    className,
-    editConfig = {},
-    handleEditChip,
-    handleIsEdit = () => {},
-    handleRemoveChip,
-    handleShowElements,
-    isEditMode = false,
-    setEditConfig = () => {}
-  },
-  { hiddenChipsCounterRef, hiddenChipsPopUpRef }
-) => {
+let HiddenChipsBlock = ({
+  chips = [],
+  chipIndex = 0,
+  chipOptions,
+  className,
+  editConfig = {},
+  handleEditChip,
+  handleIsEdit = () => {},
+  handleRemoveChip,
+  handleShowElements,
+  isEditMode = false,
+  ref,
+  setEditConfig = () => {}
+}) => {
+  const { hiddenChipsCounterRef, hiddenChipsPopUpRef } = ref
   const { hiddenChipsBlockClassNames } = useHiddenChipsBlock(
     hiddenChipsCounterRef,
     hiddenChipsPopUpRef
@@ -84,8 +83,6 @@ let HiddenChipsBlock = (
     document.getElementById('overlay_container')
   )
 }
-
-HiddenChipsBlock = React.forwardRef(HiddenChipsBlock)
 
 HiddenChipsBlock.displayName = 'HiddenChipsBlock'
 

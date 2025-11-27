@@ -14,14 +14,7 @@ illegal under applicable law, and the grant of the foregoing license
 under the Apache 2.0 license is conditioned upon your compliance with
 such restriction.
 */
-import React, {
-  useState,
-  useCallback,
-  useEffect,
-  useLayoutEffect,
-  useMemo,
-  forwardRef
-} from 'react'
+import React, { useState, useCallback, useEffect, useLayoutEffect, useMemo } from 'react'
 import PropTypes from 'prop-types'
 import classnames from 'classnames'
 import { isEmpty, get, isNil, throttle } from 'lodash'
@@ -43,25 +36,23 @@ const defaultProps = {
   rules: {}
 }
 
-let NewChipForm = (
-  {
-    chip,
-    chipIndex,
-    chipOptions,
-    className = '',
-    editConfig,
-    handleRemoveChip,
-    isEditable,
-    keyName,
-    meta,
-    onChange,
-    setChipSizeIsRecalculated,
-    setEditConfig,
-    validationRules: rules = defaultProps.rules,
-    valueName
-  },
-  ref
-) => {
+let NewChipForm = ({
+  chip,
+  chipIndex,
+  chipOptions,
+  className = '',
+  editConfig,
+  handleRemoveChip,
+  isEditable,
+  keyName,
+  meta,
+  onChange,
+  ref,
+  setChipSizeIsRecalculated,
+  setEditConfig,
+  validationRules: rules = defaultProps.rules,
+  valueName
+}) => {
   const [chipData, setChipData] = useState({
     isKeyOnly: chip.isKeyOnly,
     key: chip.key,
@@ -197,7 +188,9 @@ let NewChipForm = (
 
   useEffect(() => {
     if (!chipData.keyFieldWidth && !chipData.valueFieldWidth) {
-      resizeChip()
+      queueMicrotask(() => {
+        resizeChip()
+      })
     }
   }, [chipData.keyFieldWidth, chipData.valueFieldWidth, resizeChip])
 
@@ -371,35 +364,43 @@ let NewChipForm = (
 
   useLayoutEffect(() => {
     if (editConfig.chipIndex === chipIndex) {
-      setSelectedInput(editConfig.isKeyFocused ? 'key' : editConfig.isValueFocused ? 'value' : null)
+      queueMicrotask(() => {
+        setSelectedInput(
+          editConfig.isKeyFocused ? 'key' : editConfig.isValueFocused ? 'value' : null
+        )
+      })
     }
   }, [editConfig.isKeyFocused, editConfig.isValueFocused, editConfig.chipIndex, chipIndex])
 
   useEffect(() => {
     if (meta.valid && showValidationRules) {
-      setShowValidationRules(false)
+      queueMicrotask(() => {
+        setShowValidationRules(false)
+      })
     }
   }, [meta.valid, showValidationRules])
 
   useEffect(() => {
     if (meta.error) {
-      setValidationRules(prevState => {
-        return {
-          ...prevState,
-          [selectedInput]: prevState[selectedInput]?.map(rule => {
-            return {
-              ...rule,
-              isValid: isEmpty(get(meta, ['error', editConfig.chipIndex, selectedInput], []))
-                ? true
-                : !meta.error[editConfig.chipIndex][selectedInput].some(
-                    err => err && err.name === rule.name
-                  )
-            }
-          })
-        }
-      })
+      queueMicrotask(() => {
+        setValidationRules(prevState => {
+          return {
+            ...prevState,
+            [selectedInput]: prevState[selectedInput]?.map(rule => {
+              return {
+                ...rule,
+                isValid: isEmpty(get(meta, ['error', editConfig.chipIndex, selectedInput], []))
+                  ? true
+                  : !meta.error[editConfig.chipIndex][selectedInput].some(
+                      err => err && err.name === rule.name
+                    )
+              }
+            })
+          }
+        })
 
-      !showValidationRules && setShowValidationRules(true)
+        !showValidationRules && setShowValidationRules(true)
+      })
     }
   }, [meta, showValidationRules, selectedInput, editConfig.chipIndex])
 
@@ -467,8 +468,6 @@ let NewChipForm = (
   )
 }
 
-NewChipForm = forwardRef(NewChipForm)
-
 NewChipForm.displayName = 'NewChipForm'
 
 NewChipForm.propTypes = {
@@ -482,6 +481,7 @@ NewChipForm.propTypes = {
   keyName: PropTypes.string.isRequired,
   meta: PropTypes.object.isRequired,
   onChange: PropTypes.func.isRequired,
+  ref: PropTypes.object.isRequired,
   setChipSizeIsRecalculated: PropTypes.func.isRequired,
   setEditConfig: PropTypes.func.isRequired,
   validationRules: PropTypes.object,

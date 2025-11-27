@@ -26,7 +26,7 @@ const OnChangeState = ({ inputValue, handler }) => {
 
   useEffect(() => {
     if (inputValue !== previousValue) {
-      setPreviousValue(inputValue)
+      setTimeout(() => setPreviousValue(inputValue), 0)
       handler(inputValue, previousValue)
     }
   }, [handler, inputValue, previousValue])

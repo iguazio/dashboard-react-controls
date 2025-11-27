@@ -58,7 +58,7 @@ const Tip = ({ className = '', text, withExclamationMark = false }) => {
       const widthPosition = iconRect.left > tipRect.width - arrowOffset ? 'tip_left' : 'tip_right'
       const heightPosition = iconRect.top > tipRect.height + arrowLength ? 'tip_top' : 'tip_bottom'
 
-      setTipClassName(`${heightPosition} ${widthPosition}`)
+      queueMicrotask(() => setTipClassName(`${heightPosition} ${widthPosition}`))
 
       if (widthPosition === 'tip_left') {
         const computedArrowOffset = arrowOffset + (iconLength + arrowLength) / 2

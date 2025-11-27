@@ -14,7 +14,7 @@ illegal under applicable law, and the grant of the foregoing license
 under the Apache 2.0 license is conditioned upon your compliance with
 such restriction.
 */
-import React, { forwardRef, useEffect } from 'react'
+import React, { useEffect } from 'react'
 import { createPortal } from 'react-dom'
 import PropTypes from 'prop-types'
 import classnames from 'classnames'
@@ -25,10 +25,15 @@ import TextTooltipTemplate from '../../TooltipTemplate/TextTooltipTemplate'
 import { CHIP_OPTIONS } from '../../../types'
 import { useHiddenChipsBlock } from '../../../hooks'
 
-let HiddenChipsBlock = (
-  { chipClassNames, chipOptions, chips, handleShowElements, textOverflowEllipsis = false },
-  { hiddenChipsCounterRef, hiddenChipsPopUpRef }
-) => {
+let HiddenChipsBlock = ({
+  chipClassNames,
+  chipOptions,
+  chips,
+  handleShowElements,
+  ref,
+  textOverflowEllipsis = false
+}) => {
+  const { hiddenChipsCounterRef, hiddenChipsPopUpRef } = ref
   const { hiddenChipsBlockClassNames } = useHiddenChipsBlock(
     hiddenChipsCounterRef,
     hiddenChipsPopUpRef
@@ -101,8 +106,6 @@ let HiddenChipsBlock = (
     document.getElementById('overlay_container')
   )
 }
-
-HiddenChipsBlock = forwardRef(HiddenChipsBlock)
 
 HiddenChipsBlock.displayName = 'HiddenChipsBlock'
 

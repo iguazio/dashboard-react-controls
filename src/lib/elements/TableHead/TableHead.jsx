@@ -17,7 +17,7 @@ illegal under applicable law, and the grant of the foregoing license
 under the Apache 2.0 license is conditioned upon your compliance with
 such restriction.
 */
-import React, { forwardRef } from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
 import classNames from 'classnames'
 import { isEmpty } from 'lodash'
@@ -28,10 +28,14 @@ import TextTooltipTemplate from '../../components/TooltipTemplate/TextTooltipTem
 
 import { SORT_PROPS } from '../../types'
 
-let TableHead = (
-  { content, hideActionsMenu = false, mainRowItemsCount, selectedItem, sortProps = null },
-  ref
-) => {
+let TableHead = ({
+  content,
+  hideActionsMenu = false,
+  mainRowItemsCount,
+  ref,
+  selectedItem,
+  sortProps = null
+}) => {
   const getHeaderCellClasses = (
     headerId,
     isSortable,
@@ -82,14 +86,13 @@ let TableHead = (
   )
 }
 
-TableHead = forwardRef(TableHead)
-
 TableHead.displayName = 'TableHead'
 
 TableHead.propTypes = {
   content: PropTypes.array.isRequired,
   hideActionsMenu: PropTypes.bool,
   mainRowItemsCount: PropTypes.number.isRequired,
+  ref: PropTypes.object.isRequired,
   selectedItem: PropTypes.object.isRequired,
   sortProps: SORT_PROPS
 }

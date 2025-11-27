@@ -19,7 +19,6 @@ such restriction.
 */
 import React, { useCallback, useEffect, useRef, useState } from 'react'
 import PropTypes from 'prop-types'
-import { isEmpty } from 'lodash'
 import classnames from 'classnames'
 
 import ActionsMenuItem from '../../elements/ActionsMenuItem/ActionsMenuItem'
@@ -39,15 +38,16 @@ const ActionsMenu = ({
   time = 100,
   withQuickActions = false
 }) => {
-  const [[actionMenu, quickActions], setActionMenuContent] = useState(menu)
-  const [isIconDisplayed, setIsIconDisplayed] = useState(false)
+  const [actionMenu, quickActions] =
+    typeof menu === 'function' ? menu(dataItem, menuPosition) : menu
+  const isIconDisplayed = Boolean(actionMenu?.some(menuItem => menuItem.icon))
   const [isShowMenu, setIsShowMenu] = useState(false)
   const actionMenuRef = useRef()
   const actionMenuBtnRef = useRef()
   const dropDownMenuRef = useRef()
   const mainActionsWrapperRef = useRef()
 
-  let idTimeout = null
+  const idTimeoutRef = useRef(null)
 
   const actionMenuClassNames = classnames(
     'actions-menu__container',
@@ -77,7 +77,7 @@ const ActionsMenu = ({
 
   const onMouseOut = () => {
     if (isShowMenu) {
-      idTimeout = setTimeout(() => {
+      idTimeoutRef.current = setTimeout(() => {
         setIsShowMenu(false)
       }, time)
     }
@@ -88,18 +88,8 @@ const ActionsMenu = ({
       setIsShowMenu(false)
     }
 
-    if (idTimeout) clearTimeout(idTimeout)
+    if (idTimeoutRef.current) clearTimeout(idTimeoutRef.current)
   }
-
-  useEffect(() => {
-    if (!isEmpty(dataItem)) {
-      setActionMenuContent(typeof menu === 'function' ? menu(dataItem, menuPosition) : menu)
-    }
-  }, [dataItem, menu, menuPosition])
-
-  useEffect(() => {
-    setIsIconDisplayed(actionMenu?.some(menuItem => menuItem.icon))
-  }, [actionMenu])
 
   useEffect(() => {
     window.addEventListener('click', clickHandler)

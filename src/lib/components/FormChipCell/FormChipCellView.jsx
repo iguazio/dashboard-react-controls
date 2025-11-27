@@ -14,7 +14,7 @@ illegal under applicable law, and the grant of the foregoing license
 under the Apache 2.0 license is conditioned upon your compliance with
 such restriction.
 */
-import React, { forwardRef } from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
 import classnames from 'classnames'
 import { FieldArray } from 'react-final-form-arrays'
@@ -31,37 +31,36 @@ import { uniquenessError } from './formChipCell.util'
 
 import Add from '../../images/add.svg?react'
 
-let FormChipCellView = (
-  {
-    chipOptions = {
-      background: 'purple',
-      boldValue: false,
-      borderRadius: 'primary',
-      borderColor: 'transparent',
-      density: 'dense',
-      font: 'purple'
-    },
-    chipSizeIsRecalculated,
-    setChipSizeIsRecalculated,
-    chips,
-    editConfig,
-    handleAddNewChip,
-    handleEditChip,
-    handleRemoveChip,
-    handleShowElements,
-    handleToEditMode,
-    isEditable = false,
-    name,
-    setChipsSizes,
-    setEditConfig,
-    shortChips = false,
-    showChips,
-    showHiddenChips,
-    validateFields,
-    validationRules = {}
+let FormChipCellView = ({
+  chipOptions = {
+    background: 'purple',
+    boldValue: false,
+    borderRadius: 'primary',
+    borderColor: 'transparent',
+    density: 'dense',
+    font: 'purple'
   },
-  { chipsCellRef, chipsWrapperRef, hiddenChipsCounterRef, hiddenChipsPopUpRef }
-) => {
+  chipSizeIsRecalculated,
+  setChipSizeIsRecalculated,
+  chips,
+  editConfig,
+  handleAddNewChip,
+  handleEditChip,
+  handleRemoveChip,
+  handleShowElements,
+  handleToEditMode,
+  isEditable = false,
+  name,
+  ref,
+  setChipsSizes,
+  setEditConfig,
+  shortChips = false,
+  showChips,
+  showHiddenChips,
+  validateFields,
+  validationRules = {}
+}) => {
+  const { chipsCellRef, chipsWrapperRef, hiddenChipsCounterRef, hiddenChipsPopUpRef } = ref
   const buttonAddClassNames = classnames(
     'button-add',
     chipOptions.background && `button-add-background_${chipOptions.background}`,
@@ -206,8 +205,6 @@ let FormChipCellView = (
   )
 }
 
-FormChipCellView = forwardRef(FormChipCellView)
-
 FormChipCellView.displayName = 'FormChipCellView'
 
 FormChipCellView.propTypes = {
@@ -224,6 +221,7 @@ FormChipCellView.propTypes = {
   handleToEditMode: PropTypes.func.isRequired,
   isEditable: PropTypes.bool,
   name: PropTypes.string.isRequired,
+  ref: PropTypes.object.isRequired,
   setChipsSizes: PropTypes.func.isRequired,
   setEditConfig: PropTypes.func.isRequired,
   shortChips: PropTypes.bool,

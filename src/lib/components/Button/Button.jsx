@@ -14,7 +14,7 @@ illegal under applicable law, and the grant of the foregoing license
 under the Apache 2.0 license is conditioned upon your compliance with
 such restriction.
 */
-import React, { forwardRef } from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
 import classNames from 'classnames'
 
@@ -26,20 +26,18 @@ import { TERTIARY_BUTTON } from '../../constants'
 
 import './Button.scss'
 
-let Button = (
-  {
-    className = '',
-    density = 'normal',
-    icon = null,
-    iconPosition = 'left',
-    id = 'btn',
-    label = 'Button',
-    tooltip = '',
-    variant = TERTIARY_BUTTON,
-    ...restProps
-  },
-  ref
-) => {
+const Button = ({
+  className = '',
+  density = 'normal',
+  icon = null,
+  iconPosition = 'left',
+  id = 'btn',
+  label = 'Button',
+  ref,
+  tooltip = '',
+  variant = TERTIARY_BUTTON,
+  ...restProps
+}) => {
   const buttonClassName = classNames('btn', `btn-${variant}`, `btn-${density}`, className)
 
   return (
@@ -55,8 +53,6 @@ let Button = (
   )
 }
 
-Button = forwardRef(Button)
-
 Button.displayName = 'Button'
 
 Button.propTypes = {
@@ -66,6 +62,7 @@ Button.propTypes = {
   iconPosition: PropTypes.oneOf(['left', 'right']),
   id: PropTypes.string,
   label: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
+  ref: PropTypes.object.isRequired,
   tooltip: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
   variant: BUTTON_VARIANTS
 }

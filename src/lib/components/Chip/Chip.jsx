@@ -32,29 +32,28 @@ import Close from '../../images/close.svg?react'
 
 import './chip.scss'
 
-let Chip = (
-  {
-    chip,
-    chipIndex = null,
-    chipOptions,
-    className,
-    editConfig = {},
-    handleEditChip = () => {},
-    handleIsEdit = () => {},
-    handleRemoveChip = () => {},
-    hiddenChips = false,
-    isDeleteMode = false,
-    isEditMode = false,
-    onClick = null,
-    setChipsSizes = () => {},
-    setEditConfig = () => {},
-    setValidation = null,
-    shortChip = false,
-    showChips,
-    textOverflowEllipsis = false
-  },
-  { chipsCellRef, hiddenChipsCounterRef }
-) => {
+let Chip = ({
+  chip,
+  chipIndex = null,
+  chipOptions,
+  className,
+  editConfig = {},
+  handleEditChip = () => {},
+  handleIsEdit = () => {},
+  handleRemoveChip = () => {},
+  hiddenChips = false,
+  isDeleteMode = false,
+  isEditMode = false,
+  onClick = null,
+  ref,
+  setChipsSizes = () => {},
+  setEditConfig = () => {},
+  setValidation = null,
+  shortChip = false,
+  showChips,
+  textOverflowEllipsis = false
+}) => {
+  const { chipsCellRef, hiddenChipsCounterRef } = ref
   const [validationRules, setValidationRules] = useState([])
   const frontendSpec = useSelector(store => store.appStore?.frontendSpec) ?? {}
   const chipRef = React.useRef()
@@ -105,7 +104,9 @@ let Chip = (
 
   useEffect(() => {
     if (setValidation) {
-      checkValidation(chip.value.match(/^(?<key>|.+?):\s?(?<value>|.+?)$/)?.groups?.key)
+      queueMicrotask(() => {
+        checkValidation(chip.value.match(/^(?<key>|.+?):\s?(?<value>|.+?)$/)?.groups?.key)
+      })
     }
   }, [checkValidation, chip, setValidation])
 
@@ -170,8 +171,6 @@ let Chip = (
   )
 }
 
-Chip = React.forwardRef(Chip)
-
 Chip.displayName = 'Chip'
 
 Chip.propTypes = {
@@ -187,6 +186,7 @@ Chip.propTypes = {
   isDeleteMode: PropTypes.bool,
   isEditMode: PropTypes.bool,
   onClick: PropTypes.func,
+  ref: PropTypes.object.isRequired,
   setChipsSizes: PropTypes.func,
   setEditConfig: PropTypes.func,
   setValidation: PropTypes.func,
