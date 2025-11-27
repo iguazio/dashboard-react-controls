@@ -163,6 +163,18 @@ const TabsSlider = ({
     }
   }, [isDetailsPopUp, params.tab, selectedTab, tabsList])
 
+  const getTabContent = useCallback(tab => {
+    return (
+      <span
+        className={(tab.icon && 'content-menu__tab-icon') || (tab.tip && 'content-menu__tab-tip')}
+      >
+        {tab.icon && <div>{tab.icon}</div>}
+        {tab.label}
+        {tab.tip && <Tip text={tab.tip} />}
+      </span>
+    )
+  }, [])
+
   return (
     <div className="content-menu">
       <div
@@ -197,29 +209,19 @@ const TabsSlider = ({
                   )}
                   className={tabClassName}
                   key={tab.id}
+                  data-tab={tab.id}
+                  onClick={() => onSelectTab(tab.id)}
                 >
-                  <span
-                    className={
-                      (tab.icon && 'content-menu__tab-icon') || (tab.tip && 'content-menu__tab-tip')
-                    }
-                    data-tab={tab.id}
-                    onClick={() => onSelectTab(tab)}
-                  >
-                    {tab.icon && <div>{tab.icon}</div>}
-                    {tab.label}
-                    {tab.tip && <Tip text={tab.tip} />}
-                  </span>
+                  {getTabContent(tab)}
                 </Link>
               ) : (
                 <div
                   className={tabClassName}
-                  data-tab={tab.id}
                   key={tab.id}
+                  data-tab={tab.id}
                   onClick={() => onSelectTab(tab.id)}
                 >
-                  {tab.icon && <div className="content-menu_tab-icon">{tab.icon}</div>}
-                  {tab.label}
-                  {tab.tip && <Tip className="content-menu__tab-tip" text={tab.tip} />}
+                  {getTabContent(tab)}
                 </div>
               ))
             )

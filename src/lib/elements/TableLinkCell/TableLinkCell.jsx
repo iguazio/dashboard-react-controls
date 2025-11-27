@@ -55,7 +55,7 @@ const TableLinkCell = ({
     <td data-testid={cellData.headerId} className={tableCellClassNames}>
       {cellData.linkIsExternal ? (
         <span className="data-ellipsis">
-          <a href={link} className="link" target="blank">
+          <a href={link} className="link" target="_top">
             <Tooltip
               className={itemNameClassNames}
               template={<TextTooltipTemplate text={cellData.tooltip || cellData.value || ''} />}

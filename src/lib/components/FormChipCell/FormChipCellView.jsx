@@ -25,7 +25,7 @@ import HiddenChipsBlock from './HiddenChipsBlock/HiddenChipsBlock'
 import TextTooltipTemplate from '../TooltipTemplate/TextTooltipTemplate'
 import Tooltip from '../Tooltip/Tooltip'
 
-import { CHIP_OPTIONS } from '../../types'
+import { CHIP_OPTIONS, VISIBLE_CHIPS_MAX_LENGTH } from '../../types'
 import { isEveryObjectValueEmpty } from '../../utils/common.util'
 import { uniquenessError } from './formChipCell.util'
 
@@ -42,13 +42,13 @@ let FormChipCellView = ({
   },
   chipSizeIsRecalculated,
   setChipSizeIsRecalculated,
-  chips,
+  children,chips,
   editConfig,
   handleAddNewChip,
   handleEditChip,
   handleRemoveChip,
   handleShowElements,
-  handleToEditMode,
+  handleToEditMode,isDeletable = false,
   isEditable = false,
   name,
   ref,
@@ -58,7 +58,8 @@ let FormChipCellView = ({
   showChips,
   showHiddenChips,
   validateFields,
-  validationRules = {}
+  validationRules = {},
+    visibleChipsMaxLength = null
 }) => {
   const { chipsCellRef, chipsWrapperRef, hiddenChipsCounterRef, hiddenChipsPopUpRef } = ref
   const buttonAddClassNames = classnames(
@@ -71,7 +72,8 @@ let FormChipCellView = ({
   const wrapperClassNames = classnames(
     'chips-wrapper',
     isEditable && 'fixed-max-width',
-    chips.visibleChips?.length > 0 && !chipSizeIsRecalculated && 'chip_invisible'
+    chips.visibleChips?.length > 0 && !chipSizeIsRecalculated && 'chip_invisible',
+    visibleChipsMaxLength === 'all' && 'chips-wrapper_all-visible'
   )
   const chipClassNames = classnames(
     'chip',
@@ -150,6 +152,7 @@ let FormChipCellView = ({
                               handleRemoveChip(event, fields, index)
                             }
                             handleToEditMode={handleToEditMode}
+                            isDeletable={isDeletable}
                             isEditable={isEditable}
                             keyName={`${contentItem}.key`}
                             meta={meta}
@@ -196,6 +199,7 @@ let FormChipCellView = ({
                     <Add />
                   </button>
                 )}
+                {children}
               </div>
             </div>
           )
@@ -211,6 +215,7 @@ FormChipCellView.propTypes = {
   chipOptions: CHIP_OPTIONS,
   chipSizeIsRecalculated: PropTypes.bool.isRequired,
   setChipSizeIsRecalculated: PropTypes.func.isRequired,
+  children: PropTypes.node,
   chips: PropTypes.object.isRequired,
   editConfig: PropTypes.object.isRequired,
   formState: PropTypes.object.isRequired,
@@ -219,6 +224,7 @@ FormChipCellView.propTypes = {
   handleRemoveChip: PropTypes.func.isRequired,
   handleShowElements: PropTypes.func.isRequired,
   handleToEditMode: PropTypes.func.isRequired,
+  isDeletable: PropTypes.bool,
   isEditable: PropTypes.bool,
   name: PropTypes.string.isRequired,
   ref: PropTypes.object.isRequired,
@@ -228,7 +234,8 @@ FormChipCellView.propTypes = {
   showChips: PropTypes.bool.isRequired,
   showHiddenChips: PropTypes.bool.isRequired,
   validateFields: PropTypes.func.isRequired,
-  validationRules: PropTypes.object
+  validationRules: PropTypes.object,
+  visibleChipsMaxLength: VISIBLE_CHIPS_MAX_LENGTH
 }
 
 export default FormChipCellView

@@ -43,7 +43,7 @@ let NewChipForm = ({
   className = '',
   editConfig,
   handleRemoveChip,
-  isEditable,
+  isDeletable,isEditable,
   keyName,
   meta,
   onChange,
@@ -84,6 +84,7 @@ let NewChipForm = ({
     !isEmpty(get(meta, ['error', chipIndex, 'key'], [])) &&
       !isEmpty(chipData.key) &&
       !chip.disabled &&
+      isEditable &&
       'item_edited_invalid'
   )
   const labelContainerClassName = classnames(
@@ -94,23 +95,23 @@ let NewChipForm = ({
     density && `edit-chip-container-density_${density}`,
     borderRadius && `edit-chip-container-border_${borderRadius}`,
     (editConfig.isEdit || editConfig.isNewChip) && 'edit-chip-container_edited',
-    chip.disabled && 'edit-chip-container_disabled edit-chip-container-font_disabled'
+    isEditable && chip.disabled && 'edit-chip-container_disabled edit-chip-container-font_disabled'
   )
   const labelValueClassName = classnames(
     'input-label-value',
     !editConfig.isValueFocused && 'item_edited',
     !isEmpty(get(meta, ['error', chipIndex, 'value'], [])) &&
       !isEmpty(chipData.value) &&
+      isEditable &&
       'item_edited_invalid'
   )
 
   const closeButtonClass = classnames(
     'item-icon-close',
     !chip.disabled &&
-      editConfig.chipIndex === chipIndex &&
-      isEditable &&
-      'item-icon-close_invisible',
-    !isEditable && 'item-icon-close_hidden'
+      ((editConfig.chipIndex === chipIndex && isEditable) || !isDeletable) &&
+      'item-icon-close invisible',
+    !isEditable && !isDeletable && 'item-icon-close hidden'
   )
 
   const resizeChip = useCallback(() => {
@@ -171,6 +172,17 @@ let NewChipForm = ({
     ref,
     setChipSizeIsRecalculated
   ])
+
+  useEffect(() => {
+    if (!ref.current) return
+
+    const element = ref.current
+    const observer = new ResizeObserver(resizeChip)
+
+    observer.observe(element)
+
+    return () => observer.unobserve(element)
+  }, [ref, resizeChip])
 
   useEffect(() => {
     const resizeChipDebounced = throttle(resizeChip, 500)
@@ -426,7 +438,7 @@ let NewChipForm = ({
         name={keyName}
         onChange={handleOnChange}
         onFocus={handleOnFocus}
-        placeholder="key"
+        placeholder={isEditable ? 'key' : ''}
         ref={refInputKey}
         style={{ width: chipData.keyFieldWidth }}
       />
@@ -442,7 +454,7 @@ let NewChipForm = ({
           name={valueName}
           onChange={handleOnChange}
           onFocus={handleOnFocus}
-          placeholder="value"
+          placeholder={isEditable ? 'value' : ''}
           ref={refInputValue}
           style={{ width: chipData.valueFieldWidth }}
         />
@@ -477,6 +489,7 @@ NewChipForm.propTypes = {
   className: PropTypes.string,
   editConfig: PropTypes.object.isRequired,
   handleRemoveChip: PropTypes.func.isRequired,
+  isDeletable: PropTypes.bool.isRequired,
   isEditable: PropTypes.bool.isRequired,
   keyName: PropTypes.string.isRequired,
   meta: PropTypes.object.isRequired,

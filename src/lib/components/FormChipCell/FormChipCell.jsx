@@ -21,7 +21,7 @@ import PropTypes from 'prop-types'
 
 import FormChipCellView from './FormChipCellView'
 
-import { CHIP_OPTIONS } from '../../types'
+import { CHIP_OPTIONS, VISIBLE_CHIPS_MAX_LENGTH } from '../../types'
 import { CLICK, TAB, TAB_SHIFT } from '../../constants'
 import { areArraysEqual } from '../../utils/common.util'
 import { checkPatternsValidity } from '../../utils/validation.util'
@@ -41,18 +41,21 @@ let FormChipCell = ({
     font: 'purple'
   },
   className = '',
+  children,
   delimiter = null,
   formState,
   initialValues,
+  isDeletable = false,
   isEditable = false,
   label = null,
   name,
   onClick = () => {},
+  onExitEditModeCallback = null,
   shortChips = false,
   validationRules = {},
   validator = null,
-  onExitEditModeCallback = null,
-  visibleChipsMaxLength = null
+  visibleChipsMaxLength = null,
+  withInitialParentWidth = false
 }) => {
   const chipsClassName = classnames('chips', className)
   const [chipSizeIsRecalculated, setChipSizeIsRecalculated] = useState(false)
@@ -67,7 +70,7 @@ let FormChipCell = ({
     showChips,
     showHiddenChips,
     visibleChipsCount
-  } = useChipCell(isEditable, visibleChipsMaxLength)
+  } = useChipCell(isEditable, visibleChipsMaxLength, withInitialParentWidth)
 
   const [editConfig, setEditConfig] = useState({
     chipIndex: null,
@@ -376,6 +379,7 @@ let FormChipCell = ({
           handleRemoveChip={handleRemoveChip}
           handleShowElements={handleShowElements}
           handleToEditMode={handleToEditMode}
+          isDeletable={isDeletable}
           isEditable={isEditable}
           name={name}
           ref={{ chipsCellRef, chipsWrapperRef, hiddenChipsCounterRef, hiddenChipsPopUpRef }}
@@ -387,7 +391,10 @@ let FormChipCell = ({
           showHiddenChips={showHiddenChips}
           validateFields={validateFields}
           validationRules={validationRules}
-        />
+          visibleChipsMaxLength={visibleChipsMaxLength}
+        >
+          {children}
+        </FormChipCellView>
       </div>
     </div>
   )
@@ -395,10 +402,12 @@ let FormChipCell = ({
 
 FormChipCell.propTypes = {
   chipOptions: CHIP_OPTIONS,
+  children: PropTypes.node,
   className: PropTypes.string,
   delimiter: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
   formState: PropTypes.object.isRequired,
   initialValues: PropTypes.object.isRequired,
+  isDeletable: PropTypes.bool,
   isEditable: PropTypes.bool,
   label: PropTypes.string,
   name: PropTypes.string.isRequired,
@@ -407,7 +416,8 @@ FormChipCell.propTypes = {
   shortChips: PropTypes.bool,
   validationRules: PropTypes.object,
   validator: PropTypes.func,
-  visibleChipsMaxLength: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
+  visibleChipsMaxLength: VISIBLE_CHIPS_MAX_LENGTH,
+  withInitialParentWidth: PropTypes.bool
 }
 
 FormChipCell = React.memo(FormChipCell)

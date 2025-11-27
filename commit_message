@@ -1,6 +1,7 @@
 
 
-Create a new dist version 3.1.11
+Create a new dist version 3.2.3
 
 Collecting:
-- Fix [Artifacts] Download notification not interactable (#440)
+- Fix [General] Wrong calculation of visible chips (#453)
+- Cleanup [UI] use FormChipCell component (#454)
