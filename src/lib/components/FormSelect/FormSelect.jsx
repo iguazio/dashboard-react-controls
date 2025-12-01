@@ -14,7 +14,7 @@ illegal under applicable law, and the grant of the foregoing license
 under the Apache 2.0 license is conditioned upon your compliance with
 such restriction.
 */
-import React, { useState, useEffect, useCallback, useMemo, useRef } from 'react'
+import React, { useState, useEffect, useCallback, useMemo, useRef, useLayoutEffect } from 'react'
 import PropTypes from 'prop-types'
 import classNames from 'classnames'
 import { Field, useField } from 'react-final-form'
@@ -53,15 +53,17 @@ let FormSelect = ({
   withoutBorder = false
 }) => {
   const { input, meta } = useField(name)
-  const [isInvalid, setIsInvalid] = useState(false)
+  const isInvalid =
+    meta.invalid && (meta.validating || meta.modified || (meta.submitFailed && meta.touched))
   const [isConfirmDialogOpen, setConfirmDialogOpen] = useState(false)
   const [isOpen, setIsOpen] = useState(false)
   const [searchValue, setSearchValue] = useState('')
+  const [selectWidth, setSelectWidth] = useState(0)
   const optionsListRef = useRef()
   const popUpRef = useRef()
   const selectRef = useRef()
   const searchRef = useRef()
-  const { width: selectWidth } = selectRef?.current?.getBoundingClientRect() || {}
+  // const { width: selectWidth } = selectRef?.current?.getBoundingClientRect() || {}
 
   const selectWrapperClassNames = classNames(
     'form-field__wrapper',
@@ -81,6 +83,19 @@ let FormSelect = ({
     'form-field__select-value',
     !input.value && 'form-field__select-placeholder'
   )
+
+  useLayoutEffect(() => {
+    if (!selectRef.current) return
+
+    const observer = new ResizeObserver(entries => {
+      const { width } = entries[0].contentRect
+      setSelectWidth(width)
+    })
+
+    observer.observe(selectRef.current)
+
+    return () => observer.disconnect()
+  }, [])
 
   const selectedOption = options.find(option => option.id === input.value)
 
@@ -134,12 +149,6 @@ let FormSelect = ({
         ? multipleValue
         : `${input.value.length} items selected`
   }
-
-  useEffect(() => {
-    setIsInvalid(
-      meta.invalid && (meta.validating || meta.modified || (meta.submitFailed && meta.touched))
-    )
-  }, [meta.invalid, meta.modified, meta.submitFailed, meta.touched, meta.validating])
 
   const openMenu = useCallback(() => {
     if (!isOpen) {

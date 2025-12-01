@@ -162,7 +162,7 @@ export const useChipCell = (isEditMode, visibleChipsMaxLength, withInitialParent
   }, [chipBlockMarginRight, chipCellInitialWidth, chipsSizes, isEditMode, withInitialParentWidth])
 
   useLayoutEffect(() => {
-    resizeChipCell()
+    requestAnimationFrame(() => resizeChipCell())
   }, [resizeChipCell])
 
   useEffect(() => {

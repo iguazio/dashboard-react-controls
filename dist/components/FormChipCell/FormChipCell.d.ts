@@ -1,5 +1,5 @@
 export default FormChipCell;
-declare function FormChipCell({ chipOptions, className, children, delimiter, formState, initialValues, isDeletable, isEditable, label, name, onClick, onExitEditModeCallback, shortChips, validationRules, validator, visibleChipsMaxLength, withInitialParentWidth }: {
+declare function FormChipCell({ chipOptions, className, delimiter, formState, initialValues, isEditable, label, name, onClick, shortChips, validationRules, validator, onExitEditModeCallback, visibleChipsMaxLength }: {
     chipOptions?: {
         background: string;
         boldValue: boolean;
@@ -9,31 +9,26 @@ declare function FormChipCell({ chipOptions, className, children, delimiter, for
         font: string;
     };
     className?: string;
-    children: any;
     delimiter?: any;
     formState: any;
     initialValues: any;
-    isDeletable?: boolean;
     isEditable?: boolean;
     label?: any;
     name: any;
     onClick?: () => void;
-    onExitEditModeCallback?: any;
     shortChips?: boolean;
     validationRules?: {};
     validator?: any;
+    onExitEditModeCallback?: any;
     visibleChipsMaxLength?: any;
-    withInitialParentWidth?: boolean;
 }): JSX.Element;
 declare namespace FormChipCell {
     namespace propTypes {
         export { CHIP_OPTIONS as chipOptions };
-        export let children: any;
         export let className: any;
         export let delimiter: any;
         export let formState: any;
         export let initialValues: any;
-        export let isDeletable: any;
         export let isEditable: any;
         export let label: any;
         export let name: any;
@@ -42,10 +37,8 @@ declare namespace FormChipCell {
         export let shortChips: any;
         export let validationRules: any;
         export let validator: any;
-        export { VISIBLE_CHIPS_MAX_LENGTH as visibleChipsMaxLength };
-        export let withInitialParentWidth: any;
+        export let visibleChipsMaxLength: any;
     }
 }
 import { CHIP_OPTIONS } from '../../types';
-import { VISIBLE_CHIPS_MAX_LENGTH } from '../../types';
 //# sourceMappingURL=FormChipCell.d.ts.map

@@ -17,7 +17,7 @@ illegal under applicable law, and the grant of the foregoing license
 under the Apache 2.0 license is conditioned upon your compliance with
 such restriction.
 */
-import { useCallback, useEffect, useMemo, useState } from 'react'
+import { useCallback, useEffect, useLayoutEffect, useMemo, useState } from 'react'
 import classnames from 'classnames'
 
 import { getTransitionEndEventName } from '../utils/common.util'
@@ -108,8 +108,8 @@ export const useHiddenChipsBlock = (hiddenChipsCounterRef, hiddenChipsPopUpRef) 
     }
   }, [hiddenChipsPopUpRef, hiddenChipsCounterRef, resizePopUp, transitionEndEventName])
 
-  useEffect(() => {
-    resizePopUp()
+  useLayoutEffect(() => {
+    queueMicrotask(() => resizePopUp())
   }, [resizePopUp])
 
   return {

@@ -17,7 +17,7 @@ illegal under applicable law, and the grant of the foregoing license
 under the Apache 2.0 license is conditioned upon your compliance with
 such restriction.
 */
-import React, { useState, useCallback, useEffect, useLayoutEffect, useMemo, useRef } from 'react'
+import React, { useState, useCallback, useEffect, useLayoutEffect, useRef } from 'react'
 import PropTypes from 'prop-types'
 import classnames from 'classnames'
 import { isEmpty } from 'lodash'
@@ -30,27 +30,23 @@ import { CHIP_OPTIONS } from '../../types'
 
 import './chipForm.scss'
 
-let ChipForm = (
-  {
-    checkValidation = null,
-    chipOptions,
-    className = '',
-    editConfig,
-    onChange,
-    setEditConfig,
-    validationRules = [],
-    value
-  },
-  ref
-) => {
+let ChipForm = ({
+  checkValidation = null,
+  chipOptions,
+  className = '',
+  editConfig,
+  onChange,
+  ref,
+  setEditConfig,
+  validationRules = [],
+  value
+}) => {
   const [chip, setChip] = useState({
     ...value,
     keyFieldWidth: 0,
     valueFieldWidth: 0
   })
-  const maxWidthInput = useMemo(() => {
-    return ref.current?.clientWidth - 50
-  }, [ref])
+  const [maxWidthInput, setMaxWidthInput] = useState(0)
   const { background, borderColor, density, font, borderRadius } = chipOptions
   const minWidthInput = 25
   const minWidthValueInput = 35
@@ -77,6 +73,12 @@ let ChipForm = (
     'input-label-value',
     !editConfig.isValueFocused && 'item_edited'
   )
+
+  useLayoutEffect(() => {
+    if (ref.current) {
+      setMaxWidthInput(ref.current.clientWidth - 50)
+    }
+  }, [ref])
 
   useLayoutEffect(() => {
     if (!chip.keyFieldWidth && !chip.valueFieldWidth) {
@@ -273,8 +275,6 @@ let ChipForm = (
   )
 }
 
-ChipForm = React.forwardRef(ChipForm)
-
 ChipForm.displayName = 'ChipForm'
 
 ChipForm.propTypes = {
@@ -283,6 +283,7 @@ ChipForm.propTypes = {
   className: PropTypes.string,
   editConfig: PropTypes.object.isRequired,
   onChange: PropTypes.func.isRequired,
+  ref: PropTypes.object.isRequired,
   setEditConfig: PropTypes.func.isRequired,
   validationRules: PropTypes.array,
   value: PropTypes.object.isRequired

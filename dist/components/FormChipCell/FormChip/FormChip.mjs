@@ -1,13 +1,13 @@
 import { jsx as p } from "react/jsx-runtime";
-import F, { useLayoutEffect as T, forwardRef as k } from "react";
+import v, { useLayoutEffect as F, forwardRef as T } from "react";
 import e from "prop-types";
-import w from "../NewChipForm/NewChipForm.mjs";
-import { CHIP_OPTIONS as O } from "../../../types.mjs";
+import k from "../NewChipForm/NewChipForm.mjs";
+import { CHIP_OPTIONS as w } from "../../../types.mjs";
 /* empty css               */
 let i = ({
   chip: f,
   chipIndex: r,
-  chipSizeIsRecalculated: s,
+  chipSizeIsRecalculated: n,
   setChipSizeIsRecalculated: c,
   chipOptions: m = {
     background: "purple",
@@ -21,26 +21,25 @@ let i = ({
   handleEditChip: b,
   handleRemoveChip: h,
   handleToEditMode: C,
-  isDeletable: q = !1,
-  isEditable: g = !1,
-  keyName: a = "",
-  meta: y,
+  isEditable: q = !1,
+  keyName: s = "",
+  meta: g,
   setChipsSizes: t,
-  setEditConfig: j,
-  validationRules: E = {},
-  valueName: N = ""
-}, v) => {
-  const u = F.useRef();
-  return T(() => {
-    u.current && t && s && t((d) => {
-      var o, n, l;
+  setEditConfig: y,
+  validationRules: j = {},
+  valueName: E = ""
+}, N) => {
+  const u = v.useRef();
+  return F(() => {
+    u.current && t && n && t((d) => {
+      var o, a, l;
       return {
         ...d,
-        [r]: ((l = (n = (o = u.current) == null ? void 0 : o.getBoundingClientRect) == null ? void 0 : n.call(o)) == null ? void 0 : l.width) ?? 50
+        [r]: ((l = (a = (o = u.current) == null ? void 0 : o.getBoundingClientRect) == null ? void 0 : a.call(o)) == null ? void 0 : l.width) ?? 50
       };
     });
-  }, [r, s, t]), /* @__PURE__ */ p("div", { onClick: (d) => C(d, r, a), ref: u, children: /* @__PURE__ */ p(
-    w,
+  }, [r, n, t]), /* @__PURE__ */ p("div", { onClick: (d) => C(d, r, s), ref: u, children: /* @__PURE__ */ p(
+    k,
     {
       chip: f,
       chipIndex: r,
@@ -48,32 +47,30 @@ let i = ({
       className: "input-label-key",
       editConfig: R,
       handleRemoveChip: h,
-      isDeletable: q,
-      isEditable: g,
-      keyName: a,
-      meta: y,
+      isEditable: q,
+      keyName: s,
+      meta: g,
       onChange: b,
-      ref: v,
+      ref: N,
       setChipSizeIsRecalculated: c,
-      setEditConfig: j,
-      validationRules: E,
-      valueName: N
+      setEditConfig: y,
+      validationRules: j,
+      valueName: E
     }
   ) });
 };
-i = k(i);
+i = T(i);
 i.displayName = "FormChip";
 i.propTypes = {
   chip: e.object.isRequired,
   chipSizeIsRecalculated: e.bool.isRequired,
   setChipSizeIsRecalculated: e.func.isRequired,
   chipIndex: e.number.isRequired,
-  chipOptions: O,
+  chipOptions: w,
   editConfig: e.object.isRequired,
   handleEditChip: e.func.isRequired,
   handleRemoveChip: e.func.isRequired,
   handleToEditMode: e.func.isRequired,
-  isDeletable: e.bool,
   isEditable: e.bool,
   keyName: e.string,
   meta: e.object.isRequired,

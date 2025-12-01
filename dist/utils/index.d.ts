@@ -1,6 +1,5 @@
 export * as chips from "./chips.util";
 export * as common from "./common.util";
-export * as createProxy from "./proxyServerConfig.util";
 export * as datetime from "./datetime.util";
 export * as filter from "./filter.util";
 export * as form from "./form.util";

@@ -74,13 +74,15 @@ const FormCombobox = ({
   const [showSuggestionList, setShowSuggestionList] = useState(false)
   const [dropdownList, setDropdownList] = useState(suggestionList)
   const [searchIsFocused, setSearchIsFocused] = useState(false)
-  const [isInvalid, setIsInvalid] = useState(false)
   const [validationRules, setValidationRules] = useState(rules)
   const [showValidationRules, setShowValidationRules] = useState(false)
   const comboboxRef = useRef()
   const selectRef = useRef()
   const inputRef = useRef()
   const suggestionListRef = useRef()
+  const isInvalid =
+    meta.invalid && (meta.validating || meta.modified || (meta.submitFailed && meta.touched))
+
   useDetectOutsideClick(comboboxRef, () => setShowValidationRules(false))
 
   const labelClassNames = classnames('form-field__label', disabled && 'form-field__label-disabled')
@@ -90,30 +92,28 @@ const FormCombobox = ({
   )
 
   useEffect(() => {
-    setValidationRules(prevState =>
-      prevState.map(rule => ({
-        ...rule,
-        isValid:
-          !meta.error || !Array.isArray(meta.error)
-            ? true
-            : !meta.error.some(err => err.name === rule.name)
-      }))
-    )
+    queueMicrotask(() => {
+      setValidationRules(prevState =>
+        prevState.map(rule => ({
+          ...rule,
+          isValid:
+            !meta.error || !Array.isArray(meta.error)
+              ? true
+              : !meta.error.some(err => err.name === rule.name)
+        }))
+      )
+    })
   }, [meta.error])
 
   useEffect(() => {
     if (!searchIsFocused) {
       if (JSON.stringify(dropdownList) !== JSON.stringify(suggestionList)) {
-        setDropdownList(suggestionList)
+        queueMicrotask(() => {
+          setDropdownList(suggestionList)
+        })
       }
     }
   }, [dropdownList, suggestionList, searchIsFocused])
-
-  useEffect(() => {
-    setIsInvalid(
-      meta.invalid && (meta.validating || meta.modified || (meta.submitFailed && meta.touched))
-    )
-  }, [meta.invalid, meta.modified, meta.submitFailed, meta.touched, meta.validating])
 
   const handleOutsideClick = useCallback(
     event => {

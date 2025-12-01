@@ -14,7 +14,7 @@ illegal under applicable law, and the grant of the foregoing license
 under the Apache 2.0 license is conditioned upon your compliance with
 such restriction.
 */
-import React, { forwardRef, useRef } from 'react'
+import React, { useRef } from 'react'
 import PropTypes from 'prop-types'
 import { CSSTransition } from 'react-transition-group'
 
@@ -22,10 +22,8 @@ import PopUpDialog from '../../components/PopUpDialog/PopUpDialog'
 
 import './optionsMenu.scss'
 
-let OptionsMenu = (
-  { children = [], show, timeout = 300 },
-  { refInputContainer, validationRulesRef }
-) => {
+let OptionsMenu = ({ children = [], ref, show, timeout = 300 }) => {
+  let { refInputContainer, validationRulesRef } = ref
   const { width: dropdownWidth } = refInputContainer?.current
     ? refInputContainer.current.getBoundingClientRect()
     : {}
@@ -58,12 +56,11 @@ let OptionsMenu = (
   )
 }
 
-OptionsMenu = forwardRef(OptionsMenu)
-
 OptionsMenu.displayName = 'OptionsMenu'
 
 OptionsMenu.propTypes = {
   children: PropTypes.arrayOf(PropTypes.element),
+  ref: PropTypes.object.isRequired,
   show: PropTypes.bool,
   timeout: PropTypes.number
 }

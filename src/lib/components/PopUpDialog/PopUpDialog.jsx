@@ -14,7 +14,7 @@ illegal under applicable law, and the grant of the foregoing license
 under the Apache 2.0 license is conditioned upon your compliance with
 such restriction.
 */
-import React, { forwardRef, useCallback, useEffect, useLayoutEffect, useRef } from 'react'
+import React, { useCallback, useEffect, useLayoutEffect, useRef } from 'react'
 import PropTypes from 'prop-types'
 import classnames from 'classnames'
 import { createPortal } from 'react-dom'
@@ -29,21 +29,19 @@ import CloseIcon from '../../images/close.svg?react'
 
 import './popUpDialog.scss'
 
-let PopUpDialog = (
-  {
-    children,
-    className = '',
-    closePopUp = null,
-    customPosition = {},
-    headerIsHidden = false,
-    headerText = '',
-    isOpen = true,
-    onResolve = null,
-    style = {},
-    tooltipText = ''
-  },
-  ref
-) => {
+let PopUpDialog = ({
+  children,
+  className = '',
+  closePopUp = null,
+  customPosition = {},
+  headerIsHidden = false,
+  headerText = '',
+  isOpen = true,
+  onResolve = null,
+  ref,
+  style = {},
+  tooltipText = ''
+}) => {
   const popUpOverlayRef = useRef(null)
   ref ??= popUpOverlayRef
   const popUpClassNames = classnames(
@@ -177,8 +175,6 @@ let PopUpDialog = (
     : null
 }
 
-PopUpDialog = forwardRef(PopUpDialog)
-
 PopUpDialog.displayName = 'PopUpDialog'
 
 PopUpDialog.propTypes = {
@@ -190,6 +186,7 @@ PopUpDialog.propTypes = {
   headerIsHidden: PropTypes.bool,
   headerText: PropTypes.string,
   onResolve: PropTypes.func,
+  ref: PropTypes.object.isRequired,
   showPopUpDialog: PropTypes.bool,
   style: PropTypes.object,
   tooltipText: PropTypes.string

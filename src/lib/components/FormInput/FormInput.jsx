@@ -14,7 +14,7 @@ illegal under applicable law, and the grant of the foregoing license
 under the Apache 2.0 license is conditioned upon your compliance with
 such restriction.
 */
-import React, { useState, useEffect, useRef, forwardRef } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import PropTypes from 'prop-types'
 import classNames from 'classnames'
 import { isEmpty, isNil } from 'lodash'
@@ -46,38 +46,36 @@ const defaultProps = {
   rules: []
 }
 
-let FormInput = (
-  {
-    async = false,
-    className = '',
-    customRequiredLabel = '',
-    density = 'normal',
-    disabled = false,
-    focused = false,
-    iconClass = '',
-    iconClick = defaultProps.iconClick,
-    inputIcon = null,
-    invalidText = 'This field is invalid',
-    label = '',
-    link = defaultProps.link,
-    name,
-    onBlur = defaultProps.onBlur,
-    onFocus,
-    onKeyDown = defaultProps.onKeyDown,
-    pattern = null,
-    required = false,
-    onValidationError = defaultProps.onValidationError,
-    suggestionList = [],
-    step = '1',
-    tip = '',
-    type = 'text',
-    validationRules: rules = defaultProps.rules,
-    validator = defaultProps.validator,
-    withoutBorder = false,
-    ...inputProps
-  },
-  ref
-) => {
+let FormInput = ({
+  async = false,
+  className = '',
+  customRequiredLabel = '',
+  density = 'normal',
+  disabled = false,
+  focused = false,
+  iconClass = '',
+  iconClick = defaultProps.iconClick,
+  inputIcon = null,
+  invalidText = 'This field is invalid',
+  label = '',
+  link = defaultProps.link,
+  name,
+  onBlur = defaultProps.onBlur,
+  onFocus,
+  onKeyDown = defaultProps.onKeyDown,
+  onValidationError = defaultProps.onValidationError,
+  pattern = null,
+  required = false,
+  ref,
+  suggestionList = [],
+  step = '1',
+  tip = '',
+  type = 'text',
+  validationRules: rules = defaultProps.rules,
+  validator = defaultProps.validator,
+  withoutBorder = false,
+  ...inputProps
+}) => {
   const { input, meta } = useField(name)
   const [isInvalid, setIsInvalid] = useState(false)
   const [isFocused, setIsFocused] = useState(false)
@@ -413,7 +411,7 @@ let FormInput = (
   )
 }
 
-FormInput = React.memo(forwardRef(FormInput))
+FormInput = React.memo(FormInput)
 
 FormInput.displayName = 'FormInput'
 
@@ -440,6 +438,7 @@ FormInput.propTypes = {
   pattern: PropTypes.string,
   placeholder: PropTypes.string,
   required: PropTypes.bool,
+  ref: PropTypes.object.isRequired,
   step: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   suggestionList: PropTypes.arrayOf(PropTypes.string),
   tip: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),

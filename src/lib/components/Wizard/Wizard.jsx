@@ -14,7 +14,7 @@ illegal under applicable law, and the grant of the foregoing license
 under the Apache 2.0 license is conditioned upon your compliance with
 such restriction.
 */
-import React, { useEffect, useLayoutEffect, useMemo, useState } from 'react'
+import React, { useEffect, useMemo, useState } from 'react'
 import PropTypes from 'prop-types'
 import classNames from 'classnames'
 import { isEmpty, isNumber } from 'lodash'
@@ -45,32 +45,24 @@ const Wizard = ({
   const wizardClasses = classNames('wizard-form', className)
   const [jumpingToFirstInvalid, setJumpingToFirstInvalid] = useState(false)
   const [activeStepNumber, setActiveStepNumber] = useState(0)
-  const [firstDisabledStepIdx, setFirstDisabledStepIdx] = useState(null)
 
   const visibleSteps = useMemo(() => {
     return stepsConfig?.filter(step => !step.hidden) || []
   }, [stepsConfig])
 
-  useLayoutEffect(() => {
-    const disabledStep = visibleSteps.find((step, stepIdx) => {
-      if (step.disabled) {
-        setFirstDisabledStepIdx(stepIdx)
-      }
-
-      return step.disabled
-    })
-
-    if (!disabledStep) {
-      setFirstDisabledStepIdx(null)
-    }
+  const firstDisabledStepIdx = useMemo(() => {
+    const idx = visibleSteps.findIndex(step => step.disabled)
+    return idx === -1 ? null : idx
   }, [visibleSteps])
 
   useEffect(() => {
     const firstInvalidStepIdx = visibleSteps.findIndex(step => step.invalid)
 
     if (jumpingToFirstInvalid && isNumber(firstInvalidStepIdx) && firstInvalidStepIdx !== -1) {
-      setActiveStepNumber(firstInvalidStepIdx)
-      setJumpingToFirstInvalid(false)
+      queueMicrotask(() => {
+        setActiveStepNumber(firstInvalidStepIdx)
+        setJumpingToFirstInvalid(false)
+      })
     }
   }, [jumpingToFirstInvalid, visibleSteps])
 

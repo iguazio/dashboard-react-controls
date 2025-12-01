@@ -25,10 +25,13 @@ import { PRIMARY_BUTTON, SECONDARY_BUTTON, TERTIARY_BUTTON } from '../../constan
 
 import './loadButton.scss'
 
-let LoadButton = (
-  { className = '', label = 'Load button', variant = TERTIARY_BUTTON, ...restProps },
-  ref
-) => {
+const LoadButton = ({
+  className = '',
+  label = 'Load button',
+  ref,
+  variant = TERTIARY_BUTTON,
+  ...restProps
+}) => {
   const buttonClassName = classNames('btn-load', `btn-load-${variant}`, className)
 
   return (
@@ -38,13 +41,12 @@ let LoadButton = (
   )
 }
 
-LoadButton = React.forwardRef(LoadButton)
-
 LoadButton.displayName = 'LoadButton'
 
 LoadButton.propTypes = {
   className: PropTypes.string,
   label: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
+  ref: PropTypes.object.isRequired,
   variant: PropTypes.oneOf([PRIMARY_BUTTON, SECONDARY_BUTTON, TERTIARY_BUTTON]).isRequired
 }
 

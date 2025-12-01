@@ -1,4 +1,4 @@
-export function useChipCell(isEditMode: any, visibleChipsMaxLength: any, withInitialParentWidth: any): {
+export function useChipCell(isEditMode: any, visibleChipsMaxLength: any): {
     chipsCellRef: import("react").MutableRefObject<undefined>;
     chipsWrapperRef: import("react").MutableRefObject<undefined>;
     handleShowElements: (event: any) => void;

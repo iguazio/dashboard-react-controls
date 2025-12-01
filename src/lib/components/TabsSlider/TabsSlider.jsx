@@ -144,16 +144,22 @@ const TabsSlider = ({
   }, [moveToSelectedTab])
 
   useEffect(() => {
-    handleHideArrows()
+    queueMicrotask(() => {
+      handleHideArrows()
+    })
   }, [tabsList, handleHideArrows])
 
   useEffect(() => {
-    moveToSelectedTab()
+    queueMicrotask(() => {
+      moveToSelectedTab()
+    })
   }, [moveToSelectedTab])
 
   useEffect(() => {
     if (params.tab && params.tab !== selectedTab && !isDetailsPopUp) {
-      setSelectedTab(tabsList.find(tab => tab.id === params.tab)?.id)
+      queueMicrotask(() => {
+        setSelectedTab(tabsList.find(tab => tab.id === params.tab)?.id)
+      })
     }
   }, [isDetailsPopUp, params.tab, selectedTab, tabsList])
 

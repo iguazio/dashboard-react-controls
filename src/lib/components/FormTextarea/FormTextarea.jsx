@@ -14,7 +14,7 @@ illegal under applicable law, and the grant of the foregoing license
 under the Apache 2.0 license is conditioned upon your compliance with
 such restriction.
 */
-import React, { forwardRef, useEffect, useLayoutEffect, useRef, useState } from 'react'
+import React, { useEffect, useRef } from 'react'
 import classnames from 'classnames'
 import PropTypes from 'prop-types'
 import { Field, useField } from 'react-final-form'
@@ -27,30 +27,29 @@ import ExclamationMarkIcon from '../../images/exclamation-mark.svg?react'
 
 import './formTextarea.scss'
 
-let FormTextarea = (
-  {
-    className = '',
-    disabled = false,
-    focused = false,
-    iconClass = '',
-    invalidText = 'This field is invalid',
-    label = '',
-    maxLength = null,
-    name,
-    onBlur = () => {},
-    onChange = () => {},
-    required = false,
-    rows = 3,
-    textAreaIcon = null,
-    tip = '',
-    withoutBorder = false,
-    ...textareaProps
-  },
-  ref
-) => {
+let FormTextarea = ({
+  className = '',
+  disabled = false,
+  focused = false,
+  iconClass = '',
+  invalidText = 'This field is invalid',
+  label = '',
+  maxLength = null,
+  name,
+  onBlur = () => {},
+  onChange = () => {},
+  ref,
+  required = false,
+  rows = 3,
+  textAreaIcon = null,
+  tip = '',
+  withoutBorder = false,
+  ...textareaProps
+}) => {
   const { input, meta } = useField(name)
-  const [isInvalid, setIsInvalid] = useState(false)
-  const [textAreaCount, setTextAreaCount] = useState(input.value.length)
+  const isInvalid =
+    meta.invalid && (meta.validating || meta.modified || (meta.submitFailed && meta.touched))
+  const textAreaCount = input.value.length
   const textAreaRef = useRef()
 
   const formFieldClassNames = classnames('form-field-textarea', className)
@@ -62,21 +61,11 @@ let FormTextarea = (
     withoutBorder && 'without-border'
   )
 
-  useLayoutEffect(() => {
-    setTextAreaCount(input.value.length)
-  }, [input.value.length])
-
   useEffect(() => {
     if (focused) {
       textAreaRef.current.focus()
     }
   }, [focused, textAreaRef])
-
-  useEffect(() => {
-    setIsInvalid(
-      meta.invalid && (meta.validating || meta.modified || (meta.submitFailed && meta.touched))
-    )
-  }, [meta.invalid, meta.modified, meta.submitFailed, meta.touched, meta.validating])
 
   const handleInputBlur = event => {
     input.onBlur(event)
@@ -164,7 +153,7 @@ let FormTextarea = (
   )
 }
 
-FormTextarea = React.memo(forwardRef(FormTextarea))
+FormTextarea = React.memo(FormTextarea)
 
 FormTextarea.displayName = 'FormTextarea'
 
@@ -179,6 +168,7 @@ FormTextarea.propTypes = {
   name: PropTypes.string.isRequired,
   onBlur: PropTypes.func,
   onChange: PropTypes.func,
+  ref: PropTypes.object.isRequired,
   required: PropTypes.bool,
   rows: PropTypes.number,
   textAreaIcon: PropTypes.element,

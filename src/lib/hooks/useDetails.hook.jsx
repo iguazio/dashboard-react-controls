@@ -57,7 +57,7 @@ const DetailsContainer = ({
   detailsRef,
   detailsStore,
   doNotLeavePage,
-  formRef,
+  form,
   isDetailsPopUp = null,
   leavePage,
   params,
@@ -69,7 +69,7 @@ const DetailsContainer = ({
   withActionMenu = true
 }) => {
   return (
-    <Form form={formRef.current} onSubmit={() => {}}>
+    <Form form={form} onSubmit={() => {}}>
       {formState => (
         <div className={detailsPanelClassNames} ref={detailsRef} data-testid="detailsPanel">
           {detailsStore.loadingCounter > 0 && <Loader />}
@@ -123,7 +123,7 @@ DetailsContainer.propTypes = {
   detailsStore: PropTypes.object.isRequired,
   commonDetailsStore: PropTypes.object.isRequired,
   doNotLeavePage: PropTypes.func.isRequired,
-  formRef: PropTypes.object.isRequired,
+  form: PropTypes.object.isRequired,
   isDetailsPopUp: PropTypes.bool,
   leavePage: PropTypes.func.isRequired,
   params: PropTypes.object.isRequired,
@@ -165,13 +165,11 @@ export const useDetails = ({
     isDetailsPopUp && 'table__item-popup'
   )
 
-  const formRef = useRef(
-    createForm({
-      initialValues: formInitialValues,
-      mutators: { ...arrayMutators, setFieldState },
-      onSubmit: () => {}
-    })
-  )
+  const form = createForm({
+    initialValues: formInitialValues,
+    mutators: { ...arrayMutators, setFieldState },
+    onSubmit: () => {}
+  })
 
   useEffect(() => {
     return () => {
@@ -229,14 +227,14 @@ export const useDetails = ({
 
   useEffect(() => {
     if (
-      formRef.current &&
+      form &&
       commonDetailsStore.changes.counter === 0 &&
-      !isEqual(pickBy(formInitialValues), pickBy(formRef.current.getState()?.values)) &&
-      !formRef.current.getState()?.active
+      !isEqual(pickBy(formInitialValues), pickBy(form.getState()?.values)) &&
+      !form.getState()?.active
     ) {
-      formRef.current.restart(formInitialValues)
+      form.restart(formInitialValues)
     }
-  }, [formInitialValues, commonDetailsStore.changes.counter])
+  }, [formInitialValues, commonDetailsStore.changes.counter, form])
 
   useEffect(() => {
     const currentPathname = location.pathname.substring(
@@ -245,11 +243,11 @@ export const useDetails = ({
     )
 
     if (previousPathnameRef.current !== currentPathname && !isDetailsPopUp) {
-      formRef.current.restart(formInitialValues)
+      form.restart(formInitialValues)
       dispatch(setEditMode(false))
       previousPathnameRef.current = currentPathname
     }
-  }, [dispatch, formInitialValues, isDetailsPopUp, location.pathname, params.tab])
+  }, [dispatch, form, formInitialValues, isDetailsPopUp, location.pathname, params.tab])
 
   const applyChanges = useCallback(() => {
     applyDetailsChanges(commonDetailsStore.changes)
@@ -275,9 +273,9 @@ export const useDetails = ({
   const cancelChanges = useCallback(() => {
     if (commonDetailsStore.changes.counter > 0) {
       dispatch(resetChanges())
-      formRef.current.reset(formInitialValues)
+      form.reset(formInitialValues)
     }
-  }, [commonDetailsStore.changes.counter, dispatch, formInitialValues])
+  }, [commonDetailsStore.changes.counter, dispatch, form, formInitialValues])
 
   const leavePage = useCallback(() => {
     cancelChanges()
@@ -308,7 +306,7 @@ export const useDetails = ({
     detailsRef,
     commonDetailsStore,
     doNotLeavePage,
-    formRef,
+    form,
     handleShowWarning,
     leavePage,
     location,

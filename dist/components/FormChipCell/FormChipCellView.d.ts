@@ -1,5 +1,5 @@
 export default FormChipCellView;
-declare function FormChipCellView({ chipOptions, chipSizeIsRecalculated, setChipSizeIsRecalculated, children, chips, editConfig, handleAddNewChip, handleEditChip, handleRemoveChip, handleShowElements, handleToEditMode, isDeletable, isEditable, name, setChipsSizes, setEditConfig, shortChips, showChips, showHiddenChips, validateFields, validationRules, visibleChipsMaxLength }: {
+declare function FormChipCellView({ chipOptions, chipSizeIsRecalculated, setChipSizeIsRecalculated, chips, editConfig, handleAddNewChip, handleEditChip, handleRemoveChip, handleShowElements, handleToEditMode, isEditable, name, setChipsSizes, setEditConfig, shortChips, showChips, showHiddenChips, validateFields, validationRules }: {
     chipOptions?: {
         background: string;
         boldValue: boolean;
@@ -10,7 +10,6 @@ declare function FormChipCellView({ chipOptions, chipSizeIsRecalculated, setChip
     };
     chipSizeIsRecalculated: any;
     setChipSizeIsRecalculated: any;
-    children: any;
     chips: any;
     editConfig: any;
     handleAddNewChip: any;
@@ -18,7 +17,6 @@ declare function FormChipCellView({ chipOptions, chipSizeIsRecalculated, setChip
     handleRemoveChip: any;
     handleShowElements: any;
     handleToEditMode: any;
-    isDeletable?: boolean;
     isEditable?: boolean;
     name: any;
     setChipsSizes: any;
@@ -28,7 +26,6 @@ declare function FormChipCellView({ chipOptions, chipSizeIsRecalculated, setChip
     showHiddenChips: any;
     validateFields: any;
     validationRules?: {};
-    visibleChipsMaxLength?: any;
 }, { chipsCellRef, chipsWrapperRef, hiddenChipsCounterRef, hiddenChipsPopUpRef }: {
     chipsCellRef: any;
     chipsWrapperRef: any;
@@ -41,7 +38,6 @@ declare namespace FormChipCellView {
         export { CHIP_OPTIONS as chipOptions };
         export let chipSizeIsRecalculated: any;
         export let setChipSizeIsRecalculated: any;
-        export let children: any;
         export let chips: any;
         export let editConfig: any;
         export let formState: any;
@@ -50,7 +46,6 @@ declare namespace FormChipCellView {
         export let handleRemoveChip: any;
         export let handleShowElements: any;
         export let handleToEditMode: any;
-        export let isDeletable: any;
         export let isEditable: any;
         export let name: any;
         export let setChipsSizes: any;
@@ -60,9 +55,7 @@ declare namespace FormChipCellView {
         export let showHiddenChips: any;
         export let validateFields: any;
         export let validationRules: any;
-        export { VISIBLE_CHIPS_MAX_LENGTH as visibleChipsMaxLength };
     }
 }
 import { CHIP_OPTIONS } from '../../types';
-import { VISIBLE_CHIPS_MAX_LENGTH } from '../../types';
 //# sourceMappingURL=FormChipCellView.d.ts.map
