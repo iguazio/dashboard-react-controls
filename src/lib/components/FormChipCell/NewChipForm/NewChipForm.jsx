@@ -119,7 +119,7 @@ let NewChipForm = (
   const closeButtonClass = classnames(
     'item-icon-close',
     !chip.disabled &&
-      ((editConfig.chipIndex === chipIndex && isEditable) || !isDeletable) &&
+      ((editConfig.chipIndex === chipIndex && isEditable) || (!isDeletable && !isEditable)) &&
       'item-icon-close invisible',
     !isEditable && !isDeletable && 'item-icon-close hidden'
   )
