@@ -4,8 +4,8 @@ import a from "prop-types";
 import j from "classnames";
 import { isEmpty as y, get as z, throttle as Re, isNil as G } from "lodash";
 import se from "../NewChipInput/NewChipInput.mjs";
-import be from "../../../elements/OptionsMenu/OptionsMenu.mjs";
-import ke from "../../../elements/ValidationTemplate/ValidationTemplate.mjs";
+import ke from "../../../elements/OptionsMenu/OptionsMenu.mjs";
+import be from "../../../elements/ValidationTemplate/ValidationTemplate.mjs";
 import { CHIP_OPTIONS as We } from "../../../types.mjs";
 import { CLICK as Ie, TAB as J, TAB_SHIFT as Ke } from "../../../constants.mjs";
 import { getTextWidth as D } from "../formChipCell.util.mjs";
@@ -15,13 +15,13 @@ import _e from "../../../images/close.svg.mjs";
 const Ne = {
   rules: {}
 };
-let P = ({
+let E = ({
   chip: d,
   chipIndex: i,
   chipOptions: ne,
   className: ie = "",
   editConfig: r,
-  handleRemoveChip: le,
+  handleRemoveChip: ue,
   isDeletable: Q,
   isEditable: u,
   keyName: N,
@@ -29,7 +29,7 @@ let P = ({
   onChange: q,
   setChipSizeIsRecalculated: U,
   setEditConfig: O,
-  validationRules: ue = Ne.rules,
+  validationRules: le = Ne.rules,
   valueName: oe
 }, w) => {
   const [l, A] = $({
@@ -38,7 +38,7 @@ let P = ({
     value: d.value,
     keyFieldWidth: 0,
     valueFieldWidth: 0
-  }), [v, ce] = $("key"), [X, ae] = $(ue), [p, B] = $(!1), { background: Y, borderColor: Z, borderRadius: C, density: g, font: ee } = ne, F = H(() => u ? 25 : 20, [u]), f = H(() => u ? 35 : 20, [u]), M = H(() => Ve(), []), o = T.useRef({}), c = T.useRef({}), S = T.useRef(), x = T.useRef(), de = j(
+  }), [v, ce] = $("key"), [X, ae] = $(le), [p, B] = $(!1), { background: Y, borderColor: Z, borderRadius: C, density: g, font: ee } = ne, F = H(() => u ? 25 : 20, [u]), f = H(() => u ? 35 : 20, [u]), M = H(() => Ve(), []), o = T.useRef({}), c = T.useRef({}), S = T.useRef(), x = T.useRef(), de = j(
     ie,
     !r.isKeyFocused && "item_edited",
     !y(z(m, ["error", i, "key"], [])) && !y(l.key) && !d.disabled && u && "item_edited_invalid"
@@ -57,29 +57,29 @@ let P = ({
     !y(z(m, ["error", i, "value"], [])) && !y(l.value) && u && "item_edited_invalid"
   ), he = j(
     "item-icon-close",
-    !d.disabled && (r.chipIndex === i && u || !Q) && "item-icon-close invisible",
+    !d.disabled && (r.chipIndex === i && u || !Q && !u) && "item-icon-close invisible",
     !u && !Q && "item-icon-close hidden"
   ), K = I(() => {
     var e;
     if (o.current) {
-      const t = D(o.current) + 1, s = D(c.current) + 1, n = ((e = w.current) == null ? void 0 : e.clientWidth) - 50, _ = t >= n / 2, L = s >= n / 2;
-      let R = null, b = null;
-      if (_ && L)
-        R = b = n / 2;
+      const t = D(o.current) + 1, s = D(c.current) + 1, n = ((e = w.current) == null ? void 0 : e.clientWidth) - 50, _ = t >= n / 2, P = s >= n / 2;
+      let R = null, k = null;
+      if (_ && P)
+        R = k = n / 2;
       else if (_) {
-        b = l.value ? s : f;
-        const k = n - b;
-        R = k > t ? t : k;
-      } else if (L) {
+        k = l.value ? s : f;
+        const b = n - k;
+        R = b > t ? t : b;
+      } else if (P) {
         R = l.key ? t : F;
-        const k = n - R;
-        b = k > s ? s : k;
+        const b = n - R;
+        k = b > s ? s : b;
       } else
-        R = !l.key || t <= F ? F : t, b = !l.value || s <= f ? f : s;
-      o.current.style.width = `${R}px`, y(c.current) || (c.current.style.width = `${b}px`), A((k) => ({
-        ...k,
+        R = !l.key || t <= F ? F : t, k = !l.value || s <= f ? f : s;
+      o.current.style.width = `${R}px`, y(c.current) || (c.current.style.width = `${k}px`), A((b) => ({
+        ...b,
         keyFieldWidth: R,
-        valueFieldWidth: b
+        valueFieldWidth: k
       })), U(!0);
     }
   }, [
@@ -103,7 +103,7 @@ let P = ({
   }, [u, K, M]), h(() => {
     !l.keyFieldWidth && !l.valueFieldWidth && K();
   }, [l.keyFieldWidth, l.valueFieldWidth, K]);
-  const E = I(
+  const L = I(
     (e, t) => {
       var s;
       r.chipIndex === i && (!(e.path ?? ((s = e.composedPath) == null ? void 0 : s.call(e))).includes(S.current) || t ? (q(e, Ie, !0), window.getSelection().removeAllRanges(), document.activeElement.blur()) : e.stopPropagation());
@@ -111,9 +111,9 @@ let P = ({
     [q, S, i, r.chipIndex]
   ), V = I(
     (e) => {
-      x != null && x.current && !x.current.contains(e.target) && (B(!1), E(e, !0));
+      x != null && x.current && !x.current.contains(e.target) && (B(!1), L(e, !0));
     },
-    [E]
+    [L]
   );
   h(() => (p && window.addEventListener("scroll", V, !0), () => {
     window.removeEventListener("scroll", V, !0);
@@ -130,10 +130,10 @@ let P = ({
     window.removeEventListener("scroll", V, !0);
   }), [V, p]), h(() => {
     if (r.isEdit)
-      return document.addEventListener("click", E, !0), () => {
-        document.removeEventListener("click", E, !0);
+      return document.addEventListener("click", L, !0), () => {
+        document.removeEventListener("click", L, !0);
       };
-  }, [E, r.isEdit]);
+  }, [L, r.isEdit]);
   const ye = I(
     (e) => {
       if (r.chipIndex === i && u) {
@@ -178,11 +178,11 @@ let P = ({
       } else {
         const n = D(c.current);
         A((_) => {
-          var L;
+          var P;
           return {
             ..._,
             value: c.current.value,
-            valueFieldWidth: ((L = c.current.value) == null ? void 0 : L.length) <= 1 ? f : n >= t ? t : n > f ? n + 2 : f
+            valueFieldWidth: ((P = c.current.value) == null ? void 0 : P.length) <= 1 ? f : n >= t ? t : n > f ? n + 2 : f
           };
         });
       }
@@ -209,7 +209,7 @@ let P = ({
   }, [m, p, v, r.chipIndex]);
   const ve = I(() => {
     var e;
-    return (e = X[v]) == null ? void 0 : e.map(({ isValid: t = !1, label: s, name: n }) => /* @__PURE__ */ W(ke, { valid: t, validationMessage: s }, n));
+    return (e = X[v]) == null ? void 0 : e.map(({ isValid: t = !1, label: s, name: n }) => /* @__PURE__ */ W(be, { valid: t, validationMessage: s }, n));
   }, [v, X]);
   return /* @__PURE__ */ Fe(
     "div",
@@ -250,18 +250,18 @@ let P = ({
           {
             disabled: d.disabled,
             className: he,
-            onClick: (e) => !d.disabled && le(e, i),
+            onClick: (e) => !d.disabled && ue(e, i),
             children: /* @__PURE__ */ W(_e, {})
           }
         ),
-        !d.disabled && (r.isKeyFocused ? !y(l.key) : !y(l.value)) && r.chipIndex === i && !y(z(m, ["error", r.chipIndex, v], [])) && /* @__PURE__ */ W(be, { show: p, ref: { refInputContainer: S, validationRulesRef: x }, children: ve() })
+        !d.disabled && (r.isKeyFocused ? !y(l.key) : !y(l.value)) && r.chipIndex === i && !y(z(m, ["error", r.chipIndex, v], [])) && /* @__PURE__ */ W(ke, { show: p, ref: { refInputContainer: S, validationRulesRef: x }, children: ve() })
       ]
     }
   );
 };
-P = we(P);
-P.displayName = "NewChipForm";
-P.propTypes = {
+E = we(E);
+E.displayName = "NewChipForm";
+E.propTypes = {
   chip: a.object.isRequired,
   chipIndex: a.number.isRequired,
   chipOptions: We.isRequired,
@@ -278,7 +278,7 @@ P.propTypes = {
   validationRules: a.object,
   valueName: a.string.isRequired
 };
-const Me = P;
+const Me = E;
 export {
   Me as default
 };
