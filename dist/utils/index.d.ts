@@ -6,6 +6,7 @@ export * as filter from "./filter.util";
 export * as form from "./form.util";
 export * as generateChipsList from "./generateChipsList.util";
 export * as getFirstScrollableParent from "./getFirstScrollableParent.util";
+export * as localStorageService from "./localStorageService.util";
 export * as math from "./math.util";
 export * as notification from "./notification.util";
 export * as string from "./string.util";

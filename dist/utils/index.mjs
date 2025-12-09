@@ -6,10 +6,11 @@ import * as a from "./filter.util.mjs";
 import * as e from "./form.util.mjs";
 import * as m from "./generateChipsList.util.mjs";
 import * as s from "./getFirstScrollableParent.util.mjs";
-import * as p from "./math.util.mjs";
-import * as l from "./notification.util.mjs";
-import * as f from "./string.util.mjs";
-import * as n from "./validation.util.mjs";
+import * as p from "./localStorageService.util.mjs";
+import * as l from "./math.util.mjs";
+import * as f from "./notification.util.mjs";
+import * as n from "./string.util.mjs";
+import * as x from "./validation.util.mjs";
 export {
   t as chips,
   r as common,
@@ -19,9 +20,10 @@ export {
   e as form,
   m as generateChipsList,
   s as getFirstScrollableParent,
-  p as math,
-  l as notification,
-  f as string,
-  n as validation
+  p as localStorageService,
+  l as math,
+  f as notification,
+  n as string,
+  x as validation
 };
 //# sourceMappingURL=index.mjs.map
