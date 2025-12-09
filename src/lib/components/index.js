@@ -35,6 +35,7 @@ import LoadButton from './LoadButton/LoadButton'
 import Loader from './Loader/Loader'
 import LoaderForSuspenseFallback from './Loader/LoaderForSuspenseFallback'
 import Modal from './Modal/Modal'
+import Navbar from './Navbar/Navbar'
 import PopUpDialog from './PopUpDialog/PopUpDialog'
 import ReadOnlyChips from './ReadOnlyChips/ReadOnlyChips'
 import RoundedIcon from './RoundedIcon/RoundedIcon'
@@ -66,6 +67,7 @@ export {
   Loader,
   LoaderForSuspenseFallback,
   Modal,
+  Navbar,
   PopUpDialog,
   ReadOnlyChips,
   RoundedIcon,
