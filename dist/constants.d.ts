@@ -119,4 +119,6 @@ export const MODAL_MIN: "min";
 export const MODAL_MAX: "max";
 export const MAIN_TABLE_ID: "main-table";
 export const MAIN_TABLE_BODY_ID: "main-table-body";
+export const NAVBAR_WIDTH_CLOSED: 57;
+export const NAVBAR_WIDTH_OPENED: 245;
 //# sourceMappingURL=constants.d.ts.map

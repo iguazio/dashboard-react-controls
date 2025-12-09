@@ -18,6 +18,7 @@ import LoadButton from './LoadButton/LoadButton';
 import Loader from './Loader/Loader';
 import LoaderForSuspenseFallback from './Loader/LoaderForSuspenseFallback';
 import Modal from './Modal/Modal';
+import Navbar from './Navbar/Navbar';
 import PopUpDialog from './PopUpDialog/PopUpDialog';
 import ReadOnlyChips from './ReadOnlyChips/ReadOnlyChips';
 import RoundedIcon from './RoundedIcon/RoundedIcon';
@@ -27,5 +28,5 @@ import TextTooltipTemplate from './TooltipTemplate/TextTooltipTemplate';
 import Tip from './Tip/Tip';
 import Tooltip from './Tooltip/Tooltip';
 import Wizard from './Wizard/Wizard';
-export { ActionsMenu, BlockerSpy, Button, ConfirmDialog, CopyToClipboard, ErrorMessage, FormCheckBox, FormChipCell, FormCombobox, FormInput, FormKeyValueTable, FormOnChange, FormRadio, FormSelect, FormTextarea, FormToggle, LoadButton, Loader, LoaderForSuspenseFallback, Modal, PopUpDialog, ReadOnlyChips, RoundedIcon, TableCell, TabsSlider, TextTooltipTemplate, Tip, Tooltip, Wizard };
+export { ActionsMenu, BlockerSpy, Button, ConfirmDialog, CopyToClipboard, ErrorMessage, FormCheckBox, FormChipCell, FormCombobox, FormInput, FormKeyValueTable, FormOnChange, FormRadio, FormSelect, FormTextarea, FormToggle, LoadButton, Loader, LoaderForSuspenseFallback, Modal, Navbar, PopUpDialog, ReadOnlyChips, RoundedIcon, TableCell, TabsSlider, TextTooltipTemplate, Tip, Tooltip, Wizard };
 //# sourceMappingURL=index.d.ts.map
