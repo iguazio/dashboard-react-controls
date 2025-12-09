@@ -28,19 +28,29 @@ export const formatDatetime = (
     day: 'numeric',
     hour: '2-digit',
     minute: '2-digit',
-    second: '2-digit',
-    hour12: true
-  }
+    second: '2-digit'
+  },
+  locale = navigator.language
 ) => {
   if (!datetime) {
     return invalidDateMessage
   }
 
-  const date = new Date(datetime)
+  let date
+
+  try {
+    date = new Date(datetime)
+  } catch {
+    return invalidDateMessage
+  }
 
   return typeof date !== 'object' || !(date instanceof Date) || isNaN(date)
     ? invalidDateMessage
-    : new Intl.DateTimeFormat(navigator.language, options).format(date)
+    : new Intl.DateTimeFormat(locale, {
+        numberingSystem: 'latn',
+        calendar: 'gregory',
+        ...options
+      }).format(date)
 }
 
 export const getFormatTime = time => {
