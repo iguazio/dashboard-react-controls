@@ -23,18 +23,6 @@ import { describe, it, expect, vi } from 'vitest'
 import LoadButton from './LoadButton'
 import { PRIMARY_BUTTON, SECONDARY_BUTTON, TERTIARY_BUTTON } from '../../constants'
 
-vi.mock('./loadButton.scss', () => ({}))
-
-vi.mock('../../constants', async importOriginal => {
-  const actual = await importOriginal()
-  return {
-    ...actual,
-    PRIMARY_BUTTON: 'primary',
-    SECONDARY_BUTTON: 'secondary',
-    TERTIARY_BUTTON: 'tertiary'
-  }
-})
-
 describe('LoadButton Component', () => {
   const defaultProps = {
     variant: TERTIARY_BUTTON,

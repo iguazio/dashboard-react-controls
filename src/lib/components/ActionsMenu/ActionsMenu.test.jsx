@@ -89,6 +89,17 @@ describe('ActionsMenu Component', () => {
     vi.useRealTimers()
   })
 
+  // Snapshot testing
+  it('renders correctly in default closed state', () => {
+    const { asFragment } = render(<ActionsMenu {...defaultProps} />)
+    expect(asFragment()).toMatchSnapshot()
+  })
+
+  it('renders with quick actions visible', () => {
+    const { asFragment } = render(<ActionsMenu {...defaultProps} withQuickActions={true} />)
+    expect(asFragment()).toMatchSnapshot()
+  })
+
   it('renders quick actions when withQuickActions is true', () => {
     render(<ActionsMenu {...defaultProps} />)
 
@@ -192,12 +203,9 @@ describe('ActionsMenu Component', () => {
 
     render(<ActionsMenu {...defaultProps} menu={menuFunction} />)
 
-    await waitFor(() => {
-      expect(menuFunction).toHaveBeenCalledWith(defaultProps.dataItem, '')
-    })
-
     fireEvent.click(screen.getByTestId('actions-menu-button'))
 
+    expect(menuFunction).toHaveBeenCalledWith(defaultProps.dataItem, '')
     expect(screen.getByText('Test Item')).toBeInTheDocument()
   })
 
