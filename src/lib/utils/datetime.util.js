@@ -30,6 +30,8 @@ export function getSupportedLocale() {
   return match || 'en-US'
 }
 
+export const supportedLocale = getSupportedLocale()
+
 export const formatDatetime = (
   datetime,
   invalidDateMessage,
@@ -41,7 +43,7 @@ export const formatDatetime = (
     minute: '2-digit',
     second: '2-digit'
   },
-  locale = getSupportedLocale()
+  locale = supportedLocale
 ) => {
   if (!datetime) {
     return invalidDateMessage
