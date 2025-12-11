@@ -19,6 +19,17 @@ such restriction.
 */
 import moment from 'moment'
 
+export function getSupportedLocale() {
+  const SUPPORTED_LOCALES = new Set(['en-GB', 'en-US'])
+
+  const userLocales = navigator.languages || [navigator.language]
+
+  // browser always returns locales in descending order of preference
+  const match = userLocales.find(locale => SUPPORTED_LOCALES.has(locale))
+
+  return match || 'en-US'
+}
+
 export const formatDatetime = (
   datetime,
   invalidDateMessage,
@@ -30,7 +41,7 @@ export const formatDatetime = (
     minute: '2-digit',
     second: '2-digit'
   },
-  locale = navigator.language
+  locale = getSupportedLocale()
 ) => {
   if (!datetime) {
     return invalidDateMessage
