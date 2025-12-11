@@ -19,22 +19,50 @@ such restriction.
 */
 import moment from 'moment'
 
-export const formatDatetime = (datetime, invalidDateMessage) => {
+export function getSupportedLocale() {
+  const SUPPORTED_LOCALES = new Set(['en-GB', 'en-US'])
+
+  const userLocales = navigator.languages || [navigator.language]
+
+  // browser always returns locales in descending order of preference
+  const match = userLocales.find(locale => SUPPORTED_LOCALES.has(locale))
+
+  return match || 'en-US'
+}
+
+export const supportedLocale = getSupportedLocale()
+
+export const formatDatetime = (
+  datetime,
+  invalidDateMessage,
+  options = {
+    year: 'numeric',
+    month: 'short',
+    day: 'numeric',
+    hour: '2-digit',
+    minute: '2-digit',
+    second: '2-digit'
+  },
+  locale = supportedLocale
+) => {
   if (!datetime) {
     return invalidDateMessage
   }
 
-  const date = new Date(datetime)
+  let date
+
+  try {
+    date = new Date(datetime)
+  } catch {
+    return invalidDateMessage
+  }
 
   return typeof date !== 'object' || !(date instanceof Date) || isNaN(date)
     ? invalidDateMessage
-    : new Intl.DateTimeFormat('en-US', {
-        year: 'numeric',
-        month: 'short',
-        day: 'numeric',
-        hour: '2-digit',
-        minute: '2-digit',
-        second: '2-digit'
+    : new Intl.DateTimeFormat(locale, {
+        numberingSystem: 'latn',
+        calendar: 'gregory',
+        ...options
       }).format(date)
 }
 
