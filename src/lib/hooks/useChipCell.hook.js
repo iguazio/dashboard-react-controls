@@ -17,7 +17,7 @@ illegal under applicable law, and the grant of the foregoing license
 under the Apache 2.0 license is conditioned upon your compliance with
 such restriction.
 */
-import { useCallback, useEffect, useMemo, useRef, useState, useLayoutEffect } from 'react'
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { throttle } from 'lodash'
 
 import {
@@ -161,7 +161,7 @@ export const useChipCell = (isEditMode, visibleChipsMaxLength, withInitialParent
     }
   }, [chipBlockMarginRight, chipCellInitialWidth, chipsSizes, isEditMode, withInitialParentWidth])
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     resizeChipCell()
   }, [resizeChipCell])
 

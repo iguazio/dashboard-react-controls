@@ -208,7 +208,7 @@ let NewChipForm = (
     }
   }, [isEditable, resizeChip, transitionEndEventName])
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (!chipData.keyFieldWidth && !chipData.valueFieldWidth) {
       resizeChip()
     }
