@@ -28,18 +28,18 @@ let o = ({
   withoutBorder: A = !1,
   ...B
 }, E) => {
-  const { input: r, meta: t } = H(b), [c, $] = w(!1), [T, j] = w(r.value.length), u = z(), q = p("form-field-textarea", y), S = p("form-field__label", f && "form-field__label-disabled"), k = p(
+  const { input: r, meta: t } = H(b), [c, j] = w(!1), [T, q] = w(r.value.length), u = z(), S = p("form-field-textarea", y), $ = p("form-field__label", f && "form-field__label-disabled"), k = p(
     "form-field__wrapper",
     f && "form-field__wrapper-disabled",
     c && "form-field__wrapper-invalid",
     A && "without-border"
   );
   D(() => {
-    j(r.value.length);
+    q(r.value.length);
   }, [r.value.length]), C(() => {
     h && u.current.focus();
   }, [h, u]), C(() => {
-    $(
+    j(
       t.invalid && (t.validating || t.modified || t.submitFailed && t.touched)
     );
   }, [t.invalid, t.modified, t.submitFailed, t.touched, t.validating]);
@@ -56,8 +56,8 @@ let o = ({
     return d.startsWith(" ") ? i = { name: "empty", label: _ } : n && d.trim().length === 0 && (i = { name: "required", label: "This field is required" }), i;
   }, name: b, children: ({ input: a, meta: d }) => {
     var i;
-    return /* @__PURE__ */ m("div", { ref: E, className: q, children: [
-      /* @__PURE__ */ l("div", { className: S, children: v && /* @__PURE__ */ m("label", { "data-testid": "label", htmlFor: a.name, children: [
+    return /* @__PURE__ */ m("div", { ref: E, className: S, children: [
+      /* @__PURE__ */ l("div", { className: $, children: v && /* @__PURE__ */ m("label", { "data-testid": "label", htmlFor: a.name, children: [
         v,
         n && /* @__PURE__ */ l("span", { className: "form-field__label-mandatory", children: " *" })
       ] }) }),
