@@ -6,8 +6,8 @@ const l = () => (r(() => {
   return e && (e.style.visibility = "hidden"), () => {
     e && (e.style.visibility = t);
   };
-}, []), /* @__PURE__ */ i(s, {})), c = o.memo(l);
+}, []), /* @__PURE__ */ i(s, {})), d = o.memo(l);
 export {
-  c as default
+  d as default
 };
 //# sourceMappingURL=LoaderForSuspenseFallback.mjs.map

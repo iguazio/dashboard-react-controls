@@ -50,8 +50,8 @@ a.propTypes = {
   tooltip: o.string
 };
 a = v.memo(a);
-const g = a;
+const _ = a;
 export {
-  g as default
+  _ as default
 };
 //# sourceMappingURL=FormRadio.mjs.map

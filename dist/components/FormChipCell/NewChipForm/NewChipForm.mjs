@@ -1,9 +1,9 @@
-import { jsx as W, jsxs as Fe } from "react/jsx-runtime";
-import T, { useState as $, useMemo as H, useCallback as I, useEffect as h, useLayoutEffect as fe, forwardRef as we } from "react";
+import { jsx as W, jsxs as fe } from "react/jsx-runtime";
+import T, { useState as $, useMemo as H, useCallback as I, useEffect as f, useLayoutEffect as se, forwardRef as we } from "react";
 import a from "prop-types";
 import j from "classnames";
-import { isEmpty as y, get as z, throttle as Re, isNil as G } from "lodash";
-import se from "../NewChipInput/NewChipInput.mjs";
+import { isEmpty as h, get as z, throttle as Re, isNil as G } from "lodash";
+import ne from "../NewChipInput/NewChipInput.mjs";
 import ke from "../../../elements/OptionsMenu/OptionsMenu.mjs";
 import be from "../../../elements/ValidationTemplate/ValidationTemplate.mjs";
 import { CHIP_OPTIONS as We } from "../../../types.mjs";
@@ -18,10 +18,10 @@ const Ne = {
 let E = ({
   chip: d,
   chipIndex: i,
-  chipOptions: ne,
-  className: ie = "",
+  chipOptions: ie,
+  className: ue = "",
   editConfig: r,
-  handleRemoveChip: ue,
+  handleRemoveChip: le,
   isDeletable: Q,
   isEditable: u,
   keyName: N,
@@ -29,8 +29,8 @@ let E = ({
   onChange: q,
   setChipSizeIsRecalculated: U,
   setEditConfig: O,
-  validationRules: le = Ne.rules,
-  valueName: oe
+  validationRules: oe = Ne.rules,
+  valueName: ce
 }, w) => {
   const [l, A] = $({
     isKeyOnly: d.isKeyOnly,
@@ -38,11 +38,11 @@ let E = ({
     value: d.value,
     keyFieldWidth: 0,
     valueFieldWidth: 0
-  }), [v, ce] = $("key"), [X, ae] = $(le), [p, B] = $(!1), { background: Y, borderColor: Z, borderRadius: C, density: g, font: ee } = ne, F = H(() => u ? 25 : 20, [u]), f = H(() => u ? 35 : 20, [u]), M = H(() => Ve(), []), o = T.useRef({}), c = T.useRef({}), S = T.useRef(), x = T.useRef(), de = j(
-    ie,
+  }), [y, ae] = $("key"), [X, de] = $(oe), [p, B] = $(!1), { background: Y, borderColor: Z, borderRadius: C, density: g, font: ee } = ie, v = H(() => u ? 25 : 20, [u]), F = H(() => u ? 35 : 20, [u]), M = H(() => Ve(), []), o = T.useRef({}), c = T.useRef({}), S = T.useRef(), x = T.useRef(), me = j(
+    ue,
     !r.isKeyFocused && "item_edited",
-    !y(z(m, ["error", i, "key"], [])) && !y(l.key) && !d.disabled && u && "item_edited_invalid"
-  ), me = j(
+    !h(z(m, ["error", i, "key"], [])) && !h(l.key) && !d.disabled && u && "item_edited_invalid"
+  ), pe = j(
     "edit-chip-container",
     Y && `edit-chip-container-background_${Y}`,
     Z && `edit-chip-container-border_${Z}`,
@@ -51,11 +51,11 @@ let E = ({
     C && `edit-chip-container-border_${C}`,
     (r.isEdit || r.isNewChip) && "edit-chip-container_edited",
     u && d.disabled && "edit-chip-container_disabled edit-chip-container-font_disabled"
-  ), pe = j(
+  ), he = j(
     "input-label-value",
     !r.isValueFocused && "item_edited",
-    !y(z(m, ["error", i, "value"], [])) && !y(l.value) && u && "item_edited_invalid"
-  ), he = j(
+    !h(z(m, ["error", i, "value"], [])) && !h(l.value) && u && "item_edited_invalid"
+  ), ye = j(
     "item-icon-close",
     !d.disabled && (r.chipIndex === i && u || !Q && !u) && "item-icon-close invisible",
     !u && !Q && "item-icon-close hidden"
@@ -67,16 +67,16 @@ let E = ({
       if (_ && P)
         R = k = n / 2;
       else if (_) {
-        k = l.value ? s : f;
+        k = l.value ? s : F;
         const b = n - k;
         R = b > t ? t : b;
       } else if (P) {
-        R = l.key ? t : F;
+        R = l.key ? t : v;
         const b = n - R;
         k = b > s ? s : b;
       } else
-        R = !l.key || t <= F ? F : t, k = !l.value || s <= f ? f : s;
-      o.current.style.width = `${R}px`, y(c.current) || (c.current.style.width = `${k}px`), A((b) => ({
+        R = !l.key || t <= v ? v : t, k = !l.value || s <= F ? F : s;
+      o.current.style.width = `${R}px`, h(c.current) || (c.current.style.width = `${k}px`), A((b) => ({
         ...b,
         keyFieldWidth: R,
         valueFieldWidth: k
@@ -85,22 +85,22 @@ let E = ({
   }, [
     l.key,
     l.value,
+    v,
     F,
-    f,
     w,
     U
   ]);
-  h(() => {
+  f(() => {
     if (!w.current) return;
     const e = w.current, t = new ResizeObserver(K);
     return t.observe(e), () => t.unobserve(e);
-  }, [w, K]), h(() => {
+  }, [w, K]), f(() => {
     const e = Re(K, 500);
     if (u)
       return window.addEventListener("resize", e), window.addEventListener(M, e), () => {
         window.removeEventListener("resize", e), window.removeEventListener(M, e);
       };
-  }, [u, K, M]), h(() => {
+  }, [u, K, M]), se(() => {
     !l.keyFieldWidth && !l.valueFieldWidth && K();
   }, [l.keyFieldWidth, l.valueFieldWidth, K]);
   const L = I(
@@ -115,9 +115,9 @@ let E = ({
     },
     [L]
   );
-  h(() => (p && window.addEventListener("scroll", V, !0), () => {
+  f(() => (p && window.addEventListener("scroll", V, !0), () => {
     window.removeEventListener("scroll", V, !0);
-  }), [V, p]), h(() => {
+  }), [V, p]), f(() => {
     r.chipIndex === i && (r.isKeyFocused ? o.current.focus() : r.isValueFocused && c.current.focus());
   }, [
     r.isKeyFocused,
@@ -126,15 +126,15 @@ let E = ({
     c,
     i,
     r.chipIndex
-  ]), h(() => (p && window.addEventListener("scroll", V, !0), () => {
+  ]), f(() => (p && window.addEventListener("scroll", V, !0), () => {
     window.removeEventListener("scroll", V, !0);
-  }), [V, p]), h(() => {
+  }), [V, p]), f(() => {
     if (r.isEdit)
       return document.addEventListener("click", L, !0), () => {
         document.removeEventListener("click", L, !0);
       };
   }, [L, r.isEdit]);
-  const ye = I(
+  const ve = I(
     (e) => {
       if (r.chipIndex === i && u) {
         if (!e.shiftKey && e.key === J && r.isValueFocused)
@@ -173,7 +173,7 @@ let E = ({
         A((_) => ({
           ..._,
           key: o.current.value,
-          keyFieldWidth: o.current.value.length <= 1 ? F : n >= t ? t : n > F ? n + 2 : F
+          keyFieldWidth: o.current.value.length <= 1 ? v : n >= t ? t : n > v ? n + 2 : v
         }));
       } else {
         const n = D(c.current);
@@ -182,46 +182,46 @@ let E = ({
           return {
             ..._,
             value: c.current.value,
-            valueFieldWidth: ((P = c.current.value) == null ? void 0 : P.length) <= 1 ? f : n >= t ? t : n > f ? n + 2 : f
+            valueFieldWidth: ((P = c.current.value) == null ? void 0 : P.length) <= 1 ? F : n >= t ? t : n > F ? n + 2 : F
           };
         });
       }
     },
-    [N, F, w, f]
+    [N, v, w, F]
   );
-  fe(() => {
-    r.chipIndex === i && ce(r.isKeyFocused ? "key" : r.isValueFocused ? "value" : null);
-  }, [r.isKeyFocused, r.isValueFocused, r.chipIndex, i]), h(() => {
+  se(() => {
+    r.chipIndex === i && ae(r.isKeyFocused ? "key" : r.isValueFocused ? "value" : null);
+  }, [r.isKeyFocused, r.isValueFocused, r.chipIndex, i]), f(() => {
     m.valid && p && B(!1);
-  }, [m.valid, p]), h(() => {
-    m.error && (ae((e) => {
+  }, [m.valid, p]), f(() => {
+    m.error && (de((e) => {
       var t;
       return {
         ...e,
-        [v]: (t = e[v]) == null ? void 0 : t.map((s) => ({
+        [y]: (t = e[y]) == null ? void 0 : t.map((s) => ({
           ...s,
-          isValid: y(z(m, ["error", r.chipIndex, v], [])) ? !0 : !m.error[r.chipIndex][v].some(
+          isValid: h(z(m, ["error", r.chipIndex, y], [])) ? !0 : !m.error[r.chipIndex][y].some(
             (n) => n && n.name === s.name
           )
         }))
       };
     }), !p && B(!0));
-  }, [m, p, v, r.chipIndex]);
-  const ve = I(() => {
+  }, [m, p, y, r.chipIndex]);
+  const Fe = I(() => {
     var e;
-    return (e = X[v]) == null ? void 0 : e.map(({ isValid: t = !1, label: s, name: n }) => /* @__PURE__ */ W(be, { valid: t, validationMessage: s }, n));
-  }, [v, X]);
-  return /* @__PURE__ */ Fe(
+    return (e = X[y]) == null ? void 0 : e.map(({ isValid: t = !1, label: s, name: n }) => /* @__PURE__ */ W(be, { valid: t, validationMessage: s }, n));
+  }, [y, X]);
+  return /* @__PURE__ */ fe(
     "div",
     {
-      className: me,
-      onKeyDown: (e) => !d.disabled && r.isEdit && ye(e),
+      className: pe,
+      onKeyDown: (e) => !d.disabled && r.isEdit && ve(e),
       ref: S,
       children: [
         /* @__PURE__ */ W(
-          se,
+          ne,
           {
-            className: de,
+            className: me,
             disabled: d.disabled || !u || !G(r.chipIndex) && r.chipIndex !== i,
             name: N,
             onChange: te,
@@ -233,11 +233,11 @@ let E = ({
         ),
         !l.isKeyOnly && /* @__PURE__ */ W("div", { className: "edit-chip-separator", children: ":" }),
         !l.isKeyOnly && /* @__PURE__ */ W(
-          se,
+          ne,
           {
-            className: pe,
+            className: he,
             disabled: d.disabled || !u || !G(r.chipIndex) && r.chipIndex !== i,
-            name: oe,
+            name: ce,
             onChange: te,
             onFocus: re,
             placeholder: u ? "value" : "",
@@ -249,12 +249,12 @@ let E = ({
           "button",
           {
             disabled: d.disabled,
-            className: he,
-            onClick: (e) => !d.disabled && ue(e, i),
+            className: ye,
+            onClick: (e) => !d.disabled && le(e, i),
             children: /* @__PURE__ */ W(_e, {})
           }
         ),
-        !d.disabled && (r.isKeyFocused ? !y(l.key) : !y(l.value)) && r.chipIndex === i && !y(z(m, ["error", r.chipIndex, v], [])) && /* @__PURE__ */ W(ke, { show: p, ref: { refInputContainer: S, validationRulesRef: x }, children: ve() })
+        !d.disabled && (r.isKeyFocused ? !h(l.key) : !h(l.value)) && r.chipIndex === i && !h(z(m, ["error", r.chipIndex, y], [])) && /* @__PURE__ */ W(ke, { show: p, ref: { refInputContainer: S, validationRulesRef: x }, children: Fe() })
       ]
     }
   );
