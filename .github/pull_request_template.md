@@ -48,8 +48,6 @@ Followed by a clear representation - e.g:
 <!-- If yes, describe what breaks and how to migrate: -->
 <!-- Example: Renamed prop `variant` → `type` in Button component -->
 
----
-
 ## 🔍 Additional Notes
 <!-- Optional: other context, performance considerations, or follow-up work -->
 <!-- Example:
