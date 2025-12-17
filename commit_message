@@ -1,9 +1,6 @@
 
 
-Create a new dist version 3.2.5
+Create a new dist version 3.2.6
 
 Collecting:
-- [FIX] Layout issues with labels and status icons
-- [FEAT] Add PR template
-- Merge pull request #463 from illia-prokopchuk/add-pr-template
-- Merge pull request #462 from illia-prokopchuk/ML-11656
+- [FIX] Changed date-time format to local (#461)
