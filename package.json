@@ -105,10 +105,10 @@
         "vite-plugin-svgr": "^4.3.0"
     },
     "scripts": {
-        "lint": "eslint 'src/**/*.{js,jsx}' --quiet",
-        "lint:fix": "eslint 'src/**/*.{js,jsx}' --fix",
-        "prettier": "prettier --check 'src/**/*.{js,jsx,scss}'",
-        "prettier:fix": "prettier --write 'src/**/*.{js,jsx,scss}'",
+        "lint": "eslint \"src/**/*.{js,jsx}\" --quiet",
+        "lint:fix": "eslint \"src/**/*.{js,jsx}\" --fix",
+        "prettier": "prettier --check \"src/**/*.{js,jsx,scss}\"",
+        "prettier:fix": "prettier --write \"src/**/*.{js,jsx,scss}\"",
         "build-storybook": "build-storybook",
         "storybook": "start-storybook -p 6006",
         "start": "vite",
