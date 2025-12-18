@@ -1,4 +1,13 @@
-export function formatDatetime(datetime: any, invalidDateMessage: any): any;
+export function getSupportedLocale(): string;
+export const supportedLocale: string;
+export function formatDatetime(datetime: any, invalidDateMessage: any, options?: {
+    year: string;
+    month: string;
+    day: string;
+    hour: string;
+    minute: string;
+    second: string;
+}, locale?: string): any;
 export function getFormatTime(time: any): {
     hour: any;
     minute: any;

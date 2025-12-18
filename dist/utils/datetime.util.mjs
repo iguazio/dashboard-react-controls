@@ -1,17 +1,30 @@
-import n from "moment";
-const u = (t, e) => {
+import a from "moment";
+function m() {
+  const t = /* @__PURE__ */ new Set(["en-GB", "en-US"]);
+  return (navigator.languages || [navigator.language]).find((o) => t.has(o)) || "en-US";
+}
+const c = m(), d = (t, e, r = {
+  year: "numeric",
+  month: "short",
+  day: "numeric",
+  hour: "2-digit",
+  minute: "2-digit",
+  second: "2-digit"
+}, o = c) => {
   if (!t)
     return e;
-  const r = new Date(t);
-  return typeof r != "object" || !(r instanceof Date) || isNaN(r) ? e : new Intl.DateTimeFormat("en-US", {
-    year: "numeric",
-    month: "short",
-    day: "numeric",
-    hour: "2-digit",
-    minute: "2-digit",
-    second: "2-digit"
-  }).format(r);
-}, c = (t) => {
+  let n;
+  try {
+    n = new Date(t);
+  } catch {
+    return e;
+  }
+  return typeof n != "object" || !(n instanceof Date) || isNaN(n) ? e : new Intl.DateTimeFormat(o, {
+    numberingSystem: "latn",
+    calendar: "gregory",
+    ...r
+  }).format(n);
+}, g = (t) => {
   const [e, r] = t.split(":");
   return r ? {
     hour: e.replace(/_/g, "0"),
@@ -20,7 +33,7 @@ const u = (t, e) => {
     hour: "0",
     minute: "0"
   };
-}, d = (t) => (n.updateLocale("en", {
+}, h = (t) => (a.updateLocale("en", {
   relativeTime: {
     future: "in %s",
     past: "%s ago",
@@ -39,15 +52,17 @@ const u = (t, e) => {
     y: "a year",
     yy: "%d years"
   }
-}), n.utc(t).fromNow()), h = (t, e) => n(t).format(e), y = (t = [], e, r = !0) => [...t].sort((s, m) => {
-  const o = Date.parse(s[e]), a = Date.parse(m[e]);
-  return r ? o - a : a - o;
+}), a.utc(t).fromNow()), p = (t, e) => a(t).format(e), y = (t = [], e, r = !0) => [...t].sort((o, n) => {
+  const s = Date.parse(o[e]), u = Date.parse(n[e]);
+  return r ? s - u : u - s;
 });
 export {
-  u as formatDatetime,
-  h as getDateAndTimeByFormat,
-  c as getFormatTime,
-  d as getTimeElapsedByDate,
-  y as sortListByDate
+  d as formatDatetime,
+  p as getDateAndTimeByFormat,
+  g as getFormatTime,
+  m as getSupportedLocale,
+  h as getTimeElapsedByDate,
+  y as sortListByDate,
+  c as supportedLocale
 };
 //# sourceMappingURL=datetime.util.mjs.map
