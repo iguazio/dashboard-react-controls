@@ -19,7 +19,13 @@ import { differenceWith, isEqual, get, omit, isEmpty, isNumber } from 'lodash'
 
 import ConfirmDialog from '../components/ConfirmDialog/ConfirmDialog'
 
-import { DANGER_BUTTON, PRIMARY_BUTTON, TERTIARY_BUTTON, VIEW_SEARCH_PARAMETER } from '../constants'
+import {
+  DANGER_BUTTON,
+  FORBIDDEN_ERROR_STATUS_CODE,
+  PRIMARY_BUTTON,
+  TERTIARY_BUTTON,
+  VIEW_SEARCH_PARAMETER
+} from '../constants'
 import { setFiltersWasHandled, showWarning } from '../reducers/commonDetailsReducer'
 import { setNotification } from '../reducers/notificationReducer'
 import { showErrorNotification } from './notification.util'
@@ -76,6 +82,10 @@ export const areArraysEqual = (firstArray, secondArray, omitBy = []) => {
   )
 }
 
+const commonErrorMessagesMap = {
+  [FORBIDDEN_ERROR_STATUS_CODE]: 'You do not have a permission to view this data'
+}
+
 /**
  * Get error information from the error object.
  *
@@ -111,6 +121,10 @@ export const getErrorMsg = (error, defaultError) => {
   ) {
     return defaultError
   } else {
+    if (commonErrorMessagesMap[error.status]) {
+      return commonErrorMessagesMap[error.status]
+    }
+
     return errorMsg || ''
   }
 }
