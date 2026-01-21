@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-name: Publish & Release
+name: Publish Package
 
 on:
   workflow_dispatch:
@@ -48,11 +48,16 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Bump package version
-        env:
-          INPUT_VERSION: ${{ github.event.inputs.version }}
-          BRANCH: ${{ github.ref_name }}
-        run: bash .github/scripts/bump-version.sh
+      - name: Bump Package version
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          npm version ${{ github.event.inputs.version }}
+          git push
+          git push --tags
+
+      - name: Set release tag
+        run: echo "RELEASE_TAG=v$(node -p "require('./package.json').version")" >> "$GITHUB_ENV"
 
       - name: Build package
         run: npm run build
@@ -63,13 +68,6 @@ jobs:
         with:
           token: ${{ secrets.NPM_TOKEN }}
           access: public
-          tag: ${{ github.ref_name == 'development' && 'latest' || format('mlrun-{0}', github.ref_name) }}
-
-      - name: "Create release: commit, tag & push"
-        if: steps.publish.outcome == 'success'
-        env:
-          BRANCH: ${{ github.ref_name }}
-        run: bash .github/scripts/create-release.sh
 
       - name: Create GitHub Release
         if: steps.publish.outcome == 'success'
