@@ -1,107 +1,109 @@
-import { create as f } from "react-modal-promise";
-import { isEmpty as c, isNumber as g, differenceWith as w, isEqual as E, omit as a, get as s } from "lodash";
+import { create as g } from "react-modal-promise";
+import { isEmpty as u, isNumber as E, differenceWith as w, isEqual as T, omit as a, get as s } from "lodash";
 import d from "../components/ConfirmDialog/ConfirmDialog.mjs";
-import { PRIMARY_BUTTON as b, TERTIARY_BUTTON as u, DANGER_BUTTON as T, VIEW_SEARCH_PARAMETER as y } from "../constants.mjs";
-import { setFiltersWasHandled as h, showWarning as v } from "../reducers/commonDetailsReducer.mjs";
-import { setNotification as C } from "../reducers/notificationReducer.mjs";
+import { PRIMARY_BUTTON as b, TERTIARY_BUTTON as m, DANGER_BUTTON as h, FORBIDDEN_ERROR_STATUS_CODE as v, VIEW_SEARCH_PARAMETER as y } from "../constants.mjs";
+import { setFiltersWasHandled as C, showWarning as R } from "../reducers/commonDetailsReducer.mjs";
+import { setNotification as N } from "../reducers/notificationReducer.mjs";
 import { showErrorNotification as l } from "./notification.util.mjs";
-const m = (t, e) => f(t)(e), M = (t, e) => m(d, {
+const p = (e, t) => g(e)(t), S = (e, t) => p(d, {
   cancelButton: {
     label: "Cancel",
-    variant: u
+    variant: m
   },
   confirmButton: {
     label: "OK",
     variant: b,
-    handler: e
+    handler: t
   },
   header: "Are you sure?",
-  message: t
-}), O = (t, e, r) => m(d, {
+  message: e
+}), _ = (e, t, n) => p(d, {
   cancelButton: {
     label: "Cancel",
-    variant: u
+    variant: m
   },
   confirmButton: {
     label: "Delete",
-    variant: T,
-    handler: r
+    variant: h,
+    handler: n
   },
-  header: t,
-  message: e
-}), F = (t) => Object.values(t).every(
-  (e) => !e || (e == null ? void 0 : e.length) === 0 || !g(e) && c(e)
-), S = (t, e, r = []) => t.length !== e.length ? !1 : c(
-  w(t, e, (n, i) => E(a(n, r), a(i, r)))
-), N = (t) => {
-  const e = s(t, "response.data.detail", null);
-  return typeof e == "string" ? e : s(e, "reason", "");
-}, V = (t, e) => {
-  const n = N(t) || t.message;
-  return (!n || n === "Not Found" || n.startsWith("Request failed with status code")) && e ? e : n || "";
-}, W = () => {
-  const t = {
+  header: e,
+  message: t
+}), F = (e) => Object.values(e).every(
+  (t) => !t || (t == null ? void 0 : t.length) === 0 || !E(t) && u(t)
+), V = (e, t, n = []) => e.length !== t.length ? !1 : u(
+  w(e, t, (r, i) => T(a(r, n), a(i, n)))
+), c = {
+  [v]: "You do not have a permission to view this data"
+}, D = (e) => {
+  const t = s(e, "response.data.detail", null);
+  return typeof t == "string" ? t : s(t, "reason", "");
+}, W = (e, t) => {
+  const r = D(e) || e.message;
+  return (!r || r === "Not Found" || r.startsWith("Request failed with status code")) && t ? t : c[e.status] ? c[e.status] : r || "";
+}, x = () => {
+  const e = {
     transition: "transitionend",
     OTransition: "oTransitionEnd",
     MozTransition: "transitionend",
     WebkitTransition: "webkitTransitionEnd"
   };
-  let e = document.body.style;
-  for (let r in t)
-    if (e[r] !== void 0)
-      return t[r];
-}, _ = (t) => getComputedStyle(document.documentElement).getPropertyValue(t).trim(), x = (t) => {
-  var e;
-  return (e = new URLSearchParams(t).get(y)) == null ? void 0 : e.toLowerCase();
-}, q = async (t, e, r = !1) => {
-  let n = Promise.resolve(!0);
-  return t.counter > 0 && (n = await new Promise((i) => {
-    const o = (p) => {
-      window.removeEventListener("discardChanges", o), window.removeEventListener("cancelLeave", o), i(p);
+  let t = document.body.style;
+  for (let n in e)
+    if (t[n] !== void 0)
+      return e[n];
+}, I = (e) => getComputedStyle(document.documentElement).getPropertyValue(e).trim(), q = (e) => {
+  var t;
+  return (t = new URLSearchParams(e).get(y)) == null ? void 0 : t.toLowerCase();
+}, H = async (e, t, n = !1) => {
+  let r = Promise.resolve(!0);
+  return e.counter > 0 && (r = await new Promise((i) => {
+    const o = (f) => {
+      window.removeEventListener("discardChanges", o), window.removeEventListener("cancelLeave", o), i(f);
     };
-    window.addEventListener("discardChanges", () => o(!0)), window.addEventListener("cancelLeave", () => o(!1)), e(h(r)), e(v(!0));
-  })), n;
-}, H = (t, e) => {
-  var r;
-  if (!((r = navigator.clipboard) != null && r.writeText))
+    window.addEventListener("discardChanges", () => o(!0)), window.addEventListener("cancelLeave", () => o(!1)), t(C(n)), t(R(!0));
+  })), r;
+}, Y = (e, t) => {
+  var n;
+  if (!((n = navigator.clipboard) != null && n.writeText))
     return l(
-      e,
+      t,
       null,
       "",
       "Copy to clipboard failed due to unsecured connection"
     );
-  navigator.clipboard.writeText(t).then(() => {
-    e(
-      C({
+  navigator.clipboard.writeText(e).then(() => {
+    t(
+      N({
         status: 200,
         id: Math.random(),
         message: "Copied to clipboard successfully"
       })
     );
-  }).catch((n) => {
-    l(e, n, "", "Copy to clipboard failed");
+  }).catch((r) => {
+    l(t, r, "", "Copy to clipboard failed");
   });
-}, I = (t, e) => {
-  if ((typeof t == "string" && t.trim() !== "" || typeof t == "number") && !isNaN(t)) {
-    const r = parseFloat(t);
-    return r % 1 === 0 ? r : +r.toFixed(e ?? 2);
+}, j = (e, t) => {
+  if ((typeof e == "string" && e.trim() !== "" || typeof e == "number") && !isNaN(e)) {
+    const n = parseFloat(e);
+    return n % 1 === 0 ? n : +n.toFixed(t ?? 2);
   }
-  return t;
-}, j = (t) => new URL(t, window.location.origin).toString();
+  return e;
+}, k = (e) => new URL(e, window.location.origin).toString();
 export {
-  S as areArraysEqual,
-  H as copyToClipboard,
-  j as generateUrlFromRouterPath,
-  N as getErrorDetail,
-  V as getErrorMsg,
-  _ as getScssVariableValue,
-  W as getTransitionEndEventName,
-  x as getViewMode,
+  V as areArraysEqual,
+  Y as copyToClipboard,
+  k as generateUrlFromRouterPath,
+  D as getErrorDetail,
+  W as getErrorMsg,
+  I as getScssVariableValue,
+  x as getTransitionEndEventName,
+  q as getViewMode,
   F as isEveryObjectValueEmpty,
-  M as openConfirmPopUp,
-  O as openDeleteConfirmPopUp,
-  m as openPopUp,
-  q as performDetailsActionHelper,
-  I as roundFloats
+  S as openConfirmPopUp,
+  _ as openDeleteConfirmPopUp,
+  p as openPopUp,
+  H as performDetailsActionHelper,
+  j as roundFloats
 };
 //# sourceMappingURL=common.util.mjs.map
