@@ -1,0 +1,80 @@
+# Copyright 2019 Iguazio
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+#
+name: Publish Package
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: Type of semantic version bump
+        required: true
+        type: choice
+        options:
+          - patch
+          - minor
+          - major
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          registry-url: https://registry.npmjs.org/
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Bump Package version
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          npm version ${{ github.event.inputs.version }}
+          git push
+          git push --tags
+
+      - name: Set release tag
+        run: echo "RELEASE_TAG=v$(npm pkg get version | tr -d '\"')" >> "$GITHUB_ENV"
+
+      - name: Build package
+        run: npm run build
+
+      - name: Publish to npm
+        id: publish
+        uses: JS-DevTools/npm-publish@v4
+        with:
+          token: ${{ secrets.NPM_TOKEN }}
+          access: public
+
+      - name: Create GitHub Release
+        if: steps.publish.outcome == 'success'
+        uses: softprops/action-gh-release@v1
+        with:
+          tag_name: ${{ env.RELEASE_TAG }}
+          name: ${{ env.RELEASE_TAG }}
+          generate_release_notes: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
