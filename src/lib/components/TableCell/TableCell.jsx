@@ -144,12 +144,7 @@ const TableCell = ({
     )
   } else if (cellData.showStatus && cellData.showTag) {
     return (
-      <TableTagStatusCell
-        className={className}
-        cellData={cellData}
-        item={item}
-        onClick={onClick}
-      />
+      <TableTagStatusCell className={className} cellData={cellData} item={item} onClick={onClick} />
     )
   } else {
     return (

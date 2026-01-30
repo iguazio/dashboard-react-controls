@@ -26,12 +26,7 @@ import TextTooltipTemplate from '../../components/TooltipTemplate/TextTooltipTem
 
 import './tableTagStatusCell.scss'
 
-const TableTagStatusCell = ({
-  cellData = {},
-  className = '',
-  item,
-  onClick = null
-}) => {
+const TableTagStatusCell = ({ cellData = {}, className = '', item, onClick = null }) => {
   const tableCellClassNames = classnames(
     'table-body__cell',
     'tag-status-cell',
@@ -40,8 +35,7 @@ const TableTagStatusCell = ({
     cellData.bodyCellClassName,
     onClick && 'link'
   )
-  const { value: stateValue, label: stateLabel, className: stateClassName } =
-    item?.state ?? {}
+  const { value: stateValue, label: stateLabel, className: stateClassName } = item?.state ?? {}
 
   return (
     <td
