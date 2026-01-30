@@ -62,5 +62,16 @@
         width: auto;
       }
     }
+
+    &.link-blue {
+      .name-wrapper {
+        .link {
+          .item-name {
+            color: colors.$cornflowerBlue;
+            font-weight: 400;
+          }
+        }
+      }
+    } 
   }
 }

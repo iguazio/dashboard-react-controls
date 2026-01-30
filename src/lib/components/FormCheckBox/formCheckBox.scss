@@ -11,6 +11,39 @@
     @include mixins.radioCheckReadonly;
   }
 
+  &__toggle-wrapper {
+    position: relative;
+    display: inline-flex;
+    cursor: pointer;
+  }
+
+  &__toggle-switch {
+    height: 24px;
+    width: 48px;
+    display: flex;
+    cursor: pointer;
+    align-items: center;
+    background-color: colors.$alto;
+    border-radius: 20px;
+    transition: all 0.2s ease;
+    box-shadow: 0 1px 3px colors.$lightBlack;
+
+    &:before {
+      content: '';
+      width: 20px;
+      height: 20px;
+      background-color: colors.$white;
+      border-radius: 50%;
+      transform: translateX(2px);
+      transition: all 0.2s ease;
+      box-shadow: 0 1px 2px colors.$lightBlack;
+    }
+  }
+
+  label.form-field-checkbox__label-tip {
+    display: flex;
+  }
+
   input[type='checkbox'] {
     flex: 0 0 18px;
     width: 18px;
@@ -86,6 +119,39 @@
           background-color: colors.$iron;
         }
       }
+    }
+  }
+
+  &_toggle {
+    gap: 10px;
+
+    input[type='checkbox'] {
+      display: none;
+      width: 0;
+      height: 0;
+
+      &:disabled {
+        & + .form-field-checkbox__toggle-switch {
+          opacity: 0.5;
+          pointer-events: none;
+          cursor: default;
+        }
+      }
+
+      &:checked {
+        & + .form-field-checkbox__toggle-switch {
+          background-color: colors.$malibu;
+
+          &:before {
+            transform: translateX(26px);
+          }
+        }
+      }
+    }
+
+    .form-field-checkbox__toggle-wrapper:not(:has(input:disabled)):hover
+      .form-field-checkbox__toggle-switch {
+      opacity: 0.9;
     }
   }
 }
