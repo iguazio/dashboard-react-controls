@@ -19,49 +19,71 @@ import classnames from 'classnames'
 import PropTypes from 'prop-types'
 import { Field } from 'react-final-form'
 
+import Tip from '../Tip/Tip'
 import { DENSITY } from '../../types.js'
 
 import './formToggle.scss'
 
-const FormToggle = ({ density = '', label = '', name, onChange = () => {}, ...inputProps }) => {
-  const toggleWrapperClassNames = classnames(
+const FormToggle = ({
+  className = '',
+  density = '',
+  label = '',
+  labelTip = '',
+  name,
+  readOnly = false,
+  onChange = () => {},
+  ...inputProps
+}) => {
+  const formFieldClassNames = classnames(
+    'test',
+    'form-field-toggle',
     'form-field__wrapper',
-    density && `form-field__wrapper-${density}`
+    density && `form-field__wrapper-${density}`,
+    (label || labelTip) && 'form-field-toggle_has-label',
+    className
   )
 
   return (
     <Field name={name} value={inputProps.value} type="checkbox">
-      {({ input }) => {
-        return (
+      {({ input }) => (
+        <div className={formFieldClassNames} data-testid={name ? `${name}-form-field-toggle` : 'form-field-toggle'}>
+          {(label || labelTip) && (
+            <label htmlFor={inputProps.value ?? name} className="form-field-toggle__label">
+              {label}
+              {labelTip && <Tip text={labelTip} />}
+            </label>
+          )}
           <label
-            className="form-field-toggle"
-            data-testid={name ? `${name}-form-field-toggle` : 'form-field-toggle'}
+            htmlFor={inputProps.value ?? name}
+            className="form-field-toggle__toggle-wrapper"
           >
-            {label && <div className="form-field__label">{label}</div>}
             <input
+              type="checkbox"
               data-testid={name ? `${name}-form-toggle` : 'form-toggle'}
-              id={name}
+              id={inputProps.value ?? name}
               {...{ ...input, ...inputProps }}
+              value={String(input.checked)}
+              disabled={readOnly}
               onChange={event => {
-                onChange && onChange(event)
+                onChange(event)
                 input.onChange(event)
               }}
-              type="checkbox"
             />
-            <div className={toggleWrapperClassNames}>
-              <span className="form-field-toggle__switch" />
-            </div>
+            <span className="form-field-toggle__switch" />
           </label>
-        )
-      }}
+        </div>
+      )}
     </Field>
   )
 }
 
 FormToggle.propTypes = {
+  className: PropTypes.string,
   density: DENSITY,
   label: PropTypes.string,
+  labelTip: PropTypes.string,
   name: PropTypes.string.isRequired,
+  readOnly: PropTypes.bool,
   onChange: PropTypes.func
 }
 

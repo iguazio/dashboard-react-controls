@@ -19,8 +19,6 @@ import PropTypes from 'prop-types'
 import { Field } from 'react-final-form'
 import classNames from 'classnames'
 
-import Tip from '../Tip/Tip'
-
 import './formCheckBox.scss'
 
 let FormCheckBox = ({
@@ -30,54 +28,19 @@ let FormCheckBox = ({
   label = '',
   name,
   readOnly = false,
-  variant = 'checkbox',
-  labelTip = '',
   ...inputProps
 }) => {
   const formFieldClassNames = classNames(
     'form-field-checkbox',
-    variant === 'toggle' && 'form-field-checkbox_toggle',
     readOnly && 'form-field-checkbox_readonly',
     className
   )
-  const labelClassNames = classNames(
-    highlightLabel && 'highlighted',
-    labelTip && 'form-field-checkbox__label-tip'
-  )
+  const labelClassNames = classNames(highlightLabel && 'highlighted')
   const inputRef = useRef(null)
 
   return (
     <Field name={name} value={inputProps.value} type="checkbox">
       {({ input }) => {
-        if (variant === 'toggle') {
-          return (
-            <div className={formFieldClassNames} data-testid="form-field-checkbox">
-              {label && (
-                <label htmlFor={inputProps.value ?? name} className={labelClassNames}>
-                  {label}
-                  {labelTip && <Tip text={labelTip} />}
-                </label>
-              )}
-              <label
-                htmlFor={inputProps.value ?? name}
-                className="form-field-checkbox__toggle-wrapper"
-              >
-                <input
-                  ref={inputRef}
-                  type="checkbox"
-                  data-testid={name ? `${name}-form-checkbox` : 'form-checkbox'}
-                  id={inputProps.value ?? name}
-                  {...{ ...input, ...inputProps }}
-                  value={String(input.checked)}
-                  disabled={readOnly}
-                />
-                <span className="form-field-checkbox__toggle-switch" />
-              </label>
-              {children}
-            </div>
-          )
-        }
-
         return (
           <div className={formFieldClassNames} data-testid="form-field-checkbox">
             <input
@@ -106,9 +69,7 @@ FormCheckBox.propTypes = {
   highlightLabel: PropTypes.bool,
   label: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
   name: PropTypes.string.isRequired,
-  readOnly: PropTypes.bool,
-  variant: PropTypes.oneOf(['checkbox', 'toggle']),
-  labelTip: PropTypes.string
+  readOnly: PropTypes.bool
 }
 
 FormCheckBox = React.memo(FormCheckBox)
