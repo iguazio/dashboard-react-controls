@@ -1,48 +1,72 @@
-import { jsx as r, jsxs as d } from "react/jsx-runtime";
+import { jsx as l, jsxs as f } from "react/jsx-runtime";
 import "react";
-import g from "classnames";
-import o from "prop-types";
-import { Field as p } from "react-final-form";
-import { DENSITY as c } from "../../types.mjs";
+import _ from "classnames";
+import r from "prop-types";
+import { Field as h } from "react-final-form";
+import N from "../Tip/Tip.mjs";
+import { DENSITY as x } from "../../types.mjs";
 /* empty css                 */
-const n = ({ density: l = "", label: t = "", name: e, onChange: i = () => {
-}, ...s }) => {
-  const f = g(
+const b = ({
+  className: a = "",
+  density: m = "",
+  label: t = "",
+  labelTip: o = "",
+  name: e,
+  readOnly: c = !1,
+  onChange: s = () => {
+  },
+  ...d
+}) => {
+  const p = _(
+    "test",
+    "form-field-toggle",
     "form-field__wrapper",
-    l && `form-field__wrapper-${l}`
+    m && `form-field__wrapper-${m}`,
+    (t || o) && "form-field-toggle_has-label",
+    a
   );
-  return /* @__PURE__ */ r(p, { name: e, value: s.value, type: "checkbox", children: ({ input: a }) => /* @__PURE__ */ d(
-    "label",
+  return /* @__PURE__ */ l(h, { name: e, value: d.value, type: "checkbox", children: ({ input: i }) => /* @__PURE__ */ f(
+    "div",
     {
-      className: "form-field-toggle",
+      className: p,
       "data-testid": e ? `${e}-form-field-toggle` : "form-field-toggle",
       children: [
-        t && /* @__PURE__ */ r("div", { className: "form-field__label", children: t }),
-        /* @__PURE__ */ r(
-          "input",
-          {
-            "data-testid": e ? `${e}-form-toggle` : "form-toggle",
-            id: e,
-            ...a,
-            ...s,
-            onChange: (m) => {
-              i && i(m), a.onChange(m);
-            },
-            type: "checkbox"
-          }
-        ),
-        /* @__PURE__ */ r("div", { className: f, children: /* @__PURE__ */ r("span", { className: "form-field-toggle__switch" }) })
+        (t || o) && /* @__PURE__ */ f("label", { htmlFor: e, className: "form-field-toggle__label", children: [
+          t,
+          o && /* @__PURE__ */ l(N, { text: o })
+        ] }),
+        /* @__PURE__ */ f("label", { htmlFor: e, className: "form-field-toggle__toggle-wrapper", children: [
+          /* @__PURE__ */ l(
+            "input",
+            {
+              type: "checkbox",
+              "data-testid": e ? `${e}-form-toggle` : "form-toggle",
+              id: e,
+              ...i,
+              ...d,
+              value: String(i.checked),
+              disabled: c,
+              onChange: (g) => {
+                s == null || s(g), i.onChange(g);
+              }
+            }
+          ),
+          /* @__PURE__ */ l("span", { className: "form-field-toggle__switch" })
+        ] })
       ]
     }
   ) });
 };
-n.propTypes = {
-  density: c,
-  label: o.string,
-  name: o.string.isRequired,
-  onChange: o.func
+b.propTypes = {
+  className: r.string,
+  density: x,
+  label: r.string,
+  labelTip: r.string,
+  name: r.string.isRequired,
+  readOnly: r.bool,
+  onChange: r.func
 };
 export {
-  n as default
+  b as default
 };
 //# sourceMappingURL=FormToggle.mjs.map
