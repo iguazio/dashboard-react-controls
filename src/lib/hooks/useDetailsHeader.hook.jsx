@@ -169,7 +169,7 @@ const DetailsHeaderContainer = ({
               )}
             </>
           )}
-          {!pageData.details.hideBackBtn &&
+          {!pageData.details.hideCloseBtn &&
             (isDetailsPopUp ? (
               <div
                 className="details-close-btn"
