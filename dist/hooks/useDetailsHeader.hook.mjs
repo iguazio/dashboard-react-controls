@@ -18,7 +18,7 @@ import te from "../images/ml-enlarge.svg.mjs";
 import oe from "../images/history.svg.mjs";
 import ne from "../images/ml-minimize.svg.mjs";
 import re from "../images/refresh.svg.mjs";
-const B = ({
+const S = ({
   actionButton: t = null,
   actionsMenu: c,
   applyChanges: d,
@@ -31,20 +31,20 @@ const B = ({
   handleCancelClick: u,
   handleRefresh: h = null,
   headerRef: T,
-  isDetailsPopUp: a = !1,
+  isDetailsPopUp: l = !1,
   isDetailsScreen: w,
   location: p,
   navigate: f,
   pageData: g,
-  params: l,
+  params: a,
   renderCustomElements: b = null,
   renderStatus: _ = null,
   renderTitle: q,
   selectedItem: k,
   showAllVersions: N = null,
-  tab: S = "",
+  tab: V = "",
   viewMode: A = "",
-  withActionMenu: V = !0,
+  withActionMenu: B = !0,
   withToggleViewBtn: I = !1
 }) => /* @__PURE__ */ r("div", { className: "item-header", ref: T, children: [
   /* @__PURE__ */ r("div", { className: "item-header__data", children: [
@@ -53,7 +53,7 @@ const B = ({
   ] }),
   /* @__PURE__ */ i("div", { className: "item-header__custom-elements", children: b && b() }),
   /* @__PURE__ */ r("div", { className: "item-header__buttons", children: [
-    o.changes.counter > 0 && !a && /* @__PURE__ */ r(M, { children: [
+    o.changes.counter > 0 && !l && /* @__PURE__ */ r(M, { children: [
       /* @__PURE__ */ i(
         j,
         {
@@ -116,9 +116,9 @@ const B = ({
         children: /* @__PURE__ */ i(re, {})
       }
     ),
-    V && /* @__PURE__ */ i(W, { dataItem: k, menu: c, time: 500 }),
+    B && /* @__PURE__ */ i(W, { dataItem: k, menu: c, time: 500 }),
     /* @__PURE__ */ r("div", { className: "item-header__navigation-buttons", children: [
-      I && !a && /* @__PURE__ */ r(M, { children: [
+      I && !l && /* @__PURE__ */ r(M, { children: [
         A !== y && /* @__PURE__ */ i(
           s,
           {
@@ -146,7 +146,7 @@ const B = ({
           }
         )
       ] }),
-      !g.details.hideBackBtn && (a ? /* @__PURE__ */ i(
+      !g.details.hideCloseBtn && (l ? /* @__PURE__ */ i(
         "div",
         {
           className: "details-close-btn",
@@ -159,7 +159,7 @@ const B = ({
         {
           className: "details-close-btn",
           "data-testid": "details-close-btn",
-          to: m ? m(k.name) : C(l, g.page, S),
+          to: m ? m(k.name) : C(a, g.page, V),
           onClick: u,
           children: /* @__PURE__ */ i(s, { tooltipText: "Close", id: "details-close", children: /* @__PURE__ */ i($, {}) })
         }
@@ -167,7 +167,7 @@ const B = ({
     ] })
   ] })
 ] });
-B.propTypes = {
+S.propTypes = {
   actionButton: Q,
   actionsMenu: K.isRequired,
   applyChanges: e.func.isRequired,
@@ -197,24 +197,24 @@ B.propTypes = {
   withToggleViewBtn: e.bool
 };
 const Ne = ({ handleCancel: t, handleShowWarning: c, isDetailsPopUp: d, pageData: R }) => {
-  const n = O((l) => l.commonDetailsStore), o = F(), m = D(), C = U(), v = ee(window.location.search), { actionButton: u, withToggleViewBtn: h, showAllVersions: T } = R.details, a = H(), w = z(), p = async (l, b) => {
+  const n = O((a) => a.commonDetailsStore), o = F(), m = D(), C = U(), v = ee(window.location.search), { actionButton: u, withToggleViewBtn: h, showAllVersions: T } = R.details, l = H(), w = z(), p = async (a, b) => {
     await ie(
       n.changes,
       o
-    ) && b(l);
+    ) && b(a);
   }, f = x(() => {
     n.changes.counter > 0 ? c(!0) : t && t();
   }, [n.changes.counter, t, c]), g = x(() => {
     t && (n.changes.counter === 0 || d) && t();
   }, [n.changes.counter, t, d]);
   return {
-    DetailsHeaderContainer: B,
+    DetailsHeaderContainer: S,
     actionButton: u,
     commonDetailsStore: n,
     handleActionClick: p,
     handleBackClick: f,
     handleCancelClick: g,
-    headerRef: a,
+    headerRef: l,
     location: w,
     navigate: C,
     params: m,

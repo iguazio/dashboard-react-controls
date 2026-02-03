@@ -1,99 +1,100 @@
-import { jsx as s, jsxs as C } from "react/jsx-runtime";
-import { cloneElement as T } from "react";
+import { jsx as s, jsxs as x } from "react/jsx-runtime";
+import { cloneElement as C } from "react";
 import t from "prop-types";
 import c from "classnames";
-import i from "../Tooltip/Tooltip.mjs";
+import p from "../Tooltip/Tooltip.mjs";
 import j from "../ReadOnlyChips/ReadOnlyChips.mjs";
 import I from "../../elements/TableLinkCell/TableLinkCell.mjs";
-import O from "../../elements/TableTypeCell/TableTypeCell.mjs";
-import p from "../TooltipTemplate/TextTooltipTemplate.mjs";
-import { getChipOptions as A } from "../../utils/chips.util.mjs";
-import { truncateUid as L } from "../../utils/string.util.mjs";
-import _ from "../../images/arrow.svg.mjs";
-const g = ({
+import O from "../../elements/TableTagStatusCell/TableTagStatusCell.mjs";
+import g from "../../elements/TableTypeCell/TableTypeCell.mjs";
+import d from "../TooltipTemplate/TextTooltipTemplate.mjs";
+import { getChipOptions as w } from "../../utils/chips.util.mjs";
+import { truncateUid as A } from "../../utils/string.util.mjs";
+import L from "../../images/arrow.svg.mjs";
+const S = ({
   cellData: e,
-  className: m = "",
+  className: n = "",
   firstCell: h = !1,
   item: r,
-  link: l = "",
-  onClick: d = null,
+  link: u = "",
+  onClick: o = null,
   selectItem: y = () => {
   },
   selectedItem: b = {},
-  showExpandButton: a = !1,
-  toggleRow: u = null
+  showExpandButton: f = !1,
+  toggleRow: l = null
 }) => {
-  const { value: N, label: f, className: v } = r.state ?? {}, o = c(
+  const { value: v, label: a, className: N } = r.state ?? {}, i = c(
     "table-body__cell",
     e.className,
-    m,
+    n,
     e.bodyCellClassName,
-    d && "link"
+    o && "link"
   );
-  return e.template ? T(e.template, {
-    className: m
-  }) : l && e.type !== "hidden" ? /* @__PURE__ */ s(
+  return e.template ? C(e.template, {
+    className: n
+  }) : u && e.type !== "hidden" ? /* @__PURE__ */ s(
     I,
     {
-      className: m,
+      className: n,
       cellData: e,
       item: r,
-      link: l,
+      link: u,
       selectItem: y,
       selectedItem: b,
-      showExpandButton: a,
-      toggleRow: u
+      showExpandButton: f,
+      toggleRow: l
     }
-  ) : h && !l ? /* @__PURE__ */ C(
+  ) : h && !u ? /* @__PURE__ */ x(
     "td",
     {
-      onClick: () => e.value && d && d(e.value),
-      className: o,
+      onClick: () => e.value && o && o(e.value),
+      className: i,
       children: [
         /* @__PURE__ */ s("div", { className: "data-ellipsis", children: e && /* @__PURE__ */ s(
-          i,
+          p,
           {
-            template: /* @__PURE__ */ s(p, { text: e.tooltip || e.value || "" }),
+            template: /* @__PURE__ */ s(d, { text: e.tooltip || e.value || "" }),
             children: e.value
           }
         ) }),
-        r.state && N && f && /* @__PURE__ */ s(i, { className: "status", template: /* @__PURE__ */ s(p, { text: f }), children: /* @__PURE__ */ s("i", { className: v }) }),
-        !r.state && r.status && /* @__PURE__ */ s(i, { className: "status", template: /* @__PURE__ */ s(p, { text: r.status }), children: /* @__PURE__ */ s("i", { className: `${r.status[0].toLowerCase()}${r.status.slice(1)}` }) }),
-        a && /* @__PURE__ */ s(_, { onClick: (n) => u && u(n, r), className: "expand-arrow" })
+        r.state && v && a && /* @__PURE__ */ s(p, { className: "status", template: /* @__PURE__ */ s(d, { text: a }), children: /* @__PURE__ */ s("i", { className: N }) }),
+        !r.state && r.status && /* @__PURE__ */ s(p, { className: "status", template: /* @__PURE__ */ s(d, { text: r.status }), children: /* @__PURE__ */ s("i", { className: `${r.status[0].toLowerCase()}${r.status.slice(1)}` }) }),
+        f && /* @__PURE__ */ s(L, { onClick: (m) => l && l(m, r), className: "expand-arrow" })
       ]
     }
-  ) : e.type === "type" ? /* @__PURE__ */ s(O, { className: m, cellData: e }) : e.type === "icons" ? /* @__PURE__ */ s("td", { "data-testid": e.headerId, className: o, children: e.value.map((n, x) => /* @__PURE__ */ s(
-    i,
+  ) : e.type === "type" ? /* @__PURE__ */ s(g, { className: n, cellData: e }) : e.type === "icons" ? /* @__PURE__ */ s("td", { "data-testid": e.headerId, className: i, children: e.value.map((m, T) => /* @__PURE__ */ s(
+    p,
     {
-      template: /* @__PURE__ */ s(p, { text: n.tooltip }),
-      children: n.icon
+      template: /* @__PURE__ */ s(d, { text: m.tooltip }),
+      children: m.icon
     },
-    n.tooltip + x
-  )) }) : Array.isArray(e.value) ? /* @__PURE__ */ s("td", { "data-testid": e.headerId, className: o, children: /* @__PURE__ */ s(
+    m.tooltip + T
+  )) }) : Array.isArray(e.value) ? /* @__PURE__ */ s("td", { "data-testid": e.headerId, className: i, children: /* @__PURE__ */ s(
     j,
     {
-      chipOptions: A(e.type),
+      chipOptions: w(e.type),
       labels: e.value,
       shortChips: !0
     }
-  ) }) : e.type === "hash" ? /* @__PURE__ */ s("td", { "data-testid": e.headerId, className: o, children: /* @__PURE__ */ s(i, { template: /* @__PURE__ */ s(p, { text: e.value }), children: /* @__PURE__ */ s("span", { children: L(e.value) }) }) }) : e.type === "hidden" ? null : e.type === "component" ? /* @__PURE__ */ s("td", { "data-testid": e.headerId, className: o, children: e.value }) : /* @__PURE__ */ s(
+  ) }) : e.type === "hash" ? /* @__PURE__ */ s("td", { "data-testid": e.headerId, className: i, children: /* @__PURE__ */ s(p, { template: /* @__PURE__ */ s(d, { text: e.value }), children: /* @__PURE__ */ s("span", { children: A(e.value) }) }) }) : e.type === "hidden" ? null : e.type === "component" ? /* @__PURE__ */ s("td", { "data-testid": e.headerId, className: i, children: e.value }) : e.showStatus && e.showTag ? /* @__PURE__ */ s(O, { className: n, cellData: e, item: r, onClick: o }) : /* @__PURE__ */ s(
     "td",
     {
       "data-testid": e == null ? void 0 : e.headerId,
-      className: o,
-      onClick: () => e.value && d && d(e.value),
+      className: i,
+      onClick: () => e.value && o && o(e.value),
       children: /* @__PURE__ */ s(
-        i,
+        p,
         {
           className: "text_small",
-          template: /* @__PURE__ */ s(p, { text: e.tooltip || e.value || "" }),
+          template: /* @__PURE__ */ s(d, { text: e.tooltip || e.value || "" }),
           children: e.value
         }
       )
     }
   );
 };
-g.propTypes = {
+S.propTypes = {
   cellData: t.object.isRequired,
   className: t.string,
   firstCell: t.bool,
@@ -106,6 +107,6 @@ g.propTypes = {
   toggleRow: t.func
 };
 export {
-  g as default
+  S as default
 };
 //# sourceMappingURL=TableCell.mjs.map
