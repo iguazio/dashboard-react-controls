@@ -48,24 +48,24 @@ const FormToggle = ({
       {({ input }) => (
         <div className={formFieldClassNames} data-testid={name ? `${name}-form-field-toggle` : 'form-field-toggle'}>
           {(label || labelTip) && (
-            <label htmlFor={inputProps.value ?? name} className="form-field-toggle__label">
+            <label htmlFor={name} className="form-field-toggle__label">
               {label}
               {labelTip && <Tip text={labelTip} />}
             </label>
           )}
           <label
-            htmlFor={inputProps.value ?? name}
+            htmlFor={name}
             className="form-field-toggle__toggle-wrapper"
           >
             <input
               type="checkbox"
               data-testid={name ? `${name}-form-toggle` : 'form-toggle'}
-              id={inputProps.value ?? name}
+              id={name}
               {...{ ...input, ...inputProps }}
               value={String(input.checked)}
               disabled={readOnly}
               onChange={event => {
-                onChange(event)
+                onChange?.(event)
                 input.onChange(event)
               }}
             />
