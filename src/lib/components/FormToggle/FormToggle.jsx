@@ -46,17 +46,17 @@ const FormToggle = ({
   return (
     <Field name={name} value={inputProps.value} type="checkbox">
       {({ input }) => (
-        <div className={formFieldClassNames} data-testid={name ? `${name}-form-field-toggle` : 'form-field-toggle'}>
+        <div
+          className={formFieldClassNames}
+          data-testid={name ? `${name}-form-field-toggle` : 'form-field-toggle'}
+        >
           {(label || labelTip) && (
             <label htmlFor={name} className="form-field-toggle__label">
               {label}
               {labelTip && <Tip text={labelTip} />}
             </label>
           )}
-          <label
-            htmlFor={name}
-            className="form-field-toggle__toggle-wrapper"
-          >
+          <label htmlFor={name} className="form-field-toggle__toggle-wrapper">
             <input
               type="checkbox"
               data-testid={name ? `${name}-form-toggle` : 'form-toggle'}
