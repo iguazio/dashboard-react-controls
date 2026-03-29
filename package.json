@@ -109,7 +109,8 @@
         "serialize-javascript": "^7.0.3",
         "braces": ">=3.0.3",
         "bn.js": "5.2.3",
-        "webpack-dev-middleware": ">=5.3.4"
+        "webpack-dev-middleware": ">=5.3.4",
+        "handlebars": "^4.7.9"
     },
     "scripts": {
         "lint": "eslint \"src/**/*.{js,jsx}\" --quiet",
