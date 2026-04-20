@@ -1,0 +1,71 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`ActionsMenu Component > renders correctly in default closed state 1`] = `
+<DocumentFragment>
+  <div
+    class="actions-menu__container actions-menu__container_extended"
+  >
+    <div
+      class="actions-menu__main-actions-wrapper"
+    >
+      <button
+        data-testid="quick-link-quick-edit"
+        title="Quick Edit"
+      >
+        <span>
+          Edit
+        </span>
+      </button>
+    </div>
+    <div
+      class="actions-menu"
+      data-testid="actions-menu"
+    >
+      <button
+        class="actions-menu-button"
+        data-testid="actions-menu-button"
+        title="More actions"
+      >
+        <div
+          data-testid="ellipsis-icon"
+        />
+      </button>
+    </div>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`ActionsMenu Component > renders with quick actions visible 1`] = `
+<DocumentFragment>
+  <div
+    class="actions-menu__container actions-menu__container_extended"
+  >
+    <div
+      class="actions-menu__main-actions-wrapper"
+    >
+      <button
+        data-testid="quick-link-quick-edit"
+        title="Quick Edit"
+      >
+        <span>
+          Edit
+        </span>
+      </button>
+    </div>
+    <div
+      class="actions-menu"
+      data-testid="actions-menu"
+    >
+      <button
+        class="actions-menu-button"
+        data-testid="actions-menu-button"
+        title="More actions"
+      >
+        <div
+          data-testid="ellipsis-icon"
+        />
+      </button>
+    </div>
+  </div>
+</DocumentFragment>
+`;
