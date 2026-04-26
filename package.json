@@ -111,7 +111,8 @@
         "bn.js": "5.2.3",
         "webpack-dev-middleware": ">=5.3.4",
         "handlebars": "^4.7.9",
-        "lodash": "^4.18.0"
+        "lodash": "^4.18.0",
+        "uuid": "^14.0.0"
     },
     "scripts": {
         "lint": "eslint \"src/**/*.{js,jsx}\" --quiet",
