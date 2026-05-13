@@ -62,6 +62,24 @@ const chipOptions = [
     borderRadius: 'primary',
     density: 'dense',
     font: 'orange'
+  },
+  {
+    type: 'requirements',
+    boldValue: false,
+    background: 'grey',
+    borderColor: 'transparent',
+    borderRadius: 'primary',
+    density: 'dense',
+    font: 'primary'
+  },
+  {
+    type: 'code_type',
+    boldValue: false,
+    background: 'purple',
+    borderColor: 'transparent',
+    density: 'dense',
+    font: 'purple',
+    borderRadius: 'primary'
   }
 ]
 
