@@ -9,6 +9,10 @@ import { viteStaticCopy } from 'vite-plugin-static-copy'
 function getEntryPoints() {
   const entries = {}
   entries.index = path.resolve(__dirname, 'src/lib/index.js')
+  entries['nextGenComponents/index'] = path.resolve(
+    __dirname,
+    'src/lib/nextGenComponents/index.ts'
+  )
 
   return entries
 }
@@ -36,6 +40,11 @@ export default defineConfig({
       ]
     })
   ],
+  resolve: {
+    alias: {
+      '@': path.resolve(__dirname, 'src/lib/nextGenComponents')
+    }
+  },
   build: {
     minify: true,
     sourcemap: true,
@@ -64,7 +73,16 @@ export default defineConfig({
         'react-router-dom',
         'react-transition-group',
         'react/jsx-dev-runtime',
-        'react/jsx-runtime'
+        'react/jsx-runtime',
+        /^@radix-ui\//,
+        /^@tanstack\//,
+        'class-variance-authority',
+        'clsx',
+        'tailwind-merge',
+        'lucide-react',
+        'date-fns',
+        'zustand',
+        'react-day-picker'
       ],
       output: {
         preserveModules: true,
