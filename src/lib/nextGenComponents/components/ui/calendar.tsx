@@ -2,7 +2,7 @@ import * as React from 'react'
 import type { DateRange } from 'react-day-picker'
 import { DayButton as DayButtonImport, DayPicker, getDefaultClassNames } from 'react-day-picker'
 
-import CalendarChevronSvg from '@/assets/images/calendar-chevron.svg?react'
+import CalendarChevronSvg from '../../../images/calendar-chevron.svg?react'
 import { Button } from '@/components/ui/button'
 import { cn } from '@/lib/utils'
 

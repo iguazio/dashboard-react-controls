@@ -1,4 +1,4 @@
-import Refresh from '@/assets/images/refresh.svg?react'
+import Refresh from '../../../images/refresh.svg?react'
 import { Button } from '@/components/ui/button'
 import { REFRESH_BUTTON_TITLE } from '@/constants'
 

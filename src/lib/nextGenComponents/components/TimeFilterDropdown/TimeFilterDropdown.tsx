@@ -1,7 +1,7 @@
 import { useState } from 'react'
 
-import Check from '@/assets/images/check.svg?react'
-import Select from '@/assets/images/select.svg?react'
+import Check from '../../../images/check.svg?react'
+import Select from '../../../images/select.svg?react'
 import CustomRangePicker from '@/components/CustomRangePicker'
 import {
   DropdownMenu,

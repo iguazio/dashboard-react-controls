@@ -1,8 +1,8 @@
 import * as SelectPrimitive from '@radix-ui/react-select'
 import * as React from 'react'
 
-import Check from '@/assets/images/check.svg?react'
-import SelectIcon from '@/assets/images/select.svg?react'
+import Check from '../../../images/check.svg?react'
+import SelectIcon from '../../../images/select.svg?react'
 import { cn } from '@/lib/utils'
 
 const Select = SelectPrimitive.Root

@@ -10,7 +10,7 @@ import {
 import { useVirtualizer } from '@tanstack/react-virtual'
 import { ComponentType, ReactNode, useRef, useMemo } from 'react'
 
-import Arrow from '@/assets/images/arrow.svg?react'
+import Arrow from '../../../images/arrow.svg?react'
 import DetailsPanel from '@/components/DetailsPanel'
 import EllipsisTooltip from '@/components/EllipsisTooltip'
 import PaginationControls, { PaginationConfig } from '@/components/PaginationControls'

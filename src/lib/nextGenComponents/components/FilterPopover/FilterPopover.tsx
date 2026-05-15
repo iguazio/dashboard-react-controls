@@ -1,7 +1,7 @@
 import { useMemo } from 'react'
 
-import ActiveFilter from '@/assets/images/activeFilter.svg?react'
-import Filter from '@/assets/images/filter.svg?react'
+import ActiveFilter from '../../../images/activeFilter.svg?react'
+import Filter from '../../../images/filter.svg?react'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Popover, PopoverTrigger, PopoverContent } from '@/components/ui/popover'

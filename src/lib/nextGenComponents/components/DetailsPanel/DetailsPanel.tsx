@@ -1,6 +1,6 @@
 import { ComponentType, ReactNode, useMemo } from 'react'
 
-import Close from '@/assets/images/close.svg?react'
+import Close from '../../../images/close.svg?react'
 import EllipsisTooltip from '@/components/EllipsisTooltip/EllipsisTooltip'
 import { Button } from '@/components/ui/button'
 import { DETAILS_FALLBACK_TITLE } from '@/constants'

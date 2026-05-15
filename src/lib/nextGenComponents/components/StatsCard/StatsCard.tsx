@@ -1,6 +1,6 @@
 import { type FunctionComponent, type ReactNode, type SVGProps } from 'react'
 
-import Clock from '@/assets/images/clock.svg?react'
+import Clock from '../../../images/clock.svg?react'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components'
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip'
 import { STATS_CARD_TIMESTAMP } from '@/constants'
