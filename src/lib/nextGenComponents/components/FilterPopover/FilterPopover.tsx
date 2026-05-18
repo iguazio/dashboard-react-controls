@@ -1,7 +1,7 @@
 import { useMemo } from 'react'
 
 import ActiveFilter from '../../../images/activeFilter.svg?react'
-import Filter from '../../../images/filter.svg?react'
+import Filter from '../../../images/filter-2.svg?react'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Popover, PopoverTrigger, PopoverContent } from '@/components/ui/popover'
@@ -76,7 +76,7 @@ const FilterPopover = <K extends string>({
         className="flex flex-col w-[300px] max-h-[400px] rounded-md border bg-background p-0 shadow-md"
       >
         <div className="p-4">
-          <h3 className="font-medium text-xl" data-testid="filter-popover-title">
+          <h3 className="font-medium m-0 text-xl" data-testid="filter-popover-title">
             {title}
           </h3>
         </div>

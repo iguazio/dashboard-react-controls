@@ -10,7 +10,7 @@ import {
 import { useVirtualizer } from '@tanstack/react-virtual'
 import { ComponentType, ReactNode, useRef, useMemo } from 'react'
 
-import Arrow from '../../../images/arrow.svg?react'
+import SortArrow from '../../../images/sort-arrow.svg?react'
 import DetailsPanel from '@/components/DetailsPanel'
 import EllipsisTooltip from '@/components/EllipsisTooltip'
 import PaginationControls, { PaginationConfig } from '@/components/PaginationControls'
@@ -148,7 +148,7 @@ const DataTable = <TData extends object>({
                           getColumnWidth
                         )}
                         className={cn(
-                          'relative px-4 py-2 text-left text-sm leading-6 text-[#7F7989] border-b border-[#eee] whitespace-nowrap',
+                          'relative px-4 py-2 text-left text-[15px] leading-6 text-[#7F7989] border-b border-[#eee] whitespace-nowrap',
                           isFirstDataColumn && 'w-[250px] pr-[10px]',
                           isCheckboxColumn && 'w-12 px-3'
                         )}
@@ -173,11 +173,11 @@ const DataTable = <TData extends object>({
                               </EllipsisTooltip>
 
                               {header.column.getCanSort() && (
-                                <span className="w-[8px] h-[8px]">
-                                  <Arrow
+                                <span className="w-2 h-2 shrink-0 flex items-center justify-center">
+                                  <SortArrow
                                     aria-hidden="true"
                                     className={cn(
-                                      'transition-transform duration-150 ease-in-out',
+                                      'w-full h-full transition-transform duration-150 ease-in-out',
                                       header.column.getIsSorted() === SORT_DIRECTION.ASC &&
                                         'rotate-180 opacity-100',
                                       header.column.getIsSorted() === SORT_DIRECTION.DESC &&
@@ -204,10 +204,10 @@ const DataTable = <TData extends object>({
 
             <tbody>
               {rows.length === 0 ? (
-                <tr className="h-12">
+                <tr>
                   <td
                     colSpan={totalColSpan}
-                    className="px-4 py-2 text-left text-sm text-[#4B4760]"
+                    className="h-40 text-center text-[15px] text-[#4B4760]"
                     data-testid="data-table-empty-state"
                   >
                     {NO_ROWS_MESSAGES}
@@ -267,7 +267,7 @@ const DataTable = <TData extends object>({
                                 getColumnWidth
                               )}
                               className={cn(
-                                'relative px-4 py-2 text-left text-[#4B4760] text-sm font-normal',
+                                'relative px-4 py-2 text-left text-[#4B4760] text-[15px] font-normal',
                                 skipEllipsisTooltip ? 'min-w-0' : 'truncate',
                                 isFirstDataColumn && 'w-[250px] pr-[10px]',
                                 isCheckboxColumn && 'w-12 px-3',

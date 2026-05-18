@@ -15,7 +15,7 @@ const buildInitialFromSchema = <K extends string>(schema: FilterSchema<K>): Draf
 
 const isActiveValue = (val: string | string[] | undefined): boolean => {
   if (val === undefined || val === '' || val === 'all') return false
-  if (Array.isArray(val)) return val.length > 0
+  if (Array.isArray(val)) return val.length > 0 && !(val.length === 1 && val[0] === 'all')
   return true
 }
 

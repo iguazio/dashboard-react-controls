@@ -15,6 +15,8 @@ export type FilterFieldDef<K extends string = string> = {
   defaultValue?: string | string[]
   disabled?: boolean
   required?: boolean
+  resolveValue?: (next: string[], prev: string[]) => string[]
+  computeDisabled?: (optValue: string, currentValues: string[]) => boolean
 }
 
 export type FilterSchema<K extends string> = Record<K, FilterFieldDef<K>>

@@ -46,9 +46,6 @@ const MultiSelectField = ({ filterField, value, setFilterDraft }: MultiSelectFie
 
   const currentValues: string[] = Array.isArray(value) ? value : []
   const options = filterField.options ?? []
-  const allOptionValues = options.map(o => o.value)
-  const isAllSelected =
-    allOptionValues.length > 0 && allOptionValues.every(v => currentValues.includes(v))
 
   const selectedLabels = options
     .filter(o => currentValues.includes(o.value))
@@ -61,21 +58,15 @@ const MultiSelectField = ({ filterField, value, setFilterDraft }: MultiSelectFie
         ? selectedLabels.join(', ')
         : `${selectedLabels.length} items selected`
 
-  const handleToggleAll = () => {
-    setFilterDraft(prev => ({
-      ...prev,
-      [filterField.key]: isAllSelected ? [] : [...allOptionValues]
-    }))
-  }
-
   const handleToggle = (optValue: string) => {
     setFilterDraft(prev => {
       const prevValues = Array.isArray(prev[filterField.key])
         ? (prev[filterField.key] as string[])
         : []
-      const next = prevValues.includes(optValue)
+      const toggled = prevValues.includes(optValue)
         ? prevValues.filter(v => v !== optValue)
         : [...prevValues, optValue]
+      const next = filterField.resolveValue ? filterField.resolveValue(toggled, prevValues) : toggled
       return { ...prev, [filterField.key]: next }
     })
   }
@@ -119,43 +110,30 @@ const MultiSelectField = ({ filterField, value, setFilterDraft }: MultiSelectFie
         }}
         data-testid={`filter-popover-multiselect-content-${filterField.key}`}
       >
-        {/* "All" toggle */}
-        <DropdownMenuItem
-          className="flex items-center gap-3 text-[15px] h-[42px] px-4 data-[highlighted]:bg-igz-accent-hover cursor-pointer"
-          onSelect={e => {
-            e.preventDefault()
-            handleToggleAll()
-          }}
-          data-testid={`filter-popover-multiselect-${filterField.key}-all`}
-        >
-          <Checkbox
-            checked={isAllSelected}
-            className="shrink-0"
-            onClick={e => e.stopPropagation()}
-            onCheckedChange={handleToggleAll}
-          />
-          <span>All</span>
-        </DropdownMenuItem>
-
         {options.map(option => {
           const isChecked = currentValues.includes(option.value)
           const color = option.meta?.color as string | undefined
+          const isDisabled =
+            Boolean((option.meta as Record<string, unknown>)?.disabled) ||
+            Boolean(filterField.computeDisabled?.(option.value, currentValues))
 
           return (
             <DropdownMenuItem
               key={option.value || 'empty'}
-              className="flex items-center gap-3 text-[15px] h-[42px] px-4 data-[highlighted]:bg-igz-accent-hover cursor-pointer"
+              disabled={isDisabled}
+              className="flex items-center gap-3 text-[15px] h-[42px] px-4 data-[highlighted]:bg-igz-accent-hover cursor-pointer data-[disabled]:pointer-events-none data-[disabled]:opacity-40"
               onSelect={e => {
                 e.preventDefault()
-                handleToggle(option.value)
+                if (!isDisabled) handleToggle(option.value)
               }}
               data-testid={`filter-popover-multiselect-${filterField.key}-${option.value}`}
             >
               <Checkbox
                 checked={isChecked}
+                disabled={isDisabled}
                 className="shrink-0"
                 onClick={e => e.stopPropagation()}
-                onCheckedChange={() => handleToggle(option.value)}
+                onCheckedChange={() => !isDisabled && handleToggle(option.value)}
               />
               {/* Label + dot grouped together so the dot sits right after the text */}
               <span className="flex items-center gap-1.5">

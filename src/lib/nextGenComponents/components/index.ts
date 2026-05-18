@@ -1,3 +1,5 @@
+export { Loader } from './Loader'
+export type { LoaderProps } from './Loader'
 export { RowActions, ActionMenu, SingleActionButton } from './RowActions'
 export type { ActionMenuItem } from './RowActions'
 export { default as CopyButton } from './EllipsisTooltip'
