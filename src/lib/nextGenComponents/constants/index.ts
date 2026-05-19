@@ -57,15 +57,7 @@ export const TIME_FILTER_RESET_VALUE = 'any'
 
 export const TIME_FILTER_FALLBACK_LABEL = 'Any time'
 
-export const HOUR = 'Hour'
-
 export const RESET = 'Reset'
-
-export const DATE_PLACEHOLDER_DDMMYYYY = 'dd/mm/yyyy'
-
-export const DEFAULT_SINCE_HOUR = '12:00 AM'
-
-export const DEFAULT_UNTIL_HOUR = '11:30 PM'
 
 export const EXPORT_TOAST = {
   TITLE_COMPLETED: 'File is ready',

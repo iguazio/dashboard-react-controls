@@ -12,7 +12,7 @@ import {
   getDefaultUntilHour,
   isoToHour,
   isoToLocalDate,
-  toLocalISO
+  toUTCISO
 } from '@/utils/date.utils'
 
 type Props = {
@@ -23,7 +23,6 @@ type Props = {
 }
 
 const INITIAL_RANGE: DateRange = { from: undefined, to: undefined }
-const INITIAL_HOURS = { from: '', to: '' }
 const FROM_AFTER_TO_ERROR = '"To" must be later than "From"'
 
 const CustomRangePicker = ({ onApply, singleDate = false, onReset, initialRange }: Props) => {
@@ -54,15 +53,15 @@ const CustomRangePicker = ({ onApply, singleDate = false, onReset, initialRange 
 
   const handleReset = () => {
     setDate(INITIAL_RANGE)
-    setHours(INITIAL_HOURS)
+    setHours({ from: defaultSinceHour, to: singleDate ? '' : defaultUntilHour })
     onReset?.()
   }
 
   const handleSelectDateFrom = (selectedDate?: Date) =>
-    setDate(prev => ({ from: selectedDate, to: prev?.to }))
+    setDate(prev => ({ from: selectedDate, to: prev.to }))
 
   const handleSelectDateTo = (selectedDate?: Date) =>
-    setDate(prev => ({ from: prev?.from, to: selectedDate }))
+    setDate(prev => ({ from: prev.from, to: selectedDate }))
 
   const handleFromHourChange = (hour: string) => {
     setHours(prev => ({ ...prev, from: hour }))
@@ -83,14 +82,14 @@ const CustomRangePicker = ({ onApply, singleDate = false, onReset, initialRange 
     const since = applyHourToDate(date.from, hours.from, defaultSinceHour)
 
     if (singleDate) {
-      onApply?.({ since: toLocalISO(since), until: '' })
+      onApply?.({ since: toUTCISO(since), until: '' })
       return
     }
 
     if (!date.to) return
     const until = applyHourToDate(date.to, hours.to, defaultUntilHour)
 
-    onApply?.({ since: toLocalISO(since), until: toLocalISO(until) })
+    onApply?.({ since: toUTCISO(since), until: toUTCISO(until) })
   }
 
   return (
@@ -99,7 +98,7 @@ const CustomRangePicker = ({ onApply, singleDate = false, onReset, initialRange 
         <DateTimePickerPanel
           label={singleDate ? '' : 'From:'}
           side="start"
-          dateValue={date?.from}
+          dateValue={date.from}
           range={date}
           hourValue={hours.from}
           singleDate={singleDate}
@@ -111,7 +110,7 @@ const CustomRangePicker = ({ onApply, singleDate = false, onReset, initialRange 
           <DateTimePickerPanel
             label="To:"
             side="end"
-            dateValue={date?.to}
+            dateValue={date.to}
             range={date}
             hourValue={hours.to}
             onHourChange={handleToHourChange}

@@ -1,10 +1,13 @@
 import { format, parse } from 'date-fns'
 
+const DEFAULT_LOCALE = 'en-US'
+
 export const getSupportedLocale = (): string => {
+  if (typeof navigator === 'undefined') return DEFAULT_LOCALE
   const SUPPORTED_LOCALES = new Set(['en-GB', 'en-US'])
   const userLocales = navigator.languages ?? [navigator.language]
   const match = userLocales.find(locale => SUPPORTED_LOCALES.has(locale))
-  return match ?? 'en-US'
+  return match ?? DEFAULT_LOCALE
 }
 
 export const is12HourFormat = (): boolean =>
@@ -56,9 +59,11 @@ export const getDefaultSinceHour = (): string =>
 export const getDefaultUntilHour = (): string =>
   is12HourFormat() ? '11:30 PM' : '23:30'
 
+const HALF_HOUR_SLOTS_PER_DAY = 24 * 2
+
 export const buildHalfHourOptions = (): string[] => {
   const fmt = getTimeFormat()
-  return Array.from({ length: 48 }, (_, i) =>
+  return Array.from({ length: HALF_HOUR_SLOTS_PER_DAY }, (_, i) =>
     format(new Date(2000, 0, 1, Math.floor(i / 2), (i % 2) * 30), fmt)
   )
 }
@@ -66,13 +71,17 @@ export const buildHalfHourOptions = (): string[] => {
 /** @deprecated Use buildHalfHourOptions */
 export const buildHalfHourOptions12h = buildHalfHourOptions
 
-export const toLocalISO = (d: Date): string => d.toISOString()
+export const toUTCISO = (d: Date): string => d.toISOString()
+
+/** @deprecated Use toUTCISO */
+export const toLocalISO = toUTCISO
+
+const TIME_PARSE_FORMATS = ['hh:mm a', 'h:mm a', 'HH:mm', 'H:mm'] as const
 
 export const applyHourToDate = (date: Date, hour: string, defaultHour?: string): Date => {
   const effectiveHour = hour || defaultHour
   if (!effectiveHour) return date
-  const formats = ['hh:mm a', 'h:mm a', 'HH:mm', 'H:mm']
-  for (const fmt of formats) {
+  for (const fmt of TIME_PARSE_FORMATS) {
     const parsed = parse(effectiveHour, fmt, date)
     if (!Number.isNaN(parsed.getTime())) return parsed
   }
@@ -98,9 +107,8 @@ export const parseTimeInput = (text: string): string => {
   if (!trimmed) return ''
 
   const ref = new Date(2000, 0, 1)
-  const formats = ['hh:mm a', 'h:mm a', 'HH:mm', 'H:mm']
 
-  for (const fmt of formats) {
+  for (const fmt of TIME_PARSE_FORMATS) {
     const parsed = parse(trimmed, fmt, ref)
     if (!Number.isNaN(parsed.getTime()) && parsed.getFullYear() === 2000) {
       return format(parsed, getTimeFormat())

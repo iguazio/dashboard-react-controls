@@ -1,6 +1,6 @@
-import { useCallback, useEffect, useRef, useState } from 'react'
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 
-import { MaskedInput, type MaskItem } from '@/components/CustomRangePicker/MaskedInput'
+import { MaskedInput, isMaskComplete, type MaskItem } from '@/components/CustomRangePicker/MaskedInput'
 import SelectIcon from '../../../images/select.svg?react'
 import { cn } from '@/lib/utils'
 import {
@@ -16,7 +16,7 @@ type Props = {
   className?: string
 }
 
-const PLACEHOLDER_CHAR = '_'
+const PLACEHOLDER_CHAR = '_' as const
 
 const use12h = is12HourFormat()
 
@@ -48,9 +48,6 @@ const timeMask24h = (value: string): MaskItem[] => {
 const timeMask = use12h ? timeMask12h : timeMask24h
 const timePlaceholder = getTimePlaceholder()
 
-const isComplete = (masked: string): boolean =>
-  masked.length > 0 && !masked.includes(PLACEHOLDER_CHAR)
-
 export const TimePickerInput = ({
   value,
   onChange,
@@ -60,7 +57,7 @@ export const TimePickerInput = ({
   const [isOpen, setIsOpen] = useState(false)
   const wrapperRef = useRef<HTMLDivElement>(null)
   const listRef = useRef<HTMLDivElement>(null)
-  const options = buildHalfHourOptions()
+  const options = useMemo(() => buildHalfHourOptions(), [])
 
   useEffect(() => {
     setMaskedValue(value)
@@ -87,7 +84,7 @@ export const TimePickerInput = ({
     (masked: string) => {
       setMaskedValue(masked)
       setIsOpen(false)
-      if (isComplete(masked)) {
+      if (isMaskComplete(masked, PLACEHOLDER_CHAR)) {
         const normalized = parseTimeInput(masked)
         if (normalized) onChange(normalized)
       }
@@ -97,7 +94,7 @@ export const TimePickerInput = ({
 
   const handleBlur = useCallback(() => {
     if (!maskedValue) return
-    if (isComplete(maskedValue)) {
+    if (isMaskComplete(maskedValue, PLACEHOLDER_CHAR)) {
       const normalized = parseTimeInput(maskedValue)
       if (normalized) {
         setMaskedValue(normalized)

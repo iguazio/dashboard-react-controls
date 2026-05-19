@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useState } from 'react'
 import type { DateRange } from 'react-day-picker'
 
-import { MaskedInput, type MaskItem } from '@/components/CustomRangePicker/MaskedInput'
+import { MaskedInput, isMaskComplete, type MaskItem } from '@/components/CustomRangePicker/MaskedInput'
 import { TimePickerInput } from '@/components/CustomRangePicker/TimePickerInput'
 import { Calendar } from '@/components/ui/calendar'
 import { cn } from '@/lib/utils'
@@ -23,7 +23,7 @@ type Props = {
   onSelectDate: (selectedDate?: Date) => void
 }
 
-const PLACEHOLDER_CHAR = '_'
+const PLACEHOLDER_CHAR = '_' as const
 
 const buildLocalDateMask = (): ((value: string) => MaskItem[]) => {
   const isUS = getSupportedLocale() === 'en-US'
@@ -68,9 +68,6 @@ const buildLocalDateMask = (): ((value: string) => MaskItem[]) => {
 const dateMask = buildLocalDateMask()
 const datePlaceholder = getDatePlaceholder()
 
-const isComplete = (masked: string): boolean =>
-  masked.length > 0 && !masked.includes(PLACEHOLDER_CHAR)
-
 export const DateTimePickerPanel = ({
   label,
   side,
@@ -98,7 +95,7 @@ export const DateTimePickerPanel = ({
         onSelectDate(undefined)
         return
       }
-      if (isComplete(masked)) {
+      if (isMaskComplete(masked, PLACEHOLDER_CHAR)) {
         const parsed = parseLocalDate(masked)
         if (parsed) onSelectDate(parsed)
       }
@@ -111,7 +108,7 @@ export const DateTimePickerPanel = ({
       onSelectDate(undefined)
       return
     }
-    if (isComplete(maskedDate)) {
+    if (isMaskComplete(maskedDate, PLACEHOLDER_CHAR)) {
       const parsed = parseLocalDate(maskedDate)
       if (parsed) {
         setMaskedDate(formatLocalDate(parsed))

@@ -5,6 +5,7 @@ import { DayButton as DayButtonImport, DayPicker, getDefaultClassNames } from 'r
 import CalendarChevronSvg from '../../../images/calendar-chevron.svg?react'
 import { Button } from '@/components/ui/button'
 import { cn } from '@/lib/utils'
+import { getSupportedLocale } from '@/utils/date.utils'
 
 type CalendarProps = React.ComponentProps<typeof DayPicker> & {
   buttonVariant?: React.ComponentProps<typeof Button>['variant']
@@ -82,15 +83,16 @@ const Calendar = ({
   }, [modifiersClassNames])
 
   const computedFormatters = React.useMemo(() => {
+    const locale = getSupportedLocale()
     return {
-      formatMonthDropdown: (date: Date) => date.toLocaleString('default', { month: 'short' }),
+      formatMonthDropdown: (date: Date) => date.toLocaleString(locale, { month: 'short' }),
       ...(weekdaySingleLetter
-        ? { formatWeekdayName: (d: Date) => d.toLocaleDateString('en-US', { weekday: 'narrow' }) }
+        ? { formatWeekdayName: (d: Date) => d.toLocaleDateString(locale, { weekday: 'narrow' }) }
         : {}),
       ...(captionPrefix
         ? {
             formatCaption: (m: Date) =>
-              `${captionPrefix} ${m.toLocaleDateString('en-US', { month: 'short', year: 'numeric' })}`
+              `${captionPrefix} ${m.toLocaleDateString(locale, { month: 'short', year: 'numeric' })}`
           }
         : {}),
       ...formatters
@@ -178,7 +180,6 @@ const CalendarDayButton = ({
   modifiers: dayModifiers,
   ...rest
 }: React.ComponentProps<typeof DayButtonImport>) => {
-  const ref = React.useRef<HTMLButtonElement>(null)
   const isSelected = dayModifiers.active_start || dayModifiers.active_end || dayModifiers.selected
   const isInRange =
     dayModifiers.range_from ||
@@ -189,7 +190,6 @@ const CalendarDayButton = ({
 
   return (
     <Button
-      ref={ref}
       variant="ghost"
       size="icon"
       data-range-start={dayModifiers.range_from || dayModifiers.active_start || undefined}

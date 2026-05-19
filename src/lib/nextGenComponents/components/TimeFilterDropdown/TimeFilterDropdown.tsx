@@ -49,16 +49,16 @@ const TimeFilterDropdown = ({
   const [isCustomOpen, setIsCustomOpen] = useState(false)
   const [isOpen, setIsOpen] = useState(false)
 
-  const handleSelect = (value: TimeFilterValue) => {
-    if (value === TIME_FILTER_CUSTOM_VALUE) {
+  const handleSelect = (selectedValue: TimeFilterValue) => {
+    if (selectedValue === TIME_FILTER_CUSTOM_VALUE) {
       setIsCustomOpen(true)
       return
     }
 
     setIsCustomOpen(false)
     setAppliedRange(null)
-    setInternal(value)
-    onChange?.(value)
+    setInternal(selectedValue)
+    onChange?.(selectedValue)
   }
 
   const handleCustomApply = (range: { since: string; until: string }) => {
@@ -78,8 +78,8 @@ const TimeFilterDropdown = ({
     >
       <DropdownMenuTrigger
         className={cn(
-          'inline-flex h-10 border-solid border-[#ccc] items-center justify-between gap-2 rounded border bg-background px-3 text-sm shadow-sm hover:bg-[#f5f5f5] transition-colors cursor-pointer',
-          'focus-visible:outline-none text-sm font-normal text-[#4B4760]',
+          'inline-flex h-10 border-solid border-[#ccc] items-center justify-between gap-2 rounded border bg-background px-3 text-sm font-normal shadow-sm hover:bg-[#f5f5f5] transition-colors cursor-pointer',
+          'focus-visible:outline-none text-[#4B4760]',
           startTimeOnly ? 'w-[220px]' : 'w-[180px]',
           triggerClassName
         )}
@@ -99,7 +99,6 @@ const TimeFilterDropdown = ({
           'text-[#4B4760]',
           className
         )}
-        onInteractOutside={e => (e.target as HTMLElement)?.closest('[data-radix-select-content]')}
       >
         {isCustomOpen ? (
           <CustomRangePicker
@@ -115,7 +114,7 @@ const TimeFilterDropdown = ({
               item.value === TIME_FILTER_CUSTOM_VALUE ? !!appliedRange : selected === item.value
             return (
               <DropdownMenuItem
-                key={item.label}
+                key={item.value}
                 onSelect={e => {
                   if (item.value === TIME_FILTER_CUSTOM_VALUE) e.preventDefault()
                   handleSelect(item.value)

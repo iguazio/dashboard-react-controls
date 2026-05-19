@@ -5,6 +5,9 @@ import { cn } from '@/lib/utils'
 
 export type MaskItem = RegExp | string
 
+export const isMaskComplete = (value: string, placeholderChar = '_'): boolean =>
+  value.length > 0 && !value.includes(placeholderChar)
+
 type Props = {
   mask: MaskItem[] | ((value: string) => MaskItem[])
   value: string
@@ -22,6 +25,17 @@ const resolveMask = (mask: Props['mask'], value: string): MaskItem[] =>
 
 const buildPlaceholder = (mask: MaskItem[], pc: string): string =>
   mask.map(m => (typeof m === 'string' ? m : pc)).join('')
+
+const conformToMask = (raw: string, resolvedMask: MaskItem[], placeholderChar: string): string =>
+  raw
+    .split('')
+    .map((c, i) => {
+      if (typeof resolvedMask[i] === 'string') return resolvedMask[i] as string
+      if (c === placeholderChar) return placeholderChar
+      if ((resolvedMask[i] as RegExp).test(c)) return c
+      return placeholderChar
+    })
+    .join('')
 
 export const MaskedInput = ({
   mask,
@@ -73,15 +87,7 @@ export const MaskedInput = ({
           const newVal = chars.join('')
           const resolvedMask = resolveMask(mask, newVal)
           const resolvedPlaceholder = buildPlaceholder(resolvedMask, placeholderChar)
-          const corrected = newVal
-            .split('')
-            .map((c, i) => {
-              if (typeof resolvedMask[i] === 'string') return resolvedMask[i] as string
-              if (c === placeholderChar) return placeholderChar
-              if ((resolvedMask[i] as RegExp).test(c)) return c
-              return placeholderChar
-            })
-            .join('')
+          const corrected = conformToMask(newVal, resolvedMask, placeholderChar)
           onChange(corrected === resolvedPlaceholder ? '' : corrected)
           requestAnimationFrame(() => input.setSelectionRange(editPos, editPos))
         }
@@ -95,8 +101,10 @@ export const MaskedInput = ({
           const chars = maskedDisplay.split('')
           chars[editPos] = placeholderChar
           const newVal = chars.join('')
-          const resolvedPlaceholder = buildPlaceholder(maskArr, placeholderChar)
-          onChange(newVal === resolvedPlaceholder ? '' : newVal)
+          const resolvedMask = resolveMask(mask, newVal)
+          const resolvedPlaceholder = buildPlaceholder(resolvedMask, placeholderChar)
+          const corrected = conformToMask(newVal, resolvedMask, placeholderChar)
+          onChange(corrected === resolvedPlaceholder ? '' : corrected)
           requestAnimationFrame(() => input.setSelectionRange(editPos, editPos))
         }
         return
@@ -117,15 +125,7 @@ export const MaskedInput = ({
         const newVal = chars.join('')
 
         const resolvedMask = resolveMask(mask, newVal)
-        const corrected = newVal
-          .split('')
-          .map((c, i) => {
-            if (typeof resolvedMask[i] === 'string') return resolvedMask[i] as string
-            if (c === placeholderChar) return placeholderChar
-            if ((resolvedMask[i] as RegExp).test(c)) return c
-            return placeholderChar
-          })
-          .join('')
+        const corrected = conformToMask(newVal, resolvedMask, placeholderChar)
 
         onChange(corrected)
         const nextPos = nextEditablePos(editPos + 1, resolvedMask)
@@ -154,15 +154,7 @@ export const MaskedInput = ({
 
       const newVal = chars.join('')
       const resolvedMask = resolveMask(mask, newVal)
-      const corrected = newVal
-        .split('')
-        .map((c, i) => {
-          if (typeof resolvedMask[i] === 'string') return resolvedMask[i] as string
-          if (c === placeholderChar) return placeholderChar
-          if ((resolvedMask[i] as RegExp).test(c)) return c
-          return placeholderChar
-        })
-        .join('')
+      const corrected = conformToMask(newVal, resolvedMask, placeholderChar)
 
       onChange(corrected)
       const cursorPos = nextEditablePos(pos, resolvedMask)

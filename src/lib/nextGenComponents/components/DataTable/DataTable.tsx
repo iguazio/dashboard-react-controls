@@ -5,7 +5,8 @@ import {
   getFilteredRowModel,
   getSortedRowModel,
   type ColumnDef,
-  type RowSelectionState
+  type RowSelectionState,
+  type SortingState
 } from '@tanstack/react-table'
 import { useVirtualizer } from '@tanstack/react-virtual'
 import { ComponentType, ReactNode, useRef, useMemo } from 'react'
@@ -40,6 +41,7 @@ export type DataTableProps<TData extends object> = {
   className?: string
   data: TData[]
   columns: ColumnDef<TData, unknown>[]
+  initialSorting?: SortingState
   pagination?: PaginationConfig
   rowActions?: (row: TData) => ActionMenuItem[]
   detailsPanel?: DetailsPanelConfig<TData>
@@ -50,6 +52,7 @@ const DataTable = <TData extends object>({
   className,
   data,
   columns,
+  initialSorting = [],
   pagination,
   rowActions,
   detailsPanel,
@@ -96,12 +99,7 @@ const DataTable = <TData extends object>({
     enableSorting: true,
     enableSortingRemoval: false,
     initialState: {
-      sorting: [
-        {
-          id: 'name',
-          desc: false
-        }
-      ]
+      sorting: initialSorting
     }
   })
 
