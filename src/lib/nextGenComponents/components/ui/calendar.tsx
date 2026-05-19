@@ -51,12 +51,13 @@ const Calendar = ({
     const from = range?.from
     const to = range?.to
 
-    const rangeMiddle =
-      from && to
-        ? {
-            range_middle: (day: Date) => day > from && day < to
-          }
-        : {}
+    const rangeModifiers: Record<string, Date | ((day: Date) => boolean) | undefined> = {}
+
+    if (from && to) {
+      rangeModifiers.range_middle = (day: Date) => day > from && day < to
+      rangeModifiers.range_from = from
+      rangeModifiers.range_to = to
+    }
 
     let active: Record<string, Date | undefined> = {}
 
@@ -68,7 +69,7 @@ const Calendar = ({
 
     return {
       ...modifiers,
-      ...rangeMiddle,
+      ...rangeModifiers,
       ...active
     }
   }, [activeRangeSide, modifiers, range?.from, range?.to])
@@ -179,16 +180,22 @@ const CalendarDayButton = ({
 }: React.ComponentProps<typeof DayButtonImport>) => {
   const ref = React.useRef<HTMLButtonElement>(null)
   const isSelected = dayModifiers.active_start || dayModifiers.active_end || dayModifiers.selected
+  const isInRange =
+    dayModifiers.range_from ||
+    dayModifiers.range_to ||
+    dayModifiers.range_middle ||
+    dayModifiers.active_start ||
+    dayModifiers.active_end
 
   return (
     <Button
       ref={ref}
       variant="ghost"
       size="icon"
-      data-range-start={dayModifiers.range_start || dayModifiers.active_start || undefined}
-      data-range-end={dayModifiers.range_end || dayModifiers.active_end || undefined}
+      data-range-start={dayModifiers.range_from || dayModifiers.active_start || undefined}
+      data-range-end={dayModifiers.range_to || dayModifiers.active_end || undefined}
       data-range-middle={dayModifiers.range_middle || undefined}
-      data-selected-single={(dayModifiers.selected && !dayModifiers.range_middle) || undefined}
+      data-selected-single={(dayModifiers.selected && !isInRange) || undefined}
       disabled={dayModifiers.outside}
       className={cn(
         'relative flex aspect-square h-8 w-full items-center justify-center p-0 font-normal transition-none z-10 hover:bg-igz-accent-hover',

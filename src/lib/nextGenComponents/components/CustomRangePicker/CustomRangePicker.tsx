@@ -1,11 +1,19 @@
-import { useState } from 'react'
+import { AlertCircle } from 'lucide-react'
+import { useMemo, useState } from 'react'
 import type { DateRange } from 'react-day-picker'
 
 import { DateTimePickerPanel } from '@/components/CustomRangePicker/DateTimePickerPanel'
 import { Button } from '@/components/ui/button'
-import { DEFAULT_SINCE_HOUR, DEFAULT_UNTIL_HOUR, FILTER_BUTTON_APPLY, RESET } from '@/constants'
+import { FILTER_BUTTON_APPLY, RESET } from '@/constants'
 import type { CustomDateRange } from '@/types/table/timeFilter'
-import { applyHourToDate, isoToHour, isoToLocalDate, toLocalISO } from '@/utils/date.utils'
+import {
+  applyHourToDate,
+  getDefaultSinceHour,
+  getDefaultUntilHour,
+  isoToHour,
+  isoToLocalDate,
+  toLocalISO
+} from '@/utils/date.utils'
 
 type Props = {
   onApply?: (range: CustomDateRange) => void
@@ -16,16 +24,33 @@ type Props = {
 
 const INITIAL_RANGE: DateRange = { from: undefined, to: undefined }
 const INITIAL_HOURS = { from: '', to: '' }
+const FROM_AFTER_TO_ERROR = '"To" must be later than "From"'
 
 const CustomRangePicker = ({ onApply, singleDate = false, onReset, initialRange }: Props) => {
+  const defaultSinceHour = getDefaultSinceHour()
+  const defaultUntilHour = getDefaultUntilHour()
+
   const [date, setDate] = useState<DateRange>({
     from: isoToLocalDate(initialRange?.since ?? ''),
     to: isoToLocalDate(initialRange?.until ?? '')
   })
   const [hours, setHours] = useState<{ from: string; to: string }>({
-    from: isoToHour(initialRange?.since ?? ''),
-    to: isoToHour(initialRange?.until ?? '')
+    from: isoToHour(initialRange?.since ?? '') || defaultSinceHour,
+    to: isoToHour(initialRange?.until ?? '') || (singleDate ? '' : defaultUntilHour)
   })
+
+  const errorMessage = useMemo(() => {
+    if (singleDate || !date.from || !date.to) return ''
+
+    const fromDate = applyHourToDate(date.from, hours.from, defaultSinceHour)
+    const toDate = applyHourToDate(date.to, hours.to, defaultUntilHour)
+
+    if (fromDate.getTime() > toDate.getTime()) {
+      return FROM_AFTER_TO_ERROR
+    }
+
+    return ''
+  }, [date.from, date.to, hours.from, hours.to, singleDate, defaultSinceHour, defaultUntilHour])
 
   const handleReset = () => {
     setDate(INITIAL_RANGE)
@@ -48,12 +73,14 @@ const CustomRangePicker = ({ onApply, singleDate = false, onReset, initialRange 
   }
 
   const hasNoDateSelected = !date.from && !date.to
-  const isApplyDisabled = singleDate ? !date.from : !date.from || !date.to
+  const isApplyDisabled =
+    (singleDate ? !date.from : !date.from || !date.to) || !!errorMessage
 
   const handleApply = () => {
+    if (errorMessage) return
     if (!date.from) return
 
-    const since = applyHourToDate(date.from, hours.from, DEFAULT_SINCE_HOUR)
+    const since = applyHourToDate(date.from, hours.from, defaultSinceHour)
 
     if (singleDate) {
       onApply?.({ since: toLocalISO(since), until: '' })
@@ -61,7 +88,7 @@ const CustomRangePicker = ({ onApply, singleDate = false, onReset, initialRange 
     }
 
     if (!date.to) return
-    const until = applyHourToDate(date.to, hours.to, DEFAULT_UNTIL_HOUR)
+    const until = applyHourToDate(date.to, hours.to, defaultUntilHour)
 
     onApply?.({ since: toLocalISO(since), until: toLocalISO(until) })
   }
@@ -92,6 +119,16 @@ const CustomRangePicker = ({ onApply, singleDate = false, onReset, initialRange 
           />
         )}
       </div>
+
+      {errorMessage && (
+        <div
+          className="flex items-center gap-3 rounded-md border border-red-300 bg-red-50 px-4 py-3"
+          data-testid="custom-date-error"
+        >
+          <AlertCircle className="h-5 w-5 shrink-0 text-red-500" />
+          <span className="text-sm font-medium text-red-600">{errorMessage}</span>
+        </div>
+      )}
 
       <div className="flex justify-end gap-3 pt-4">
         <Button

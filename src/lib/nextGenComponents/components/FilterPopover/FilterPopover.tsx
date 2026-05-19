@@ -47,6 +47,7 @@ const FilterPopover = <K extends string>({
   const reset = () => {
     resetFilterDraft({})
     onClear?.()
+    setFilterPopoverOpen(false)
   }
 
   const apply = () => {
@@ -55,7 +56,7 @@ const FilterPopover = <K extends string>({
   }
 
   return (
-    <Popover open={filterPopoverOpen} onOpenChange={handleOpenChange}>
+    <Popover open={filterPopoverOpen} onOpenChange={handleOpenChange} modal>
       <PopoverTrigger asChild>
         <Button
           variant="rounded"
@@ -69,11 +70,11 @@ const FilterPopover = <K extends string>({
 
       <PopoverContent
         side="bottom"
-        align="center"
+        align="end"
         sideOffset={6}
         avoidCollisions={true}
         collisionPadding={8}
-        className="flex flex-col w-[300px] max-h-[400px] rounded-md border bg-background p-0 shadow-md"
+        className="flex flex-col w-[300px] max-h-[400px] rounded-md border bg-background p-0 shadow-md z-40"
       >
         <div className="p-4">
           <h3 className="font-medium m-0 text-xl" data-testid="filter-popover-title">

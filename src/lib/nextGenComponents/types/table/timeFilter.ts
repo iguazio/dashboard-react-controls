@@ -14,6 +14,7 @@ export type TimeFilterDropdownProps = {
   onChange?: (v: TimeFilterValue) => void
   onCustomRange?: (range: CustomDateRange) => void
   initialCustomRange?: CustomDateRange
+  presetDateRange?: CustomDateRange
   options?: TimeFilterOption[]
   startTimeOnly?: boolean
   className?: string

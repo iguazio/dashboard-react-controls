@@ -1,16 +1,16 @@
+import { useCallback, useEffect, useState } from 'react'
 import type { DateRange } from 'react-day-picker'
 
+import { MaskedInput, type MaskItem } from '@/components/CustomRangePicker/MaskedInput'
+import { TimePickerInput } from '@/components/CustomRangePicker/TimePickerInput'
 import { Calendar } from '@/components/ui/calendar'
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue
-} from '@/components/ui/select'
-import { DATE_PLACEHOLDER_DDMMYYYY, HOUR } from '@/constants'
 import { cn } from '@/lib/utils'
-import { buildHalfHourOptions12h, formatDateDDMMYYYY } from '@/utils/date.utils'
+import {
+  formatLocalDate,
+  getDatePlaceholder,
+  getSupportedLocale,
+  parseLocalDate
+} from '@/utils/date.utils'
 
 type Props = {
   label: string
@@ -23,6 +23,54 @@ type Props = {
   onSelectDate: (selectedDate?: Date) => void
 }
 
+const PLACEHOLDER_CHAR = '_'
+
+const buildLocalDateMask = (): ((value: string) => MaskItem[]) => {
+  const isUS = getSupportedLocale() === 'en-US'
+
+  if (isUS) {
+    return (value: string): MaskItem[] => {
+      const monthFirst = value[0]
+      const dayFirst = value[3]
+      return [
+        /[0-1]/,
+        monthFirst === '1' ? /[0-2]/ : /\d/,
+        '/',
+        /[0-3]/,
+        dayFirst === '3' ? /[0-1]/ : /\d/,
+        '/',
+        /[1-2]/,
+        /\d/,
+        /\d/,
+        /\d/
+      ]
+    }
+  }
+
+  return (value: string): MaskItem[] => {
+    const dayFirst = value[0]
+    const monthFirst = value[3]
+    return [
+      /[0-3]/,
+      dayFirst === '3' ? /[0-1]/ : /\d/,
+      '/',
+      /[0-1]/,
+      monthFirst === '1' ? /[0-2]/ : /\d/,
+      '/',
+      /[1-2]/,
+      /\d/,
+      /\d/,
+      /\d/
+    ]
+  }
+}
+
+const dateMask = buildLocalDateMask()
+const datePlaceholder = getDatePlaceholder()
+
+const isComplete = (masked: string): boolean =>
+  masked.length > 0 && !masked.includes(PLACEHOLDER_CHAR)
+
 export const DateTimePickerPanel = ({
   label,
   side,
@@ -33,38 +81,76 @@ export const DateTimePickerPanel = ({
   onHourChange,
   onSelectDate
 }: Props) => {
-  const hoursOptions = buildHalfHourOptions12h()
+  const [maskedDate, setMaskedDate] = useState(dateValue ? formatLocalDate(dateValue) : '')
+  const [displayedMonth, setDisplayedMonth] = useState<Date>(dateValue ?? new Date())
+
+  useEffect(() => {
+    setMaskedDate(dateValue ? formatLocalDate(dateValue) : '')
+    if (dateValue) {
+      setDisplayedMonth(dateValue)
+    }
+  }, [dateValue])
+
+  const handleMaskedDateChange = useCallback(
+    (masked: string) => {
+      setMaskedDate(masked)
+      if (!masked) {
+        onSelectDate(undefined)
+        return
+      }
+      if (isComplete(masked)) {
+        const parsed = parseLocalDate(masked)
+        if (parsed) onSelectDate(parsed)
+      }
+    },
+    [onSelectDate]
+  )
+
+  const handleDateBlur = useCallback(() => {
+    if (!maskedDate) {
+      onSelectDate(undefined)
+      return
+    }
+    if (isComplete(maskedDate)) {
+      const parsed = parseLocalDate(maskedDate)
+      if (parsed) {
+        setMaskedDate(formatLocalDate(parsed))
+        onSelectDate(parsed)
+      } else {
+        setMaskedDate(dateValue ? formatLocalDate(dateValue) : '')
+      }
+    } else {
+      setMaskedDate(dateValue ? formatLocalDate(dateValue) : '')
+    }
+  }, [maskedDate, dateValue, onSelectDate])
 
   return (
     <div className="flex flex-col gap-6">
       <div className="flex gap-2">
-        <div
+        <MaskedInput
+          mask={dateMask}
+          value={maskedDate}
+          onChange={handleMaskedDateChange}
+          onBlur={handleDateBlur}
+          textPlaceholder={datePlaceholder}
           className={cn(
-            'flex h-10 flex-1 items-center w-[116px] justify-center border border-[#C4C2C8] rounded-md text-center ',
-            dateValue ? 'text-igz-primary' : 'text-muted-foreground text-[#C4C2C8] text-[15px]'
+            'h-10 flex-1 w-[116px] text-center text-[14px] border border-[#C4C2C8] rounded-md focus-visible:ring-1 focus-visible:ring-igz-light-purple focus-visible:outline-none',
+            dateValue ? 'text-igz-primary' : 'text-[#C4C2C8]'
           )}
-        >
-          {dateValue ? formatDateDDMMYYYY(dateValue) : DATE_PLACEHOLDER_DDMMYYYY}
-        </div>
+        />
 
-        <Select value={hourValue} onValueChange={onHourChange}>
-          <SelectTrigger className="w-[110px] h-10 text-[15px] border-[#C4C2C8] [&_svg]:h-3 [&_svg]:w-3 focus:ring-0 data-[placeholder]:text-[#C4C2C8]">
-            <SelectValue placeholder={HOUR} />
-          </SelectTrigger>
-
-          <SelectContent className="max-h-[200px] w-[var(--radix-select-trigger-width)] min-w-[var(--radix-select-trigger-width)] text-[13px] bg-white [&_svg]:hidden">
-            {hoursOptions.map(time => (
-              <SelectItem className="h-12 text-[14px]" key={time} value={time}>
-                {time}
-              </SelectItem>
-            ))}
-          </SelectContent>
-        </Select>
+        <TimePickerInput
+          value={hourValue}
+          onChange={onHourChange}
+          className="w-[110px]"
+        />
       </div>
 
       <Calendar
         mode="single"
-        defaultMonth={dateValue}
+        month={displayedMonth}
+        onMonthChange={setDisplayedMonth}
+        selected={dateValue}
         onSelect={onSelectDate}
         className="[--calendar-padding:0rem] border-none"
         classNames={{

@@ -26,6 +26,7 @@ const TimeFilterDropdown = ({
   onChange,
   onCustomRange,
   initialCustomRange,
+  presetDateRange,
   options = DEFAULT_TIME_FILTER_OPTIONS,
   startTimeOnly = false,
   className,
@@ -102,10 +103,11 @@ const TimeFilterDropdown = ({
       >
         {isCustomOpen ? (
           <CustomRangePicker
+            key={`${appliedRange?.since ?? presetDateRange?.since ?? ''}-${appliedRange?.until ?? presetDateRange?.until ?? ''}`}
             onApply={handleCustomApply}
             singleDate={startTimeOnly}
             onReset={() => handleSelect(TIME_FILTER_RESET_VALUE)}
-            initialRange={appliedRange ?? undefined}
+            initialRange={appliedRange ?? presetDateRange ?? undefined}
           />
         ) : (
           options.map(item => {

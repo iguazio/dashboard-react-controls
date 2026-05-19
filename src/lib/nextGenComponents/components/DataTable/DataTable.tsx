@@ -93,7 +93,16 @@ const DataTable = <TData extends object>({
     getSortedRowModel: getSortedRowModel(),
     enableRowSelection: true,
     enableMultiRowSelection: !!checkboxSelection,
-    enableSorting: true
+    enableSorting: true,
+    enableSortingRemoval: false,
+    initialState: {
+      sorting: [
+        {
+          id: 'name',
+          desc: false
+        }
+      ]
+    }
   })
 
   const { rows } = table.getRowModel()

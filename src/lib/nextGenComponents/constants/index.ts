@@ -34,7 +34,7 @@ export const STATS_CARD_TIMESTAMP = 'Last 24 hrs'
 
 export const LOG_OUT = 'Log out'
 
-export const NO_ROWS_MESSAGES = 'No data to show'
+export const NO_ROWS_MESSAGES = 'No rows available'
 
 export const PERSONAL_SETTING = 'Personal Settings'
 

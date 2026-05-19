@@ -4,7 +4,11 @@ export { RowActions, ActionMenu, SingleActionButton } from './RowActions'
 export type { ActionMenuItem } from './RowActions'
 export { default as CopyButton } from './EllipsisTooltip'
 export { default as DataTable } from './DataTable'
-export type { DataTableProps, DetailsPanelConfig, CheckboxSelectionConfig } from './DataTable/DataTable'
+export type {
+  DataTableProps,
+  DetailsPanelConfig,
+  CheckboxSelectionConfig
+} from './DataTable/DataTable'
 export { default as DetailsPanel } from './DetailsPanel'
 export { default as EllipsisTooltip } from './EllipsisTooltip'
 export { default as FilterPopover } from './FilterPopover'
