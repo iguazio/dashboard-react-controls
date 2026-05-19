@@ -47,13 +47,11 @@ const MultiSelectField = ({ filterField, value, setFilterDraft }: MultiSelectFie
   const currentValues: string[] = Array.isArray(value) ? value : []
   const options = filterField.options ?? []
 
-  const selectedLabels = options
-    .filter(o => currentValues.includes(o.value))
-    .map(o => o.label)
+  const selectedLabels = options.filter(o => currentValues.includes(o.value)).map(o => o.label)
 
   const triggerText =
     currentValues.length === 0
-      ? filterField.placeholder ?? 'Select...'
+      ? (filterField.placeholder ?? 'Select...')
       : selectedLabels.length <= MAX_INLINE_LABELS
         ? selectedLabels.join(', ')
         : `${selectedLabels.length} items selected`
@@ -66,7 +64,9 @@ const MultiSelectField = ({ filterField, value, setFilterDraft }: MultiSelectFie
       const toggled = prevValues.includes(optValue)
         ? prevValues.filter(v => v !== optValue)
         : [...prevValues, optValue]
-      const next = filterField.resolveValue ? filterField.resolveValue(toggled, prevValues) : toggled
+      const next = filterField.resolveValue
+        ? filterField.resolveValue(toggled, prevValues)
+        : toggled
       return { ...prev, [filterField.key]: next }
     })
   }
@@ -87,9 +87,8 @@ const MultiSelectField = ({ filterField, value, setFilterDraft }: MultiSelectFie
           border: '1px solid var(--igz-gray, #C4C2C8)',
           background: 'white',
           fontSize: 15,
-          color: currentValues.length === 0
-            ? 'var(--igz-gray, #C4C2C8)'
-            : 'var(--igz-primary, #4B4760)',
+          color:
+            currentValues.length === 0 ? 'var(--igz-gray, #C4C2C8)' : 'var(--igz-primary, #4B4760)',
           cursor: 'pointer',
           outline: 'none'
         }}

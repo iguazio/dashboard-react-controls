@@ -50,14 +50,11 @@ export const parseDateDDMMYYYY = parseLocalDate
 export const getDatePlaceholder = (): string =>
   getSupportedLocale() === 'en-US' ? 'mm/dd/yyyy' : 'dd/mm/yyyy'
 
-export const getTimePlaceholder = (): string =>
-  is12HourFormat() ? 'hh:mm AM' : 'HH:mm'
+export const getTimePlaceholder = (): string => (is12HourFormat() ? 'hh:mm AM' : 'HH:mm')
 
-export const getDefaultSinceHour = (): string =>
-  is12HourFormat() ? '12:00 AM' : '00:00'
+export const getDefaultSinceHour = (): string => (is12HourFormat() ? '12:00 AM' : '00:00')
 
-export const getDefaultUntilHour = (): string =>
-  is12HourFormat() ? '11:30 PM' : '23:30'
+export const getDefaultUntilHour = (): string => (is12HourFormat() ? '11:30 PM' : '23:30')
 
 const HALF_HOUR_SLOTS_PER_DAY = 24 * 2
 
@@ -103,7 +100,10 @@ export const isoToHour = (iso: string): string => {
 }
 
 export const parseTimeInput = (text: string): string => {
-  const trimmed = text.trim().replace(/\s+/g, ' ').replace(/(\d)([AaPp][Mm])/, '$1 $2')
+  const trimmed = text
+    .trim()
+    .replace(/\s+/g, ' ')
+    .replace(/(\d)([AaPp][Mm])/, '$1 $2')
   if (!trimmed) return ''
 
   const ref = new Date(2000, 0, 1)

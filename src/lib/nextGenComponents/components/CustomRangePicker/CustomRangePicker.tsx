@@ -72,8 +72,7 @@ const CustomRangePicker = ({ onApply, singleDate = false, onReset, initialRange 
   }
 
   const hasNoDateSelected = !date.from && !date.to
-  const isApplyDisabled =
-    (singleDate ? !date.from : !date.from || !date.to) || !!errorMessage
+  const isApplyDisabled = (singleDate ? !date.from : !date.from || !date.to) || !!errorMessage
 
   const handleApply = () => {
     if (errorMessage) return

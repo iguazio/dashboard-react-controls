@@ -55,23 +55,17 @@ export const MaskedInput = ({
   const showTextPlaceholder = !!textPlaceholder && !value && !isFocused
   const inputValue = showTextPlaceholder ? '' : maskedDisplay
 
-  const nextEditablePos = useCallback(
-    (from: number, maskItems: MaskItem[]): number => {
-      let pos = from
-      while (pos < maskItems.length && typeof maskItems[pos] === 'string') pos++
-      return pos
-    },
-    []
-  )
+  const nextEditablePos = useCallback((from: number, maskItems: MaskItem[]): number => {
+    let pos = from
+    while (pos < maskItems.length && typeof maskItems[pos] === 'string') pos++
+    return pos
+  }, [])
 
-  const prevEditablePos = useCallback(
-    (from: number, maskItems: MaskItem[]): number => {
-      let pos = from
-      while (pos >= 0 && typeof maskItems[pos] === 'string') pos--
-      return pos
-    },
-    []
-  )
+  const prevEditablePos = useCallback((from: number, maskItems: MaskItem[]): number => {
+    let pos = from
+    while (pos >= 0 && typeof maskItems[pos] === 'string') pos--
+    return pos
+  }, [])
 
   const handleKeyDown = useCallback(
     (e: KeyboardEvent<HTMLInputElement>) => {

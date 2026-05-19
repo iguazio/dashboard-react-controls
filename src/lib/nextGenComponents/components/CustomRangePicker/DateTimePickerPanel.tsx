@@ -1,7 +1,11 @@
 import { useCallback, useEffect, useState } from 'react'
 import type { DateRange } from 'react-day-picker'
 
-import { MaskedInput, isMaskComplete, type MaskItem } from '@/components/CustomRangePicker/MaskedInput'
+import {
+  MaskedInput,
+  isMaskComplete,
+  type MaskItem
+} from '@/components/CustomRangePicker/MaskedInput'
 import { TimePickerInput } from '@/components/CustomRangePicker/TimePickerInput'
 import { Calendar } from '@/components/ui/calendar'
 import { cn } from '@/lib/utils'
@@ -136,11 +140,7 @@ export const DateTimePickerPanel = ({
           )}
         />
 
-        <TimePickerInput
-          value={hourValue}
-          onChange={onHourChange}
-          className="w-[110px]"
-        />
+        <TimePickerInput value={hourValue} onChange={onHourChange} className="w-[110px]" />
       </div>
 
       <Calendar

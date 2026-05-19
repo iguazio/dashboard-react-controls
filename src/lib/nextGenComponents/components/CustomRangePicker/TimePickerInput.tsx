@@ -1,6 +1,10 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 
-import { MaskedInput, isMaskComplete, type MaskItem } from '@/components/CustomRangePicker/MaskedInput'
+import {
+  MaskedInput,
+  isMaskComplete,
+  type MaskItem
+} from '@/components/CustomRangePicker/MaskedInput'
 import SelectIcon from '../../../images/select.svg?react'
 import { cn } from '@/lib/utils'
 import {
@@ -36,23 +40,13 @@ const timeMask12h = (value: string): MaskItem[] => {
 
 const timeMask24h = (value: string): MaskItem[] => {
   const firstChar = value[0]
-  return [
-    /[0-2]/,
-    firstChar === '2' ? /[0-3]/ : /[0-9]/,
-    ':',
-    /[0-5]/,
-    /[0-9]/
-  ]
+  return [/[0-2]/, firstChar === '2' ? /[0-3]/ : /[0-9]/, ':', /[0-5]/, /[0-9]/]
 }
 
 const timeMask = use12h ? timeMask12h : timeMask24h
 const timePlaceholder = getTimePlaceholder()
 
-export const TimePickerInput = ({
-  value,
-  onChange,
-  className
-}: Props) => {
+export const TimePickerInput = ({ value, onChange, className }: Props) => {
   const [maskedValue, setMaskedValue] = useState('')
   const [isOpen, setIsOpen] = useState(false)
   const wrapperRef = useRef<HTMLDivElement>(null)
