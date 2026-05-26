@@ -16,6 +16,7 @@ export type BadgeCellProps = {
   className?: string
 }
 
+const badgeColor = getBadgeColor()
 const OVERFLOW_BADGE_WIDTH = 36
 const BADGE_GAP = 4
 
@@ -24,12 +25,7 @@ const formatLabel = (badge: BadgeItem, delimiter: string) => {
   return `${badge.key}${delimiter}${badge.value}`
 }
 
-const BadgeCell = ({
-  badges,
-  delimiter = ':',
-  maxVisible,
-  className
-}: BadgeCellProps) => {
+const BadgeCell = ({ badges, delimiter = ':', maxVisible, className }: BadgeCellProps) => {
   const containerRef = useRef<HTMLDivElement>(null)
   const measureRef = useRef<HTMLDivElement>(null)
   const [visibleCount, setVisibleCount] = useState(badges.length)
@@ -132,18 +128,12 @@ const BadgeCell = ({
         className="absolute top-0 left-0 flex items-center gap-1 invisible pointer-events-none whitespace-nowrap"
       >
         {badges.map((badge, index) => (
-          <Badge
-            key={`measure-${badge.key}-${index}`}
-            label={formatLabel(badge, delimiter)}
-          />
+          <Badge key={`measure-${badge.key}-${index}`} label={formatLabel(badge, delimiter)} />
         ))}
       </div>
 
       {visibleBadges.map((badge, index) => (
-        <Badge
-          key={`${badge.key}-${index}`}
-          label={formatLabel(badge, delimiter)}
-        />
+        <Badge key={`${badge.key}-${index}`} label={formatLabel(badge, delimiter)} />
       ))}
 
       {hiddenCount > 0 && (
@@ -152,7 +142,11 @@ const BadgeCell = ({
             <button
               type="button"
               data-testid="badge-cell-overflow"
-              className="inline-flex items-center justify-center rounded bg-[rgba(164,76,197,0.16)] px-2 py-0.5 text-xs font-medium text-[#A44CC5] cursor-pointer whitespace-nowrap border-0"
+              className={cn(
+                'inline-flex items-center justify-center rounded px-2 py-0.5 text-xs font-medium cursor-pointer whitespace-nowrap border-0',
+                badgeColor.bg,
+                badgeColor.text
+              )}
             >
               +{hiddenCount}
             </button>
@@ -163,22 +157,18 @@ const BadgeCell = ({
             className="w-auto max-h-[200px] overflow-y-auto p-2 bg-white text-igz-primary border border-igz-gray-light"
           >
             <div className="flex flex-col gap-1.5">
-              {hiddenBadges.map((badge, index) => {
-                const label = formatLabel(badge, delimiter)
-                const color = getBadgeColor()
-                return (
-                  <span
-                    key={`hidden-${badge.key}-${index}`}
-                    className={cn(
-                      'inline-flex rounded px-2 py-0.5 text-xs font-medium whitespace-nowrap',
-                      color.bg,
-                      color.text
-                    )}
-                  >
-                    {label}
-                  </span>
-                )
-              })}
+              {hiddenBadges.map((badge, index) => (
+                <span
+                  key={`hidden-${badge.key}-${index}`}
+                  className={cn(
+                    'inline-flex rounded px-2 py-0.5 text-xs font-medium whitespace-nowrap',
+                    badgeColor.bg,
+                    badgeColor.text
+                  )}
+                >
+                  {formatLabel(badge, delimiter)}
+                </span>
+              ))}
             </div>
           </PopoverContent>
         </Popover>

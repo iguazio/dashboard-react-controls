@@ -47,6 +47,11 @@ type TableState = {
   resetFilterDraft: (scopeId: string, initial: DraftValues) => void
 }
 
+export const selectFilterPopover =
+  (scopeId: string) =>
+  (state: TableState): FilterPopoverState =>
+    state.filterPopovers[scopeId] ?? emptyPopoverState
+
 export const useTableStore = create<TableState>((set, get) => ({
   rowSelection: {},
   sorting: [],
@@ -81,8 +86,7 @@ export const useTableStore = create<TableState>((set, get) => ({
       columnFilters: typeof value === 'function' ? value(old.columnFilters) : value
     })),
 
-  getFilterPopover: (scopeId: string) =>
-    get().filterPopovers[scopeId] ?? emptyPopoverState,
+  getFilterPopover: (scopeId: string) => get().filterPopovers[scopeId] ?? emptyPopoverState,
 
   setFilterPopoverOpen: (scopeId, open) =>
     set(old => {

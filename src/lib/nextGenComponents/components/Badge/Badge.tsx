@@ -11,7 +11,6 @@ export const getBadgeColor = () => {
 export type BadgeProps = {
   label: string
   className?: string
-  onRemove?: () => void
   children?: ReactNode
 }
 

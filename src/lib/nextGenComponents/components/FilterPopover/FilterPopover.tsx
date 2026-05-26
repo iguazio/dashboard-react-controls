@@ -14,7 +14,7 @@ import {
   SelectItem
 } from '@/components/ui/select'
 import { FILTER_POPOVER_DEFAULT_TITLE, FILTER_BUTTON_CLEAR, FILTER_BUTTON_APPLY } from '@/constants'
-import { useTableStore, DEFAULT_FILTER_SCOPE } from '@/stores/tableStore'
+import { useTableStore, selectFilterPopover, DEFAULT_FILTER_SCOPE } from '@/stores/tableStore'
 import type { FilterFieldDef, FilterSchema, FilterValues } from '@/types/table/filter'
 import { buildInitialFromSchema, hasActiveFilters, objectValues } from '@/utils/tableFilters.utils'
 import MultiSelectField from '@/components/MultiSelectField'
@@ -34,14 +34,10 @@ const FilterPopover = <K extends string>({
   onApply,
   onClear
 }: Readonly<Props<K>>) => {
-  const {
-    getFilterPopover,
-    setFilterPopoverOpen,
-    setFilterDraft,
-    resetFilterDraft
-  } = useTableStore()
-
-  const { open: filterPopoverOpen, draft: filterDraft } = getFilterPopover(scopeId)
+  const { setFilterPopoverOpen, setFilterDraft, resetFilterDraft } = useTableStore()
+  const { open: filterPopoverOpen, draft: filterDraft } = useTableStore(
+    selectFilterPopover(scopeId)
+  )
   const isFilterActive = useMemo(() => hasActiveFilters(schema), [schema])
 
   const handleOpenChange = (next: boolean) => {
