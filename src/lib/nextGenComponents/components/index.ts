@@ -1,3 +1,7 @@
+export { default as Badge, getBadgeColor } from './Badge'
+export type { BadgeProps } from './Badge'
+export { default as BadgeCell } from './BadgeCell'
+export type { BadgeCellProps, BadgeItem } from './BadgeCell'
 export { Loader } from './Loader'
 export type { LoaderProps } from './Loader'
 export { RowActions, ActionMenu, SingleActionButton } from './RowActions'
@@ -22,8 +26,22 @@ export { default as TimeFilterDropdown } from './TimeFilterDropdown'
 
 export { Button } from './ui/button'
 export type { ButtonProps } from './ui/button'
+export {
+  Dialog,
+  DialogPortal,
+  DialogOverlay,
+  DialogClose,
+  DialogTrigger,
+  DialogContent,
+  DialogHeader,
+  DialogBody,
+  DialogFooter,
+  DialogTitle,
+  DialogDescription
+} from './ui/dialog'
 export { Calendar } from './ui/calendar'
 export { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from './ui/card'
+export { Collapsible, CollapsibleTrigger, CollapsibleContent } from './ui/collapsible'
 export { Checkbox } from './ui/checkbox'
 export * from './ui/dropdown-menu'
 export { Input } from './ui/input'
@@ -34,3 +52,5 @@ export * from './ui/select'
 export { Separator } from './ui/separator'
 export { Tabs, TabsContent, TabsList, TabsTrigger } from './ui/tabs'
 export { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from './ui/tooltip'
+
+export { cn } from '../lib/utils'
