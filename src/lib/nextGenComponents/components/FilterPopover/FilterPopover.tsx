@@ -14,7 +14,7 @@ import {
   SelectItem
 } from '@/components/ui/select'
 import { FILTER_POPOVER_DEFAULT_TITLE, FILTER_BUTTON_CLEAR, FILTER_BUTTON_APPLY } from '@/constants'
-import { useTableStore } from '@/stores/tableStore'
+import { useTableStore, selectFilterPopover, DEFAULT_FILTER_SCOPE } from '@/stores/tableStore'
 import type { FilterFieldDef, FilterSchema, FilterValues } from '@/types/table/filter'
 import { buildInitialFromSchema, hasActiveFilters, objectValues } from '@/utils/tableFilters.utils'
 import MultiSelectField from '@/components/MultiSelectField'
@@ -22,6 +22,7 @@ import MultiSelectField from '@/components/MultiSelectField'
 type Props<K extends string> = {
   schema: FilterSchema<K>
   title?: string
+  scopeId?: string
   onApply?: (vals?: FilterValues<K>) => void
   onClear?: () => void
 }
@@ -29,34 +30,37 @@ type Props<K extends string> = {
 const FilterPopover = <K extends string>({
   schema,
   title = FILTER_POPOVER_DEFAULT_TITLE,
+  scopeId = DEFAULT_FILTER_SCOPE,
   onApply,
   onClear
 }: Readonly<Props<K>>) => {
-  const { filterPopoverOpen, setFilterPopoverOpen, filterDraft, setFilterDraft, resetFilterDraft } =
-    useTableStore()
+  const { setFilterPopoverOpen, setFilterDraft, resetFilterDraft } = useTableStore()
+  const { open: filterPopoverOpen, draft: filterDraft } = useTableStore(
+    selectFilterPopover(scopeId)
+  )
   const isFilterActive = useMemo(() => hasActiveFilters(schema), [schema])
 
   const handleOpenChange = (next: boolean) => {
     if (next) {
       const initial = buildInitialFromSchema(schema)
-      resetFilterDraft(initial)
+      resetFilterDraft(scopeId, initial)
     }
-    setFilterPopoverOpen(next)
+    setFilterPopoverOpen(scopeId, next)
   }
 
   const reset = () => {
-    resetFilterDraft({})
+    resetFilterDraft(scopeId, {})
     onClear?.()
-    setFilterPopoverOpen(false)
+    setFilterPopoverOpen(scopeId, false)
   }
 
   const apply = () => {
     onApply?.(filterDraft as FilterValues<K>)
-    setFilterPopoverOpen(false)
+    setFilterPopoverOpen(scopeId, false)
   }
 
   return (
-    <Popover open={filterPopoverOpen} onOpenChange={handleOpenChange} modal>
+    <Popover open={filterPopoverOpen} onOpenChange={handleOpenChange}>
       <PopoverTrigger asChild>
         <Button
           variant="rounded"
@@ -107,7 +111,7 @@ const FilterPopover = <K extends string>({
                       disabled={filterField.disabled}
                       className="h-10 w-full px-4 text-[15px] font-normal placeholder-[#C4C2C8]"
                       onChange={e =>
-                        setFilterDraft(prev => ({
+                        setFilterDraft(scopeId, prev => ({
                           ...prev,
                           [filterField.key]: e.target.value
                         }))
@@ -120,7 +124,7 @@ const FilterPopover = <K extends string>({
                     <Select
                       value={(value as string | undefined) ?? ''}
                       onValueChange={value =>
-                        setFilterDraft(prev => ({
+                        setFilterDraft(scopeId, prev => ({
                           ...prev,
                           [filterField.key]: value
                         }))
@@ -152,7 +156,7 @@ const FilterPopover = <K extends string>({
                     <MultiSelectField
                       filterField={filterField}
                       value={value}
-                      setFilterDraft={setFilterDraft}
+                      setFilterDraft={draft => setFilterDraft(scopeId, draft)}
                     />
                   )}
                 </div>
