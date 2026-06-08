@@ -23,9 +23,10 @@ import PropTypes from 'prop-types'
 
 import './loader.scss'
 
-const Loader = ({ secondary = false, section = false, small = false }) => {
+const Loader = ({ overlay = false, secondary = false, section = false, small = false }) => {
   const wrapperClassNames = classnames(
     'loader-wrapper',
+    overlay && 'overlay-loader',
     section && 'section-loader',
     small && 'small-loader',
     secondary && 'secondary-loader'
@@ -56,6 +57,7 @@ const Loader = ({ secondary = false, section = false, small = false }) => {
 }
 
 Loader.propTypes = {
+  overlay: PropTypes.bool,
   secondary: PropTypes.bool,
   section: PropTypes.bool,
   small: PropTypes.bool
