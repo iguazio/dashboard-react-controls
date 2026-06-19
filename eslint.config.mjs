@@ -72,6 +72,7 @@ export default [
       ...react.configs.recommended.rules,
       'react/react-in-jsx-scope': 'off',
       'react/no-unescaped-entities': 'off',
+      'react/prop-types': 'off',
       'no-unused-vars': 'off',
       '@typescript-eslint/no-unused-vars': process.env.NODE_ENV === 'production' ? 2 : 1,
       'no-debugger': process.env.NODE_ENV === 'production' ? 2 : 1,
