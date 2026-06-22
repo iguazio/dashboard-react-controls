@@ -52,5 +52,30 @@ export * from './ui/select'
 export { Separator } from './ui/separator'
 export { Tabs, TabsContent, TabsList, TabsTrigger } from './ui/tabs'
 export { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from './ui/tooltip'
+export {
+  Sidebar,
+  SidebarContent,
+  SidebarFooter,
+  SidebarGroup,
+  SidebarGroupAction,
+  SidebarGroupContent,
+  SidebarGroupLabel,
+  SidebarHeader,
+  SidebarInput,
+  SidebarInset,
+  SidebarMenu,
+  SidebarMenuAction,
+  SidebarMenuBadge,
+  SidebarMenuButton,
+  SidebarMenuItem,
+  SidebarMenuSub,
+  SidebarMenuSubButton,
+  SidebarMenuSubItem,
+  SidebarProvider,
+  SidebarRail,
+  SidebarSeparator,
+  SidebarTrigger,
+  useSidebar
+} from './ui/sidebar'
 
 export { cn } from '../lib/utils'
