@@ -13,7 +13,10 @@ const EllipsisTooltip = ({ children, className, ...tooltipContentProps }: Ellips
   const [isOverflowed, setIsOverflowed] = useState(false)
 
   const handleOpenChange = (open: boolean) => {
-    if (!open) { setIsOverflowed(false); return }
+    if (!open) {
+      setIsOverflowed(false)
+      return
+    }
     if (ref.current) setIsOverflowed(ref.current.scrollWidth > ref.current.clientWidth)
   }
 
@@ -26,7 +29,10 @@ const EllipsisTooltip = ({ children, className, ...tooltipContentProps }: Ellips
   return (
     <Tooltip open={isOverflowed} onOpenChange={handleOpenChange}>
       <TooltipTrigger asChild>{content}</TooltipTrigger>
-      <TooltipContent className="break-words *:text-white [&_*]:text-white" {...tooltipContentProps}>
+      <TooltipContent
+        className="break-words *:text-white [&_*]:text-white"
+        {...tooltipContentProps}
+      >
         <div className="select-text">{children}</div>
       </TooltipContent>
     </Tooltip>
