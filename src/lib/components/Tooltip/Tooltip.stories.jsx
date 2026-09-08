@@ -18,7 +18,7 @@ import React from 'react'
 
 import Tooltip from '/src/lib/components/Tooltip/Tooltip'
 import TextTooltipTemplate from '/src/lib/components/TooltipTemplate/TextTooltipTemplate'
-import EyeIcon from '../../images/eye.svg?react'
+import EyeIcon from '../../images/eye-icon.svg?react'
 
 export default {
   title: 'Example/Tooltip',
