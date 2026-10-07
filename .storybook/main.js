@@ -15,18 +15,19 @@ under the Apache 2.0 license is conditioned upon your compliance with
 such restriction.
 */
 module.exports = {
-  babel: async (options) => {
-    options.plugins.push('babel-plugin-inline-react-svg')
-    return options
-  },
   stories: ['../src/**/*.stories.mdx', '../src/**/*.stories.@(js|jsx|ts|tsx)'],
   addons: [
     '@storybook/addon-links',
     '@storybook/addon-essentials',
     '@storybook/addon-interactions'
   ],
-  framework: '@storybook/react',
-  core: {
-    builder: 'webpack5'
+  framework: {
+    name: '@storybook/react-vite',
+    options: {}
+  },
+  viteFinal: async config => {
+    const svgr = (await import('vite-plugin-svgr')).default
+    config.plugins.push(svgr())
+    return config
   }
 }
