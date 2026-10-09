@@ -24,6 +24,7 @@ import TextTooltipTemplate from '../../TooltipTemplate/TextTooltipTemplate'
 
 import { CHIP_OPTIONS } from '../../../types'
 import { useHiddenChipsBlock } from '../../../hooks'
+import { getOverlayContainer } from '../../../utils/portalContainer.util'
 
 let HiddenChipsBlock = (
   { chipClassNames, chipOptions, chips, handleShowElements, textOverflowEllipsis = false },
@@ -98,7 +99,7 @@ let HiddenChipsBlock = (
         })}
       </div>
     </div>,
-    document.getElementById('overlay_container')
+    getOverlayContainer()
   )
 }
 

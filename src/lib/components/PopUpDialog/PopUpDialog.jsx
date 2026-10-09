@@ -26,6 +26,7 @@ import TextTooltipTemplate from '../TooltipTemplate/TextTooltipTemplate'
 
 import { POP_UP_CUSTOM_POSITION } from '../../types'
 import CloseIcon from '../../images/close.svg?react'
+import { getOverlayContainer } from '../../utils/portalContainer.util'
 
 import './popUpDialog.scss'
 
@@ -172,7 +173,7 @@ let PopUpDialog = (
             {children}
           </div>
         </div>,
-        document.getElementById('overlay_container')
+        getOverlayContainer()
       )
     : null
 }
