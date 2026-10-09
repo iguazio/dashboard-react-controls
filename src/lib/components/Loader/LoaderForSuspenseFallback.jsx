@@ -21,9 +21,11 @@ import React, { useLayoutEffect } from 'react'
 
 import Loader from './Loader'
 
+import { getOverlayContainer } from '../../utils/portalContainer.util'
+
 const LoaderForSuspenseFallback = () => {
   useLayoutEffect(() => {
-    const overlayContainer = document.getElementById('overlay_container')
+    const overlayContainer = getOverlayContainer()
     const savedVisibilityStyle = overlayContainer ? overlayContainer.style.visibility : 'visible'
 
     if (overlayContainer) overlayContainer.style.visibility = 'hidden'
