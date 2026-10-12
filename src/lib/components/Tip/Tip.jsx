@@ -21,7 +21,6 @@ import classnames from 'classnames'
 import { createPortal } from 'react-dom'
 
 import { getScssVariableValue } from '../../utils/common.util'
-import { getOverlayContainer } from '../../utils/portalContainer.util'
 
 import QuestionMarkIcon from '../../images/question-mark.svg?react'
 import ExclamationMarkIcon from '../../images/exclamation-mark.svg?react'
@@ -115,7 +114,7 @@ const Tip = ({ className = '', text, withExclamationMark = false }) => {
             {text}
           </div>
         </CSSTransition>,
-        getOverlayContainer()
+        document.getElementById('overlay_container')
       )}
     </div>
   )

@@ -22,7 +22,6 @@ import classnames from 'classnames'
 import { debounce } from 'lodash'
 
 import { isEveryObjectValueEmpty } from '../../utils/common.util'
-import { getOverlayContainer } from '../../utils/portalContainer.util'
 
 import './tooltip.scss'
 
@@ -211,7 +210,7 @@ let Tooltip = ({
               {template}
             </div>
           </CSSTransition>,
-          getOverlayContainer()
+          document.getElementById('overlay_container')
         )}
     </>
   )

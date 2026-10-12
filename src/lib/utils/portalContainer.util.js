@@ -14,17 +14,7 @@ illegal under applicable law, and the grant of the foregoing license
 under the Apache 2.0 license is conditioned upon your compliance with
 such restriction.
 */
-let overlayContainer = null
 let portalContainer
-
-// Container for legacy popups (PopUpDialog, Tooltip, Tip, ...), `#overlay_container` by default.
-// Lets an app that runs as a Module Federation remote keep its popups out of the host's DOM.
-export const setOverlayContainer = container => {
-  overlayContainer = container
-}
-
-export const getOverlayContainer = () =>
-  overlayContainer ?? document.getElementById('overlay_container')
 
 // Container for next-gen (Radix) popups, `document.body` by default.
 export const setPortalContainer = container => {
